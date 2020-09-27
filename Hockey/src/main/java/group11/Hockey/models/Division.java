@@ -67,7 +67,7 @@ public class Division {
 		return isDivisionNameValid;
 	}
 	
-	public Division getConferencefromConferenceName(String divisionName, List<Division> divisionList) {
+	public Division getDivisionFromDivisionName(String divisionName, List<Division> divisionList) {
 		Division division = null;
 		for(Division div: divisionList) {
 			if(div.getDivisionName().equalsIgnoreCase(divisionName)) {

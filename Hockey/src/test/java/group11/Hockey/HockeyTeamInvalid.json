@@ -1,0 +1,61 @@
+{
+	"leagueName": "Dalhousie Hockey League",
+	"conferences": [
+		{
+			"conferenceName": "Eastern Conference",
+			"divisions": [
+				{
+					"divisionName": "Atlantic",
+					"teams": [
+						{
+							"teamName": "Boston",
+							"generalManager": "Mister Fred",
+							"headCoach": "Mary Smith",
+							"players": [
+								{
+									"playerName": "Player One",
+									"position": "forward1",
+									"captain": true
+								}
+							]
+						}
+					]
+				},
+				{
+					"divisionName": "Atlantic",
+					"teams": [
+						{
+							"teamName": "Boston1",
+							"generalManager": "Mister Fred1",
+							"headCoach": "Mary Smith1",
+							"players": [
+								{
+									"playerName": "Player One1",
+									"position": "forward",
+									"captain": true
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"freeAgents": [
+		{
+			"playerName": "Agent One",
+			"position": "forward",
+			"captain": false
+		},
+		{
+			"playerName": "Agent Two",
+			"position": "defense",
+			"captain": false
+		},
+		{
+			"playerName": "Agent Three",
+			"position": "goalie",
+			"captain": false
+		}
+	]
+}

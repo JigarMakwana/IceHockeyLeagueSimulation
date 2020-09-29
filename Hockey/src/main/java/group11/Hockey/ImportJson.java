@@ -27,23 +27,21 @@ public class ImportJson implements IFileOperations {
 	List<String> divisionNamesList = new ArrayList<String>();
 	List<String> conferenceNamesList = new ArrayList<String>();
 
-	public League parseFile(String fileName) {
+	public League parseFile(String fileName) throws Exception {
 		JSONParser parser = new JSONParser();
 		try {
 			fileObj = parser.parse(new FileReader(fileName));
-			leagueModelObj = parseJson();
-
 		} catch (Exception e) {
 			System.out.println(e);
-			System.exit(1);
-			// return null;
+			return null;
 		}
+		leagueModelObj = parseJson();
+
 		return leagueModelObj;
 	}
 
-	private League parseJson() {
+	private League parseJson() throws Exception {
 		leagueModelObj = new League();
-		try {
 			JSONObject jsonObject = (JSONObject) fileObj;
 			// parse league name
 			String leagueName = (String) jsonObject.get("leagueName");
@@ -55,10 +53,7 @@ public class ImportJson implements IFileOperations {
 			List<FreeAgent> freeAgentsList = parseFreeAgent(jsonObject);
 			leagueModelObj.setFreeAgents(freeAgentsList);
 
-		} catch (Exception e) {
-			System.out.println(e);
-			System.exit(1);
-		}
+		
 		return leagueModelObj;
 	}
 
@@ -79,7 +74,7 @@ public class ImportJson implements IFileOperations {
 				conference.setConferenceName(conferenceName);
 				conferenceNamesList.add(conferenceName.toLowerCase());
 			}
-			
+
 			// parse Divisions
 			List<Division> divisionsList = parseDivisions(ConferencesListJsonObject);
 			conference.setDivisions(divisionsList);

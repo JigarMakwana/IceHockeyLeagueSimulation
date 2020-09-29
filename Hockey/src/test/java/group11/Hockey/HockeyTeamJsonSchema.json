@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Hockey Team",
+    "description": "Hockey Team",
+    "type": "object",
+	"required": [ "leagueName", "conferences" ],
+    "properties": {
+        "leagueName": {
+            "type": "string"
+        },
+        "conferences": {
+            "type": "array",
+			"items": { "$ref": "#/definitions/conference" }
+        },
+		"freeAgents":{
+			"type":"array",
+			"items":{"$ref": "#/definitions/player"}
+		}
+    },
+	"definitions": {
+		"conference":{
+		"required": [ "conferenceName", "divisions" ],
+			"properties": {
+				"conferenceName":{
+					"type": "string"
+				},
+				"divisions":{
+					"type":"array",
+					"items":{"$ref": "#/definitions/division"}
+				}
+			}
+		},
+		"division":{
+		"required": [ "divisionName", "teams" ],
+			"properties":{
+				"divisionName":{
+					"type":"string"
+				},
+				"teams":{
+					"type":"array",
+					"items":{"$ref": "#/definitions/team"}
+				}
+			}
+		},
+		"team":{
+		"required": [ "teamName", "generalManager", "headCoach", "players" ],
+			"properties":{
+				"teamName":{
+					"type":"string"
+				},
+				"generalManager":{
+					"type":"string"
+				},
+				"headCoach":{
+					"type":"string"
+				},
+				"players":{
+					"type":"array",
+					"items":{"$ref": "#/definitions/player"}
+				}
+			}
+		},
+		"player":{
+		"required": [ "playerName", "position", "captain" ],
+			"properties":{
+				"playerName":{
+					"type":"string"
+				},
+				"position":{
+					"type":"string",
+					"pattern":"^forward$|^defense$|^goalie$"
+				},
+				"captain":{
+					"type":"boolean"
+				}
+			}
+		}
+		
+	}
+}

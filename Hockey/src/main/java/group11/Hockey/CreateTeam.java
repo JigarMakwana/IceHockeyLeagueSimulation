@@ -143,7 +143,7 @@ public class CreateTeam {
 
 	private boolean isNotValidConference(String conferenceName, List<Conference> conferencesList) {
 
-		if (conferenceName == null || conferenceName.isBlank()) {
+		if (isStrBlank(conferenceName)) {
 			return true;
 		} else if (conferenceObj.isConferenceNameValid(conferenceName, conferencesList)) {
 			return false;
@@ -155,7 +155,7 @@ public class CreateTeam {
 
 	private boolean isNotValidDivision(String divisionName, Conference conferenceItem) {
 
-		if (divisionName == null || divisionName.isBlank()) {
+		if (isStrBlank(divisionName)) {
 			return true;
 		} else if (divisionObj.isDivisionNameValid(divisionName, conferenceItem.getDivisions())) {
 			return false;
@@ -166,7 +166,7 @@ public class CreateTeam {
 	}
 
 	private boolean isNotValidTeamName(String teamName, Team teamObj) {
-		if (teamName == null || teamName.isBlank()) {
+		if (isStrBlank(teamName)) {
 			return true;
 		} else if (teamObj.isTeamNameValid(teamName, leagueObj)) {
 			return false;
@@ -176,7 +176,7 @@ public class CreateTeam {
 	}
 
 	private boolean isNotValidGeneralManager(String name, Team teamObj) {
-		if (name == null || name.isBlank()) {
+		if (isStrBlank(name)) {
 			return true;
 		}
 		if (teamObj.isTeamManagerNameValid(name, leagueObj)) {
@@ -187,7 +187,7 @@ public class CreateTeam {
 	}
 
 	private boolean isNotValidHeadCoach(String name, Team teamObj) {
-		if (name == null || name.isBlank()) {
+		if (isStrBlank(name)) {
 			return true;
 		}
 		if (teamObj.isHeadCoachNameValid(name, leagueObj)) {
@@ -198,20 +198,28 @@ public class CreateTeam {
 	}
 
 	private boolean isValidString(String name) {
-		if (name == null || name.isBlank()) {
+		if (isStrBlank(name)) {
 			return false;
 		}
 		return true;
 	}
 
 	private boolean isValidCaptain(String isCaptain) {
-		if (isCaptain == null || isCaptain.isBlank()) {
+		if (isStrBlank(isCaptain)) {
 			return false;
 		} else if (isCaptain.equalsIgnoreCase("yes") || isCaptain.equalsIgnoreCase("no")) {
 
 			return true;
 		}
 		userInputMode.displayMessage("Wrong input");
+		return false;
+	}
+	
+	private boolean isStrBlank(String str) {
+		if (str == null || str.isEmpty() || str.split(" +").length == 0) {
+			return true;
+		}
+
 		return false;
 	}
 

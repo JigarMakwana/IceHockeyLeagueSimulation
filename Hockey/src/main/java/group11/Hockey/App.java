@@ -17,7 +17,7 @@ public class App {
 
 			ValidateJson validate = new ValidateJson();
 			boolean isValid = validate.validateJson(jsonFile, jsonSchemaFile);
-			System.out.println(isValid);
+			System.out.println("valide json:->:"+isValid);
 
 			ImportJson importJson = new ImportJson();
 			League leagueObj = null;

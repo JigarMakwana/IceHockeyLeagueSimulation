@@ -1,5 +1,7 @@
 package group11.Hockey;
 
+import java.net.URL;
+
 import group11.Hockey.models.League;
 
 /**
@@ -11,34 +13,48 @@ public class App {
 		System.out.println("Hello World!");
 		// C:\\Users\\RajKumar\\Documents\\MACS_Fall\\A_SDC\\HockeyTeamDummy.json
 		// C:\\Users\\RajKumar\\Documents\\MACS_Fall\\A_SDC\\HockeyTeamJsonSchema.json
+		League leagueObj = null;
+		IUserInputMode userInputMode = new CommandLineInput();
 		if (args.length != 0) {
 			String jsonFile = args[0];
-			String jsonSchemaFile = args[1];
+			URL jsonSchemaFile = App.class.getResource("HockeyTeamJsonSchema.json");
+			// String jsonSchemaFile = args[1];
 
 			ValidateJson validate = new ValidateJson();
-			boolean isValid = validate.validateJson(jsonFile, jsonSchemaFile);
-			System.out.println("valide json:->:"+isValid);
+			boolean isValid = validate.validateJson(jsonFile, jsonSchemaFile.getPath());
+			System.out.println("valide json:->:" + isValid);
+			if (isValid) {
+				ImportJson importJson = new ImportJson();
 
-			ImportJson importJson = new ImportJson();
-			League leagueObj = null;
+				try {
+					leagueObj = importJson.parseFile(jsonFile);
+					
+
+					CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj);
+					leagueObj = createTeamObj.getTeam();
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Exception:-->");
+					System.out.println(e.getMessage());
+				}
+			}
+
+		} else {
+			LoadTeam loadTeam = new LoadTeam(userInputMode);
+
 			try {
-				leagueObj = importJson.parseFile(jsonFile);
-				IUserInputMode userInputMode = new CommandLineInput();
-
-				CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj);
-				leagueObj = createTeamObj.getTeam();
+				leagueObj = loadTeam.getTeam();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("Exception:-->");
-				System.out.println(e.getMessage());
 			}
 
-			// PersistJson persistJson = new PersistJson(new ImportJson());
-			// persistJson.parseFile(jsonFile);
-
-		} else {
-			System.out.println("Load team");
 		}
+		
+		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
+		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
+		System.out.println(noOfSeasons);
+		
+
 	}
 }

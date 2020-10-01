@@ -49,4 +49,10 @@ public class TeamDbMock implements ITeamDb {
 		return isHeadCoachPresent;
 	}
 
+	@Override
+	public Team findTeamDetails(String teamName, String generalMangerName, String headCoachName, String leagueName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

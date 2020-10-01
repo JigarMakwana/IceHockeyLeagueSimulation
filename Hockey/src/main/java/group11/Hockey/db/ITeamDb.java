@@ -1,11 +1,10 @@
 package group11.Hockey.db;
 
+import group11.Hockey.models.Team;
+
 public interface ITeamDb {
 
-	public boolean findTeamWithName(String teamName);
+	public Team findTeamDetails(String teamName, String generalMangerName, String headCoachName, String leagueName);
 
-	public boolean findGeneralManagerWithName(String generalManagerName);
-
-	public boolean findHeadCoachWithName(String headCoach);
 
 }

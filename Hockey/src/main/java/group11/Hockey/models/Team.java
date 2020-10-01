@@ -1,6 +1,9 @@
 package group11.Hockey.models;
 
+import java.lang.reflect.Method;
 import java.util.List;
+
+import group11.Hockey.db.ITeamDb;
 
 /**
  * This class contain all the business logic related to team model
@@ -14,6 +17,8 @@ public class Team {
 	private String generalManager;
 	private String headCoach;
 	private List<Player> players = null;
+	private ITeamDb dao;
+	
 
 	public Team(String teamName, String generalManager, String headCoach, List<Player> players) {
 		super();
@@ -24,7 +29,11 @@ public class Team {
 	}
 
 	public Team() {
+		
 	}
+
+	
+	
 
 	/**
 	 * @return the teamName
@@ -81,73 +90,71 @@ public class Team {
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
-	
-	public boolean isTeamNameValid(String teamName, League league) {
-		boolean isTeamNameValid = true;
-		List<Conference> cconferenceList  = league.getConferences();
-		for(Conference conference : cconferenceList) {
+
+	public boolean validateTeamMethod(League league, String methodName, String value) {
+		boolean isTeamDetailsValid = true;
+		List<Conference> cconferenceList = league.getConferences();
+		for (Conference conference : cconferenceList) {
 			List<Division> divisionList = conference.getDivisions();
-			for(Division division: divisionList) {
+			for (Division division : divisionList) {
 				List<Team> teamList = division.getTeams();
-				for(Team team: teamList) {
-					if(team.getTeamName().equalsIgnoreCase(teamName)) {
-						isTeamNameValid = false;
-						return isTeamNameValid;
+				for (Team team : teamList) {
+
+					Method m;
+					try {
+						m = team.getClass().getMethod(methodName);
+						String fetchedValue = (String) m.invoke(team);
+						if (fetchedValue.equalsIgnoreCase(value)) {
+							isTeamDetailsValid = false;
+							return isTeamDetailsValid;
+						}
+					} catch (Exception e) {
+						System.out.println("Exception occured while validating the new team values with imported JSON");
 					}
 				}
 			}
 		}
-	
+
+		return isTeamDetailsValid;
+
+	}
+
+	public boolean isTeamNameValid(String teamName, League league) {
+		boolean isTeamNameValid = true;
+		isTeamNameValid = validateTeamMethod(league, "getTeamName", teamName);
+
 		// check in db if team name exits or not
 		
+
 		return isTeamNameValid;
 	}
-	
+
+//	public boolean validateTeamDetails(String teamName, String managerName, String headCoach, League league) {
+//		
+//		return false;
+//		
+//	}
 
 	public boolean isTeamManagerNameValid(String managerName, League league) {
 		boolean isTeamMangerNameValid = true;
-		List<Conference> cconferenceList  = league.getConferences();
-		for(Conference conference : cconferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			for(Division division: divisionList) {
-				List<Team> teamList = division.getTeams();
-				for(Team team: teamList) {
-					if(team.getGeneralManager().equalsIgnoreCase(managerName)) {
-						isTeamMangerNameValid = false;
-						return isTeamMangerNameValid;
-					}
-				}
-			}
-		}
+		//getGeneralManager
+		isTeamMangerNameValid = validateTeamMethod(league, "getGeneralManager", managerName);
 		// check in db if team name exits or not
+		// teamDbImpl where object we will get that from constructor and make a new
+		// constructor or check
 		return isTeamMangerNameValid;
 	}
 
 	public boolean isHeadCoachNameValid(String headCoach, League league) {
 		boolean isHeadCoachNameValid = true;
-		List<Conference> cconferenceList  = league.getConferences();
-		for(Conference conference : cconferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			for(Division division: divisionList) {
-				List<Team> teamList = division.getTeams();
-				for(Team team: teamList) {
-					if(team.getHeadCoach().equalsIgnoreCase(headCoach)) {
-						isHeadCoachNameValid = false;
-						return isHeadCoachNameValid;
-					}
-				}
-			}
-		}
+		isHeadCoachNameValid = validateTeamMethod(league, "getHeadCoach", headCoach);
 		return isHeadCoachNameValid;
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
 		return "Team [teamName=" + teamName + ", generalManager=" + generalManager + ", headCoach=" + headCoach
 				+ ", players=" + players + "]";
 	}
 
-	
 }

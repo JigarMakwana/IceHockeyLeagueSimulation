@@ -6,9 +6,28 @@ import java.util.List;
 
 import org.junit.Test;
 
+import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.db.League.LeagueDbMock;
 import junit.framework.Assert;
 
 public class LeagueTest {
+	
+	
+	public League populateLeagueObject() {
+		List<Team> teamsList = new ArrayList<Team>();
+		Team team = new Team("Vancouver Canucks", "John", "Peter", null);
+		teamsList.add(team);
+
+		List<Division> divisionsList = new ArrayList<Division>();
+		Division atlanticDivision = new Division("Atlantic Division", teamsList);
+		divisionsList.add(atlanticDivision);
+		List<Conference> conferenceList = new ArrayList<Conference>();
+		Conference conference = new Conference("Westeren Conference", divisionsList);
+		conferenceList.add(conference);
+		League league = new League("DHL", conferenceList, null);
+		return league;
+
+	}
 
 	@Test
 	public void LeagueDeafultConstructorTest() {
@@ -48,6 +67,21 @@ public class LeagueTest {
 				+ easternConference.getDivisions() + "]", league.getConferences().get(1).toString());
 
 		Assert.assertTrue(league.getConferences().size() == 2);
+	}
+	@Test
+	public void isLeagueNameValid() {
+		League league = populateLeagueObject();
+		ILeagueDb leagueDb = new LeagueDbMock();
+		Assert.assertTrue(league.isLeagueNameValid(league.getLeagueName(), leagueDb));
+		league.setLeagueName("NHL");
+		Assert.assertFalse(league.isLeagueNameValid(league.getLeagueName(), leagueDb));
+	}
+	
+	@Test
+	public void insertLeagueObject() {
+		League league = populateLeagueObject();
+		ILeagueDb leagueDb = new LeagueDbMock();
+		Assert.assertTrue(league.insertLeagueObject(league, leagueDb, null, null, null) == 2);
 	}
 
 }

@@ -79,38 +79,6 @@ public class Division {
 	}
 	
 	
-//	public boolean isTeamNameValid(String teamName) {
-//		boolean isTeamNameValid = true;
-//		for(Team team: teams) {
-//			if(team.getTeamName().equalsIgnoreCase(teamName)) {
-//				isTeamNameValid = false;
-//				break;
-//			}
-//				
-//		}
-//		// check in db if team name exits or not
-//		return isTeamNameValid;
-//	}
-//
-//	public boolean isTeamManagerNameValid(String managerName) {
-//		boolean isTeamMangerNameValid = true;
-//		for(Team team: teams) {
-//			if(team.getTeamName().equalsIgnoreCase(teamName)) {
-//				isTeamNameValid = false;
-//				break;
-//			}
-//				
-//		}
-//		// check in db if team name exits or not
-//		return false;
-//	}
-//
-//	public boolean isHeadCoachNameValid(String headCoach) {
-//		// cheeck any coach name in existing json exits or not
-//		// check in db if team name exits or not
-//		return false;
-//	}
-
 	public void addNewTeamInDivision(Team newTeam) {
 		teams.add(newTeam);
 	}

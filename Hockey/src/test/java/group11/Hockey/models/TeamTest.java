@@ -1,36 +1,20 @@
 package group11.Hockey.models;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+import group11.Hockey.db.Team.ITeamDb;
+import group11.Hockey.db.Team.TeamDbMock;
 import junit.framework.Assert;
 
 public class TeamTest {
 	
-	public static League league;
 	
-	@BeforeClass
-	public static void loadDataInLeague() {
-		
-		
-		List<Team> teamsList = new ArrayList<Team>();
-		Team team = new Team("Vancouver Canucks", "John", "Peter", null);
-		teamsList.add(team);
-		
-		List<Division> divisionsList = new ArrayList<Division>();
-		Division atlanticDivision = new Division("Atlantic Division", teamsList);
-		divisionsList.add(atlanticDivision);
-		List<Conference> conferenceList = new ArrayList<Conference>();
-		Conference conference = new Conference("Westeren Conference", divisionsList);
-		conferenceList.add(conference);
-		// add free agents
-		league = new League("DHL", conferenceList, null);
-		
-	}
+	LeagueTest leagueTest = new LeagueTest();
+	public League league = leagueTest.populateLeagueObject();
+	
 	
 	@Test
 	public void getTeamNameTest() {
@@ -78,55 +62,40 @@ public class TeamTest {
 		Assert.assertTrue(team.getPlayers().size() == 2);
 	}
 	
-	public boolean validateTeamMethodField(League league, String methodName, String value) {
-		boolean isTeamDetailsValid = true;
-		List<Conference> cconferenceList = league.getConferences();
-		for (Conference conference : cconferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
-
-					Method m;
-					try {
-						m = team.getClass().getMethod(methodName);
-						String fetchedValue = (String) m.invoke(team);
-						if (fetchedValue.equalsIgnoreCase(value)) {
-							isTeamDetailsValid = false;
-							return isTeamDetailsValid;
-						}
-					} catch (Exception e) {
-						System.out.println("Exception occured while validating the new team values with imported JSON");
-					}
-				}
-			}
-		}
-
-		return isTeamDetailsValid;
-
+	public ITeamDb createTeamDbMockObject() {
+		ITeamDb teamDb = new TeamDbMock();
+		return teamDb;
 	}
 	
 	@Test
 	public void isTeamNameValidTest() {
-		league = this.league;
 		String teamName = "Vancouver Canucks";
 		boolean isTeamNameValid = true;
-		List<Conference> cconferenceList  = league.getConferences();
 		Team team = new Team();
-		isTeamNameValid = team.validateTeamMethod(league, "getTeamName", "Vancouver Canucks");
-//		for(Conference conference : cconferenceList) {
-//			List<Division> divisionList = conference.getDivisions();
-//			for(Division division: divisionList) {
-//				List<Team> teamList = division.getTeams();
-//				for(Team team: teamList) {
-//					if(team.getTeamName().equalsIgnoreCase(teamName)) {
-//						isTeamNameValid = false;
-//					}
-//				}
-//			}
-//		}
+		isTeamNameValid = team.isTeamNameValid(teamName, league);
 		Assert.assertFalse(isTeamNameValid);
-		
 	}
 
+	
+	@Test
+	public void isTeamManagerNameValidTest() {
+		String managerName = "John";
+		boolean isMangerNameValid = true;
+		Team team = new Team();
+		isMangerNameValid = team.isTeamManagerNameValid(managerName, league);
+		Assert.assertFalse(isMangerNameValid);
+		
+	}
+	
+	@Test
+	public void isHeadCoachNameValidTest() {
+		String coachName = "Peter";
+		boolean isCoachNameValid = true;
+		Team team = new Team();
+		isCoachNameValid = team.isHeadCoachNameValid(coachName, league);
+		Assert.assertFalse(isCoachNameValid);
+		
+	}
+	
+	
 }

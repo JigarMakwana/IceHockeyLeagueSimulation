@@ -76,25 +76,4 @@ public class Conference {
 		return conference;
 	}
 
-//	public boolean isDivisionNameValid(String divisionName) {
-//		boolean isDivisionNameValid = false;
-//		for(Division division: divisions) {
-//			if(division.getDivisionName().equalsIgnoreCase(divisionName)) {
-//				isDivisionNameValid = true;
-//				break;
-//			}
-//		}
-//		return isDivisionNameValid;
-//	}
-//	
-//	public Division getConferencefromConferenceName(String divisionName) {
-//		Division division = null;
-//		for(Division div: divisions) {
-//			if(div.getDivisionName().equalsIgnoreCase(divisionName)) {
-//				division = div;
-//				break;
-//			}
-//		}
-//		return division;
-//	}
 }

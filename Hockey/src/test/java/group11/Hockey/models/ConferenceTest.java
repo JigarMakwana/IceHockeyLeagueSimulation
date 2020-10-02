@@ -8,6 +8,10 @@ import org.junit.Test;
 import junit.framework.Assert;
 
 public class ConferenceTest {
+	
+	LeagueTest leagueTest = new LeagueTest();
+	List<Conference> conferenceList = leagueTest.populateLeagueObject().getConferences();
+	Conference conference = new Conference();
 
 	@Test
 	public void getConferenceNameTest() {
@@ -40,6 +44,19 @@ public class ConferenceTest {
 		divisionsList.add(centralDivision);
 		Conference conference = new Conference("Westeren Conference", divisionsList);
 		Assert.assertTrue(conference.getDivisions().size() == 2);
+	}
+	
+	@Test
+	public void isConferenceNameValidTest() {
+		Assert.assertTrue(conference.isConferenceNameValid("Westeren Conference", conferenceList));
+		Assert.assertFalse(conference.isConferenceNameValid("Eastern Conference", conferenceList));
+		
+	}
+	@Test
+	public void getConferenceFromConferenceNameTest() {
+		String conferenceName = "Westeren Conference";
+		Assert.assertTrue(conference.getConferencefromConferenceName("Westeren Conference", conferenceList).getConferenceName().equalsIgnoreCase(conferenceName));
+		Assert.assertNull(conference.getConferencefromConferenceName("Eastern Conference", conferenceList));
 	}
 
 }

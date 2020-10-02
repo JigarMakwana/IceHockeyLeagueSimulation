@@ -3,8 +3,6 @@ package group11.Hockey.models;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import group11.Hockey.db.ITeamDb;
-
 /**
  * This class contain all the business logic related to team model
  * 
@@ -17,8 +15,6 @@ public class Team {
 	private String generalManager;
 	private String headCoach;
 	private List<Player> players = null;
-	private ITeamDb dao;
-	
 
 	public Team(String teamName, String generalManager, String headCoach, List<Player> players) {
 		super();
@@ -27,13 +23,11 @@ public class Team {
 		this.headCoach = headCoach;
 		this.players = players;
 	}
-
+	
+	
 	public Team() {
-		
-	}
 
-	
-	
+	}
 
 	/**
 	 * @return the teamName
@@ -91,7 +85,7 @@ public class Team {
 		this.players = players;
 	}
 
-	public boolean validateTeamMethod(League league, String methodName, String value) {
+	public boolean validateTeamMethodName(League league, String methodName, String value) {
 		boolean isTeamDetailsValid = true;
 		List<Conference> cconferenceList = league.getConferences();
 		for (Conference conference : cconferenceList) {
@@ -120,34 +114,20 @@ public class Team {
 	}
 
 	public boolean isTeamNameValid(String teamName, League league) {
-		boolean isTeamNameValid = true;
-		isTeamNameValid = validateTeamMethod(league, "getTeamName", teamName);
-
-		// check in db if team name exits or not
-		
-
+		boolean isTeamNameValid;
+		isTeamNameValid = validateTeamMethodName(league, "getTeamName", teamName);
 		return isTeamNameValid;
 	}
 
-//	public boolean validateTeamDetails(String teamName, String managerName, String headCoach, League league) {
-//		
-//		return false;
-//		
-//	}
-
 	public boolean isTeamManagerNameValid(String managerName, League league) {
-		boolean isTeamMangerNameValid = true;
-		//getGeneralManager
-		isTeamMangerNameValid = validateTeamMethod(league, "getGeneralManager", managerName);
-		// check in db if team name exits or not
-		// teamDbImpl where object we will get that from constructor and make a new
-		// constructor or check
+		boolean isTeamMangerNameValid;
+		isTeamMangerNameValid = validateTeamMethodName(league, "getGeneralManager", managerName);
 		return isTeamMangerNameValid;
 	}
 
 	public boolean isHeadCoachNameValid(String headCoach, League league) {
-		boolean isHeadCoachNameValid = true;
-		isHeadCoachNameValid = validateTeamMethod(league, "getHeadCoach", headCoach);
+		boolean isHeadCoachNameValid;
+		isHeadCoachNameValid = validateTeamMethodName(league, "getHeadCoach", headCoach);
 		return isHeadCoachNameValid;
 	}
 

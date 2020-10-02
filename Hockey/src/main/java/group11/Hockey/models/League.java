@@ -2,6 +2,11 @@ package group11.Hockey.models;
 
 import java.util.List;
 
+import group11.Hockey.db.Conference.IConferenceDb;
+import group11.Hockey.db.Division.IDivision;
+import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.db.Team.ITeamDb;
+
 /**
  * This class contains the business logic for the League model
  * 
@@ -19,7 +24,7 @@ public class League {
 		this.conferences = conferences;
 		this.freeAgents = freeAgents;
 	}
-	
+
 	public League() {
 		super();
 	}
@@ -65,26 +70,30 @@ public class League {
 	public void setFreeAgents(List<FreeAgent> freeAgents) {
 		this.freeAgents = freeAgents;
 	}
-	
-//	public boolean isConferenceNameValid(String conferenceName) {
-//		boolean isConferanceNameValid = false;
-//		for(Conference conference: conferences) {
-//			if(conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
-//				isConferanceNameValid = true;
-//				break;
-//			}
-//		}
-//		return isConferanceNameValid;
-//	}
-	
-//	public Conference getConferencefromConferenceName(String conferenceName) {
-//		Conference conf = null;
-//		for(Conference conference: conferences) {
-//			if(conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
-//				conf = conference;
-//				break;
-//			}
-//		}
-//		return conf;
-//	}
+
+	public int insertLeagueObject(League league, ILeagueDb leagueDb, IConferenceDb conferenceDb, IDivision divisionDb,
+			ITeamDb teamDb) {
+		int leagueId = leagueDb.insertLeagueInDb(league.getLeagueName());
+		List<Conference> conferenceList = league.getConferences();
+		for (Conference conference : conferenceList) {
+			int conferenceId = conferenceDb.insertConferenceInDb(conference.getConferenceName(), leagueId);
+			List<Division> divisionList = conference.getDivisions();
+			for (Division divison : divisionList) {
+				int divisionId = divisionDb.insertDivisionInDb(divison.getDivisionName(), conferenceId);
+				List<Team> teamList = divison.getTeams();
+				for (Team team : teamList) {
+					teamDb.insertTeamInDb(team.getTeamName(), team.getGeneralManager(), team.getHeadCoach(),
+							divisionId);
+				}
+			}
+		}
+
+		return leagueId;
+
+	}
+
+	public boolean isLeagueNameValid(String leagueName, ILeagueDb leagueDb) {
+		return leagueDb.checkLeagueNameExitsInDb(leagueName);
+
+	}
 }

@@ -3,6 +3,8 @@ package group11.Hockey.models;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import group11.Hockey.db.Team.ITeamDb;
+
 /**
  * This class contain all the business logic related to team model
  * 
@@ -129,6 +131,10 @@ public class Team {
 		boolean isHeadCoachNameValid;
 		isHeadCoachNameValid = validateTeamMethodName(league, "getHeadCoach", headCoach);
 		return isHeadCoachNameValid;
+	}
+	
+	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb){
+		return teamDb.loadTeamFromTeamName(teamName);
 	}
 
 	@Override

@@ -1,6 +1,22 @@
-demo_job:
-     tags:
-       - ugrad
-     script:
-       - echo Hello World
-     
+stages:
+  - build
+  - test
+  
+build:
+  stage: build
+  tags:
+    - ugrad
+  script:
+    - echo Building...
+    - mvn compile
+
+test:
+  stage: test
+  tags:
+    - ugrad
+  script:
+    - echo testing...
+    - mvn clean test
+
+after_script:
+  - echo "End CI"

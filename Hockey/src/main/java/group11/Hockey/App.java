@@ -17,11 +17,11 @@ public class App {
 		IUserInputMode userInputMode = new CommandLineInput();
 		if (args.length != 0) {
 			String jsonFile = args[0];
-			URL jsonSchemaFile = App.class.getResource("HockeyTeamJsonSchema.json");
+			String jsonSchemaFile = "C:\\Users\\RajKumar\\Documents\\MACS_Fall\\A_SDC\\HockeyTeamJsonSchema.json";
 			// String jsonSchemaFile = args[1];
 
 			ValidateJson validate = new ValidateJson();
-			boolean isValid = validate.validateJson(jsonFile, jsonSchemaFile.getPath());
+			boolean isValid = validate.validateJson(jsonFile, jsonSchemaFile);
 			System.out.println("valide json:->:" + isValid);
 			if (isValid) {
 				ImportJson importJson = new ImportJson();

@@ -2,6 +2,9 @@ package group11.Hockey;
 
 import java.util.List;
 
+import group11.Hockey.db.Conference.IConferenceDb;
+import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.db.League.LeagueDbMock;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
@@ -55,6 +58,8 @@ public class CreateTeam {
 				userInputMode.displayMessage("not a valid number");
 			}
 		}
+		
+		//saveTeam();
 
 		return leagueObj;
 
@@ -62,6 +67,7 @@ public class CreateTeam {
 	
 	private void saveTeam() {
 		
+		leagueObj.insertLeagueObject(leagueObj, null, null, null, null);
 	}
 
 	private void createTeam(Division division) {
@@ -183,22 +189,24 @@ public class CreateTeam {
 		if (isStrBlank(name)) {
 			return true;
 		}
-		if (teamObj.isTeamManagerNameValid(name, leagueObj)) {
+		else {
 			return false;
 		}
-		userInputMode.displayMessage("GeneralManager already exists in this League");
-		return true;
+//		if (teamObj.isTeamManagerNameValid(name, leagueObj)) {
+//			return false;
+//		}
 	}
 
 	private boolean isNotValidHeadCoach(String name, Team teamObj) {
 		if (isStrBlank(name)) {
 			return true;
 		}
-		if (teamObj.isHeadCoachNameValid(name, leagueObj)) {
+		else {
 			return false;
 		}
-		userInputMode.displayMessage("HeadCoach already exists in this League");
-		return true;
+//		if (teamObj.isHeadCoachNameValid(name, leagueObj)) {
+//			return false;
+//		}
 	}
 
 	private boolean isValidString(String name) {

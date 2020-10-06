@@ -22,8 +22,6 @@ public class ImportJson implements IFileOperations {
 	private Object fileObj;
 	private League leagueModelObj;
 	List<String> teamNameList = new ArrayList<String>();
-	List<String> generalManagerList = new ArrayList<String>();
-	List<String> headCoachList = new ArrayList<String>();
 	List<String> divisionNamesList = new ArrayList<String>();
 	List<String> conferenceNamesList = new ArrayList<String>();
 
@@ -62,7 +60,6 @@ public class ImportJson implements IFileOperations {
 		List<Conference> conferencesList = new ArrayList<Conference>();
 		JSONArray ConferenceJSONArray = (JSONArray) jsonObject.get("conferences");
 		Iterator<JSONObject> ConferencesListIterator = ConferenceJSONArray.iterator();
-		System.out.println("ConferencesList size -> " + ConferenceJSONArray.size());
 		while (ConferencesListIterator.hasNext()) {
 			conference = new Conference();
 			// get conferenceName
@@ -89,7 +86,6 @@ public class ImportJson implements IFileOperations {
 		List<Division> divisionsList = new ArrayList<Division>();
 		JSONArray divisionsJSONArray = (JSONArray) ConferencesListJsonObject.get("divisions");
 		Iterator<JSONObject> divisionsListIterator = divisionsJSONArray.iterator();
-		System.out.println("divisionsList size -> " + divisionsJSONArray.size());
 		while (divisionsListIterator.hasNext()) {
 
 			divisionObj = new Division();
@@ -118,7 +114,6 @@ public class ImportJson implements IFileOperations {
 		List<Team> teamsList = new ArrayList<Team>();
 		JSONArray teamsJSONArray = (JSONArray) divisionsListJsonObject.get("teams");
 		Iterator<JSONObject> teamsListIterator = teamsJSONArray.iterator();
-		System.out.println("teamsList size -> " + teamsJSONArray.size());
 		while (teamsListIterator.hasNext()) {
 			teamObj = new Team();
 			JSONObject teamsListJsonObject = teamsListIterator.next();
@@ -133,21 +128,12 @@ public class ImportJson implements IFileOperations {
 
 			// get generalManager
 			String generalManager = (String) teamsListJsonObject.get("generalManager");
-			if (generalManagerList.contains(generalManager.toLowerCase())) {
-				throw new Exception("GeneralManager " + generalManager + " already exists");
-			} else {
-				teamObj.setGeneralManager(generalManager);
-				generalManagerList.add(generalManager.toLowerCase());
-			}
+			teamObj.setGeneralManager(generalManager);
+			
 
 			// get headCoach
 			String headCoach = (String) teamsListJsonObject.get("headCoach");
-			if (headCoachList.contains(headCoach.toLowerCase())) {
-				throw new Exception("HeadCoach " + headCoach + " already exists");
-			} else {
-				teamObj.setHeadCoach(headCoach);
-				headCoachList.add(headCoach.toLowerCase());
-			}
+			teamObj.setHeadCoach(headCoach);
 
 			// parse Teams
 			List<Player> playersList = parsePlayers(teamsListJsonObject);
@@ -173,7 +159,6 @@ public class ImportJson implements IFileOperations {
 
 		JSONArray playersJsonArray = (JSONArray) teamsListJsonObject.get("players");
 		Iterator<JSONObject> playersListIterator = playersJsonArray.iterator();
-		System.out.println("playersList size -> " + playersJsonArray.size());
 		while (playersListIterator.hasNext()) {
 			playerObj = new Player();
 			JSONObject playersListJsonObject = playersListIterator.next();
@@ -197,7 +182,6 @@ public class ImportJson implements IFileOperations {
 		List<FreeAgent> freeAgentsList = new ArrayList<FreeAgent>();
 		JSONArray playersList = (JSONArray) teamsListJsonObject.get("freeAgents");
 		Iterator<JSONObject> playersListIterator = playersList.iterator();
-		System.out.println("freeAgent playersList size -> " + playersList.size());
 		while (playersListIterator.hasNext()) {
 
 			JSONObject playersListJsonObject = playersListIterator.next();

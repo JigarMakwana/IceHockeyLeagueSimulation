@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for App.
+ * Unit test for Hockey App.
  */
 public class AppTest
     extends TestCase

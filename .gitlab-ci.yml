@@ -1,0 +1,6 @@
+demo_job:
+     tags:
+       - ugrad
+     script:
+       - echo Hello World
+     

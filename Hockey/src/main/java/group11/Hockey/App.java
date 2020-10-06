@@ -18,6 +18,7 @@ public class App {
 		if (args.length != 0) {
 			String jsonFile = args[0];
 			//String jsonSchemaFile = "C:\\Users\\RajKumar\\Documents\\MACS_Fall\\A_SDC\\HockeyTeamJsonSchema.json";
+			//test CICD 
 			// String jsonSchemaFile = args[1];
 
 			ValidateJson validate = new ValidateJson();

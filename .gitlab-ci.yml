@@ -1,11 +1,15 @@
 stages:
   - build
   - test
+  - deploy
   
 build:
   stage: build
   tags:
     - ugrad
+  artifacts:
+    paths:
+      - app/build/outputs
   script:
     - echo Building...
     - mvn compile
@@ -14,9 +18,24 @@ test:
   stage: test
   tags:
     - ugrad
+  artifacts:
+    paths:
+      - app/build/outputs
   script:
     - echo testing...
     - mvn clean test
+    
+deploy:
+  stage: deploy
+  tags:
+    - ugrad
+  artifacts:
+    paths:
+      - app/build/outputs
+  script:
+    - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - zip -r ${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHORT_SHA}.zip app/build/outputs
+    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" <FILE> "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHORT_SHA}.zip"
 
 after_script:
   - echo "End CI"

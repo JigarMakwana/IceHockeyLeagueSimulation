@@ -10,37 +10,28 @@ import group11.Hockey.models.League;
 
 public class ImportJsonTest {
 
-//	@Test
-//	public void parseFileTest() {
-//		URL jsonFile = getClass().getResource("HockeyTeam.json");
-//		
-//		ImportJson importJsonObj = new ImportJson();
-//		
-//		
-//		League leagueModelObj = null;
-//		try {
-//			leagueModelObj = importJsonObj.parseFile(jsonFile.getPath());
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		assertEquals(leagueModelObj.getLeagueName(),"Dalhousie Hockey League");
-//		assertEquals(leagueModelObj.getConferences().size(), 1);
-//	}
-	
-//	@Test
-//	public void parseFileDuplicateConfirenceNameTest() {
-//		URL jsonFile = getClass().getResource("HockeyTeamInvalid.json");
-//		ImportJson importJsonObj = new ImportJson();
-//		
-//		Exception exception = assertThrows(Exception.class, () -> {
-//			importJsonObj.parseFile(jsonFile.getPath());
-//	    });
-//		
-//		String exceptionMessage = "Division name Atlantic already exists";
-//	    String actualMessage = exception.getMessage();
-//	    
-//	    assertEquals(exceptionMessage, actualMessage);
-//	}
+	@Test
+	public void parseFileTest() throws Exception {
+		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeam.json");
+
+		ImportJson importJsonObj = new ImportJson();
+
+		League leagueModelObj = null;
+
+		leagueModelObj = importJsonObj.parseFile(jsonFile.getPath());
+
+		assertEquals(leagueModelObj.getLeagueName(), "Dalhousie Hockey League");
+		assertEquals(leagueModelObj.getConferences().size(), 1);
+	}
+
+	@Test(expected = Exception.class)
+	public void parseFileDuplicateConfirenceNameTest() throws Exception {
+		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeamInvalid.json");
+		ImportJson importJsonObj = new ImportJson();
+		importJsonObj.parseFile(jsonFile.getPath());
+	    
+		
+		
+	}
 
 }

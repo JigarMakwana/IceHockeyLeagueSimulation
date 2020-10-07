@@ -15,8 +15,8 @@ public class LeagueDbImpl implements ILeagueDb {
 
 	@Override
 	public boolean checkLeagueNameExitsInDb(String leagueName) {
-
-		return false;
+		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call isLeagueExists(?)}");
+		return procedureCallDb.procedureCallForLeagueExistsCheck(leagueName);
 	}
 
 }

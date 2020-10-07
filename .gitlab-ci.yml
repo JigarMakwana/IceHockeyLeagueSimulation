@@ -39,9 +39,12 @@ deploy:
     paths:
       - target
   script:
+    - echo testing...
     - mvn package
     - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - echo compressing...
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
+    - echo deploying...
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
 
 after_script:

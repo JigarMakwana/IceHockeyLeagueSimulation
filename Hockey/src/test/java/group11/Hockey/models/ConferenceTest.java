@@ -1,6 +1,7 @@
 package group11.Hockey.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,11 +13,41 @@ public class ConferenceTest {
 	LeagueTest leagueTest = new LeagueTest();
 	List<Conference> conferenceList = leagueTest.populateLeagueObject().getConferences();
 	Conference conference = new Conference();
+	
+	@Test
+	public void ConferenceConstructorTest() {
+		Conference conference = new Conference();
+		Assert.assertNull(conference.getDivisions());
+		Assert.assertNull(conference.getConferenceName());
+	}
+	
+	@Test
+	public void ConferenceParameterisedConstructorTest() {
+		Conference conference = new Conference("Westeren Conference", Arrays.asList(new Division()));
+		Assert.assertEquals("Westeren Conference", conference.getConferenceName());
+		Assert.assertTrue(conference.getDivisions().size()==1);
+	}
+	
+	@Test
+	public void setConferenceNameTest() {
+		Conference conference = new Conference();
+		conference.setConferenceName("Westeren Conference");
+		Assert.assertEquals("Westeren Conference", conference.getConferenceName());
+	}
+	
 
 	@Test
 	public void getConferenceNameTest() {
 		Conference conference = new Conference("Westeren Conference", null);
 		Assert.assertEquals("Westeren Conference", conference.getConferenceName());
+	}
+	
+	@Test
+	public void setDivisionsTest() {
+		Conference conference = new Conference();
+		conference.setDivisions(Arrays.asList(new Division("Atlantic Division", null)));
+		Assert.assertTrue(conference.getDivisions().size() == 1);
+		Assert.assertEquals("Atlantic Division", conference.getDivisions().get(0).getDivisionName());
 	}
 
 	@Test

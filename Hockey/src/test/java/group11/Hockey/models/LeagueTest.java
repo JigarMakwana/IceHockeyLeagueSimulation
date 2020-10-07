@@ -12,6 +12,9 @@ import junit.framework.Assert;
 
 public class LeagueTest {
 	
+	Conference westernConference = new Conference("Westeren Conference", null);
+	Conference easternConference = new Conference("Eastern Conference", null);
+	List<Conference> conferenceList = new ArrayList<Conference>();
 	
 	public League populateLeagueObject() {
 		List<Team> teamsList = new ArrayList<Team>();
@@ -28,6 +31,7 @@ public class LeagueTest {
 		return league;
 
 	}
+	
 
 	@Test
 	public void LeagueDeafultConstructorTest() {
@@ -44,18 +48,32 @@ public class LeagueTest {
 		Assert.assertTrue(league.getConferences().size() == 1);
 		Assert.assertNull(league.getFreeAgents());
 	}
+	
+	@Test
+	public void setLeagueNameTest() {
+		League league = new League();
+		league.setLeagueName("DHL");
+		Assert.assertEquals("DHL", league.getLeagueName());
+	}
 
 	@Test
 	public void getLeagueNameTest() {
 		League league = new League("DHL", null, null);
 		Assert.assertEquals("DHL", league.getLeagueName());
 	}
+	
+	@Test
+	public void setConferencesTest() {
+		League league = new League();
+		league.setConferences(Arrays.asList(westernConference, easternConference));
+		Assert.assertTrue(league.getConferences().size() == 2);
+		Assert.assertEquals("Westeren Conference", league.getConferences().get(0).getConferenceName());
+		
+	}
 
 	@Test
 	public void getConferencesTest() {
-		List<Conference> conferenceList = new ArrayList<Conference>();
-		Conference westernConference = new Conference("Westeren Conference", null);
-		Conference easternConference = new Conference("Eastern Conference", null);
+		
 		conferenceList.add(westernConference);
 		conferenceList.add(easternConference);
 
@@ -79,10 +97,10 @@ public class LeagueTest {
 	
 	@Test
 	public void insertLeagueObject() {
-//		League league = populateLeagueObject();
-//		ILeagueDb leagueDb = new LeagueDbMock();
-//		Assert.assertTrue(league.insertLeagueObject(league, leagueDb, null, null, null) == 2);
-		Assert.assertTrue(true);
+		League league = populateLeagueObject();
+		ILeagueDb leagueDb = new LeagueDbMock();
+		boolean leagueId = league.insertLeagueObject(league, leagueDb);
+		Assert.assertTrue(leagueId);
 	}
 
 }

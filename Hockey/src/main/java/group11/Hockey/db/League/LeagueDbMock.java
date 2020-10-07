@@ -1,6 +1,7 @@
 package group11.Hockey.db.League;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import group11.Hockey.models.Conference;
@@ -18,11 +19,14 @@ public class LeagueDbMock implements ILeagueDb {
 	}
 
 	@Override
-	public int insertLeagueInDb(String leagueName) {
-		League leagueObject = new League();
-		leagueObject.setLeagueName(leagueName);
-		leagueList.add(leagueObject);
-		return leagueList.size();
+	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName, String generalManger, String headCoach) {
+		Team team = new Team();
+		team.setTeamName(teamName);
+		Division division = new Division(divisionName, Arrays.asList(team));
+		Conference conference = new Conference("conferenceName", Arrays.asList(division));
+		League leagueObject = new League(leagueName, Arrays.asList(conference), null);
+		if(leagueObject.getLeagueName().equalsIgnoreCase(leagueName) && leagueObject.getConferences().size() == 1);
+		return true;
 	}
 	
 	public League populateLeagueObject() {

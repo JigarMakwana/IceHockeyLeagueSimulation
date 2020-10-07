@@ -20,7 +20,7 @@ test:
     - ugrad
   artifacts:
     paths:
-      - app/build/outputs
+      - target
   script:
     - echo testing...
     - mvn clean test
@@ -31,7 +31,7 @@ deploy:
     - ugrad
   artifacts:
     paths:
-      - app/build/outputs
+      - target
   script:
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target

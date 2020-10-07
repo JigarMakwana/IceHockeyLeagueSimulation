@@ -44,4 +44,4 @@ deploy:
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
 
 after_script:
-  - echo "End CI and CD"
+  - echo "End CI and CD!"

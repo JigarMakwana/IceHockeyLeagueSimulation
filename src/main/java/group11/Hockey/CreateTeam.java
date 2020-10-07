@@ -17,13 +17,15 @@ public class CreateTeam {
 	private String teamName;
 	private League leagueObj;
 	private IUserInputMode userInputMode;
+	private ILeagueDb leagueDb;
 	Conference conferenceObj = new Conference();
 	Division divisionObj = new Division();
 
-	public CreateTeam(IUserInputMode userInputMode, League leagueObj) {
+	public CreateTeam(IUserInputMode userInputMode, League leagueObj, ILeagueDb leagueDb) {
 		super();
 		this.userInputMode = userInputMode;
 		this.leagueObj = leagueObj;
+		this.leagueDb = leagueDb;
 	}
 
 	public League getTeam() {
@@ -59,15 +61,15 @@ public class CreateTeam {
 				userInputMode.displayMessage("not a valid number");
 			}
 		}
-		
-		//saveTeam();
+
+		saveTeam();
 
 		return leagueObj;
 
 	}
-	
+
 	private void saveTeam() {
-		ILeagueDb leagueDb = new LeagueDbImpl();
+
 		leagueObj.insertLeagueObject(leagueObj, leagueDb);
 	}
 
@@ -189,8 +191,7 @@ public class CreateTeam {
 	private boolean isNotValidGeneralManager(String name, Team teamObj) {
 		if (isStrBlank(name)) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 //		if (teamObj.isTeamManagerNameValid(name, leagueObj)) {
@@ -201,8 +202,7 @@ public class CreateTeam {
 	private boolean isNotValidHeadCoach(String name, Team teamObj) {
 		if (isStrBlank(name)) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 //		if (teamObj.isHeadCoachNameValid(name, leagueObj)) {
@@ -227,7 +227,7 @@ public class CreateTeam {
 		userInputMode.displayMessage("Wrong input");
 		return false;
 	}
-	
+
 	private boolean isStrBlank(String str) {
 		if (str == null || str.isEmpty() || str.split(" +").length == 0) {
 			return true;

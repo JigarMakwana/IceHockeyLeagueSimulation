@@ -10,6 +10,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import group11.Hockey.db.League.LeagueDbImpl;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.FreeAgent;
@@ -43,7 +44,16 @@ public class ImportJson implements IFileOperations {
 			JSONObject jsonObject = (JSONObject) fileObj;
 			// parse league name
 			String leagueName = (String) jsonObject.get("leagueName");
-			leagueModelObj.setLeagueName(leagueName);
+			
+			LeagueDbImpl leagueDb = new LeagueDbImpl();  
+			if(leagueModelObj.isLeagueNameValid(leagueName, leagueDb)) {
+				leagueModelObj.setLeagueName(leagueName);
+			}
+			else {
+				throw new Exception(leagueName+ " -> League name already exists in the system");
+			}
+			
+			
 			// parse Conferences
 			List<Conference> conferencesList = parseConferences(jsonObject);
 			leagueModelObj.setConferences(conferencesList);

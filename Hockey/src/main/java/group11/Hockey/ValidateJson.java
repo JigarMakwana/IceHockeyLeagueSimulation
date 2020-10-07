@@ -31,7 +31,7 @@ public class ValidateJson {
 			return true;
 		} catch (ValidationException e) {
 			System.out.println(e.getMessage());
-			e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
+			//e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
 		}
 		return false;
 	}

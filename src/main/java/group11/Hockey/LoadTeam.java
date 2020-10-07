@@ -1,32 +1,112 @@
 package group11.Hockey;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import group11.Hockey.db.Team.ITeamDb;
+import group11.Hockey.db.Team.TeamDbImpl;
+import group11.Hockey.models.Conference;
+import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
+import group11.Hockey.models.Team;
 
 public class LoadTeam {
 	private IUserInputMode userInputMode;
+	private ITeamDb teamDb;
 
-	public LoadTeam(IUserInputMode userInputMode) {
+	public LoadTeam(IUserInputMode userInputMode, ITeamDb teamDb) {
 		super();
 		this.userInputMode = userInputMode;
+		this.teamDb = teamDb;
 	}
 
-	public League getTeam() throws Exception {
+	public Team getTeam() throws Exception {
 		userInputMode.displayMessage("***Load Team***\n");
 		String teamName;
 
 		userInputMode.displayMessage("Enter Team Name: ");
 		teamName = userInputMode.getName();
 		if (isNotValidTeamName(teamName)) {
+			throw new Exception("Not a valid Team name");
+		}
+		
+		
+		Team teamObj = new Team();
+		
+		List<League> leaguesList = teamObj.loadTeamWithTeamName(teamName,teamDb);
+		if (leaguesList.size() == 0) {
 			throw new Exception("Team name does not exist in the system");
+		} else if (leaguesList.size() > 1) {
+			userInputMode.displayMessage("Team Name found in the following Leagues: ");
+
+			int count = 0;
+			List<String> LeagueNames = new ArrayList<String>();
+
+			boolean isNotValidNumber = true;
+			int leagueOption = 0;
+			while (isNotValidNumber || leagueOption <= 0 || leagueOption >= count) {
+				count = 1;
+				userInputMode.displayMessage("Choose following options: ");
+				for (League league : leaguesList) {
+					userInputMode.displayMessage("\"" + count + "\"" + " for " + league.getLeagueName());
+					LeagueNames.add(league.getLeagueName());
+					count++;
+				}
+				try {
+					leagueOption = userInputMode.getInt();
+					isNotValidNumber = false;
+				} catch (Exception e) {
+					userInputMode.displayMessage("not a valid number");
+				}
+			}
+
+			String leagueName = LeagueNames.get(leagueOption - 1);
+
+			for (League league : leaguesList) {
+				if (league.getLeagueName() == leagueName) {
+					List<Conference> conferenceList = league.getConferences();
+					for (Conference conference : conferenceList) {
+						List<Division> divisionList = conference.getDivisions();
+						for (Division division : divisionList) {
+							List<Team> teamList = division.getTeams();
+							for (Team team : teamList) {
+								if (team.getTeamName().equalsIgnoreCase(teamName)) {
+									return team;
+								}
+							}
+						}
+					}
+
+				}
+			}
+
+		} else if (leaguesList.size() == 1) {
+			for (League league : leaguesList) {
+				List<Conference> conferenceList = league.getConferences();
+				for (Conference conference : conferenceList) {
+					List<Division> divisionList = conference.getDivisions();
+					for (Division division : divisionList) {
+						List<Team> teamList = division.getTeams();
+						for (Team team : teamList) {
+							if (team.getTeamName().equalsIgnoreCase(teamName)) {
+								return team;
+							}
+						}
+					}
+				}
+
+			}
 		}
 
 		return null;
 	}
 
 	private boolean isNotValidTeamName(String teamName) {
+
 		if (isStrBlank(teamName)) {
 			return true;
-		} 
+		}
+
 		return false;
 	}
 

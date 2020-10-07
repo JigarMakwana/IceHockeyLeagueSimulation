@@ -71,24 +71,33 @@ public class League {
 		this.freeAgents = freeAgents;
 	}
 
-	public int insertLeagueObject(League league, ILeagueDb leagueDb, IConferenceDb conferenceDb, IDivision divisionDb,
-			ITeamDb teamDb) {
-		int leagueId = leagueDb.insertLeagueInDb(league.getLeagueName());
+	public boolean insertLeagueObject(League league, ILeagueDb leagueDb) {
+		boolean leagueObjectInserted = false;
+
 		List<Conference> conferenceList = league.getConferences();
 		for (Conference conference : conferenceList) {
-			int conferenceId = conferenceDb.insertConferenceInDb(conference.getConferenceName(), leagueId);
 			List<Division> divisionList = conference.getDivisions();
-			for (Division divison : divisionList) {
-				int divisionId = divisionDb.insertDivisionInDb(divison.getDivisionName(), conferenceId);
-				List<Team> teamList = divison.getTeams();
-				for (Team team : teamList) {
-					teamDb.insertTeamInDb(team.getTeamName(), team.getGeneralManager(), team.getHeadCoach(),
-							divisionId);
+			if (divisionList == null || divisionList.size() == 0) {
+				leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(), null, null,
+						null, null);
+			} else {
+				for (Division divison : divisionList) {
+					List<Team> teamList = divison.getTeams();
+					if (teamList == null || teamList.size() == 0) {
+						leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(),
+								divison.getDivisionName(), null, null, null);
+					} else {
+						for (Team team : teamList) {
+							leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(),
+									divison.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
+									team.getHeadCoach());
+						}
+					}
 				}
 			}
 		}
 
-		return leagueId;
+		return leagueObjectInserted;
 
 	}
 

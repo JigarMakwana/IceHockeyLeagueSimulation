@@ -1,6 +1,7 @@
 package group11.Hockey.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -8,7 +9,36 @@ import org.junit.Test;
 import junit.framework.Assert;
 
 public class DivisionTest {
-
+	
+	@Test
+	public void DivisionConstructorTest() {
+		Division division = new Division();
+		Assert.assertNull(division.getTeams());
+		Assert.assertNull(division.getDivisionName());
+	}
+	
+	@Test
+	public void DivisionParameterizedConstructorTest() {
+		Division division = new Division("Atlantic Division", Arrays.asList(new Team()));
+		Assert.assertEquals("Atlantic Division", division.getDivisionName());
+		Assert.assertTrue(division.getTeams().size()==1);
+	}
+	
+	@Test
+	public void setDivisionNameTest() {
+		Division division = new Division();
+		division.setDivisionName("Atlantic Division");
+		Assert.assertEquals("Atlantic Division", division.getDivisionName());
+	}
+	
+	@Test
+	public void setTeamsTest() {
+		Division division = new Division();
+		division.setTeams(Arrays.asList(new Team("Vancouver Canucks", "John", "Peter", null)));
+		Assert.assertTrue(division.getTeams().size() == 1);
+		Assert.assertEquals("Vancouver Canucks", division.getTeams().get(0).getTeamName());
+	}
+	
 	@Test
 	public void getDivisionNameTest() {
 		Division division = new Division("Atlantic Division", null);

@@ -41,7 +41,7 @@ deploy:
   script:
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
-    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${FILE_PATH} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
+    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
 
 after_script:
   - echo "End CI and CD"

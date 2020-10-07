@@ -89,4 +89,36 @@ public class ProcedureCallDb {
 		return leagueList;
 
 	}
+
+	public boolean procedureCallForLeagueExistsCheck(String leagueName) {
+		Connection connection = null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		boolean isLeagueNameValid = true;
+		try {
+			connection = connectionUtil.getConnection();
+			CallableStatement statement = null;
+			try {
+				statement = connection.prepareCall(this.procedureName);
+				statement.setString(1, leagueName);
+				if (statement.execute()) {
+					ResultSet resultSet = statement.getResultSet();
+					while (resultSet.next()) {
+						if (resultSet.getString("league_name").equalsIgnoreCase(leagueName)) {
+							isLeagueNameValid = false;
+							break;
+						}
+					}
+				}
+			}
+
+			catch (Exception e) {
+				connectionUtil.closeConnection(connection);
+			} finally {
+				connectionUtil.closeConnection(connection);
+			}
+		} catch (Exception e) {
+			connectionUtil.closeConnection(connection);
+		}
+		return isLeagueNameValid;
+	}
 }

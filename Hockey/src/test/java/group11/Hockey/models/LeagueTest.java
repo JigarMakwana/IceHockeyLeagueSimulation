@@ -87,7 +87,7 @@ public class LeagueTest {
 		Assert.assertTrue(league.getConferences().size() == 2);
 	}
 	@Test
-	public void isLeagueNameValid() {
+	public void isLeagueNameValidTest() {
 		League league = populateLeagueObject();
 		ILeagueDb leagueDb = new LeagueDbMock();
 		Assert.assertTrue(league.isLeagueNameValid(league.getLeagueName(), leagueDb));
@@ -96,7 +96,7 @@ public class LeagueTest {
 	}
 	
 	@Test
-	public void insertLeagueObject() {
+	public void insertLeagueObjectTest() {
 		League league = populateLeagueObject();
 		ILeagueDb leagueDb = new LeagueDbMock();
 		boolean leagueId = league.insertLeagueObject(league, leagueDb);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import group11.Hockey.db.Conference.IConferenceDb;
 import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.db.League.LeagueDbImpl;
 import group11.Hockey.db.League.LeagueDbMock;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
@@ -66,8 +67,8 @@ public class CreateTeam {
 	}
 	
 	private void saveTeam() {
-		
-		leagueObj.insertLeagueObject(leagueObj, null, null, null, null);
+		ILeagueDb leagueDb = new LeagueDbImpl();
+		leagueObj.insertLeagueObject(leagueObj, leagueDb);
 	}
 
 	private void createTeam(Division division) {

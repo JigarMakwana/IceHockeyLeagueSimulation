@@ -7,7 +7,7 @@ public class LeagueDbImpl implements ILeagueDb {
 	@Override
 	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
 			String generalManger, String headCoach, String playerName, String playerPosition, Boolean captain) {
-		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertNew(?, ?, ?, ?, ?, ?, ?)}");
+		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertNew_original(?, ?, ?, ?, ?, ?, ?, ?,?,?)}");
 		return procedureCallDb.procCallForInsertLeague(leagueName, conferenceName, divisionName, teamName,
 				generalManger, headCoach, playerName, playerPosition, captain);
 
@@ -17,6 +17,12 @@ public class LeagueDbImpl implements ILeagueDb {
 	public boolean checkLeagueNameExitsInDb(String leagueName) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call isLeagueExists(?)}");
 		return procedureCallDb.procedureCallForLeagueExistsCheck(leagueName);
+	}
+
+	@Override
+	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, Boolean captain) {
+		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertFreeAgent(?, ?, ?, ?, ?)}");
+		return procedureCallDb.procCallForInsertFreeAgents(leagueName, freeAgentName, position, captain);
 	}
 
 }

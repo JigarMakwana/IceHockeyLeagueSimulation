@@ -7,14 +7,16 @@ import java.util.List;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
+import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
 
 public class LeagueDbMock implements ILeagueDb {
-	
+
 	League leadDbMockObject = new League();
 	List<League> leagueList = new ArrayList<League>();
-	
-	public LeagueDbMock(){
+	League league = new League();
+
+	public LeagueDbMock() {
 		leadDbMockObject = populateLeagueObject();
 	}
 
@@ -25,11 +27,40 @@ public class LeagueDbMock implements ILeagueDb {
 		team.setTeamName(teamName);
 		Division division = new Division(divisionName, Arrays.asList(team));
 		Conference conference = new Conference("conferenceName", Arrays.asList(division));
-		League leagueObject = new League(leagueName, Arrays.asList(conference), null);
-		if(leagueObject.getLeagueName().equalsIgnoreCase(leagueName) && leagueObject.getConferences().size() == 1);
-		return true;
+		league.setLeagueName(leagueName);
+		league.setConferences(Arrays.asList(conference));
+		leagueList.add(league);
+		if (league.getLeagueName().equalsIgnoreCase(leagueName) && leagueList.size() == 2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
+
+	@Override
+	public boolean checkLeagueNameExitsInDb(String leagueName) {
+		boolean isLeagueNameValid;
+		if (leadDbMockObject.getLeagueName().equalsIgnoreCase(leagueName)) {
+			isLeagueNameValid = false;
+		} else {
+			isLeagueNameValid = true;
+		}
+		return isLeagueNameValid;
+	}
+
+	@Override
+	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, Boolean captain) {
+		List<Player> listOfFreeAgents = new ArrayList<Player>();
+		listOfFreeAgents.add(new Player(freeAgentName, position, captain));
+		leagueList.get(1).setFreeAgents(listOfFreeAgents);
+		if ((leagueList.get(1).getLeagueName() != null && leagueList.get(1).getLeagueName().equalsIgnoreCase(leagueName))
+				&& leagueList.get(1).getFreeAgents().size() == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public League populateLeagueObject() {
 		League league;
 		List<Team> teamsList = new ArrayList<Team>();
@@ -47,17 +78,5 @@ public class LeagueDbMock implements ILeagueDb {
 		leagueList.add(league);
 		return league;
 
-	}
-
-	@Override
-	public boolean checkLeagueNameExitsInDb(String leagueName) {
-		boolean isLeagueNameValid;
-		if(leadDbMockObject.getLeagueName().equalsIgnoreCase(leagueName)) {
-			isLeagueNameValid = false;
-		}
-		else {
-			isLeagueNameValid = true;
-		}
-		return isLeagueNameValid;
 	}
 }

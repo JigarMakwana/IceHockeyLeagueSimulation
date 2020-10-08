@@ -1,6 +1,5 @@
 package group11.Hockey.models;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import group11.Hockey.db.Team.ITeamDb;
@@ -87,51 +86,24 @@ public class Team {
 		this.players = players;
 	}
 
-	public boolean validateTeamMethodName(League league, String methodName, String value) {
-		boolean isTeamDetailsValid = true;
+	public boolean isTeamNameValid(String teamName, League league) {
+		boolean isTeamNameValid = true;
 		List<Conference> cconferenceList = league.getConferences();
 		for (Conference conference : cconferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
 				List<Team> teamList = division.getTeams();
 				for (Team team : teamList) {
-
-					Method m;
-					try {
-						m = team.getClass().getMethod(methodName);
-						String fetchedValue = (String) m.invoke(team);
-						if (fetchedValue.equalsIgnoreCase(value)) {
-							isTeamDetailsValid = false;
-							return isTeamDetailsValid;
-						}
-					} catch (Exception e) {
-						System.out.println("Exception occured while validating the new team values with imported JSON");
+					if(team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
+						isTeamNameValid = false;
+						return isTeamNameValid;
 					}
 				}
 			}
 		}
-
-		return isTeamDetailsValid;
-
-	}
-
-	public boolean isTeamNameValid(String teamName, League league) {
-		boolean isTeamNameValid;
-		isTeamNameValid = validateTeamMethodName(league, "getTeamName", teamName);
 		return isTeamNameValid;
 	}
-
-	public boolean isTeamManagerNameValid(String managerName, League league) {
-		boolean isTeamMangerNameValid;
-		isTeamMangerNameValid = validateTeamMethodName(league, "getGeneralManager", managerName);
-		return isTeamMangerNameValid;
-	}
-
-	public boolean isHeadCoachNameValid(String headCoach, League league) {
-		boolean isHeadCoachNameValid;
-		isHeadCoachNameValid = validateTeamMethodName(league, "getHeadCoach", headCoach);
-		return isHeadCoachNameValid;
-	}
+	
 	
 	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb){
 		return teamDb.loadTeamFromTeamName(teamName);

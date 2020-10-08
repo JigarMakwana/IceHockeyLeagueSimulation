@@ -15,23 +15,37 @@ public class TeamTest {
 	LeagueTest leagueTest = new LeagueTest();
 	public League league = leagueTest.populateLeagueObject();
 	Team team = new Team();
+	Team teamWithParams = new Team("Vancouver Canucks", "John", "Peter", null);
 
 	@Test
+	public void TeamDeafultConstructorTest() {
+		Assert.assertNull(team.getTeamName());
+		Assert.assertNull(team.getGeneralManager());
+		Assert.assertNull(team.getHeadCoach());
+		Assert.assertNull(team.getPlayers());
+	}
+	
+	@Test
+	public void TeamParameterisedConstructorTest() {
+		Assert.assertEquals("Vancouver Canucks", teamWithParams.getTeamName());
+		Assert.assertTrue(teamWithParams.getPlayers() == null);
+		Assert.assertEquals("John", teamWithParams.getGeneralManager());
+		Assert.assertEquals("Peter", teamWithParams.getHeadCoach());
+	}
+	
+	@Test
 	public void getTeamNameTest() {
-		Team team = new Team("Vancouver Canucks", null, null, null);
-		Assert.assertEquals("Vancouver Canucks", team.getTeamName());
+		Assert.assertEquals("Vancouver Canucks", teamWithParams.getTeamName());
 	}
 
 	@Test
 	public void getGeneralManagerTest() {
-		Team team = new Team("Vancouver Canucks", "John", null, null);
-		Assert.assertEquals("John", team.getGeneralManager());
+		Assert.assertEquals("John", teamWithParams.getGeneralManager());
 	}
 
 	@Test
 	public void getHeadCoachTest() {
-		Team team = new Team("Vancouver Canucks", "John", "Peter", null);
-		Assert.assertEquals("Peter", team.getHeadCoach());
+		Assert.assertEquals("Peter", teamWithParams.getHeadCoach());
 	}
 
 	// getPlayers
@@ -48,17 +62,6 @@ public class TeamTest {
 
 		Assert.assertEquals("playerName=" + player2.getPlayerName() + ", position=" + player2.getPosition()
 				+ ", captain=" + player2.getCaptain(), team.getPlayers().get(1).toString());
-	}
-
-	@Test
-	public void getPlayersListSizeTest() {
-		List<Player> listOfPlayers = new ArrayList<Player>();
-		Player player1 = new Player("Player1", "forward", true);
-		Player player2 = new Player("Player2", "goalie", false);
-		listOfPlayers.add(player1);
-		listOfPlayers.add(player2);
-		Team team = new Team("Vancouver Canucks", "John", "Peter", listOfPlayers);
-
 		Assert.assertTrue(team.getPlayers().size() == 2);
 	}
 
@@ -75,23 +78,6 @@ public class TeamTest {
 		Assert.assertFalse(isTeamNameValid);
 	}
 
-	@Test
-	public void isTeamManagerNameValidTest() {
-		String managerName = "John";
-		boolean isMangerNameValid = true;
-		isMangerNameValid = team.isTeamManagerNameValid(managerName, league);
-		Assert.assertFalse(isMangerNameValid);
-
-	}
-
-	@Test
-	public void isHeadCoachNameValidTest() {
-		String coachName = "Peter";
-		boolean isCoachNameValid = true;
-		isCoachNameValid = team.isHeadCoachNameValid(coachName, league);
-		Assert.assertFalse(isCoachNameValid);
-
-	}
 
 	@Test
 	public void loadTeamWithTeamNameTest() {

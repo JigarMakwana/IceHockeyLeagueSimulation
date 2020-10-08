@@ -17,7 +17,7 @@ build:
     paths:
       - app/build/outputs
   script:
-    - echo Building...
+    - echo "Building..."
     - mvn clean compile
 
 test:
@@ -28,10 +28,10 @@ test:
     paths:
       - target
   script:
-    - echo testing...
+    - echo "Running Test Cases..."
     - mvn test
     
-deploy:
+deploy_test:
   stage: deploy
   tags:
     - ugrad
@@ -42,19 +42,44 @@ deploy:
     - echo "DB_NAME=${DB_NAME}" >> config.properties
     - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
     - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
-    - echo "DEPLOY_HOST=${DEPLOY_HOST}" >> config.properties
     - cat config.properties
-    - echo packaging...
+    - echo "Packaging application..."
     - mvn package
     - chmod og-rwx ${DEPLOY_SSH_KEY}
-    - echo compressing...
+    - echo "Compressing package..."
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target config.properties
-    - echo deploying...
+    - echo "Deploying to test server..."
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
-    - echo Successfully Deployed!
+    - echo "Successfully Deployed on Test Server!"
+  environment:
+    name: DEVINT
+  only:
+    - developCICD
+    
+deploy_prod:
+  stage: deploy
+  tags:
+    - ugrad
+  artifacts:
+    paths:
+      - target
+  script:
+    - echo "DB_NAME=${DB_NAME}" >> config.properties
+    - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
+    - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
+    - cat config.properties
+    - echo "Packaging application..."
+    - mvn package
+    - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - echo "Compressing package..."
+    - zip -r ${CI_COMMIT_SHORT_SHA}.zip target config.properties
+    - echo "Deploying to production server..."
+    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
+    - echo "Successfully Deployed on Production Server!"
   environment:
     name: TEST
   only:
-    - developCICD
+    - develop
+    
 after_script:
   - echo "End CI and CD!"

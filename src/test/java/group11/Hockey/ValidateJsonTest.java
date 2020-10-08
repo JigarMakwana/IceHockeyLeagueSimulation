@@ -12,32 +12,29 @@ public class ValidateJsonTest {
 	@Test
 	public void validateJsonWithoutExceptionTest() {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeam.json");
-		URL jsonSchemaFile = getClass().getClassLoader().getResource("HockeyTeamJsonSchema.json");
 		ValidateJson validateJsonClass = new ValidateJson();
 		
 		
-		boolean isValid = validateJsonClass.validateJson(jsonFile.getPath(), jsonSchemaFile.getPath());
+		boolean isValid = validateJsonClass.validateJson(jsonFile.getPath());
 		assertTrue(isValid);
 	}
 	
 	@Test
 	public void validateJsonWithExceptionTest() {
-		URL jsonSchemaFile = getClass().getClassLoader().getResource("HockeyTeamJsonSchema.json");
 		ValidateJson validateJsonClass = new ValidateJson();
 		
 		
-		boolean isValid = validateJsonClass.validateJson("//nofile.json", jsonSchemaFile.getPath());
+		boolean isValid = validateJsonClass.validateJson("//nofile.json");
 		assertTrue(!isValid);
 	}
 	
 	@Test
 	public void validateJsonWithInCorrectJsonTest() {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeamInvalid.json");
-		URL jsonSchemaFile = getClass().getClassLoader().getResource("HockeyTeamJsonSchema.json");
 		ValidateJson validateJsonClass = new ValidateJson();
 		
 		
-		boolean isValid = validateJsonClass.validateJson(jsonFile.getPath(), jsonSchemaFile.getPath());
+		boolean isValid = validateJsonClass.validateJson(jsonFile.getPath());
 		assertTrue(!isValid);
 	}
 

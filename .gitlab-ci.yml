@@ -48,7 +48,7 @@ deploy:
     - mvn package
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - echo compressing...
-    - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
+    - zip -r ${CI_COMMIT_SHORT_SHA}.zip target config.properties
     - echo deploying...
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
     - echo Successfully Deployed!

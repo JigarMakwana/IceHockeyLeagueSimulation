@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.Assert;
 
-import junit.framework.Assert;
 
 public class DivisionTest {
 	

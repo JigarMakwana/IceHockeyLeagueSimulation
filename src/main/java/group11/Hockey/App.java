@@ -34,8 +34,8 @@ public class App {
 					leagueObj = createTeamObj.getTeam();
 					System.out.println("****Create Team end****");
 				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("Exception:-->");
+					//e.printStackTrace();
+					System.out.print("Exception:-->");
 					System.out.println(e.getMessage());
 					System.exit(0);
 				}
@@ -53,7 +53,9 @@ public class App {
 				System.out.println("****Load Team end****");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.print("Exception:-->");
+				System.out.println(e.getMessage());
 				System.exit(0);
 			}
 

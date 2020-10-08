@@ -1,7 +1,5 @@
 package group11.Hockey;
 
-import java.net.URL;
-
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbImpl;
 import group11.Hockey.db.Team.ITeamDb;
@@ -19,12 +17,11 @@ public class App {
 		League leagueObj = null;
 		IUserInputMode userInputMode = new CommandLineInput();
 		if (args.length != 0) {
-			// if (false) {
+		//	 if (false) {
 			String jsonFile = args[0];
 
-			ValidateJson validate = new ValidateJson();
-			URL jsonSchemaFile = App.class.getClassLoader().getResource("HockeyTeamJsonSchema.json");
-			boolean isValid = validate.validateJson(jsonFile, jsonSchemaFile.getPath());
+			ValidateJson validate = new ValidateJson();	
+			boolean isValid = validate.validateJson(jsonFile);
 			System.out.println("valide json:->:" + isValid);
 			if (isValid) {
 				ImportJson importJson = new ImportJson();
@@ -34,6 +31,7 @@ public class App {
 					ILeagueDb leagueDb = new LeagueDbImpl();
 					CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb);
 					leagueObj = createTeamObj.getTeam();
+					System.out.println("****Create Team end****");
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("Exception:-->");
@@ -62,7 +60,7 @@ public class App {
 
 		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
 		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
-		System.out.println(noOfSeasons);
+		System.out.println("Number of seasons to simulate -> "+noOfSeasons);
 
 	}
 }

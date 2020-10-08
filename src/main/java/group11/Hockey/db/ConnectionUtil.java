@@ -14,6 +14,7 @@ public class ConnectionUtil {
 		try {
 			conn = DriverManager.getConnection(hostURL, dbUserName, dbPassword);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("DbConnection Failed");
 		}
 		return conn;

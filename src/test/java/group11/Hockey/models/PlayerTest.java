@@ -2,7 +2,8 @@ package group11.Hockey.models;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
+import org.junit.Assert;
+
 
 public class PlayerTest {
 	@Test

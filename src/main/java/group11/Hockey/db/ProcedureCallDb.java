@@ -22,7 +22,7 @@ public class ProcedureCallDb {
 	}
 
 	public boolean procCallForInsertLeague(String leagueName, String conferenceName, String divisionName,
-			String teamName, String generalManager, String headCoach) {
+			String teamName, String generalManager, String headCoach, String playerName, String position, Boolean captain) {
 		Connection connection = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		boolean outPutValue = false;
@@ -37,7 +37,10 @@ public class ProcedureCallDb {
 				statement.setString(4, teamName);
 				statement.setString(5, generalManager);
 				statement.setString(6, headCoach);
-				statement.registerOutParameter(7, Types.BOOLEAN);
+				statement.setString(7, playerName);
+				statement.setString(8, position);
+				statement.setString(9, captain.toString());
+				statement.registerOutParameter(10, Types.BOOLEAN);
 				statement.execute();
 				outPutValue = statement.getBoolean(7);
 

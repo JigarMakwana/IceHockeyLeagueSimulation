@@ -71,6 +71,13 @@ public class LoadTeam {
 							List<Team> teamList = division.getTeams();
 							for (Team team : teamList) {
 								if (team.getTeamName().equalsIgnoreCase(teamName)) {
+									userInputMode.displayMessage("**Team details:");
+									userInputMode.displayMessage("League name-> "+ leagueName);
+									userInputMode.displayMessage("-Conference name-> "+ conference.getConferenceName());
+									userInputMode.displayMessage("--Division name-> "+ division.getDivisionName());
+									userInputMode.displayMessage("---Team name-> "+ team.getTeamName());
+									userInputMode.displayMessage("---GeneralManager-> "+ team.getGeneralManager());
+									userInputMode.displayMessage("---HeadCoach-> "+ team.getHeadCoach());
 									return team;
 								}
 							}
@@ -89,6 +96,13 @@ public class LoadTeam {
 						List<Team> teamList = division.getTeams();
 						for (Team team : teamList) {
 							if (team.getTeamName().equalsIgnoreCase(teamName)) {
+								userInputMode.displayMessage("**Team details:");
+								userInputMode.displayMessage("League name-> "+ league.getLeagueName());
+								userInputMode.displayMessage("-Conference name-> "+ conference.getConferenceName());
+								userInputMode.displayMessage("--Division name-> "+ division.getDivisionName());
+								userInputMode.displayMessage("---Team name-> "+ team.getTeamName());
+								userInputMode.displayMessage("---GeneralManager-> "+ team.getGeneralManager());
+								userInputMode.displayMessage("---HeadCoach-> "+ team.getHeadCoach());
 								return team;
 							}
 						}

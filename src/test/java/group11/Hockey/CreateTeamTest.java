@@ -37,7 +37,7 @@ public class CreateTeamTest {
 
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
 		when(leagueDbMock.insertLeagueInDb(leagueName, conferenceName, divisionName, teamName, generalManger,
-				headCoach)).thenReturn(true);
+				headCoach, null, null, null)).thenReturn(true);
 		CreateTeam createTeam = new CreateTeam(userInputMode, leagueObj, leagueDbMock);
 		League modifiedLeagueObj = createTeam.getTeam();
 

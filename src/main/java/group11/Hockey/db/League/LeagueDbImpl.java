@@ -6,10 +6,10 @@ public class LeagueDbImpl implements ILeagueDb {
 
 	@Override
 	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
-			String generalManager, String headCoach) {
+			String generalManger, String headCoach, String playerName, String playerPosition, Boolean captain) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertNew(?, ?, ?, ?, ?, ?, ?)}");
 		return procedureCallDb.procCallForInsertLeague(leagueName, conferenceName, divisionName, teamName,
-				generalManager, headCoach);
+				generalManger, headCoach, playerName, playerPosition, captain);
 
 	}
 

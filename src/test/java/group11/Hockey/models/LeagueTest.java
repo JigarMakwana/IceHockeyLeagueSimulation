@@ -8,7 +8,8 @@ import org.junit.Test;
 
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbMock;
-import junit.framework.Assert;
+import org.junit.Assert;
+
 
 public class LeagueTest {
 	

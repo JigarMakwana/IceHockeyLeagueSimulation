@@ -79,18 +79,27 @@ public class League {
 			List<Division> divisionList = conference.getDivisions();
 			if (divisionList == null || divisionList.size() == 0) {
 				leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(), null, null,
-						null, null);
+						null, null, null, null, null);
 			} else {
 				for (Division divison : divisionList) {
 					List<Team> teamList = divison.getTeams();
 					if (teamList == null || teamList.size() == 0) {
 						leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(),
-								divison.getDivisionName(), null, null, null);
+								divison.getDivisionName(), null, null, null, null, null, null);
 					} else {
 						for (Team team : teamList) {
-							leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(),
-									divison.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
-									team.getHeadCoach());
+							List<Player> playerList = team.getPlayers();
+							if(playerList == null || playerList.size() == 0) {
+								leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(),
+										divison.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
+										team.getHeadCoach(), null, null, null);
+							}else {
+								for(Player player: playerList) {
+									leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(),
+											divison.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
+											team.getHeadCoach(), player.getPlayerName(), player.getPosition(), player.getCaptain());
+								}
+							}
 						}
 					}
 				}

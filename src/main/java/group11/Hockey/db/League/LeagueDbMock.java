@@ -19,7 +19,8 @@ public class LeagueDbMock implements ILeagueDb {
 	}
 
 	@Override
-	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName, String generalManger, String headCoach) {
+	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
+			String generalManger, String headCoach, String playerName, String playerPosition, Boolean captain) {
 		Team team = new Team();
 		team.setTeamName(teamName);
 		Division division = new Division(divisionName, Arrays.asList(team));

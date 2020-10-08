@@ -7,7 +7,8 @@ import org.junit.Test;
 
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbMock;
-import junit.framework.Assert;
+import org.junit.Assert;
+
 
 public class TeamTest {
 

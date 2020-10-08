@@ -3,7 +3,7 @@ package group11.Hockey.models;
 import java.util.List;
 
 /**
- * This class containe the business logic for the Conference model
+ * This class contains the business logic for the Conference model
  * 
  * @author jatinpartaprana
  *

@@ -2,10 +2,7 @@ package group11.Hockey;
 
 import java.util.List;
 
-import group11.Hockey.db.Conference.IConferenceDb;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.db.League.LeagueDbImpl;
-import group11.Hockey.db.League.LeagueDbMock;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
@@ -14,7 +11,7 @@ import group11.Hockey.models.Team;
 public class CreateTeam {
 	private String conferenceName;
 	private String divisionName;
-	private String teamName;
+	
 	private League leagueObj;
 	private IUserInputMode userInputMode;
 	private ILeagueDb leagueDb;

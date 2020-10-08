@@ -18,7 +18,7 @@ import group11.Hockey.models.League;
 import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
 
-public class ImportJson implements IFileOperations {
+public class ImportJson {
 
 	private Object fileObj;
 	private League leagueModelObj;

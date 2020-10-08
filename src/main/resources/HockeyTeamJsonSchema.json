@@ -46,7 +46,7 @@
 			}
 		},
 		"team":{
-		"required": [ "teamName", "generalManager", "headCoach", "players" ],
+		"required": [ "teamName", "generalManager", "headCoach" ],
 			"properties":{
 				"teamName":{
 					"type":"string",

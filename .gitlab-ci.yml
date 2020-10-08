@@ -86,4 +86,4 @@ deploy_prod:
     - develop
     
 after_script:
-  - echo "End CI and CD!!"
+  - echo "End CI and CD!"

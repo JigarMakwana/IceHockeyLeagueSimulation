@@ -36,9 +36,11 @@ public class ConnectionUtil {
 
 	public void readDataConnectionDetails() {
 		try {
-			InputStream input = new FileInputStream("target/config.properties");
+			String filePath = "./config.properties";
+			InputStream input = new FileInputStream(filePath);
 			Properties prop = new Properties();
 			prop.load(input);
+			input.close();
 			hostURL = prop.getProperty("DB_NAME");
 			dbUserName = prop.getProperty("DB_USER_NAME");
 			dbPassword = prop.getProperty("DB_PASSWORD");

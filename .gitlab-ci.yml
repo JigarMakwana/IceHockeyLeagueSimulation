@@ -18,7 +18,7 @@ build:
       - app/build/outputs
   script:
     - echo Building...
-    - mvn compile
+    - mvn clean compile
 
 test:
   stage: test
@@ -29,7 +29,7 @@ test:
       - target
   script:
     - echo testing...
-    - mvn clean test
+    - mvn test
     
 deploy:
   stage: deploy
@@ -39,9 +39,13 @@ deploy:
     paths:
       - target
   script:
+    - echo testing...
+    - mvn package
     - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - echo compressing...
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
+    - echo deploying...
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
-
+    - echo Successfully Deployed!
 after_script:
   - echo "End CI and CD!"

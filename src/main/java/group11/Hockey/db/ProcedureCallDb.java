@@ -39,10 +39,10 @@ public class ProcedureCallDb {
 				statement.setString(6, headCoach);
 				statement.setString(7, playerName);
 				statement.setString(8, position);
-				statement.setString(9, captain.toString());
+				statement.setString(9, captain != null ? captain.toString() : null);
 				statement.registerOutParameter(10, Types.BOOLEAN);
 				statement.execute();
-				outPutValue = statement.getBoolean(7);
+				outPutValue = statement.getBoolean(10);
 
 				statement.close();
 				connectionUtil.closeConnection(connection);
@@ -92,6 +92,38 @@ public class ProcedureCallDb {
 		return leagueList;
 
 	}
+	
+	public boolean procCallForInsertFreeAgents(String leagueName, String freeAgentName, String position, Boolean captain) {
+		Connection connection = null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		boolean outPutValue = false;
+		try {
+			connection = connectionUtil.getConnection();
+			CallableStatement statement = null;
+			try {
+				statement = connection.prepareCall(this.procedureName);
+				statement.setString(1, leagueName);
+				statement.setString(2, freeAgentName);
+				statement.setString(3, position);
+				statement.setString(4, captain != null ? captain.toString() : null);
+				statement.registerOutParameter(5, Types.BOOLEAN);
+				statement.execute();
+				outPutValue = statement.getBoolean(5);
+
+				statement.close();
+				connectionUtil.closeConnection(connection);
+			} catch (Exception e) {
+				connectionUtil.closeConnection(connection);
+			} finally {
+				connectionUtil.closeConnection(connection);
+			}
+
+		} catch (Exception e) {
+			connectionUtil.closeConnection(connection);
+		}
+		return outPutValue;
+	}
+	
 
 	public boolean procedureCallForLeagueExistsCheck(String leagueName) {
 		Connection connection = null;

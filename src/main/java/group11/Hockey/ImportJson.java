@@ -1,7 +1,6 @@
 package group11.Hockey;
 
 import java.io.FileReader;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,10 +10,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.db.League.LeagueDbImpl;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
-import group11.Hockey.models.FreeAgent;
 import group11.Hockey.models.League;
 import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
@@ -62,7 +59,7 @@ public class ImportJson {
 		List<Conference> conferencesList = parseConferences(jsonObject);
 		leagueModelObj.setConferences(conferencesList);
 		// parse freeAgents
-		List<FreeAgent> freeAgentsList = parseFreeAgent(jsonObject);
+		List<Player> freeAgentsList = parseFreeAgent(jsonObject);
 		leagueModelObj.setFreeAgents(freeAgentsList);
 
 		return leagueModelObj;
@@ -194,9 +191,9 @@ public class ImportJson {
 		return playersList;
 	}
 
-	private List<FreeAgent> parseFreeAgent(JSONObject teamsListJsonObject) {
-		FreeAgent freeAgentsObj;
-		List<FreeAgent> freeAgentsList = new ArrayList<FreeAgent>();
+	private List<Player> parseFreeAgent(JSONObject teamsListJsonObject) {
+		Player freeAgentsObj;
+		List<Player> freeAgentsList = new ArrayList<Player>();
 		JSONArray playersList = (JSONArray) teamsListJsonObject.get("freeAgents");
 		Iterator<JSONObject> playersListIterator = playersList.iterator();
 		while (playersListIterator.hasNext()) {
@@ -209,7 +206,7 @@ public class ImportJson {
 			// get captain
 			Boolean captain = (Boolean) playersListJsonObject.get("captain");
 
-			freeAgentsObj = new FreeAgent(playerName, position, captain);
+			freeAgentsObj = new Player(playerName, position, captain);
 			freeAgentsList.add(freeAgentsObj);
 		}
 		return freeAgentsList;

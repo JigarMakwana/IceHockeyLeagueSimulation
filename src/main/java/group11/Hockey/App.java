@@ -24,11 +24,12 @@ public class App {
 			boolean isValid = validate.validateJson(jsonFile);
 			System.out.println("valide json:->:" + isValid);
 			if (isValid) {
-				ImportJson importJson = new ImportJson();
+				ILeagueDb leagueDb = new LeagueDbImpl();
+				ImportJson importJson = new ImportJson(leagueDb);
 
 				try {
 					leagueObj = importJson.parseFile(jsonFile);
-					ILeagueDb leagueDb = new LeagueDbImpl();
+					
 					CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb);
 					leagueObj = createTeamObj.getTeam();
 					System.out.println("****Create Team end****");

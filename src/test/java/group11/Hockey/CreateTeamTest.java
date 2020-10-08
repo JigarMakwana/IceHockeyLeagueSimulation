@@ -1,6 +1,5 @@
 package group11.Hockey;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.List;

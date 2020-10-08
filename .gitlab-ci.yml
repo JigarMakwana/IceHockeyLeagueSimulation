@@ -1,8 +1,5 @@
 variables:
-  # This is a place for you to define variables you can use
-  # later in the script by referring to the variable like so:
-  #   ${EXAMPLE_VARIABLE}
-  FILE_PATH: "/users/grad/jmakwana/AdvSDC/CSCI5308builds"
+  MAVEN_CLI_OPTS: "clean"
   
 stages:
   - build
@@ -13,23 +10,25 @@ build:
   stage: build
   tags:
     - ugrad
-  artifacts:
-    paths:
-      - app/build/outputs
   script:
     - echo "Building..."
-    - mvn clean compile
+    - mvn $MAVEN_CLI_OPTS compile
 
 test:
   stage: test
   tags:
     - ugrad
   artifacts:
+    when: always
     paths:
-      - target
+      - target/surefire-reports/TEST-*.xml
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+
   script:
     - echo "Running Test Cases..."
-    - mvn test
+    - mvn verify
     
 deploy_test:
   stage: deploy

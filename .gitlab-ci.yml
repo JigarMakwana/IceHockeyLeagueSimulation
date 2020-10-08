@@ -10,8 +10,15 @@ build:
   stage: build
   tags:
     - ugrad
+  artifacts:
+    paths:
+      - /
   script:
     - echo "Building..."
+    - echo "DB_NAME=${DB_NAME}" >> config.properties
+    - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
+    - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
+    - cat config.properties
     - mvn $MAVEN_CLI_OPTS compile
 
 test:
@@ -38,10 +45,10 @@ deploy_test:
     paths:
       - target
   script:
-    - echo "DB_NAME=${DB_NAME}" >> config.properties
-    - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
-    - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
-    - cat config.properties
+    # - echo "DB_NAME=${DB_NAME}" >> config.properties
+    # - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
+    # - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
+    # - cat config.properties
     - echo "Packaging application..."
     - mvn package
     - chmod og-rwx ${DEPLOY_SSH_KEY}

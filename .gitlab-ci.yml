@@ -12,7 +12,7 @@ build:
     - ugrad
   artifacts:
     paths:
-      - /
+      - target/
   script:
     - echo "Building..."
     - echo "DB_NAME=${DB_NAME}" >> config.properties

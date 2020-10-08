@@ -1,12 +1,20 @@
 package group11.Hockey;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 import java.net.URL;
 
 import org.junit.Test;
 
+import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.League;
+
+import static org.mockito.Mockito.*;
+
+import java.util.List;
+
+import org.junit.Assert;
 
 public class ImportJsonTest {
 
@@ -14,7 +22,10 @@ public class ImportJsonTest {
 	public void parseFileTest() throws Exception {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeam.json");
 
-		ImportJson importJsonObj = new ImportJson();
+		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
+		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(true);
+		
+		ImportJson importJsonObj = new ImportJson(leagueDbMock);
 
 		League leagueModelObj = null;
 
@@ -27,7 +38,9 @@ public class ImportJsonTest {
 	@Test(expected = Exception.class)
 	public void parseFileDuplicateConfirenceNameTest() throws Exception {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeamInvalid.json");
-		ImportJson importJsonObj = new ImportJson();
+		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
+		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(false);
+		ImportJson importJsonObj = new ImportJson(leagueDbMock);
 		importJsonObj.parseFile(jsonFile.getPath());
 	    
 		

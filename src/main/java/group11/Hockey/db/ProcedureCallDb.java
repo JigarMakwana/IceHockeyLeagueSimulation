@@ -13,11 +13,11 @@ public class ProcedureCallDb {
 
 	public ProcedureCallDb(String procedureName) {
 		this.procedureName = procedureName;
-		this.connection = connectionUtil.getConnection();
 	}
 
 	public CallableStatement getDBCallableStatement() {
 		try {
+			this.connection = connectionUtil.getConnection();
 			statement = connection.prepareCall(this.procedureName);
 		} catch (SQLException e) {
 			connectionUtil.closeConnection(connection);

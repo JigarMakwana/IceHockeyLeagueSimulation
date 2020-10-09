@@ -1,8 +1,5 @@
 variables:
-  # This is a place for you to define variables you can use
-  # later in the script by referring to the variable like so:
-  #   ${EXAMPLE_VARIABLE}
-  FILE_PATH: "/users/grad/jmakwana/AdvSDC/CSCI5308builds"
+  MAVEN_CLI_OPTS: "clean"
   
 stages:
   - build
@@ -15,23 +12,28 @@ build:
     - ugrad
   artifacts:
     paths:
-      - app/build/outputs
+      - target
   script:
-    - echo Building...
-    - mvn clean compile
+    - echo "Building..."
+    - mvn $MAVEN_CLI_OPTS compile
 
 test:
   stage: test
   tags:
     - ugrad
   artifacts:
+    when: always
     paths:
-      - target
+      - target/surefire-reports/TEST-*.xml
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+
   script:
-    - echo testing...
-    - mvn test
+    - echo "Running Test Cases..."
+    - mvn verify
     
-deploy:
+deploy_develop:
   stage: deploy
   tags:
     - ugrad
@@ -39,13 +41,49 @@ deploy:
     paths:
       - target
   script:
-    - echo testing...
+    - echo "DB_NAME=${DB_NAME}" >> config.properties
+    - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
+    - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
+    - cat config.properties
+    - mv config.properties target/
+    - echo "Packaging application..."
     - mvn package
     - chmod og-rwx ${DEPLOY_SSH_KEY}
-    - echo compressing...
+    - echo "Compressing package..."
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
-    - echo deploying...
+    # - zip -r ${CI_COMMIT_SHORT_SHA}.zip target config.properties
+    - echo "Deploying to test server..."
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
-    - echo Successfully Deployed!
+    - echo "Successfully Deployed on Test Server!"
+  environment:
+    name: TEST
+  only:
+    - develop
+    
+deploy_prod:
+  stage: deploy
+  tags:
+    - ugrad
+  artifacts:
+    paths:
+      - target
+  script:
+    - echo "DB_NAME=${DB_NAME}" >> config.properties
+    - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
+    - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
+    - cat config.properties
+    - echo "Packaging application..."
+    - mvn package
+    - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - echo "Compressing package..."
+    - zip -r ${CI_COMMIT_SHORT_SHA}.zip target config.properties
+    - echo "Deploying to production server..."
+    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
+    - echo "Successfully Deployed on Production Server!"
+  environment:
+    name: PRODUCTION
+  only:
+    - release
+    
 after_script:
   - echo "End CI and CD!"

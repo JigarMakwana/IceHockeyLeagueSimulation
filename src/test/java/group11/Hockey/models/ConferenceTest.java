@@ -63,18 +63,9 @@ public class ConferenceTest {
 
 		Assert.assertEquals("Division [divisionName=" + centralDivision.getDivisionName() + ", teams="
 				+ centralDivision.getTeams() + "]", conference.getDivisions().get(1).toString());
-	}
-
-	@Test
-	public void divisionsInConferenceListSizeTest() {
-		List<Division> divisionsList = new ArrayList<Division>();
-		Division atlanticDivision = new Division("Atlantic Division", null);
-		Division centralDivision = new Division("Central Division", null);
-		divisionsList.add(atlanticDivision);
-		divisionsList.add(centralDivision);
-		Conference conference = new Conference("Westeren Conference", divisionsList);
 		Assert.assertTrue(conference.getDivisions().size() == 2);
 	}
+
 	
 	@Test
 	public void isConferenceNameValidTest() {

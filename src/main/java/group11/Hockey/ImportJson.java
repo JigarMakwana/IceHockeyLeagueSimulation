@@ -1,7 +1,6 @@
 package group11.Hockey;
 
 import java.io.FileReader;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,21 +9,26 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import group11.Hockey.db.League.LeagueDbImpl;
+import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
-import group11.Hockey.models.FreeAgent;
 import group11.Hockey.models.League;
 import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
 
-public class ImportJson implements IFileOperations {
+public class ImportJson {
 
 	private Object fileObj;
 	private League leagueModelObj;
 	List<String> teamNameList = new ArrayList<String>();
 	List<String> divisionNamesList = new ArrayList<String>();
 	List<String> conferenceNamesList = new ArrayList<String>();
+	private ILeagueDb leagueDb;
+
+	public ImportJson(ILeagueDb leagueDb) {
+		super();
+		this.leagueDb = leagueDb;
+	}
 
 	public League parseFile(String fileName) throws Exception {
 		JSONParser parser = new JSONParser();
@@ -41,27 +45,23 @@ public class ImportJson implements IFileOperations {
 
 	private League parseJson() throws Exception {
 		leagueModelObj = new League();
-			JSONObject jsonObject = (JSONObject) fileObj;
-			// parse league name
-			String leagueName = (String) jsonObject.get("leagueName");
-			
-			LeagueDbImpl leagueDb = new LeagueDbImpl();  
-			if(leagueModelObj.isLeagueNameValid(leagueName, leagueDb)) {
-				leagueModelObj.setLeagueName(leagueName);
-			}
-			else {
-				throw new Exception(leagueName+ " -> League name already exists in the system");
-			}
-			
-			
-			// parse Conferences
-			List<Conference> conferencesList = parseConferences(jsonObject);
-			leagueModelObj.setConferences(conferencesList);
-			// parse freeAgents
-			List<FreeAgent> freeAgentsList = parseFreeAgent(jsonObject);
-			leagueModelObj.setFreeAgents(freeAgentsList);
+		JSONObject jsonObject = (JSONObject) fileObj;
+		// parse league name
+		String leagueName = (String) jsonObject.get("leagueName");
 
-		
+		if (leagueModelObj.isLeagueNameValid(leagueName, leagueDb)) {
+			leagueModelObj.setLeagueName(leagueName);
+		} else {
+			throw new Exception(leagueName + " -> League name already exists in the system");
+		}
+
+		// parse Conferences
+		List<Conference> conferencesList = parseConferences(jsonObject);
+		leagueModelObj.setConferences(conferencesList);
+		// parse freeAgents
+		List<Player> freeAgentsList = parseFreeAgent(jsonObject);
+		leagueModelObj.setFreeAgents(freeAgentsList);
+
 		return leagueModelObj;
 	}
 
@@ -139,7 +139,6 @@ public class ImportJson implements IFileOperations {
 			// get generalManager
 			String generalManager = (String) teamsListJsonObject.get("generalManager");
 			teamObj.setGeneralManager(generalManager);
-			
 
 			// get headCoach
 			String headCoach = (String) teamsListJsonObject.get("headCoach");
@@ -147,16 +146,18 @@ public class ImportJson implements IFileOperations {
 
 			// parse Teams
 			List<Player> playersList = parsePlayers(teamsListJsonObject);
-			teamObj.setPlayers(playersList);
-			teamsList.add(teamObj);
+			if (playersList.size() > 0) {
+				teamObj.setPlayers(playersList);
 
-			// check valid captian
-			int captians = checkCaptains(playersList);
-			if (captians == 0) {
-				throw new Exception("Team " + teamName + " has no captain");
-			} else if (captians > 1) {
-				throw new Exception("Team " + teamName + " has " + captians + " captains");
+				// check valid captian
+				int captians = checkCaptains(playersList);
+				if (captians == 0) {
+					throw new Exception("Team " + teamName + " has no captain");
+				} else if (captians > 1) {
+					throw new Exception("Team " + teamName + " has " + captians + " captains");
+				}
 			}
+			teamsList.add(teamObj);
 
 		}
 		return teamsList;
@@ -168,6 +169,9 @@ public class ImportJson implements IFileOperations {
 		List<Player> playersList = new ArrayList<Player>();
 
 		JSONArray playersJsonArray = (JSONArray) teamsListJsonObject.get("players");
+		if (playersJsonArray == null) {
+			return playersList;
+		}
 		Iterator<JSONObject> playersListIterator = playersJsonArray.iterator();
 		while (playersListIterator.hasNext()) {
 			playerObj = new Player();
@@ -187,9 +191,9 @@ public class ImportJson implements IFileOperations {
 		return playersList;
 	}
 
-	private List<FreeAgent> parseFreeAgent(JSONObject teamsListJsonObject) {
-		FreeAgent freeAgentsObj;
-		List<FreeAgent> freeAgentsList = new ArrayList<FreeAgent>();
+	private List<Player> parseFreeAgent(JSONObject teamsListJsonObject) {
+		Player freeAgentsObj;
+		List<Player> freeAgentsList = new ArrayList<Player>();
 		JSONArray playersList = (JSONArray) teamsListJsonObject.get("freeAgents");
 		Iterator<JSONObject> playersListIterator = playersList.iterator();
 		while (playersListIterator.hasNext()) {
@@ -202,7 +206,7 @@ public class ImportJson implements IFileOperations {
 			// get captain
 			Boolean captain = (Boolean) playersListJsonObject.get("captain");
 
-			freeAgentsObj = new FreeAgent(playerName, position, captain);
+			freeAgentsObj = new Player(playerName, position, captain);
 			freeAgentsList.add(freeAgentsObj);
 		}
 		return freeAgentsList;

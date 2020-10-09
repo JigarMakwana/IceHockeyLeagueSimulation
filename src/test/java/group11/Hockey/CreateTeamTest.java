@@ -1,6 +1,5 @@
 package group11.Hockey;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
-import group11.Hockey.models.LeagueMock;
+import group11.Hockey.models.LeagueModelMock;
 import group11.Hockey.models.Team;
 
 public class CreateTeamTest {
@@ -25,7 +24,8 @@ public class CreateTeamTest {
 		String teamName = "Team1";
 		String generalManger = "Manager1";
 		String headCoach = "HeadCoach1";
-		LeagueMock leagueMock = new LeagueMock();
+		
+		LeagueModelMock leagueMock = new LeagueModelMock();
 		League leagueObj = leagueMock.getLeagueInfo();
 
 		IUserInputMode userInputMode = mock(IUserInputMode.class);

@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import org.everit.json.schema.Schema;
-//import org.everit.json.schema.ValidationException;
+import org.everit.json.schema.ValidationException;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -30,9 +30,9 @@ public class ValidateJson {
 		try {
 			schema.validate(new JSONObject(new JSONTokener(inputStreamJson)));
 			return true;
-		} catch (Exception e) {
+		} catch (ValidationException e) {
 			System.out.println(e.getMessage());
-			// e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
+			e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
 		}
 		return false;
 	}

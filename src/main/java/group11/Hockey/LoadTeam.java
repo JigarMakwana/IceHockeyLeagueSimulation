@@ -29,11 +29,10 @@ public class LoadTeam {
 		if (isNotValidTeamName(teamName)) {
 			throw new Exception("Not a valid Team name");
 		}
-		
-		
+
 		Team teamObj = new Team();
-		
-		List<League> leaguesList = teamObj.loadTeamWithTeamName(teamName,teamDb);
+
+		List<League> leaguesList = teamObj.loadTeamWithTeamName(teamName, teamDb);
 		if (leaguesList.size() == 0) {
 			throw new Exception("Team name does not exist in the system");
 		} else if (leaguesList.size() > 1) {
@@ -71,13 +70,9 @@ public class LoadTeam {
 							List<Team> teamList = division.getTeams();
 							for (Team team : teamList) {
 								if (team.getTeamName().equalsIgnoreCase(teamName)) {
-									userInputMode.displayMessage("**Team details:");
-									userInputMode.displayMessage("League name-> "+ leagueName);
-									userInputMode.displayMessage("-Conference name-> "+ conference.getConferenceName());
-									userInputMode.displayMessage("--Division name-> "+ division.getDivisionName());
-									userInputMode.displayMessage("---Team name-> "+ team.getTeamName());
-									userInputMode.displayMessage("---GeneralManager-> "+ team.getGeneralManager());
-									userInputMode.displayMessage("---HeadCoach-> "+ team.getHeadCoach());
+									printLoadTeamDetails(leagueName, conference.getConferenceName(),
+											division.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
+											team.getHeadCoach());
 									return team;
 								}
 							}
@@ -96,13 +91,9 @@ public class LoadTeam {
 						List<Team> teamList = division.getTeams();
 						for (Team team : teamList) {
 							if (team.getTeamName().equalsIgnoreCase(teamName)) {
-								userInputMode.displayMessage("**Team details:");
-								userInputMode.displayMessage("League name-> "+ league.getLeagueName());
-								userInputMode.displayMessage("-Conference name-> "+ conference.getConferenceName());
-								userInputMode.displayMessage("--Division name-> "+ division.getDivisionName());
-								userInputMode.displayMessage("---Team name-> "+ team.getTeamName());
-								userInputMode.displayMessage("---GeneralManager-> "+ team.getGeneralManager());
-								userInputMode.displayMessage("---HeadCoach-> "+ team.getHeadCoach());
+								printLoadTeamDetails(league.getLeagueName(), conference.getConferenceName(),
+										division.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
+										team.getHeadCoach());
 								return team;
 							}
 						}
@@ -113,6 +104,17 @@ public class LoadTeam {
 		}
 
 		return null;
+	}
+
+	private void printLoadTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
+			String managerName, String hcName) {
+		userInputMode.displayMessage("**Team details:");
+		userInputMode.displayMessage("League name-> " + leagueName);
+		userInputMode.displayMessage("-Conference name-> " + conferenceName);
+		userInputMode.displayMessage("--Division name-> " + divisionName);
+		userInputMode.displayMessage("---Team name-> " + teamName);
+		userInputMode.displayMessage("---GeneralManager-> " + managerName);
+		userInputMode.displayMessage("---HeadCoach-> " + hcName);
 	}
 
 	private boolean isNotValidTeamName(String teamName) {

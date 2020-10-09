@@ -16,6 +16,7 @@ public class LeagueTest {
 	Conference westernConference = new Conference("Westeren Conference", null);
 	Conference easternConference = new Conference("Eastern Conference", null);
 	List<Conference> conferenceList = new ArrayList<Conference>();
+	League league = new League();
 	
 	public League populateLeagueObject() {
 		List<Team> teamsList = new ArrayList<Team>();
@@ -28,7 +29,8 @@ public class LeagueTest {
 		List<Conference> conferenceList = new ArrayList<Conference>();
 		Conference conference = new Conference("Westeren Conference", divisionsList);
 		conferenceList.add(conference);
-		League league = new League("DHL", conferenceList, null);
+		Player freeAgent = new Player("Player 1", "forward", Boolean.TRUE);
+		League league = new League("DHL", conferenceList, Arrays.asList(freeAgent));
 		return league;
 
 	}
@@ -36,7 +38,6 @@ public class LeagueTest {
 
 	@Test
 	public void LeagueDeafultConstructorTest() {
-		League league = new League();
 		Assert.assertNull(league.getLeagueName());
 		Assert.assertNull(league.getConferences());
 		Assert.assertNull(league.getConferences());
@@ -52,7 +53,6 @@ public class LeagueTest {
 	
 	@Test
 	public void setLeagueNameTest() {
-		League league = new League();
 		league.setLeagueName("DHL");
 		Assert.assertEquals("DHL", league.getLeagueName());
 	}
@@ -65,7 +65,6 @@ public class LeagueTest {
 	
 	@Test
 	public void setConferencesTest() {
-		League league = new League();
 		league.setConferences(Arrays.asList(westernConference, easternConference));
 		Assert.assertTrue(league.getConferences().size() == 2);
 		Assert.assertEquals("Westeren Conference", league.getConferences().get(0).getConferenceName());
@@ -87,6 +86,23 @@ public class LeagueTest {
 
 		Assert.assertTrue(league.getConferences().size() == 2);
 	}
+	
+	@Test
+	public void setFreeAgentsTest() {
+		List<Player> freeAgentList = new ArrayList<Player>();
+		Player freeAgent = new Player("Free Agent 1", "Forward", Boolean.FALSE);
+		freeAgentList.add(freeAgent);
+		league.setFreeAgents(freeAgentList);
+		Assert.assertTrue(league.getFreeAgents().size() == 1);
+	}
+	
+	@Test
+	public void getFreeAgentsTest() {
+		League league = populateLeagueObject();
+		Assert.assertTrue(league.getFreeAgents().size() ==1);
+		Assert.assertEquals("Player 1", league.getFreeAgents().get(0).getPlayerName());
+	}
+	
 	@Test
 	public void isLeagueNameValidTest() {
 		League league = populateLeagueObject();

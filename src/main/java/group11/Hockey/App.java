@@ -24,17 +24,18 @@ public class App {
 			boolean isValid = validate.validateJson(jsonFile);
 			System.out.println("valide json:->:" + isValid);
 			if (isValid) {
-				ImportJson importJson = new ImportJson();
+				ILeagueDb leagueDb = new LeagueDbImpl();
+				ImportJson importJson = new ImportJson(leagueDb);
 
 				try {
 					leagueObj = importJson.parseFile(jsonFile);
-					ILeagueDb leagueDb = new LeagueDbImpl();
+					
 					CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb);
 					leagueObj = createTeamObj.getTeam();
 					System.out.println("****Create Team end****");
 				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("Exception:-->");
+					//e.printStackTrace();
+					System.out.print("Exception:-->");
 					System.out.println(e.getMessage());
 					System.exit(0);
 				}
@@ -52,7 +53,9 @@ public class App {
 				System.out.println("****Load Team end****");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.print("Exception:-->");
+				System.out.println(e.getMessage());
 				System.exit(0);
 			}
 

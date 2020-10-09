@@ -24,6 +24,7 @@ public class ConnectionUtil {
 		return conn;
 	}
 
+	
 	public void closeConnection(Connection connection) {
 		try {
 			if (connection != null) {
@@ -41,9 +42,9 @@ public class ConnectionUtil {
 			Properties prop = new Properties();
 			prop.load(input);
 			input.close();
-			hostURL = prop.getProperty("DB_NAME");
-			dbUserName = prop.getProperty("DB_USER_NAME");
-			dbPassword = prop.getProperty("DB_PASSWORD");
+			hostURL = prop.getProperty(DbConstants.DB_NAME.toString());
+			dbUserName = prop.getProperty(DbConstants.DB_USER_NAME.toString());
+			dbPassword = prop.getProperty(DbConstants.DB_PASSWORD.toString());
 
 		} catch (Exception e) {
 			System.out.println("Exception occoured while reading data from the properties file");

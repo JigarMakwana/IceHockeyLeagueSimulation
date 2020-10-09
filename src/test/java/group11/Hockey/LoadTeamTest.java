@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.models.League;
-import group11.Hockey.models.LeagueMock;
+import group11.Hockey.models.LeagueModelMock;
 import group11.Hockey.models.LeagueTest;
 import group11.Hockey.models.Team;
 
@@ -23,7 +23,7 @@ public class LoadTeamTest {
 	public void getTeamWithOneLeagueTest() throws Exception {
 		String teamName = "Boston";
 		List<League> leagueList = new ArrayList<League>();
-		LeagueMock leagueMock = new LeagueMock();
+		LeagueModelMock leagueMock = new LeagueModelMock();
 		League league = leagueMock.getLeagueInfo();
 		leagueList.add(league);
 
@@ -43,7 +43,7 @@ public class LoadTeamTest {
 	public void getTeamWithTwoLeaguesTest() throws Exception {
 		String teamName = "Boston";
 		List<League> leagueList = new ArrayList<League>();
-		LeagueMock leagueMock = new LeagueMock();
+		LeagueModelMock leagueMock = new LeagueModelMock();
 		League league = leagueMock.getLeagueInfo();
 		leagueList.add(league);
 		leagueList.add(league);

@@ -58,7 +58,7 @@ deploy_develop:
   environment:
     name: TEST
   only:
-    - developCICD
+    - develop
     
 deploy_prod:
   stage: deploy
@@ -83,7 +83,7 @@ deploy_prod:
   environment:
     name: PRODUCTION
   only:
-    - develop
+    - release
     
 after_script:
   - echo "End CI and CD!"

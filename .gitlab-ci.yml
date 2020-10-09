@@ -72,6 +72,7 @@ deploy_prod:
     - echo "DB_USER_NAME=${DB_USER_NAME}" >> config.properties
     - echo "DB_PASSWORD=${DB_PASSWORD}" >> config.properties
     - cat config.properties
+    - mv config.properties target/
     - echo "Packaging application..."
     - mvn package
     - chmod og-rwx ${DEPLOY_SSH_KEY}

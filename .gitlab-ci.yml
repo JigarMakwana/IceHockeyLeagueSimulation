@@ -33,7 +33,7 @@ test:
     - echo "Running Test Cases..."
     - mvn verify
     
-deploy_test:
+deploy_develop:
   stage: deploy
   tags:
     - ugrad
@@ -56,7 +56,7 @@ deploy_test:
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
     - echo "Successfully Deployed on Test Server!"
   environment:
-    name: DEVINT
+    name: TEST
   only:
     - developCICD
     
@@ -81,7 +81,7 @@ deploy_prod:
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "${CI_COMMIT_SHORT_SHA}.zip" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
     - echo "Successfully Deployed on Production Server!"
   environment:
-    name: TEST
+    name: PRODUCTION
   only:
     - develop
     

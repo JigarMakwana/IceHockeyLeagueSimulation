@@ -3,10 +3,10 @@ package group11.Hockey.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeagueMock {
+public class LeagueModelMock {
 	private League league;
 
-	public LeagueMock() {
+	public LeagueModelMock() {
 		super();
 		
 		addLeague();

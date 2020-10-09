@@ -12,12 +12,6 @@ public class TeamDbMock implements ITeamDb {
 	}
 
 	@Override
-	public int insertTeamInDb(String teamName, String generalMangerName, String coachName, int divisionId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<League> loadTeamFromTeamName(String teamName) {
 		LeagueDbMock leagueDbMock = new LeagueDbMock();
 		League league = leagueDbMock.populateLeagueObject();

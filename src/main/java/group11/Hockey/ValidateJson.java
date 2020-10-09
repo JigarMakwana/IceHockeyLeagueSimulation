@@ -31,9 +31,12 @@ public class ValidateJson {
 			schema.validate(new JSONObject(new JSONTokener(inputStreamJson)));
 			return true;
 		} catch (ValidationException e) {
-			System.out.println(e.getMessage());
 			e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
 		}
+		catch (Exception e) {
+			System.out.println("Exception: "+e.getMessage() );
+		}
+
 		return false;
 	}
 }

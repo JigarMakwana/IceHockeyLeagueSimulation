@@ -17,30 +17,20 @@ public class App {
 		League leagueObj = null;
 		IUserInputMode userInputMode = new CommandLineInput();
 		if (args.length != 0) {
-		//	 if (false) {
+			// if (false) {
 			String jsonFile = args[0];
+			ILeagueDb leagueDb = new LeagueDbImpl();
+			ImportJson importJson = new ImportJson(leagueDb);
 
-			ValidateJson validate = new ValidateJson();	
-			boolean isValid = validate.validateJson(jsonFile);
-			System.out.println("valide json:->:" + isValid);
-			if (isValid) {
-				ILeagueDb leagueDb = new LeagueDbImpl();
-				ImportJson importJson = new ImportJson(leagueDb);
+			try {
+				leagueObj = importJson.parseFile(jsonFile);
 
-				try {
-					leagueObj = importJson.parseFile(jsonFile);
-					
-					CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb);
-					leagueObj = createTeamObj.getTeam();
-					System.out.println("****Create Team end****");
-				} catch (Exception e) {
-					//e.printStackTrace();
-					System.out.print("Exception:-->");
-					System.out.println(e.getMessage());
-					System.exit(0);
-				}
-			}
-			else {
+				CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb);
+				leagueObj = createTeamObj.getTeam();
+				System.out.println("****Create Team end****");
+			} catch (Exception e) {
+				System.out.print("Exception:-->");
+				System.out.println(e.getMessage());
 				System.exit(0);
 			}
 
@@ -53,7 +43,7 @@ public class App {
 				System.out.println("****Load Team end****");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				// e.printStackTrace();
 				System.out.print("Exception:-->");
 				System.out.println(e.getMessage());
 				System.exit(0);
@@ -63,7 +53,7 @@ public class App {
 
 		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
 		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
-		System.out.println("Number of seasons to simulate -> "+noOfSeasons);
+		System.out.println("Number of seasons to simulate -> " + noOfSeasons);
 
 	}
 }

@@ -14,10 +14,10 @@ public class Team {
 
 	private String teamName;
 	private String generalManager;
-	private String headCoach;
+	private Coach headCoach;
 	private List<Player> players = null;
 
-	public Team(String teamName, String generalManager, String headCoach, List<Player> players) {
+	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();
 		this.teamName = teamName;
 		this.generalManager = generalManager;
@@ -61,14 +61,14 @@ public class Team {
 	/**
 	 * @return the headCoach
 	 */
-	public String getHeadCoach() {
+	public Coach getHeadCoach() {
 		return headCoach;
 	}
 
 	/**
 	 * @param headCoach the headCoach to set
 	 */
-	public void setHeadCoach(String headCoach) {
+	public void setHeadCoach(Coach headCoach) {
 		this.headCoach = headCoach;
 	}
 

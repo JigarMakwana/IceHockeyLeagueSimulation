@@ -9,7 +9,6 @@ import group11.Hockey.models.Player;
 public class JsonAttributes {
 	
 	private ILeagueDb leagueDb;
-	protected League leagueModelObj;
 	
 	public JsonAttributes() {
 		super();
@@ -21,6 +20,7 @@ public class JsonAttributes {
 	}	
 
 	public boolean isValidLeagueName(String name) {
+		League leagueModelObj = new League();
 		return leagueModelObj.isLeagueNameValid(name, leagueDb);
 	}
 

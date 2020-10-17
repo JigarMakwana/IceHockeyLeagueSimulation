@@ -2,21 +2,33 @@ package group11.Hockey;
 
 import java.util.List;
 
+import group11.Hockey.db.ICoachDb;
+import group11.Hockey.db.IGameplayConfigDb;
+import group11.Hockey.db.IManagerDb;
+import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
 import group11.Hockey.models.Team;
 
-public class CreateTeam extends ValidateCreateTeam{
-	
+public class CreateTeam extends ValidateCreateTeam {
+
 	private String conferenceName;
 	private String divisionName;
 	private IUserInputMode userInputMode;
-	
-	public CreateTeam(IUserInputMode userInputMode, League leagueObj, ILeagueDb leagueDb) {
-		super(leagueObj,userInputMode,leagueDb);
+	private IGameplayConfigDb gameplayConfigDb;
+	private IPlayerDb playerDb;
+	private ICoachDb coachDb;
+	private IManagerDb managerDb;
+
+	public CreateTeam(IUserInputMode userInputMode, League leagueObj, ILeagueDb leagueDb,
+			IGameplayConfigDb gameplayConfigDb, IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
+		super(leagueObj, userInputMode, leagueDb);
 		this.userInputMode = userInputMode;
+		this.gameplayConfigDb = gameplayConfigDb;
+		this.playerDb = playerDb;
+		this.coachDb = coachDb;
 	}
 
 	public League getTeam() {
@@ -53,7 +65,7 @@ public class CreateTeam extends ValidateCreateTeam{
 			}
 		}
 
-		leagueObj.insertLeagueObject(leagueObj, leagueDb);
+		leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 
 		return leagueObj;
 
@@ -79,13 +91,11 @@ public class CreateTeam extends ValidateCreateTeam{
 		while (isNotValidHeadCoach(headCoach, newTeam)) {
 			userInputMode.displayMessage("Enter headCoach Name: ");
 			headCoach = userInputMode.getName();
-			newTeam.setHeadCoach(headCoach);
+			// newTeam.setHeadCoach(headCoach);
 		}
 
 		division.addNewTeamInDivision(newTeam);
 
 	}
-
-	
 
 }

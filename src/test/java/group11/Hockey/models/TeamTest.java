@@ -15,7 +15,7 @@ public class TeamTest {
 	LeagueTest leagueTest = new LeagueTest();
 	public League league = leagueTest.populateLeagueObject();
 	Team team = new Team();
-	Team teamWithParams = new Team("Vancouver Canucks", "John", "Peter", null);
+	Team teamWithParams = new Team("Vancouver Canucks", "John", null, null);
 
 	@Test
 	public void TeamDeafultConstructorTest() {
@@ -30,7 +30,7 @@ public class TeamTest {
 		Assert.assertEquals("Vancouver Canucks", teamWithParams.getTeamName());
 		Assert.assertTrue(teamWithParams.getPlayers() == null);
 		Assert.assertEquals("John", teamWithParams.getGeneralManager());
-		Assert.assertEquals("Peter", teamWithParams.getHeadCoach());
+		Assert.assertEquals(null, teamWithParams.getHeadCoach());
 	}
 	
 	@Test
@@ -45,18 +45,18 @@ public class TeamTest {
 
 	@Test
 	public void getHeadCoachTest() {
-		Assert.assertEquals("Peter", teamWithParams.getHeadCoach());
+		Assert.assertEquals(null, teamWithParams.getHeadCoach());
 	}
 
 	// getPlayers
 	@Test
 	public void getPlayersTest() {
 		List<Player> listOfPlayers = new ArrayList<Player>();
-		Player player1 = new Player("Player1", "forward", true);
-		Player player2 = new Player("Player2", "goalie", false);
+		Player player1 = new Player(0, 0, 0, 0, "Player1", "forward", true, false, 0);
+		Player player2 = new Player(0, 0, 0, 0, "Player2", "goalie", false,false, 0);
 		listOfPlayers.add(player1);
 		listOfPlayers.add(player2);
-		Team team = new Team("Vancouver Canucks", "John", "Peter", listOfPlayers);
+		Team team = new Team("Vancouver Canucks", "John", null, listOfPlayers);
 		Assert.assertEquals("playerName=" + player1.getPlayerName() + ", position=" + player1.getPosition()
 				+ ", captain=" + player1.getCaptain(), team.getPlayers().get(0).toString());
 

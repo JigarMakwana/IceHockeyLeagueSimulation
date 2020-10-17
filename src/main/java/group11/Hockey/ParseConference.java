@@ -19,16 +19,25 @@ public class ParseConference extends ValidateJson implements IAttribute {
 
 	@Override
 	public <T> void setAttributes(T object, JSONObject listJsonObject) throws Exception {
+		setConferenceName((Conference) object,listJsonObject);
+		
+		ParseJson parseJson = new ParseJson();
+		List<Division> divisionsList = parseJson.parseElement(Division.class, listJsonObject, new ParseDivision());
+		setDivisions((Conference) object,divisionsList);
+
+	}
+	
+	private void setConferenceName(Conference conference, JSONObject listJsonObject) throws Exception {
 		String conferenceName = (String) listJsonObject.get("conferenceName");
 		if (isNameAlreadyExists(conferenceNamesList, conferenceName)) {
 			throw new Exception("Conference name " + conferenceName + " already exists");
 		} else {
-			((Conference) object).setConferenceName(conferenceName);
+			conference.setConferenceName(conferenceName);
 		}
-		ParseJson parseJson = new ParseJson();
-		List<Division> divisionsList = parseJson.parseElement(Division.class, listJsonObject, new ParseDivision());
-		((Conference) object).setDivisions(divisionsList);
-
+	}
+	
+	private void setDivisions(Conference conference, List<Division> divisionsList) {
+		conference.setDivisions(divisionsList);
 	}
 
 }

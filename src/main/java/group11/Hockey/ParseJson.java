@@ -7,7 +7,6 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-//["con","div","team","player"]
 public class ParseJson {
 	
 	public  <T> List<T> parseElement(Class<?> aClass, JSONObject jsonObj, IAttribute attribute) throws Exception {

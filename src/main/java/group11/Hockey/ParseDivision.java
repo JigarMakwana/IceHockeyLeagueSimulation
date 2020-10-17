@@ -19,16 +19,24 @@ public class ParseDivision extends ValidateJson implements IAttribute {
 
 	@Override
 	public <T> void setAttributes(T object, JSONObject listJsonObject) throws Exception {
+		setDivisionName((Division) object,listJsonObject);
+		
+		ParseJson parseJson = new ParseJson();
+		List<Team> teamsList = parseJson.parseElement(Team.class, listJsonObject, new ParseTeams());
+		setTeams((Division) object,teamsList);
+	}
+	
+	private void setDivisionName(Division division,JSONObject listJsonObject) throws Exception {
 		String divisionName = (String) listJsonObject.get("divisionName");
 		if (isNameAlreadyExists(divisionNamesList, divisionName)) {
 			throw new Exception("Division name " + divisionName + " already exists");
 		} else {
-			((Division) object).setDivisionName(divisionName);
+			division.setDivisionName(divisionName);
 		}
-		ParseJson parseJson = new ParseJson();
-		List<Team> teamsList = parseJson.parseElement(Team.class, listJsonObject, new ParseTeams());
-		((Division) object).setTeams(teamsList);
-
+	}
+	
+	private void setTeams(Division division,List<Team> teamsList) {
+		division.setTeams(teamsList);
 	}
 
 }

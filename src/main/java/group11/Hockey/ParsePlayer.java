@@ -23,9 +23,21 @@ public class ParsePlayer extends ValidateJson implements IAttribute {
 		// get captain
 		Boolean captain = (Boolean) listJsonObject.get("captain");
 		((Player) object).setCaptain(captain);
-
+		// get age
+		int age = ((Long) listJsonObject.get("age")).intValue();
+		((Player) object).setAge(age);
+		// get skating
+		float skating = ((Long) listJsonObject.get("skating")).intValue();
+		((Player) object).setSkating(skating);
+		// get shooting
+		float shooting = ((Long) listJsonObject.get("shooting")).intValue();
+		((Player) object).setShooting(shooting);
+		// get checking
+		float checking = ((Long) listJsonObject.get("checking")).intValue();
+		((Player) object).setChecking(checking);
+		// get saving
+		float saving = ((Long) listJsonObject.get("saving")).intValue();
+		((Player) object).setSaving(saving);
 	}
-
-	
 
 }

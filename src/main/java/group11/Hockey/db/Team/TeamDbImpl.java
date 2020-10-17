@@ -24,12 +24,12 @@ public class TeamDbImpl implements ITeamDb {
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
 			while (resultSet.next()) {
-				Team team = new Team(resultSet.getString("team_name"), resultSet.getString("general_manager"),
-						resultSet.getString("head_coach"), null);
-				Division divison = new Division(resultSet.getString("division_name"), Arrays.asList(team));
-				Conference conference = new Conference(resultSet.getString("conference_name"), Arrays.asList(divison));
-				League league = new League(resultSet.getString("league_name"), Arrays.asList(conference), null);
-				leagueList.add(league);
+				//Team team = new Team(resultSet.getString("team_name"), resultSet.getString("general_manager"),
+						//resultSet.getString("head_coach"), null);
+				//Division divison = new Division(resultSet.getString("division_name"), Arrays.asList(team));
+				//Conference conference = new Conference(resultSet.getString("conference_name"), Arrays.asList(divison));
+				//League league = new League(resultSet.getString("league_name"), Arrays.asList(conference), null);
+				//leagueList.add(league);
 			}
 			statement.close();
 			procedureCallDb.closeConnection();

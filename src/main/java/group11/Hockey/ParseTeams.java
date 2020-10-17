@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import group11.Hockey.models.Coach;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
@@ -35,9 +36,7 @@ public class ParseTeams extends ValidateJson implements IAttribute {
 		String generalManager = (String) listJsonObject.get("generalManager");
 		((Team) object).setGeneralManager(generalManager);
 
-		// get headCoach
-		String headCoach = (String) listJsonObject.get("headCoach");
-		((Team) object).setHeadCoach(headCoach);
+		setHeadCoach((Team) object,listJsonObject);
 		
 		ParseJson parseJson = new ParseJson();
 		List<Player> playersList = parseJson.parseElement(Player.class, listJsonObject, new ParsePlayer());
@@ -50,6 +49,18 @@ public class ParseTeams extends ValidateJson implements IAttribute {
 		}
 		
 		
+	}
+	
+	private void setHeadCoach(Team team, JSONObject listJsonObject) {
+		JSONObject headCoach = (JSONObject) listJsonObject.get("headCoach");
+		String name = (String) headCoach.get("name");
+		float skating = ((Double) headCoach.get("skating")).floatValue();
+		float shooting = ((Double)  headCoach.get("shooting")).floatValue();
+		float checking = ((Double)  headCoach.get("checking")).floatValue();
+		float saving = ((Double)  headCoach.get("saving")).floatValue();
+		Coach coach = new Coach(skating, shooting, checking, saving, name);
+		
+		team.setHeadCoach(coach);
 	}
 
 }

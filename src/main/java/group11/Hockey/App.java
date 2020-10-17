@@ -27,6 +27,7 @@ public class App {
 		if (args.length != 0) {
 			// if (false) {
 			String jsonFile = args[0];
+			
 			ILeagueDb leagueDb = new LeagueDbImpl();
 			IGameplayConfigDb gameplayConfigDb = new GameplayConfigDb();
 			IPlayerDb playerDb = new PlayerDb();

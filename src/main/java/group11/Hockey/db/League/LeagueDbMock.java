@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import group11.Hockey.models.Coach;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
-import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
 
 public class LeagueDbMock implements ILeagueDb {
@@ -25,7 +23,7 @@ public class LeagueDbMock implements ILeagueDb {
 	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
 			String generalManger, String headcoachName, float skating, float shooting, float checking, float saving,
 			String playerName, String playerPosition, boolean captain, float playerSkating, float playerShooting,
-			float playerChecking, float playerSaving, int age) {
+			float playerChecking, float playerSaving, float age) {
 		Team team = new Team();
 		team.setTeamName(teamName);
 		Division division = new Division(divisionName, Arrays.asList(team));
@@ -49,21 +47,6 @@ public class LeagueDbMock implements ILeagueDb {
 			isLeagueNameValid = true;
 		}
 		return isLeagueNameValid;
-	}
-
-	@Override
-	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, float playerSkating,
-			float playerShooting, float playerChecking, float playerSaving, int age) {
-		List<Player> listOfFreeAgents = new ArrayList<Player>();
-		listOfFreeAgents.add(new Player(0, 0, 0, 0, freeAgentName, position, false,false,age));
-		leagueList.get(1).setFreeAgents(listOfFreeAgents);
-		if ((leagueList.get(1).getLeagueName() != null
-				&& leagueList.get(1).getLeagueName().equalsIgnoreCase(leagueName))
-				&& leagueList.get(1).getFreeAgents().size() == 1) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public League populateLeagueObject() {

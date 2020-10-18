@@ -1,6 +1,6 @@
 package group11.Hockey.models;
 
-public class Stats {
+public class Stats{
 
 	private float skating;
 	private float shooting;

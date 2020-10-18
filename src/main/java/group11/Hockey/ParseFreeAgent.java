@@ -20,7 +20,7 @@ public class ParseFreeAgent extends ValidateJson implements IAttribute {
 		String position = (String) listJsonObject.get("position");
 		((Player) object).setPosition(position);
 		// get age
-		int age = ((Long)  listJsonObject.get("age")).intValue();
+		float age = ((Long)  listJsonObject.get("age")).floatValue();
 		((Player) object).setAge(age);
 		// get skating
 		float skating = ((Long)  listJsonObject.get("skating")).intValue();

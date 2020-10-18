@@ -3,35 +3,47 @@ package group11.Hockey.models;
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.db.IPlayerDb;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.BeforeClass;
 
 public class PlayerTest {
-	
-	//Player player = new Player();
-	Player playerWithParams = new Player(0, 0, 0, 0, "Player1", "forward", false,false, 0);
-	
-	
+
+	private static Player playerWithParams;
+
+	@BeforeClass
+	public static void init() {
+		playerWithParams = new Player((float) 0.1, (float) 0.2, (float) 0.3, (float) 0.4, "Player1", "forward", false,
+				false, 0);
+	}
+
 	@Test
 	public void PlayerDefaultParameterisedConstructorTest() {
-		Player playerWithParams = new Player(0, 0, 0, 0, "Player 1", "Forward", false,false, 0);
-		Assert.assertEquals("Player 1", playerWithParams.getPlayerName());
-		Assert.assertEquals("Forward", playerWithParams.getPosition());
+		Assert.assertEquals("Player1", playerWithParams.getPlayerName());
+		Assert.assertEquals("forward", playerWithParams.getPosition());
 	}
-	
+
 	@Test
 	public void setPlayerNameTest() {
-		//player.setPlayerName("Player 1");
-		//Assert.assertEquals("Player 1", player.getPlayerName());
+		playerWithParams.setPlayerName("Player 1");
+		Assert.assertEquals("Player 1", playerWithParams.getPlayerName());
 	}
-	
+
 	@Test
 	public void getPlayerNameTest() {
 		Assert.assertEquals("Player1", playerWithParams.getPlayerName());
 	}
-	
+
 	@Test
 	public void setPositionTest() {
-		//player.setPosition("Forward");
-		//Assert.assertEquals("Forward", player.getPosition());
+		playerWithParams.setPosition("forward");
+		Assert.assertEquals("forward", playerWithParams.getPosition());
 	}
 
 	@Test
@@ -43,11 +55,21 @@ public class PlayerTest {
 	public void setCaptainTest() {
 		Assert.assertFalse(playerWithParams.getCaptain());
 	}
-	
+
 	@Test
 	public void getCaptainTest() {
-		Player player = new Player(0, 0, 0, 0, "Player1", "forward", false,false, 0);
-		Assert.assertFalse(player.getCaptain());
+		Assert.assertFalse(playerWithParams.getCaptain());
 	}
 	
+	@Test
+	public void insertLeagueFreeAgentsTest() {
+		IPlayerDb playerDb = mock(IPlayerDb.class);
+		when(playerDb.insertLeagueFreeAgents("league", "A1", "fwd", 0, 0, 0, 0, 0)).thenReturn(true);
+		List<Player> listOfFreeAgents= new ArrayList<Player>();
+		listOfFreeAgents.add(playerWithParams);
+		Player player2 = new Player("league", playerDb);  
+		boolean flag = player2.insertLeagueFreeAgents(listOfFreeAgents);
+		Assert.assertFalse(flag);
+	}
+
 }

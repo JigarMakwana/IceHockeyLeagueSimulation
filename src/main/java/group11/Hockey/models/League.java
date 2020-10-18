@@ -1,5 +1,6 @@
 package group11.Hockey.models;
 
+import java.util.Collections;
 import java.util.List;
 
 import group11.Hockey.db.ICoachDb;
@@ -21,6 +22,7 @@ public class League {
 	private GameplayConfig gamePlayConfig = null;
 	private List<Coach> coaches;
 	private List<GeneralManager> generalManagers;
+	private List<Player> retiredPlayers;
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {
@@ -69,6 +71,7 @@ public class League {
 	 * @return the freeAgents
 	 */
 	public List<Player> getFreeAgents() {
+		Collections.sort(freeAgents);
 		return freeAgents;
 	}
 
@@ -101,6 +104,14 @@ public class League {
 
 	public void setGeneralManagers(List<GeneralManager> generalManagers) {
 		this.generalManagers = generalManagers;
+	}
+
+	public List<Player> getRetiredPlayers() {
+		return retiredPlayers;
+	}
+
+	public void setRetiredPlayers(List<Player> retiredPlayers) {
+		this.retiredPlayers = retiredPlayers;
 	}
 
 	public boolean insertLeagueObject(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,

@@ -2,12 +2,11 @@ package group11.Hockey.db;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
-
 public class PlayerDb implements IPlayerDb{
 
 	@Override
 	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, float playerSkating,
-			float playerShooting, float playerChecking, float playerSaving, int age) {
+			float playerShooting, float playerChecking, float playerSaving, float age) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertFreeAgent(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
@@ -19,7 +18,7 @@ public class PlayerDb implements IPlayerDb{
 			statement.setFloat(5, playerShooting);
 			statement.setFloat(6, playerChecking);
 			statement.setFloat(7, playerSaving);
-			statement.setInt(8, age);
+			statement.setFloat(8, age);
 
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();

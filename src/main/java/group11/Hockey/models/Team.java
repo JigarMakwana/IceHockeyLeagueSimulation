@@ -24,8 +24,7 @@ public class Team {
 		this.headCoach = headCoach;
 		this.players = players;
 	}
-	
-	
+
 	public Team() {
 
 	}
@@ -86,6 +85,17 @@ public class Team {
 		this.players = players;
 	}
 
+	public float getTeamStrength(List<Player> players) {
+		float teamStrength = 0;
+		if (players == null || players.size() == 0) {
+			return 0;
+		}
+		for (Player player : players) {
+			teamStrength += player.getPlayerStrength();
+		}
+		return teamStrength;
+	}
+
 	public boolean isTeamNameValid(String teamName, League league) {
 		boolean isTeamNameValid = true;
 		List<Conference> cconferenceList = league.getConferences();
@@ -94,7 +104,7 @@ public class Team {
 			for (Division division : divisionList) {
 				List<Team> teamList = division.getTeams();
 				for (Team team : teamList) {
-					if(team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
+					if (team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
 						isTeamNameValid = false;
 						return isTeamNameValid;
 					}
@@ -103,9 +113,8 @@ public class Team {
 		}
 		return isTeamNameValid;
 	}
-	
-	
-	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb){
+
+	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb) {
 		return teamDb.loadTeamFromTeamName(teamName);
 	}
 

@@ -12,7 +12,7 @@ public class LeagueDbImpl implements ILeagueDb {
 	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
 			String generalManger, String headcoachName, float skating, float shooting, float checking, float saving,
 			String playerName, String playerPosition, boolean captain, float playerSkating, float playerShooting,
-			float playerChecking, float playerSaving, int age) {
+			float playerChecking, float playerSaving, float age) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb(
 				"{call insertNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
@@ -37,7 +37,7 @@ public class LeagueDbImpl implements ILeagueDb {
 			statement.setFloat(15, playerShooting);
 			statement.setFloat(16, playerChecking);
 			statement.setFloat(17, playerSaving);
-			statement.setInt(18, age);
+			statement.setFloat(18, age);
 
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
@@ -82,39 +82,6 @@ public class LeagueDbImpl implements ILeagueDb {
 			procedureCallDb.closeConnection();
 		}
 		return isLeagueNameValid;
-	}
-
-	@Override
-	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, float playerSkating,
-			float playerShooting, float playerChecking, float playerSaving, int age) {
-		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertFreeAgent(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
-		CallableStatement statement = procedureCallDb.getDBCallableStatement();
-		boolean outPutValue = false;
-		try {
-			statement.setString(1, leagueName);
-			statement.setString(2, freeAgentName);
-			statement.setString(3, position);
-			statement.setFloat(4, playerSkating);
-			statement.setFloat(5, playerShooting);
-			statement.setFloat(6, playerChecking);
-			statement.setFloat(7, playerSaving);
-			statement.setInt(8, age);
-
-			procedureCallDb.executeProcedure();
-			ResultSet resultSet = statement.getResultSet();
-			while (resultSet.next()) {
-				outPutValue = resultSet.getBoolean("status");
-			}
-			statement.close();
-			procedureCallDb.closeConnection();
-		} catch (Exception e) {
-			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
-		} finally {
-
-			procedureCallDb.closeConnection();
-		}
-		return outPutValue;
 	}
 
 }

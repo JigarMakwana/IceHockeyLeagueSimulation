@@ -18,8 +18,8 @@ public class ImportJson extends ValidateJson {
 	}
 
 	public League parseFile(String fileName) throws Exception {
-		//if (validateJsonSchema(fileName)) {
-		if(true) {
+		if (validateJsonSchema(fileName)) {
+		//if(true) {
 			JSONParser parser = new JSONParser();
 
 			fileObj = parser.parse(new FileReader(fileName));

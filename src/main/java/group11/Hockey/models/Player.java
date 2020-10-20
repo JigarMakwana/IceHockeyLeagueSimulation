@@ -24,6 +24,7 @@ public class Player extends Stats implements Comparable<Player> {
 	private float age;
 	private boolean isInjured;
 	private boolean IsRetired;
+	private int numberOfInjuredDays;
 
 	public Player() {
 		super();
@@ -118,6 +119,14 @@ public class Player extends Stats implements Comparable<Player> {
 		IsRetired = isRetired;
 	}
 
+	public int getNumberOfInjuredDays() {
+		return numberOfInjuredDays;
+	}
+
+	public void setNumberOfInjuredDays(int numberOfInjuredDays) {
+		this.numberOfInjuredDays = numberOfInjuredDays;
+	}
+
 	public float getPlayerStrength() {
 		float strength;
 		if (this.position.equalsIgnoreCase("Forward")) {
@@ -162,6 +171,17 @@ public class Player extends Stats implements Comparable<Player> {
 		age = this.getAge() + yearsToIncrease;
 		this.setAge(age);
 		this.setIsRetired(checkForRetirement(league));
+		decreaseInjuredDays(days);
+	}
+
+	private void decreaseInjuredDays(int days) {
+		if (this.isInjured()) {
+			int numberOfDaysLeftForHeal = this.getNumberOfInjuredDays() - days;
+			this.setNumberOfInjuredDays(numberOfDaysLeftForHeal > 0 ? numberOfDaysLeftForHeal : 0);
+			if (this.getNumberOfInjuredDays() == 0) {
+				this.setInjured(false);
+			}
+		}
 	}
 
 	private boolean checkForRetirement(League league) {

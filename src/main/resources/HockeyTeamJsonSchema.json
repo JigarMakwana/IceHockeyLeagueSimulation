@@ -120,38 +120,25 @@
 		"player":{
 		"required": [ "playerName", "position","skating","shooting","checking","saving","age" ],
 			"properties":{
-				"playerName":{
-					"type":"string",
-					"minLength":1
-				},
-				"position":{
-					"type":"string",
-					"pattern":"^forward$|^defense$|^goalie$"
-				},
-				"captain":{
-					"type":"boolean"
-				},
-				"skating":{"type":"number"},
-				"shooting":{"type":"number"},
-				"checking":{"type":"number"},
-				"saving":{"type":"number"},
-				"age":{"type":"number"},
+				"playerName":{"type":"string","minLength":1},
+				"position":{"type":"string","pattern":"^forward$|^defense$|^goalie$"},
+				"captain":{"type":"boolean"},
+				"skating":{"type":"number","minimum": 1,"maximum": 20},
+				"shooting":{"type":"number","minimum": 1,"maximum": 20},
+				"checking":{"type":"number","minimum": 1,"maximum": 20},
+				"saving":{"type":"number","minimum": 1,"maximum": 20},
+				"age":{"type":"number","minimum": 1,"maximum": 100},
 			}
 		},
 		"coaches":{
 			"required":["name","skating","shooting","checking","saving"],
 				"properties":{
-					"name":{
-						"type":"string",
-						"minLength":1
-					},
-					"skating":{"type":"number"},
-					"shooting":{"type":"number"},
-					"checking":{"type":"number"},
-					"saving":{"type":"number"},
+					"name":{"type":"string","minLength":1},
+					"skating":{"type":"number","minimum": 0,"maximum": 1},
+					"shooting":{"type":"number","minimum": 0,"maximum": 1},
+					"checking":{"type":"number","minimum": 0,"maximum": 1},
+					"saving":{"type":"number","minimum": 0,"maximum": 1},
 				},
 		}
-		
-		
 	}
 }

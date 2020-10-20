@@ -1,5 +1,5 @@
 {
-	"leagueName": "Dalhousie Hockey League x99",
+	"leagueName": "Dalhousie Hockey League",
 	"gameplayConfig": {
 		"aging": {
 			"averageRetirementAge": 35,
@@ -49,7 +49,7 @@
 									"skating": 15,
 									"shooting": 18,
 									"checking": 12,
-									"saving": 0
+									"saving": 1
 								},
 								{
 									"playerName": "Player Two",
@@ -59,7 +59,7 @@
 									"skating": 10,
 									"shooting": 10,
 									"checking": 10,
-									"saving": 0
+									"saving": 1
 								},
 								{
 									"playerName": "Player Three",
@@ -86,7 +86,7 @@
 			"skating": 10,
 			"shooting": 10,
 			"checking": 10,
-			"saving": 0
+			"saving": 1
 		},
 		{
 			"playerName": "Agent Two",
@@ -95,7 +95,7 @@
 			"skating": 10,
 			"shooting": 10,
 			"checking": 10,
-			"saving": 0
+			"saving": 1
 		},
 		{
 			"playerName": "Agent Three",

@@ -16,6 +16,7 @@ public class Team {
 	private String generalManager;
 	private Coach headCoach;
 	private List<Player> players = null;
+	private float teamStrength;
 
 	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();
@@ -83,6 +84,23 @@ public class Team {
 	 */
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+	}
+	
+
+	public float getTeamStrength() {
+		List<Player> players = this.getPlayers();
+		float teamStrength = 0;
+		if (players == null || players.size() == 0) {
+			return 0;
+		}
+		for (Player player : players) {
+			teamStrength += player.getPlayerStrength();
+		}
+		return teamStrength;
+	}
+
+	public void setTeamStrength(float teamStrength) {
+		this.teamStrength = teamStrength;
 	}
 
 	public float getTeamStrength(List<Player> players) {

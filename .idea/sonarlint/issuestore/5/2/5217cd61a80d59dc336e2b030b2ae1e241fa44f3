@@ -1,0 +1,16 @@
+
+S
+java:S1155}">Use isEmpty() to check whether the collection is empty or not.(¥§Âw
+Z
+java:S1155ƒ">Use isEmpty() to check whether the collection is empty or not.(¿ÍÈßüÿÿÿÿ
+Z
+java:S1155‹">Use isEmpty() to check whether the collection is empty or not.(üº½ãþÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
+Y
+java:S1854¤"BRemove this useless assignment to local variable "gameplayConfig".(ÂˆåÆ
+h
+java:S3776u"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(Íâÿ¨
+]
+java:S1126´"AReplace this if-then-else statement by a single return statement.(•ØªŸúÿÿÿÿ
+J
+java:S1481¤"3Remove this unused "gameplayConfig" local variable.(ÂˆåÆ

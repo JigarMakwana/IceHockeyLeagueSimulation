@@ -6,7 +6,7 @@ import group11.Hockey.db.Team.ITeamDb;
 
 /**
  * This class contain all the business logic related to team model
- * 
+ *
  * @author jatinpartaprana
  *
  */
@@ -16,6 +16,15 @@ public class Team {
 	private String generalManager;
 	private Coach headCoach;
 	private List<Player> players = null;
+	private int lossPoint;
+
+	public int getLossPoint() {
+		return lossPoint;
+	}
+
+	public void setLossPoint(int lossPoint) {
+		this.lossPoint = lossPoint;
+	}
 
 	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();

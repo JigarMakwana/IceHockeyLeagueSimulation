@@ -1,8 +1,14 @@
 /target/
 /idea/
 
-# Eclipse Core      
+# Eclipse Core
 .project
 
-# JDT-specific (Eclipse Java Development Tools)     
+# JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+.properties
+
+Hockey.iml
+
+.log

@@ -8,7 +8,7 @@ import junit.framework.Assert;
 
 import org.junit.BeforeClass;
 
-public class TradingTest {
+public class ITradingEligibilityTest {
 
 	private static Trading trading;
 

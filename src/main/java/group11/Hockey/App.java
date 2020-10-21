@@ -39,14 +39,16 @@ public class App {
 
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
+				AIToAITrading aiToAITradObj = new AIToAITrading(leagueObj);
+				aiToAITradObj.generateTradeOffers();
 
-				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+//				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				//Player p = new Player();
 				//p.increaseAge(leagueObj, 300);
-				CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb, gameplayConfigDb,
-						playerDb, coachDb, managerDb);
-				leagueObj = createTeamObj.getTeam();
-				System.out.println("****Create Team end****");
+//				CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb, gameplayConfigDb,
+//						playerDb, coachDb, managerDb);
+//				leagueObj = createTeamObj.getTeam();
+//				System.out.println("****Create Team end****");
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.print("Exception:-->");

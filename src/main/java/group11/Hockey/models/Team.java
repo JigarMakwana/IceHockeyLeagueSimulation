@@ -16,6 +16,7 @@ public class Team {
 	private String generalManager;
 	private Coach headCoach;
 	private List<Player> players = null;
+	private float teamStrength;
 	private int lossPoint;
 
 	public int getLossPoint() {

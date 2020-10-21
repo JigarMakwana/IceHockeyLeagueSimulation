@@ -29,17 +29,17 @@ public class ImportJsonTest {
 
 		League leagueModelObj = null;
 
-		//leagueModelObj = importJsonObj.parseFile(jsonFile.getPath());
+		leagueModelObj = importJsonObj.parseFile(jsonFile.getPath());
 
-		//assertEquals(leagueModelObj.getLeagueName(), "Dalhousie Hockey League");
-		//assertEquals(leagueModelObj.getConferences().size(), 1);
+		assertEquals(leagueModelObj.getLeagueName(), "Dalhousie Hockey League");
+		assertEquals(leagueModelObj.getConferences().size(), 1);
 	}
 
 	@Test(expected = Exception.class)
 	public void parseFileDuplicateConfirenceNameTest() throws Exception {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeamInvalid.json");
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
-		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(false);
+		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(true);
 		ImportJson importJsonObj = new ImportJson(leagueDbMock);
 		importJsonObj.parseFile(jsonFile.getPath());
 	    

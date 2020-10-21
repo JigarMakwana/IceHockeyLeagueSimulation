@@ -186,6 +186,5 @@ public class League {
 
 	public boolean isLeagueNameValid(String leagueName, ILeagueDb leagueDb) {
 		return leagueDb.checkLeagueNameExitsInDb(leagueName);
-
 	}
 }

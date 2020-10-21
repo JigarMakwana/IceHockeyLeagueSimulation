@@ -31,7 +31,7 @@ public class ValidateJsonTest {
 		
 		
 		boolean isValid = validateJsonClass.validateJsonSchema("//nofile.json");
-		assertTrue(!isValid);
+		assertFalse(isValid);
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class ValidateJsonTest {
 		
 		
 		boolean isValid = validateJsonClass.validateJsonSchema(jsonFile.getPath());
-		assertTrue(!isValid);
+		assertFalse(isValid);
 	}
 
 }

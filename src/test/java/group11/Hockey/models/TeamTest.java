@@ -8,66 +8,55 @@ import org.junit.Test;
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbMock;
 import org.junit.Assert;
-
+import org.junit.BeforeClass;
 
 public class TeamTest {
 
-	LeagueTest leagueTest = new LeagueTest();
-	public League league = leagueTest.populateLeagueObject();
-	Team team = new Team();
-	Team teamWithParams = new Team("Vancouver Canucks", "John", null, null);
+	private static LeagueTest leagueTest;
+	private static League league;
+	private static Team team;
+	private static Player player1;
+	private static Player player2;
+
+	@BeforeClass
+	public static void init() {
+		List<Player> listOfPlayers = new ArrayList<Player>();
+		leagueTest = new LeagueTest();
+		league = leagueTest.populateLeagueObject();
+
+		player1 = new Player(10, 10, 10, 10, "Player1", "forward", true, false, 20);
+		player2 = new Player(15, 15, 15, 15, "Player2", "goalie", false, false, 20);
+		listOfPlayers.add(player1);
+		listOfPlayers.add(player2);
+		team = new Team("Vancouver Canucks", "John", null, listOfPlayers);
+
+	}
 
 	@Test
-	public void TeamDeafultConstructorTest() {
-		Assert.assertNull(team.getTeamName());
-		Assert.assertNull(team.getGeneralManager());
-		Assert.assertNull(team.getHeadCoach());
-		Assert.assertNull(team.getPlayers());
-	}
-	
-	@Test
-	public void TeamParameterisedConstructorTest() {
-		Assert.assertEquals("Vancouver Canucks", teamWithParams.getTeamName());
-		Assert.assertTrue(teamWithParams.getPlayers() == null);
-		Assert.assertEquals("John", teamWithParams.getGeneralManager());
-		Assert.assertEquals(null, teamWithParams.getHeadCoach());
-	}
-	
-	@Test
 	public void getTeamNameTest() {
-		Assert.assertEquals("Vancouver Canucks", teamWithParams.getTeamName());
+		Assert.assertEquals("Vancouver Canucks", team.getTeamName());
 	}
 
 	@Test
 	public void getGeneralManagerTest() {
-		Assert.assertEquals("John", teamWithParams.getGeneralManager());
+		Assert.assertEquals("John", team.getGeneralManager());
 	}
 
 	@Test
 	public void getHeadCoachTest() {
-		Assert.assertEquals(null, teamWithParams.getHeadCoach());
+		Assert.assertEquals(null, team.getHeadCoach());
 	}
 
 	// getPlayers
 	@Test
 	public void getPlayersTest() {
-		List<Player> listOfPlayers = new ArrayList<Player>();
-		Player player1 = new Player(0, 0, 0, 0, "Player1", "forward", true, false, 0);
-		Player player2 = new Player(0, 0, 0, 0, "Player2", "goalie", false,false, 0);
-		listOfPlayers.add(player1);
-		listOfPlayers.add(player2);
-		Team team = new Team("Vancouver Canucks", "John", null, listOfPlayers);
+
 		Assert.assertEquals("playerName=" + player1.getPlayerName() + ", position=" + player1.getPosition()
 				+ ", captain=" + player1.getCaptain(), team.getPlayers().get(0).toString());
 
 		Assert.assertEquals("playerName=" + player2.getPlayerName() + ", position=" + player2.getPosition()
 				+ ", captain=" + player2.getCaptain(), team.getPlayers().get(1).toString());
 		Assert.assertTrue(team.getPlayers().size() == 2);
-	}
-
-	public ITeamDb createTeamDbMockObject() {
-		ITeamDb teamDb = new TeamDbMock();
-		return teamDb;
 	}
 
 	@Test
@@ -78,11 +67,10 @@ public class TeamTest {
 		Assert.assertFalse(isTeamNameValid);
 	}
 
-
 	@Test
 	public void loadTeamWithTeamNameTest() {
 		String teamName = "Toronto Maples";
-		ITeamDb teamDb = createTeamDbMockObject();
+		ITeamDb teamDb = new TeamDbMock();
 		List<League> fetcheData = team.loadTeamWithTeamName(teamName, teamDb);
 		Assert.assertTrue(fetcheData.size() == 1);
 		Assert.assertTrue(
@@ -91,6 +79,12 @@ public class TeamTest {
 				.equalsIgnoreCase("Atlantic Division"));
 		Assert.assertTrue(fetcheData.get(0).getConferences().get(0).getDivisions().get(0).getTeams().get(0)
 				.getTeamName().equalsIgnoreCase("Toronto Maples"));
+	}
+
+	@Test
+	public void getTeamStrengthTest() {
+		float teamStrength = team.getTeamStrength();
+		Assert.assertEquals(teamStrength, 55.0, 55.0);
 	}
 
 }

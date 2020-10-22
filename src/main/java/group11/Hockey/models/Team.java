@@ -99,21 +99,6 @@ public class Team {
 		return teamStrength;
 	}
 
-	public void setTeamStrength(float teamStrength) {
-		this.teamStrength = teamStrength;
-	}
-
-	public float getTeamStrength(List<Player> players) {
-		float teamStrength = 0;
-		if (players == null || players.size() == 0) {
-			return 0;
-		}
-		for (Player player : players) {
-			teamStrength += player.getPlayerStrength();
-		}
-		return teamStrength;
-	}
-
 	public boolean isTeamNameValid(String teamName, League league) {
 		boolean isTeamNameValid = true;
 		List<Conference> cconferenceList = league.getConferences();

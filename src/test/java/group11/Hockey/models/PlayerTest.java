@@ -19,8 +19,8 @@ public class PlayerTest {
 
 	@BeforeClass
 	public static void init() {
-		playerWithParams = new Player((float) 0.1, (float) 0.2, (float) 0.3, (float) 0.4, "Player1", "forward", false,
-				false, 0);
+		playerWithParams = new Player((float) 10, (float) 10, (float) 10, (float) 10, "Player1", "forward", false,
+				false, 30);
 	}
 
 	@Test
@@ -70,6 +70,12 @@ public class PlayerTest {
 		Player player2 = new Player("league", playerDb);  
 		boolean flag = player2.insertLeagueFreeAgents(listOfFreeAgents);
 		Assert.assertFalse(flag);
+	}
+	
+	@Test
+	public void getPlayerStrengthTest() {
+		float strength = playerWithParams.getPlayerStrength();
+		Assert.assertEquals(strength, 25.0,25.0);
 	}
 
 }

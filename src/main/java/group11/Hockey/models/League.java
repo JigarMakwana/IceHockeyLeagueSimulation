@@ -127,6 +127,9 @@ public class League {
 		boolean leagueObjectInserted = false;
 		boolean freeAgentInsertionCheck = false;
 
+		Player playerObj = new Player(leagueName, playerDb);
+		playerObj.deleteLeaguePlayers();
+		
 		List<Conference> conferenceList = league.getConferences();
 		for (Conference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
@@ -174,9 +177,11 @@ public class League {
 				league.getGamePlayConfig().getTraining(), league.getGamePlayConfig().getTrading(), gameplayConfigDb,
 				leagueName);
 
-		// freeAgents
-		Player player = new Player(leagueName, playerDb);
-		player.insertLeagueFreeAgents(league.getFreeAgents());
+		// freeAgents and Retired players
+		
+		playerObj.insertLeagueFreeAgents(league.getFreeAgents());
+		playerObj.insertLeagueRetiredPlayers(league.getRetiredPlayers());
+		
 		// coaches
 		Coach coach = new Coach(leagueName, coachDb);
 		coach.insertCoaches(league.getCoaches());
@@ -185,6 +190,8 @@ public class League {
 		GeneralManager generalManager = new GeneralManager(leagueName, managerDb);
 		generalManager.insertManager(league.getGeneralManagers());
 
+		
+		
 		if (leagueObjectInserted && freeAgentInsertionCheck) {
 			return true;
 		} else

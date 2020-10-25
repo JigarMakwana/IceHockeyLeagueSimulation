@@ -152,6 +152,25 @@ public class Player extends Stats implements Comparable<Player> {
 		}
 		return freeAgentInsertionCheck;
 	}
+	
+	public boolean insertLeagueRetiredPlayers(List<Player> listOfRetiredPlayers) {
+		boolean retiredPlayersInsertionCheck = false;
+
+		if (listOfRetiredPlayers == null || listOfRetiredPlayers.size() == 0) {
+			retiredPlayersInsertionCheck = true;
+		} else {
+			for (Player freeAgent : listOfRetiredPlayers) {
+				retiredPlayersInsertionCheck = playerDb.insertLeagueRetiredPlayers(leagueName, freeAgent.getPlayerName(),
+						freeAgent.getPosition(), freeAgent.getSkating(), freeAgent.getShooting(),
+						freeAgent.getChecking(), freeAgent.getSaving(), freeAgent.getAge());
+			}
+		}
+		return retiredPlayersInsertionCheck;
+	}
+	
+	public boolean deleteLeaguePlayers() {
+		return playerDb.deleteLeaguePlayers(leagueName);
+	}
 
 	@Override
 	public int compareTo(Player player) {
@@ -191,6 +210,7 @@ public class Player extends Stats implements Comparable<Player> {
 			Player freeAgent = freeAgentsItr.next();
 			if (freeAgent.getPosition().equalsIgnoreCase(this.getPosition())) {
 				freeAgent.setIsFreeAgent(false);
+				freeAgent.setCaptain(this.getCaptain());
 				playersList.add(freeAgent);
 				freeAgentsItr.remove();
 			}

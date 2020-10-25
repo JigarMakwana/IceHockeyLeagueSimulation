@@ -1,5 +1,6 @@
 package group11.Hockey.models;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import group11.Hockey.db.League.ILeagueDb;
 public class League {
 	private String leagueName;
 	private List<Conference> conferences = null;
-	private List<Player> freeAgents = null;
+	private List<Player> freeAgents = new ArrayList<Player>();
 	private GameplayConfig gamePlayConfig = null;
 	private List<Coach> coaches;
 	private List<GeneralManager> generalManagers;
@@ -71,7 +72,10 @@ public class League {
 	 * @return the freeAgents
 	 */
 	public List<Player> getFreeAgents() {
-		Collections.sort(freeAgents);
+		if(isFreeAgentsNotNull()) {
+			Collections.sort(freeAgents);
+		}
+		
 		return freeAgents;
 	}
 
@@ -112,6 +116,10 @@ public class League {
 
 	public void setRetiredPlayers(List<Player> retiredPlayers) {
 		this.retiredPlayers = retiredPlayers;
+	}
+	
+	private boolean isFreeAgentsNotNull() {
+		return freeAgents != null;
 	}
 
 	public boolean insertLeagueObject(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,

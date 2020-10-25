@@ -39,12 +39,12 @@ public class App {
 
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
-				AgePlayer ageplayer = new AgePlayer();
-				ageplayer.increaseAge(leagueObj, 300);
+				
 
 				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-				//Player p = new Player();
-				//p.increaseAge(leagueObj, 300);
+				//AgePlayer ageplayer = new AgePlayer();
+				//ageplayer.increaseAge(leagueObj, 300);
+				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				CreateTeam createTeamObj = new CreateTeam(userInputMode, leagueObj, leagueDb, gameplayConfigDb,
 						playerDb, coachDb, managerDb);
 				leagueObj = createTeamObj.getTeam();

@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
 import group11.Hockey.db.ProcedureCallDb;
-import group11.Hockey.models.Coach;
 
 public class LeagueDbImpl implements ILeagueDb {
 

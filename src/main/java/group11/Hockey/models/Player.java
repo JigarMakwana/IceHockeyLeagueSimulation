@@ -1,10 +1,9 @@
 package group11.Hockey.models;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
+import group11.Hockey.RetirePlayer;
 import group11.Hockey.db.IPlayerDb;
 
 /**
@@ -153,6 +152,25 @@ public class Player extends Stats implements Comparable<Player> {
 		}
 		return freeAgentInsertionCheck;
 	}
+	
+	public boolean insertLeagueRetiredPlayers(List<Player> listOfRetiredPlayers) {
+		boolean retiredPlayersInsertionCheck = false;
+
+		if (listOfRetiredPlayers == null || listOfRetiredPlayers.size() == 0) {
+			retiredPlayersInsertionCheck = true;
+		} else {
+			for (Player freeAgent : listOfRetiredPlayers) {
+				retiredPlayersInsertionCheck = playerDb.insertLeagueRetiredPlayers(leagueName, freeAgent.getPlayerName(),
+						freeAgent.getPosition(), freeAgent.getSkating(), freeAgent.getShooting(),
+						freeAgent.getChecking(), freeAgent.getSaving(), freeAgent.getAge());
+			}
+		}
+		return retiredPlayersInsertionCheck;
+	}
+	
+	public boolean deleteLeaguePlayers() {
+		return playerDb.deleteLeaguePlayers(leagueName);
+	}
 
 	@Override
 	public int compareTo(Player player) {
@@ -164,111 +182,37 @@ public class Player extends Stats implements Comparable<Player> {
 		return "playerName=" + playerName + ", position=" + position + ", captain=" + captain;
 	}
 
-	//
-	private void increaseAgeForPlayer(League league, int days) {
-		float yearsToIncrease = (float) days / 360;
-		float age;
-		age = this.getAge() + yearsToIncrease;
-		this.setAge(age);
-		this.setIsRetired(checkForRetirement(league));
-		decreaseInjuredDays(days);
-	}
-
-	private void decreaseInjuredDays(int days) {
+	private void decreaseInjuredDaysForPlayer(int days) {
 		if (this.isInjured()) {
-			int numberOfDaysLeftForHeal = this.getNumberOfInjuredDays() - days;
-			this.setNumberOfInjuredDays(numberOfDaysLeftForHeal > 0 ? numberOfDaysLeftForHeal : 0);
+			int numberOfDaysLeftToHeal = this.getNumberOfInjuredDays() - days;
+			this.setNumberOfInjuredDays(numberOfDaysLeftToHeal > 0 ? numberOfDaysLeftToHeal : 0);
 			if (this.getNumberOfInjuredDays() == 0) {
 				this.setInjured(false);
 			}
 		}
 	}
 
-	private boolean checkForRetirement(League league) {
-		int likelihoodOfRetirement = getLikelihoodOfRetirement(league);
-		boolean isRetired = new Random().nextInt(likelihoodOfRetirement) == likelihoodOfRetirement - 1;
-		return isRetired;
-	}
-
-	private int getLikelihoodOfRetirement(League league) {
-		GameplayConfig gameplayConfig = league.getGamePlayConfig();
-		Aging ageDetails = gameplayConfig.getAging();
-		int averageRetirementAge = ageDetails.getAverageRetirementAge();
-		int maximumAge = ageDetails.getMaximumAge();
-		int likelihoodOfRetirement = 1;
-		float playerAge = this.getAge();
-
-		if (averageRetirementAge >= playerAge) {
-			likelihoodOfRetirement = (int) (maximumAge - playerAge);
-		} else if (averageRetirementAge < playerAge) {
-			likelihoodOfRetirement = (int) (maximumAge / playerAge);
-		}
-
-		return likelihoodOfRetirement;
-	}
-
 	public void increaseAge(League league, int days) {
-		boolean isRetired;
-		List<Player> retiredPlayers = new ArrayList<Player>();
-		List<Player> freeAgents = league.getFreeAgents();
-
-		Iterator<Player> freeAgentsItr = freeAgents.iterator();
-
-		while (freeAgentsItr.hasNext()) {
-			Player freeAgent = freeAgentsItr.next();
-			freeAgent.increaseAgeForPlayer(league, days);
-			isRetired = freeAgent.isIsRetired();
-			if (isRetired) {
-				retiredPlayers.add(freeAgent);
-				freeAgentsItr.remove();
-			}
-		}
-
-		for (Conference conference : league.getConferences()) {
-			for (Division division : conference.getDivisions()) {
-				for (Team team : division.getTeams()) {
-					for (Player player : team.getPlayers()) {
-						player.increaseAgeForPlayer(league, days);
-						isRetired = player.isIsRetired();
-						if (isRetired) {
-							retiredPlayers.add(player);
-						}
-					}
-				}
-			}
-		}
-		league.setRetiredPlayers(retiredPlayers);
-		retirePlayer(league);
-
+		float yearsToIncrease = (float) days / 365;
+		float age;
+		age = this.getAge() + yearsToIncrease;
+		this.setAge(age);
+		RetirePlayer retireplayer = new RetirePlayer();
+		this.setIsRetired(retireplayer.checkForRetirement(league, this.getAge()));
+		decreaseInjuredDaysForPlayer(days);
 	}
 
-	private void retirePlayer(League league) {
-		List<Player> retiredPlayerList = league.getRetiredPlayers();
-		for (Conference conference : league.getConferences()) {
-			for (Division division : conference.getDivisions()) {
-				for (Team team : division.getTeams()) {
-					List<Player> playersList = team.getPlayers();
-					for (Player retiredPlayer : retiredPlayerList) {
-						boolean removed = playersList.remove(retiredPlayer);
-						if (removed) {
-							getPlayersFromFreeAgents(league, playersList, retiredPlayer.getPosition());
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public void getPlayersFromFreeAgents(League league, List<Player> playersList, String position) {
+	public void replacePlayerWithFreeAgent(League league, List<Player> playersList) {
 		List<Player> freeAgents = league.getFreeAgents();
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 
 		while (freeAgentsItr.hasNext()) {
 			Player freeAgent = freeAgentsItr.next();
-			if (freeAgent.getPosition().equalsIgnoreCase(position)) {
+			if (freeAgent.getPosition().equalsIgnoreCase(this.getPosition())) {
+				freeAgent.setIsFreeAgent(false);
+				freeAgent.setCaptain(this.getCaptain());
 				playersList.add(freeAgent);
 				freeAgentsItr.remove();
-				break;
 			}
 		}
 	}

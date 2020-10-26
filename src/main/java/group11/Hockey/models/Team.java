@@ -95,7 +95,9 @@ public class Team {
 		this.players = players;
 	}
 
-	public float getTeamStrength(List<Player> players) {
+
+	public float getTeamStrength() {
+		List<Player> players = this.getPlayers();
 		float teamStrength = 0;
 		if (players == null || players.size() == 0) {
 			return 0;

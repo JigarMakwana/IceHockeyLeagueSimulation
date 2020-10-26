@@ -1,5 +1,6 @@
 package group11.Hockey.models;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import group11.Hockey.db.League.ILeagueDb;
 public class League {
 	private String leagueName;
 	private List<Conference> conferences = null;
-	private List<Player> freeAgents = null;
+	private List<Player> freeAgents = new ArrayList<Player>();
 	private GameplayConfig gamePlayConfig = null;
 	private List<Coach> coaches;
 	private List<GeneralManager> generalManagers;
@@ -71,7 +72,10 @@ public class League {
 	 * @return the freeAgents
 	 */
 	public List<Player> getFreeAgents() {
-		Collections.sort(freeAgents);
+		if(isFreeAgentsNotNull()) {
+			Collections.sort(freeAgents);
+		}
+		
 		return freeAgents;
 	}
 
@@ -113,12 +117,19 @@ public class League {
 	public void setRetiredPlayers(List<Player> retiredPlayers) {
 		this.retiredPlayers = retiredPlayers;
 	}
+	
+	private boolean isFreeAgentsNotNull() {
+		return freeAgents != null;
+	}
 
 	public boolean insertLeagueObject(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
 			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
 		boolean leagueObjectInserted = false;
 		boolean freeAgentInsertionCheck = false;
 
+		Player playerObj = new Player(leagueName, playerDb);
+		playerObj.deleteLeaguePlayers();
+		
 		List<Conference> conferenceList = league.getConferences();
 		for (Conference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
@@ -166,9 +177,11 @@ public class League {
 				league.getGamePlayConfig().getTraining(), league.getGamePlayConfig().getTrading(), gameplayConfigDb,
 				leagueName);
 
-		// freeAgents
-		Player player = new Player(leagueName, playerDb);
-		player.insertLeagueFreeAgents(league.getFreeAgents());
+		// freeAgents and Retired players
+		
+		playerObj.insertLeagueFreeAgents(league.getFreeAgents());
+		playerObj.insertLeagueRetiredPlayers(league.getRetiredPlayers());
+		
 		// coaches
 		Coach coach = new Coach(leagueName, coachDb);
 		coach.insertCoaches(league.getCoaches());
@@ -177,6 +190,8 @@ public class League {
 		GeneralManager generalManager = new GeneralManager(leagueName, managerDb);
 		generalManager.insertManager(league.getGeneralManagers());
 
+		
+		
 		if (leagueObjectInserted && freeAgentInsertionCheck) {
 			return true;
 		} else

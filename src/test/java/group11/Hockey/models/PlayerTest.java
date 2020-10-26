@@ -16,11 +16,12 @@ import org.junit.BeforeClass;
 public class PlayerTest {
 
 	private static Player playerWithParams;
+	private static float age = 30;
 
 	@BeforeClass
 	public static void init() {
-		playerWithParams = new Player((float) 0.1, (float) 0.2, (float) 0.3, (float) 0.4, "Player1", "forward", false,
-				false, 0);
+		playerWithParams = new Player((float) 10, (float) 10, (float) 10, (float) 10, "Player1", "forward", false,
+				false, age);
 	}
 
 	@Test
@@ -60,16 +61,47 @@ public class PlayerTest {
 	public void getCaptainTest() {
 		Assert.assertFalse(playerWithParams.getCaptain());
 	}
-	
+
 	@Test
 	public void insertLeagueFreeAgentsTest() {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
 		when(playerDb.insertLeagueFreeAgents("league", "A1", "fwd", 0, 0, 0, 0, 0)).thenReturn(true);
-		List<Player> listOfFreeAgents= new ArrayList<Player>();
+		List<Player> listOfFreeAgents = new ArrayList<Player>();
 		listOfFreeAgents.add(playerWithParams);
-		Player player2 = new Player("league", playerDb);  
+		Player player2 = new Player("league", playerDb);
 		boolean flag = player2.insertLeagueFreeAgents(listOfFreeAgents);
 		Assert.assertFalse(flag);
+	}
+
+	@Test
+	public void getPlayerStrengthTest() {
+		float strength = playerWithParams.getPlayerStrength();
+		Assert.assertEquals(strength, 25.0, 25.0);
+	}
+
+	@Test
+	public void increaseAgeTest() {
+		LeagueModelMock leagueModel = new LeagueModelMock();
+		League league = leagueModel.getLeagueInfo();
+		playerWithParams.increaseAge(league, 365);
+		Assert.assertEquals(age + 1, 31, 31);
+	}
+
+	@Test
+	public void replacePlayerWithFreeAgentTest() {
+		Player player1 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
+		Player player2 = new Player(10, 10, 10, 10, "Agent one", "forward", true, true, 20);
+		List<Player> playerList = new ArrayList<Player>();
+		playerList.add(player1);
+		
+		LeagueModelMock leagueModel = new LeagueModelMock();
+		League league = leagueModel.getLeagueInfo();
+		List<Player> playerList2 = new ArrayList<Player>();
+		playerList2.add(player2);
+		league.setFreeAgents(playerList2);
+
+		playerWithParams.replacePlayerWithFreeAgent(league, playerList);
+		Assert.assertEquals(playerList.size(), 2);
 	}
 
 }

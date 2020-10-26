@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 public class CheckAndSimulateTodaySchedule {
 
 	private HashMap<String,HashMap<Team,Team>> schedule;
-	
+	//
 	public CheckAndSimulateTodaySchedule(HashMap<String,HashMap<Team,Team>> schedule) {
 		super();
 		this.schedule = schedule;

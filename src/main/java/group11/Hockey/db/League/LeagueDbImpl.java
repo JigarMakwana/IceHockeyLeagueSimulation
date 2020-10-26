@@ -9,11 +9,8 @@ public class LeagueDbImpl implements ILeagueDb {
 
 	@Override
 	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
-			String generalManger, String headcoachName, float skating, float shooting, float checking, float saving,
-			String playerName, String playerPosition, boolean captain, float playerSkating, float playerShooting,
-			float playerChecking, float playerSaving, float age) {
-		ProcedureCallDb procedureCallDb = new ProcedureCallDb(
-				"{call insertNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)}");
+			String generalManger, String headCoach, String playerName, String playerPosition, Boolean captain) {
+		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertNew_original(?, ?, ?, ?, ?, ?, ?, ?,?,?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
 		try {
@@ -22,22 +19,10 @@ public class LeagueDbImpl implements ILeagueDb {
 			statement.setString(3, divisionName);
 			statement.setString(4, teamName);
 			statement.setString(5, generalManger);
-
-			statement.setString(6, headcoachName);
-			statement.setFloat(7, skating);
-			statement.setFloat(8, shooting);
-			statement.setFloat(9, checking);
-			statement.setFloat(10, saving);
-
-			statement.setString(11, playerName);
-			statement.setString(12, playerPosition);
-			statement.setBoolean(13, captain);
-			statement.setFloat(14, playerSkating);
-			statement.setFloat(15, playerShooting);
-			statement.setFloat(16, playerChecking);
-			statement.setFloat(17, playerSaving);
-			statement.setFloat(18, age);
-
+			statement.setString(6, headCoach);
+			statement.setString(7, playerName);
+			statement.setString(8, playerPosition);
+			statement.setString(9, captain != null ? captain.toString() : null);
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
 			while (resultSet.next()) {
@@ -81,6 +66,34 @@ public class LeagueDbImpl implements ILeagueDb {
 			procedureCallDb.closeConnection();
 		}
 		return isLeagueNameValid;
+	}
+
+	@Override
+	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, Boolean captain) {
+		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertFreeAgent(?, ?, ?, ?, ?)}");
+		CallableStatement statement = procedureCallDb.getDBCallableStatement();
+		boolean outPutValue = false;
+		try {
+			statement.setString(1, leagueName);
+			statement.setString(2, freeAgentName);
+			statement.setString(3, position);
+			statement.setString(4, captain != null ? captain.toString() : null);
+
+			procedureCallDb.executeProcedure();
+			ResultSet resultSet = statement.getResultSet();
+			while (resultSet.next()) {
+				outPutValue = resultSet.getBoolean("status");
+			}
+			statement.close();
+			procedureCallDb.closeConnection();
+		} catch (Exception e) {
+			procedureCallDb.closeConnection();
+			System.out.println("Exception occured while getting the callable statment ");
+		} finally {
+
+			procedureCallDb.closeConnection();
+		}
+		return outPutValue;
 	}
 
 }

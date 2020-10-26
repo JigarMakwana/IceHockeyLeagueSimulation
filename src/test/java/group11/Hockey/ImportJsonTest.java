@@ -39,7 +39,7 @@ public class ImportJsonTest {
 	public void parseFileDuplicateConfirenceNameTest() throws Exception {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeamInvalid.json");
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
-		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(true);
+		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(false);
 		ImportJson importJsonObj = new ImportJson(leagueDbMock);
 		importJsonObj.parseFile(jsonFile.getPath());
 	    

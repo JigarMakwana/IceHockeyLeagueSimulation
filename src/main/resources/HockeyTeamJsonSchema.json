@@ -3,59 +3,12 @@
     "title": "Hockey Team",
     "description": "Hockey Team",
     "type": "object",
-	"required": [ "leagueName", "conferences","gameplayConfig","freeAgents","coaches" ],
+	"required": [ "leagueName", "conferences" ],
     "properties": {
         "leagueName": {
             "type": "string",
 			"minLength":1
         },
-		"gameplayConfig":{
-			"type": "object",
-			"required":["aging","gameResolver","injuries","training","trading"],
-			"properties": {
-				"aging":{
-					"type":"object",
-					"required":["averageRetirementAge","maximumAge"],
-					"properties": {
-						"averageRetirementAge":{ "type":"number" },
-						"maximumAge":{ "type":"number" },
-					}
-				},
-				"gameResolver":{
-					"type":"object",
-					"required":["randomWinChance"],
-					"properties": {
-						"randomWinChance":{ "type":"number" },
-					}
-				},
-				"injuries":{
-					"type":"object",
-					"required":["randomInjuryChance","injuryDaysLow","injuryDaysHigh"],
-					"properties": {
-						"randomInjuryChance":{ "type":"number" },
-						"injuryDaysLow":{ "type":"number" },
-						"injuryDaysHigh":{ "type":"number" },
-					}
-				},
-				"training":{
-					"type":"object",
-					"required":["daysUntilStatIncreaseCheck"],
-					"properties": {
-						"daysUntilStatIncreaseCheck":{ "type":"number" },
-					}
-				},
-				"trading":{
-					"type":"object",
-					"required":["randomTradeOfferChance","maxPlayersPerTrade","randomAcceptanceChance"],
-					"properties": {
-						"lossPoint":{ "type":"number" },
-						"randomTradeOfferChance":{ "type":"number" },
-						"maxPlayersPerTrade":{ "type":"number" },
-						"randomAcceptanceChance":{ "type":"number" },
-					}
-				},
-			},
-		},
         "conferences": {
             "type": "array",
 			"items": { "$ref": "#/definitions/conference" }
@@ -63,11 +16,7 @@
 		"freeAgents":{
 			"type":"array",
 			"items":{"$ref": "#/definitions/player"}
-		},
-		"coaches":{
-			"type":"array",
-			"items":{"$ref": "#/definitions/coaches"}
-		},
+		}
     },
 	"definitions": {
 		"conference":{
@@ -97,7 +46,7 @@
 			}
 		},
 		"team":{
-		"required": [ "teamName", "generalManager", "headCoach", "players" ],
+		"required": [ "teamName", "generalManager", "headCoach" ],
 			"properties":{
 				"teamName":{
 					"type":"string",
@@ -108,8 +57,8 @@
 					"minLength":1
 				},
 				"headCoach":{
-					"type":"object",
-					"items":{"$ref": "#/definitions/coaches"}
+					"type":"string",
+					"minLength":1
 				},
 				"players":{
 					"type":"array",
@@ -118,27 +67,21 @@
 			}
 		},
 		"player":{
-		"required": [ "playerName", "position","skating","shooting","checking","saving","age" ],
+		"required": [ "playerName", "position", "captain" ],
 			"properties":{
-				"playerName":{"type":"string","minLength":1},
-				"position":{"type":"string","pattern":"^forward$|^defense$|^goalie$"},
-				"captain":{"type":"boolean"},
-				"skating":{"type":"number","minimum": 1,"maximum": 20},
-				"shooting":{"type":"number","minimum": 1,"maximum": 20},
-				"checking":{"type":"number","minimum": 1,"maximum": 20},
-				"saving":{"type":"number","minimum": 1,"maximum": 20},
-				"age":{"type":"number","minimum": 1,"maximum": 100},
-			}
-		},
-		"coaches":{
-			"required":["name","skating","shooting","checking","saving"],
-				"properties":{
-					"name":{"type":"string","minLength":1},
-					"skating":{"type":"number","minimum": 0,"maximum": 1},
-					"shooting":{"type":"number","minimum": 0,"maximum": 1},
-					"checking":{"type":"number","minimum": 0,"maximum": 1},
-					"saving":{"type":"number","minimum": 0,"maximum": 1},
+				"playerName":{
+					"type":"string",
+					"minLength":1
 				},
+				"position":{
+					"type":"string",
+					"pattern":"^forward$|^defense$|^goalie$"
+				},
+				"captain":{
+					"type":"boolean"
+				}
+			}
 		}
+		
 	}
 }

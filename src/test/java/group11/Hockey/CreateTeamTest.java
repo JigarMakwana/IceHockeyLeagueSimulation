@@ -18,34 +18,34 @@ public class CreateTeamTest {
 
 	@Test
 	public void createTeamTest() {
-//		String leagueName = "DLU";
-//		String conferenceName = "Eastern Conference";
-//		String divisionName = "Atlantic";
-//		String teamName = "Team1";
-//		String generalManger = "Manager1";
-//		String headCoach = "HeadCoach1";
-//		
-//		LeagueModelMock leagueMock = new LeagueModelMock();
-//		League leagueObj = leagueMock.getLeagueInfo();
-//
-//		IUserInputMode userInputMode = mock(IUserInputMode.class);
-//		when(userInputMode.getInt()).thenReturn(1);
-//		when(userInputMode.getName()).thenReturn(conferenceName, divisionName, teamName, generalManger, headCoach);
-//
-//		List<Team> mockTeam = mock(List.class);
-//		when(mockTeam.size()).thenReturn(2);
-//
-//		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
-////		when(leagueDbMock.insertLeagueInDb(leagueName, conferenceName, divisionName, teamName, generalManger,
-////				headCoach, null, null, null)).thenReturn(true);
-//		CreateTeam createTeam = new CreateTeam(userInputMode, leagueObj, leagueDbMock, null, null, null, null);
-//		League modifiedLeagueObj = createTeam.getTeam();
-//
-//		List<Conference> confList = modifiedLeagueObj.getConferences();
-//		List<Division> divList = confList.get(0).getDivisions();
-//		List<Team> teamList = divList.get(0).getTeams();
+		String leagueName = "DLU";
+		String conferenceName = "Eastern Conference";
+		String divisionName = "Atlantic";
+		String teamName = "Team1";
+		String generalManger = "Manager1";
+		String headCoach = "HeadCoach1";
+		
+		LeagueModelMock leagueMock = new LeagueModelMock();
+		League leagueObj = leagueMock.getLeagueInfo();
 
-		//Assert.assertEquals(mockTeam.size() + 1, teamList.size());
+		IUserInputMode userInputMode = mock(IUserInputMode.class);
+		when(userInputMode.getInt()).thenReturn(1);
+		when(userInputMode.getName()).thenReturn(conferenceName, divisionName, teamName, generalManger, headCoach);
+
+		List<Team> mockTeam = mock(List.class);
+		when(mockTeam.size()).thenReturn(2);
+
+		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
+		when(leagueDbMock.insertLeagueInDb(leagueName, conferenceName, divisionName, teamName, generalManger,
+				headCoach, null, null, null)).thenReturn(true);
+		CreateTeam createTeam = new CreateTeam(userInputMode, leagueObj, leagueDbMock);
+		League modifiedLeagueObj = createTeam.getTeam();
+
+		List<Conference> confList = modifiedLeagueObj.getConferences();
+		List<Division> divList = confList.get(0).getDivisions();
+		List<Team> teamList = divList.get(0).getTeams();
+
+		Assert.assertEquals(mockTeam.size() + 1, teamList.size());
 
 	}
 

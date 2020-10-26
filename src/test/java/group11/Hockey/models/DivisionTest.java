@@ -35,7 +35,7 @@ public class DivisionTest {
 	@Test
 	public void setTeamsTest() {
 		Division division = new Division();
-		division.setTeams(Arrays.asList(new Team("Vancouver Canucks", "John", null, null)));
+		division.setTeams(Arrays.asList(new Team("Vancouver Canucks", "John", "Peter", null)));
 		Assert.assertTrue(division.getTeams().size() == 1);
 		Assert.assertEquals("Vancouver Canucks", division.getTeams().get(0).getTeamName());
 	}
@@ -49,8 +49,8 @@ public class DivisionTest {
 	@Test
 	public void getTeamsTest() {
 		List<Team> teamsList = new ArrayList<Team>();
-		Team team1 = new Team("Vancouver Canucks", "John", null, null);
-		Team team2 = new Team("Maple Leafs", "John", null, null);
+		Team team1 = new Team("Vancouver Canucks", "John", "Peter", null);
+		Team team2 = new Team("Maple Leafs", "John", "Peter", null);
 		teamsList.add(team1);
 		teamsList.add(team2);
 
@@ -96,7 +96,7 @@ public class DivisionTest {
 	public void addNewTeamInDivisionTest() {
 		LeagueTest leagueTest = new LeagueTest();
 		League leagueObject = leagueTest.populateLeagueObject();
-		Team team = new Team("Dalhousie Tigers", "John", null, null);
+		Team team = new Team("Dalhousie Tigers", "John", "Peter", null);
 		Division divisionFromLeagueObject = leagueObject.getConferences().get(0).getDivisions().get(0);
 		divisionFromLeagueObject.addNewTeamInDivision(team);
 		Assert.assertTrue(leagueObject.getConferences().get(0).getDivisions().get(0).getTeams().get(1).getTeamName().equalsIgnoreCase("Dalhousie Tigers"));

@@ -25,7 +25,7 @@ public class ImportJsonTest {
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
 		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(true);
 		
-		ImportJson importJsonObj = new ImportJson(leagueDbMock);
+		JsonImport importJsonObj = new JsonImport(leagueDbMock);
 
 		League leagueModelObj = null;
 
@@ -40,7 +40,7 @@ public class ImportJsonTest {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeamInvalid.json");
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
 		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(true);
-		ImportJson importJsonObj = new ImportJson(leagueDbMock);
+		JsonImport importJsonObj = new JsonImport(leagueDbMock);
 		importJsonObj.parseFile(jsonFile.getPath());
 	    
 		

@@ -10,7 +10,7 @@ import group11.Hockey.models.Team;
 
 public class InjurySystem {
 
-	public void checkForInjury(League league, Team team) {
+	public void setInjuryToPlayers(League league, Team team) {
 		GameplayConfig gameplayConfig = league.getGamePlayConfig();
 		Injuries injuries = gameplayConfig.getInjuries();
 		float randomInjuryChance = injuries.getRandomInjuryChance();

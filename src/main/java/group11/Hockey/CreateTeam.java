@@ -2,27 +2,33 @@ package group11.Hockey;
 
 import java.util.List;
 
+import group11.Hockey.db.ICoachDb;
+import group11.Hockey.db.IGameplayConfigDb;
+import group11.Hockey.db.IManagerDb;
+import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
 import group11.Hockey.models.Team;
 
-public class CreateTeam {
+public class CreateTeam extends ValidateCreateTeam {
+
 	private String conferenceName;
 	private String divisionName;
-	
-	private League leagueObj;
 	private IUserInputMode userInputMode;
-	private ILeagueDb leagueDb;
-	Conference conferenceObj = new Conference();
-	Division divisionObj = new Division();
+	private IGameplayConfigDb gameplayConfigDb;
+	private IPlayerDb playerDb;
+	private ICoachDb coachDb;
+	private IManagerDb managerDb;
 
-	public CreateTeam(IUserInputMode userInputMode, League leagueObj, ILeagueDb leagueDb) {
-		super();
+	public CreateTeam(IUserInputMode userInputMode, League leagueObj, ILeagueDb leagueDb,
+			IGameplayConfigDb gameplayConfigDb, IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
+		super(leagueObj, userInputMode, leagueDb);
 		this.userInputMode = userInputMode;
-		this.leagueObj = leagueObj;
-		this.leagueDb = leagueDb;
+		this.gameplayConfigDb = gameplayConfigDb;
+		this.playerDb = playerDb;
+		this.coachDb = coachDb;
 	}
 
 	public League getTeam() {
@@ -59,15 +65,10 @@ public class CreateTeam {
 			}
 		}
 
-		saveTeam();
+		leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 
 		return leagueObj;
 
-	}
-
-	private void saveTeam() {
-
-		leagueObj.insertLeagueObject(leagueObj, leagueDb);
 	}
 
 	private void createTeam(Division division) {
@@ -90,147 +91,11 @@ public class CreateTeam {
 		while (isNotValidHeadCoach(headCoach, newTeam)) {
 			userInputMode.displayMessage("Enter headCoach Name: ");
 			headCoach = userInputMode.getName();
-			newTeam.setHeadCoach(headCoach);
+			// newTeam.setHeadCoach(headCoach);
 		}
 
 		division.addNewTeamInDivision(newTeam);
 
-//		userInputMode.displayMessage("Enter Number of Players to create: ");
-//		try {
-//			int numberOfPlayers = userInputMode.getInt();
-//			for (int i = 0; i < numberOfPlayers; i++) {
-//				// Create Team
-//				userInputMode.displayMessage("Player " + (i + 1) + "/" + numberOfPlayers);
-//				//createPlayer();
-//			}
-//		} catch (Exception e) {
-//			userInputMode.displayMessage("not a valid number, restart the process");
-//		}
-
-	}
-
-	private void createPlayer() {
-		String playerName = null;
-		int positionChoice = 0;
-		String position = null;
-		Boolean isNotValidInput = true;
-		String headCoach = null;
-		String isCaptainString = null;
-		Boolean isCaptian;
-		while (!isValidString(playerName)) {
-			userInputMode.displayMessage("Enter Player Name: ");
-			playerName = userInputMode.getName();
-		}
-
-		while (isNotValidInput) {
-			userInputMode.displayMessage(
-					"Choose following options  \"Position\" :\n \"1\" for \"forward\" \n \"2\" for \"defense\" \n \"3\" for \"goalie\" \n Enter your choice: ");
-			positionChoice = userInputMode.getInt();
-			if (positionChoice == 1) {
-				position = "forward";
-				isNotValidInput = false;
-			} else if (positionChoice == 2) {
-				position = "defense";
-				isNotValidInput = false;
-			} else if (positionChoice == 3) {
-				position = "goalie";
-				isNotValidInput = false;
-			} else {
-				userInputMode.displayMessage("Wrong input");
-			}
-		}
-
-		while (!isValidCaptain(isCaptainString)) {
-			userInputMode.displayMessage("Is the player Capitan [Enter (yes/no)]: ");
-			isCaptainString = userInputMode.getName();
-			if (isCaptainString.equalsIgnoreCase("yes")) {
-				isCaptian = true;
-			} else if (isCaptainString.equalsIgnoreCase("no")) {
-				isCaptian = false;
-			}
-		}
-	}
-
-	private boolean isNotValidConference(String conferenceName, List<Conference> conferencesList) {
-
-		if (isStrBlank(conferenceName)) {
-			return true;
-		} else if (conferenceObj.isConferenceNameValid(conferenceName, conferencesList)) {
-			return false;
-		} else {
-			userInputMode.displayMessage("Conference name does not exist, Please enter valid conference name");
-			return true;
-		}
-	}
-
-	private boolean isNotValidDivision(String divisionName, Conference conferenceItem) {
-
-		if (isStrBlank(divisionName)) {
-			return true;
-		} else if (divisionObj.isDivisionNameValid(divisionName, conferenceItem.getDivisions())) {
-			return false;
-		} else {
-			userInputMode.displayMessage("Division name does not exist, Please enter valid division name");
-			return true;
-		}
-	}
-
-	private boolean isNotValidTeamName(String teamName, Team teamObj) {
-		if (isStrBlank(teamName)) {
-			return true;
-		} else if (teamObj.isTeamNameValid(teamName, leagueObj)) {
-			return false;
-		}
-		userInputMode.displayMessage("Team name already exists in this League");
-		return true;
-	}
-
-	private boolean isNotValidGeneralManager(String name, Team teamObj) {
-		if (isStrBlank(name)) {
-			return true;
-		} else {
-			return false;
-		}
-//		if (teamObj.isTeamManagerNameValid(name, leagueObj)) {
-//			return false;
-//		}
-	}
-
-	private boolean isNotValidHeadCoach(String name, Team teamObj) {
-		if (isStrBlank(name)) {
-			return true;
-		} else {
-			return false;
-		}
-//		if (teamObj.isHeadCoachNameValid(name, leagueObj)) {
-//			return false;
-//		}
-	}
-
-	private boolean isValidString(String name) {
-		if (isStrBlank(name)) {
-			return false;
-		}
-		return true;
-	}
-
-	private boolean isValidCaptain(String isCaptain) {
-		if (isStrBlank(isCaptain)) {
-			return false;
-		} else if (isCaptain.equalsIgnoreCase("yes") || isCaptain.equalsIgnoreCase("no")) {
-
-			return true;
-		}
-		userInputMode.displayMessage("Wrong input");
-		return false;
-	}
-
-	private boolean isStrBlank(String str) {
-		if (str == null || str.isEmpty() || str.split(" +").length == 0) {
-			return true;
-		}
-
-		return false;
 	}
 
 }

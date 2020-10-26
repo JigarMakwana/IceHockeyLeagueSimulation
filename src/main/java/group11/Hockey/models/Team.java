@@ -14,18 +14,18 @@ public class Team {
 
 	private String teamName;
 	private String generalManager;
-	private String headCoach;
+	private Coach headCoach;
 	private List<Player> players = null;
+	private float teamStrength;
 
-	public Team(String teamName, String generalManager, String headCoach, List<Player> players) {
+	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();
 		this.teamName = teamName;
 		this.generalManager = generalManager;
 		this.headCoach = headCoach;
 		this.players = players;
 	}
-	
-	
+
 	public Team() {
 
 	}
@@ -61,14 +61,14 @@ public class Team {
 	/**
 	 * @return the headCoach
 	 */
-	public String getHeadCoach() {
+	public Coach getHeadCoach() {
 		return headCoach;
 	}
 
 	/**
 	 * @param headCoach the headCoach to set
 	 */
-	public void setHeadCoach(String headCoach) {
+	public void setHeadCoach(Coach headCoach) {
 		this.headCoach = headCoach;
 	}
 
@@ -85,6 +85,19 @@ public class Team {
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
+	
+
+	public float getTeamStrength() {
+		List<Player> players = this.getPlayers();
+		float teamStrength = 0;
+		if (players == null || players.size() == 0) {
+			return 0;
+		}
+		for (Player player : players) {
+			teamStrength += player.getPlayerStrength();
+		}
+		return teamStrength;
+	}
 
 	public boolean isTeamNameValid(String teamName, League league) {
 		boolean isTeamNameValid = true;
@@ -94,7 +107,7 @@ public class Team {
 			for (Division division : divisionList) {
 				List<Team> teamList = division.getTeams();
 				for (Team team : teamList) {
-					if(team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
+					if (team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
 						isTeamNameValid = false;
 						return isTeamNameValid;
 					}
@@ -103,9 +116,8 @@ public class Team {
 		}
 		return isTeamNameValid;
 	}
-	
-	
-	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb){
+
+	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb) {
 		return teamDb.loadTeamFromTeamName(teamName);
 	}
 

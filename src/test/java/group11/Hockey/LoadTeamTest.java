@@ -1,6 +1,5 @@
 package group11.Hockey;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -8,13 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.models.League;
 import group11.Hockey.models.LeagueModelMock;
-import group11.Hockey.models.LeagueTest;
 import group11.Hockey.models.Team;
 
 public class LoadTeamTest {

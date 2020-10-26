@@ -5,6 +5,7 @@ import java.util.List;
 
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbImpl;
+import group11.Hockey.models.Coach;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
@@ -107,14 +108,14 @@ public class LoadTeam {
 	}
 
 	private void printLoadTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
-			String managerName, String hcName) {
+			String managerName, Coach coach) {
 		userInputMode.displayMessage("**Team details:");
 		userInputMode.displayMessage("League name-> " + leagueName);
 		userInputMode.displayMessage("-Conference name-> " + conferenceName);
 		userInputMode.displayMessage("--Division name-> " + divisionName);
 		userInputMode.displayMessage("---Team name-> " + teamName);
 		userInputMode.displayMessage("---GeneralManager-> " + managerName);
-		userInputMode.displayMessage("---HeadCoach-> " + hcName);
+		userInputMode.displayMessage("---HeadCoach-> " + coach);
 	}
 
 	private boolean isNotValidTeamName(String teamName) {

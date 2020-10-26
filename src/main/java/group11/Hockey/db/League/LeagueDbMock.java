@@ -7,7 +7,6 @@ import java.util.List;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.Division;
 import group11.Hockey.models.League;
-import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
 
 public class LeagueDbMock implements ILeagueDb {
@@ -22,7 +21,9 @@ public class LeagueDbMock implements ILeagueDb {
 
 	@Override
 	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
-			String generalManger, String headCoach, String playerName, String playerPosition, Boolean captain) {
+			String generalManger, String headcoachName, float skating, float shooting, float checking, float saving,
+			String playerName, String playerPosition, boolean captain, float playerSkating, float playerShooting,
+			float playerChecking, float playerSaving, float age) {
 		Team team = new Team();
 		team.setTeamName(teamName);
 		Division division = new Division(divisionName, Arrays.asList(team));
@@ -48,23 +49,10 @@ public class LeagueDbMock implements ILeagueDb {
 		return isLeagueNameValid;
 	}
 
-	@Override
-	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, Boolean captain) {
-		List<Player> listOfFreeAgents = new ArrayList<Player>();
-		listOfFreeAgents.add(new Player(freeAgentName, position, captain));
-		leagueList.get(1).setFreeAgents(listOfFreeAgents);
-		if ((leagueList.get(1).getLeagueName() != null && leagueList.get(1).getLeagueName().equalsIgnoreCase(leagueName))
-				&& leagueList.get(1).getFreeAgents().size() == 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public League populateLeagueObject() {
 		League league;
 		List<Team> teamsList = new ArrayList<Team>();
-		Team team = new Team("Toronto Maples", "Kenley", "Scott", null);
+		Team team = new Team("Toronto Maples", "Kenley", null, null);
 		teamsList.add(team);
 
 		List<Division> divisionsList = new ArrayList<Division>();
@@ -74,7 +62,7 @@ public class LeagueDbMock implements ILeagueDb {
 		Conference conference = new Conference("Westeren Conference", divisionsList);
 		conferenceList.add(conference);
 		// add free agents
-		league = new League("NHL", conferenceList, null);
+		league = new League("NHL", conferenceList, null, null, null, null);
 		leagueList.add(league);
 		return league;
 

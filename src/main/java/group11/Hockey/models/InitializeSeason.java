@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InitializeSeason {	
-	
+	//
 	private int seasonCount;
 	
 	private League leagueObj;
@@ -38,13 +38,13 @@ public class InitializeSeason {
 			System.out.println("Start date : "+startDate); 
 			System.out.println("End date : "+regularSeasonEndDate); 			
 			
-			GenerateSeasonSchedule regularSeasonSchedule=new GenerateSeasonSchedule(startDate,regularSeasonEndDate,leagueObj);
-			HashMap<String,List<String>> regularSchedule=regularSeasonSchedule.getSeasonSchedule();
+			Schedule regularSeasonSchedule=new Schedule(startDate,regularSeasonEndDate,leagueObj);
+			HashMap<String,HashMap<Team,Team>> regularSchedule=regularSeasonSchedule.getSeasonSchedule();
 			
 			Advance advanceObj=new Advance();
 			String regularSeasonStartDate=advanceObj.getAdvanceDate(startDate,1);
 			
-			SimulateSeason simulateSeason=new SimulateSeason();
+			SimulateSeason simulateSeason=new SimulateSeason(regularSchedule);
 			simulateSeason.StartSimulatingSeason(regularSeasonStartDate,regularSeasonEndDate);
 		}
 		return seasonCount+" Seasons Simulated";

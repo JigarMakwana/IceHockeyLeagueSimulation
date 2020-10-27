@@ -65,12 +65,34 @@ public class PlayerTest {
 	@Test
 	public void insertLeagueFreeAgentsTest() {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
-		when(playerDb.insertLeagueFreeAgents("league", "A1", "fwd", 0, 0, 0, 0, 0)).thenReturn(true);
+		when(playerDb.insertLeagueFreeAgents("league", "Player1", "forward", (float) 10, (float) 10, (float) 10, (float) 10, 30)).thenReturn(true);
 		List<Player> listOfFreeAgents = new ArrayList<Player>();
 		listOfFreeAgents.add(playerWithParams);
 		Player player2 = new Player("league", playerDb);
 		boolean flag = player2.insertLeagueFreeAgents(listOfFreeAgents);
 		Assert.assertFalse(flag);
+	}
+	
+	@Test
+	public void insertLeagueRetiredPlayersTest() {
+		IPlayerDb playerDb = mock(IPlayerDb.class);
+		when(playerDb.insertLeagueRetiredPlayers("league", "Player1", "forward", (float) 10, (float) 10, (float) 10, (float) 10, 30)).thenReturn(true);
+		List<Player> listOfFreeAgents = new ArrayList<Player>();
+		listOfFreeAgents.add(playerWithParams);
+		Player player2 = new Player("league", playerDb);
+		boolean flag = player2.insertLeagueRetiredPlayers(listOfFreeAgents);
+		Assert.assertFalse(flag);
+	}
+	
+	@Test
+	public void deleteLeaguePlayersTest() {
+		IPlayerDb playerDb = mock(IPlayerDb.class);
+		when(playerDb.deleteLeaguePlayers("league")).thenReturn(true);
+		List<Player> listOfFreeAgents = new ArrayList<Player>();
+		listOfFreeAgents.add(playerWithParams);
+		Player player2 = new Player("league", playerDb);
+		boolean flag = player2.deleteLeaguePlayers();
+		Assert.assertTrue(flag);
 	}
 
 	@Test

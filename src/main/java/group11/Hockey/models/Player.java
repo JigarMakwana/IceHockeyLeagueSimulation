@@ -3,10 +3,12 @@ package group11.Hockey.models;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.AgePlayer;
 import group11.Hockey.DefensePosition;
 import group11.Hockey.ForwardPosition;
 import group11.Hockey.GoaliePosition;
 import group11.Hockey.IPosition;
+import group11.Hockey.InjurySystem;
 import group11.Hockey.PlayerStrength;
 import group11.Hockey.RetirePlayer;
 import group11.Hockey.db.IPlayerDb;
@@ -114,6 +116,17 @@ public class Player extends Stats implements Comparable<Player> {
 	public void setInjured(boolean isInjured) {
 		this.isInjured = isInjured;
 	}
+	
+	public boolean checkInjury(League league) {
+		if(this.isInjured()) {
+			return this.isInjured();
+		}
+		InjurySystem injurySyetem = new InjurySystem(league);
+		boolean isPlayerInjured = injurySyetem.determainIsPlayerInjured();
+		this.setInjured(isPlayerInjured);
+		this.setNumberOfInjuredDays(injurySyetem.determainNumberOfDaysOfInjury());
+		return isPlayerInjured;
+	}
 
 	public boolean isIsRetired() {
 		return IsRetired;
@@ -203,8 +216,8 @@ public class Player extends Stats implements Comparable<Player> {
 		float age;
 		age = this.getAge() + yearsToIncrease;
 		this.setAge(age);
-		RetirePlayer retireplayer = new RetirePlayer();
-		this.setIsRetired(retireplayer.checkForRetirement(league, age));
+		AgePlayer agePlayer = new AgePlayer();
+		this.setIsRetired(agePlayer.checkForRetirement(league, age));
 		decreaseInjuredDaysForPlayer(days);
 	}
 

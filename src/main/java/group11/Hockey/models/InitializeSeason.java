@@ -27,8 +27,7 @@ public class InitializeSeason {
 	public String startSeasons(int seasonCount) throws ParseException {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		int count=seasonCount;
-		while(count>0) {
-			count--;			
+		while(count>0) {		
 			String startDate="30/09/"+Integer.toString(year);			
 			year++;	
 			LocalDate eDate = LocalDate.of(year, Month.APRIL, 1);	
@@ -42,10 +41,10 @@ public class InitializeSeason {
 			HashMap<String,HashMap<Team,Team>> regularSchedule=regularSeasonSchedule.getSeasonSchedule();
 			
 			Advance advanceObj=new Advance();
-			String regularSeasonStartDate=advanceObj.getAdvanceDate(startDate,1);
-			
-			SimulateSeason simulateSeason=new SimulateSeason(regularSchedule);
-			simulateSeason.StartSimulatingSeason(regularSeasonStartDate,regularSeasonEndDate);
+			//String regularSeasonStartDate=advanceObj.getAdvanceDate(startDate,1);
+			SimulateSeason simulateSeason=new SimulateSeason(regularSchedule,leagueObj);
+			simulateSeason.StartSimulatingSeason(startDate,regularSeasonEndDate);
+			count--;	
 		}
 		return seasonCount+" Seasons Simulated";
 	}

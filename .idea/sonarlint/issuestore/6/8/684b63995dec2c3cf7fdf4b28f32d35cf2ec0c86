@@ -1,4 +1,10 @@
 
+]
+java:S1117e"@Rename "teamStrength" which hides the field declared at line 19.(€­ŽÃ8ÆÍ”¤Ö.
 Y
-java:S1155Z">Use isEmpty() to check whether the collection is empty or not.(Ë¡œ™ÿÿÿÿÿ
+java:S1155f">Use isEmpty() to check whether the collection is empty or not.(Ë¡œ™ÿÿÿÿÿ
+]
+java:S1117d";Rename "players" which hides the field declared at line 18.(È™¡Šûÿÿÿÿ8ÆÍ”¤Ö.
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
+R
+java:S1068"0Remove this unused "teamStrength" private field.(ìºâ™úÿÿÿÿ8ÆÍ”¤Ö.

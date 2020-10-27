@@ -1,16 +1,18 @@
 
-S
-java:S1155}">Use isEmpty() to check whether the collection is empty or not.(¥§Âw
-Z
-java:S1155ƒ">Use isEmpty() to check whether the collection is empty or not.(¿ÍÈßüÿÿÿÿ
-Z
-java:S1155‹">Use isEmpty() to check whether the collection is empty or not.(üº½ãþÿÿÿÿ
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
-Y
-java:S1854¤"BRemove this useless assignment to local variable "gameplayConfig".(ÂˆåÆ
-h
-java:S3776u"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(Íâÿ¨
+v
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¯8ôÖ¤Ö.
 ]
-java:S1126´"AReplace this if-then-else statement by a single return statement.(•ØªŸúÿÿÿÿ
+java:S1126Ã"AReplace this if-then-else statement by a single return statement.(•ØªŸúÿÿÿÿ
+h
+java:S3776}"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(Íâÿ¨
+Y
+java:S1854¯"BRemove this useless assignment to local variable "gameplayConfig".(ÂˆåÆ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
 J
-java:S1481¤"3Remove this unused "gameplayConfig" local variable.(ÂˆåÆ
+java:S1481¯"3Remove this unused "gameplayConfig" local variable.(ÂˆåÆ
+Z
+java:S1155–">Use isEmpty() to check whether the collection is empty or not.(üº½ãþÿÿÿÿ
+Z
+java:S1155Ž">Use isEmpty() to check whether the collection is empty or not.(¿ÍÈßüÿÿÿÿ
+T
+java:S1155ˆ">Use isEmpty() to check whether the collection is empty or not.(¥§Âw

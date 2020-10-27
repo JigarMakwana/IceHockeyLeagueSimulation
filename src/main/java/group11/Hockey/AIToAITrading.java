@@ -42,10 +42,10 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
                 }
             }
         }
-//        System.out.println("------- ** Eligible Teams ** -------");
-//        for (Team team : eligibleTeamList) {
-//            System.out.println(team.getTeamName());
-//        }
+        System.out.println("------- ** Eligible Teams ** -------");
+        for (Team team : eligibleTeamList) {
+            System.out.println(team.getTeamName());
+        }
         return eligibleTeamList;
     }
 
@@ -61,26 +61,40 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
         List<Team> eligibleTeamList = determineEligibleTeams();
         //Implementation of generating random trade offer
         for (Team team : eligibleTeamList) {
-            if(this.generateRandomNumber() == this.getRandomTradeOfferChance()) {
-//                System.out.println("------- ** Generate Trade ** -------");
-                generateTradeOfferForTeam(team);
-            }
+//            if(this.generateRandomNumber() == this.getRandomTradeOfferChance()) {
+                System.out.println("Generating Trade for " + team.getTeamName() );
+                List<Player> weakestPlayerList = findWeakestPlayers(team);
+                List<Team> eligibleTeamListTemp = eligibleTeamList;
+                eligibleTeamListTemp.set(0, team);
+                for (int i =1; i < eligibleTeamListTemp.size(); i++){
+                    List<Player> strongestPlayerList = findStrongestPlayers(eligibleTeamListTemp.get(i));
+                }
+                generateTradeOfferForTeam(team, eligibleTeamList);
+//            }
         }
     }
 
     @Override
-    public void generateTradeOfferForTeam(Team team) {
-
+    public void generateTradeOfferForTeam(Team team, List<Team> eligibleTeamList) {
+        for (Team t : eligibleTeamList) {
+            System.out.println("------- ** Other teams ** -------");
+            System.out.println(t.getTeamName());
+        }
     }
 
     @Override
-    public void findWeakestPlayers() {
+    public List<Player> findWeakestPlayers(Team team) {
+        List<Player> playerList = team.getPlayers();
 
+
+        return playerList;
     }
 
     @Override
-    public void findStrongestPlayers() {
+    public List<Player> findStrongestPlayers(Team team) {
+        List<Player> playerList = team.getPlayers();
 
+        return playerList;
     }
 
     @Override

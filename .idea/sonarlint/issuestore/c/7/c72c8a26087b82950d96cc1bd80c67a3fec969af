@@ -1,4 +1,33 @@
 
+T
+java:S1135!"2Complete the task associated to this TODO comment.(íÆŞúÿÿÿÿ8ôÖ¤Ö.
+W	java:S125&"<This block of commented-out lines of code should be removed.(ĞÎˆc8ôÖ¤Ö.
+
+java:S1186H"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(û÷õ»8ôÖ¤Ö.
+
+java:S1186\"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(©Æµ¯8ôÖ¤Ö.
+V
+java:S1481"4Remove this unused "lossPointCutOff" local variable.(„ö´øÿÿÿÿ8ôÖ¤Ö.
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ğÔïÍşÿÿÿÿ8ü°„§Ö.
+Z	java:S106-"9Replace this use of System.out or System.err by a logger.(şññıÿÿÿÿÿ8ü°„§Ö.
+
+java:S1186W"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Úø÷¯8ôÖ¤Ö.
+e
+java:S1854"CRemove this useless assignment to local variable "lossPointCutOff".(„ö´øÿÿÿÿ8ôÖ¤Ö.
+
+java:S1186R"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(’´Ïö8ôÖ¤Ö.
+U	java:S106/"9Replace this use of System.out or System.err by a logger.(Ì«Åã8ü°„§Ö.
+
+java:S14887"nImmediately return this expression instead of assigning it to the temporary variable "randomTradeOfferChance".(ˆû¹éûÿÿÿÿ8ôÖ¤Ö.
+{
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ç÷°çúÿÿÿÿ8ôÖ¤Ö.
+@
+java:S21196"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8ôÖ¤Ö.
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìş
-X
-java:S2094"BRemove this empty class, write its code or make it an "interface".(¨âÈÄ
+
+java:S1186b"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÎØûQ8ôÖ¤Ö.
+Z	java:S106A"9Replace this use of System.out or System.err by a logger.(¨¾çšûÿÿÿÿ8Øó…§Ö.
+
+java:S1186M"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(İáá8ôÖ¤Ö.
+]	java:S125"<This block of commented-out lines of code should be removed.(´üÿÿÿÿ8ôÖ¤Ö.

@@ -25,8 +25,8 @@ public class InjurySystemTest {
 		List<Team> teams = divisions.get(0).getTeams();
 		List<Player> players = teams.get(0).getPlayers();
 		
-		InjurySystem injurySystem = new InjurySystem();
-		injurySystem.setInjuryToPlayers(league, teams.get(0));
+		InjurySystem injurySystem = new InjurySystem(league);
+		injurySystem.setInjuryToPlayers(teams.get(0));
 		
 		Assert.assertTrue(players.get(0).isInjured());
 	}

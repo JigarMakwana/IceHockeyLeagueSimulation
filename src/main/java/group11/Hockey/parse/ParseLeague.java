@@ -1,10 +1,12 @@
-package group11.Hockey;
+package group11.Hockey.parse;
 
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import group11.Hockey.IAttribute;
+import group11.Hockey.ValidateJson;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.League;

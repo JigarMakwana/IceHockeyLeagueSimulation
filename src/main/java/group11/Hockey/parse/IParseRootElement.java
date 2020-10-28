@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.parse;
 
 import org.json.simple.JSONObject;
 

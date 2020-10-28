@@ -17,6 +17,7 @@ public class Team {
 	private Coach headCoach;
 	private List<Player> players = null;
 	private float teamStrength;
+	private boolean isUserTeam = false;
 
 	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();
@@ -97,6 +98,20 @@ public class Team {
 			teamStrength += player.getPlayerStrength();
 		}
 		return teamStrength;
+	}
+
+	/**
+	 * @return the isUserTeam
+	 */
+	public boolean isUserTeam() {
+		return isUserTeam;
+	}
+
+	/**
+	 * @param isUserTeam the isUserTeam to set
+	 */
+	public void setUserTeam(boolean isUserTeam) {
+		this.isUserTeam = isUserTeam;
 	}
 
 	public boolean isTeamNameValid(String teamName, League league) {

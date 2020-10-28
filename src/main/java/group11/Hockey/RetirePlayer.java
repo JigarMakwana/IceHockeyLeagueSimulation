@@ -11,7 +11,7 @@ import group11.Hockey.models.League;
 import group11.Hockey.models.Player;
 import group11.Hockey.models.Team;
 
-public class RetirePlayer {
+public abstract class RetirePlayer {
 
 	public boolean checkForRetirement(League league, float age) {
 		int likelihoodOfRetirement = getLikelihoodOfRetirement(league, age);

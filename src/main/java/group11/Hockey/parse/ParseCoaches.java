@@ -1,8 +1,9 @@
-package group11.Hockey;
+package group11.Hockey.parse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import group11.Hockey.IAttribute;
 import group11.Hockey.models.Coach;
 
 public class ParseCoaches implements IAttribute {

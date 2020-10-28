@@ -22,15 +22,12 @@ public class JsonImport extends ValidateJson implements IJsonImport {
 	public League parseFile(String fileName) throws Exception {
 		if (isValidJsonSchema(fileName)) {
 			JSONParser parser = new JSONParser();
-
 			fileObj = parser.parse(new FileReader(fileName));
-
 			League leagueModelObj = new League();
 			JSONObject jsonObject = (JSONObject) fileObj;
 
 			for (Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
 				String key = (String) iterator.next();
-
 				if (key.equalsIgnoreCase("leagueName")) {
 					String leagueName = (String) jsonObject.get(key);
 					if (isValidLeagueName(leagueName)) {
@@ -43,13 +40,10 @@ public class JsonImport extends ValidateJson implements IJsonImport {
 					IParseRootElement parseRootElem = (IParseRootElement) loadedClass.newInstance();
 					parseRootElem.parseRootElement(leagueModelObj, jsonObject);
 				}
-
 			}
-
 			return leagueModelObj;
 		} else {
 			throw new Exception("Exception in the schema");
 		}
 	}
-
 }

@@ -27,7 +27,7 @@ public class ValidateJson extends JsonAttributes{
 		super(leagueDb);
 	}
 
-	public boolean validateJsonSchema(String jsonFilePath) {
+	public boolean isValidJsonSchema(String jsonFilePath) {
 		File jsonFile = new File(jsonFilePath);
 		InputStream inputStreamJson = null;
 		InputStream inputStreamJsonSchema = App.class.getResourceAsStream("/HockeyTeamJsonSchema.json");

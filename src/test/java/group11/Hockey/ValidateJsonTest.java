@@ -20,7 +20,7 @@ public class ValidateJsonTest {
 		ValidateJson validateJsonClass = new ValidateJson(leagueDbMock);
 		
 		
-		boolean isValid = validateJsonClass.validateJsonSchema(jsonFile.getPath());
+		boolean isValid = validateJsonClass.isValidJsonSchema(jsonFile.getPath());
 		assertTrue(isValid);
 	}
 	
@@ -30,7 +30,7 @@ public class ValidateJsonTest {
 		ValidateJson validateJsonClass = new ValidateJson(leagueDbMock);
 		
 		
-		boolean isValid = validateJsonClass.validateJsonSchema("//nofile.json");
+		boolean isValid = validateJsonClass.isValidJsonSchema("//nofile.json");
 		assertFalse(isValid);
 	}
 	
@@ -41,7 +41,7 @@ public class ValidateJsonTest {
 		ValidateJson validateJsonClass = new ValidateJson(leagueDbMock);
 		
 		
-		boolean isValid = validateJsonClass.validateJsonSchema(jsonFile.getPath());
+		boolean isValid = validateJsonClass.isValidJsonSchema(jsonFile.getPath());
 		assertFalse(isValid);
 	}
 

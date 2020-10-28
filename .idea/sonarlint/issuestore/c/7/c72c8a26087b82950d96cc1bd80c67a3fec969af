@@ -1,63 +1,61 @@
 
-V	java:S106û"9Replace this use of System.out or System.err by a logger.(ÕÊ²Ê8¹ÆœğÖ.
-V	java:S106"9Replace this use of System.out or System.err by a logger.(Ëí¾ø8¹ÆœğÖ.
-V
-java:S1481N"4Remove this unused "lossPointCutOff" local variable.(é¢É«ûÿÿÿÿ8¹ÆœğÖ.
-V	java:S106"9Replace this use of System.out or System.err by a logger.(¤È€Î8¹ÆœğÖ.
-Ÿ
-java:S1186Å"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(†î¶8ßØçğÖ.
-T
-java:S1135Y"2Complete the task associated to this TODO comment.(íÆŞúÿÿÿÿ8¹ÆœğÖ.
-|
-java:S2293Å"YReplace the type specification in this constructor call with the diamond operator ("<>").(¥Ê„¢ùÿÿÿÿ8¹ÆœğÖ.
-M
-java:S3740è"/Provide the parametrized type for this generic.(òËå«8¹ÆœğÖ.
-¤
-java:S1186Ñ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(÷§üêùÿÿÿÿ8ßØçğÖ.
-@
-java:S2119s"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8¹ÆœğÖ.
-L
-java:S1125÷")Remove the literal "false" boolean value.(ù±½âÿÿÿÿÿ8¹ÆœğÖ.
-R
-java:S1481Œ"/Remove this unused "maxPlayers" local variable.(õâ„íùÿÿÿÿ8¹ÆœğÖ.
-¤
-java:S1186º"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡¢’ôúÿÿÿÿ8¹ÆœğÖ.
+^	java:S125´"<This block of commented-out lines of code should be removed.(öˆêÒşÿÿÿÿ8¶ÓÎ‚×.
+P
+java:S1135Ê"2Complete the task associated to this TODO comment.(†‡¸¥8¶ÓÎ‚×.
+W	java:S125Y"<This block of commented-out lines of code should be removed.(ĞÎˆc8¶ÓÎ‚×.
+{
+java:S2293x"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ó‚ßşÿÿÿÿ8¶ÓÎ‚×.
+[	java:S106ÿ"9Replace this use of System.out or System.err by a logger.(ò›ÿÿÿÿÿ8¶ÓÎ‚×.
+p
+java:S3776³"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(Â¥‚°8¶ÓÎ‚×.
 t
-java:S3776K"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(°ÃÛ€ùÿÿÿÿ8¹ÆœğÖ.
-
-java:S1488t"nImmediately return this expression instead of assigning it to the temporary variable "randomTradeOfferChance".(ˆû¹éûÿÿÿÿ8¹ÆœğÖ.
-a
-java:S1854Œ">Remove this useless assignment to local variable "maxPlayers".(õâ„íùÿÿÿÿ8¹ÆœğÖ.
-V	java:S106„"9Replace this use of System.out or System.err by a logger.(¢„Ò8¹ÆœğÖ.
-Y	java:S125"<This block of commented-out lines of code should be removed.(‹‡•…8¹ÆœğÖ.
-Z	java:S106("9Replace this use of System.out or System.err by a logger.(à‡²¢úÿÿÿÿ8õ‹¨ÛÖ.
-X	java:S1258"<This block of commented-out lines of code should be removed.(ßòù—8À¦ÙğÖ.
-U	java:S106h"9Replace this use of System.out or System.err by a logger.(Í„•8¹ÆœğÖ.
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìş
-¤
-java:S1186´"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‡ñ¤şÿÿÿÿ8¹ÆœğÖ.
-U	java:S106k"9Replace this use of System.out or System.err by a logger.(Ì«Åã8¹ÆœğÖ.
+java:S3776E"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(°ÃÛ€ùÿÿÿÿ8¶ÓÎ‚×.
+Z	java:S106("9Replace this use of System.out or System.err by a logger.(à‡²¢úÿÿÿÿ8¶ÓÎ‚×.
+V	java:S106†"9Replace this use of System.out or System.err by a logger.(Ëí¾ø8¶ÓÎ‚×.
 X	java:S125&"<This block of commented-out lines of code should be removed.(ÀôÚõ8õ‹¨ÛÖ.
-]	java:S125}"<This block of commented-out lines of code should be removed.(¸æ«¶øÿÿÿÿ8¹ÆœğÖ.
-^	java:S125„"<This block of commented-out lines of code should be removed.(ı¬ïøÿÿÿÿ8¹ÆœğÖ.
-[	java:S106‚"9Replace this use of System.out or System.err by a logger.(òÆäêúÿÿÿÿ8Ç’‘ïÖ.
-[	java:S106ƒ"9Replace this use of System.out or System.err by a logger.(³‹†Æÿÿÿÿÿ8é¾ïÖ.
-B
-java:S1659ç"Declare "j" on a separate line.(¦¢Éëùÿÿÿÿ8¹ÆœğÖ.
+V	java:S106‰"9Replace this use of System.out or System.err by a logger.(¤È€Î8¶ÓÎ‚×.
+|
+java:S2293¾"YReplace the type specification in this constructor call with the diamond operator ("<>").(¥Ê„¢ùÿÿÿÿ8¶ÓÎ‚×.
 Ÿ
-java:S1186Ë"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Îò¿Í8ßØçğÖ.
-^	java:S125»"<This block of commented-out lines of code should be removed.(öˆêÒşÿÿÿÿ8¹ÆœğÖ.
-{
-java:S2293O"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ç÷°çúÿÿÿÿ8¹ÆœğÖ.
+java:S1186ç"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(†î¶8¶ÓÎ‚×.
+T
+java:S1135R"2Complete the task associated to this TODO comment.(íÆŞúÿÿÿÿ8¶ÓÎ‚×.
+@
+java:S2119l"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8¶ÓÎ‚×.
+L
+java:S1125ğ")Remove the literal "false" boolean value.(ù±½âÿÿÿÿÿ8¶ÓÎ‚×.
 ¤
-java:S1186×"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•Î¾âúÿÿÿÿ8ßØçğÖ.
-W	java:S125`"<This block of commented-out lines of code should be removed.(ĞÎˆc8¹ÆœğÖ.
+java:S1186ù"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•Î¾âúÿÿÿÿ8¶ÓÎ‚×.
 {
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ó‚ßşÿÿÿÿ8¹ÆœğÖ.
+java:S2293H"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ç÷°çúÿÿÿÿ8¶ÓÎ‚×.
+¤
+java:S1186ó"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(÷§üêùÿÿÿÿ8¶ÓÎ‚×.
+a
+java:S1854…">Remove this useless assignment to local variable "maxPlayers".(õâ„íùÿÿÿÿ8¶ÓÎ‚×.
+U	java:S106a"9Replace this use of System.out or System.err by a logger.(Í„•8¶ÓÎ‚×.
+]	java:S125v"<This block of commented-out lines of code should be removed.(¸æ«¶øÿÿÿÿ8¶ÓÎ‚×.
+P
+java:S1135Ø"2Complete the task associated to this TODO comment.(†‡¸¥8¶ÓÎ‚×.
+]	java:S125@"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8¶ÓÎ‚×.
+U	java:S106d"9Replace this use of System.out or System.err by a logger.(Ì«Åã8¶ÓÎ‚×.
+M
+java:S3740á"/Provide the parametrized type for this generic.(òËå«8¶ÓÎ‚×.
+Ÿ
+java:S1186í"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Îò¿Í8¶ÓÎ‚×.
+
+java:S1488m"nImmediately return this expression instead of assigning it to the temporary variable "randomTradeOfferChance".(ˆû¹éûÿÿÿÿ8¶ÓÎ‚×.
 w
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Æ­„Â8¹ÆœğÖ.
-e
-java:S1854N"CRemove this useless assignment to local variable "lossPointCutOff".(é¢É«ûÿÿÿÿ8¹ÆœğÖ.
-]	java:S125M"<This block of commented-out lines of code should be removed.(´üÿÿÿÿ8¹ÆœğÖ.
-]	java:S125F"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8¹ÆœğÖ.
-V	java:S106†"9Replace this use of System.out or System.err by a logger.(ãÎ×Œ8¹ÆœğÖ.
+java:S2293ˆ"YReplace the type specification in this constructor call with the diamond operator ("<>").(Æ­„Â8¶ÓÎ‚×.
+[	java:S106û"9Replace this use of System.out or System.err by a logger.(òÆäêúÿÿÿÿ8¶ÓÎ‚×.
+V	java:S106ı"9Replace this use of System.out or System.err by a logger.(úÙ•ñ8Ç’‘ïÖ.
+[	java:S106ü"9Replace this use of System.out or System.err by a logger.(³‹†Æÿÿÿÿÿ8é¾ïÖ.
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìş
+Y	java:S125‡"<This block of commented-out lines of code should be removed.(‹‡•…8î‘¦×.
+]	java:S125}"<This block of commented-out lines of code should be removed.(ı¬ïøÿÿÿÿ8¶ÓÎ‚×.
+B
+java:S1659à"Declare "j" on a separate line.(¦¢Éëùÿÿÿÿ8¶ÓÎ‚×.
+[
+java:S11556">Use isEmpty() to check whether the collection is empty or not.(Ì„£ˆ8„—ê‚×.
+V	java:S106ô"9Replace this use of System.out or System.err by a logger.(ÕÊ²Ê8¶ÓÎ‚×.
+R
+java:S1481…"/Remove this unused "maxPlayers" local variable.(õâ„íùÿÿÿÿ8¶ÓÎ‚×.

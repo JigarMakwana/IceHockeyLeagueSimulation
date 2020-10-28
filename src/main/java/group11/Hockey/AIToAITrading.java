@@ -33,40 +33,34 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
     {
         List<Team> eligibleTeamList = determineEligibleTeams();
         int teamLength = eligibleTeamList.size();
-        for (int i=0; i<teamLength; i++)
+        for (int i=0; teamLength > 1; i=0)
         {
 //            if(this.generateRandomNumber() < tradingConfig.getRandomTradeOfferChance())
 //            {
             System.out.println("\nGenerating Trade for " + eligibleTeamList.get(i).getTeamName() );
+            List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer= new ArrayList<>();
             List<Player> weakestPlayerList = findWeakestPlayers(eligibleTeamList.get(i));
             List<Integer> playerPositionFlag = findPlayerPositions(weakestPlayerList);
 
-            List<Team> eligibleTeamListCopy = eligibleTeamList;
-            Team temp = null;
-            temp = eligibleTeamListCopy.get(0);
-            eligibleTeamListCopy.set(0, eligibleTeamList.get(i));
-            eligibleTeamListCopy.set(i, temp);
-
-            List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer= new ArrayList<>();
-            for (int k=1; k<eligibleTeamListCopy.size(); k++)
+            for (int k=1; k<eligibleTeamList.size(); k++)
             {
                 List<Player> strongestPlayerList =
-                        findStrongestPlayers(eligibleTeamListCopy.get(k),playerPositionFlag);
+                        findStrongestPlayers(eligibleTeamList.get(k),playerPositionFlag);
                 Float strengthSum = strengthSum(strongestPlayerList);
-//                for(int l=0; l<strongestPlayerList.size(); l++)
-//                {
-//                    strengthSum += strongestPlayerList.get(l).getPlayerStrength();
-//                }
-                Triplet<Team, List<Player>, Float> teamEntry =
-                        Triplet.of(eligibleTeamListCopy.get(k), strongestPlayerList, strengthSum);
-                tradingTeamsBuffer.add(teamEntry);
+                Triplet<Team, List<Player>, Float> teamRequestEntry =
+                        Triplet.of(eligibleTeamList.get(k), strongestPlayerList, strengthSum);
+                tradingTeamsBuffer.add(teamRequestEntry);
             }
-            Triplet<Team, List<Player>, Float> tradeTeam =
-                    offerTrade(eligibleTeamList.get(i), tradingTeamsBuffer);
-            displayTradeStatistics(eligibleTeamList.get(i), weakestPlayerList,
-                    tradeTeam.getFirst(), tradeTeam.getSecond());
-            resolveTrade(eligibleTeamList.get(i), weakestPlayerList,
-                    tradeTeam.getFirst(), tradeTeam.getSecond());
+            if(tradingTeamsBuffer.size() > 0){
+                Triplet<Team, List<Player>, Float> tradeTeam =
+                        offerTrade(eligibleTeamList.get(i), tradingTeamsBuffer);
+                displayTradeStatistics(eligibleTeamList.get(i), weakestPlayerList,
+                        tradeTeam.getFirst(), tradeTeam.getSecond());
+                resolveTrade(eligibleTeamList.get(i), weakestPlayerList,
+                        tradeTeam.getFirst(), tradeTeam.getSecond());
+                eligibleTeamList.remove(0);
+                teamLength = eligibleTeamList.size();
+            }
 //            }
         }
     }
@@ -74,7 +68,6 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
     @Override
     public List<Team> determineEligibleTeams()
     {
-//        System.out.println("------- ** In determineEligibleTeams ** -------");
         int lossPointCutOff = tradingConfig.getLossPoint();
         List<Team> eligibleTeamList = new ArrayList<Team>();
         List<Conference> conferenceList = leagueObj.getConferences();
@@ -94,7 +87,7 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
                         team.setLossPoint(2);
                     }
 //                    System.out.println(team.getTeamName() + "'s LossPoint is " + team.getLossPoint());
-                    if(team.getLossPoint() == tradingConfig.getLossPoint())
+                    if(team.getLossPoint() == lossPointCutOff)
                     {
                         eligibleTeamList.add(team);
                     }
@@ -281,15 +274,15 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
         Float playerStrength2 = strengthSum(playerList2);
         if(this.generateRandomNumber() < tradingConfig.getRandomAcceptanceChance())
         {
-            acceptTrade();
+            acceptTrade(team1, playerList1, team2, playerList2);
         }
         else if(playerStrength1 > playerStrength2)
         {
-            acceptTrade();
+            acceptTrade(team1, playerList1, team2, playerList2);
         }
         else
         {
-            rejectTrade();
+            rejectTrade(team1);
         }
         settleTrade();
     }
@@ -305,14 +298,55 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
     }
 
     @Override
-    public void rejectTrade()
+    public void rejectTrade(Team team)
     {
-
+        resetLossPoints(team);
     }
 
     @Override
-    public void acceptTrade()
+    public void acceptTrade(Team team1, List<Player> playerList1, Team team2, List<Player> playerList2)
     {
+        List<Conference> conferenceList = leagueObj.getConferences();
+        for (Conference conference : conferenceList)
+        {
+            List<Division> divisionList = conference.getDivisions();
+            for (Division division : divisionList)
+            {
+                List<Team> teamList = division.getTeams();
+                for (Team team : teamList)
+                {
+                    if(team.getTeamName().equals(team1.getTeamName()))
+                    {
+                        for(Player toBeRemoved :playerList1)
+                        {
+                            team.getPlayers().removeIf(player ->
+                                    player.getPlayerName().equals(toBeRemoved.getPlayerName()));
+                        }
+                        for(Player toBeAdded :playerList2)
+                        {
+                            team.getPlayers().add(toBeAdded);
+                        }
+                        resetLossPoints(team);
+                        //TODO update this team to league object
+                    }
+                    else if(team.getTeamName().equals(team2.getTeamName()))
+                    {
+                        for(Player toBeRemoved :playerList2)
+                        {
+                            team.getPlayers().removeIf(player ->
+                                    player.getPlayerName().equals(toBeRemoved.getPlayerName()));
+                        }
+                        for(Player toBeAdded :playerList1)
+                        {
+                            team.getPlayers().add(toBeAdded);
+                        }
+                        resetLossPoints(team);
+                        //TODO update this team to league object
+                    }
+
+                }
+            }
+        }
 
     }
 

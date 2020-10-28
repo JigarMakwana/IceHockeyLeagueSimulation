@@ -1,6 +1,5 @@
 package group11.Hockey.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import group11.Hockey.db.Team.ITeamDb;
@@ -18,27 +17,8 @@ public class Team {
 	private Coach headCoach;
 	private List<Player> players = null;
 	private float teamStrength;
+	private boolean isUserTeam = false;
 	private int lossPoint;
-
-	/**
-	 *
-	 * @author  Jigar Makwana B00842568
-	 *
-	 */
-	public int getLossPoint()
-	{
-		return lossPoint;
-	}
-
-	/**
-	 *
-	 * @author  Jigar Makwana B00842568
-	 *
-	 */
-	public void setLossPoint(int lossPoint)
-	{
-		this.lossPoint = lossPoint;
-	}
 
 	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();
@@ -121,6 +101,20 @@ public class Team {
 		return teamStrength;
 	}
 
+	/**
+	 * @return the isUserTeam
+	 */
+	public boolean isUserTeam() {
+		return isUserTeam;
+	}
+
+	/**
+	 * @param isUserTeam the isUserTeam to set
+	 */
+	public void setUserTeam(boolean isUserTeam) {
+		this.isUserTeam = isUserTeam;
+	}
+
 	public boolean isTeamNameValid(String teamName, League league) {
 		boolean isTeamNameValid = true;
 		List<Conference> cconferenceList = league.getConferences();
@@ -176,5 +170,25 @@ public class Team {
 				break;
 		}
 		return sortedPlayerList;
+	}
+
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public int getLossPoint()
+	{
+		return lossPoint;
+	}
+
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public void setLossPoint(int lossPoint)
+	{
+		this.lossPoint = lossPoint;
 	}
 }

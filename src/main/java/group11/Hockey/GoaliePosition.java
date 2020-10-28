@@ -13,7 +13,8 @@ public class GoaliePosition implements IPosition {
 	@Override
 	public float claculateStrength() {
 		float strength = player.getSkating() + player.getSaving();
-		return player.isInjured() ? strength / 2 : strength;
+		float playerStrength = player.isInjured() ? strength / 2 : strength;
+		return playerStrength;
 	}
 
 }

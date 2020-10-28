@@ -1,0 +1,173 @@
+{
+  "leagueName": "Dalhousie Hockey League x99",
+  "conferences": [
+    {
+      "conferenceName": "Eastern Conference",
+      "divisions": [
+        {
+          "divisionName": "Atlantic",
+          "teams": [
+            {
+              "teamName": "Boston",
+              "generalManager": "Mister Fred",
+              "headCoach": {
+                "name": "Mary Smith",
+                "skating": 0.5,
+                "shooting": 0.8,
+                "checking": 0.3,
+                "saving": 0.5
+              },
+              "players": [
+                {
+                  "playerName": "Player One",
+                  "position": "forward",
+                  "captain": true,
+                  "isFreeAgent": false,
+                  "age": 49.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 15.0,
+                  "shooting": 18.0,
+                  "checking": 12.0,
+                  "saving": 1.0
+                },
+                {
+                  "playerName": "Player Two",
+                  "position": "defense",
+                  "captain": false,
+                  "isFreeAgent": false,
+                  "age": 25.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 10.0,
+                  "shooting": 10.0,
+                  "checking": 10.0,
+                  "saving": 1.0
+                },
+                {
+                  "playerName": "Player Three",
+                  "position": "goalie",
+                  "captain": false,
+                  "isFreeAgent": false,
+                  "age": 25.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 10.0,
+                  "shooting": 4.0,
+                  "checking": 9.0,
+                  "saving": 18.0
+                }
+              ],
+              "teamStrength": 0.0,
+              "isUserTeam": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "freeAgents": [
+    {
+      "playerName": "Agent One",
+      "position": "forward",
+      "captain": false,
+      "isFreeAgent": true,
+      "age": 25.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 1.0
+    },
+    {
+      "playerName": "Agent Two",
+      "position": "defense",
+      "captain": false,
+      "isFreeAgent": true,
+      "age": 25.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 1.0
+    },
+    {
+      "playerName": "Agent Three",
+      "position": "goalie",
+      "captain": false,
+      "isFreeAgent": true,
+      "age": 25.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 5.0,
+      "checking": 5.0,
+      "saving": 10.0
+    }
+  ],
+  "gamePlayConfig": {
+    "aging": {
+      "averageRetirementAge": 35,
+      "maximumAge": 50
+    },
+    "gameResolver": {
+      "randomWinChance": 0.1
+    },
+    "injuries": {
+      "randomInjuryChance": 0.05,
+      "injuryDaysLow": 1,
+      "injuryDaysHigh": 260
+    },
+    "training": {
+      "daysUntilStatIncreaseCheck": 100
+    },
+    "trading": {
+      "lossPoint": 8,
+      "randomTradeOfferChance": 0.05,
+      "maxPlayersPerTrade": 2,
+      "randomAcceptanceChance": 0.05
+    }
+  },
+  "coaches": [
+    {
+      "name": "Joe Smith",
+      "skating": 0.5,
+      "shooting": 0.8,
+      "checking": 0.3,
+      "saving": 1.0
+    },
+    {
+      "name": "Frank Smith",
+      "skating": 0.5,
+      "shooting": 0.8,
+      "checking": 0.3,
+      "saving": 0.5
+    },
+    {
+      "name": "Samantha Smith",
+      "skating": 1.0,
+      "shooting": 0.5,
+      "checking": 0.5,
+      "saving": 0.0
+    }
+  ],
+  "generalManagers": [
+    {
+      "name": "Karen Potam"
+    },
+    {
+      "name": "Joseph Squidly"
+    },
+    {
+      "name": "Tom Spaghetti"
+    }
+  ]
+}

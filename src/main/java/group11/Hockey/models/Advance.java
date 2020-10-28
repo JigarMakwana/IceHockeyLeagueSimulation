@@ -11,7 +11,7 @@ private String advanceTime;
 private String advanceDate;
 	
 	public String getAdvanceTime(String time,int hours) throws ParseException {
-		SimpleDateFormat myFormat = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat myFormat = new SimpleDateFormat("HH:mm:ss");
 		Date dateTime=myFormat.parse(time);
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(dateTime); 

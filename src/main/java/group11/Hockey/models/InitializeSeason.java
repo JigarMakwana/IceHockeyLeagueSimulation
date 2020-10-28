@@ -25,28 +25,26 @@ public class InitializeSeason {
 	}
 	
 	public String startSeasons(int seasonCount) throws ParseException {
+		//get last date simulated from db;
+		
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		int count=seasonCount;
+		String seasonEndDate = null;
 		while(count>0) {		
-			String startDate="30/09/"+Integer.toString(year);			
-			year++;	
-			LocalDate eDate = LocalDate.of(year, Month.APRIL, 1);	
-		    LocalDate firstSaturday = eDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.SATURDAY));
-		    String regularSeasonEndDate = firstSaturday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-	
+			String startDate="30/09/"+Integer.toString(year);		
+			
 			System.out.println("Start date : "+startDate); 
-			System.out.println("End date : "+regularSeasonEndDate); 			
+			System.out.println("End date : "+seasonEndDate); 			
 			
-			Schedule regularSeasonSchedule=new Schedule(startDate,regularSeasonEndDate,leagueObj);
-			HashMap<String,HashMap<Team,Team>> regularSchedule=regularSeasonSchedule.getSeasonSchedule();
+			Schedule regularSeasonSchedule=new Schedule(leagueObj);
+			HashMap<String,HashMap<Team,Team>> regularSchedule=regularSeasonSchedule.getSeasonSchedule(startDate);
 			
-			Advance advanceObj=new Advance();
-			//String regularSeasonStartDate=advanceObj.getAdvanceDate(startDate,1);
 			SimulateSeason simulateSeason=new SimulateSeason(regularSchedule,leagueObj);
-			simulateSeason.StartSimulatingSeason(startDate,regularSeasonEndDate);
+			seasonEndDate=simulateSeason.StartSimulatingSeason(startDate);
 			count--;	
 		}
-		return seasonCount+" Seasons Simulated";
+		//set or return last date to current date after simulations
+		return seasonEndDate;
 	}
 
 }

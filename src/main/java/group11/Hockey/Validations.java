@@ -136,7 +136,7 @@ public class Validations implements IValidations {
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
 		}
-		String position = league.getFreeAgents().get(playerNumber).getPosition();
+		String position = league.getFreeAgents().get(playerNumber - 1).getPosition();
 		if (selectedValues.contains(playerNumber)) {
 			display.showMessageOnConsole("This player is already selected");
 			isPlayerValueNotValid = true;

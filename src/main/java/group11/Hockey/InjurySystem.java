@@ -10,24 +10,36 @@ import group11.Hockey.models.Team;
 
 public class InjurySystem {
 
-	public void setInjuryToPlayers(League league, Team team) {
+	private float randomInjuryChance;
+	private int injuryDaysLow;
+	private int injuryDaysHigh;
+
+	public InjurySystem(League league) {
+		super();
 		GameplayConfig gameplayConfig = league.getGamePlayConfig();
 		Injuries injuries = gameplayConfig.getInjuries();
-		float randomInjuryChance = injuries.getRandomInjuryChance();
-		int injuryDaysLow = injuries.getInjuryDaysLow();
-		int injuryDaysHigh = injuries.getInjuryDaysHigh();
-		float probabilityOfInjury;
+		this.randomInjuryChance = injuries.getRandomInjuryChance();
+		this.injuryDaysLow = injuries.getInjuryDaysLow();
+		this.injuryDaysHigh = injuries.getInjuryDaysHigh();
+	}
 
+	public void setInjuryToPlayers(Team team) {
 		for (Player player : team.getPlayers()) {
-			probabilityOfInjury = new Random().nextFloat();
-
-			if (randomInjuryChance >= probabilityOfInjury) {
+			if (determainIsPlayerInjured()) {
 				player.setInjured(true);
-				int numberOfInjuredDays = new Random().nextInt((injuryDaysHigh - injuryDaysLow) + 1) + injuryDaysLow;
-				player.setNumberOfInjuredDays(numberOfInjuredDays);
+				player.setNumberOfInjuredDays(determainNumberOfDaysOfInjury());
 			}
 		}
+	}
 
+	public boolean determainIsPlayerInjured() {
+		float probabilityOfInjury = new Random().nextFloat();
+		return randomInjuryChance >= probabilityOfInjury;
+	}
+
+	public int determainNumberOfDaysOfInjury() {
+		int numberOfInjuredDays = new Random().nextInt((injuryDaysHigh - injuryDaysLow) + 1) + injuryDaysLow;
+		return numberOfInjuredDays;
 	}
 
 }

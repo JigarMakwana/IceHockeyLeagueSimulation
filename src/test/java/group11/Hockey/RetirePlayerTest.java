@@ -21,7 +21,7 @@ public class RetirePlayerTest {
 		LeagueModelMock leagueModel = new LeagueModelMock();
 		League league = leagueModel.getLeagueInfo();
 
-		RetirePlayer retirePlayer = new RetirePlayer();
+		AgePlayer retirePlayer = new AgePlayer();
 		boolean isRetired = retirePlayer.checkForRetirement(league, 50);
 		Assert.assertTrue(isRetired);
 	}
@@ -31,7 +31,7 @@ public class RetirePlayerTest {
 		LeagueModelMock leagueModel = new LeagueModelMock();
 		League league = leagueModel.getLeagueInfo();
 
-		RetirePlayer retirePlayer = new RetirePlayer();
+		AgePlayer retirePlayer = new AgePlayer();
 		retirePlayer.retireAndReplacePlayer(league);
 		List<Conference> conferences = league.getConferences();
 		List<Division> divisions = conferences.get(0).getDivisions();

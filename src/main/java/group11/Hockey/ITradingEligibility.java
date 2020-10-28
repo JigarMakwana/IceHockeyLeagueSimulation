@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ITradingEligibility extends ITrading {
     public List<Team> determineEligibleTeams();
-    public void displayTradeStatistics();
 }

@@ -9,8 +9,9 @@ import java.util.List;
 public interface IGenerateTradeOffers extends ITrading {
     public float generateRandomNumber();
     public void generateTradeOffers();
-    public void generateTradeOfferForTeam(Team team, List<Team> eligibleTeamList);
+    public Triplet<Team, List<Player>, Float> offerTrade
+            (Team team, List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer);
     public List<Player> findWeakestPlayers(Team team);
-    public List<Player> findStrongestPlayers(Team team);
-    public void displayTradeStatistics();
+    public List<Player> findStrongestPlayers(Team team, List<Integer> playerPositionFlag);
+    public void displayTradeStatistics(Team team1, List<Player> playerList1, Team team2, List<Player> playerList2);
 }

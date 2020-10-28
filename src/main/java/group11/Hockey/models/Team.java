@@ -1,5 +1,6 @@
 package group11.Hockey.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import group11.Hockey.db.Team.ITeamDb;
@@ -19,11 +20,23 @@ public class Team {
 	private float teamStrength;
 	private int lossPoint;
 
-	public int getLossPoint() {
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public int getLossPoint()
+	{
 		return lossPoint;
 	}
 
-	public void setLossPoint(int lossPoint) {
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public void setLossPoint(int lossPoint)
+	{
 		this.lossPoint = lossPoint;
 	}
 
@@ -136,4 +149,32 @@ public class Team {
 				+ ", players=" + players + "]";
 	}
 
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public List<Player>  sortPlayersByStrength() {
+		List<Player> sortedPlayerList = this.players;
+		/* bubble sort */
+		int i, j;
+		Player temp;
+		boolean swapped;
+		int length = sortedPlayerList.size();
+		for (i = 0; i < length - 1; i++) {
+			swapped = false;
+			for (j = 0; j < length - i - 1; j++) {
+				if (sortedPlayerList.get(j).getPlayerStrength() >
+						sortedPlayerList.get(j + 1).getPlayerStrength()) {
+					temp = sortedPlayerList.get(j);
+					sortedPlayerList.set(j, sortedPlayerList.get(j + 1));
+					sortedPlayerList.set(j + 1, temp);
+					swapped = true;
+				}
+			}
+			if (swapped == false)
+				break;
+		}
+		return sortedPlayerList;
+	}
 }

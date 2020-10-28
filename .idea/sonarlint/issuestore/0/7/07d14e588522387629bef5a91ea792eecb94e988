@@ -1,37 +1,37 @@
 
-X	java:S125F"<This block of commented-out lines of code should be removed.(†€éˆ8Ü²«¤Ö.
-Z	java:S1069"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8Ü²«¤Ö.
-N	java:S1068"9Replace this use of System.out or System.err by a logger.(ì‘êÜ
-X
-java:S1854#";Remove this useless assignment to local variable "coachDb".(•«‰8®–ù¤Ö.
+U	java:S106C"9Replace this use of System.out or System.err by a logger.(½å²Ä8Ü²«¤Ö.
 T
 java:S1135E"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8Ü²«¤Ö.
-V
-java:S1128"9Remove this unused import 'group11.Hockey.models.Player'.(×—Ñæ8äÖ¤Ö.
-f
-java:S1854!"DRemove this useless assignment to local variable "gameplayConfigDb".(¥†°ôûÿÿÿÿ8®–ù¤Ö.
+]	java:S125N"<This block of commented-out lines of code should be removed.(±¦ùûÿÿÿÿ8åãÉİÖ.
+Z	java:S1065"9Replace this use of System.out or System.err by a logger.(Ãº™ëøÿÿÿÿ8Ü²«¤Ö.
 Z
 java:S1854B"8Remove this useless assignment to local variable "team".(†™Öâıÿÿÿÿ8Ü²«¤Ö.
-K
-java:S1481B")Remove this unused "team" local variable.(†™Öâıÿÿÿÿ8Ü²«¤Ö.
-S	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Ş´şÿÿÿÿ
-U	java:S106G"9Replace this use of System.out or System.err by a logger.(ì‘êÜ8äÖ¤Ö.
-Z	java:S106P"9Replace this use of System.out or System.err by a logger.(Ï¹èÿøÿÿÿÿ8Ü²«¤Ö.
-_
-java:S1854$"=Remove this useless assignment to local variable "managerDb".(ÓÛØºÿÿÿÿÿ8®–ù¤Ö.
+X	java:S125F"<This block of commented-out lines of code should be removed.(†€éˆ8Ü²«¤Ö.
 I
 java:S1481#",Remove this unused "coachDb" local variable.(•«‰8®–ù¤Ö.
-O
-java:S1481""-Remove this unused "playerDb" local variable.(¥™—Ûıÿÿÿÿ8®–ù¤Ö.
-P
-java:S1481$".Remove this unused "managerDb" local variable.(ÓÛØºÿÿÿÿÿ8®–ù¤Ö.
-U	java:S106C"9Replace this use of System.out or System.err by a logger.(½å²Ä8Ü²«¤Ö.
-^
-java:S1854""<Remove this useless assignment to local variable "playerDb".(¥™—Ûıÿÿÿÿ8®–ù¤Ö.
-Z	java:S1065"9Replace this use of System.out or System.err by a logger.(Ãº™ëøÿÿÿÿ8Ü²«¤Ö.
-W	java:S125."<This block of commented-out lines of code should be removed.(ü‰Ä_8Ü²«¤Ö.
-Q	java:S125"<This block of commented-out lines of code should be removed.(ÛÇõ
-Z	java:S106H"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8Ü²«¤Ö.
+U	java:S106G"9Replace this use of System.out or System.err by a logger.(ì‘êÜ8äÖ¤Ö.
+K
+java:S1481B")Remove this unused "team" local variable.(†™Öâıÿÿÿÿ8Ü²«¤Ö.
 W
 java:S1481!"5Remove this unused "gameplayConfigDb" local variable.(¥†°ôûÿÿÿÿ8®–ù¤Ö.
+P
+java:S1481$".Remove this unused "managerDb" local variable.(ÓÛØºÿÿÿÿÿ8®–ù¤Ö.
+W	java:S125."<This block of commented-out lines of code should be removed.(ü‰Ä_8Ü²«¤Ö.
+O
+java:S1481""-Remove this unused "playerDb" local variable.(¥™—Ûıÿÿÿÿ8®–ù¤Ö.
+V
+java:S1128"9Remove this unused import 'group11.Hockey.models.Player'.(×—Ñæ8äÖ¤Ö.
+^
+java:S1854""<Remove this useless assignment to local variable "playerDb".(¥™—Ûıÿÿÿÿ8®–ù¤Ö.
+Z	java:S1069"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8Ü²«¤Ö.
+X
+java:S1854#";Remove this useless assignment to local variable "coachDb".(•«‰8®–ù¤Ö.
+f
+java:S1854!"DRemove this useless assignment to local variable "gameplayConfigDb".(¥†°ôûÿÿÿÿ8®–ù¤Ö.
+N	java:S1068"9Replace this use of System.out or System.err by a logger.(ì‘êÜ
+_
+java:S1854$"=Remove this useless assignment to local variable "managerDb".(ÓÛØºÿÿÿÿÿ8®–ù¤Ö.
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìş
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Ş´şÿÿÿÿ
+Q	java:S125"<This block of commented-out lines of code should be removed.(ÛÇõ
+Z	java:S106H"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8Ü²«¤Ö.

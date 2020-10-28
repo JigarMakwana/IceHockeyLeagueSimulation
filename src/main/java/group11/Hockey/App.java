@@ -75,9 +75,9 @@ public class App {
 
 		}
 
-		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
-		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
-		System.out.println("Number of seasons to simulate -> " + noOfSeasons);
+//		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
+//		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
+//		System.out.println("Number of seasons to simulate -> " + noOfSeasons);
 
 	}
 }

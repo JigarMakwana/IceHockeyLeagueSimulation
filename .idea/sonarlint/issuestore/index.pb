@@ -82,3 +82,15 @@ b
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 \
 ,src/main/java/group11/Hockey/ImportJson.java,3\6\3635d78e3bc768e7baa47edf4e03032c721dd7f1
+c
+3src/test/java/group11/Hockey/AIToAITradingTest.java,c\6\c69f3efde387a6afbcb88174d0fd44b46c214a3b
+c
+3src/test/java/group11/Hockey/models/LeagueTest.java,7\f\7fbedf12cb640a46c34a6949c1fb2cd8a031bd09
+g
+7src/main/java/group11/Hockey/models/GameplayConfig.java,6\a\6aee8b6049c78baaf377291e2f625e2ff615caf7
+b
+2src/test/java/group11/Hockey/InjurySystemTest.java,a\e\ae191fbc93d3dc11e3698a255c617fb67aca4142
+`
+0src/main/java/group11/Hockey/ParseFreeAgent.java,2\e\2e79631e1b2e16975a445f8c9b50ee3d593f0633
+Y
+)src/main/java/group11/Hockey/Triplet.java,7\0\70a855cec9edbc5990fb48ba24a6a73d96d07775

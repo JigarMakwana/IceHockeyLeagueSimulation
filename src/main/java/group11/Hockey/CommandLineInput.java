@@ -2,21 +2,27 @@ package group11.Hockey;
 
 import java.util.Scanner;
 
-public class CommandLineInput implements IUserInputMode {
-	Scanner sc = null;
+public class CommandLineInput implements ICommandLineInput {
+	Scanner scanner = null;
+
+	@Override
+	public String getValueFromUser() {
+		scanner = new Scanner(System.in);
+		return scanner.nextLine();
+	}
 
 	public String getName() {
-		sc = new Scanner(System.in);
-		return sc.nextLine();
+		scanner = new Scanner(System.in);
+		return scanner.nextLine();
 	}
 
 	public int getInt() {
-		sc = new Scanner(System.in);
-		return sc.nextInt();
+		scanner = new Scanner(System.in);
+		return scanner.nextInt();
 	}
 
 	public void displayMessage(String message) {
-		sc = new Scanner(System.in);
+		scanner = new Scanner(System.in);
 		System.out.println(message);
 	}
 

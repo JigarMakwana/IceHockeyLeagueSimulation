@@ -26,7 +26,10 @@ public class LeagueTest {
 
 	public League populateLeagueObject() {
 		List<Team> teamsList = new ArrayList<Team>();
+		List<GeneralManager> generalManagerList = new ArrayList<GeneralManager>();
 		Coach coach = new Coach(0, 0, 0, 0, "C1");
+		GeneralManager generalManager = new GeneralManager("Kevin");
+		generalManagerList.add(generalManager);
 		Team team = new Team("Vancouver Canucks", "John", coach, null);
 		teamsList.add(team);
 
@@ -36,13 +39,14 @@ public class LeagueTest {
 		List<Conference> conferenceList = new ArrayList<Conference>();
 		Conference conference = new Conference("Westeren Conference", divisionsList);
 		conferenceList.add(conference);
-		Player freeAgent = new Player(0, 0, 0, 0, "Player 1", "forward", true, false, 0);
+		Player firstFreeAgent = new Player(0, 0, 0, 0, "Player 1", "forward", true, false, 0);
+		Player secondFreeAgent = new Player(0, 0, 0, 0, "Player 2", "Goalie", true, false, 0);
 
 		List<Coach> coachList = new ArrayList<Coach>();
 		coachList.add(coach);
 		GameplayConfig gameplayConf = new GameplayConfig(new Aging(0, 0), new GameResolver(0), new Injuries(0, 0, 0),
 				new Training(0), new Trading(0, 0, 0, 0));
-		League league = new League("DHL", conferenceList, Arrays.asList(freeAgent), gameplayConf, coachList, null);
+		League league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf, coachList, generalManagerList);
 		return league;
 
 	}
@@ -110,7 +114,7 @@ public class LeagueTest {
 	@Test
 	public void getFreeAgentsTest() {
 		League league = populateLeagueObject();
-		Assert.assertTrue(league.getFreeAgents().size() == 1);
+		Assert.assertTrue(league.getFreeAgents().size() == 2);
 		Assert.assertEquals("Player 1", league.getFreeAgents().get(0).getPlayerName());
 	}
 

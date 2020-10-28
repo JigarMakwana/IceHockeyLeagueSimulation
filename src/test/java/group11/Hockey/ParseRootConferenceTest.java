@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import group11.Hockey.models.Conference;
 import group11.Hockey.models.League;
+import group11.Hockey.parse.ParseRootconferences;
 
 public class ParseRootConferenceTest {
 

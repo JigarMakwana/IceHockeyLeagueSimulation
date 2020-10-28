@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import group11.Hockey.models.League;
 import group11.Hockey.models.Player;
+import group11.Hockey.parse.ParseRootfreeAgents;
 
 public class ParseRootfreeAgentsTest {
 

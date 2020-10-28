@@ -8,15 +8,17 @@ import org.json.simple.parser.JSONParser;
 
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.League;
+import group11.Hockey.parse.IParseRootElement;
 
-public class ImportJson extends ValidateJson {
+public class JsonImport extends ValidateJson implements IJsonImport {
 
 	private Object fileObj;
 
-	public ImportJson(ILeagueDb leagueDb) {
+	public JsonImport(ILeagueDb leagueDb) {
 		super(leagueDb);
 	}
 
+	@Override
 	public League parseFile(String fileName) throws Exception {
 		if (isValidJsonSchema(fileName)) {
 			JSONParser parser = new JSONParser();
@@ -37,7 +39,7 @@ public class ImportJson extends ValidateJson {
 						throw new Exception(leagueName + " -> League name already exists in the system");
 					}
 				} else {
-					Class loadedClass = Class.forName("group11.Hockey.ParseRoot" + key);
+					Class loadedClass = Class.forName("group11.Hockey.parse.ParseRoot" + key);
 					IParseRootElement parseRootElem = (IParseRootElement) loadedClass.newInstance();
 					parseRootElem.parseRootElement(leagueModelObj, jsonObject);
 				}

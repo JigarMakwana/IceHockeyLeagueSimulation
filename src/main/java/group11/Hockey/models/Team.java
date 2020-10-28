@@ -18,6 +18,34 @@ public class Team {
 	private List<Player> players = null;
 	private float teamStrength;
 	private boolean isUserTeam = false;
+	private int losses;
+	
+	public int getLosses() {
+		return losses;
+	}
+
+	public void setLosses(int losses) {
+		this.losses = losses;
+	}
+
+	public int getWins() {
+		return wins;
+	}
+
+	public void setWins(int wins) {
+		this.wins = wins;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	private int wins;
+	private int points;
 
 	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();

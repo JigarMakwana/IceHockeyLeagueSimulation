@@ -2,6 +2,7 @@ package group11.Hockey.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import group11.Hockey.db.ICoachDb;
@@ -24,6 +25,7 @@ public class League {
 	private List<Coach> coaches;
 	private List<GeneralManager> generalManagers;
 	private List<Player> retiredPlayers;
+	private String lastSimulatedDate;
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {

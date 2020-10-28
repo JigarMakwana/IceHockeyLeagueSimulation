@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import group11.Hockey.models.GeneralManager;
 import group11.Hockey.models.League;
+import group11.Hockey.parse.ParseRootgeneralManagers;
 
 public class ParseRootgeneralManagersTest {
 	private static JSONObject jsonObject;

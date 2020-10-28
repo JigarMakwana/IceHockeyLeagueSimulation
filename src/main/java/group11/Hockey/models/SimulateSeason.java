@@ -1,10 +1,7 @@
 package group11.Hockey.models;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import group11.Hockey.AgePlayer;
 

@@ -9,15 +9,11 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.time.LocalDate;
 
 
 public class Schedule {
 
-	private String startDate;
-	private String endDate;
 	private League leagueObj;
 	//
 	public Schedule(League leagueObj) {

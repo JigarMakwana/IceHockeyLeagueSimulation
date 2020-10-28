@@ -53,9 +53,9 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 		display.displayListOfPLayers(league);
 		playerChoiceFromUser(newTeam, league);
 		divisionItem.addNewTeamInDivision(newTeam);
-		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
-		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
-		System.out.println("Number of seasons to simulate -> " + noOfSeasons);
+		//PlayerChoice playerChoice = new PlayerChoice(userInputMode);
+		//int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
+		//System.out.println("Number of seasons to simulate -> " + noOfSeasons);
 	}
 
 	public void conferenceNameFromUserCheck(List<Conference> conferencesList) {

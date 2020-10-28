@@ -34,7 +34,8 @@ public class InjurySystem {
 
 	public boolean determainIsPlayerInjured() {
 		float probabilityOfInjury = new Random().nextFloat();
-		return randomInjuryChance >= probabilityOfInjury;
+		boolean isPlayerInjured = randomInjuryChance >= probabilityOfInjury;
+		return isPlayerInjured;
 	}
 
 	public int determainNumberOfDaysOfInjury() {

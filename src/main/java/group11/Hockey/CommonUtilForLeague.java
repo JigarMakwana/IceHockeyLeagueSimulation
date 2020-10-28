@@ -1,5 +1,6 @@
 package group11.Hockey;
 
+import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.models.Coach;
@@ -47,10 +48,12 @@ abstract public class CommonUtilForLeague {
 
 	public void removeFreeAgentsFromLeague(League league, List<Player> freeAgents) {
 		List<Player> listOfFreeAgentsInLeague = league.getFreeAgents();
-		for (Player freeAgentInLeague : listOfFreeAgentsInLeague) {
+		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
+		while (interator.hasNext()) {
+		    Player pl = interator.next();
 			for (Player freeAgent : freeAgents) {
-				if (freeAgent.toString().equalsIgnoreCase(freeAgentInLeague.toString())) {
-					listOfFreeAgentsInLeague.remove(freeAgentInLeague);
+				if (freeAgent.toString().equalsIgnoreCase(pl.toString())) {
+					interator.remove();
 				}
 			}
 		}

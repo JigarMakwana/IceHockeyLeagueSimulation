@@ -53,6 +53,9 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 		display.displayListOfPLayers(league);
 		playerChoiceFromUser(newTeam, league);
 		divisionItem.addNewTeamInDivision(newTeam);
+		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
+		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
+		System.out.println("Number of seasons to simulate -> " + noOfSeasons);
 	}
 
 	public void conferenceNameFromUserCheck(List<Conference> conferencesList) {
@@ -121,22 +124,24 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 		List<Player> goalies = new ArrayList<Player>();
 		String playerValue;
 		display.showMessageOnConsole("Select 20 players for team: 18 Skaters and 2 Goalies");
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 3; i++) {
 			while (playerValueCheck) {
-				display.showMessageOnConsole("Select " + i + 1 + " player");
+				display.showMessageOnConsole("Select " + (i+1) + " player");
 				playerValue = userInputMode.getValueFromUser();
 				playerValueCheck = validation.playerCheck(Integer.parseInt(playerValue), league, selectedValuesFromUser,
 						skatersList, goalies);
 				if (playerValueCheck == false) {
-					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue)).getPosition();
+					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue) - 1).getPosition();
 					if (postion.equalsIgnoreCase("forward") || postion.equalsIgnoreCase("defense")) {
-						skatersList.add(league.getFreeAgents().get(Integer.parseInt(playerValue)));
+						skatersList.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					} else if (postion.equalsIgnoreCase("goalie")) {
-						goalies.add(league.getFreeAgents().get(Integer.parseInt(playerValue)));
+						goalies.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					}
 				}
 			}
+			playerValueCheck = true;
 		}
+
 		List<Player> finalListOfPlayers = new ArrayList<Player>();
 		finalListOfPlayers.addAll(skatersList);
 		finalListOfPlayers.addAll(goalies);

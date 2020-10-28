@@ -13,7 +13,8 @@ public class DefensePosition implements IPosition {
 	@Override
 	public float claculateStrength() {
 		float strength = player.getSkating() + player.getChecking() + (player.getShooting() / 2);
-		return player.isInjured() ? strength / 2 : strength;
+		float playerStrength = player.isInjured() ? strength / 2 : strength;
+		return playerStrength;
 	}
 
 }

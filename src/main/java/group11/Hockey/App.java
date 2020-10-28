@@ -27,8 +27,8 @@ public class App {
 			IJsonImport importJson = new JsonImport(leagueDb);
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
-				SerializeLeague seralizeLeague = new SerializeLeague();
-				seralizeLeague.serializeLeagueObject(leagueObj);
+				//SerializeLeague seralizeLeague = new SerializeLeague();
+				//seralizeLeague.serializeLeagueObject(leagueObj);
 				
 				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
 						playerDb, coachDb, managerDb);
@@ -56,9 +56,6 @@ public class App {
 
 		}
 
-//		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
-//		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
-//		System.out.println("Number of seasons to simulate -> " + noOfSeasons);
 
 	}
 }

@@ -83,6 +83,7 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 		}
 		if (teamName != null) {
 			newTeam.setTeamName(teamName);
+			newTeam.setUserTeam(true);
 		}
 	}
 

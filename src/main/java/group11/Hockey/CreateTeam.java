@@ -51,6 +51,7 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 		display.displayListOfCoaches(league);
 		headCoachNameFromUserCheck(newTeam, league);
 		display.displayListOfPLayers(league);
+		playerChoiceFromUser(newTeam, league);
 		divisionItem.addNewTeamInDivision(newTeam);
 	}
 

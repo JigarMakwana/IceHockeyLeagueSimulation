@@ -18,7 +18,7 @@ public class LeagueModelMock {
 		
 		Aging aging = new Aging(30, 55);
 		GameResolver gameResolver = new GameResolver(0);
-		Injuries injuries = new Injuries(0, 0, 0);
+		Injuries injuries = new Injuries(1, 1, 100);
 		Training training = new Training(0);
 		Trading trading = new Trading(0, 0, 0, 0);
 		

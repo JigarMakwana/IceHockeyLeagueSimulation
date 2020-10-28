@@ -27,6 +27,9 @@ public class App {
 			IJsonImport importJson = new JsonImport(leagueDb);
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
+				SerializeLeague seralizeLeague = new SerializeLeague();
+				seralizeLeague.serializeLeagueObject(leagueObj);
+				
 				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
 						playerDb, coachDb, managerDb);
 //				leagueObj = createTeamObj.getTeam();

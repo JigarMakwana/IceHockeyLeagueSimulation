@@ -131,10 +131,12 @@ public class Validations implements IValidations {
 	public boolean playerCheck(int playerNumber, League league, List<Integer> selectedValues, List<Player> skaters,
 			List<Player> goalies) {
 		boolean isPlayerValueNotValid = true;
-		String position = league.getFreeAgents().get(playerNumber).getPosition();
-		if (playerNumber < 0 || playerNumber > 20) {
+		if (playerNumber < 0 || playerNumber > league.getFreeAgents().size()) {
+			display.showMessageOnConsole("Enter Valid value");
 			isPlayerValueNotValid = true;
+			return isPlayerValueNotValid;
 		}
+		String position = league.getFreeAgents().get(playerNumber).getPosition();
 		if (selectedValues.contains(playerNumber)) {
 			display.showMessageOnConsole("This player is already selected");
 			isPlayerValueNotValid = true;

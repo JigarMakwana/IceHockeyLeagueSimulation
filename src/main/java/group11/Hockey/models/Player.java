@@ -3,6 +3,13 @@ package group11.Hockey.models;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.AgePlayer;
+import group11.Hockey.DefensePosition;
+import group11.Hockey.ForwardPosition;
+import group11.Hockey.GoaliePosition;
+import group11.Hockey.IPosition;
+import group11.Hockey.InjurySystem;
+import group11.Hockey.PlayerStrength;
 import group11.Hockey.RetirePlayer;
 import group11.Hockey.db.IPlayerDb;
 
@@ -109,6 +116,17 @@ public class Player extends Stats implements Comparable<Player> {
 	public void setInjured(boolean isInjured) {
 		this.isInjured = isInjured;
 	}
+	
+	public boolean checkInjury(League league) {
+		if(this.isInjured()) {
+			return this.isInjured();
+		}
+		InjurySystem injurySyetem = new InjurySystem(league);
+		boolean isPlayerInjured = injurySyetem.determainIsPlayerInjured();
+		this.setInjured(isPlayerInjured);
+		this.setNumberOfInjuredDays(injurySyetem.determainNumberOfDaysOfInjury());
+		return isPlayerInjured;
+	}
 
 	public boolean isIsRetired() {
 		return IsRetired;
@@ -128,14 +146,15 @@ public class Player extends Stats implements Comparable<Player> {
 
 	public float getPlayerStrength() {
 		float strength;
+		PlayerStrength playerStrength = new PlayerStrength();
 		if (this.position.equalsIgnoreCase("Forward")) {
-			strength = this.getSkating() + this.getShooting() + (this.getChecking() / 2);
+			strength = playerStrength.calculatePlayerStrength(new ForwardPosition(this));
 		} else if (this.position.equalsIgnoreCase("Defense")) {
-			strength = this.getSkating() + this.getChecking() + (this.getShooting() / 2);
+			strength = playerStrength.calculatePlayerStrength(new DefensePosition(this));
 		} else {
-			strength = this.getSkating() + this.getSaving();
+			strength = playerStrength.calculatePlayerStrength(new GoaliePosition(this));
 		}
-		return this.isInjured ? strength / 2 : strength;
+		return strength;
 	}
 
 	public boolean insertLeagueFreeAgents(List<Player> listOfFreeAgents) {
@@ -152,7 +171,7 @@ public class Player extends Stats implements Comparable<Player> {
 		}
 		return freeAgentInsertionCheck;
 	}
-	
+
 	public boolean insertLeagueRetiredPlayers(List<Player> listOfRetiredPlayers) {
 		boolean retiredPlayersInsertionCheck = false;
 
@@ -160,14 +179,14 @@ public class Player extends Stats implements Comparable<Player> {
 			retiredPlayersInsertionCheck = true;
 		} else {
 			for (Player freeAgent : listOfRetiredPlayers) {
-				retiredPlayersInsertionCheck = playerDb.insertLeagueRetiredPlayers(leagueName, freeAgent.getPlayerName(),
-						freeAgent.getPosition(), freeAgent.getSkating(), freeAgent.getShooting(),
-						freeAgent.getChecking(), freeAgent.getSaving(), freeAgent.getAge());
+				retiredPlayersInsertionCheck = playerDb.insertLeagueRetiredPlayers(leagueName,
+						freeAgent.getPlayerName(), freeAgent.getPosition(), freeAgent.getSkating(),
+						freeAgent.getShooting(), freeAgent.getChecking(), freeAgent.getSaving(), freeAgent.getAge());
 			}
 		}
 		return retiredPlayersInsertionCheck;
 	}
-	
+
 	public boolean deleteLeaguePlayers() {
 		return playerDb.deleteLeaguePlayers(leagueName);
 	}
@@ -197,8 +216,8 @@ public class Player extends Stats implements Comparable<Player> {
 		float age;
 		age = this.getAge() + yearsToIncrease;
 		this.setAge(age);
-		RetirePlayer retireplayer = new RetirePlayer();
-		this.setIsRetired(retireplayer.checkForRetirement(league, this.getAge()));
+		AgePlayer agePlayer = new AgePlayer();
+		this.setIsRetired(agePlayer.checkForRetirement(league, age));
 		decreaseInjuredDaysForPlayer(days);
 	}
 

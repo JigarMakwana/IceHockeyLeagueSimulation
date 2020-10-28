@@ -17,6 +17,7 @@ public class Team {
 	private Coach headCoach;
 	private List<Player> players = null;
 	private float teamStrength;
+	
 
 	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
 		super();

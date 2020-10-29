@@ -12,9 +12,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.League;
-import group11.Hockey.parse.ParseRootconferences;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.JsonParsing.ParseRootconferences;
 
 public class ParseRootConferenceTest {
 

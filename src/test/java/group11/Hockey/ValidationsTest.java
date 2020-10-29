@@ -8,10 +8,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.League;
+import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.Validations;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.models.LeagueTest;
-import group11.Hockey.models.Player;
 
 public class ValidationsTest {
 	League league;

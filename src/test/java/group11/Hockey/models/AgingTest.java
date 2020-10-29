@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.models.Aging;
+
 public class AgingTest {
 
 	private static Aging aging;

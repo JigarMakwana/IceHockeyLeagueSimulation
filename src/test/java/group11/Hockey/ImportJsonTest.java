@@ -7,8 +7,9 @@ import java.net.URL;
 
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.League;
 
 import static org.mockito.Mockito.*;
 

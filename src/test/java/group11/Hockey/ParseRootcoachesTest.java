@@ -11,10 +11,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-import group11.Hockey.models.Coach;
-import group11.Hockey.models.League;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.JsonParsing.ParseRootcoaches;
 import group11.Hockey.models.LeagueModelMock;
-import group11.Hockey.parse.ParseRootcoaches;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;

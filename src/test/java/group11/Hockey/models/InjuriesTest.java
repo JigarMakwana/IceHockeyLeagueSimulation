@@ -3,6 +3,9 @@ package group11.Hockey.models;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import group11.Hockey.BusinessLogic.models.Injuries;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

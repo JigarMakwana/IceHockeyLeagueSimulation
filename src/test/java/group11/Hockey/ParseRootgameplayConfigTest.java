@@ -12,11 +12,11 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.models.Aging;
-import group11.Hockey.models.GameplayConfig;
-import group11.Hockey.models.League;
-import group11.Hockey.models.Player;
-import group11.Hockey.parse.ParseRootgameplayConfig;
+import group11.Hockey.BusinessLogic.models.Aging;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.InputOutput.JsonParsing.ParseRootgameplayConfig;
 
 public class ParseRootgameplayConfigTest {
 

@@ -6,6 +6,12 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.models.Aging;
+import group11.Hockey.BusinessLogic.models.GameResolver;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.Injuries;
+import group11.Hockey.BusinessLogic.models.Trading;
+import group11.Hockey.BusinessLogic.models.Training;
 import group11.Hockey.db.IGameplayConfigDb;
 
 import static org.mockito.Mockito.mock;

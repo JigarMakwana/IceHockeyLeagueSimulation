@@ -1,5 +1,9 @@
 package group11.Hockey;
 
+import group11.Hockey.BusinessLogic.CreateTeam;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.JsonParsing.IJsonImport;
+import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.CoachDb;
 import group11.Hockey.db.GameplayConfigDb;
 import group11.Hockey.db.ICoachDb;
@@ -10,7 +14,6 @@ import group11.Hockey.db.ManagerDb;
 import group11.Hockey.db.PlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbImpl;
-import group11.Hockey.models.League;
 
 public class App {
 	public static void main(String[] args) {
@@ -34,7 +37,7 @@ public class App {
 						playerDb, coachDb, managerDb);
 //				leagueObj = createTeamObj.getTeam();
 				createTeamObj.createTeamMethod();
-				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				System.out.println("****Create Team end****");
 			} catch (Exception e) {
 				System.out.print("Exception:--> " + e.getMessage());

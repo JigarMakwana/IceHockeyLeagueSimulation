@@ -12,9 +12,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.models.GeneralManager;
-import group11.Hockey.models.League;
-import group11.Hockey.parse.ParseRootgeneralManagers;
+import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.JsonParsing.ParseRootgeneralManagers;
 
 public class ParseRootgeneralManagersTest {
 	private static JSONObject jsonObject;

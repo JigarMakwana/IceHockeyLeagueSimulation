@@ -1,5 +1,6 @@
 package group11.Hockey;
 
+import group11.Hockey.InputOutput.ICommandLineInput;
 
 public class PlayerChoice {
 	private ICommandLineInput userInputMode;

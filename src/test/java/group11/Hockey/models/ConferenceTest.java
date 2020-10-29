@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+
 import org.junit.Assert;
 
 public class ConferenceTest {

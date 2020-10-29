@@ -9,6 +9,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.db.ICoachDb;
 
 public class CoachTest {

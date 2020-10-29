@@ -3,7 +3,10 @@ package group11.Hockey.models;
 import java.util.Date;
 import java.util.HashMap;
 
-import group11.Hockey.AgePlayer;
+import group11.Hockey.BusinessLogic.AgePlayer;
+import group11.Hockey.BusinessLogic.models.Advance;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Team;
 
 public class SimulateSeason {
 

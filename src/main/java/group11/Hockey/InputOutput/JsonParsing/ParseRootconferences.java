@@ -21,14 +21,8 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 
 	@Override
 	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
-		// ParseJson parseJson = new ParseJson();
-
-		// parse Conference
-		// List<Conference> conferencesList = parseJson.parseElement(Conference.class,
-		// jsonObject, new ParseConference());
 		List<Conference> conferencesList = parseConferences(jsonObject);
 		leagueModelObj.setConferences(conferencesList);
-
 	}
 
 	private List<Conference> parseConferences(JSONObject jsonObject) throws Exception {
@@ -38,7 +32,6 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 		Iterator<JSONObject> ConferencesListIterator = ConferenceJSONArray.iterator();
 		while (ConferencesListIterator.hasNext()) {
 			conference = new Conference();
-
 			// get conferenceName
 			JSONObject ConferencesListJsonObject = ConferencesListIterator.next();
 			String conferenceName = (String) ConferencesListJsonObject.get("conferenceName");
@@ -47,12 +40,10 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 			} else {
 				conference.setConferenceName(conferenceName);
 			}
-
 			// parse Divisions
 			List<Division> divisionsList = parseDivisions(ConferencesListJsonObject);
 			conference.setDivisions(divisionsList);
 			conferencesList.add(conference);
-
 		}
 		return conferencesList;
 	}
@@ -63,7 +54,6 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 		JSONArray divisionsJSONArray = (JSONArray) ConferencesListJsonObject.get("divisions");
 		Iterator<JSONObject> divisionsListIterator = divisionsJSONArray.iterator();
 		while (divisionsListIterator.hasNext()) {
-
 			divisionObj = new Division();
 			// get division name
 			JSONObject divisionsListJsonObject = divisionsListIterator.next();
@@ -72,13 +62,10 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 				throw new Exception("Division name " + divisionName + " already exists");
 			} else {
 				divisionObj.setDivisionName(divisionName);
-
 				// parse Teams
 				List<Team> teamsList = parseTeams(divisionsListJsonObject);
-
 				divisionObj.setTeams(teamsList);
 				divisionsList.add(divisionObj);
-
 			}
 		}
 		return divisionsList;
@@ -94,41 +81,24 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 			JSONObject teamsListJsonObject = teamsListIterator.next();
 			// get team name
 			String teamName = (String) teamsListJsonObject.get("teamName");
-
 			if (isNameAlreadyExists(teamNameList, teamName)) {
 				throw new Exception("Team name " + teamName + " already exists");
 			} else {
 				teamObj.setTeamName(teamName);
 			}
-
 			// get generalManager
 			String generalManager = (String) teamsListJsonObject.get("generalManager");
 			teamObj.setGeneralManager(generalManager);
-
 			setHeadCoach(teamObj, teamsListJsonObject);
-
 			// parse Teams
 			List<Player> playersList = parsePlayers(teamsListJsonObject);
-//			if (playersList.size() > 0) {
-//				teamObj.setPlayers(playersList);
-//
-//				// check valid captian
-//				int captians = checkCaptains(playersList);
-//				if (captians == 0) {
-//					throw new Exception("Team " + teamName + " has no captain");
-//				} else if (captians > 1) {
-//					throw new Exception("Team " + teamName + " has " + captians + " captains");
-//				}
-//			}
 			if (playersList != null && playersList.size() > 0) {
 				teamObj.setPlayers(playersList);
-
 				if (hasInvalidCaptain(playersList)) {
 					throw new Exception("Team " + teamName + " has no/more captain(s)");
 				}
 			}
 			teamsList.add(teamObj);
-
 		}
 		return teamsList;
 	}
@@ -141,15 +111,12 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 		float checking = ((Double) headCoach.get("checking")).floatValue();
 		float saving = ((Double) headCoach.get("saving")).floatValue();
 		Coach coach = new Coach(skating, shooting, checking, saving, name);
-
 		team.setHeadCoach(coach);
 	}
 
 	private List<Player> parsePlayers(JSONObject teamsListJsonObject) {
-
 		Player playerObj;
 		List<Player> playersList = new ArrayList<Player>();
-
 		JSONArray playersJsonArray = (JSONArray) teamsListJsonObject.get("players");
 		if (playersJsonArray == null) {
 			return playersList;
@@ -183,19 +150,7 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 			float saving = ((Long) playersListJsonObject.get("saving")).intValue();
 			playerObj.setSaving(saving);
 			playersList.add(playerObj);
-
 		}
 		return playersList;
 	}
-
-//	private int checkCaptains(List<Player> playersList) {
-//		int captains = 0;
-//		for (Player player : playersList) {
-//			if (player.getCaptain()) {
-//				captains = captains + 1;
-//			}
-//		}
-//		return captains;
-//	}
-
 }

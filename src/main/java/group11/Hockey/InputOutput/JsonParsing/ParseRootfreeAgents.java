@@ -14,12 +14,8 @@ public class ParseRootfreeAgents implements IParseRootElement {
 
 	@Override
 	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
-		//ParseJson parseJson = new ParseJson();
-		// parse freeAgents
-		//List<Player> playersList = parseJson.parseElement(Player.class, jsonObject, new ParseFreeAgent());
-		List<Player> playersList=parseFreeAgent(jsonObject);
+		List<Player> playersList = parseFreeAgent(jsonObject);
 		leagueModelObj.setFreeAgents(playersList);
-
 	}
 
 	private List<Player> parseFreeAgent(JSONObject teamsListJsonObject) {

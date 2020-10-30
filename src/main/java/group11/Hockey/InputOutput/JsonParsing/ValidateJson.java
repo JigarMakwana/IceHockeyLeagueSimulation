@@ -49,7 +49,6 @@ public class ValidateJson extends JsonAttributes{
 		catch (Exception e) {
 			System.out.println("Exception: "+e.getMessage() );
 		}
-
 		return false;
 	}
 	

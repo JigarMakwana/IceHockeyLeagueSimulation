@@ -7,21 +7,16 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
 
 public class ParseRootcoaches implements IParseRootElement {
 
 	@Override
 	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
-		//ParseJson parseJson = new ParseJson();
-		// parse freeAgents
-		// List<Coach> coachesList = parseJson.parseElement(Coach.class, jsonObject, new
-		// ParseCoaches());
 		List<Coach> coachesList = parseCoaches(jsonObject);
 		leagueModelObj.setCoaches(coachesList);
-
 	}
 
 	private List<Coach> parseCoaches(JSONObject jsonObject) {

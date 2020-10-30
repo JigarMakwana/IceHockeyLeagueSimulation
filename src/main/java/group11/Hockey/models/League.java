@@ -26,6 +26,15 @@ public class League {
 	private List<GeneralManager> generalManagers;
 	private List<Player> retiredPlayers;
 	private String lastSimulatedDate;
+	private List<Team> qualifiedTeams=new ArrayList<Team>();
+
+	public List<Team> getQualifiedTeams() {
+		return qualifiedTeams;
+	}
+
+	public void setQualifiedTeams(List<Team> qualifiedTeams) {
+		this.qualifiedTeams = qualifiedTeams;
+	}
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {

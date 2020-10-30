@@ -28,15 +28,15 @@ public class InitializeSeason {
 		int count=seasonCount;
 		String seasonEndDate = null;
 		while(count>0) {		
-			String startDate="30/09/"+Integer.toString(year);		
-			
+			String startDate="29/09/"+Integer.toString(year);
 			System.out.println("Start date : "+startDate); 		
 			
 			Schedule regularSeasonSchedule=new Schedule(leagueObj);
 			HashMap<String,HashMap<Team,Team>> regularSchedule=regularSeasonSchedule.getSeasonSchedule(startDate);
 			
 			SimulateSeason simulateSeason=new SimulateSeason(regularSchedule,leagueObj);
-			seasonEndDate=simulateSeason.StartSimulatingSeason(startDate);
+			seasonEndDate=simulateSeason.StartSimulatingSeason(startDate);		
+			year++;
 			count--;	
 		}
 		//set or return last date to current date after simulations

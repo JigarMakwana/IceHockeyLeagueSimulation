@@ -33,4 +33,9 @@ public class Parse {
 		}		
 		return year;
 	}
+	public String parseDateToString(Date date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+        String stringDate = dateFormat.format(date);  
+	    return stringDate;
+	}
 }

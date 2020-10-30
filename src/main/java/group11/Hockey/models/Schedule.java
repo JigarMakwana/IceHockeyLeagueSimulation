@@ -1,11 +1,6 @@
 package group11.Hockey.models;
 
 import java.text.ParseException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,19 +26,21 @@ public class Schedule {
 		
 		Advance advanceObj = new Advance();
 		Parse parseObj=new Parse();
+		Deadlines deadline=new Deadlines();
 		
 		int totalTeams=0,divLimit,divLimitReached,inConLimit,inConLimitReached,outConLimit,outConLimitReached;
 		int team1DivCount,team1InConCount,team1OutConCount,totalGames=0;
 		int team2DivCount,team2InConCount,team2OutConCount,loop=0,totalDivTeams,totalInConTeams,totalOutConTeams,team2TotalCount;
 		String date=startDate,time="00:00:00";
-		int year=parseObj.parseStringToYear(date);
-		year++;
-		LocalDate eDate = LocalDate.of(year, Month.APRIL, 1);	
-	    LocalDate firstSaturday = eDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.SATURDAY));
-	    String endDate = firstSaturday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
 		Team t1,t2;
 		Division div1,div2;	
 		Conference con1,con2;
+		
+		Date dateTime=parseObj.parseStringToDate(date);		
+		Date endDateTime = deadline.getRegularSeasonDeadline(startDate);
+		String regularSeasonStartDate=advanceObj.getAdvanceDate(date,1);	
+		
 
 		ArrayList<Team> teamName = new ArrayList<Team>(); 
 		HashMap<Team,Integer> scheduledDivisionMatchCount = new HashMap<>(); 
@@ -56,6 +53,9 @@ public class Schedule {
 		HashMap<Conference,Integer> conTeamCount=new HashMap<>();
 		HashMap<Division,Integer> divTeamCount=new HashMap<>();
 		HashMap<Team,Integer> totalGameCount=new HashMap<>();
+		HashMap<String,HashMap<Team,Team>> regularSchedule = new HashMap<>();		
+		
+		
 		
 		List<Conference> cconferenceList = leagueObj.getConferences();
 		for (Conference conference : cconferenceList) {		
@@ -78,12 +78,6 @@ public class Schedule {
 				}
 			}
 		}
-		
-		Date dateTime=parseObj.parseStringToDate(date);		
-		Date endDateTime = parseObj.parseStringToDate(endDate);
-		String regularSeasonStartDate=advanceObj.getAdvanceDate(date,1);	
-		
-		HashMap<String,HashMap<Team,Team>> regularSchedule = new HashMap<>();		
 		
 		
 		for(int i=0;i<totalTeams;i++) {
@@ -200,9 +194,8 @@ public class Schedule {
 						}
 					}
 				}
-			}//System.out.println("exit Div while "+i);
-			//System.out.println("Scheduled "+scheduledDivisionMatchCount.get(teamName.get(i))+" in division games for "+i);
-			//System.out.println("\nIN DIVISION STARTS\n");
+			}
+				
 			//In conference but not same division starts
 						//ensures team schedules 24 games
 

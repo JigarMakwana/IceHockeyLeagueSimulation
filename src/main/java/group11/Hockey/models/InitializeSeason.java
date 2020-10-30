@@ -3,6 +3,9 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Team;
+
 public class InitializeSeason {	
 	//
 	private int seasonCount;

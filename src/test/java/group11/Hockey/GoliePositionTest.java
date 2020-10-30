@@ -5,7 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.models.Player;
+import group11.Hockey.BusinessLogic.GoaliePosition;
+import group11.Hockey.BusinessLogic.models.Player;
 
 public class GoliePositionTest {
 

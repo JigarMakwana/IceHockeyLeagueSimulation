@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.models.Trading;
 import junit.framework.Assert;
 
 import org.junit.BeforeClass;

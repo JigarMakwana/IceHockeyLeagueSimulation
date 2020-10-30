@@ -7,12 +7,12 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.Division;
-import group11.Hockey.models.League;
 import group11.Hockey.models.LeagueModelMock;
-import group11.Hockey.models.Team;
 
 public class CreateTeamTest {
 

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.db.ProcedureCallDb;
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.Division;
-import group11.Hockey.models.League;
-import group11.Hockey.models.Team;
 
 public class TeamDbImpl implements ITeamDb {
 

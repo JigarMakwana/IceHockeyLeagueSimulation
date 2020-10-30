@@ -5,12 +5,8 @@ c
 3src/main/java/group11/Hockey/db/ConnectionUtil.java,9\0\901f8185390eb0c99759133e82fe2a6223130281
 e
 5src/main/java/group11/Hockey/db/GameplayConfigDb.java,1\d\1de6cc5c0dd0c4199a0e708abb61f775cdb45d22
-^
-.src/main/java/group11/Hockey/ParseCoaches.java,8\4\84a7c74458af136ba79a9bb1a915cef8e2d033e2
 \
 ,src/main/java/group11/Hockey/IAttribute.java,4\e\4e9e40f0840a4586b010cde8165ec5962d24493f
-`
-0src/main/java/group11/Hockey/IUserInputMode.java,1\0\10b28dcf31fa7b212210a588ae5a9db349259fc0
 e
 5src/main/java/group11/Hockey/db/League/ILeagueDb.java,9\e\9e2cf59a7ea901fcb983568f892298adbfa6eda6
 a
@@ -22,10 +18,6 @@ h
 _
 /src/main/java/group11/Hockey/models/League.java,5\2\5217cd61a80d59dc336e2b030b2ae1e241fa44f3
 ]
--src/main/java/group11/Hockey/ParsePlayer.java,e\6\e6d60b07ce09bcbf9395b2710be22c396fa039be
-b
-2src/main/java/group11/Hockey/ParseRootcoaches.java,4\3\43e51521cd00ec153d5557a9ae3f8a84e444d4aa
-]
 -src/main/java/group11/Hockey/models/Team.java,6\8\684b63995dec2c3cf7fdf4b28f32d35cf2ec0c86
 `
 0src/main/java/group11/Hockey/models/Trading.java,c\7\c7478667c92229129be29609d2f15097334be2d8
@@ -33,10 +25,6 @@ U
 %src/main/java/group11/Hockey/App.java,0\7\07d14e588522387629bef5a91ea792eecb94e988
 ^
 .src/main/java/group11/Hockey/PlayerChoice.java,c\6\c62887e6c32fd75393dd09795edff18097821ffb
-\
-,src/main/java/group11/Hockey/IParseJson.java,7\5\75cbcdc579bb6f65a861c94dd3d37f169d831cfa
-c
-3src/main/java/group11/Hockey/IParseRootElement.java,f\d\fd9259f539d92565afe9286cdd238abba926b82c
 _
 /src/main/java/group11/Hockey/models/Player.java,2\d\2d5e28da02cf15f11b71da9622c9c1df16e0854c
 f
@@ -80,8 +68,6 @@ b
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-\
-,src/main/java/group11/Hockey/ImportJson.java,3\6\3635d78e3bc768e7baa47edf4e03032c721dd7f1
 c
 3src/test/java/group11/Hockey/AIToAITradingTest.java,c\6\c69f3efde387a6afbcb88174d0fd44b46c214a3b
 c
@@ -90,8 +76,6 @@ g
 7src/main/java/group11/Hockey/models/GameplayConfig.java,6\a\6aee8b6049c78baaf377291e2f625e2ff615caf7
 b
 2src/test/java/group11/Hockey/InjurySystemTest.java,a\e\ae191fbc93d3dc11e3698a255c617fb67aca4142
-`
-0src/main/java/group11/Hockey/ParseFreeAgent.java,2\e\2e79631e1b2e16975a445f8c9b50ee3d593f0633
 Y
 )src/main/java/group11/Hockey/Triplet.java,7\0\70a855cec9edbc5990fb48ba24a6a73d96d07775
 ^
@@ -100,3 +84,9 @@ k
 ;src/test/java/group11/Hockey/models/GameplayConfigTest.java,4\6\46206903bed19cffeb430d8770a60dd77d397555
 b
 2src/test/java/group11/Hockey/TradingModelMock.java,8\a\8a9b190938140ab22ea19f2cc1a5dad1e564ffcd
+a
+1src/main/java/group11/Hockey/SerializeLeague.java,f\e\fe5380b311cef42f8ab05f483f55d06862518ece
+c
+3src/main/java/group11/Hockey/DeserializeLeague.java,2\2\229232109b5fc14abb9cd499dcc74e2a85154c89
+Z
+*src/main/java/group11/Hockey/ATrading.java,b\4\b44cade6378a0371442cf3a6c8c62a0c048b5fd2

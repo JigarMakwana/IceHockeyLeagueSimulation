@@ -1,5 +1,6 @@
 package group11.Hockey.models;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import group11.Hockey.db.IPlayerDb;
 /**
  * This is model class for Player and it contains all the business logic related
  * to player
- * 
+ *
  * @author jatinpartaprana
  *
  */
@@ -116,7 +117,7 @@ public class Player extends Stats implements Comparable<Player> {
 	public void setInjured(boolean isInjured) {
 		this.isInjured = isInjured;
 	}
-	
+
 	public boolean checkInjury(League league) {
 		if(this.isInjured()) {
 			return this.isInjured();
@@ -232,6 +233,24 @@ public class Player extends Stats implements Comparable<Player> {
 				freeAgent.setCaptain(this.getCaptain());
 				playersList.add(freeAgent);
 				freeAgentsItr.remove();
+				break;
+			}
+		}
+		//TODO implement exception if no player is hired from free agents
+	}
+
+	public void dropPlayerToFreeAgent(League league, List<Player> playersList) {
+		List<Player> freeAgents = league.getFreeAgents();
+		Iterator<Player> playersListItr = playersList.iterator();
+
+		while (playersListItr.hasNext()) {
+			Player player = playersListItr.next();
+			if (player.getPosition().equalsIgnoreCase(this.getPosition())) {
+				player.setIsFreeAgent(true);
+				player.setCaptain(this.getCaptain());
+				freeAgents.add(player);
+				playersListItr.remove();
+				break;
 			}
 		}
 	}

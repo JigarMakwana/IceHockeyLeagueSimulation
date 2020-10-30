@@ -32,11 +32,11 @@ public class App {
 				AIToAITrading aiToAITradObj = new AIToAITrading(leagueObj);
 				aiToAITradObj.generateTradeOffers();
 
-				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
-						playerDb, coachDb, managerDb);
-//				leagueObj = createTeamObj.getTeam();
-				createTeamObj.createTeamMethod();
-				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+//				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
+//						playerDb, coachDb, managerDb);
+////				leagueObj = createTeamObj.getTeam();
+//				createTeamObj.createTeamMethod();
+//				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 
 				System.out.println("****Create Team end****");
 			} catch (Exception e) {

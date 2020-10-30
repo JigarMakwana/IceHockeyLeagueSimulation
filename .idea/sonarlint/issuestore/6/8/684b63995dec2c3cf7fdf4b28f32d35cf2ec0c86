@@ -1,16 +1,14 @@
 
-Y
-java:S1155s">Use isEmpty() to check whether the collection is empty or not.(Ë¡œ™ÿÿÿÿÿ
 L
-java:S1125¯")Remove the literal "false" boolean value.(ù±½âÿÿÿÿÿ8›èöÚÖ.
-B
-java:S1659 "Declare "j" on a separate line.(¦¢Éëùÿÿÿÿ8›èöÚÖ.
-R
-java:S1068"0Remove this unused "teamStrength" private field.(ìºâ™úÿÿÿÿ8ÆÍ”¤Ö.
-]
-java:S1117r"@Rename "teamStrength" which hides the field declared at line 20.(€­ŽÃ8ÆÍ”¤Ö.
+java:S1125©")Remove the literal "false" boolean value.(ù±½âÿÿÿÿÿ8Ì£‡„×.
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
-M
-java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8®›óÚÖ.
 ]
-java:S1117q";Rename "players" which hides the field declared at line 19.(È™¡Šûÿÿÿÿ8ÆÍ”¤Ö.
+java:S1117]";Rename "players" which hides the field declared at line 18.(È™¡Šûÿÿÿÿ8Ì£‡„×.
+R
+java:S1068"0Remove this unused "teamStrength" private field.(ìºâ™úÿÿÿÿ8Ì£‡„×.
+`
+java:S1155_">Use isEmpty() to check whether the collection is empty or not.(Ë¡œ™ÿÿÿÿÿ8Ì£‡„×.
+]
+java:S1117^"@Rename "teamStrength" which hides the field declared at line 19.(€­ŽÃ8Ì£‡„×.
+B
+java:S1659š"Declare "j" on a separate line.(¦¢Éëùÿÿÿÿ8Ì£‡„×.

@@ -1,14 +1,17 @@
 
-N
-java:S1117Ë"7Rename "age" which hides the field declared at line 28.(¯Š¿
-W
-java:S1128	"5Remove this unused import 'group11.Hockey.IPosition'.(Õ²Åûÿÿÿÿ8ä¢‰ÚÖ.
-n	java:S116"TRename this field "IsRetired" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨¼®þúÿÿÿÿ
-a
-java:S1155¥">Use isEmpty() to check whether the collection is empty or not.(Ø¢–‡øÿÿÿÿ8ßÅŸ¤Ö.
-[	java:S107%"AConstructor has 9 parameters, which is greater than 7 authorized.(ßÍüÐþÿÿÿÿ
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
-u
-java:S1210¶"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(£ôùÿÿÿÿ
 Z
-java:S1155–">Use isEmpty() to check whether the collection is empty or not.(ÎãªÛùÿÿÿÿ
+java:S1155£">Use isEmpty() to check whether the collection is empty or not.(ÎãªÛùÿÿÿÿ
+u
+java:S1210Ã"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(£ôùÿÿÿÿ
+N
+java:S1117Ø"7Rename "age" which hides the field declared at line 30.(¯Š¿
+W
+java:S1128
+"5Remove this unused import 'group11.Hockey.IPosition'.(Õ²Åûÿÿÿÿ8ä¢‰ÚÖ.
+[	java:S107'"AConstructor has 9 parameters, which is greater than 7 authorized.(ßÍüÐþÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
+a
+java:S1155²">Use isEmpty() to check whether the collection is empty or not.(Ø¢–‡øÿÿÿÿ8ßÅŸ¤Ö.
+n	java:S116 "TRename this field "IsRetired" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨¼®þúÿÿÿÿ
+Z
+java:S1128"8Remove this unused import 'group11.Hockey.RetirePlayer'.(òÊÊ‘úÿÿÿÿ8£ßó…×.

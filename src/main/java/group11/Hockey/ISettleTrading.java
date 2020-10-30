@@ -1,8 +1,7 @@
 package group11.Hockey;
 
+import group11.Hockey.models.Team;
+
 public interface ISettleTrading {
-    public void checkTeamConstrains();
-    public void dropPlayer();
-    public void hirePlayer();
-    public void settleTrade();
+    public void settleTeam(Team team);
 }

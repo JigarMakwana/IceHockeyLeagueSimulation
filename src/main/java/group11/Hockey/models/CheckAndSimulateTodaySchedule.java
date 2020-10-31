@@ -1,11 +1,11 @@
 package group11.Hockey.models;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -27,9 +27,9 @@ public class CheckAndSimulateTodaySchedule {
 	public void CheckAndSimulateToday(String date) {
 		Advance advanceObj = new Advance();
 		Parse parse = new Parse();
+		Team team1, team2, won, lost;
 		String time = "00:00:00", id = date + "T" + time;
 		HashMap<Team, Team> todayTeams = new HashMap<>();
-		Team team1, team2, won, lost;
 		todayTeams = schedule.get(id);
 		int points, updatePoints, year, updateWin, loss;
 		Date possibleSeasonEnd, possibleSeasonStart, dateTime;
@@ -41,9 +41,6 @@ public class CheckAndSimulateTodaySchedule {
 		possibleSeasonEnd = advanceObj.getFirstSaturdayOfAprilInYear(year);
 
 		while (schedule.containsKey(id)) {
-			if (time == "24:00:00") {
-				break;
-			}
 			List<Conference> cconferenceList = leagueObj.getConferences();
 			for (Conference conference : cconferenceList) {
 				List<Division> divisionList = conference.getDivisions();
@@ -91,8 +88,6 @@ public class CheckAndSimulateTodaySchedule {
 									updateWin++;
 									won.setWins(updateWin);
 									if (updateWin == 4) {
-										// add won team into qualified teams list
-										// qualifiedTeams.add(won);
 										if (qualifiedTeams.contains(lost)) {
 											qualifiedTeams.remove(lost);
 										}
@@ -112,10 +107,14 @@ public class CheckAndSimulateTodaySchedule {
 							}
 
 						}
-						// call checkInjury();
+						InjurySystem injury=new InjurySystem(leagueObj);
+						injury.setInjuryToPlayers(team1);
+						injury.setInjuryToPlayers(team2);
 					}
 				}
 			}
+
+			// in between stanley schedule
 			if ((dateTime.compareTo(possibleSeasonStart) <= 0) && (dateTime.compareTo(possibleSeasonEnd) > 0)) {
 				try {
 					time = advanceObj.getAdvanceTime(time, 5);

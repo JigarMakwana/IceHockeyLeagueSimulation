@@ -1,6 +1,7 @@
 package group11.Hockey;
 
 import group11.Hockey.BusinessLogic.CreateTeam;
+import group11.Hockey.BusinessLogic.LoadTeam;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.CoachDb;
@@ -24,7 +25,6 @@ public class App {
 		IPlayerDb playerDb = new PlayerDb();
 		ICoachDb coachDb = new CoachDb();
 		IManagerDb managerDb = new ManagerDb();
-
 		if (args.length > 0) {
 			String jsonFile = args[0];
 			JsonImport importJson = new JsonImport(leagueDb);
@@ -57,6 +57,26 @@ public class App {
 //			LoadTeam loadTeam = new LoadTeam(userInputMode, teamDb);
 //
 //			try {
+//				leagueObj = importJson.parseFile(jsonFile);
+//				//SerializeLeague seralizeLeague = new SerializeLeague();
+//				//seralizeLeague.serializeLeagueObject(leagueObj);
+//				
+//				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
+//						playerDb, coachDb, managerDb);
+////				leagueObj = createTeamObj.getTeam();
+//				createTeamObj.createTeamMethod();
+//				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+//				System.out.println("****Create Team end****");
+//			} catch (Exception e) {
+//				System.out.print("Exception:--> " + e.getMessage());
+//				System.exit(0);
+//			}
+//
+//		} else {
+//			ITeamDb teamDb = new TeamDbImpl();
+//			LoadTeam loadTeam = new LoadTeam(teamDb);
+//
+//			try {
 //				loadTeam.getTeam();
 //				System.out.println("****Load Team end****");
 //			} catch (Exception e) {
@@ -65,8 +85,9 @@ public class App {
 //				System.exit(0);
 //			}
 
-		}
+		//}
 
 
 	}
+}
 }

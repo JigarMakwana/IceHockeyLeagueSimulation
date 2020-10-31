@@ -6,15 +6,15 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class JsonAttributes {
+public class ValidateJsonAttributes {
 	
 	private ILeagueDb leagueDb;
 	
-	public JsonAttributes() {
+	public ValidateJsonAttributes() {
 		super();
 	}
 	
-	public JsonAttributes(ILeagueDb leagueDb) {
+	public ValidateJsonAttributes(ILeagueDb leagueDb) {
 		super();
 		this.leagueDb = leagueDb;
 	}	

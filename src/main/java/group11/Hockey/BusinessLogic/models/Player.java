@@ -10,6 +10,7 @@ import group11.Hockey.BusinessLogic.GoaliePosition;
 import group11.Hockey.BusinessLogic.IPosition;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.PlayerStrength;
+import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.RetirePlayer;
 import group11.Hockey.db.IPlayerDb;
 
@@ -147,9 +148,9 @@ public class Player extends Stats implements Comparable<Player> {
 	public float getPlayerStrength() {
 		float strength;
 		PlayerStrength playerStrength = new PlayerStrength();
-		if (this.position.equalsIgnoreCase("Forward")) {
+		if (this.position.equalsIgnoreCase(Positions.FORWARD.toString())) {
 			strength = playerStrength.calculatePlayerStrength(new ForwardPosition(this));
-		} else if (this.position.equalsIgnoreCase("Defense")) {
+		} else if (this.position.equalsIgnoreCase(Positions.DEFENSE.toString())) {
 			strength = playerStrength.calculatePlayerStrength(new DefensePosition(this));
 		} else {
 			strength = playerStrength.calculatePlayerStrength(new GoaliePosition(this));

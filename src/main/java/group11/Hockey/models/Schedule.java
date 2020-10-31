@@ -102,9 +102,6 @@ public class Schedule {
 				t2 = teamName.get(j);
 				div2 = teamDivision.get(t2);
 				team2DivCount = scheduledDivisionMatchCount.get(t2);
-				/*
-				 * if(totalGameCount.get(t2)>=82) { break; }
-				 */
 				if (divLimitReached == divLimit) {
 					break;
 				}
@@ -148,14 +145,11 @@ public class Schedule {
 					div2 = teamDivision.get(t2);
 					team2DivCount = scheduledDivisionMatchCount.get(t2);
 					team2TotalCount = totalGameCount.get(t2);
-					/*
-					 * if(totalGameCount.get(t2)<=82) { break; }
-					 */
 					if (divLimitReached == divLimit) {
 						break;
 					}
-
-					if ((div1.getDivisionName() == div2.getDivisionName()) && (t1.getTeamName() != t2.getTeamName())) {
+					;
+					if ((div1.getDivisionName() == div2.getDivisionName()) && (((t1.getTeamName().compareTo(t2.getTeamName()))>0)||((t1.getTeamName().compareTo(t2.getTeamName()))<0))) {
 
 						if ((team2TotalCount < 82) && (team2DivCount < divLimit)) {
 
@@ -193,13 +187,10 @@ public class Schedule {
 				con2 = teamConference.get(t2);
 				team2InConCount = scheduledInConferenceMatchCount.get(t2);
 				team2TotalCount = totalGameCount.get(t2);
-				/*
-				 * if(totalGameCount.get(t2)>=82) { break; }
-				 */
 				if (inConLimitReached == inConLimit) {
 					break;
 				}
-				if ((div1.getDivisionName() != div2.getDivisionName())
+				if (((div1.getDivisionName().compareTo(div2.getDivisionName())<0)||(div1.getDivisionName().compareTo(div2.getDivisionName())>0))
 						&& (con2.getConferenceName() == con1.getConferenceName())) {
 
 					// ensures team played every other team once
@@ -233,22 +224,17 @@ public class Schedule {
 			loop = 0;
 			while ((loop < totalInConTeams)) {
 				loop++;
-				// System.out.println("entered Div while "+i);
-
 				for (int k = 0; k < totalTeams; k++) {
 					t2 = teamName.get(k);
 					div2 = teamDivision.get(t2);
 					con2 = teamConference.get(t2);
 					team2InConCount = scheduledInConferenceMatchCount.get(t2);
 					team2TotalCount = totalGameCount.get(t2);
-					/*
-					 * if(totalGameCount.get(t2)<=82) { break; }
-					 */
 					if (inConLimitReached == inConLimit) {
 						break;
 					}
 
-					if ((div1.getDivisionName() != div2.getDivisionName())
+					if (((div1.getDivisionName().compareTo(div2.getDivisionName())<0)||(div1.getDivisionName().compareTo(div2.getDivisionName())>0))
 							&& (con2.getConferenceName() == con1.getConferenceName()))
 
 						if ((team2TotalCount < 82) && (team2InConCount < inConLimit)) {
@@ -284,13 +270,10 @@ public class Schedule {
 				con2 = teamConference.get(t2);
 				team2OutConCount = scheduledOutConferenceMatchCount.get(t2);
 				team2TotalCount = totalGameCount.get(t2);
-				/*
-				 * if(totalGameCount.get(t2)>=82) { break; }
-				 */
 				if (outConLimitReached == outConLimit) {
 					break;
 				}
-				if (con2.getConferenceName() != con1.getConferenceName()) {
+				if (((con2.getConferenceName().compareTo(con1.getConferenceName()))>0)||((con2.getConferenceName().compareTo(con1.getConferenceName()))<0)) {
 
 					// ensures team played every other team once
 					if ((team2TotalCount < 82) && (team2OutConCount < 26)) {
@@ -324,22 +307,17 @@ public class Schedule {
 			totalOutConTeams = totalTeams - totalDivTeams - totalInConTeams;
 			while ((loop < totalOutConTeams)) {
 				loop++;
-				// System.out.println("entered Div while "+i);
-
 				for (int k = 0; k < totalTeams; k++) {
 					t2 = teamName.get(k);
 					div2 = teamDivision.get(t2);
 					con2 = teamConference.get(t2);
 					team2OutConCount = scheduledOutConferenceMatchCount.get(t2);
 					team2TotalCount = totalGameCount.get(t2);
-					/*
-					 * if(totalGameCount.get(t2)<=82) { break; }
-					 */
 					if (outConLimitReached == outConLimit) {
 						break;
 					}
 
-					if (con2.getConferenceName() != con1.getConferenceName()) {
+					if (((con2.getConferenceName().compareTo(con1.getConferenceName()))>0)||((con2.getConferenceName().compareTo(con1.getConferenceName()))<0)) {
 
 						if ((team2TotalCount < 82) && (team2OutConCount < 26)) {
 

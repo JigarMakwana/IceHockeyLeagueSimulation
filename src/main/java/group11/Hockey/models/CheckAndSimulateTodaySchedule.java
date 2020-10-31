@@ -47,10 +47,9 @@ public class CheckAndSimulateTodaySchedule {
 				for (Division division : divisionList) {
 					List<Team> teamList = division.getTeams();
 					for (Team team : teamList) {
-
-						team1 = team;
-						team2 = todayTeams.get(team);
-						if (team2 != null) {
+						if (todayTeams.containsKey(team)) {
+							team1 = team;
+							team2 = todayTeams.get(team);
 							System.out
 									.println(id + " teams are " + team1.getTeamName() + " and " + team2.getTeamName());
 							long wonTeam = Math.round(Math.random());

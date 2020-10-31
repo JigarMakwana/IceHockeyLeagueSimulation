@@ -58,6 +58,9 @@ public class Division {
 
 	public boolean isDivisionNameValid(String divisionName, List<Division> divisionList) {
 		boolean isDivisionNameValid = false;
+		if(divisionList == null) {
+			return isDivisionNameValid;
+		}
 		for(Division division: divisionList) {
 			if(division.getDivisionName().equalsIgnoreCase(divisionName)) {
 				isDivisionNameValid = true;

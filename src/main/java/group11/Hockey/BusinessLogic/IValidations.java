@@ -17,7 +17,7 @@ public interface IValidations {
 
 	public boolean headCoachNameCheck(String name, League league);
 	
-	public boolean playerCheck(int playerNumber, League league, List<Integer> selectedValues, List<Player> skaters,
+	public boolean playerCheck(String playerNumber, League league, List<Integer> selectedValues, List<Player> skaters,
 			List<Player> goalies);
 
 }

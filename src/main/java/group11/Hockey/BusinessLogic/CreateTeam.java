@@ -35,10 +35,10 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 		this.league = leagueObj;
 	}
 
-	public CreateTeam(League league, Conference conference, Division division) {
+
+	public CreateTeam(League league,  ICommandLineInput userInputMode) {
 		this.league = league;
-		this.conference = conference;
-		this.division = division;
+		this.userInputMode = userInputMode;
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 			while (playerValueCheck) {
 				display.showMessageOnConsole("Select " + (i+1) + " player");
 				playerValue = userInputMode.getValueFromUser();
-				playerValueCheck = validation.playerCheck(Integer.parseInt(playerValue), league, selectedValuesFromUser,
+				playerValueCheck = validation.playerCheck(playerValue, league, selectedValuesFromUser,
 						skatersList, goalies);
 				if (playerValueCheck == false) {
 					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue) - 1).getPosition();

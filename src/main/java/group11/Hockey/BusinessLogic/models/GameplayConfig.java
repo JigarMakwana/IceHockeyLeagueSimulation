@@ -21,6 +21,10 @@ public class GameplayConfig {
 		this.training = training;
 		this.trading = trading;
 	}
+	
+	public GameplayConfig() {
+		
+	}
 
 	public GameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries, Training training, Trading trading,
 			IGameplayConfigDb gameplayConfigDb, String leagueName) {

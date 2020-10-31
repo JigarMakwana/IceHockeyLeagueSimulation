@@ -150,7 +150,7 @@ public class LeagueTest {
 		IManagerDb managerDb = mock(IManagerDb.class);
 
 		when(leagueDb.insertLeagueInDb(null, "conf", "div", null, null, null)).thenReturn(true);
-		when(gameplayConfigDb.insertGameplayConfig(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "league")).thenReturn(true);
+		when(gameplayConfigDb.insertGameplayConfig(null,null,null,null,null, "league")).thenReturn(true);
 		when(playerDb.insertLeagueFreeAgents("league", "A1", "fwd", 0, 0, 0, 0, 0)).thenReturn(true);
 		when(coachDb.insertCoaches("league", "c1", 0, 0, 0, 0)).thenReturn(true);
 		when(managerDb.insertManager("league", "M1")).thenReturn(true);

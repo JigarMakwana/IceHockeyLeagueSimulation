@@ -37,7 +37,7 @@ public class App {
 						playerDb, coachDb, managerDb);
 //				leagueObj = createTeamObj.getTeam();
 				createTeamObj.createTeamMethod();
-				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				System.out.println("****Create Team end****");
 				InitializeSeason initialize=new InitializeSeason(leagueObj,leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				

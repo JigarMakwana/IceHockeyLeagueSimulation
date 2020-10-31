@@ -91,7 +91,7 @@ public class LeagueDbImpl implements ILeagueDb {
 	public boolean insertLeagueInDb(League league, String conferenceName, String divisionName, Team team, Coach coach,
 			Player player) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb(
-				"{call insertNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)}");
+				"{call insertNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
 		try {
@@ -115,7 +115,7 @@ public class LeagueDbImpl implements ILeagueDb {
 			statement.setFloat(16, player.getChecking());
 			statement.setFloat(17, player.getSaving());
 			statement.setFloat(18, player.getAge());
-			// statement.setString(19, league.emd);
+			statement.setString(19, league.getStartDate());
 			statement.setInt(20, team.getPoints());
 
 			procedureCallDb.executeProcedure();

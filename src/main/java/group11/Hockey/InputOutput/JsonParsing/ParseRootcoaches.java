@@ -22,21 +22,21 @@ public class ParseRootcoaches implements IParseRootElement {
 	private List<Coach> parseCoaches(JSONObject jsonObject) {
 		Coach coach;
 		List<Coach> coachesList = new ArrayList<Coach>();
-		JSONArray coachesJSONArray = (JSONArray) jsonObject.get("coaches");
+		JSONArray coachesJSONArray = (JSONArray) jsonObject.get(Attributes.COACHES.getAttribute());
 		Iterator<JSONObject> coachesListIterator = coachesJSONArray.iterator();
 		while (coachesListIterator.hasNext()) {
 
 			JSONObject coachListJsonObject = coachesListIterator.next();
 			// get playerName
-			String name = (String) coachListJsonObject.get("name");
+			String name = (String) coachListJsonObject.get(Attributes.NAME.getAttribute());
 			// get skating
-			float skating = ((Double) coachListJsonObject.get("skating")).floatValue();
+			float skating = ((Double) coachListJsonObject.get(Attributes.SKATING.getAttribute())).floatValue();
 			// get shooting
-			float shooting = ((Double) coachListJsonObject.get("shooting")).floatValue();
+			float shooting = ((Double) coachListJsonObject.get(Attributes.SHOOTING.getAttribute())).floatValue();
 			// get checking
-			float checking = ((Double) coachListJsonObject.get("checking")).floatValue();
+			float checking = ((Double) coachListJsonObject.get(Attributes.CHECKING.getAttribute())).floatValue();
 			// get saving
-			float saving = ((Double) coachListJsonObject.get("saving")).floatValue();
+			float saving = ((Double) coachListJsonObject.get(Attributes.SAVING.getAttribute())).floatValue();
 
 			coach = new Coach(skating, shooting, checking, saving, name);
 			coachesList.add(coach);

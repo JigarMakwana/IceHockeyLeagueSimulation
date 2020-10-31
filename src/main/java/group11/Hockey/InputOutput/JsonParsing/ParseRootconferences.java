@@ -14,7 +14,7 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
-public class ParseRootconferences extends ValidateJson implements IParseRootElement {
+public class ParseRootconferences extends ValidateJsonSchema implements IParseRootElement {
 	private List<String> conferenceNamesList = new ArrayList<String>();
 	private List<String> divisionNamesList = new ArrayList<String>();
 	private List<String> teamNameList = new ArrayList<String>();
@@ -28,13 +28,13 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 	private List<Conference> parseConferences(JSONObject jsonObject) throws Exception {
 		Conference conference;
 		List<Conference> conferencesList = new ArrayList<Conference>();
-		JSONArray ConferenceJSONArray = (JSONArray) jsonObject.get("conferences");
+		JSONArray ConferenceJSONArray = (JSONArray) jsonObject.get(Attributes.CONFERENCES.getAttribute());
 		Iterator<JSONObject> ConferencesListIterator = ConferenceJSONArray.iterator();
 		while (ConferencesListIterator.hasNext()) {
 			conference = new Conference();
 			// get conferenceName
 			JSONObject ConferencesListJsonObject = ConferencesListIterator.next();
-			String conferenceName = (String) ConferencesListJsonObject.get("conferenceName");
+			String conferenceName = (String) ConferencesListJsonObject.get(Attributes.CONFERENCENAME.getAttribute());
 			if (isNameAlreadyExists(conferenceNamesList, conferenceName)) {
 				throw new Exception("Conference name " + conferenceName + " already exists");
 			} else {
@@ -51,13 +51,13 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 	private List<Division> parseDivisions(JSONObject ConferencesListJsonObject) throws Exception {
 		Division divisionObj;
 		List<Division> divisionsList = new ArrayList<Division>();
-		JSONArray divisionsJSONArray = (JSONArray) ConferencesListJsonObject.get("divisions");
+		JSONArray divisionsJSONArray = (JSONArray) ConferencesListJsonObject.get(Attributes.DIVISIONS.getAttribute());
 		Iterator<JSONObject> divisionsListIterator = divisionsJSONArray.iterator();
 		while (divisionsListIterator.hasNext()) {
 			divisionObj = new Division();
 			// get division name
 			JSONObject divisionsListJsonObject = divisionsListIterator.next();
-			String divisionName = (String) divisionsListJsonObject.get("divisionName");
+			String divisionName = (String) divisionsListJsonObject.get(Attributes.DIVISIONNAME.getAttribute());
 			if (isNameAlreadyExists(divisionNamesList, divisionName)) {
 				throw new Exception("Division name " + divisionName + " already exists");
 			} else {
@@ -74,20 +74,20 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 	private List<Team> parseTeams(JSONObject divisionsListJsonObject) throws Exception {
 		Team teamObj;
 		List<Team> teamsList = new ArrayList<Team>();
-		JSONArray teamsJSONArray = (JSONArray) divisionsListJsonObject.get("teams");
+		JSONArray teamsJSONArray = (JSONArray) divisionsListJsonObject.get(Attributes.TEAMS.getAttribute());
 		Iterator<JSONObject> teamsListIterator = teamsJSONArray.iterator();
 		while (teamsListIterator.hasNext()) {
 			teamObj = new Team();
 			JSONObject teamsListJsonObject = teamsListIterator.next();
 			// get team name
-			String teamName = (String) teamsListJsonObject.get("teamName");
+			String teamName = (String) teamsListJsonObject.get(Attributes.TEAMNAME.getAttribute());
 			if (isNameAlreadyExists(teamNameList, teamName)) {
 				throw new Exception("Team name " + teamName + " already exists");
 			} else {
 				teamObj.setTeamName(teamName);
 			}
 			// get generalManager
-			String generalManager = (String) teamsListJsonObject.get("generalManager");
+			String generalManager = (String) teamsListJsonObject.get(Attributes.GENERALMANAGER.getAttribute());
 			teamObj.setGeneralManager(generalManager);
 			setHeadCoach(teamObj, teamsListJsonObject);
 			// parse Teams
@@ -104,12 +104,12 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 	}
 
 	private void setHeadCoach(Team team, JSONObject listJsonObject) {
-		JSONObject headCoach = (JSONObject) listJsonObject.get("headCoach");
-		String name = (String) headCoach.get("name");
-		float skating = ((Double) headCoach.get("skating")).floatValue();
-		float shooting = ((Double) headCoach.get("shooting")).floatValue();
-		float checking = ((Double) headCoach.get("checking")).floatValue();
-		float saving = ((Double) headCoach.get("saving")).floatValue();
+		JSONObject headCoach = (JSONObject) listJsonObject.get(Attributes.HEADCOACH.getAttribute());
+		String name = (String) headCoach.get(Attributes.NAME.getAttribute());
+		float skating = ((Double) headCoach.get(Attributes.SKATING.getAttribute())).floatValue();
+		float shooting = ((Double) headCoach.get(Attributes.SHOOTING.getAttribute())).floatValue();
+		float checking = ((Double) headCoach.get(Attributes.CHECKING.getAttribute())).floatValue();
+		float saving = ((Double) headCoach.get(Attributes.SAVING.getAttribute())).floatValue();
 		Coach coach = new Coach(skating, shooting, checking, saving, name);
 		team.setHeadCoach(coach);
 	}
@@ -117,7 +117,7 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 	private List<Player> parsePlayers(JSONObject teamsListJsonObject) {
 		Player playerObj;
 		List<Player> playersList = new ArrayList<Player>();
-		JSONArray playersJsonArray = (JSONArray) teamsListJsonObject.get("players");
+		JSONArray playersJsonArray = (JSONArray) teamsListJsonObject.get(Attributes.PLAYERS.getAttribute());
 		if (playersJsonArray == null) {
 			return playersList;
 		}
@@ -126,28 +126,28 @@ public class ParseRootconferences extends ValidateJson implements IParseRootElem
 			playerObj = new Player();
 			JSONObject playersListJsonObject = playersListIterator.next();
 			// get playerName
-			String playerName = (String) playersListJsonObject.get("playerName");
+			String playerName = (String) playersListJsonObject.get(Attributes.PLAYERNAME.getAttribute());
 			playerObj.setPlayerName(playerName);
 			// get position
-			String position = (String) playersListJsonObject.get("position");
+			String position = (String) playersListJsonObject.get(Attributes.POSITION.getAttribute());
 			playerObj.setPosition(position);
 			// get captain
-			Boolean captain = (Boolean) playersListJsonObject.get("captain");
+			Boolean captain = (Boolean) playersListJsonObject.get(Attributes.CAPTAIN.getAttribute());
 			playerObj.setCaptain(captain);
 			// get age
-			float age = ((Long) playersListJsonObject.get("age")).floatValue();
+			float age = ((Long) playersListJsonObject.get(Attributes.AGE.getAttribute())).floatValue();
 			playerObj.setAge(age);
 			// get skating
-			float skating = ((Long) playersListJsonObject.get("skating")).intValue();
+			float skating = ((Long) playersListJsonObject.get(Attributes.SKATING.getAttribute())).intValue();
 			playerObj.setSkating(skating);
 			// get shooting
-			float shooting = ((Long) playersListJsonObject.get("shooting")).intValue();
+			float shooting = ((Long) playersListJsonObject.get(Attributes.SHOOTING.getAttribute())).intValue();
 			playerObj.setShooting(shooting);
 			// get checking
-			float checking = ((Long) playersListJsonObject.get("checking")).intValue();
+			float checking = ((Long) playersListJsonObject.get(Attributes.CHECKING.getAttribute())).intValue();
 			playerObj.setChecking(checking);
 			// get saving
-			float saving = ((Long) playersListJsonObject.get("saving")).intValue();
+			float saving = ((Long) playersListJsonObject.get(Attributes.SAVING.getAttribute())).intValue();
 			playerObj.setSaving(saving);
 			playersList.add(playerObj);
 		}

@@ -1,4 +1,10 @@
 package group11.Hockey;
 
-public class AIToUserTrading {
+import group11.Hockey.models.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AIToUserTrading extends ATrading {
+
 }

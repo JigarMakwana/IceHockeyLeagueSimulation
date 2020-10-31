@@ -34,7 +34,7 @@ class AIToAITradingTest {
     }
 
     @Test
-    void offerTrade() {
+    void findStrongestTradeTeam() {
     }
 
     @Test
@@ -82,7 +82,7 @@ class AIToAITradingTest {
     }
 
     @Test
-    void testOfferTrade() {
+    void testfindStrongestTradeTeam() {
     }
 
     @Test
@@ -94,7 +94,7 @@ class AIToAITradingTest {
     }
 
     @Test
-    void resolveTrade() {
+    void resolveAIToAITrade() {
     }
 
     @Test

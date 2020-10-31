@@ -1,6 +1,7 @@
 package group11.Hockey;
 import group11.Hockey.models.*;
 
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -11,17 +12,25 @@ import java.util.stream.Collectors;
  *
  */
 
-public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers, IResolveTradeOffers, ISettleTrading {
+public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
+        IresolveAIToAITradeOffers, ISettleTrading {
     protected League leagueObj;
     protected Trading tradingConfig;
     protected static final int TEAM_SIZE = 20;
     protected static final int SKATERS_SIZE = 18;
     protected static final int GOALIE_SIZE = 2;
 
-    enum Position {
+    enum Position
+    {
         FORWARD,
         DEFENSE,
         GOALIE
+    }
+
+    enum UseChoice
+    {
+        ACCEPT,
+        REJECT
     }
 
     public AIToAITrading(League leagueObj)
@@ -36,35 +45,61 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
     {
         List<Team> eligibleTeamList = determineEligibleTeams();
         int teamLength = eligibleTeamList.size();
+        boolean isAITeam = false;
         for (int i=0; teamLength > 1; i=0)
         {
-//            if(this.generateRandomNumber() < tradingConfig.getRandomTradeOfferChance())
-//            {
-            System.out.println("\nGenerating Trade for " + eligibleTeamList.get(i).getTeamName() );
-            List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer= new ArrayList<>();
-            List<Player> weakestPlayerList = findWeakestPlayers(eligibleTeamList.get(i));
-            List<Integer> playerPositionFlag = findPlayerPositions(weakestPlayerList);
-
-            for (int k=1; k<eligibleTeamList.size(); k++)
+            if(eligibleTeamList.get(i).isUserTeam())
             {
-                List<Player> strongestPlayerList =
-                        findStrongestPlayers(eligibleTeamList.get(k),playerPositionFlag);
-                Float strengthSum = strengthSum(strongestPlayerList);
-                Triplet<Team, List<Player>, Float> teamRequestEntry =
-                        Triplet.of(eligibleTeamList.get(k), strongestPlayerList, strengthSum);
-                tradingTeamsBuffer.add(teamRequestEntry);
+                isAITeam = false;
             }
-            if(tradingTeamsBuffer.size() > 0){
-                Triplet<Team, List<Player>, Float> tradeTeam =
-                        offerTrade(eligibleTeamList.get(i), tradingTeamsBuffer);
-                displayTradeStatistics(eligibleTeamList.get(i), weakestPlayerList,
-                        tradeTeam.getFirst(), tradeTeam.getSecond());
-                resolveTrade(eligibleTeamList.get(i), weakestPlayerList,
-                        tradeTeam.getFirst(), tradeTeam.getSecond());
-                eligibleTeamList.remove(0);
+            else
+            {
+                isAITeam = true;
+            }
+            if(isAITeam)
+            {
+                float randomTradeOfferChance = this.generateRandomNumber();
+                if( randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance())
+                {
+                    System.out.println("\nGenerating Trade for AI Team " + eligibleTeamList.get(i).getTeamName() );
+                    List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer= new ArrayList<>();
+                    List<Player> weakestPlayerList = findWeakestPlayers(eligibleTeamList.get(i));
+                    List<Integer> playerPositionFlag = findPlayerPositions(weakestPlayerList);
+
+                    for (int k=1; k<eligibleTeamList.size(); k++)
+                    {
+                        List<Player> strongestPlayerList =
+                                findStrongestPlayers(eligibleTeamList.get(k),playerPositionFlag);
+                        Float strengthSum = strengthSum(strongestPlayerList);
+                        Triplet<Team, List<Player>, Float> teamRequestEntry =
+                                Triplet.of(eligibleTeamList.get(k), strongestPlayerList, strengthSum);
+                        tradingTeamsBuffer.add(teamRequestEntry);
+                    }
+                    if(tradingTeamsBuffer.size() > 0){
+                        Triplet<Team, List<Player>, Float> tradeTeam =
+                                findStrongestTradeTeam(eligibleTeamList.get(i), tradingTeamsBuffer);
+                        if(tradeTeam.getFirst().isUserTeam())
+                        {
+                            resolveAIToUserTrade(eligibleTeamList.get(i), weakestPlayerList,
+                                    tradeTeam.getFirst(), tradeTeam.getSecond());
+                        }
+                        else
+                        {
+                            displayTradeStatistics(eligibleTeamList.get(i), weakestPlayerList,
+                                    tradeTeam.getFirst(), tradeTeam.getSecond());
+                            resolveAIToAITrade(eligibleTeamList.get(i), weakestPlayerList,
+                                    tradeTeam.getFirst(), tradeTeam.getSecond());
+                        }
+                        eligibleTeamList.remove(0);
+                        teamLength = eligibleTeamList.size();
+                    }
+                }
+            }
+            else
+            {
+                eligibleTeamList.remove(i);
                 teamLength = eligibleTeamList.size();
             }
-//            }
         }
     }
 
@@ -72,6 +107,7 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
     public List<Team> determineEligibleTeams()
     {
         int lossPointCutOff = tradingConfig.getLossPoint();
+        boolean isAITeam;
         List<Team> eligibleTeamList = new ArrayList<Team>();
         List<Conference> conferenceList = leagueObj.getConferences();
         for (Conference conference : conferenceList)
@@ -85,12 +121,18 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
                     //TODO Mocking LossPoint for teams as Simulation is not ready
                     if(team.getTeamName().equalsIgnoreCase("Boston") ||
                             team.getTeamName().equalsIgnoreCase("Miami") ||
-                            team.getTeamName().equalsIgnoreCase("New York"))
+                            team.getTeamName().equalsIgnoreCase("NewYork") ||
+                            team.getTeamName().equalsIgnoreCase("Viena")||
+                            team.getTeamName().equalsIgnoreCase("Mexico1" +
+                                    ""))
                     {
                         team.setLossPoint(2);
                     }
-//                    System.out.println(team.getTeamName() + "'s LossPoint is " + team.getLossPoint());
-                    if(team.getLossPoint() == lossPointCutOff)
+                    if(team.getTeamName().equalsIgnoreCase("Viena"))
+                    {
+                        team.setUserTeam(true);
+                    }
+                    if((team.getLossPoint() == lossPointCutOff))
                     {
                         eligibleTeamList.add(team);
                     }
@@ -217,7 +259,8 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
     }
 
     @Override
-    public Triplet<Team, List<Player>, Float> offerTrade(Team team, List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer)
+    public Triplet<Team, List<Player>, Float> findStrongestTradeTeam(
+            Team team, List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer)
     {
         List<Triplet<Team, List<Player>, Float>> sortedBuffer = tradingTeamsBuffer;
         /* bubble sort */
@@ -241,19 +284,20 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
                 break;
         }
         Triplet<Team, List<Player>, Float> tradeTeam = sortedBuffer.get(length-1);
-        System.out.println("Successfully generated the Trade with team " + tradeTeam.getFirst().getTeamName());
+        System.out.println("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
         return tradeTeam;
     }
 
     @Override
-    public void displayTradeStatistics(Team team1, List<Player> playerList1, Team team2, List<Player> playerList2)
+    public void displayTradeStatistics(Team team1, List<Player> offeredPlayerList,
+                                       Team team2, List<Player> requestedPlayerList)
     {
         System.out.println("\n****** Trade Statistics ******");
         System.out.println("\nTeam " + team1.getTeamName() + " is offering the trade to " + team2.getTeamName());
         System.out.println("---- Team " + team1.getTeamName() + "'s Players Offered ----");
-        displayPlayers(playerList1);
+        displayPlayers(offeredPlayerList);
         System.out.println("---- Team " + team2.getTeamName() + "'s Players Requested ----");
-        displayPlayers(playerList2);
+        displayPlayers(requestedPlayerList);
     }
 
     public void displayPlayers(List<Player> playersList)
@@ -268,17 +312,51 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
         }
     }
 
+    public void displayTradeStatisticsToUser(Team team1, List<Player> offeredPlayerList,
+                                             Team team2, List<Player> requestedPlayerList)
+    {
+        System.out.println("\n****** Woaha Trade Offer from AI Team ******");
+        System.out.println("Team " + team1.getTeamName() + " is offering the trade");
+        System.out.println("---- Team " + team1.getTeamName() + "'s Players Offered ----");
+        displayPlayers(offeredPlayerList);
+        System.out.println("---- Your Team's Requested Players ----");
+        displayPlayers(requestedPlayerList);
+    }
+
     @Override
-    public void resolveTrade(Team team1, List<Player> playerList1, Team team2, List<Player> playerList2) {
-        Float playerStrength1 = strengthSum(playerList1);
-        Float playerStrength2 = strengthSum(playerList2);
-        if(this.generateRandomNumber() < tradingConfig.getRandomAcceptanceChance())
+    public void resolveAIToAITrade(Team team1, List<Player> offeredPlayerList,
+                                   Team team2, List<Player> requestedPlayerList)
+    {
+        Float playerStrength1 = strengthSum(offeredPlayerList);
+        Float playerStrength2 = strengthSum(requestedPlayerList);
+        float randomAcceptanceChance = this.generateRandomNumber();
+        if(randomAcceptanceChance < tradingConfig.getRandomAcceptanceChance())
+//            if(true)
+
         {
-            acceptTrade(team1, playerList1, team2, playerList2);
+            acceptTrade(team1, offeredPlayerList, team2, requestedPlayerList);
         }
         else if(playerStrength1 > playerStrength2)
         {
-            acceptTrade(team1, playerList1, team2, playerList2);
+            acceptTrade(team1, offeredPlayerList, team2, requestedPlayerList);
+        }
+        else
+        {
+            rejectTrade(team1);
+        }
+    }
+
+    public void resolveAIToUserTrade(Team team1, List<Player> offeredPlayerList,
+                                     Team team2, List<Player> requestedPlayerList)
+    {
+        displayTradeStatisticsToUser(team1, offeredPlayerList, team2, requestedPlayerList);
+        System.out.println("Press 1 to Accept the trade\nPress any other key to Reject the trade.");
+        ICommandLineInput userInputMode = new CommandLineInput();
+        int userChoice = userInputMode.getInt();
+
+        if((userChoice == (UseChoice.ACCEPT.ordinal() + 1)))
+        {
+            acceptTrade(team1, offeredPlayerList, team2, requestedPlayerList);
         }
         else
         {
@@ -299,28 +377,29 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
     @Override
     public void rejectTrade(Team team)
     {
+        System.out.println("Trade is declined.");
         resetLossPoints(team);
     }
 
     @Override
-    public void acceptTrade(Team team1, List<Player> playerList1, Team team2, List<Player> playerList2)
+    public void acceptTrade(Team team1, List<Player> offeredPlayerList, Team team2, List<Player> requestedPlayerList)
     {
-        for(Player toBeRemoved :playerList1)
+        for(Player toBeRemoved :offeredPlayerList)
         {
             team1.getPlayers().removeIf(player ->
                     player.getPlayerName().equals(toBeRemoved.getPlayerName()));
         }
-        for(Player toBeAdded :playerList2)
+        for(Player toBeAdded :requestedPlayerList)
         {
             team1.getPlayers().add(toBeAdded);
         }
 
-        for(Player toBeRemoved :playerList2)
+        for(Player toBeRemoved :requestedPlayerList)
         {
             team2.getPlayers().removeIf(player ->
                     player.getPlayerName().equals(toBeRemoved.getPlayerName()));
         }
-        for(Player toBeAdded :playerList1)
+        for(Player toBeAdded :offeredPlayerList)
         {
             team2.getPlayers().add(toBeAdded);
         }
@@ -328,6 +407,7 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
         resetLossPoints(team2);
         settleTeam(team1);
         settleTeam(team2);
+        System.out.println("Trade successfully accepted and team changes has been made!");
     }
 
     @Override
@@ -388,16 +468,16 @@ public class AIToAITrading implements ITradingEligibility, IGenerateTradeOffers,
 
     public void dropPlayer(List<Player> playerList, Position playerPosition)
     {
-            Player p = new Player();
-            p.setPosition(playerPosition.toString());
-            p.dropPlayerToFreeAgent(leagueObj,playerList);
+        Player p = new Player();
+        p.setPosition(playerPosition.toString());
+        p.dropPlayerToFreeAgent(leagueObj,playerList);
     }
 
     public void hirePlayer(List<Player> playerList, Position playerPosition)
     {
-            Player p = new Player();
-            p.setPosition(playerPosition.toString());
-            p.replacePlayerWithFreeAgent(leagueObj,playerList);
+        Player p = new Player();
+        p.setPosition(playerPosition.toString());
+        p.replacePlayerWithFreeAgent(leagueObj,playerList);
     }
 
     public List<Player> getForwardList(List<Player> playerList)

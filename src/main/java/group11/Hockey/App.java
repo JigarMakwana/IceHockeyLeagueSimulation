@@ -2,7 +2,6 @@ package group11.Hockey;
 
 import group11.Hockey.BusinessLogic.CreateTeam;
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.InputOutput.JsonParsing.IJsonImport;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.CoachDb;
 import group11.Hockey.db.GameplayConfigDb;
@@ -27,7 +26,7 @@ public class App {
 
 		if (args.length > 0) {
 			String jsonFile = args[0];
-			IJsonImport importJson = new JsonImport(leagueDb);
+			JsonImport importJson = new JsonImport(leagueDb);
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
 				//SerializeLeague seralizeLeague = new SerializeLeague();

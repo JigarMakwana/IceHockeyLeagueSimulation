@@ -9,7 +9,7 @@ import org.json.simple.parser.JSONParser;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class JsonImport extends ValidateJson implements IJsonImport {
+public class JsonImport extends ValidateJsonSchema {
 
 	private Object fileObj;
 
@@ -17,7 +17,6 @@ public class JsonImport extends ValidateJson implements IJsonImport {
 		super(leagueDb);
 	}
 
-	@Override
 	public League parseFile(String fileName) throws Exception {
 		if (isValidJsonSchema(fileName)) {
 			JSONParser parser = new JSONParser();
@@ -27,7 +26,7 @@ public class JsonImport extends ValidateJson implements IJsonImport {
 
 			for (Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
 				String key = (String) iterator.next();
-				if (key.equalsIgnoreCase("leagueName")) {
+				if (key.equalsIgnoreCase(Attributes.LEAGUENAME.getAttribute())) {
 					String leagueName = (String) jsonObject.get(key);
 					if (isValidLeagueName(leagueName)) {
 						leagueModelObj.setLeagueName(leagueName);

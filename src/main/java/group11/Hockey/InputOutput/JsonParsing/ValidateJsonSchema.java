@@ -14,13 +14,13 @@ import org.json.JSONTokener;
 import group11.Hockey.App;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class ValidateJson extends JsonAttributes{
+public class ValidateJsonSchema extends ValidateJsonAttributes{
 	
-	public ValidateJson() {
+	public ValidateJsonSchema() {
 		super();
 	}
 	
-	public ValidateJson(ILeagueDb leagueDb) {
+	public ValidateJsonSchema(ILeagueDb leagueDb) {
 		super(leagueDb);
 	}
 
@@ -49,7 +49,6 @@ public class ValidateJson extends JsonAttributes{
 		catch (Exception e) {
 			System.out.println("Exception: "+e.getMessage() );
 		}
-
 		return false;
 	}
 	

@@ -24,7 +24,7 @@ public class ConnectionUtil {
 		return conn;
 	}
 
-	
+
 	public void closeConnection(Connection connection) {
 		try {
 			if (connection != null) {
@@ -37,7 +37,7 @@ public class ConnectionUtil {
 
 	public void readDataConnectionDetails() {
 		try {
-			String filePath = "C:\\Users\\RajKumar\\Documents\\MACS_Fall\\A_SDC/config.properties";
+			String filePath = "/config.properties";
 			InputStream input = new FileInputStream(filePath);
 			Properties prop = new Properties();
 			prop.load(input);

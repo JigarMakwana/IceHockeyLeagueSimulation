@@ -1,0 +1,14 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ĞÅ‘ùÿÿÿÿ
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¯ˆäşÿÿÿÿ
+\
+java:S1126""AReplace this if-then-else statement by a single return statement.(¯ÄÔ’üÿÿÿÿ
+U
+java:S11175":Rename "league" which hides the field declared at line 16.(£èÉ›şÿÿÿÿ
+t
+java:S22936"YReplace the type specification in this constructor call with the diamond operator ("<>").(ò¾şÌıÿÿÿÿ
+t
+java:S2293:"YReplace the type specification in this constructor call with the diamond operator ("<>").(º’›°ûÿÿÿÿ
+t
+java:S2293="YReplace the type specification in this constructor call with the diamond operator ("<>").(­ìª€üÿÿÿÿ

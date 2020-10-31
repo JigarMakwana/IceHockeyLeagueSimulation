@@ -32,15 +32,18 @@ public class App {
 				leagueObj = importJson.parseFile(jsonFile);
 				//SerializeLeague seralizeLeague = new SerializeLeague();
 				//seralizeLeague.serializeLeagueObject(leagueObj);
-				
+				AITrading aiToAITradObj = new AITrading(leagueObj);
+				aiToAITradObj.generateTradeOffers();
+
 				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
 						playerDb, coachDb, managerDb);
 //				leagueObj = createTeamObj.getTeam();
 				createTeamObj.createTeamMethod();
 				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+
 				System.out.println("****Create Team end****");
 				InitializeSeason initialize=new InitializeSeason(leagueObj,leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-				
+
 				try {
 					String advancedDate=initialize.startSeasons(1);
 					System.out.println("Simulation Ended and season advanced to "+advancedDate);
@@ -60,7 +63,7 @@ public class App {
 //				leagueObj = importJson.parseFile(jsonFile);
 //				//SerializeLeague seralizeLeague = new SerializeLeague();
 //				//seralizeLeague.serializeLeagueObject(leagueObj);
-//				
+//
 //				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
 //						playerDb, coachDb, managerDb);
 ////				leagueObj = createTeamObj.getTeam();

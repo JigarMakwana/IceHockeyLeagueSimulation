@@ -1,0 +1,14 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÚÜîÔúÿÿÿÿ
+R
+java:S1068"0Remove this unused "teamStrength" private field.(ìºâ™úÿÿÿÿ8Ì£‡„×.
+]
+java:S1117^"@Rename "teamStrength" which hides the field declared at line 19.(€­ŽÃ8Ì£‡„×.
+]
+java:S1117]";Rename "players" which hides the field declared at line 18.(È™¡Šûÿÿÿÿ8Ì£‡„×.
+`
+java:S1155_">Use isEmpty() to check whether the collection is empty or not.(Ë¡œ™ÿÿÿÿÿ8Ì£‡„×.
+B
+java:S1659š"Declare "j" on a separate line.(¦¢Éëùÿÿÿÿ8Ì£‡„×.
+L
+java:S1125©")Remove the literal "false" boolean value.(ù±½âÿÿÿÿÿ8Ì£‡„×.

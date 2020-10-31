@@ -14,6 +14,7 @@ import group11.Hockey.db.ManagerDb;
 import group11.Hockey.db.PlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbImpl;
+import group11.Hockey.models.InitializeSeason;
 
 public class App {
 	public static void main(String[] args) {
@@ -39,6 +40,14 @@ public class App {
 				createTeamObj.createTeamMethod();
 				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				System.out.println("****Create Team end****");
+				InitializeSeason initialize=new InitializeSeason(leagueObj,leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+				
+				try {
+					String advancedDate=initialize.startSeasons(1);
+					System.out.println("Simulation Ended and season advanced to "+advancedDate);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			} catch (Exception e) {
 				System.out.print("Exception:--> " + e.getMessage());
 				System.exit(0);

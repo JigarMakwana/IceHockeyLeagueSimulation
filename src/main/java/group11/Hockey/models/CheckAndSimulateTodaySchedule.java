@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -106,7 +107,9 @@ public class CheckAndSimulateTodaySchedule {
 							}
 
 						}
-						// call checkInjury();
+						InjurySystem injury=new InjurySystem(leagueObj);
+						injury.setInjuryToPlayers(team1);
+						injury.setInjuryToPlayers(team2);
 					}
 				}
 			}

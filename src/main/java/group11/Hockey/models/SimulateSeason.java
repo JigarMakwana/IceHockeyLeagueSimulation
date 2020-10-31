@@ -9,15 +9,36 @@ import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.db.CoachDb;
+import group11.Hockey.db.GameplayConfigDb;
+import group11.Hockey.db.ICoachDb;
+import group11.Hockey.db.IGameplayConfigDb;
+import group11.Hockey.db.IManagerDb;
+import group11.Hockey.db.IPlayerDb;
+import group11.Hockey.db.ManagerDb;
+import group11.Hockey.db.PlayerDb;
+import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.db.League.LeagueDbImpl;
 
 public class SimulateSeason {
 
 	private HashMap<String, HashMap<Team, Team>> schedule;
 	private League leagueObj;
+	private ILeagueDb leagueDb;
+	private IGameplayConfigDb gameplayConfigDb;
+	private IPlayerDb playerDb;
+	private ICoachDb coachDb;
+	private IManagerDb managerDb;
 
-	public SimulateSeason(HashMap<String, HashMap<Team, Team>> regularSchedule, League leagueObj) {
+	public SimulateSeason(HashMap<String, HashMap<Team, Team>> regularSchedule, League leagueObj,ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
+			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
 		this.schedule = regularSchedule;
 		this.leagueObj = leagueObj;
+		this.leagueDb = leagueDb;
+		this.gameplayConfigDb = gameplayConfigDb;
+		this.playerDb = playerDb;
+		this.coachDb = coachDb;
+		this.managerDb = managerDb;
 	}
 
 	public String StartSimulatingSeason(String date) {
@@ -164,10 +185,12 @@ public class SimulateSeason {
 					e.printStackTrace();
 				}
 				ageplayer.increaseAge(leagueObj, daysBetween);
+				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				break;
 			}
 			System.out.println("Persist");
-			// persist();
+			
+			leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 
 		}
 		return date;

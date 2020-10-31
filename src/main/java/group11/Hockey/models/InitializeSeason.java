@@ -1,4 +1,5 @@
 package group11.Hockey.models;
+
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -6,12 +7,12 @@ import java.util.HashMap;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 
-public class InitializeSeason {	
+public class InitializeSeason {
 	//
 	private int seasonCount;
-	
+
 	private League leagueObj;
-	
+
 	public InitializeSeason(League leagueObj) {
 		super();
 		this.leagueObj = leagueObj;
@@ -20,26 +21,32 @@ public class InitializeSeason {
 	public int getSeasonCount() {
 		return seasonCount;
 	}
-	
-	public String startSeasons(int seasonCount) throws ParseException {
-		//get last date simulated from db;
-		
+
+	public String startSeasons(int seasonCount) {
+		// get last date simulated from db;
+
 		int year = Calendar.getInstance().get(Calendar.YEAR);
-		int count=seasonCount;
+		int count = seasonCount;
 		String seasonEndDate = null;
-		while(count>0) {		
-			String startDate="29/09/"+Integer.toString(year);
-			System.out.println("Start date : "+startDate); 		
-			
-			Schedule regularSeasonSchedule=new Schedule(leagueObj);
-			HashMap<String,HashMap<Team,Team>> regularSchedule=regularSeasonSchedule.getSeasonSchedule(startDate);
-			
-			SimulateSeason simulateSeason=new SimulateSeason(regularSchedule,leagueObj);
-			seasonEndDate=simulateSeason.StartSimulatingSeason(startDate);		
+		while (count > 0) {
+			String startDate = "29/09/" + Integer.toString(year);
+			System.out.println("Start date : " + startDate);
+
+			Schedule regularSeasonSchedule = new Schedule(leagueObj);
+			HashMap<String, HashMap<Team, Team>> regularSchedule = null;
+			try {
+				regularSchedule = regularSeasonSchedule.getSeasonSchedule(startDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			SimulateSeason simulateSeason = new SimulateSeason(regularSchedule, leagueObj);
+			seasonEndDate = simulateSeason.StartSimulatingSeason(startDate);
 			year++;
-			count--;	
+			count--;
 		}
-		//set or return last date to current date after simulations
+		System.out.println("Persist");
+		// persist();
 		return seasonEndDate;
 	}
 

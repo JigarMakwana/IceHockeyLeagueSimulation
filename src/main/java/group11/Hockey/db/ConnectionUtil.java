@@ -37,7 +37,7 @@ public class ConnectionUtil {
 
 	public void readDataConnectionDetails() {
 		try {
-			String filePath = "/Users/jatinpartaprana/Downloads/config.properties";
+			String filePath = "C:\\Users\\Lenovo\\Downloads\\config.properties";
 			InputStream input = new FileInputStream(filePath);
 			Properties prop = new Properties();
 			prop.load(input);

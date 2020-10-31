@@ -2,7 +2,6 @@ package group11.Hockey.BusinessLogic.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import group11.Hockey.db.ICoachDb;
@@ -19,10 +18,10 @@ import group11.Hockey.db.League.ILeagueDb;
  */
 public class League {
 	private String leagueName;
-	private List<Conference> conferences = null;
+	private List<Conference> conferences = new ArrayList<Conference>();
 	private List<Player> freeAgents = new ArrayList<Player>();
-	private GameplayConfig gamePlayConfig = null;
-	private List<Coach> coaches;
+	private GameplayConfig gamePlayConfig = new GameplayConfig();
+	private List<Coach> coaches = new ArrayList<Coach>();
 	private List<GeneralManager> generalManagers;
 	private List<Player> retiredPlayers;
 	private String lastSimulatedDate;
@@ -35,6 +34,8 @@ public class League {
 	public void setQualifiedTeams(List<Team> qualifiedTeams) {
 		this.qualifiedTeams = qualifiedTeams;
 	}
+
+	private String startDate;
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {
@@ -129,6 +130,20 @@ public class League {
 		this.retiredPlayers = retiredPlayers;
 	}
 
+	/**
+	 * @return the startDate
+	 */
+	public String getStartDate() {
+		return startDate;
+	}
+
+	/**
+	 * @param startDate the startDate to set
+	 */
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
 	private boolean isFreeAgentsNotNull() {
 		return freeAgents != null;
 	}
@@ -145,28 +160,27 @@ public class League {
 		for (Conference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			if (divisionList == null || divisionList.size() == 0) {
-				leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(),
-						null, null, new Coach(), new Player());
+				leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(), null, null,
+						new Coach(), new Player());
 			} else {
 				for (Division divison : divisionList) {
 					List<Team> teamList = divison.getTeams();
 					if (teamList == null || teamList.size() == 0) {
-						leagueObjectInserted = leagueDb.insertLeagueInDb(league,
-								conference.getConferenceName(), divison.getDivisionName(), null, new Coach(),
-								new Player());
+						leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(),
+								divison.getDivisionName(), null, new Coach(), new Player());
 					} else {
 						for (Team team : teamList) {
 							List<Player> playerList = team.getPlayers();
 							Coach coach = team.getHeadCoach();
 							if (playerList == null || playerList.size() == 0) {
 
-								leagueObjectInserted = leagueDb.insertLeagueInDb(league,
-										conference.getConferenceName(), divison.getDivisionName(), team, coach, new Player());
+								leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(),
+										divison.getDivisionName(), team, coach, new Player());
 							} else {
 								for (Player player : playerList) {
 									leagueObjectInserted = leagueDb.insertLeagueInDb(league,
-											conference.getConferenceName(), divison.getDivisionName(),
-											team, coach, player);
+											conference.getConferenceName(), divison.getDivisionName(), team, coach,
+											player);
 								}
 							}
 						}

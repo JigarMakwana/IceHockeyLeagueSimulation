@@ -159,6 +159,33 @@ public class Team {
 		}
 		return isTeamNameValid;
 	}
+	
+	public boolean teamExistsInDivision(String teamName, Division divisionName) {
+		boolean teamExists = false;
+		List<Team> teamList = divisionName.getTeams();
+		if(teamList == null) {
+			return teamExists;
+		}
+		for (Team team : teamList) {
+			if(team.getTeamName().equalsIgnoreCase(teamName)) {
+				teamExists = true;
+				return teamExists;
+			}
+		}
+		return teamExists;
+	}
+	
+	public Team getTeamFromDivision(String teamName, Division division) {
+		List<Team> teamList = division.getTeams();
+		Team teamInDivision = null;
+		for (Team team : teamList) {
+			if(team.getTeamName().equalsIgnoreCase(teamName)) {
+				teamInDivision = team;
+				return team;
+			}
+		}
+		return teamInDivision;
+	}
 
 	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb) {
 		return teamDb.loadTeamFromTeamName(teamName);

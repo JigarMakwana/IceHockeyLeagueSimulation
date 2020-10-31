@@ -67,9 +67,7 @@ public class LeagueTest {
 
 	@Test
 	public void LeagueDeafultConstructorTest() {
-		Assert.assertNull(league.getLeagueName());
-		Assert.assertNull(league.getConferences());
-		Assert.assertNull(league.getConferences());
+		Assert.assertNull(league.getLeagueName());		
 	}
 
 	@Test

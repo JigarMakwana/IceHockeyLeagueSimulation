@@ -130,16 +130,24 @@ public class Validations implements IValidations {
 		return coachNameCheck;
 	}
 
-	public boolean playerCheck(int playerNumber, League league, List<Integer> selectedValues, List<Player> skaters,
+	public boolean playerCheck(String playerNumber, League league, List<Integer> selectedValues, List<Player> skaters,
 			List<Player> goalies) {
 		boolean isPlayerValueNotValid = true;
-		if (playerNumber < 0 || playerNumber > league.getFreeAgents().size()) {
-			display.showMessageOnConsole("Enter Valid value");
+		int playerNumberInInt = 0;
+		try {
+			playerNumberInInt = Integer.parseInt(playerNumber);
+		} catch (Exception e) {
+			display.showMessageOnConsole("Select valid value");
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
 		}
-		String position = league.getFreeAgents().get(playerNumber - 1).getPosition();
-		if (selectedValues.contains(playerNumber)) {
+		if (playerNumberInInt < 0 || playerNumberInInt > league.getFreeAgents().size()) {
+			display.showMessageOnConsole("Select Valid value");
+			isPlayerValueNotValid = true;
+			return isPlayerValueNotValid;
+		}
+		String position = league.getFreeAgents().get(playerNumberInInt - 1).getPosition();
+		if (selectedValues.contains(playerNumberInInt)) {
 			display.showMessageOnConsole("This player is already selected");
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
@@ -147,7 +155,7 @@ public class Validations implements IValidations {
 		if (position.equalsIgnoreCase("forward") || position.equalsIgnoreCase("defense")) {
 			if (skaters.size() <= 18) {
 				isPlayerValueNotValid = false;
-				selectedValues.add(playerNumber);
+				selectedValues.add(playerNumberInInt);
 				return isPlayerValueNotValid;
 			} else {
 				display.showMessageOnConsole("Can not select more skaters");
@@ -155,7 +163,7 @@ public class Validations implements IValidations {
 		} else if (position.equalsIgnoreCase("goalie")) {
 			if (goalies.size() <= 2) {
 				isPlayerValueNotValid = false;
-				selectedValues.add(playerNumber);
+				selectedValues.add(playerNumberInInt);
 				return isPlayerValueNotValid;
 			} else {
 				display.showMessageOnConsole("Can not select more goalies");

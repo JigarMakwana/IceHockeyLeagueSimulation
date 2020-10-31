@@ -12,9 +12,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.models.League;
-import group11.Hockey.models.Player;
-import group11.Hockey.parse.ParseRootfreeAgents;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.InputOutput.JsonParsing.ParseRootfreeAgents;
 
 public class ParseRootfreeAgentsTest {
 

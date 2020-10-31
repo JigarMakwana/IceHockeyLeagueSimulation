@@ -1,14 +1,19 @@
 package group11.Hockey;
 
 import group11.Hockey.AITrading;
-import group11.Hockey.models.League;
-import group11.Hockey.models.Player;
-import group11.Hockey.models.Team;
+import group11.Hockey.BusinessLogic.CommonUtilForLeague;
+import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.Validations;
+import group11.Hockey.InputOutput.CommandLineInput;
+import group11.Hockey.InputOutput.Display;
+import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
+import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettleTeamRoster extends CommonUtilForLeague{
+public class SettleTeamRoster extends CommonUtilForLeague {
     private League leagueObj;
     private AITrading aiTradingObj;
     IDisplay display = new Display();

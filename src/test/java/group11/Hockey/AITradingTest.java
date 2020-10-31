@@ -2,9 +2,9 @@ package group11.Hockey;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import group11.Hockey.models.*;
+
+import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,10 +16,6 @@ class AITradingTest {
     private League leagueObj = leagueModel.getLeagueInfo();
     private Trading tradingConfig = new Trading(2, 1, 2, 1);;
     private AITrading aiTradingObj = new AITrading(leagueObj);
-
-    @BeforeClass
-    public void init() {
-    }
 
     @Test
     void generateTradeOffersTest() {

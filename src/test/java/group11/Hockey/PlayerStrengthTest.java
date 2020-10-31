@@ -7,6 +7,9 @@ import static org.mockito.Mockito.when;
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.IPosition;
+import group11.Hockey.BusinessLogic.PlayerStrength;
+
 public class PlayerStrengthTest {
 
 	@Test

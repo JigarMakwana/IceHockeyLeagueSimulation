@@ -1,5 +1,9 @@
 package group11.Hockey;
-import group11.Hockey.models.*;
+import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.InputOutput.CommandLineInput;
+import group11.Hockey.InputOutput.Display;
+import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
 
 import java.util.*;
 import java.util.stream.Collectors;

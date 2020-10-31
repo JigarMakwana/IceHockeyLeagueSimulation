@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.Division;
-import group11.Hockey.models.League;
-import group11.Hockey.models.Team;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
 
 public class LeagueDbMock implements ILeagueDb {
 
@@ -20,18 +22,16 @@ public class LeagueDbMock implements ILeagueDb {
 	}
 
 	@Override
-	public boolean insertLeagueInDb(String leagueName, String conferenceName, String divisionName, String teamName,
-			String generalManger, String headcoachName, float skating, float shooting, float checking, float saving,
-			String playerName, String playerPosition, boolean captain, float playerSkating, float playerShooting,
-			float playerChecking, float playerSaving, float age) {
+	public boolean insertLeagueInDb(League league1, String conferenceName, String divisionName, Team team1, Coach coach,
+			Player player) {
 		Team team = new Team();
-		team.setTeamName(teamName);
+		team.setTeamName(team1.getTeamName());
 		Division division = new Division(divisionName, Arrays.asList(team));
 		Conference conference = new Conference("conferenceName", Arrays.asList(division));
-		league.setLeagueName(leagueName);
+		league.setLeagueName(league1.getLeagueName());
 		league.setConferences(Arrays.asList(conference));
 		leagueList.add(league);
-		if (league.getLeagueName().equalsIgnoreCase(leagueName) && leagueList.size() == 2) {
+		if (league.getLeagueName().equalsIgnoreCase(league1.getLeagueName()) && leagueList.size() == 2) {
 			return true;
 		} else {
 			return false;

@@ -3,6 +3,19 @@ package group11.Hockey.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.Aging;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.GameResolver;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.Injuries;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.Trading;
+import group11.Hockey.BusinessLogic.models.Training;
+
 public class LeagueModelMock {
 	private League league;
 
@@ -32,15 +45,21 @@ public class LeagueModelMock {
 		playerList.add(player3);
 
 		List<Team> teamsList = new ArrayList<Team>();
-		Team team1 = new Team("Boston", "Mister Fred", null, playerList);
+		float skill = (float) 2.0;
+		Coach coach = new Coach();
+		coach.setChecking(skill);
+		coach.setName("Dave");
+		coach.setSaving(skill);
+		coach.setShooting(skill);
+		coach.setSkating(skill);
+		
+		Team team1 = new Team("Boston", "Mister Fred", coach, playerList);
 		
 		playerList = new ArrayList<Player>();
 		Player player4 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
 		Player player5 = new Player(10, 10, 10, 10, "Player Two", "defense", false, false, 20);
 		playerList.add(player4);
 		playerList.add(player5);
-		
-		
 		
 		Team team2 = new Team("Vancouver Canucks", "John", null, playerList);
 		teamsList.add(team1);

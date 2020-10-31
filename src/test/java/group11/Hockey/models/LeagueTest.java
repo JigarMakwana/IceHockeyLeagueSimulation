@@ -6,6 +6,19 @@ import java.util.List;
 
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.models.Aging;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.GameResolver;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.Injuries;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.Trading;
+import group11.Hockey.BusinessLogic.models.Training;
 import group11.Hockey.db.ICoachDb;
 import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.IManagerDb;
@@ -46,16 +59,15 @@ public class LeagueTest {
 		coachList.add(coach);
 		GameplayConfig gameplayConf = new GameplayConfig(new Aging(0, 0), new GameResolver(0), new Injuries(0, 0, 0),
 				new Training(0), new Trading(0, 0, 0, 0));
-		League league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf, coachList, generalManagerList);
+		League league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf,
+				coachList, generalManagerList);
 		return league;
 
 	}
 
 	@Test
 	public void LeagueDeafultConstructorTest() {
-		Assert.assertNull(league.getLeagueName());
-		Assert.assertNull(league.getConferences());
-		Assert.assertNull(league.getConferences());
+		Assert.assertNull(league.getLeagueName());		
 	}
 
 	@Test
@@ -130,16 +142,15 @@ public class LeagueTest {
 	@Test
 	public void insertLeagueObjectTest() {
 		League league = populateLeagueObject();
-		
+
 		ILeagueDb leagueDb = mock(ILeagueDb.class);
 		IGameplayConfigDb gameplayConfigDb = mock(IGameplayConfigDb.class);
 		IPlayerDb playerDb = mock(IPlayerDb.class);
 		ICoachDb coachDb = mock(ICoachDb.class);
 		IManagerDb managerDb = mock(IManagerDb.class);
 
-		when(leagueDb.insertLeagueInDb("test", "conf", "div", "t1", "gm1", "hc1", 0, 0, 0, 0, "p1", "fwd", true, 0, 0,
-				0, 0, 30)).thenReturn(true);
-		when(gameplayConfigDb.insertGameplayConfig(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "league")).thenReturn(true);
+		when(leagueDb.insertLeagueInDb(null, "conf", "div", null, null, null)).thenReturn(true);
+		when(gameplayConfigDb.insertGameplayConfig(null,null,null,null,null, "league")).thenReturn(true);
 		when(playerDb.insertLeagueFreeAgents("league", "A1", "fwd", 0, 0, 0, 0, 0)).thenReturn(true);
 		when(coachDb.insertCoaches("league", "c1", 0, 0, 0, 0)).thenReturn(true);
 		when(managerDb.insertManager("league", "M1")).thenReturn(true);

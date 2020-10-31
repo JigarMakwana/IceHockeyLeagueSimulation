@@ -7,12 +7,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.Division;
-import group11.Hockey.models.League;
+import group11.Hockey.BusinessLogic.InjurySystem;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.models.LeagueModelMock;
-import group11.Hockey.models.Player;
-import group11.Hockey.models.Team;
 
 public class InjurySystemTest {
 

@@ -8,10 +8,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.League;
+import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.Validations;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.models.LeagueTest;
-import group11.Hockey.models.Player;
 
 public class ValidationsTest {
 	League league;
@@ -78,14 +80,14 @@ public class ValidationsTest {
 	@Test
 	public void playerCheckTest() {
 		boolean playerCheck = false;
-		playerCheck = validations.playerCheck(new Integer(21), league, null, null,
+		playerCheck = validations.playerCheck("21", league, null, null,
 				null);
 		Assert.assertTrue(playerCheck);
 		List<Player> forwardDefensePlayerList = new ArrayList<Player>();
 		List<Player> gloalisList = new ArrayList<Player>();
 		forwardDefensePlayerList.add(league.getFreeAgents().get(0));
 		gloalisList.add(league.getFreeAgents().get(1));
-		playerCheck = validations.playerCheck(new Integer(1), league, Arrays.asList(1), forwardDefensePlayerList, gloalisList);
+		playerCheck = validations.playerCheck("1", league, Arrays.asList(1), forwardDefensePlayerList, gloalisList);
 		
 		Assert.assertTrue(playerCheck);
 	}

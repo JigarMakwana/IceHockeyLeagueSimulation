@@ -1,5 +1,6 @@
 package group11.Hockey;
 
+import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.models.*;
 
 import java.util.ArrayList;

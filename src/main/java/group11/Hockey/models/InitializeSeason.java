@@ -1,53 +1,74 @@
 package group11.Hockey.models;
+
 import java.text.ParseException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 
-public class InitializeSeason {	
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.db.CoachDb;
+import group11.Hockey.db.GameplayConfigDb;
+import group11.Hockey.db.ICoachDb;
+import group11.Hockey.db.IGameplayConfigDb;
+import group11.Hockey.db.IManagerDb;
+import group11.Hockey.db.IPlayerDb;
+import group11.Hockey.db.ManagerDb;
+import group11.Hockey.db.PlayerDb;
+import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.db.League.LeagueDbImpl;
+
+public class InitializeSeason {
 	//
 	private int seasonCount;
-	
+	private ILeagueDb leagueDb;
+	private IGameplayConfigDb gameplayConfigDb;
+	private IPlayerDb playerDb;
+	private ICoachDb coachDb;
+	private IManagerDb managerDb;
 	private League leagueObj;
 	
-	public InitializeSeason(League leagueObj) {
+	public InitializeSeason(League leagueObj, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
+			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
 		super();
 		this.leagueObj = leagueObj;
+		this.leagueDb = leagueDb;
+		this.gameplayConfigDb = gameplayConfigDb;
+		this.playerDb = playerDb;
+		this.coachDb = coachDb;
+		this.managerDb = managerDb;
 	}
+	
 
 	public int getSeasonCount() {
 		return seasonCount;
 	}
-	
-	public String startSeasons(int seasonCount) throws ParseException {
+
+	public String startSeasons(int seasonCount) {
+		// get last date simulated from db;
+
 		int year = Calendar.getInstance().get(Calendar.YEAR);
-		int count=seasonCount;
-		while(count>0) {
-			count--;			
-			String startDate="30/09/"+Integer.toString(year);			
-			year++;	
-			LocalDate eDate = LocalDate.of(year, Month.APRIL, 1);	
-		    LocalDate firstSaturday = eDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.SATURDAY));
-		    String regularSeasonEndDate = firstSaturday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-	
-			System.out.println("Start date : "+startDate); 
-			System.out.println("End date : "+regularSeasonEndDate); 			
-			
-			Schedule regularSeasonSchedule=new Schedule(startDate,regularSeasonEndDate,leagueObj);
-			HashMap<String,HashMap<Team,Team>> regularSchedule=regularSeasonSchedule.getSeasonSchedule();
-			
-			Advance advanceObj=new Advance();
-			String regularSeasonStartDate=advanceObj.getAdvanceDate(startDate,1);
-			
-			SimulateSeason simulateSeason=new SimulateSeason(regularSchedule);
-			simulateSeason.StartSimulatingSeason(regularSeasonStartDate,regularSeasonEndDate);
+		int count = seasonCount;
+		String seasonEndDate = null;
+		while (count > 0) {
+			String startDate = "29/09/" + Integer.toString(year);
+			System.out.println("Start date : " + startDate);
+
+			Schedule regularSeasonSchedule = new Schedule(leagueObj);
+			HashMap<String, HashMap<Team, Team>> regularSchedule = null;
+			try {
+				regularSchedule = regularSeasonSchedule.getSeasonSchedule(startDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			SimulateSeason simulateSeason = new SimulateSeason(regularSchedule, leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+			seasonEndDate = simulateSeason.StartSimulatingSeason(startDate);
+			year++;
+			count--;
 		}
-		return seasonCount+" Seasons Simulated";
+		System.out.println("Persist");
+		// persist();
+		return seasonEndDate;
 	}
 
 }

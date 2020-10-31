@@ -1,7 +1,17 @@
 
+{
+java:S2293|"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÑûÜøÿÿÿÿ8®¯¯à×.
+Z	java:S106:"9Replace this use of System.out or System.err by a logger.(Ï¹èÿøÿÿÿÿ8®¯¯à×.
+U	java:S106)"9Replace this use of System.out or System.err by a logger.(œ°ÜÜ8®¯¯à×.
+{
+java:S2293{"YReplace the type specification in this constructor call with the diamond operator ("<>").(¸†¼üüÿÿÿÿ8®¯¯à×.
+H
+java:S1172"&Remove these unused method parameters.(¬Õ§‰ùÿÿÿÿ8®¯¯à×.
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìş
-U
-java:S2387"?"userInputMode" is the name of a field in "ValidateCreateTeam".(éõ­
-F
-java:S1172"0Remove this unused method parameter "managerDb".(“‡Ï
-Q	java:S125^"<This block of commented-out lines of code should be removed.(€¾é‡
+v
+java:S2293z"YReplace the type specification in this constructor call with the diamond operator ("<>").(‹›İ™8®¯¯à×.
+G
+java:S1125…")Remove the literal "false" boolean value.(Šè¸ˆ8®¯¯à×.
+v
+java:S2293‘"YReplace the type specification in this constructor call with the diamond operator ("<>").(İúd8®¯¯à×.
+Y	java:S125š"<This block of commented-out lines of code should be removed.(‡»Ã¿8®¯¯à×.

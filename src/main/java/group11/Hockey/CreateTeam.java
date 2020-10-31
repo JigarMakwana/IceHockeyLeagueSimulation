@@ -147,6 +147,7 @@ public class CreateTeam extends CommonUtilForLeague implements ICreateTeam {
 		finalListOfPlayers.addAll(goalies);
 		newTeam.setPlayers(finalListOfPlayers);
 		removeFreeAgentsFromLeague(league, finalListOfPlayers);
+		removeFreeAgentsFromLeague(league, finalListOfPlayers);
 
 	}
 

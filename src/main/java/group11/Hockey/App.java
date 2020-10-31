@@ -29,7 +29,7 @@ public class App {
 				leagueObj = importJson.parseFile(jsonFile);
 				//SerializeLeague seralizeLeague = new SerializeLeague();
 				//seralizeLeague.serializeLeagueObject(leagueObj);
-				AIToAITrading aiToAITradObj = new AIToAITrading(leagueObj);
+				AITrading aiToAITradObj = new AITrading(leagueObj);
 				aiToAITradObj.generateTradeOffers();
 
 //				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,

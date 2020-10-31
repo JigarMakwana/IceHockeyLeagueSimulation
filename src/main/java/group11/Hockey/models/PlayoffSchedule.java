@@ -165,7 +165,6 @@ public class PlayoffSchedule {
 		Team team1, team2;
 
 		String time = "00:00:00";
-
 		int teamNumber1 = 0;
 		int teamNumber2 = 1;
 		int teams = 0, series = 0, totalSetTeams, qualifiedTeamsSize;
@@ -178,7 +177,8 @@ public class PlayoffSchedule {
 		} else if (totalSetTeams == 1) {
 			System.out.println("\n********** Playoff Schedule - Final round **********");
 		}
-		while (teams < totalSetTeams) { // final sets of teams(team1,team2)
+		// final sets of teams(team1,team2)
+		while (teams < totalSetTeams) { 
 			teams++;
 			series = 0;
 			while (series < 7) {

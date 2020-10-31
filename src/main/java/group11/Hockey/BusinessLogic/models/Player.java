@@ -117,9 +117,9 @@ public class Player extends Stats implements Comparable<Player> {
 	public void setInjured(boolean isInjured) {
 		this.isInjured = isInjured;
 	}
-	
+
 	public boolean checkInjury(League league) {
-		if(this.isInjured()) {
+		if (this.isInjured()) {
 			return this.isInjured();
 		}
 		InjurySystem injurySyetem = new InjurySystem(league);

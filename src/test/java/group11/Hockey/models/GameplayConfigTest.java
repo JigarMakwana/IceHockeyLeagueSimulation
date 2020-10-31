@@ -34,7 +34,7 @@ public class GameplayConfigTest {
 		injuries = new Injuries(0, 0, 0);
 		training = new Training(0);
 		trading = new Trading(0, 0, 0, 0);
-		when(gameplayConfigDb.insertGameplayConfig(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "league")).thenReturn(true);
+		when(gameplayConfigDb.insertGameplayConfig(aging, gameResolver, injuries, training, trading, "league")).thenReturn(true);
 
 		gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading, gameplayConfigDb,
 				"league");

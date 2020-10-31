@@ -13,14 +13,24 @@ import group11.Hockey.BusinessLogic.models.Training;
 public class GameplayConfigDb implements IGameplayConfigDb {
 
 	@Override
-	public boolean insertGameplayConfig(int averageRetirementAge, int maximumAge, float randomWinChance,
-			float randomInjuryChance, int injuryDaysLow, int injuryDaysHigh, int daysUntilStatIncreaseCheck,
-			int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade, float randomAcceptanceChance,
-			String leagueName) {
+	public boolean insertGameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries, Training training,
+			Trading trading, String leagueName) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb(
 				"{call insertGameplayConfig(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		try {
+			int averageRetirementAge = aging.getAverageRetirementAge();
+			int maximumAge = aging.getMaximumAge();
+			float randomWinChance = gameResolver.getRandomWinChance();
+			float randomInjuryChance = injuries.getRandomInjuryChance();
+			int injuryDaysLow = injuries.getInjuryDaysLow();
+			int injuryDaysHigh = injuries.getInjuryDaysHigh();
+			int daysUntilStatIncreaseCheck = training.getDaysUntilStatIncreaseCheck();
+			int lossPoint = trading.getLossPoint();
+			float randomTradeOfferChance = trading.getRandomTradeOfferChance();
+			int maxPlayersPerTrade = trading.getMaxPlayersPerTrade();
+			float randomAcceptanceChance = trading.getRandomAcceptanceChance();
+			
 			statement.setInt(1, averageRetirementAge);
 			statement.setInt(2, maximumAge);
 			statement.setFloat(3, randomWinChance);

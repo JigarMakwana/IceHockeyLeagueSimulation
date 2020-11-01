@@ -104,9 +104,9 @@ public class CheckAndSimulateTodaySchedule {
 								loss++;
 								lost.setLosses(loss);
 							}
-							InjurySystem injury=new InjurySystem(leagueObj);
+							/*InjurySystem injury=new InjurySystem(leagueObj);
 							injury.setInjuryToPlayers(team1);
-							injury.setInjuryToPlayers(team2);
+							injury.setInjuryToPlayers(team2);*/
 						}
 						
 					}

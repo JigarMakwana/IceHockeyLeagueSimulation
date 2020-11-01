@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.AgePlayer;
-import group11.Hockey.BusinessLogic.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.db.CoachDb;
@@ -44,7 +42,7 @@ public class SimulateSeason {
 	}
 
 	public String StartSimulatingSeason(String date) {
-		String startDate = date;
+
 		Advance advance = new Advance();
 		Parse parseObj = new Parse();
 		Deadlines deadline = new Deadlines();
@@ -98,14 +96,8 @@ public class SimulateSeason {
 				e.printStackTrace();
 			}
 			dateTime = parseObj.parseStringToDate(date);
-			
-			int daysDifference = (int) ((parseObj.parseStringToDate(date).getTime() - parseObj.parseStringToDate(startDate).getTime())/ (24 * 60 * 60 * 1000));
-			GameplayConfig gameplayConfig  = leagueObj.getGamePlayConfig();
-			int trainingDays = gameplayConfig.getTraining().getDaysUntilStatIncreaseCheck();
-			if(daysDifference > trainingDays) {
-				TrainingPlayer trainingPlayer = new TrainingPlayer();
-				trainingPlayer.trainPlayer(leagueObj);
-			}
+
+			// training(leagueObj,1);
 
 			// on or before regular season end date
 			if (dateTime.compareTo(regularSeasonEndDateTime) <= 0) { 
@@ -175,8 +167,8 @@ public class SimulateSeason {
 				// System.out.println("Entered Trades");
 			}
 
-			//AgePlayer ageplayer = new AgePlayer();
-			//ageplayer.increaseAge(leagueObj, 1);
+			AgePlayer ageplayer = new AgePlayer();
+			ageplayer.increaseAge(leagueObj, 1);
 
 			// on the last day of stanley playoff
 			if ((dateTime.equals(stanleyEndDateTime))||(qualifiedTeams.size()==1)) { 
@@ -189,16 +181,19 @@ public class SimulateSeason {
 				System.out.println("\n********** Winner team of the season("+startYear+"/"+endYear+") is " + winner.getTeamName()+" **********");
 				try {
 					date = advance.getAdvanceDate(date, daysBetween);
+					leagueObj.setStartDate(date);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
+
 				//ageplayer.increaseAge(leagueObj, daysBetween);
+
 				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				break;
 			}
 			System.out.println("Persist");
 			
-			//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+			leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 
 		}
 		return date;

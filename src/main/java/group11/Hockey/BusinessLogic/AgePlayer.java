@@ -85,8 +85,9 @@ public class AgePlayer extends RetirePlayer {
 				}
 			}
 		}
-
-		league.setRetiredPlayers(retiredPlayers);
+		List<Player> existingRetiredPlayers = league.getRetiredPlayers();
+		existingRetiredPlayers.addAll(retiredPlayers);
+		league.setRetiredPlayers(existingRetiredPlayers);
 		retireAndReplacePlayer(league);
 	}
 

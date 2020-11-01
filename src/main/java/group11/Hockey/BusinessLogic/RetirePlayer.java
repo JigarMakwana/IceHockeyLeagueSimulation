@@ -16,9 +16,6 @@ public abstract class RetirePlayer {
 	public boolean checkForRetirement(League league, float age) {
 		int likelihoodOfRetirement = getLikelihoodOfRetirement(league, age);
 		boolean isRetired = new Random().nextInt(likelihoodOfRetirement) == likelihoodOfRetirement - 1;
-		if(isRetired) {
-			System.out.println(likelihoodOfRetirement);
-		}
 		return isRetired;
 	}
 
@@ -29,13 +26,13 @@ public abstract class RetirePlayer {
 		int maximumAge = ageDetails.getMaximumAge();
 		int likelihoodOfRetirement = 1;
 		float playerAge = age;
-
-		if (averageRetirementAge >= playerAge) {
-			likelihoodOfRetirement = (int) (maximumAge - playerAge)*10;
+		if (age >= maximumAge) {
+			return likelihoodOfRetirement;
+		} else if (averageRetirementAge >= playerAge) {
+			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 50;
 		} else if (averageRetirementAge < playerAge) {
-			likelihoodOfRetirement = (int) (maximumAge - playerAge)/2;
+			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 25;
 		}
-
 		return likelihoodOfRetirement;
 	}
 
@@ -66,7 +63,6 @@ public abstract class RetirePlayer {
 				}
 			}
 		}
-
 	}
 
 }

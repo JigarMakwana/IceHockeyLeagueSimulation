@@ -23,7 +23,7 @@ public class RetirePlayerTest {
 		League league = leagueModel.getLeagueInfo();
 
 		AgePlayer retirePlayer = new AgePlayer();
-		boolean isRetired = retirePlayer.checkForRetirement(league, 50);
+		boolean isRetired = retirePlayer.checkForRetirement(league, 55);
 		Assert.assertTrue(isRetired);
 	}
 	
@@ -38,7 +38,7 @@ public class RetirePlayerTest {
 		List<Division> divisions = conferences.get(0).getDivisions();
 		List<Team> teams = divisions.get(0).getTeams();
 		List<Player> players = teams.get(0).getPlayers();
-		Assert.assertEquals(players.size(), 2);
+		Assert.assertEquals(players.size(), 3);
 	}
 
 }

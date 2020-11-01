@@ -184,7 +184,9 @@ public class SimulateSeason {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				ageplayer.increaseAge(leagueObj, daysBetween);
+
+				//ageplayer.increaseAge(leagueObj, daysBetween);
+
 				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				break;
 			}

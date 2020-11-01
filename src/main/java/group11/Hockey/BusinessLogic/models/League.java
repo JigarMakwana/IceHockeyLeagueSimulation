@@ -23,7 +23,7 @@ public class League {
 	private GameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<Coach> coaches = new ArrayList<Coach>();
 	private List<GeneralManager> generalManagers;
-	private List<Player> retiredPlayers;
+	private List<Player> retiredPlayers= new ArrayList<Player>();
 	private String lastSimulatedDate;
 	private List<Team> qualifiedTeams = new ArrayList<Team>();
 
@@ -160,22 +160,19 @@ public class League {
 		for (Conference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			if (divisionList == null || divisionList.size() == 0) {
-				leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(), null, null,
-						new Coach(), new Player());
+				leagueObjectInserted = false;
 			} else {
 				for (Division divison : divisionList) {
 					List<Team> teamList = divison.getTeams();
 					if (teamList == null || teamList.size() == 0) {
-						leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(),
-								divison.getDivisionName(), null, new Coach(), new Player());
+						leagueObjectInserted = false;
 					} else {
 						for (Team team : teamList) {
 							List<Player> playerList = team.getPlayers();
 							Coach coach = team.getHeadCoach();
 							if (playerList == null || playerList.size() == 0) {
 
-								leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(),
-										divison.getDivisionName(), team, coach, new Player());
+								leagueObjectInserted = false;
 							} else {
 								for (Player player : playerList) {
 									leagueObjectInserted = leagueDb.insertLeagueInDb(league,

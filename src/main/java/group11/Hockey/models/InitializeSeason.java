@@ -44,14 +44,22 @@ public class InitializeSeason {
 	}
 
 	public String startSeasons(int seasonCount) {
-		// get last date simulated from db;
-
-		int year = Calendar.getInstance().get(Calendar.YEAR);
+		String lastSimulatedDate=leagueObj.getStartDate();
+		Parse parse=new Parse();
+		int year;
+		if((lastSimulatedDate.isEmpty())||(lastSimulatedDate==null)) {
+			year = Calendar.getInstance().get(Calendar.YEAR);
+		}
+		else {
+			year=parse.parseStringToYear(lastSimulatedDate);
+		}
+		 
 		int count = seasonCount;
 		String seasonEndDate = null;
 		while (count > 0) {
 			String startDate = "29/09/" + Integer.toString(year);
 			System.out.println("Start date : " + startDate);
+			leagueObj.setStartDate(startDate);
 
 			Schedule regularSeasonSchedule = new Schedule(leagueObj);
 			HashMap<String, HashMap<Team, Team>> regularSchedule = null;

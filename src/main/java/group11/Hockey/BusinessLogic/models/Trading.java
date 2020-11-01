@@ -1,6 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-public class Trading {
+public class Trading implements ITrading{
 	private int lossPoint;
 	private float randomTradeOfferChance;
 	private int maxPlayersPerTrade;

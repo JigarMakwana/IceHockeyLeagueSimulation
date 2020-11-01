@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.ICoach;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
 public class LeagueDbMock implements ILeagueDb {
@@ -22,8 +24,8 @@ public class LeagueDbMock implements ILeagueDb {
 	}
 
 	@Override
-	public boolean insertLeagueInDb(League league1, String conferenceName, String divisionName, Team team1, Coach coach,
-			Player player) {
+	public boolean insertLeagueInDb(ILeague league1, String conferenceName, String divisionName, ITeam team1, ICoach coach,
+			IPlayer player) {
 		Team team = new Team();
 		team.setTeamName(team1.getTeamName());
 		Division division = new Division(divisionName, Arrays.asList(team));

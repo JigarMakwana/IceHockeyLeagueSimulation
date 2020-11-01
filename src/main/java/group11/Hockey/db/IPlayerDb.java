@@ -1,11 +1,11 @@
 package group11.Hockey.db;
 
+import group11.Hockey.BusinessLogic.models.IPlayer;
+
 public interface IPlayerDb {
-	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, float playerSkating,
-			float playerShooting, float playerChecking, float playerSaving, float age);
+	public boolean insertLeagueFreeAgents(String leagueName, IPlayer freeAgent);
 	
-	public boolean insertLeagueRetiredPlayers(String leagueName, String playerName, String position, float playerSkating,
-			float playerShooting, float playerChecking, float playerSaving, float age);
+	public boolean insertLeagueRetiredPlayers(String leagueName, IPlayer retiredPlayer);
 	
 	public boolean deleteLeaguePlayers(String leagueName);
 }

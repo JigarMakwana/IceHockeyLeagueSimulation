@@ -16,9 +16,6 @@ public abstract class RetirePlayer {
 	public boolean checkForRetirement(League league, float age) {
 		int likelihoodOfRetirement = getLikelihoodOfRetirement(league, age);
 		boolean isRetired = new Random().nextInt(likelihoodOfRetirement) == likelihoodOfRetirement - 1;
-		if(isRetired) {
-			System.out.println(likelihoodOfRetirement);
-		}
 		return isRetired;
 	}
 

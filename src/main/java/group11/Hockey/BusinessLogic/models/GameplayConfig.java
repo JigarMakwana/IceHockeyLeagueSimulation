@@ -21,9 +21,9 @@ public class GameplayConfig {
 		this.training = training;
 		this.trading = trading;
 	}
-	
+
 	public GameplayConfig() {
-		
+
 	}
 
 	public GameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries, Training training, Trading trading,
@@ -59,22 +59,7 @@ public class GameplayConfig {
 	}
 
 	private void saveGameplayConfig() {
-
-		int averageRetirementAge = aging.getAverageRetirementAge();
-		int maximumAge = aging.getMaximumAge();
-		float randomWinChance = gameResolver.getRandomWinChance();
-		float randomInjuryChance = injuries.getRandomInjuryChance();
-		int injuryDaysLow = injuries.getInjuryDaysLow();
-		int injuryDaysHigh = injuries.getInjuryDaysHigh();
-		int daysUntilStatIncreaseCheck = training.getDaysUntilStatIncreaseCheck();
-		int lossPoint = trading.getLossPoint();
-		float randomTradeOfferChance = trading.getRandomTradeOfferChance();
-		int maxPlayersPerTrade = trading.getMaxPlayersPerTrade();
-		float randomAcceptanceChance = trading.getRandomAcceptanceChance();
-
-		gameplayConfigDb.insertGameplayConfig(averageRetirementAge, maximumAge, randomWinChance, randomInjuryChance,
-				injuryDaysLow, injuryDaysHigh, daysUntilStatIncreaseCheck, lossPoint, randomTradeOfferChance,
-				maxPlayersPerTrade, randomAcceptanceChance, leagueName);
+		gameplayConfigDb.insertGameplayConfig(aging, gameResolver, injuries, training, trading, leagueName);
 	}
 
 }

@@ -22,17 +22,6 @@ abstract public class CommonUtilForLeague {
 		}
 	}
 
-	public Coach getCoachFromCoachName(League league, String coachName) {
-		List<Coach> coachList = league.getCoaches();
-		Coach ch = null;
-		for (Coach coach : coachList) {
-			if (coach != null && coach.getName().equalsIgnoreCase(coachName)) {
-				ch = coach;
-			}
-		}
-		return ch;
-	}
-
 	public void addCoachToTeam(Team team, String coachName, League league) {
 		Coach coach = new Coach();
 		coach.setName(coachName);

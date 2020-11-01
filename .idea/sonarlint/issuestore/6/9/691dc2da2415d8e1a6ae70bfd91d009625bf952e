@@ -1,0 +1,9 @@
+
+
+java:S1192!"wDefine a constant instead of duplicating this literal "Exception occured while getting the callable statment " 3 times.(ê‰Šæ
+b
+java:S1192"GDefine a constant instead of duplicating this literal "status" 3 times.(·¿Òğıÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆÅ¨Ô
+N	java:S106!"9Replace this use of System.out or System.err by a logger.(ê‰Šæ
+N	java:S106B"9Replace this use of System.out or System.err by a logger.(ê‰Šæ
+N	java:S106["9Replace this use of System.out or System.err by a logger.(ê‰Šæ

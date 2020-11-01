@@ -3,23 +3,25 @@ package group11.Hockey.db;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
+import group11.Hockey.BusinessLogic.models.IPlayer;
+
 public class PlayerDb implements IPlayerDb {
 
 	@Override
-	public boolean insertLeagueFreeAgents(String leagueName, String freeAgentName, String position, float playerSkating,
-			float playerShooting, float playerChecking, float playerSaving, float age) {
+	public boolean insertLeagueFreeAgents(String leagueName, IPlayer freeAgent) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertFreeAgent(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
 		try {
+
 			statement.setString(1, leagueName);
-			statement.setString(2, freeAgentName);
-			statement.setString(3, position);
-			statement.setFloat(4, playerSkating);
-			statement.setFloat(5, playerShooting);
-			statement.setFloat(6, playerChecking);
-			statement.setFloat(7, playerSaving);
-			statement.setFloat(8, age);
+			statement.setString(2, freeAgent.getPlayerName());
+			statement.setString(3, freeAgent.getPosition());
+			statement.setFloat(4, freeAgent.getSkating());
+			statement.setFloat(5, freeAgent.getShooting());
+			statement.setFloat(6, freeAgent.getChecking());
+			statement.setFloat(7, freeAgent.getSaving());
+			statement.setFloat(8, freeAgent.getAge());
 
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
@@ -39,20 +41,19 @@ public class PlayerDb implements IPlayerDb {
 	}
 
 	@Override
-	public boolean insertLeagueRetiredPlayers(String leagueName, String playerName, String position,
-			float playerSkating, float playerShooting, float playerChecking, float playerSaving, float age) {
+	public boolean insertLeagueRetiredPlayers(String leagueName, IPlayer retiredPlayer) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertRetiredPlayers(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
 		try {
 			statement.setString(1, leagueName);
-			statement.setString(2, playerName);
-			statement.setString(3, position);
-			statement.setFloat(4, playerSkating);
-			statement.setFloat(5, playerShooting);
-			statement.setFloat(6, playerChecking);
-			statement.setFloat(7, playerSaving);
-			statement.setFloat(8, age);
+			statement.setString(2, retiredPlayer.getPlayerName());
+			statement.setString(3, retiredPlayer.getPosition());
+			statement.setFloat(4, retiredPlayer.getSkating());
+			statement.setFloat(5, retiredPlayer.getShooting());
+			statement.setFloat(6, retiredPlayer.getChecking());
+			statement.setFloat(7, retiredPlayer.getSaving());
+			statement.setFloat(8, retiredPlayer.getAge());
 
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();

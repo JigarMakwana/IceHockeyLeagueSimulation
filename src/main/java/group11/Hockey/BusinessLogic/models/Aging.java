@@ -1,6 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-public class Aging {
+public class Aging implements IAging{
 	private int averageRetirementAge;
 	private int maximumAge;
 

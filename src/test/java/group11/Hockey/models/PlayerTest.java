@@ -67,25 +67,25 @@ public class PlayerTest {
 	@Test
 	public void insertLeagueFreeAgentsTest() {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
-		when(playerDb.insertLeagueFreeAgents("league", "Player1", "forward", (float) 10, (float) 10, (float) 10, (float) 10, 30)).thenReturn(true);
+		when(playerDb.insertLeagueFreeAgents("league", playerWithParams)).thenReturn(true);
 		List<Player> listOfFreeAgents = new ArrayList<Player>();
 		listOfFreeAgents.add(playerWithParams);
 		Player player2 = new Player("league", playerDb);
 		boolean flag = player2.insertLeagueFreeAgents(listOfFreeAgents);
-		Assert.assertFalse(flag);
+		Assert.assertTrue(flag);
 	}
-	
+
 	@Test
 	public void insertLeagueRetiredPlayersTest() {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
-		when(playerDb.insertLeagueRetiredPlayers("league", "Player1", "forward", (float) 10, (float) 10, (float) 10, (float) 10, 30)).thenReturn(true);
+		when(playerDb.insertLeagueRetiredPlayers("league", playerWithParams)).thenReturn(true);
 		List<Player> listOfFreeAgents = new ArrayList<Player>();
 		listOfFreeAgents.add(playerWithParams);
 		Player player2 = new Player("league", playerDb);
 		boolean flag = player2.insertLeagueRetiredPlayers(listOfFreeAgents);
-		Assert.assertFalse(flag);
+		Assert.assertTrue(flag);
 	}
-	
+
 	@Test
 	public void deleteLeaguePlayersTest() {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
@@ -117,7 +117,7 @@ public class PlayerTest {
 		Player player2 = new Player(10, 10, 10, 10, "Agent one", "forward", true, true, 20);
 		List<Player> playerList = new ArrayList<Player>();
 		playerList.add(player1);
-		
+
 		LeagueModelMock leagueModel = new LeagueModelMock();
 		League league = leagueModel.getLeagueInfo();
 		List<Player> playerList2 = new ArrayList<Player>();
@@ -127,7 +127,7 @@ public class PlayerTest {
 		playerWithParams.replacePlayerWithFreeAgent(league, playerList);
 		Assert.assertEquals(playerList.size(), 2);
 	}
-	
+
 	@Test
 	public void removeFreeAgentsFromLeagueTest() {
 		LeagueModelMock leagueModelMock = new LeagueModelMock();

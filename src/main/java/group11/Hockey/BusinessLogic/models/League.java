@@ -16,16 +16,16 @@ import group11.Hockey.db.League.ILeagueDb;
  * @author jatinpartaprana
  *
  */
-public class League {
+public class League implements ILeague {
 	private String leagueName;
 	private List<Conference> conferences = new ArrayList<Conference>();
 	private List<Player> freeAgents = new ArrayList<Player>();
 	private GameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<Coach> coaches = new ArrayList<Coach>();
 	private List<GeneralManager> generalManagers;
-	private List<Player> retiredPlayers= new ArrayList<Player>();
-	private String lastSimulatedDate;
+	private List<Player> retiredPlayers = new ArrayList<Player>();
 	private List<Team> qualifiedTeams = new ArrayList<Team>();
+	private String startDate;
 
 	public List<Team> getQualifiedTeams() {
 		return qualifiedTeams;
@@ -34,8 +34,6 @@ public class League {
 	public void setQualifiedTeams(List<Team> qualifiedTeams) {
 		this.qualifiedTeams = qualifiedTeams;
 	}
-
-	private String startDate;
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {

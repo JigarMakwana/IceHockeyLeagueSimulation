@@ -1,6 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-public class Injuries {
+public class Injuries implements IInjuries{
 	private float randomInjuryChance;
 	private int injuryDaysLow;
 	private int injuryDaysHigh;

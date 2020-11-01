@@ -4,7 +4,7 @@ import java.util.List;
 
 import group11.Hockey.db.ICoachDb;
 
-public class Coach extends Stats {
+public class Coach extends Stats implements ICoach{
 	private String name;
 	private String leagueName;
 	private ICoachDb coachDb;

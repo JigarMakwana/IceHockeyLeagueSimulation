@@ -10,40 +10,15 @@ import group11.Hockey.db.Team.ITeamDb;
  * @author jatinpartaprana
  *
  */
-public class Team {
+public class Team implements ITeam {
 
 	private String teamName;
 	private String generalManager;
 	private Coach headCoach;
 	private List<Player> players = null;
-	private float teamStrength;
 	private boolean isUserTeam = false;
 	private int lossPoint;
 	private int losses;
-
-	public int getLosses() {
-		return losses;
-	}
-
-	public void setLosses(int losses) {
-		this.losses = losses;
-	}
-
-	public int getWins() {
-		return wins;
-	}
-
-	public void setWins(int wins) {
-		this.wins = wins;
-	}
-
-	public int getPoints() {
-		return points;
-	}
-
-	public void setPoints(int points) {
-		this.points = points;
-	}
 
 	private int wins;
 	private int points;
@@ -116,6 +91,29 @@ public class Team {
 		this.players = players;
 	}
 
+	public int getLosses() {
+		return losses;
+	}
+
+	public void setLosses(int losses) {
+		this.losses = losses;
+	}
+
+	public int getWins() {
+		return wins;
+	}
+
+	public void setWins(int wins) {
+		this.wins = wins;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
 
 	public float getTeamStrength() {
 		List<Player> players = this.getPlayers();
@@ -164,11 +162,11 @@ public class Team {
 	public boolean teamExistsInDivision(String teamName, Division divisionName) {
 		boolean teamExists = false;
 		List<Team> teamList = divisionName.getTeams();
-		if(teamList == null) {
+		if (teamList == null) {
 			return teamExists;
 		}
 		for (Team team : teamList) {
-			if(team.getTeamName().equalsIgnoreCase(teamName)) {
+			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamExists = true;
 				return teamExists;
 			}
@@ -180,19 +178,18 @@ public class Team {
 		List<Team> teamList = division.getTeams();
 		Team teamInDivision = null;
 		for (Team team : teamList) {
-			if(team.getTeamName().equalsIgnoreCase(teamName)) {
+			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamInDivision = team;
 				return team;
 			}
 		}
 		return teamInDivision;
 	}
-	
 
 	public League loadLeagueWithTeamName(String teamName, ITeamDb teamDb) {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
-	
+
 	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
 		team.setGeneralManager(generalMangerName);
 		List<GeneralManager> generalManagers = league.getGeneralManagers();
@@ -203,7 +200,7 @@ public class Team {
 			}
 		}
 	}
-	
+
 	public void addCoachToTeam(Team team, String coachName, League league) {
 		Coach coach = new Coach();
 		coach.setName(coachName);
@@ -225,10 +222,10 @@ public class Team {
 
 	/**
 	 *
-	 * @author  Jigar Makwana B00842568
+	 * @author Jigar Makwana B00842568
 	 *
 	 */
-	public List<Player>  sortPlayersByStrength() {
+	public List<Player> sortPlayersByStrength() {
 		List<Player> sortedPlayerList = this.players;
 		/* bubble sort */
 		int i, j;
@@ -238,8 +235,7 @@ public class Team {
 		for (i = 0; i < length - 1; i++) {
 			swapped = false;
 			for (j = 0; j < length - i - 1; j++) {
-				if (sortedPlayerList.get(j).getPlayerStrength() >
-						sortedPlayerList.get(j + 1).getPlayerStrength()) {
+				if (sortedPlayerList.get(j).getPlayerStrength() > sortedPlayerList.get(j + 1).getPlayerStrength()) {
 					temp = sortedPlayerList.get(j);
 					sortedPlayerList.set(j, sortedPlayerList.get(j + 1));
 					sortedPlayerList.set(j + 1, temp);
@@ -254,21 +250,19 @@ public class Team {
 
 	/**
 	 *
-	 * @author  Jigar Makwana B00842568
+	 * @author Jigar Makwana B00842568
 	 *
 	 */
-	public int getLossPoint()
-	{
+	public int getLossPoint() {
 		return lossPoint;
 	}
 
 	/**
 	 *
-	 * @author  Jigar Makwana B00842568
+	 * @author Jigar Makwana B00842568
 	 *
 	 */
-	public void setLossPoint(int lossPoint)
-	{
+	public void setLossPoint(int lossPoint) {
 		this.lossPoint = lossPoint;
 	}
 }

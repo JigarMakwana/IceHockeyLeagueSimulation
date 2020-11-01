@@ -26,13 +26,13 @@ public abstract class RetirePlayer {
 		int maximumAge = ageDetails.getMaximumAge();
 		int likelihoodOfRetirement = 1;
 		float playerAge = age;
-
-		if (averageRetirementAge >= playerAge) {
+		if (age >= maximumAge) {
+			return likelihoodOfRetirement;
+		} else if (averageRetirementAge >= playerAge) {
 			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 50;
 		} else if (averageRetirementAge < playerAge) {
 			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 25;
 		}
-
 		return likelihoodOfRetirement;
 	}
 

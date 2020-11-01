@@ -63,6 +63,7 @@
               ],
               "teamStrength": 0.0,
               "isUserTeam": false,
+              "lossPoint": 0,
               "losses": 0,
               "wins": 0,
               "points": 0
@@ -109,6 +110,7 @@
               ],
               "teamStrength": 0.0,
               "isUserTeam": false,
+              "lossPoint": 0,
               "losses": 0,
               "wins": 0,
               "points": 0

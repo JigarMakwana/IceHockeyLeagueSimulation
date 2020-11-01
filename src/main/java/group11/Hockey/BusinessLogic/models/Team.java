@@ -187,9 +187,34 @@ public class Team {
 		}
 		return teamInDivision;
 	}
+	
 
 	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb) {
 		return teamDb.loadTeamFromTeamName(teamName);
+	}
+	
+	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
+		team.setGeneralManager(generalMangerName);
+		List<GeneralManager> generalManagers = league.getGeneralManagers();
+		for (GeneralManager gm : generalManagers) {
+			if (gm.getName() != null && gm.getName().equalsIgnoreCase(generalMangerName)) {
+				generalManagers.remove(gm);
+				break;
+			}
+		}
+	}
+	
+	public void addCoachToTeam(Team team, String coachName, League league) {
+		Coach coach = new Coach();
+		coach.setName(coachName);
+		team.setHeadCoach(coach);
+		List<Coach> coaches = league.getCoaches();
+		for (Coach ch : coaches) {
+			if (ch.getName() != null && ch.getName().equalsIgnoreCase(coach.getName())) {
+				coaches.remove(ch);
+				break;
+			}
+		}
 	}
 
 	@Override

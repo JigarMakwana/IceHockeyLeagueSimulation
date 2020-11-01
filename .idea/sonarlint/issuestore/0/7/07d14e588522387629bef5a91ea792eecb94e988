@@ -1,24 +1,24 @@
 
-]	java:S125;"<This block of commented-out lines of code should be removed.(ª¥’¡üÿÿÿÿ8Õ™‡„×.
-]	java:S125["<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8Ğó·†Ø.
+W
+java:S1481"5Remove this unused "gameplayConfigDb" local variable.(¥†°ôûÿÿÿÿ8ÿ÷í†Ø.
 X	java:S125!"<This block of commented-out lines of code should be removed.(—Ö¤ø8Õ™‡„×.
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Ş´şÿÿÿÿ8Õ™‡„×.
-U	java:S1066"9Replace this use of System.out or System.err by a logger.(Ñ¥…¥8Õ™‡„×.
+]	java:S125'"<This block of commented-out lines of code should be removed.(×â›ûÿÿÿÿ8ÿ÷í†Ø.
+]	java:S125["<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8Ğó·†Ø.
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìş
-_
-java:S1854"=Remove this useless assignment to local variable "managerDb".(ÓÛØºÿÿÿÿÿ8ÿ÷í†Ø.
+U	java:S1066"9Replace this use of System.out or System.err by a logger.(Ñ¥…¥8Õ™‡„×.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Ş´şÿÿÿÿ8Õ™‡„×.
 X
 java:S1854";Remove this useless assignment to local variable "coachDb".(•«‰8ÿ÷í†Ø.
+I
+java:S1481",Remove this unused "coachDb" local variable.(•«‰8ÿ÷í†Ø.
+O
+java:S1481"-Remove this unused "playerDb" local variable.(¥™—Ûıÿÿÿÿ8ÿ÷í†Ø.
 ^
 java:S1854"<Remove this useless assignment to local variable "playerDb".(¥™—Ûıÿÿÿÿ8ÿ÷í†Ø.
 f
 java:S1854"DRemove this useless assignment to local variable "gameplayConfigDb".(¥†°ôûÿÿÿÿ8ÿ÷í†Ø.
-]	java:S125'"<This block of commented-out lines of code should be removed.(×â›ûÿÿÿÿ8ÿ÷í†Ø.
-W
-java:S1481"5Remove this unused "gameplayConfigDb" local variable.(¥†°ôûÿÿÿÿ8ÿ÷í†Ø.
-O
-java:S1481"-Remove this unused "playerDb" local variable.(¥™—Ûıÿÿÿÿ8ÿ÷í†Ø.
-I
-java:S1481",Remove this unused "coachDb" local variable.(•«‰8ÿ÷í†Ø.
+]	java:S125;"<This block of commented-out lines of code should be removed.(ª¥’¡üÿÿÿÿ8Õ™‡„×.
 P
 java:S1481".Remove this unused "managerDb" local variable.(ÓÛØºÿÿÿÿÿ8ÿ÷í†Ø.
+_
+java:S1854"=Remove this useless assignment to local variable "managerDb".(ÓÛØºÿÿÿÿÿ8ÿ÷í†Ø.

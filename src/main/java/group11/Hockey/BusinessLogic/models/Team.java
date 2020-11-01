@@ -189,8 +189,8 @@ public class Team {
 	}
 	
 
-	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb) {
-		return teamDb.loadTeamFromTeamName(teamName);
+	public League loadLeagueWithTeamName(String teamName, ITeamDb teamDb) {
+		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 	
 	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {

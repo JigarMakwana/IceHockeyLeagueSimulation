@@ -1,5 +1,6 @@
 package group11.Hockey.InputOutput;
 
+import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -25,6 +26,9 @@ public interface IDisplay {
 											  Team team2, List<Player> requestedPlayerList);
 
 	public void displayAcceptRejectOptionToUser();
+	
+	public void printTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
+			String managerName, Coach coach);
 
 
 }

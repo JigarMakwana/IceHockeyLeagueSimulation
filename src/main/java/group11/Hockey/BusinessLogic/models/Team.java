@@ -6,7 +6,7 @@ import group11.Hockey.db.Team.ITeamDb;
 
 /**
  * This class contain all the business logic related to team model
- * 
+ *
  * @author jatinpartaprana
  *
  */
@@ -18,8 +18,9 @@ public class Team {
 	private List<Player> players = null;
 	private float teamStrength;
 	private boolean isUserTeam = false;
+	private int lossPoint;
 	private int losses;
-	
+
 	public int getLosses() {
 		return losses;
 	}
@@ -114,7 +115,7 @@ public class Team {
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
-	
+
 
 	public float getTeamStrength() {
 		List<Player> players = this.getPlayers();
@@ -159,7 +160,7 @@ public class Team {
 		}
 		return isTeamNameValid;
 	}
-	
+
 	public boolean teamExistsInDivision(String teamName, Division divisionName) {
 		boolean teamExists = false;
 		List<Team> teamList = divisionName.getTeams();
@@ -174,7 +175,7 @@ public class Team {
 		}
 		return teamExists;
 	}
-	
+
 	public Team getTeamFromDivision(String teamName, Division division) {
 		List<Team> teamList = division.getTeams();
 		Team teamInDivision = null;
@@ -186,9 +187,34 @@ public class Team {
 		}
 		return teamInDivision;
 	}
+	
 
 	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb) {
 		return teamDb.loadTeamFromTeamName(teamName);
+	}
+	
+	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
+		team.setGeneralManager(generalMangerName);
+		List<GeneralManager> generalManagers = league.getGeneralManagers();
+		for (GeneralManager gm : generalManagers) {
+			if (gm.getName() != null && gm.getName().equalsIgnoreCase(generalMangerName)) {
+				generalManagers.remove(gm);
+				break;
+			}
+		}
+	}
+	
+	public void addCoachToTeam(Team team, String coachName, League league) {
+		Coach coach = new Coach();
+		coach.setName(coachName);
+		team.setHeadCoach(coach);
+		List<Coach> coaches = league.getCoaches();
+		for (Coach ch : coaches) {
+			if (ch.getName() != null && ch.getName().equalsIgnoreCase(coach.getName())) {
+				coaches.remove(ch);
+				break;
+			}
+		}
 	}
 
 	@Override
@@ -197,4 +223,52 @@ public class Team {
 				+ ", players=" + players + "]";
 	}
 
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public List<Player>  sortPlayersByStrength() {
+		List<Player> sortedPlayerList = this.players;
+		/* bubble sort */
+		int i, j;
+		Player temp;
+		boolean swapped;
+		int length = sortedPlayerList.size();
+		for (i = 0; i < length - 1; i++) {
+			swapped = false;
+			for (j = 0; j < length - i - 1; j++) {
+				if (sortedPlayerList.get(j).getPlayerStrength() >
+						sortedPlayerList.get(j + 1).getPlayerStrength()) {
+					temp = sortedPlayerList.get(j);
+					sortedPlayerList.set(j, sortedPlayerList.get(j + 1));
+					sortedPlayerList.set(j + 1, temp);
+					swapped = true;
+				}
+			}
+			if (swapped == false)
+				break;
+		}
+		return sortedPlayerList;
+	}
+
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public int getLossPoint()
+	{
+		return lossPoint;
+	}
+
+	/**
+	 *
+	 * @author  Jigar Makwana B00842568
+	 *
+	 */
+	public void setLossPoint(int lossPoint)
+	{
+		this.lossPoint = lossPoint;
+	}
 }

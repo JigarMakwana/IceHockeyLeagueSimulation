@@ -4,5 +4,5 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 
 public interface ITrainingPlayer {
-	public void trainPlayer(Team team, League league);
+	public void trainPlayer(League league);
 }

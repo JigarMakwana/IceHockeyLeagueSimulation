@@ -42,7 +42,7 @@ public class TeamTest {
 
 	@Test
 	public void getGeneralManagerTest() {
-		Assert.assertEquals("John", team.getGeneralManager());
+		Assert.assertEquals("Kevin", team.getGeneralManager());
 	}
 
 	@Test
@@ -88,6 +88,20 @@ public class TeamTest {
 	public void getTeamStrengthTest() {
 		float teamStrength = team.getTeamStrength();
 		Assert.assertEquals(teamStrength, 55.0, 55.0);
+	}
+
+	@Test
+	public void addGeneralMangerToTeamTest() {
+		team.addGeneralMangerToTeam(team, "Kevin", league);
+		Assert.assertEquals("Kevin", team.getGeneralManager());
+		Assert.assertTrue(league.getGeneralManagers().size() == 0);
+	}
+	
+	@Test
+	public void addCoachToTeamTest() {
+		team.addCoachToTeam(team, "C1", league);
+		Assert.assertEquals("C1", team.getHeadCoach().getName());
+		Assert.assertTrue(league.getCoaches().size() == 0);
 	}
 
 }

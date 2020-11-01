@@ -25,7 +25,7 @@ public class League {
 	private List<GeneralManager> generalManagers;
 	private List<Player> retiredPlayers;
 	private String lastSimulatedDate;
-	private List<Team> qualifiedTeams=new ArrayList<Team>();
+	private List<Team> qualifiedTeams = new ArrayList<Team>();
 
 	public List<Team> getQualifiedTeams() {
 		return qualifiedTeams;
@@ -34,6 +34,7 @@ public class League {
 	public void setQualifiedTeams(List<Team> qualifiedTeams) {
 		this.qualifiedTeams = qualifiedTeams;
 	}
+
 	private String startDate;
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
@@ -83,10 +84,10 @@ public class League {
 	 * @return the freeAgents
 	 */
 	public List<Player> getFreeAgents() {
-		if(isFreeAgentsNotNull()) {
+		if (isFreeAgentsNotNull()) {
 			Collections.sort(freeAgents);
 		}
-		
+
 		return freeAgents;
 	}
 
@@ -128,7 +129,7 @@ public class League {
 	public void setRetiredPlayers(List<Player> retiredPlayers) {
 		this.retiredPlayers = retiredPlayers;
 	}
-	
+
 	/**
 	 * @return the startDate
 	 */
@@ -154,40 +155,32 @@ public class League {
 
 		Player playerObj = new Player(leagueName, playerDb);
 		playerObj.deleteLeaguePlayers();
-		
+
 		List<Conference> conferenceList = league.getConferences();
 		for (Conference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			if (divisionList == null || divisionList.size() == 0) {
-				leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(), conference.getConferenceName(),
-						null, null, null, null, 0, 0, 0, 0, null, null, false, 0, 0, 0, 0, 0);
+				leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(), null, null,
+						new Coach(), new Player());
 			} else {
 				for (Division divison : divisionList) {
 					List<Team> teamList = divison.getTeams();
 					if (teamList == null || teamList.size() == 0) {
-						leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(),
-								conference.getConferenceName(), divison.getDivisionName(), null, null, null, 0, 0, 0, 0,
-								null, null, false, 0, 0, 0, 0, 0);
+						leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(),
+								divison.getDivisionName(), null, new Coach(), new Player());
 					} else {
 						for (Team team : teamList) {
 							List<Player> playerList = team.getPlayers();
 							Coach coach = team.getHeadCoach();
 							if (playerList == null || playerList.size() == 0) {
 
-								leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(),
-										conference.getConferenceName(), divison.getDivisionName(), team.getTeamName(),
-										team.getGeneralManager(), coach.getName(), coach.getSkating(),
-										coach.getShooting(), coach.getChecking(), coach.getSaving(), null, null, false,
-										0, 0, 0, 0, 0);
+								leagueObjectInserted = leagueDb.insertLeagueInDb(league, conference.getConferenceName(),
+										divison.getDivisionName(), team, coach, new Player());
 							} else {
 								for (Player player : playerList) {
-									leagueObjectInserted = leagueDb.insertLeagueInDb(league.getLeagueName(),
-											conference.getConferenceName(), divison.getDivisionName(),
-											team.getTeamName(), team.getGeneralManager(), coach.getName(),
-											coach.getSkating(), coach.getShooting(), coach.getChecking(),
-											coach.getSaving(), player.getPlayerName(), player.getPosition(),
-											player.getCaptain(), player.getSkating(), player.getShooting(),
-											player.getChecking(), player.getSaving(), player.getAge());
+									leagueObjectInserted = leagueDb.insertLeagueInDb(league,
+											conference.getConferenceName(), divison.getDivisionName(), team, coach,
+											player);
 								}
 							}
 						}
@@ -203,10 +196,10 @@ public class League {
 				leagueName);
 
 		// freeAgents and Retired players
-		
+
 		playerObj.insertLeagueFreeAgents(league.getFreeAgents());
 		playerObj.insertLeagueRetiredPlayers(league.getRetiredPlayers());
-		
+
 		// coaches
 		Coach coach = new Coach(leagueName, coachDb);
 		coach.insertCoaches(league.getCoaches());
@@ -215,8 +208,6 @@ public class League {
 		GeneralManager generalManager = new GeneralManager(leagueName, managerDb);
 		generalManager.insertManager(league.getGeneralManagers());
 
-		
-		
 		if (leagueObjectInserted && freeAgentInsertionCheck) {
 			return true;
 		} else

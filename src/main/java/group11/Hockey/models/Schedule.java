@@ -359,7 +359,7 @@ public class Schedule {
 			}
 		}
 
-		System.out.println("\n********** Total games scheduled : " +totalGames+ "("+(totalGames/totalTeams)+" games each team **********");
+		System.out.println("\n********** Total games scheduled : " +totalGames+ "("+(totalGames/totalTeams)+" games each team) **********");
 		return regularSchedule;
 	}
 

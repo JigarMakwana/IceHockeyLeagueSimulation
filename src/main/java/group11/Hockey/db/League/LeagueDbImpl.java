@@ -120,9 +120,9 @@ public class LeagueDbImpl implements ILeagueDb {
 
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
-			while (resultSet.next()) {
-				outPutValue = resultSet.getBoolean("status");
-			}
+//			while (resultSet.next()) {
+//				outPutValue = resultSet.getBoolean("status");
+//			}
 			statement.close();
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {

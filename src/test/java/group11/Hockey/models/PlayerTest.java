@@ -127,5 +127,19 @@ public class PlayerTest {
 		playerWithParams.replacePlayerWithFreeAgent(league, playerList);
 		Assert.assertEquals(playerList.size(), 2);
 	}
+	
+	@Test
+	public void removeFreeAgentsFromLeagueTest() {
+		LeagueModelMock leagueModelMock = new LeagueModelMock();
+		League league = leagueModelMock.getLeagueInfo();
+		Player player = new Player();
+		Player freeAgent1 = new Player(10, 10, 10, 10, "Player 1", "forward", true, false, 50);
+		Player freeAgent2 = new Player(10, 10, 10, 10, "Player 2", "forward", true, false, 50);
+		List<Player> freeAgents = new ArrayList<Player>();
+		freeAgents.add(freeAgent1);
+		freeAgents.add(freeAgent2);
+		player.removeFreeAgentsFromLeague(league, freeAgents);
+		Assert.assertTrue(league.getFreeAgents().size() == 18);
+	}
 
 }

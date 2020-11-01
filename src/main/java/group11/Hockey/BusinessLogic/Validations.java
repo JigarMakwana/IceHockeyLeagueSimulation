@@ -173,11 +173,31 @@ public class Validations implements IValidations {
 
 	}
 
-	protected boolean isStrBlank(String str) {
+	public boolean isStrBlank(String str) {
 		if (str == null || str.isEmpty() || str.split(" +").length == 0) {
 			return true;
 		}
 
 		return false;
+	}
+	
+	public boolean isNoOfSeasonsValueValid(String numberOfSeasons) {
+		boolean isNoOfSeasonsValueValid = false;
+		try {
+			int value = Integer.parseInt(numberOfSeasons);
+			if(value < 0) {
+				display.showMessageOnConsole("Select valid value for simulation");
+				isNoOfSeasonsValueValid = true;
+				return isNoOfSeasonsValueValid;
+			}
+			else {
+				return false;
+			}
+		} catch (Exception e) {
+			display.showMessageOnConsole("Select valid value for simulation");
+			isNoOfSeasonsValueValid = true;
+			return isNoOfSeasonsValueValid;
+		}
+		
 	}
 }

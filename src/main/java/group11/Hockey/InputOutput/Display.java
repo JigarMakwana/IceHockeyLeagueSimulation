@@ -104,4 +104,16 @@ public class Display implements IDisplay {
 	public void displayAcceptRejectOptionToUser() {
 		System.out.println("Press 1 to Accept the trade\nPress any other key to Reject the trade.");
 	}
+	
+	@Override
+	public void printTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
+			String managerName, Coach coach) {
+		showMessageOnConsole("**Team details:");
+		showMessageOnConsole("League name-> " + leagueName);
+		showMessageOnConsole("-Conference name-> " + conferenceName);
+		showMessageOnConsole("--Division name-> " + divisionName);
+		showMessageOnConsole("---Team name-> " + teamName);
+		showMessageOnConsole("---GeneralManager-> " + managerName);
+		showMessageOnConsole("---HeadCoach-> " + coach);
+	}
 }

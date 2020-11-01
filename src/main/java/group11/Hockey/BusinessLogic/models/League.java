@@ -23,7 +23,7 @@ public class League {
 	private GameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<Coach> coaches = new ArrayList<Coach>();
 	private List<GeneralManager> generalManagers;
-	private List<Player> retiredPlayers;
+	private List<Player> retiredPlayers= new ArrayList<Player>();
 	private String lastSimulatedDate;
 	private List<Team> qualifiedTeams = new ArrayList<Team>();
 

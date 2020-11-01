@@ -237,7 +237,6 @@ public class Player extends Stats implements Comparable<Player> {
 				break;
 			}
 		}
-		//TODO implement exception if no player is hired from free agents
 	}
 
 	public void dropPlayerToFreeAgent(League league, List<Player> playersList) {
@@ -248,7 +247,6 @@ public class Player extends Stats implements Comparable<Player> {
 			Player player = playersListItr.next();
 			if (player.getPosition().equalsIgnoreCase(this.getPosition())) {
 				player.setIsFreeAgent(true);
-				player.setCaptain(this.getCaptain());
 				freeAgents.add(player);
 				playersListItr.remove();
 				break;

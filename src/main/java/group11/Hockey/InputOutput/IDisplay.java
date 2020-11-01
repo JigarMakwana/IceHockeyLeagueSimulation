@@ -26,5 +26,5 @@ public interface IDisplay {
 
 	public void displayAcceptRejectOptionToUser();
 
-
+	public void displayListOfFreeAgents(List<Player> freeAgentList);
 }

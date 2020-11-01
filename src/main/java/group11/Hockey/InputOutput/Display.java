@@ -102,6 +102,22 @@ public class Display implements IDisplay {
 
 	@Override
 	public void displayAcceptRejectOptionToUser() {
-		System.out.println("Press 1 to Accept the trade\nPress any other key to Reject the trade.");
+		System.out.println("Press 1 to Accept the trade\nPress 0 to Reject the trade.");
+	}
+
+	@Override
+	public void displayListOfFreeAgents(List<Player> freeAgentList) {
+		System.out.println("******Select Players for Team******: ");
+		System.out.println("******List of free agents******: ");
+		for(int i=0; i<freeAgentList.size(); i++)
+		{
+			int playerNo = i +1;
+			System.out.println("Press " + playerNo + " to select this player: " + freeAgentList.get(i).getPlayerName());
+			System.out.println("Player Name ----- Position ----- Strength");
+			System.out.println(freeAgentList.get(i).getPlayerName() + "        " +
+					freeAgentList.get(i).getPosition() + "         " +
+					freeAgentList.get(i).getPlayerStrength());
+
+		}
 	}
 }

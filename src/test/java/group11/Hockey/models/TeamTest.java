@@ -74,13 +74,13 @@ public class TeamTest {
 	public void loadTeamWithTeamNameTest() {
 		String teamName = "Toronto Maples";
 		ITeamDb teamDb = new TeamDbMock();
-		List<League> fetcheData = team.loadTeamWithTeamName(teamName, teamDb);
-		Assert.assertTrue(fetcheData.size() == 1);
+		League fetcheData = team.loadLeagueWithTeamName(teamName, teamDb);
+		
 		Assert.assertTrue(
-				fetcheData.get(0).getConferences().get(0).getConferenceName().equalsIgnoreCase("Westeren Conference"));
-		Assert.assertTrue(fetcheData.get(0).getConferences().get(0).getDivisions().get(0).getDivisionName()
+				fetcheData.getConferences().get(0).getConferenceName().equalsIgnoreCase("Westeren Conference"));
+		Assert.assertTrue(fetcheData.getConferences().get(0).getDivisions().get(0).getDivisionName()
 				.equalsIgnoreCase("Atlantic Division"));
-		Assert.assertTrue(fetcheData.get(0).getConferences().get(0).getDivisions().get(0).getTeams().get(0)
+		Assert.assertTrue(fetcheData.getConferences().get(0).getDivisions().get(0).getTeams().get(0)
 				.getTeamName().equalsIgnoreCase("Toronto Maples"));
 	}
 

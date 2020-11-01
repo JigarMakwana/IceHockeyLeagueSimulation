@@ -42,22 +42,4 @@ public class CreateTeamTest {
 		Assert.assertTrue(newTeam.getPlayers().size() == 20);
 	}
 
-//	@Test
-//	public void conferenceNameFromUserCheckTest() {
-//		ICommandLineInput userInputMode = mock(ICommandLineInput.class);
-//		when(userInputMode.getValueFromUser()).thenReturn(conferenceName);
-//		CreateTeam createTeam = new CreateTeam(leagueObj, userInputMode);
-//		createTeam.conferenceNameFromUserCheck(leagueObj.getConferences());
-//		Assert.assertTrue(leagueObj.getConferences().get(0).getConferenceName().equalsIgnoreCase(conferenceName));
-//	}
-//	
-//	@Test
-//	public void divisonNameFromUserCheckTest() {
-//		ICommandLineInput userInputMode = mock(ICommandLineInput.class);
-//		when(userInputMode.getValueFromUser()).thenReturn(divisionName);
-//		CreateTeam createTeam = new CreateTeam(leagueObj, userInputMode);
-//		createTeam.divisonNameFromUserCheck(leagueObj.getConferences().get(0));
-//		
-//	}
-
 }

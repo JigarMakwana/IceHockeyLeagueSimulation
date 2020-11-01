@@ -181,10 +181,13 @@ public class SimulateSeason {
 				System.out.println("\n********** Winner team of the season("+startYear+"/"+endYear+") is " + winner.getTeamName()+" **********");
 				try {
 					date = advance.getAdvanceDate(date, daysBetween);
+					leagueObj.setStartDate(date);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				ageplayer.increaseAge(leagueObj, daysBetween);
+
+				//ageplayer.increaseAge(leagueObj, daysBetween);
+
 				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				break;
 			}

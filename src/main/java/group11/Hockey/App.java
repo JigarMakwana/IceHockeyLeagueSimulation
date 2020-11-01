@@ -3,6 +3,7 @@ package group11.Hockey;
 import group11.Hockey.BusinessLogic.CreateTeam;
 import group11.Hockey.BusinessLogic.LoadTeam;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.CoachDb;
 import group11.Hockey.db.GameplayConfigDb;
@@ -40,7 +41,11 @@ public class App {
 //				leagueObj = createTeamObj.getTeam();
 				createTeamObj.createTeamMethod();
 				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-
+				
+				//CreateTeam createTeamObj = new CreateTeam(leagueObj, new CommandLineInput());
+//				leagueObj = createTeamObj.getTeam();
+				//createTeamObj.createTeamMethod();
+				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				System.out.println("****Create Team end****");
 				InitializeSeason initialize=new InitializeSeason(leagueObj,leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 

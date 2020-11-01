@@ -37,6 +37,10 @@ public class Player extends Stats implements Comparable<Player> {
 	public Player() {
 		super();
 	}
+	
+	public Player(String playerName) {
+		this.playerName = playerName;
+	}
 
 	public Player(float skating, float shooting, float checking, float saving, String playerName, String position,
 			boolean captain, boolean isFreeAgent, float age) {
@@ -252,6 +256,19 @@ public class Player extends Stats implements Comparable<Player> {
 				freeAgents.add(player);
 				playersListItr.remove();
 				break;
+			}
+		}
+	}
+	
+	public void removeFreeAgentsFromLeague(League league, List<Player> freeAgents) {
+		List<Player> listOfFreeAgentsInLeague = league.getFreeAgents();
+		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
+		while (interator.hasNext()) {
+		    Player pl = interator.next();
+			for (Player freeAgent : freeAgents) {
+				if (freeAgent.toString().equalsIgnoreCase(pl.toString())) {
+					interator.remove();
+				}
 			}
 		}
 	}

@@ -26,7 +26,7 @@ public class TrainingPlayerTest {
 	@Test
 	public void trainPlayerTest() {
 		Team team = league.getConferences().get(0).getDivisions().get(0).getTeams().get(0);
-		traingPlayer.trainPlayer(team, league);
+		traingPlayer.trainPlayer(league);
 		Assert.assertTrue(team.getPlayers().get(0).getSkating() >= 0);
 		Assert.assertTrue(team.getPlayers().get(0).getShooting() >= 0);
 		Assert.assertTrue(team.getPlayers().get(0).getChecking() >= 0);

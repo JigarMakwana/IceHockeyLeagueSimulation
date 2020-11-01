@@ -3,6 +3,8 @@ package group11.Hockey.BusinessLogic;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -10,14 +12,23 @@ import group11.Hockey.BusinessLogic.models.Team;
 public class TrainingPlayer implements ITrainingPlayer {
 
 	@Override
-	public void trainPlayer(Team team, League league) {
-		List<Player> playerList = team.getPlayers();
-		Coach headCoach = team.getHeadCoach();
-		for (Player player : playerList) {
-			changePlayerSkatingSkill(player, headCoach.getSkating(),league );
-			changePlayerShootingSkill(player, headCoach.getShooting(), league);
-			changePlayerCheckingSkill(player, headCoach.getChecking(), league);
-			changePlayerSavingSkill(player, headCoach.getChecking(), league);
+	public void trainPlayer(League league) {
+		List<Conference> conferenceList = league.getConferences();
+		for(Conference conference : conferenceList) {
+			List<Division> divisionList = conference.getDivisions();
+			for(Division division: divisionList) {
+				List<Team> teamList = division.getTeams();
+				for(Team team: teamList) {
+					Coach headCoach = team.getHeadCoach();
+					List<Player> playerList = team.getPlayers();
+					for (Player player : playerList) {
+						changePlayerSkatingSkill(player, headCoach.getSkating(),league );
+						changePlayerShootingSkill(player, headCoach.getShooting(), league);
+						changePlayerCheckingSkill(player, headCoach.getChecking(), league);
+						changePlayerSavingSkill(player, headCoach.getChecking(), league);
+					}
+				}
+			}
 		}
 	}
 

@@ -54,94 +54,109 @@ public class SimulationLeagueModelMock {
 			List<Conference> conferenceList = new ArrayList<Conference>();
 			List<Team> qualifiedTeams = new ArrayList<Team>();		
 			Team team1,team2,team3,team4,team5,team6,team7,team8;
-			Player player1,player2,player3,player4;
+			Player player,player1,player2,player3,player4;
 			
 			//Atlantic Division, Eastern Conference
-			player1 = new Player(15, 18, 12, 1, "Tom1", "forward", true, false, 25);
+			/*player1 = new Player(15, 18, 12, 1, "Tom1", "forward", true, false, 25);
 	        player2 = new Player(10, 10, 10, 1, "Dick1", "defense", false, false, 28);
 	        player3 = new Player(10, 4, 9, 18, "Harry1", "goalie", false, false, 30);
 	        player4 = new Player(10, 10, 10, 1, "Jerry1", "defense", false, false, 21);
 			playerList.add(player1);
 			playerList.add(player2);
 			playerList.add(player3);
-			playerList.add(player4);			
+			playerList.add(player4);			*/
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom1"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick1"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry1"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry1"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team1 = new Team("Boston Bruins", "Don Sweeney", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
 			player1 = new Player(15, 18, 12, 1, "Tom2", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick2", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry2", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry2", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);	
 			team2 = new Team("Buffalo Sabres", "Kevyn Adams", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom3", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick3", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry3", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry3", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom2"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick2"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry2"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry2"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team3 = new Team("Detroit Red Wings", "Steve Yzerman", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom4", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick4", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry4", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry4", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom3"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick3"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry3"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry3"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team4 = new Team("Florida Panthers", "Bill Zito", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom5", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick5", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry5", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry5", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom5"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick5"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry5"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry5"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team5 = new Team("Montreal Canadiens", "Marc Bergevin", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom6", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick6", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry6", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry6", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom6"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick6"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry6"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry6"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team6 = new Team("Ottawa Senators", "Pierre Dorion", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom7", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick7", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry7", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry7", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom7"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick7"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry7"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry7"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team7 = new Team("Tampa Bay Lightning", "Julien BriseBois", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom8", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick8", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry8", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry8", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom8"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick8"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry8"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry8"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team8 = new Team("Toronto Maple Leafs", "Kyle Dubas", coach, playerList);
 			
 			teamsList.add(team1);
@@ -159,91 +174,107 @@ public class SimulationLeagueModelMock {
 			//Metropolitan Division, Eastern Conference
 			teamsList = new ArrayList<Team>();
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom9", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick9", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry9", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry9", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom9"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick9"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry9"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry9"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team1 = new Team("Carolina Hurricanes", "Don Waddel", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom10", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick10", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry10", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry10", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom10"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick10"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry10"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry10"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team2 = new Team("Columbus Blue Jackets", "Jarmo Kekalainen", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom11", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick11", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry11", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry11", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom11"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick11"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry11"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry11"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team3 = new Team("New Jersey Devils", "Tom Fitzgerald", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom12", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick12", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry12", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry12", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom12"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick12"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry12"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry12"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team4 = new Team("New York Islanders", "Lou Lamoriello", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom13", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick13", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry13", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry13", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom13"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick13"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry13"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry13"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team5 = new Team("New York Rangers", "Jeff Gorton", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom14", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick14", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry14", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry14", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom14"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick14"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry14"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry14"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team6 = new Team("Philidelphia Flyers", "Check Fletcher", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom15", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick15", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry15", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry15", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom15"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick15"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry15"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry15"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team7 = new Team("Pittsburgh Penguins", "Jim Rutherford", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom16", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick16", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry16", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry16", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom16"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick16"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry16"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry16"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team8 = new Team("Washington Capitals", "Brian MacLellan", coach, playerList);
 			
 			teamsList.add(team1);
@@ -265,91 +296,107 @@ public class SimulationLeagueModelMock {
 			//Central Division, Western Conference
 			divisionsList = new ArrayList<Division>();
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom17", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick17", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry17", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry17", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom17"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick17"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry17"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry17"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team1 = new Team("Chicago Blackhawks", "Stan Bowman", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom18", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick18", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry18", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry18", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom18"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick18"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry18"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry18"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team2 = new Team("Colorado Avalanche", "Joe Sakic", coach, playerList);	
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom19", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick19", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry19", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry19", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom19"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick19"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry19"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry19"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team3 = new Team("Dallas Stars", "Jim Nill", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom20", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick20", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry20", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry20", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom20"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick20"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry20"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry20"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team4 = new Team("Minnesota Wild", "Bill Guerrin", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom21", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick21", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry21", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry21", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom21"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick21"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry21"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry21"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team5 = new Team("Nashville Predators", "David Poile", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom22", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick22", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry22", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry22", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom22"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick22"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry22"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry22"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team6 = new Team("St. Louis Blues", "Doug Armstrong", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom23", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick23", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry23", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry23", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom23"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick23"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry23"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry23"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team7 = new Team("Winnipeg Jets", "Kevin Cheveldayoff", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom24", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick24", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry24", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry24", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom24"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick24"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry24"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry24"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team8 = new Team("Minnesota Blues", "Kelly McCrimmons", coach, playerList);
 			
 			teamsList = new ArrayList<Team>();
@@ -368,90 +415,106 @@ public class SimulationLeagueModelMock {
 			//Pacific Division, Western Conference
 			teamsList = new ArrayList<Team>();
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom25", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick25", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry25", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry25", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom25"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick25"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry25"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry25"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team1 = new Team("Anaheim Ducks", "Bob Murray", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom26", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick26", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry26", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry26", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom26"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick26"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry26"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry26"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team2 = new Team("Arizona Coyotes", "Bill Armstrong", coach, playerList);	
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom27", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick27", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry27", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry27", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom27"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick27"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry27"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry27"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team3 = new Team("Calgary Flames", "Brad Treliving", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom28", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick28", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry28", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry28", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom28"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick28"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry28"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry28"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team4 = new Team("Edmonton Oilers", "Ken Holland", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom29", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick29", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry29", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry29", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom29"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick29"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry29"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry29"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team5 = new Team("Los Angeles Kings", "Rob Blake", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom30", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick30", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry30", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry30", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom30"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick30"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry30"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry30"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team6 = new Team("San Jose Sharks", "Doug Wilson", coach, playerList);
 			
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom31", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick31", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry31", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry31", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom31"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick31"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry31"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry31"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team7 = new Team("Vancouver Canucks", "Jim Benning", coach, playerList);
 			playerList = new ArrayList<Player>();
-			player1 = new Player(15, 18, 12, 1, "Tom32", "forward", true, false, 25);
-	        player2 = new Player(10, 10, 10, 1, "Dick32", "defense", false, false, 28);
-	        player3 = new Player(10, 4, 9, 18, "Harry32", "goalie", false, false, 30);
-	        player4 = new Player(10, 10, 10, 1, "Jerry32", "defense", false, false, 21);
-			playerList.add(player1);
-			playerList.add(player2);
-			playerList.add(player3);
-			playerList.add(player4);
+			for(int i=0;i<=5;i++) {
+				player1 = new Player(15, 18, 12, 1, "Tom32"+i, "forward", true, false, 25);
+		        player2 = new Player(10, 10, 10, 1, "Dick32"+i, "defense", false, false, 28);
+		        player3 = new Player(10, 4, 9, 18, "Harry32"+i, "goalie", false, false, 30);
+		        player4 = new Player(10, 10, 10, 1, "Jerry32"+i, "defense", false, false, 21);
+				playerList.add(player1);
+				playerList.add(player2);
+				playerList.add(player3);
+				playerList.add(player4);	
+			}
 			team8 = new Team("Vegas Golden Knights", "BKelly McCrimmon", coach, playerList);
 			
 			teamsList.add(team1);

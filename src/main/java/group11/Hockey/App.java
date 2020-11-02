@@ -1,7 +1,9 @@
 package group11.Hockey;
 
 import group11.Hockey.BusinessLogic.CreateTeam;
+import group11.Hockey.BusinessLogic.IInitializeSeason;
 import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.InitializeSeason;
 import group11.Hockey.BusinessLogic.LoadLeague;
 import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.League;
@@ -22,8 +24,6 @@ import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbImpl;
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbImpl;
-import group11.Hockey.models.IInitializeSeason;
-import group11.Hockey.models.InitializeSeason;
 
 public class App {
 	public static void main(String[] args) {

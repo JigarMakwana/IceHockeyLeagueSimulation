@@ -8,8 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
-public class Deadlines {
+public class Deadlines implements IDeadlines {
 
+	@Override
 	public Date getTradeDeadline(String startDate) {
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
@@ -27,7 +28,8 @@ public class Deadlines {
 		}
 		return tradeDeadLine;
 	}
-
+	
+	@Override
 	public Date getRegularSeasonDeadline(String startDate) {
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
@@ -45,6 +47,7 @@ public class Deadlines {
 		return regularDeadLine;
 	}
 
+	@Override
 	public Date getStanleyPlayoffDeadline(String startDate) {
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
@@ -60,6 +63,7 @@ public class Deadlines {
 		return stanleyPlayoffDeadLine;
 	}
 
+	@Override
 	public Date getStanleyPlayoffBeginDate(String startDate) {
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");

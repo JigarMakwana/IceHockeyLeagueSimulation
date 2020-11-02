@@ -1,24 +1,13 @@
 
-I
-java:S1481",Remove this unused "coachDb" local variable.(•«‰Ž8‚ÒÔÝ×.
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Þ´þÿÿÿÿ8Õ™‡„×.
 W
-java:S1481"5Remove this unused "gameplayConfigDb" local variable.(¥†°ôûÿÿÿÿ8‚ÒÔÝ×.
-Z	java:S106)"9Replace this use of System.out or System.err by a logger.(Ãº™ëøÿÿÿÿ8Õ™‡„×.
+java:S11414"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Ç¾†£Ø.
+X	java:S125-"<This block of commented-out lines of code should be removed.(µßîé8Ç¾†£Ø.
+]	java:S125)"<This block of commented-out lines of code should be removed.(¿åä»øÿÿÿÿ8Ç¾†£Ø.
+]	java:S125`"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8Ðó·†Ø.
+U	java:S1066"9Replace this use of System.out or System.err by a logger.(è¯À‰8Õ™‡„×.
+Z	java:S1061"9Replace this use of System.out or System.err by a logger.(Ãº™ëøÿÿÿÿ8Ç¾†£Ø.
+U	java:S106;"9Replace this use of System.out or System.err by a logger.(Ñ¥…¥8Ç¾†£Ø.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Þ´þÿÿÿÿ8Õ™‡„×.
+]	java:S125@"<This block of commented-out lines of code should be removed.(ª¥’¡üÿÿÿÿ8Õ™‡„×.
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìþ
-_
-java:S1854"=Remove this useless assignment to local variable "managerDb".(ÓÛØºÿÿÿÿÿ8‚ÒÔÝ×.
-X	java:S125"<This block of commented-out lines of code should be removed.(—Ö¤ø8Õ™‡„×.
-^
-java:S1854"<Remove this useless assignment to local variable "playerDb".(¥™—Ûýÿÿÿÿ8‚ÒÔÝ×.
-]	java:S1250"<This block of commented-out lines of code should be removed.(ª¥’¡üÿÿÿÿ8Õ™‡„×.
-O
-java:S1481"-Remove this unused "playerDb" local variable.(¥™—Ûýÿÿÿÿ8‚ÒÔÝ×.
-]	java:S125$"<This block of commented-out lines of code should be removed.(×â›ûÿÿÿÿ8‚ÒÔÝ×.
-X
-java:S1854";Remove this useless assignment to local variable "coachDb".(•«‰Ž8‚ÒÔÝ×.
-f
-java:S1854"DRemove this useless assignment to local variable "gameplayConfigDb".(¥†°ôûÿÿÿÿ8‚ÒÔÝ×.
-P
-java:S1481".Remove this unused "managerDb" local variable.(ÓÛØºÿÿÿÿÿ8‚ÒÔÝ×.
-U	java:S106+"9Replace this use of System.out or System.err by a logger.(Ñ¥…¥8Õ™‡„×.
+X	java:S125""<This block of commented-out lines of code should be removed.(—Ö¤ø8Õ™‡„×.

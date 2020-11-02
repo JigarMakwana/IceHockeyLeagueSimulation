@@ -17,7 +17,6 @@ public class Team implements ITeam {
 	private Coach headCoach;
 	private List<Player> players = null;
 	private boolean isUserTeam = false;
-	private int lossPoint;
 	private int losses;
 
 	private int wins;
@@ -218,51 +217,5 @@ public class Team implements ITeam {
 	public String toString() {
 		return "Team [teamName=" + teamName + ", generalManager=" + generalManager + ", headCoach=" + headCoach
 				+ ", players=" + players + "]";
-	}
-
-	/**
-	 *
-	 * @author Jigar Makwana B00842568
-	 *
-	 */
-	public List<Player> sortPlayersByStrength() {
-		List<Player> sortedPlayerList = this.players;
-		/* bubble sort */
-		int i, j;
-		Player temp;
-		boolean swapped;
-		int length = sortedPlayerList.size();
-		for (i = 0; i < length - 1; i++) {
-			swapped = false;
-			for (j = 0; j < length - i - 1; j++) {
-				if (sortedPlayerList.get(j).getPlayerStrength() > sortedPlayerList.get(j + 1).getPlayerStrength()) {
-					temp = sortedPlayerList.get(j);
-					sortedPlayerList.set(j, sortedPlayerList.get(j + 1));
-					sortedPlayerList.set(j + 1, temp);
-					swapped = true;
-				}
-			}
-			if (swapped == false)
-				break;
-		}
-		return sortedPlayerList;
-	}
-
-	/**
-	 *
-	 * @author Jigar Makwana B00842568
-	 *
-	 */
-	public int getLossPoint() {
-		return lossPoint;
-	}
-
-	/**
-	 *
-	 * @author Jigar Makwana B00842568
-	 *
-	 */
-	public void setLossPoint(int lossPoint) {
-		this.lossPoint = lossPoint;
 	}
 }

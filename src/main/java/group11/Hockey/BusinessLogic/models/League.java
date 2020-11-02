@@ -194,6 +194,7 @@ public class League implements ILeague {
 
 		playerObj.insertLeagueFreeAgents(league.getFreeAgents());
 		playerObj.insertLeagueRetiredPlayers(league.getRetiredPlayers());
+		league.setRetiredPlayers(new ArrayList<Player>());
 
 		// coaches
 		Coach coach = new Coach(leagueName, coachDb);

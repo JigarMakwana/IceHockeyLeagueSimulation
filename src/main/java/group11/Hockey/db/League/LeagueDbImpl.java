@@ -42,7 +42,7 @@ public class LeagueDbImpl implements ILeagueDb {
 	public boolean insertLeagueInDb(ILeague league, String conferenceName, String divisionName, ITeam team,
 			ICoach coach, IPlayer player) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb(
-				"{call insertNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+				"{call insertNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
 		try {
@@ -68,6 +68,9 @@ public class LeagueDbImpl implements ILeagueDb {
 			statement.setFloat(18, player.getAge());
 			statement.setString(19, league.getStartDate());
 			statement.setInt(20, team.getPoints());
+			statement.setBoolean(21, player.isInjured());
+			statement.setInt(22, player.getNumberOfInjuredDays());
+			
 
 			procedureCallDb.executeProcedure();
 //			ResultSet resultSet = statement.getResultSet();

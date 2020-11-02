@@ -24,4 +24,6 @@ public interface IPlayer {
 
 	public float getSaving();
 
+	public boolean isInjured();
+
 }

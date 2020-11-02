@@ -8,7 +8,7 @@ import java.util.List;
  * @author jatinpartaprana
  *
  */
-public class Division {
+public class Division implements IDivision {
 
 	private String divisionName;
 	private List<Team> teams = null;

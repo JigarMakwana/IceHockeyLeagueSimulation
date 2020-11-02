@@ -8,7 +8,7 @@ import java.util.List;
  * @author jatinpartaprana
  *
  */
-public class Conference {
+public class Conference implements IConference {
 	private String conferenceName;
 	private List<Division> divisions = null;
 

@@ -10,14 +10,20 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Advance {
+public class Advance implements IAdvance {
 
 private String advanceTime;
 private String advanceDate;
 	
-	public String getAdvanceTime(String time,int hours) throws ParseException {
+	@Override
+	public String getAdvanceTime(String time,int hours) {
 		SimpleDateFormat myFormat = new SimpleDateFormat("HH:mm:ss");
-		Date dateTime=myFormat.parse(time);
+		Date dateTime = null;
+		try {
+			dateTime = myFormat.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(dateTime); 
 		c.add(Calendar.HOUR_OF_DAY, hours);
@@ -25,9 +31,15 @@ private String advanceDate;
 		 return advanceTime;
 	}
 	
-	public String getAdvanceDate(String date,int days) throws ParseException {
+	@Override
+	public String getAdvanceDate(String date,int days) {
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date dateTime=myFormat.parse(date);
+		Date dateTime = null;
+		try {
+			dateTime = myFormat.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(dateTime); 
 		c.add(Calendar.DATE, days);
@@ -35,24 +47,5 @@ private String advanceDate;
 		 return advanceDate;
 	}
 	
-	public Date getFirstSaturdayOfAprilInYear(int year) {
-		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-		LocalDate eDate = LocalDate.of(year, Month.APRIL, 1);	
-	    LocalDate firstSaturday = eDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.SATURDAY));
-	    String startDate = firstSaturday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-	    Date firstSat = null;
-		try {
-			firstSat = myFormat.parse(startDate);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		return firstSat;
-	}
-	
-	public int getYearFromStringDate(String date) {
-		String[] dateParts = date.split("/");			
-		int year = Integer.valueOf(dateParts[2]);
-		return year;
-	}
-	
+		
 }

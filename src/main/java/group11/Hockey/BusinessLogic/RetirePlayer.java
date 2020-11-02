@@ -29,9 +29,9 @@ public abstract class RetirePlayer {
 		if (age >= maximumAge) {
 			return likelihoodOfRetirement;
 		} else if (averageRetirementAge >= playerAge) {
-			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 50;
+			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 1000;
 		} else if (averageRetirementAge < playerAge) {
-			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 25;
+			likelihoodOfRetirement = (int) (maximumAge - playerAge) * 750;
 		}
 		return likelihoodOfRetirement;
 	}

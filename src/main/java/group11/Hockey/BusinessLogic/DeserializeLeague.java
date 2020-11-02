@@ -1,4 +1,4 @@
-package group11.Hockey.InputOutput;
+package group11.Hockey.BusinessLogic;
 
 import java.io.FileReader;
 

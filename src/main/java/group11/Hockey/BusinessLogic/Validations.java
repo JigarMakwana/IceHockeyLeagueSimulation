@@ -9,14 +9,21 @@ import group11.Hockey.BusinessLogic.models.GeneralManager;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.IDisplay;
 
 public class Validations implements IValidations {
 
 	Conference conferenceObj = new Conference();
 	Division divisionObj = new Division();
-	IDisplay display = new Display();
+	IDisplay display;
+	
+	public Validations(IDisplay display){
+		this.display = display;
+	}
+	
+	public Validations(){
+		
+	}	
 
 
 	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferencesList) {

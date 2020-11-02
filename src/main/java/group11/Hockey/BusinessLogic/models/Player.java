@@ -1,6 +1,5 @@
 package group11.Hockey.BusinessLogic.models;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,11 +7,9 @@ import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.DefensePosition;
 import group11.Hockey.BusinessLogic.ForwardPosition;
 import group11.Hockey.BusinessLogic.GoaliePosition;
-import group11.Hockey.BusinessLogic.IPosition;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.PlayerStrength;
 import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.BusinessLogic.RetirePlayer;
 import group11.Hockey.db.IPlayerDb;
 
 /**
@@ -22,7 +19,7 @@ import group11.Hockey.db.IPlayerDb;
  * @author jatinpartaprana
  *
  */
-public class Player extends Stats implements Comparable<Player> {
+public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private String playerName;
 	private String position;
 	private boolean captain;
@@ -37,7 +34,7 @@ public class Player extends Stats implements Comparable<Player> {
 	public Player() {
 		super();
 	}
-	
+
 	public Player(String playerName) {
 		this.playerName = playerName;
 	}
@@ -170,9 +167,7 @@ public class Player extends Stats implements Comparable<Player> {
 			freeAgentInsertionCheck = true;
 		} else {
 			for (Player freeAgent : listOfFreeAgents) {
-				freeAgentInsertionCheck = playerDb.insertLeagueFreeAgents(leagueName, freeAgent.getPlayerName(),
-						freeAgent.getPosition(), freeAgent.getSkating(), freeAgent.getShooting(),
-						freeAgent.getChecking(), freeAgent.getSaving(), freeAgent.getAge());
+				freeAgentInsertionCheck = playerDb.insertLeagueFreeAgents(leagueName, freeAgent);
 			}
 		}
 		return freeAgentInsertionCheck;
@@ -184,10 +179,8 @@ public class Player extends Stats implements Comparable<Player> {
 		if (listOfRetiredPlayers == null || listOfRetiredPlayers.size() == 0) {
 			retiredPlayersInsertionCheck = true;
 		} else {
-			for (Player freeAgent : listOfRetiredPlayers) {
-				retiredPlayersInsertionCheck = playerDb.insertLeagueRetiredPlayers(leagueName,
-						freeAgent.getPlayerName(), freeAgent.getPosition(), freeAgent.getSkating(),
-						freeAgent.getShooting(), freeAgent.getChecking(), freeAgent.getSaving(), freeAgent.getAge());
+			for (Player retiredPlayer : listOfRetiredPlayers) {
+				retiredPlayersInsertionCheck = playerDb.insertLeagueRetiredPlayers(leagueName, retiredPlayer);
 			}
 		}
 		return retiredPlayersInsertionCheck;
@@ -241,6 +234,7 @@ public class Player extends Stats implements Comparable<Player> {
 				break;
 			}
 		}
+		// TODO implement exception if no player is hired from free agents
 	}
 
 	public void dropPlayerToFreeAgent(League league, List<Player> playersList) {
@@ -251,18 +245,19 @@ public class Player extends Stats implements Comparable<Player> {
 			Player player = playersListItr.next();
 			if (player.getPosition().equalsIgnoreCase(this.getPosition())) {
 				player.setIsFreeAgent(true);
+				player.setCaptain(this.getCaptain());
 				freeAgents.add(player);
 				playersListItr.remove();
 				break;
 			}
 		}
 	}
-	
+
 	public void removeFreeAgentsFromLeague(League league, List<Player> freeAgents) {
 		List<Player> listOfFreeAgentsInLeague = league.getFreeAgents();
 		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
 		while (interator.hasNext()) {
-		    Player pl = interator.next();
+			Player pl = interator.next();
 			for (Player freeAgent : freeAgents) {
 				if (freeAgent.toString().equalsIgnoreCase(pl.toString())) {
 					interator.remove();

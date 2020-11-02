@@ -1,9 +1,9 @@
 package group11.Hockey.db.League;
 
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.ICoach;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 
 public interface ILeagueDb {
 	public boolean checkLeagueNameExitsInDb(String leagueName);
@@ -13,6 +13,6 @@ public interface ILeagueDb {
 //			String playerName, String playerPosition, boolean captain, float playerSkating, float playerShooting,
 //			float playerChecking, float playerSaving, float age);
 
-	public boolean insertLeagueInDb(League league, String conferenceName, String divisionName, Team team, Coach coach,
-			Player player);
+	public boolean insertLeagueInDb(ILeague league, String conferenceName, String divisionName, ITeam team, ICoach coach,
+			IPlayer player);
 }

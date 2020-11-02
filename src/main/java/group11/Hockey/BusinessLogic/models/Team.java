@@ -10,39 +10,14 @@ import group11.Hockey.db.Team.ITeamDb;
  * @author jatinpartaprana
  *
  */
-public class Team {
+public class Team implements ITeam {
 
 	private String teamName;
 	private String generalManager;
 	private Coach headCoach;
 	private List<Player> players = null;
-	private float teamStrength;
 	private boolean isUserTeam = false;
 	private int losses;
-
-	public int getLosses() {
-		return losses;
-	}
-
-	public void setLosses(int losses) {
-		this.losses = losses;
-	}
-
-	public int getWins() {
-		return wins;
-	}
-
-	public void setWins(int wins) {
-		this.wins = wins;
-	}
-
-	public int getPoints() {
-		return points;
-	}
-
-	public void setPoints(int points) {
-		this.points = points;
-	}
 
 	private int wins;
 	private int points;
@@ -115,6 +90,29 @@ public class Team {
 		this.players = players;
 	}
 
+	public int getLosses() {
+		return losses;
+	}
+
+	public void setLosses(int losses) {
+		this.losses = losses;
+	}
+
+	public int getWins() {
+		return wins;
+	}
+
+	public void setWins(int wins) {
+		this.wins = wins;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
 
 	public float getTeamStrength() {
 		List<Player> players = this.getPlayers();
@@ -163,11 +161,11 @@ public class Team {
 	public boolean teamExistsInDivision(String teamName, Division divisionName) {
 		boolean teamExists = false;
 		List<Team> teamList = divisionName.getTeams();
-		if(teamList == null) {
+		if (teamList == null) {
 			return teamExists;
 		}
 		for (Team team : teamList) {
-			if(team.getTeamName().equalsIgnoreCase(teamName)) {
+			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamExists = true;
 				return teamExists;
 			}
@@ -179,14 +177,13 @@ public class Team {
 		List<Team> teamList = division.getTeams();
 		Team teamInDivision = null;
 		for (Team team : teamList) {
-			if(team.getTeamName().equalsIgnoreCase(teamName)) {
+			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamInDivision = team;
 				return team;
 			}
 		}
 		return teamInDivision;
 	}
-
 
 	public League loadLeagueWithTeamName(String teamName, ITeamDb teamDb) {
 		return teamDb.loadLeagueWithTeamName(teamName);

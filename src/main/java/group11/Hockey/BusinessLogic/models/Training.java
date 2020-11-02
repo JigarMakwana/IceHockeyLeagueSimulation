@@ -1,6 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-public class Training {
+public class Training implements ITraining{
 	private int daysUntilStatIncreaseCheck;
 
 	public Training(int daysUntilStatIncreaseCheck) {

@@ -1,6 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-public class GameResolver {
+public class GameResolver implements IGameResolver {
 	private float randomWinChance;
 
 	public GameResolver(float randomWinChance) {

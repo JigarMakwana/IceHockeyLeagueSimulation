@@ -1,6 +1,5 @@
 package group11.Hockey.models;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,36 +8,22 @@ import java.util.List;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.IPrintToConsole;
+import group11.Hockey.InputOutput.PrintToConsole;
 
-public class Schedule {
+public class Schedule implements ISchedule {
 
-	private League leagueObj;
+	private League league;
 
-	//
-	public Schedule(League leagueObj) {
-		this.leagueObj = leagueObj;
+	public Schedule(League league) {
+		this.league = league;
 	}
 
-	public HashMap<String, HashMap<Team, Team>> getSeasonSchedule(String startDate) throws ParseException {
-
-		Advance advanceObj = new Advance();
-		Parse parseObj = new Parse();
-		Deadlines deadline = new Deadlines();
-
-		int totalTeams = 0, divLimit, divLimitReached, inConLimit, inConLimitReached, outConLimit, outConLimitReached,
-				team1DivCount, team1InConCount, team1OutConCount, totalGames = 0, team2DivCount, team2InConCount,
-				team2OutConCount, loop = 0, totalDivTeams, totalInConTeams, totalOutConTeams, team2TotalCount;
-		String date = startDate, time = "00:00:00";
-
-		Team t1, t2;
-		Division div1, div2;
-		Conference con1, con2;
-
-		Date dateTime = parseObj.parseStringToDate(date);
-		Date endDateTime = deadline.getRegularSeasonDeadline(startDate);
-		String regularSeasonStartDate = advanceObj.getAdvanceDate(date, 1);
+	@Override
+	public HashMap<String, HashMap<Team, Team>> getSeasonSchedule(String startDate) {
 
 		ArrayList<Team> teamName = new ArrayList<Team>();
 		HashMap<Team, Integer> scheduledDivisionMatchCount = new HashMap<>();
@@ -52,7 +37,8 @@ public class Schedule {
 		HashMap<Team, Integer> totalGameCount = new HashMap<>();
 		HashMap<String, HashMap<Team, Team>> regularSchedule = new HashMap<>();
 
-		List<Conference> cconferenceList = leagueObj.getConferences();
+		int totalTeams = 0;
+		List<Conference> cconferenceList = league.getConferences();
 		for (Conference conference : cconferenceList) {
 			conTeamCount.put(conference, 0);
 			List<Division> divisionList = conference.getDivisions();
@@ -74,12 +60,26 @@ public class Schedule {
 			}
 		}
 
+		IPrintToConsole console = new PrintToConsole();
+		String message;
+		Team t1, t2;
+		Division div1, div2;
+		Conference con1, con2;
+		int divLimit, divLimitReached, inConLimit, inConLimitReached, outConLimit, outConLimitReached, team1DivCount,
+				team1InConCount, team1OutConCount, totalGames = 0, team2DivCount, team2InConCount, team2OutConCount,
+				totalDivTeams, totalInConTeams, totalOutConTeams, team2TotalCount;
+		String date = startDate, time = "00:00:00";
+		IParse parse = new Parse();
+		Date dateTime = parse.stringToDate(date);
+		IDeadlines deadline = new Deadlines();
+		Date endDateTime = deadline.getRegularSeasonDeadline(startDate);
+		IAdvance advance = new Advance();
+		String regularSeasonStartDate = advance.getAdvanceDate(date, 1);
 		for (int i = 0; i < totalTeams; i++) {
 			t1 = teamName.get(i);
 			team1DivCount = scheduledDivisionMatchCount.get(t1);
 			team1InConCount = scheduledInConferenceMatchCount.get(t1);
 			team1OutConCount = scheduledOutConferenceMatchCount.get(t1);
-			// System.out.println("Entered"+i);
 			divLimit = 28;
 			inConLimit = 28;
 
@@ -110,20 +110,20 @@ public class Schedule {
 					// ensures team played every other team once
 					if ((team2DivCount < divLimit)) {
 
-						date = advanceObj.getAdvanceDate(date, 1);
-						dateTime = parseObj.parseStringToDate(date);
+						date = advance.getAdvanceDate(date, 1);
+						dateTime = parse.stringToDate(date);
 
 						if (dateTime.compareTo(endDateTime) > 0) {
 							date = regularSeasonStartDate;
-							time = advanceObj.getAdvanceTime(time, 1);
+							time = advance.getAdvanceTime(time, 1);
 						}
 
 						HashMap<Team, Team> schedule = new HashMap<>();
 						schedule.put(t1, t2);
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
-						System.out.println(t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time);
-
+						message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
+						console.print(message);
 						divLimitReached++;
 						totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 						totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -135,10 +135,9 @@ public class Schedule {
 			}
 
 			// schedules repetitive games between already scheduled teams
-			loop = 0;
+			int loop = 0;
 			while ((loop < totalDivTeams)) {
 				loop++;
-				// System.out.println("entered Div while "+i);
 
 				for (int k = 0; k < totalTeams; k++) {
 					t2 = teamName.get(k);
@@ -149,24 +148,26 @@ public class Schedule {
 						break;
 					}
 					;
-					if ((div1.getDivisionName() == div2.getDivisionName()) && (((t1.getTeamName().compareTo(t2.getTeamName()))>0)||((t1.getTeamName().compareTo(t2.getTeamName()))<0))) {
+					if ((div1.getDivisionName() == div2.getDivisionName())
+							&& (((t1.getTeamName().compareTo(t2.getTeamName())) > 0)
+									|| ((t1.getTeamName().compareTo(t2.getTeamName())) < 0))) {
 
 						if ((team2TotalCount < 82) && (team2DivCount < divLimit)) {
 
-							date = advanceObj.getAdvanceDate(date, 1);
-							dateTime = parseObj.parseStringToDate(date);
+							date = advance.getAdvanceDate(date, 1);
+							dateTime = parse.stringToDate(date);
 
 							if (dateTime.compareTo(endDateTime) > 0) {
 								date = regularSeasonStartDate;
-								time = advanceObj.getAdvanceTime(time, 1);
+								time = advance.getAdvanceTime(time, 1);
 							}
 
 							HashMap<Team, Team> schedule = new HashMap<>();
 							schedule.put(t1, t2);
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
-							System.out.println(t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time);
-
+							message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
+							console.print(message);
 							divLimitReached++;
 							totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 							totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -179,8 +180,6 @@ public class Schedule {
 			}
 
 			// In conference but not same division starts
-			// ensures team schedules 24 games
-
 			for (int j = i + 1; j < totalTeams; j++) {
 				t2 = teamName.get(j);
 				div2 = teamDivision.get(t2);
@@ -190,26 +189,27 @@ public class Schedule {
 				if (inConLimitReached == inConLimit) {
 					break;
 				}
-				if (((div1.getDivisionName().compareTo(div2.getDivisionName())<0)||(div1.getDivisionName().compareTo(div2.getDivisionName())>0))
+				if (((div1.getDivisionName().compareTo(div2.getDivisionName()) < 0)
+						|| (div1.getDivisionName().compareTo(div2.getDivisionName()) > 0))
 						&& (con2.getConferenceName() == con1.getConferenceName())) {
 
 					// ensures team played every other team once
 					if ((team2InConCount < inConLimit)) {
 
-						date = advanceObj.getAdvanceDate(date, 1);
-						dateTime = parseObj.parseStringToDate(date);
+						date = advance.getAdvanceDate(date, 1);
+						dateTime = parse.stringToDate(date);
 
 						if (dateTime.compareTo(endDateTime) > 0) {
 							date = regularSeasonStartDate;
-							time = advanceObj.getAdvanceTime(time, 1);
+							time = advance.getAdvanceTime(time, 1);
 						}
 
 						HashMap<Team, Team> schedule = new HashMap<>();
 						schedule.put(t1, t2);
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
-						System.out.println(t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time);
-
+						message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
+						console.print(message);
 						inConLimitReached++;
 						totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 						totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -234,25 +234,26 @@ public class Schedule {
 						break;
 					}
 
-					if (((div1.getDivisionName().compareTo(div2.getDivisionName())<0)||(div1.getDivisionName().compareTo(div2.getDivisionName())>0))
+					if (((div1.getDivisionName().compareTo(div2.getDivisionName()) < 0)
+							|| (div1.getDivisionName().compareTo(div2.getDivisionName()) > 0))
 							&& (con2.getConferenceName() == con1.getConferenceName()))
 
 						if ((team2TotalCount < 82) && (team2InConCount < inConLimit)) {
 
-							date = advanceObj.getAdvanceDate(date, 1);
-							dateTime = parseObj.parseStringToDate(date);
+							date = advance.getAdvanceDate(date, 1);
+							dateTime = parse.stringToDate(date);
 
 							if (dateTime.compareTo(endDateTime) > 0) {
 								date = regularSeasonStartDate;
-								time = advanceObj.getAdvanceTime(time, 1);
+								time = advance.getAdvanceTime(time, 1);
 							}
 
 							HashMap<Team, Team> schedule = new HashMap<>();
 							schedule.put(t1, t2);
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
-							System.out.println(t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time);
-
+							message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
+							console.print(message);
 							inConLimitReached++;
 							totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 							totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -273,25 +274,26 @@ public class Schedule {
 				if (outConLimitReached == outConLimit) {
 					break;
 				}
-				if (((con2.getConferenceName().compareTo(con1.getConferenceName()))>0)||((con2.getConferenceName().compareTo(con1.getConferenceName()))<0)) {
+				if (((con2.getConferenceName().compareTo(con1.getConferenceName())) > 0)
+						|| ((con2.getConferenceName().compareTo(con1.getConferenceName())) < 0)) {
 
 					// ensures team played every other team once
 					if ((team2TotalCount < 82) && (team2OutConCount < 26)) {
 
-						date = advanceObj.getAdvanceDate(date, 1);
-						dateTime = parseObj.parseStringToDate(date);
+						date = advance.getAdvanceDate(date, 1);
+						dateTime = parse.stringToDate(date);
 
 						if (dateTime.compareTo(endDateTime) > 0) {
 							date = regularSeasonStartDate;
-							time = advanceObj.getAdvanceTime(time, 1);
+							time = advance.getAdvanceTime(time, 1);
 						}
 
 						HashMap<Team, Team> schedule = new HashMap<>();
 						schedule.put(t1, t2);
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
-						System.out.println(t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time);
-
+						message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
+						console.print(message);
 						outConLimitReached++;
 						totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 						totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -317,24 +319,25 @@ public class Schedule {
 						break;
 					}
 
-					if (((con2.getConferenceName().compareTo(con1.getConferenceName()))>0)||((con2.getConferenceName().compareTo(con1.getConferenceName()))<0)) {
+					if (((con2.getConferenceName().compareTo(con1.getConferenceName())) > 0)
+							|| ((con2.getConferenceName().compareTo(con1.getConferenceName())) < 0)) {
 
 						if ((team2TotalCount < 82) && (team2OutConCount < 26)) {
 
-							date = advanceObj.getAdvanceDate(date, 1);
-							dateTime = parseObj.parseStringToDate(date);
+							date = advance.getAdvanceDate(date, 1);
+							dateTime = parse.stringToDate(date);
 
 							if (dateTime.compareTo(endDateTime) > 0) {
 								date = regularSeasonStartDate;
-								time = advanceObj.getAdvanceTime(time, 1);
+								time = advance.getAdvanceTime(time, 1);
 							}
 
 							HashMap<Team, Team> schedule = new HashMap<>();
 							schedule.put(t1, t2);
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
-							System.out.println(t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time);
-
+							message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
+							console.print(message);
 							outConLimitReached++;
 							totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 							totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -359,7 +362,9 @@ public class Schedule {
 			}
 		}
 
-		System.out.println("\n********** Total games scheduled : " +totalGames+ "("+(totalGames/totalTeams)+" games each team) **********");
+		message = "\n********** Total games scheduled : " + totalGames + "(" + (totalGames / totalTeams)
+				+ " games each team) **********";
+		console.print(message);
 		return regularSchedule;
 	}
 

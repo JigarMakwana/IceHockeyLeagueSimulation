@@ -7,27 +7,34 @@ import java.util.List;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.IPrintToConsole;
+import group11.Hockey.InputOutput.PrintToConsole;
 
-public class PlayoffSchedule {
+public class PlayoffSchedule implements IPlayoffSchedule {
 
-	private League leagueObj;
+	private League league;
 
-	public PlayoffSchedule(League leagueObj) {
-		this.leagueObj = leagueObj;
+	public PlayoffSchedule(League league) {
+		this.league = league;
 	}
 
+	@Override
 	public HashMap<String, HashMap<Team, Team>> generatePlayoffScheduleRound1(String date) {
-		Advance advance = new Advance();
+
 		HashMap<String, HashMap<Team, Team>> firstRoundSchedule = new HashMap<>();
 		Team team1, team2, firstHighestTeam = null, secondHighestTeam = null, thirdHighestTeam = null, tempTeam = null;
 		int firstHighestPoints = 0, secondHighestPoints = 0, thirdHighestPoints = 0, tempPoints, teamPoints;
-		String time = "00:00:00";
-		List<Team> qualifiedTeams = leagueObj.getQualifiedTeams();
-		System.out.println("\n********** Playoff Schedule - First round **********");
+		String time = "00:00:00", message;
+		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		IAdvance advance = new Advance();
+		IPrintToConsole console = new PrintToConsole();
+		message = "\n********** Playoff Schedule - First round **********";
+		console.print(message);
 
-		List<Conference> cconferenceList = leagueObj.getConferences();
+		List<Conference> cconferenceList = league.getConferences();
 		for (Conference conference : cconferenceList) {
 			List<Team> roundOne = new ArrayList<Team>();
 			List<Division> divisionList = conference.getDivisions();
@@ -112,7 +119,8 @@ public class PlayoffSchedule {
 			int teamNumber1 = 0;
 			int teamNumber2 = 3;
 			int teams = 0, series = 0;
-			while (teams < 4) { // four final sets of teams(team1,team2) from each conference - FIRST ROUND
+			// four final sets of teams(team1,team2) from each conference - FIRST ROUND
+			while (teams < 4) {
 				teams++;
 				series = 0;
 				while (series < 7) {
@@ -123,9 +131,9 @@ public class PlayoffSchedule {
 					HashMap<Team, Team> schedule = new HashMap<>();
 					schedule.put(team1, team2);
 					firstRoundSchedule.put(date + "T" + time, schedule);
-					System.out.println("Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on "
-							+ date + " at " + time);
-
+					message = "Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date
+							+ " at " + time;
+					console.print(message);
 					try {
 						time = advance.getAdvanceTime(time, 6);
 					} catch (Exception e) {
@@ -158,11 +166,14 @@ public class PlayoffSchedule {
 		return firstRoundSchedule;
 	}
 
-	public HashMap<String, HashMap<Team, Team>> generatePlayoffScheduleReaminingRounds(String date) {
-		Advance advance = new Advance();
+	@Override
+	public HashMap<String, HashMap<Team, Team>> generatePlayoffScheduleRemainingRounds(String date) {
+		IAdvance advance = new Advance();
 		HashMap<String, HashMap<Team, Team>> playoffSchedule = new HashMap<>();
-		List<Team> qualifiedTeams = leagueObj.getQualifiedTeams();
+		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		IPrintToConsole console = new PrintToConsole();
 		Team team1, team2;
+		String message;
 
 		String time = "00:00:00";
 		int teamNumber1 = 0;
@@ -171,14 +182,17 @@ public class PlayoffSchedule {
 		qualifiedTeamsSize = qualifiedTeams.size();
 		totalSetTeams = (qualifiedTeamsSize / 2);
 		if (totalSetTeams == 4) {
-			System.out.println("\n********** Playoff Schedule - Second round **********");
+			message = "\n********** Playoff Schedule - Second round **********";
+			console.print(message);
 		} else if (totalSetTeams == 2) {
-			System.out.println("\n********** Playoff Schedule - Semi-Final round **********");
+			message = "\n********** Playoff Schedule - Semi-Final round **********";
+			console.print(message);
 		} else if (totalSetTeams == 1) {
-			System.out.println("\n********** Playoff Schedule - Final round **********");
+			message = "\n********** Playoff Schedule - Final round **********";
+			console.print(message);
 		}
 		// final sets of teams(team1,team2)
-		while (teams < totalSetTeams) { 
+		while (teams < totalSetTeams) {
 			teams++;
 			series = 0;
 			while (series < 7) {
@@ -189,12 +203,12 @@ public class PlayoffSchedule {
 				team1.setWins(0);
 				team2.setWins(0);
 
-
 				HashMap<Team, Team> schedule = new HashMap<>();
 				schedule.put(team1, team2);
 				playoffSchedule.put(date + "T" + time, schedule);
-				System.out.println("Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date
-						+ " at " + time);
+				message = "Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date + " at "
+						+ time;
+				console.print(message);
 				try {
 					time = advance.getAdvanceTime(time, 6);
 				} catch (Exception e) {

@@ -15,8 +15,8 @@ public class UserInputCheck implements IUserInputCheck {
 	private ICommandLineInput commandLineInput;
 	IValidations validation = new Validations();
 	IDisplay display = new Display();
-	
-	public UserInputCheck(ICommandLineInput commandLineInput){
+
+	public UserInputCheck(ICommandLineInput commandLineInput) {
 		this.commandLineInput = commandLineInput;
 	}
 
@@ -102,15 +102,16 @@ public class UserInputCheck implements IUserInputCheck {
 		display.showMessageOnConsole("Select 20 players for team: 18 Skaters and 2 Goalies");
 		for (int i = 0; i < 20; i++) {
 			while (playerValueCheck) {
-				display.showMessageOnConsole("Select " + (i+1) + " player");
+				display.showMessageOnConsole("Select " + (i + 1) + " player");
 				playerValue = commandLineInput.getValueFromUser();
-				playerValueCheck = validation.playerCheck(playerValue, league, selectedValuesFromUser,
-						skatersList, goalies);
+				playerValueCheck = validation.playerCheck(playerValue, league, selectedValuesFromUser, skatersList,
+						goalies);
 				if (playerValueCheck == false) {
 					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue) - 1).getPosition();
-					if (postion.equalsIgnoreCase("forward") || postion.equalsIgnoreCase("defense")) {
+					if (postion.equalsIgnoreCase(PositionEnum.FORWARD.toString())
+							|| postion.equalsIgnoreCase(PositionEnum.DEFENSE.toString())) {
 						skatersList.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
-					} else if (postion.equalsIgnoreCase("goalie")) {
+					} else if (postion.equalsIgnoreCase(PositionEnum.GOALIE.toString())) {
 						goalies.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					}
 				}

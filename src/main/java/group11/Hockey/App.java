@@ -22,6 +22,7 @@ import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbImpl;
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbImpl;
+import group11.Hockey.models.IInitializeSeason;
 import group11.Hockey.models.InitializeSeason;
 
 public class App {
@@ -43,8 +44,8 @@ public class App {
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
 
-				CreateTeam createTeamObj = new CreateTeam(leagueObj, commandLineInput);
-				createTeamObj.createTeamMethod();
+				/*CreateTeam createTeamObj = new CreateTeam(leagueObj, commandLineInput);
+				createTeamObj.createTeamMethod();*/
 				app.startSimulation(leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb, display, validation,
 						commandLineInput, leagueObj);
 
@@ -83,7 +84,7 @@ public class App {
 			seasonsCheck = validation.isNoOfSeasonsValueValid(numberOfSeasons);
 		}
 		int seasons = Integer.parseInt(numberOfSeasons);
-		InitializeSeason initialize = new InitializeSeason(league, leagueDb, gameplayConfigDb, playerDb, coachDb,
+		IInitializeSeason initialize = new InitializeSeason(league, leagueDb, gameplayConfigDb, playerDb, coachDb,
 				managerDb);
 
 		initialize.startSeasons(seasons);

@@ -54,9 +54,6 @@ public class CreateTeam implements ICreateTeam {
 		display.displayListOfPLayers(league);
 		userInputCheck.playerChoiceFromUser(newTeam, league);
 		divisionItem.addNewTeamInDivision(newTeam);
-//		PlayerChoice playerChoice = new PlayerChoice(userInputMode);
-//		int noOfSeasons = playerChoice.getNumberOfSeasonsToSimulate();
-//		System.out.println("Number of seasons to simulate -> " + noOfSeasons);
 	}
 
 

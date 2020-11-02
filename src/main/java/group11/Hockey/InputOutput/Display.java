@@ -2,8 +2,11 @@ package group11.Hockey.InputOutput;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.*;
-import group11.Hockey.models.*;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
 
 public class Display implements IDisplay {
 
@@ -26,17 +29,15 @@ public class Display implements IDisplay {
 
 	@Override
 	public void displayListOfCoaches(League league) {
-		int count = 1;
 		List<Coach> coaches = league.getCoaches();
 		System.out.println("Available Coaches List: ");
 		for (Coach coach : coaches) {
-			System.out.println("Press " + count + "for coach" + coach.getName());
-			System.out.println("******Coach Skill Details******");
+			System.out.println("******Coach Details******");
+			System.out.println("Coach Name: " + coach.getName());
 			System.out.println("Skating :" + coach.getSkating());
 			System.out.println("Shooting :" + coach.getShooting());
 			System.out.println("Checking :" + coach.getChecking());
 			System.out.println("Saving :" + coach.getSaving());
-			count++;
 		}
 	}
 
@@ -55,6 +56,7 @@ public class Display implements IDisplay {
 			System.out.println("Shooting :" + freeAgent.getShooting());
 			System.out.println("Checking :" + freeAgent.getChecking());
 			System.out.println("Saving :" + freeAgent.getSaving());
+			count++;
 		}
 
 	}
@@ -130,6 +132,5 @@ public class Display implements IDisplay {
 		showMessageOnConsole("--Division name-> " + divisionName);
 		showMessageOnConsole("---Team name-> " + teamName);
 		showMessageOnConsole("---GeneralManager-> " + managerName);
-		showMessageOnConsole("---HeadCoach-> " + coach);
 	}
 }

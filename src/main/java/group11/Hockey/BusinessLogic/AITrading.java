@@ -110,7 +110,7 @@ public class AITrading {
                 List<Team> teamList = division.getTeams();
                 for (Team team : teamList)
                 {
-                    if((team.getLosses() == lossPointCutOff))
+                    if((team.getLosses() >= lossPointCutOff))
                     {
                         eligibleTeamList.add(team);
                     }
@@ -217,7 +217,8 @@ public class AITrading {
     public void settleTeamAfterTrade(Team team)
     {
         display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size after trade negotiation...");
-        SettleTeamRoster settleObj = new SettleTeamRoster(leagueObj);
+        IConstantSupplier constants = new ConstantSupplier(20,18,2);
+        SettleTeamRoster settleObj = new SettleTeamRoster(leagueObj, constants);
         try{
             settleObj.settleTeam(team);
             display.showMessageOnConsole("Team " + team.getTeamName() + "'s size successfully settled!");

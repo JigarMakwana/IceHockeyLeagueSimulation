@@ -8,19 +8,23 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class SettleTeamRoster extends CommonUtilForLeague {
+public class SettleTeamRoster {
     private League leagueObj;
     private AITrading aiTradingObj;
+    private int teamSize;
+    private int skaterSize;
+    private int goalieSize;
+
     IDisplay display = new Display();
     IUserInputValidation userSelection = new UserInputValidation();
-    private static final int TEAM_SIZE = 20;
-    private static final int SKATERS_SIZE = 18;
-    private static final int GOALIE_SIZE = 2;
 
-    public SettleTeamRoster(League leagueObj)
+    public SettleTeamRoster(League leagueObj, IConstantSupplier supplier)
     {
         this.leagueObj = leagueObj;
         aiTradingObj = new AITrading(leagueObj);
+        this.teamSize = supplier.getTeamSize();
+        this.skaterSize = supplier.getSkaterSize();
+        this.goalieSize = supplier.getGoalieSize();
     }
 
     public void settleTeam(Team team) throws Exception
@@ -32,11 +36,11 @@ public class SettleTeamRoster extends CommonUtilForLeague {
         int noOfDefense = playerPositionFlag.get(Positions.DEFENSE.ordinal());
         int noOfGoalies = playerPositionFlag.get(Positions.GOALIE.ordinal());
         int noOfSkaters = noOfForward + noOfDefense;
-        if(noOfPlayers > TEAM_SIZE)
+        if(noOfPlayers > teamSize)
         {
-            if(noOfGoalies > GOALIE_SIZE)
+            if(noOfGoalies > goalieSize)
             {
-                int noOfGoaliesToBeDropped = noOfGoalies - GOALIE_SIZE;
+                int noOfGoaliesToBeDropped = noOfGoalies - goalieSize;
                 for(int i=0; i<noOfGoaliesToBeDropped; i++)
                 {
                     if(team.isUserTeam() == true)
@@ -49,9 +53,9 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                     }
                 }
             }
-            if(noOfSkaters > SKATERS_SIZE)
+            if(noOfSkaters > skaterSize)
             {
-                int noOfSkatersToBeDropped =  noOfSkaters - SKATERS_SIZE;
+                int noOfSkatersToBeDropped =  noOfSkaters - skaterSize;
                 for(int i=0; i<noOfSkatersToBeDropped; i++)
                 {
                     if(team.isUserTeam() == true)
@@ -65,11 +69,11 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 }
             }
         }
-        else if (noOfPlayers < TEAM_SIZE)
+        else if (noOfPlayers < teamSize)
         {
-            if(noOfGoalies < GOALIE_SIZE)
+            if(noOfGoalies < goalieSize)
             {
-                int noOfGoaliesToBeHired = GOALIE_SIZE - noOfGoalies;
+                int noOfGoaliesToBeHired = goalieSize - noOfGoalies;
                 for(int i=0; i<noOfGoaliesToBeHired; i++)
                 {
                     if(team.isUserTeam() == true)
@@ -82,9 +86,9 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                     }
                 }
             }
-            if(noOfSkaters < SKATERS_SIZE)
+            if(noOfSkaters < skaterSize)
             {
-                int noOfSkatersToBeHired = SKATERS_SIZE - noOfSkaters;
+                int noOfSkatersToBeHired = skaterSize - noOfSkaters;
                 for(int i=0; i<noOfSkatersToBeHired; i++)
                 {
                     if(team.isUserTeam() == true)
@@ -102,7 +106,6 @@ public class SettleTeamRoster extends CommonUtilForLeague {
 
     public void hirePlayer(League league, List<Player> playerList, Positions playerPosition) throws Exception
     {
-        Team team = new Team();
         List<Player> freeAgents = league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(freeAgents);
         Collections.reverse(sortedFreeAgents);

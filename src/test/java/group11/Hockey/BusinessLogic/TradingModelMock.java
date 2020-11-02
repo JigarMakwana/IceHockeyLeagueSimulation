@@ -1,17 +1,22 @@
-package group11.Hockey;
-
+package group11.Hockey.BusinessLogic;
 import group11.Hockey.BusinessLogic.models.*;
-import group11.Hockey.models.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TradingModelMock {
     private League league;
+    private List<Team> teamsList;
+    private Trading trading;
+    private float randomTradeOfferChance;
+    private float randomAcceptanceChance;
 
-    public TradingModelMock() {
+    public TradingModelMock(float randomTradeOfferChance, float randomAcceptanceChance) {
         super();
-
+        teamsList = new ArrayList<Team>();
+        this.randomTradeOfferChance = randomTradeOfferChance;
+        this.randomAcceptanceChance = randomAcceptanceChance;
+        this.trading = new Trading(2, this.randomTradeOfferChance,
+                2, this.randomAcceptanceChance);
         addLeague();
     }
 
@@ -23,15 +28,12 @@ public class TradingModelMock {
         List<Player> playerList4 = new ArrayList<Player>();
         List<Player> playerList5 = new ArrayList<Player>();
 
-        List<Team> teamsList = new ArrayList<Team>();
-
         Aging aging = new Aging(30, 55);
         GameResolver gameResolver = new GameResolver(0);
         Injuries injuries = new Injuries(1, 1, 100);
         Training training = new Training(0);
-        Trading trading = new Trading(2, 0.05f, 2, 0.05f);
 
-        GameplayConfig gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
+        GameplayConfig gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, this.trading);
 
         Player player1 = new Player(15, 18, 12, 1, "Tom", "forward", true, false, 25);
         Player player2 = new Player(10, 10, 10, 1, "Dick", "defense", false, false, 28);
@@ -44,6 +46,7 @@ public class TradingModelMock {
         playerList1.add(player4);
 
         Team team1 = new Team("Boston", "Mister Fred", null, playerList1);
+        team1.setLosses(3);
 
         playerList2 = new ArrayList<Player>();
         Player player5 = new Player(10, 20, 13, 1, "Ramesh", "forward", true, false, 30);
@@ -56,6 +59,7 @@ public class TradingModelMock {
         playerList2.add(player8);
 
         Team team2 = new Team("Miami", "John Smith", null, playerList2);
+        team2.setLosses(4);
 
         playerList3 = new ArrayList<Player>();
         Player player9 = new Player(12, 11, 11, 1, "Jigar", "forward", true, false, 23);
@@ -109,17 +113,33 @@ public class TradingModelMock {
         Conference conference = new Conference("Eastern Conference", divisionsList);
         conferenceList.add(conference);
 
-        Player firstFreeAgent = new Player(2, 4, 6, 1, "Player 1", "forward", true, false, 25);
-        Player secondFreeAgent = new Player(7, 8, 9, 10, "Player 2", "goalie", true, false, 30);
-        Player thirdFreeAgent = new Player(11, 12, 13, 0, "Player 1", "defense", true, false, 24);
-        Player forthFreeAgent = new Player(7, 8, 9, 0, "Player 2", "forward", true, false, 26);
-        Player fifthFreeAgent = new Player(8, 9, 10, 15, "Player 1", "goalie", true, false, 27);
-        Player sixthFreeAgent = new Player(12, 13, 14, 0, "Player 2", "defense", true, false, 28);
+        Player firstFreeAgent = new Player(2, 4, 6, 1, "firstFreeAgent", "forward", true, false, 25);
+        Player secondFreeAgent = new Player(7, 8, 9, 10, "secondFreeAgent", "goalie", true, false, 30);
+        Player thirdFreeAgent = new Player(11, 12, 13, 0, "thirdFreeAgent", "defense", true, false, 24);
+        Player forthFreeAgent = new Player(7, 8, 9, 0, "forthFreeAgent", "forward", true, false, 26);
+        Player fifthFreeAgent = new Player(8, 9, 10, 15, "fifthFreeAgent", "goalie", true, false, 27);
+        Player sixthFreeAgent = new Player(12, 13, 14, 0, "sixthFreeAgent", "defense", true, false, 28);
+
+        freeAgentsList.add(fifthFreeAgent);
+        freeAgentsList.add(secondFreeAgent);
+        freeAgentsList.add(thirdFreeAgent);
+        freeAgentsList.add(forthFreeAgent);
+        freeAgentsList.add(fifthFreeAgent);
+        freeAgentsList.add(sixthFreeAgent);
 
         league = new League("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
     }
 
+    public List<Team> getTeamList() {
+        return teamsList;
+    }
+
     public League getLeagueInfo() {
         return league;
+    }
+
+    public void setTradingConfig(float randomTradeOfferChance, float randomAcceptanceChance){
+        this.randomTradeOfferChance = randomTradeOfferChance;
+        this.randomAcceptanceChance = randomAcceptanceChance;
     }
 }

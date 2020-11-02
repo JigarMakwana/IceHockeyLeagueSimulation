@@ -18,17 +18,6 @@ public class Validations implements IValidations {
 	Division divisionObj = new Division();
 	IDisplay display = new Display();
 
-	protected boolean isNotValidConference(String conferenceName, List<Conference> conferencesList) {
-
-		if (isStrBlank(conferenceName)) {
-			return true;
-		} else if (conferenceObj.isConferenceNameValid(conferenceName, conferencesList)) {
-			return false;
-		} else {
-			display.showMessageOnConsole("Conference name does not exist, Please enter valid conference name");
-			return true;
-		}
-	}
 
 	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferencesList) {
 		boolean conferenceNameCheck = false;
@@ -58,17 +47,6 @@ public class Validations implements IValidations {
 		return divisionNameCheck;
 	}
 
-	protected boolean isNotValidDivision(String divisionName, Conference conferenceItem) {
-
-		if (isStrBlank(divisionName)) {
-			return true;
-		} else if (divisionObj.isDivisionNameValid(divisionName, conferenceItem.getDivisions())) {
-			return false;
-		} else {
-			display.showMessageOnConsole("Division name does not exist, Please enter valid division name");
-			return true;
-		}
-	}
 
 	public boolean isTeamNameValid(String teamName, League league) {
 		Team team = new Team();
@@ -81,15 +59,6 @@ public class Validations implements IValidations {
 		return true;
 	}
 
-	protected boolean isNotValidTeamName(String teamName, Team teamObj, League league) {
-		if (isStrBlank(teamName)) {
-			return true;
-		} else if (teamObj.isTeamNameValid(teamName, league)) {
-			return false;
-		}
-		display.showMessageOnConsole("Team name already exists in this League");
-		return true;
-	}
 
 	public boolean generalManagerNameCheck(String name, League league) {
 		if (isStrBlank(name)) {
@@ -106,13 +75,6 @@ public class Validations implements IValidations {
 		}
 	}
 
-	public boolean isNotValidGeneralManager(String name, Team teamObj) {
-		if (isStrBlank(name)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public boolean headCoachNameCheck(String coachName, League league) {
 		boolean coachNameCheck = true;

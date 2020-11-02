@@ -21,9 +21,5 @@ public class CommandLineInput implements ICommandLineInput {
 		return scanner.nextInt();
 	}
 
-	public void displayMessage(String message) {
-		scanner = new Scanner(System.in);
-		System.out.println(message);
-	}
 
 }

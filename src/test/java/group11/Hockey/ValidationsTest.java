@@ -91,5 +91,12 @@ public class ValidationsTest {
 		
 		Assert.assertTrue(playerCheck);
 	}
+	
+	@Test
+	public void isNoOfSeasonsValueValidTest() {
+		String seasons = "2";
+		boolean isSeasonNoValid = validations.isNoOfSeasonsValueValid(seasons);
+		Assert.assertFalse(isSeasonNoValid);
+	}
 
 }

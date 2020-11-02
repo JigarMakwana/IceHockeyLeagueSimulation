@@ -1,9 +1,5 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.AITrading;
-import group11.Hockey.BusinessLogic.CommonUtilForLeague;
-import group11.Hockey.BusinessLogic.IValidations;
-import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.InputOutput.*;
 import group11.Hockey.BusinessLogic.models.*;
 
@@ -12,29 +8,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-enum PlayerPosition
-{
-    SKATER,
-    GOALIE
-}
-
-enum Position
-{
-    FORWARD,
-    DEFENSE,
-    GOALIE
-}
-
 public class SettleTeamRoster extends CommonUtilForLeague {
     private League leagueObj;
     private AITrading aiTradingObj;
     IDisplay display = new Display();
-    ICommandLineInput userInputMode = new CommandLineInput();
     IUserInputValidation userSelection = new UserInputValidation();
-    IValidations validation = new Validations();
-    private static final int TEAM_SIZE = 4;
-    private static final int SKATERS_SIZE = 3;
-    private static final int GOALIE_SIZE = 1;
+    private static final int TEAM_SIZE = 20;
+    private static final int SKATERS_SIZE = 18;
+    private static final int GOALIE_SIZE = 2;
 
     public SettleTeamRoster(League leagueObj)
     {
@@ -46,10 +27,10 @@ public class SettleTeamRoster extends CommonUtilForLeague {
     {
         int noOfPlayers = team.getPlayers().size();
         List<Player> playerList = team.getPlayers();
-        List<Integer> playerPositionFlag = aiTradingObj.findPlayerPositions(playerList);
-        int noOfForward = playerPositionFlag.get(Position.FORWARD.ordinal());
-        int noOfDefense = playerPositionFlag.get(Position.DEFENSE.ordinal());
-        int noOfGoalies = playerPositionFlag.get(Position.GOALIE.ordinal());
+        List<Integer> playerPositionFlag = aiTradingObj.getPlayerMiscellaneous().findPlayerPositions(playerList);
+        int noOfForward = playerPositionFlag.get(Positions.FORWARD.ordinal());
+        int noOfDefense = playerPositionFlag.get(Positions.DEFENSE.ordinal());
+        int noOfGoalies = playerPositionFlag.get(Positions.GOALIE.ordinal());
         int noOfSkaters = noOfForward + noOfDefense;
         if(noOfPlayers > TEAM_SIZE)
         {
@@ -60,11 +41,11 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 {
                     if(team.isUserTeam() == true)
                     {
-                        dropPlayerUser(leagueObj, playerList, PlayerPosition.GOALIE);
+                        dropPlayerUser(leagueObj, playerList, Positions.GOALIE);
                     }
                     else
                     {
-                        dropPlayer(leagueObj, playerList, PlayerPosition.GOALIE);
+                        dropPlayer(leagueObj, playerList, Positions.GOALIE);
                     }
                 }
             }
@@ -75,11 +56,11 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 {
                     if(team.isUserTeam() == true)
                     {
-                        dropPlayerUser(leagueObj, playerList, PlayerPosition.SKATER);
+                        dropPlayerUser(leagueObj, playerList, Positions.SKATER);
                     }
                     else
                     {
-                        dropPlayer(leagueObj, playerList, PlayerPosition.SKATER);
+                        dropPlayer(leagueObj, playerList, Positions.SKATER);
                     }
                 }
             }
@@ -93,11 +74,11 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 {
                     if(team.isUserTeam() == true)
                     {
-                        hirePlayerUser(leagueObj, playerList, PlayerPosition.GOALIE);
+                        hirePlayerUser(leagueObj, playerList, Positions.GOALIE);
                     }
                     else
                     {
-                        hirePlayer(leagueObj, playerList, PlayerPosition.GOALIE);
+                        hirePlayer(leagueObj, playerList, Positions.GOALIE);
                     }
                 }
             }
@@ -108,29 +89,29 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 {
                     if(team.isUserTeam() == true)
                     {
-                        hirePlayerUser(leagueObj, playerList, PlayerPosition.SKATER);
+                        hirePlayerUser(leagueObj, playerList, Positions.SKATER);
                     }
                     else
                     {
-                        hirePlayer(leagueObj, playerList, PlayerPosition.SKATER);
+                        hirePlayer(leagueObj, playerList, Positions.SKATER);
                     }
                 }
             }
         }
     }
 
-    public void hirePlayer(League league, List<Player> playerList, PlayerPosition playerPosition) throws Exception
+    public void hirePlayer(League league, List<Player> playerList, Positions playerPosition) throws Exception
     {
         Team team = new Team();
         List<Player> freeAgents = league.getFreeAgents();
-        List<Player> sortedFreeAgents = aiTradingObj.sortPlayersByStrength(freeAgents);
+        List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(freeAgents);
         Collections.reverse(sortedFreeAgents);
         Iterator<Player> freeAgentsItr = sortedFreeAgents.iterator();
         boolean playerHired = false;
 
         while (freeAgentsItr.hasNext()) {
             Player freeAgent = freeAgentsItr.next();
-            if(playerPosition.equals(PlayerPosition.GOALIE))
+            if(playerPosition.equals(Positions.GOALIE))
             {
                 if (freeAgent.getPosition().equalsIgnoreCase(playerPosition.toString())) {
                     freeAgent.setIsFreeAgent(false);
@@ -140,10 +121,10 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                     break;
                 }
             }
-            else if(playerPosition.equals(PlayerPosition.SKATER))
+            else if(playerPosition.equals(Positions.SKATER))
             {
-                if (freeAgent.getPosition().equalsIgnoreCase(Position.FORWARD.toString()) ||
-                        freeAgent.getPosition().equalsIgnoreCase(Position.DEFENSE.toString())) {
+                if (freeAgent.getPosition().equalsIgnoreCase(Positions.FORWARD.toString()) ||
+                        freeAgent.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
                     freeAgent.setIsFreeAgent(false);
                     playerList.add(freeAgent);
                     freeAgentsItr.remove();
@@ -152,27 +133,27 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 }
             }
         }
-        if(playerPosition.equals(PlayerPosition.GOALIE) && playerHired == false)
+        if(playerPosition.equals(Positions.GOALIE) && playerHired == false)
         {
             throw new Exception("Goalie is not available in Free Agents to form a Team.");
 //            display.showMessageOnConsole("Goalie is not available in Free Agents to form a Team.");
         }
-        if(playerPosition.equals(PlayerPosition.SKATER) && playerHired == false)
+        if(playerPosition.equals(Positions.SKATER) && playerHired == false)
         {
             throw new Exception("Skater is not available in Free Agents to form a Team.");
 //            display.showMessageOnConsole("Skater is not available in Free Agents to form a Team.");
         }
     }
 
-    public void dropPlayer(League league, List<Player> playerList, PlayerPosition playerPosition)
+    public void dropPlayer(League league, List<Player> playerList, Positions playerPosition)
     {
         List<Player> freeAgents = league.getFreeAgents();
-        List<Player> sortedFreeAgents = aiTradingObj.sortPlayersByStrength(playerList);
+        List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(playerList);
         Iterator<Player> playersItr = sortedFreeAgents.iterator();
 
         while (playersItr.hasNext()) {
             Player player = playersItr.next();
-            if(playerPosition.equals(PlayerPosition.GOALIE))
+            if(playerPosition.equals(Positions.GOALIE))
             {
                 if (player.getPosition().equalsIgnoreCase(playerPosition.toString())) {
                     player.setIsFreeAgent(true);
@@ -182,10 +163,10 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                     break;
                 }
             }
-            else if(playerPosition.equals(PlayerPosition.SKATER))
+            else if(playerPosition.equals(Positions.SKATER))
             {
-                if (player.getPosition().equalsIgnoreCase(Position.FORWARD.toString()) ||
-                        player.getPosition().equalsIgnoreCase(Position.DEFENSE.toString())) {
+                if (player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString()) ||
+                        player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
                     player.setIsFreeAgent(true);
                     player.setCaptain(false);
                     freeAgents.add(player);
@@ -196,15 +177,15 @@ public class SettleTeamRoster extends CommonUtilForLeague {
         }
     }
 
-    public void hirePlayerUser(League league, List<Player> playerList, PlayerPosition playerPosition) throws Exception
+    public void hirePlayerUser(League league, List<Player> playerList, Positions playerPosition) throws Exception
     {
         List<Player> freeAgents = league.getFreeAgents();
         Iterator<Player> freeAgentsItr = freeAgents.iterator();
         boolean playerHired = false;
 
-        if(playerPosition.equals(PlayerPosition.GOALIE))
+        if(playerPosition.equals(Positions.GOALIE))
         {
-            List<Player> goalieFreeAgents = aiTradingObj.getGoalieList(freeAgents);
+            List<Player> goalieFreeAgents = aiTradingObj.getPlayerMiscellaneous().getGoalieList(freeAgents);
             display.displayListOfFreeAgents(goalieFreeAgents);
 
             int userInput = userSelection.userIterativeIntegerSelection(goalieFreeAgents.size());
@@ -212,7 +193,7 @@ public class SettleTeamRoster extends CommonUtilForLeague {
             while (freeAgentsItr.hasNext()) {
                 Player freeAgent = freeAgentsItr.next();
                 if ((freeAgent.getPlayerName().equalsIgnoreCase(goalieName)) &&
-                        (freeAgent.getPosition().equalsIgnoreCase(PlayerPosition.GOALIE.toString()))) {
+                        (freeAgent.getPosition().equalsIgnoreCase(Positions.GOALIE.toString()))) {
                     freeAgent.setIsFreeAgent(false);
                     playerList.add(freeAgent);
                     freeAgentsItr.remove();
@@ -221,10 +202,10 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 }
             }
         }
-        else if(playerPosition.equals(PlayerPosition.SKATER))
+        else if(playerPosition.equals(Positions.SKATER))
         {
-            List<Player> forwardFreeAgents = aiTradingObj.getForwardList(freeAgents);
-            List<Player> defenseFreeAgents = aiTradingObj.getDefenseList(freeAgents);
+            List<Player> forwardFreeAgents = aiTradingObj.getPlayerMiscellaneous().getForwardList(freeAgents);
+            List<Player> defenseFreeAgents = aiTradingObj.getPlayerMiscellaneous().getDefenseList(freeAgents);
             List<Player> skaterFreeAgents = new ArrayList<Player>(forwardFreeAgents);
             skaterFreeAgents.addAll(defenseFreeAgents);
             display.displayListOfFreeAgents(skaterFreeAgents);
@@ -235,8 +216,8 @@ public class SettleTeamRoster extends CommonUtilForLeague {
             while (freeAgentsItr.hasNext()) {
                 Player freeAgent = freeAgentsItr.next();
                 if ((freeAgent.getPlayerName().equalsIgnoreCase(skaterName)) &&
-                        (freeAgent.getPosition().equalsIgnoreCase(Position.FORWARD.toString()) ||
-                                freeAgent.getPosition().equalsIgnoreCase(Position.DEFENSE.toString()))) {
+                        (freeAgent.getPosition().equalsIgnoreCase(Positions.FORWARD.toString()) ||
+                                freeAgent.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString()))) {
                     freeAgent.setIsFreeAgent(false);
                     playerList.add(freeAgent);
                     freeAgentsItr.remove();
@@ -245,27 +226,27 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 }
             }
         }
-        if(playerPosition.equals(PlayerPosition.GOALIE) && playerHired == false)
+        if(playerPosition.equals(Positions.GOALIE) && playerHired == false)
         {
             throw new Exception("Goalie is not available in Free Agents to form a Team.");
 //            display.showMessageOnConsole("Goalie is not available in Free Agents to form a Team.");
         }
-        if(playerPosition.equals(PlayerPosition.SKATER) && playerHired == false)
+        if(playerPosition.equals(Positions.SKATER) && playerHired == false)
         {
             throw new Exception("Skater is not available in Free Agents to form a Team.");
 //            display.showMessageOnConsole("Skater is not available in Free Agents to form a Team.");
         }
     }
 
-    public void dropPlayerUser(League league, List<Player> playerList, PlayerPosition playerPosition)
+    public void dropPlayerUser(League league, List<Player> playerList, Positions playerPosition)
     {
         List<Player> freeAgents = league.getFreeAgents();
         Iterator<Player> playersItr = playerList.iterator();
 
         display.showMessageOnConsole("\n**Please select the player to drop**");
-        if(playerPosition.equals(PlayerPosition.GOALIE))
+        if(playerPosition.equals(Positions.GOALIE))
         {
-            List<Player> goalieFreeAgents = aiTradingObj.getGoalieList(freeAgents);
+            List<Player> goalieFreeAgents = aiTradingObj.getPlayerMiscellaneous().getGoalieList(freeAgents);
             display.displayListOfFreeAgents(goalieFreeAgents);
 
             int userInput = userSelection.userIterativeIntegerSelection(goalieFreeAgents.size());
@@ -274,7 +255,7 @@ public class SettleTeamRoster extends CommonUtilForLeague {
             while (playersItr.hasNext()) {
                 Player player = playersItr.next();
                 if ((player.getPlayerName().equalsIgnoreCase(goalieName)) &&
-                        (player.getPosition().equalsIgnoreCase(PlayerPosition.GOALIE.toString()))) {
+                        (player.getPosition().equalsIgnoreCase(Positions.GOALIE.toString()))) {
                     player.setIsFreeAgent(true);
                     player.setCaptain(false);
                     freeAgents.add(player);
@@ -283,10 +264,10 @@ public class SettleTeamRoster extends CommonUtilForLeague {
                 }
             }
         }
-        else if(playerPosition.equals(PlayerPosition.SKATER))
+        else if(playerPosition.equals(Positions.SKATER))
         {
-            List<Player> forwardFreeAgents = aiTradingObj.getForwardList(freeAgents);
-            List<Player> defenseFreeAgents = aiTradingObj.getDefenseList(freeAgents);
+            List<Player> forwardFreeAgents = aiTradingObj.getPlayerMiscellaneous().getForwardList(freeAgents);
+            List<Player> defenseFreeAgents = aiTradingObj.getPlayerMiscellaneous().getDefenseList(freeAgents);
             List<Player> skaterFreeAgents = new ArrayList<Player>(forwardFreeAgents);
             skaterFreeAgents.addAll(defenseFreeAgents);
             display.displayListOfFreeAgents(skaterFreeAgents);
@@ -297,8 +278,8 @@ public class SettleTeamRoster extends CommonUtilForLeague {
             while (playersItr.hasNext()) {
                 Player player = playersItr.next();
                 if ((player.getPlayerName().equalsIgnoreCase(skaterName)) &&
-                        (player.getPosition().equalsIgnoreCase(Position.FORWARD.toString()) ||
-                                player.getPosition().equalsIgnoreCase(Position.DEFENSE.toString()))) {
+                        (player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString()) ||
+                                player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString()))) {
                     player.setIsFreeAgent(true);
                     player.setCaptain(false);
                     freeAgents.add(player);

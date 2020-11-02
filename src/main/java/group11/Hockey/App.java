@@ -1,9 +1,14 @@
 package group11.Hockey;
 
 import group11.Hockey.BusinessLogic.CreateTeam;
-import group11.Hockey.BusinessLogic.LoadTeam;
+import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.LoadLeague;
+import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.CommandLineInput;
+import group11.Hockey.InputOutput.Display;
+import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.CoachDb;
 import group11.Hockey.db.GameplayConfigDb;
@@ -15,6 +20,8 @@ import group11.Hockey.db.ManagerDb;
 import group11.Hockey.db.PlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbImpl;
+import group11.Hockey.db.Team.ITeamDb;
+import group11.Hockey.db.Team.TeamDbImpl;
 import group11.Hockey.models.InitializeSeason;
 
 public class App {
@@ -26,76 +33,59 @@ public class App {
 		IPlayerDb playerDb = new PlayerDb();
 		ICoachDb coachDb = new CoachDb();
 		IManagerDb managerDb = new ManagerDb();
+		IDisplay display = new Display();
+		IValidations validation = new Validations();
+		ICommandLineInput commandLineInput = new CommandLineInput();
+		App app = new App();
 		if (args.length > 0) {
 			String jsonFile = args[0];
 			JsonImport importJson = new JsonImport(leagueDb);
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
-				//SerializeLeague seralizeLeague = new SerializeLeague();
-				//seralizeLeague.serializeLeagueObject(leagueObj);
-				AITrading aiToAITradObj = new AITrading(leagueObj);
-				aiToAITradObj.generateTradeOffers();
 
-				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
-						playerDb, coachDb, managerDb);
-//				leagueObj = createTeamObj.getTeam();
+				CreateTeam createTeamObj = new CreateTeam(leagueObj, commandLineInput);
 				createTeamObj.createTeamMethod();
-				leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+				app.startSimulation(leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb, display, validation,
+						commandLineInput, leagueObj);
 
-				//CreateTeam createTeamObj = new CreateTeam(leagueObj, new CommandLineInput());
-//				leagueObj = createTeamObj.getTeam();
-				//createTeamObj.createTeamMethod();
-				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				System.out.println("****Create Team end****");
-				InitializeSeason initialize=new InitializeSeason(leagueObj,leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-
-				try {
-					String advancedDate=initialize.startSeasons(1);
-					System.out.println("Simulation Ended and season advanced to "+advancedDate);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			} catch (Exception e) {
 				System.out.print("Exception:--> " + e.getMessage());
 				System.exit(0);
 			}
 
 		} else {
-//			ITeamDb teamDb = new TeamDbImpl();
-//			LoadTeam loadTeam = new LoadTeam(userInputMode, teamDb);
-//
-//			try {
-//				leagueObj = importJson.parseFile(jsonFile);
-//				//SerializeLeague seralizeLeague = new SerializeLeague();
-//				//seralizeLeague.serializeLeagueObject(leagueObj);
-//
-//				CreateTeam createTeamObj = new CreateTeam(leagueObj, leagueDb, gameplayConfigDb,
-//						playerDb, coachDb, managerDb);
-////				leagueObj = createTeamObj.getTeam();
-//				createTeamObj.createTeamMethod();
-//				//leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-//				System.out.println("****Create Team end****");
-//			} catch (Exception e) {
-//				System.out.print("Exception:--> " + e.getMessage());
-//				System.exit(0);
-//			}
-//
-//		} else {
-//			ITeamDb teamDb = new TeamDbImpl();
-//			LoadTeam loadTeam = new LoadTeam(teamDb);
-//
-//			try {
-//				loadTeam.getTeam();
-//				System.out.println("****Load Team end****");
-//			} catch (Exception e) {
-//				System.out.print("Exception:-->");
-//				System.out.println(e.getMessage());
-//				System.exit(0);
-//			}
+			ITeamDb teamDb = new TeamDbImpl();
+			LoadLeague loadTeam = new LoadLeague(commandLineInput, teamDb);
+			try {
+				League league = loadTeam.loadLeagueWithTeamName();
 
-		//}
+				app.startSimulation(leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb, display, validation,
+						commandLineInput, league);
 
-
+				System.out.println("****Load Team end****");
+			} catch (Exception e) {
+				System.out.print("Exception:-->");
+				System.out.println(e.getMessage());
+				System.exit(0);
+			}
+		}
 	}
-}
+
+	private void startSimulation(ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb, IPlayerDb playerDb,
+			ICoachDb coachDb, IManagerDb managerDb, IDisplay display, IValidations validation,
+			ICommandLineInput commandLineInput, League league) {
+		boolean seasonsCheck = true;
+		String numberOfSeasons = null;
+		while (seasonsCheck) {
+			display.showMessageOnConsole("Enter number of seasons to simulate:");
+			numberOfSeasons = commandLineInput.getValueFromUser();
+			seasonsCheck = validation.isNoOfSeasonsValueValid(numberOfSeasons);
+		}
+		int seasons = Integer.parseInt(numberOfSeasons);
+		InitializeSeason initialize = new InitializeSeason(league, leagueDb, gameplayConfigDb, playerDb, coachDb,
+				managerDb);
+
+		initialize.startSeasons(seasons);
+	}
 }

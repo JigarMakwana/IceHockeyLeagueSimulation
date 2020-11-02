@@ -19,5 +19,9 @@ public interface IValidations {
 	
 	public boolean playerCheck(String playerNumber, League league, List<Integer> selectedValues, List<Player> skaters,
 			List<Player> goalies);
+	
+	public boolean isStrBlank(String str);
+	
+	public boolean isNoOfSeasonsValueValid(String numberOfSeasons);
 
 }

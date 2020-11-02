@@ -18,7 +18,6 @@ public class Team {
 	private List<Player> players = null;
 	private float teamStrength;
 	private boolean isUserTeam = false;
-	private int lossPoint;
 	private int losses;
 
 	public int getLosses() {
@@ -187,12 +186,12 @@ public class Team {
 		}
 		return teamInDivision;
 	}
-	
 
-	public List<League> loadTeamWithTeamName(String teamName, ITeamDb teamDb) {
-		return teamDb.loadTeamFromTeamName(teamName);
+
+	public League loadLeagueWithTeamName(String teamName, ITeamDb teamDb) {
+		return teamDb.loadLeagueWithTeamName(teamName);
 	}
-	
+
 	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
 		team.setGeneralManager(generalMangerName);
 		List<GeneralManager> generalManagers = league.getGeneralManagers();
@@ -203,7 +202,7 @@ public class Team {
 			}
 		}
 	}
-	
+
 	public void addCoachToTeam(Team team, String coachName, League league) {
 		Coach coach = new Coach();
 		coach.setName(coachName);
@@ -221,25 +220,5 @@ public class Team {
 	public String toString() {
 		return "Team [teamName=" + teamName + ", generalManager=" + generalManager + ", headCoach=" + headCoach
 				+ ", players=" + players + "]";
-	}
-
-	/**
-	 *
-	 * @author  Jigar Makwana B00842568
-	 *
-	 */
-	public int getLossPoint()
-	{
-		return lossPoint;
-	}
-
-	/**
-	 *
-	 * @author  Jigar Makwana B00842568
-	 *
-	 */
-	public void setLossPoint(int lossPoint)
-	{
-		this.lossPoint = lossPoint;
 	}
 }

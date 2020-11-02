@@ -120,4 +120,16 @@ public class Display implements IDisplay {
 
 		}
 	}
+	
+	@Override
+	public void printTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
+			String managerName, Coach coach) {
+		showMessageOnConsole("**Team details:");
+		showMessageOnConsole("League name-> " + leagueName);
+		showMessageOnConsole("-Conference name-> " + conferenceName);
+		showMessageOnConsole("--Division name-> " + divisionName);
+		showMessageOnConsole("---Team name-> " + teamName);
+		showMessageOnConsole("---GeneralManager-> " + managerName);
+		showMessageOnConsole("---HeadCoach-> " + coach);
+	}
 }

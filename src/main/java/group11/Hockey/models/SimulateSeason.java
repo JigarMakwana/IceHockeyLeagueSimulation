@@ -5,20 +5,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.AITrading;
 import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.db.CoachDb;
-import group11.Hockey.db.GameplayConfigDb;
 import group11.Hockey.db.ICoachDb;
 import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.IManagerDb;
 import group11.Hockey.db.IPlayerDb;
-import group11.Hockey.db.ManagerDb;
-import group11.Hockey.db.PlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.db.League.LeagueDbImpl;
 
 public class SimulateSeason {
 
@@ -79,7 +75,7 @@ public class SimulateSeason {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
+
 		endYear=parseObj.parseStringToYear(stanleyDate);
 		firstRoundEnd = parseObj.parseStringToDate(firstRound);
 		secondRoundEnd = parseObj.parseStringToDate(secondRound);
@@ -87,9 +83,9 @@ public class SimulateSeason {
 		finalsEnd = stanleyEndDateTime;
 
 		System.out.println("********** Simulation started **********");
-		
+
 		// on or before stanley playoff end date
-		while (dateTime.compareTo(stanleyEndDateTime) <= 0) { 
+		while (dateTime.compareTo(stanleyEndDateTime) <= 0) {
 			try {
 				date = advance.getAdvanceDate(date, 1);
 			} catch (Exception e) {
@@ -100,69 +96,71 @@ public class SimulateSeason {
 			// training(leagueObj,1);
 
 			// on or before regular season end date
-			if (dateTime.compareTo(regularSeasonEndDateTime) <= 0) { 
+			if (dateTime.compareTo(regularSeasonEndDateTime) <= 0) {
 				CheckAndSimulateTodaySchedule simulateToday = new CheckAndSimulateTodaySchedule(schedule, leagueObj);
 				simulateToday.CheckAndSimulateToday(date);
 			}
 
 			// on the last day regular season
-			if (dateTime.equals(regularSeasonEndDateTime)) { 
+			if (dateTime.equals(regularSeasonEndDateTime)) {
 				System.out.println("********** Regular season ended **********");
 				System.out.println("\n********** Generating Playoff schedule **********");
 				playoffSchedule = playoff.generatePlayoffScheduleRound1(stanleyDate);
 			}
 
 			// on and after stanley playoff begin date
-			if (dateTime.compareTo(stanleyStartDateTime) >= 0) { 
+			if (dateTime.compareTo(stanleyStartDateTime) >= 0) {
 
 				// on or before 1st playoff end date
-				if (dateTime.compareTo(firstRoundEnd) <= 0) { 
+				if (dateTime.compareTo(firstRoundEnd) <= 0) {
 					CheckAndSimulateTodaySchedule simulatePlayoffToday = new CheckAndSimulateTodaySchedule(
 							playoffSchedule, leagueObj);
 					simulatePlayoffToday.CheckAndSimulateToday(date);
 				}
 
 				// on the last day 1st playoff round
-				if (dateTime.equals(firstRoundEnd)) { 
+				if (dateTime.equals(firstRoundEnd)) {
 					playoffSchedule = playoff.generatePlayoffScheduleReaminingRounds(date);
 				}
 
 				// on or before 2nd playoff end date
-				if ((dateTime.compareTo(secondRoundEnd) <= 0) && (dateTime.compareTo(firstRoundEnd) >= 0)) { 
+				if ((dateTime.compareTo(secondRoundEnd) <= 0) && (dateTime.compareTo(firstRoundEnd) >= 0)) {
 					CheckAndSimulateTodaySchedule simulatePlayoffToday = new CheckAndSimulateTodaySchedule(
 							playoffSchedule, leagueObj);
 					simulatePlayoffToday.CheckAndSimulateToday(date);
 				}
 
 				// on the last day 2nd playoff round
-				if (dateTime.equals(secondRoundEnd)) { 
+				if (dateTime.equals(secondRoundEnd)) {
 					playoffSchedule = playoff.generatePlayoffScheduleReaminingRounds(date);
 				}
-				
+
 				// on or before semi finals end date
-				if ((dateTime.compareTo(semiFinalsEnd) <= 0) && (dateTime.compareTo(secondRoundEnd) >= 0)) { 
+				if ((dateTime.compareTo(semiFinalsEnd) <= 0) && (dateTime.compareTo(secondRoundEnd) >= 0)) {
 					CheckAndSimulateTodaySchedule simulatePlayoffToday = new CheckAndSimulateTodaySchedule(
 							playoffSchedule, leagueObj);
 					simulatePlayoffToday.CheckAndSimulateToday(date);
 				}
-				
+
 				// on the last day semi finals playoff round
-				if (dateTime.equals(semiFinalsEnd)) { 
+				if (dateTime.equals(semiFinalsEnd)) {
 					playoffSchedule = playoff.generatePlayoffScheduleReaminingRounds(date);
 
 				}
-				
+
 				// on or before finals end date
-				if ((dateTime.compareTo(finalsEnd) <= 0) && (dateTime.compareTo(semiFinalsEnd) >= 0)) { 
+				if ((dateTime.compareTo(finalsEnd) <= 0) && (dateTime.compareTo(semiFinalsEnd) >= 0)) {
 					CheckAndSimulateTodaySchedule simulatePlayoffToday = new CheckAndSimulateTodaySchedule(
 							playoffSchedule, leagueObj);
 					simulatePlayoffToday.CheckAndSimulateToday(date);
 				}
 
 			}
-			
+
 			// on or before trade deadline
-			if (dateTime.compareTo(tradeDeadLine) <= 0) { 
+			if (dateTime.compareTo(tradeDeadLine) <= 0) {
+				AITrading aiTradingObj = new AITrading(leagueObj);
+				aiTradingObj.generateTradeOffers();
 				// executeTrades();
 				// System.out.println("Entered Trades");
 			}
@@ -171,7 +169,7 @@ public class SimulateSeason {
 			ageplayer.increaseAge(leagueObj, 1);
 
 			// on the last day of stanley playoff
-			if ((dateTime.equals(stanleyEndDateTime))||(qualifiedTeams.size()==1)) { 
+			if ((dateTime.equals(stanleyEndDateTime))||(qualifiedTeams.size()==1)) {
 				int year=parseObj.parseStringToYear(date);
 				String advanced="29/09/"+Integer.toString(year);
 				Date advancedDate=parseObj.parseStringToDate(advanced);
@@ -192,7 +190,7 @@ public class SimulateSeason {
 				break;
 			}
 			System.out.println("Persist");
-			
+
 			leagueObj.insertLeagueObject(leagueObj, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 
 		}

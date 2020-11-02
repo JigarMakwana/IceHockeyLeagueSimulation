@@ -26,7 +26,7 @@ public class InitializeSeason {
 	private ICoachDb coachDb;
 	private IManagerDb managerDb;
 	private League leagueObj;
-	
+
 	public InitializeSeason(League leagueObj, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
 			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
 		super();
@@ -37,7 +37,7 @@ public class InitializeSeason {
 		this.coachDb = coachDb;
 		this.managerDb = managerDb;
 	}
-	
+
 
 	public int getSeasonCount() {
 		return seasonCount;
@@ -47,13 +47,13 @@ public class InitializeSeason {
 		String lastSimulatedDate=leagueObj.getStartDate();
 		Parse parse=new Parse();
 		int year;
-		if((lastSimulatedDate.isEmpty())||(lastSimulatedDate==null)) {
+		if((lastSimulatedDate==null)||(lastSimulatedDate.isEmpty())) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
 		}
 		else {
 			year=parse.parseStringToYear(lastSimulatedDate);
 		}
-		 
+
 		int count = seasonCount;
 		String seasonEndDate = null;
 		while (count > 0) {

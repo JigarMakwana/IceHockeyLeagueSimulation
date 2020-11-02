@@ -14,7 +14,7 @@ import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbMock;
 
 
-public class LoadTeamTest {
+public class LoadLeagueTest {
 
 	@Test
 	public void loadLeagueWithTeamNameTest(){

@@ -61,7 +61,6 @@
                   "saving": 10.0
                 }
               ],
-              "teamStrength": 0.0,
               "isUserTeam": false,
               "losses": 0,
               "wins": 0,
@@ -107,7 +106,6 @@
                   "saving": 10.0
                 }
               ],
-              "teamStrength": 0.0,
               "isUserTeam": false,
               "losses": 0,
               "wins": 0,

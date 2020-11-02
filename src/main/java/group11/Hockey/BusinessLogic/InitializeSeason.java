@@ -1,10 +1,8 @@
-package group11.Hockey.models;
+package group11.Hockey.BusinessLogic;
 
 import java.util.Calendar;
 import java.util.HashMap;
 
-import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
@@ -42,8 +40,14 @@ public class InitializeSeason implements IInitializeSeason{
 
 	@Override
 	public String startSeasons(int seasonCount) {
-		String startDate,lastSimulatedDate=league.getStartDate();
+		int count = seasonCount;		
 		int year;
+		String startDate;
+		String lastSimulatedDate=league.getStartDate();
+		String seasonEndDate = null;
+		String message;
+		IPrintToConsole console=new PrintToConsole();
+		IAdvance advance=new Advance();
 		if((lastSimulatedDate==null)||(lastSimulatedDate.isEmpty())) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
 			startDate = "29/09/" + Integer.toString(year);
@@ -53,22 +57,15 @@ public class InitializeSeason implements IInitializeSeason{
 			year=parse.stringToYear(lastSimulatedDate);
 			startDate=lastSimulatedDate;
 		}
-
-		int count = seasonCount;
-		String seasonEndDate = null,message;
-		IPrintToConsole console=new PrintToConsole();
-		IAdvance advance=new Advance();
 		while (count > 0) {
 			startDate=advance.getAdvanceDate(startDate, 1);
 			league.setStartDate(startDate);
 			message="Start date : " + startDate;
 			console.print(message);
 			league.setStartDate(startDate);
-
 			ISchedule regularSeasonSchedule = new Schedule(league);
 			HashMap<String, HashMap<Team, Team>> regularSchedule = null;
 			regularSchedule = regularSeasonSchedule.getSeasonSchedule(startDate);
-
 			ISimulateSeason simulateSeason = new SimulateSeason(regularSchedule, league, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 			seasonEndDate = simulateSeason.StartSimulatingSeason(startDate);
 			startDate=seasonEndDate;
@@ -77,5 +74,4 @@ public class InitializeSeason implements IInitializeSeason{
 		}
 		return seasonEndDate;
 	}
-
 }

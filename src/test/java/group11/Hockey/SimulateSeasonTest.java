@@ -11,6 +11,8 @@ import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.ISimulateSeason;
+import group11.Hockey.BusinessLogic.SimulateSeason;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -22,8 +24,6 @@ import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.IManagerDb;
 import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.ISimulateSeason;
-import group11.Hockey.models.SimulateSeason;
 
 public class SimulateSeasonTest {
 

@@ -1,4 +1,4 @@
-package group11.Hockey.models;
+package group11.Hockey.BusinessLogic;
 
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -23,7 +23,6 @@ public class Deadlines implements IDeadlines {
 		try {
 			tradeDeadLine = myFormat.parse(TradeEndDate);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return tradeDeadLine;

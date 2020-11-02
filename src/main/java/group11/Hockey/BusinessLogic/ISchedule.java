@@ -1,4 +1,4 @@
-package group11.Hockey.models;
+package group11.Hockey.BusinessLogic;
 
 import java.util.HashMap;
 

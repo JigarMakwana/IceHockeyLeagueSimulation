@@ -1,4 +1,4 @@
-package group11.Hockey.BusinessLogic.models;
+package group11.Hockey.BusinessLogic;
 
 public interface IAdvance {
 	public String getAdvanceTime(String time,int hours);

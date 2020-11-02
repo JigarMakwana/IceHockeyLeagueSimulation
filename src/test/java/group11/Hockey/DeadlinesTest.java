@@ -7,7 +7,7 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.models.Deadlines;
+import group11.Hockey.BusinessLogic.Deadlines;
 
 public class DeadlinesTest {
 

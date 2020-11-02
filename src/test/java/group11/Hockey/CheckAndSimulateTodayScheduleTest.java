@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.models.CheckAndSimulateTodaySchedule;
 
 public class CheckAndSimulateTodayScheduleTest {
 
@@ -66,6 +66,7 @@ public class CheckAndSimulateTodayScheduleTest {
 		
 		CheckAndSimulateTodaySchedule simulateSchedule = new CheckAndSimulateTodaySchedule(regularSchedule,league);
 		simulateSchedule.CheckAndSimulateToday("01/10/2020");
+		
 	}
 
 }

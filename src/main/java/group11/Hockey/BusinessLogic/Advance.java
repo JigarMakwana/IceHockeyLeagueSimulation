@@ -1,4 +1,4 @@
-package group11.Hockey.BusinessLogic.models;
+package group11.Hockey.BusinessLogic;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,13 +1,11 @@
-package group11.Hockey.models;
+package group11.Hockey.BusinessLogic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
@@ -33,7 +31,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 		IPrintToConsole console = new PrintToConsole();
 		message = "\n********** Playoff Schedule - First round **********";
 		console.print(message);
-
 		List<Conference> cconferenceList = league.getConferences();
 		for (Conference conference : cconferenceList) {
 			List<Team> roundOne = new ArrayList<Team>();
@@ -54,7 +51,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 						secondHighestPoints = firstHighestPoints;
 						thirdHighestPoints = tempPoints;
 						firstHighestPoints = team.getPoints();
-
 						tempTeam = secondHighestTeam;
 						secondHighestTeam = firstHighestTeam;
 						thirdHighestTeam = tempTeam;
@@ -62,7 +58,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 					} else if ((team.getPoints() > secondHighestPoints) && (team.getPoints() <= firstHighestPoints)) {
 						thirdHighestPoints = secondHighestPoints;
 						secondHighestPoints = team.getPoints();
-
 						thirdHighestTeam = secondHighestTeam;
 						secondHighestTeam = team;
 					} else if ((team.getPoints() > thirdHighestPoints) && (team.getPoints() <= secondHighestPoints)) {
@@ -70,15 +65,11 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 						thirdHighestTeam = team;
 					}
 				}
-				// teams of one division ends
 				roundOne.add(firstHighestTeam);
 				roundOne.add(secondHighestTeam);
 				roundOne.add(thirdHighestTeam);
-				roundOne.add(null); // to populate with appropriate wildcard team
-
+				roundOne.add(null); 
 			}
-
-			// get wildcards from remaining teams
 			firstHighestPoints = 0;
 			secondHighestPoints = 0;
 			firstHighestTeam = null;
@@ -94,7 +85,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 						if (team.getPoints() > firstHighestPoints) {
 							secondHighestPoints = firstHighestPoints;
 							firstHighestPoints = team.getPoints();
-
 							secondHighestTeam = firstHighestTeam;
 							firstHighestTeam = team;
 						} else if ((team.getPoints() > secondHighestPoints)
@@ -114,12 +104,9 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 				roundOne.set(3, firstHighestTeam);
 				roundOne.set(7, secondHighestTeam);
 			}
-			// teams of one conference ends
-
 			int teamNumber1 = 0;
 			int teamNumber2 = 3;
 			int teams = 0, series = 0;
-			// four final sets of teams(team1,team2) from each conference - FIRST ROUND
 			while (teams < 4) {
 				teams++;
 				series = 0;
@@ -127,7 +114,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 					series++;
 					team1 = roundOne.get(teamNumber1);
 					team2 = roundOne.get(teamNumber2);
-
 					HashMap<Team, Team> schedule = new HashMap<>();
 					schedule.put(team1, team2);
 					firstRoundSchedule.put(date + "T" + time, schedule);
@@ -139,7 +125,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-
 					if (time.equals("18:00:00")) {
 						try {
 							date = advance.getAdvanceDate(date, 1);
@@ -161,7 +146,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 					teamNumber2 = 7;
 				}
 			}
-
 		}
 		return firstRoundSchedule;
 	}
@@ -172,13 +156,16 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 		HashMap<String, HashMap<Team, Team>> playoffSchedule = new HashMap<>();
 		List<Team> qualifiedTeams = league.getQualifiedTeams();
 		IPrintToConsole console = new PrintToConsole();
-		Team team1, team2;
+		Team team1;
+		Team team2;
 		String message;
-
 		String time = "00:00:00";
 		int teamNumber1 = 0;
 		int teamNumber2 = 1;
-		int teams = 0, series = 0, totalSetTeams, qualifiedTeamsSize;
+		int teams = 0;
+		int series = 0;
+		int totalSetTeams;
+		int qualifiedTeamsSize;
 		qualifiedTeamsSize = qualifiedTeams.size();
 		totalSetTeams = (qualifiedTeamsSize / 2);
 		if (totalSetTeams == 4) {
@@ -191,7 +178,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 			message = "\n********** Playoff Schedule - Final round **********";
 			console.print(message);
 		}
-		// final sets of teams(team1,team2)
 		while (teams < totalSetTeams) {
 			teams++;
 			series = 0;
@@ -199,10 +185,8 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 				series++;
 				team1 = qualifiedTeams.get(teamNumber1);
 				team2 = qualifiedTeams.get(teamNumber2);
-
 				team1.setWins(0);
 				team2.setWins(0);
-
 				HashMap<Team, Team> schedule = new HashMap<>();
 				schedule.put(team1, team2);
 				playoffSchedule.put(date + "T" + time, schedule);
@@ -214,7 +198,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
 				if (time.equals("18:00:00")) {
 					try {
 						date = advance.getAdvanceDate(date, 1);

@@ -6,7 +6,9 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.AITrading;
 import group11.Hockey.BusinessLogic.AgePlayer;
+import group11.Hockey.BusinessLogic.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -41,7 +43,8 @@ public class SimulateSeason implements ISimulateSeason {
 
 	@Override
 	public String StartSimulatingSeason(String date) {
-
+		
+		String startDate = date;
 		Date dateTime, stanleyStartDateTime, stanleyEndDateTime, regularSeasonEndDateTime, tradeDeadLine, firstRoundEnd,
 				secondRoundEnd, semiFinalsEnd, finalsEnd;
 		String stanleyDate, firstRound = null, secondRound = null, semiFinalRound = null;
@@ -97,7 +100,13 @@ public class SimulateSeason implements ISimulateSeason {
 			}
 			dateTime = parse.stringToDate(date);
 
-			// training(league,1);
+			int daysDifference = (int) ((parse.stringToDate(date).getTime() - parse.stringToDate(startDate).getTime())/ (24 * 60 * 60 * 1000));
+			GameplayConfig gameplayConfig  = league.getGamePlayConfig();
+			int trainingDays = gameplayConfig.getTraining().getDaysUntilStatIncreaseCheck();
+			if(daysDifference > trainingDays) {
+				TrainingPlayer trainingPlayer = new TrainingPlayer();
+				trainingPlayer.trainPlayer(league);
+			}
 
 			// on or before regular season end date
 			if (dateTime.compareTo(regularSeasonEndDateTime) <= 0) {
@@ -170,7 +179,7 @@ public class SimulateSeason implements ISimulateSeason {
 			}
 
 			AgePlayer ageplayer = new AgePlayer();
-			//ageplayer.increaseAge(league, 1);
+			ageplayer.increaseAge(league, 1);
 
 			// on the last day of stanley playoff
 			if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
@@ -186,9 +195,9 @@ public class SimulateSeason implements ISimulateSeason {
 				date = advance.getAdvanceDate(date, daysBetween);
 				league.setStartDate(date);
 
-				//ageplayer.increaseAge(league, daysBetween);
+				ageplayer.increaseAge(league, daysBetween);
 
-				//league.insertLeagueObject(league, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+				league.insertLeagueObject(league, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
 				break;
 			}
 

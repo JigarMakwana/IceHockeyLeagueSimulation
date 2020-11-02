@@ -185,7 +185,7 @@ public class SimulateSeasonTest {
 		league.setQualifiedTeams(teamList);
 		
 		ISimulateSeason season=new SimulateSeason(regularSchedule,league, leagueDb,  gameplayConfigDb, playerDb, coachDb, managerDb);
-		String endDate=season.StartSimulatingSeason("29/09/2020");
+		String endDate=season.StartSimulatingSeason("30/09/2020");
 		Assert.assertEquals("29/09/2021", endDate);
 }
 

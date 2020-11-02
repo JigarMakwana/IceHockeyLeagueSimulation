@@ -7,17 +7,18 @@ import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 
 public class UserInputCheck implements IUserInputCheck {
 	private ICommandLineInput commandLineInput;
-	IValidations validation = new Validations();
-	IDisplay display = new Display();
+	IValidations validation;
+	IDisplay display;
 
-	public UserInputCheck(ICommandLineInput commandLineInput) {
+	public UserInputCheck(ICommandLineInput commandLineInput, IValidations validation, IDisplay display) {
 		this.commandLineInput = commandLineInput;
+		this.validation = validation;
+		this.display = display;
 	}
 
 	@Override

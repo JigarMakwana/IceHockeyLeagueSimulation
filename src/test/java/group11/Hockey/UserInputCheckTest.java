@@ -6,10 +6,14 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 import org.junit.Assert;
 import group11.Hockey.BusinessLogic.IUserInputCheck;
+import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.UserInputCheck;
+import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.models.LeagueModelMock;
 
 public class UserInputCheckTest {
@@ -22,8 +26,10 @@ public class UserInputCheckTest {
 	LeagueModelMock leagueMock = new LeagueModelMock();
 	League leagueObj = leagueMock.getLeagueInfo();
 	ICommandLineInput userInputMode = mock(ICommandLineInput.class);
-	IUserInputCheck userInputCheck = new UserInputCheck(userInputMode);
-
+	IValidations validations = new Validations();
+	IDisplay display = new Display();
+	IUserInputCheck userInputCheck = new UserInputCheck(userInputMode, validations, display);
+	
 	@Test
 	public void conferenceNameFromUserCheckTest() {
 		when(userInputMode.getValueFromUser()).thenReturn(conferenceName);

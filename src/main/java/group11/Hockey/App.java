@@ -4,6 +4,10 @@ import group11.Hockey.BusinessLogic.CreateTeam;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.LoadLeague;
 import group11.Hockey.BusinessLogic.Validations;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
@@ -22,7 +26,6 @@ import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueDbImpl;
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbImpl;
-import group11.Hockey.models.IInitializeSeason;
 import group11.Hockey.models.InitializeSeason;
 
 public class App {
@@ -35,17 +38,19 @@ public class App {
 		ICoachDb coachDb = new CoachDb();
 		IManagerDb managerDb = new ManagerDb();
 		IDisplay display = new Display();
-		IValidations validation = new Validations();
+		IValidations validation = new Validations(display);
 		ICommandLineInput commandLineInput = new CommandLineInput();
+		IConference conference = new Conference();
+		IDivision division = new Division();
 		App app = new App();
 		if (args.length > 0) {
 			String jsonFile = args[0];
 			JsonImport importJson = new JsonImport(leagueDb);
 			try {
 				leagueObj = importJson.parseFile(jsonFile);
-
-				/*CreateTeam createTeamObj = new CreateTeam(leagueObj, commandLineInput);
-				createTeamObj.createTeamMethod();*/
+				CreateTeam createTeamObj = new CreateTeam(leagueObj, commandLineInput, display, validation, conference,
+						division);
+				createTeamObj.createTeamMethod();
 				app.startSimulation(leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb, display, validation,
 						commandLineInput, leagueObj);
 
@@ -84,7 +89,7 @@ public class App {
 			seasonsCheck = validation.isNoOfSeasonsValueValid(numberOfSeasons);
 		}
 		int seasons = Integer.parseInt(numberOfSeasons);
-		IInitializeSeason initialize = new InitializeSeason(league, leagueDb, gameplayConfigDb, playerDb, coachDb,
+		InitializeSeason initialize = new InitializeSeason(league, leagueDb, gameplayConfigDb, playerDb, coachDb,
 				managerDb);
 
 		initialize.startSeasons(seasons);

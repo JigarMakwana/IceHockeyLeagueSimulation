@@ -13,11 +13,14 @@ import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.InputOutput.Display;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.models.LeagueTest;
 
 public class ValidationsTest {
 	League league;
-	IValidations validations = new Validations();
+	IDisplay display = new Display();
+	IValidations validations = new Validations(display);
 
 	@Before
 	public void loadLeagueObject() {

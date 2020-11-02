@@ -8,9 +8,17 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.CreateTeam;
 import group11.Hockey.BusinessLogic.ICreateTeam;
+import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.Validations;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.models.LeagueModelMock;
 
 public class CreateTeamTest {
@@ -23,6 +31,10 @@ public class CreateTeamTest {
 	String headCoach = "Coach 1";
 	LeagueModelMock leagueMock = new LeagueModelMock();
 	League leagueObj = leagueMock.getLeagueInfo();
+	IDisplay display = new Display();
+	IValidations validation = new Validations(display);
+	IConference conference = new Conference();
+	IDivision division = new Division();
 
 	@Test
 	public void createTeamTest() {
@@ -31,7 +43,8 @@ public class CreateTeamTest {
 				headCoach, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
 				"18", "19", "20");
 
-		ICreateTeam createTeam = new CreateTeam(leagueObj, userInputMode);
+		ICreateTeam createTeam = new CreateTeam(leagueObj, userInputMode, display, validation, conference,
+				division);
 		;
 		createTeam.createTeamMethod();
 		Team newTeam = leagueObj.getConferences().get(0).getDivisions().get(0).getTeams().get(2);

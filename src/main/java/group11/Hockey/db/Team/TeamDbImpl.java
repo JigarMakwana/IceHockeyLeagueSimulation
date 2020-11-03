@@ -9,10 +9,10 @@ import java.util.List;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GeneralManager;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.db.Constants;
 import group11.Hockey.db.GameplayConfigDb;
 import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.ProcedureCallDb;
@@ -34,19 +34,19 @@ public class TeamDbImpl implements ITeamDb {
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
 			while (resultSet.next()) {
-				league.setLeagueName(resultSet.getString("leagueName"));
-				league.setStartDate(resultSet.getString("leagueStartDate"));
+				league.setLeagueName(resultSet.getString(Constants.leagueName.toString()));
+				league.setStartDate(resultSet.getString(Constants.leagueStartDate.toString()));
 				Conference conferenceInLeague = null;
 				Division divisionInConference = null;
 				Team teamInDivision = null;
-				boolean conferencExits = conference.isConferenceNameValid(resultSet.getString("conferenceName"),
+				boolean conferencExits = conference.isConferenceNameValid(resultSet.getString(Constants.conferenceName.toString()),
 						league.getConferences());
 				if (conferencExits) {
 					conferenceInLeague = conference.getConferencefromConferenceName(
-							resultSet.getString("conferenceName"), league.getConferences());
+							resultSet.getString(Constants.conferenceName.toString()), league.getConferences());
 				} else {
 					List<Conference> conferenceList = league.getConferences();
-					conferenceInLeague = new Conference(resultSet.getString("conferenceName"), null);
+					conferenceInLeague = new Conference(resultSet.getString(Constants.conferenceName.toString()), null);
 					conferenceList.add(conferenceInLeague);
 				}
 				divisionInConference = populateDivisionInConference(divison, resultSet, conferenceInLeague);
@@ -83,13 +83,13 @@ public class TeamDbImpl implements ITeamDb {
 	private Division populateDivisionInConference(Division divison, ResultSet resultSet, Conference conferenceInLeague)
 			throws SQLException {
 		Division divisionInConference;
-		boolean divisionExits = divison.isDivisionNameValid(resultSet.getString("divisionName"),
+		boolean divisionExits = divison.isDivisionNameValid(resultSet.getString(Constants.divisionName.toString()),
 				conferenceInLeague.getDivisions());
 		if (divisionExits) {
-			divisionInConference = divison.getDivisionFromDivisionName(resultSet.getString("divisionName"),
+			divisionInConference = divison.getDivisionFromDivisionName(resultSet.getString(Constants.divisionName.toString()),
 					conferenceInLeague.getDivisions());
 		} else {
-			divisionInConference = new Division(resultSet.getString("divisionName"), null);
+			divisionInConference = new Division(resultSet.getString(Constants.divisionName.toString()), null);
 			List<Division> divisionList = conferenceInLeague.getDivisions();
 			if (divisionList == null || divisionList.size() == 0) {
 				divisionList = new ArrayList<Division>();
@@ -105,20 +105,20 @@ public class TeamDbImpl implements ITeamDb {
 	private Team pupulateTeamInDivision(Team team, ResultSet resultSet, Division divisionInConference)
 			throws SQLException {
 		Team teamInDivision;
-		boolean teamExists = team.teamExistsInDivision(resultSet.getString("teamName"), divisionInConference);
+		boolean teamExists = team.teamExistsInDivision(resultSet.getString(Constants.teamName.toString()), divisionInConference);
 		if (teamExists) {
-			teamInDivision = team.getTeamFromDivision(resultSet.getString("teamName"), divisionInConference);
+			teamInDivision = team.getTeamFromDivision(resultSet.getString(Constants.teamName.toString()), divisionInConference);
 		} else {
 			teamInDivision = new Team();
-			teamInDivision.setTeamName(resultSet.getString("teamName"));
+			teamInDivision.setTeamName(resultSet.getString(Constants.teamName.toString()));
 			Coach headCoach = new Coach();
-			headCoach.setName(resultSet.getString("coachName"));
-			headCoach.setChecking(Float.parseFloat(resultSet.getString("coachChecking")));
-			headCoach.setSaving((Float.parseFloat(resultSet.getString("coachSaving"))));
-			headCoach.setShooting((Float.parseFloat(resultSet.getString("coachShooting"))));
-			headCoach.setSkating((Float.parseFloat(resultSet.getString("coachSkating"))));
+			headCoach.setName(resultSet.getString(Constants.coachName.toString()));
+			headCoach.setChecking(Float.parseFloat(resultSet.getString(Constants.coachChecking.toString())));
+			headCoach.setSaving((Float.parseFloat(resultSet.getString(Constants.coachSaving.toString()))));
+			headCoach.setShooting((Float.parseFloat(resultSet.getString(Constants.coachShooting.toString()))));
+			headCoach.setSkating((Float.parseFloat(resultSet.getString(Constants.coachSkating.toString()))));
 			teamInDivision.setHeadCoach(headCoach);
-			teamInDivision.setGeneralManager(resultSet.getString("generalManger"));
+			teamInDivision.setGeneralManager(resultSet.getString(Constants.generalManger.toString()));
 			List<Team> teamList = divisionInConference.getTeams();
 			if (teamList == null || teamList.size() == 0) {
 				teamList = new ArrayList<Team>();
@@ -133,16 +133,16 @@ public class TeamDbImpl implements ITeamDb {
 
 	private Player populatePlayerDetails(ResultSet resultSet) throws SQLException {
 		Player player = new Player();
-		player.setPlayerName(resultSet.getString("playerName"));
-		player.setPosition(resultSet.getString("playerPosition"));
-		player.setAge(Float.parseFloat(resultSet.getString("age")));
-		player.setSkating(Float.parseFloat(resultSet.getString("skating")));
-		player.setShooting(Float.parseFloat(resultSet.getString("shooting")));
-		player.setChecking(Float.parseFloat(resultSet.getString("checking")));
-		player.setSaving(Float.parseFloat(resultSet.getString("saving")));
-		player.setCaptain(Boolean.parseBoolean(resultSet.getString("captain")));
-		player.setIsFreeAgent(Boolean.parseBoolean(resultSet.getString("isFreeAgent")));
-		player.setIsRetired(Boolean.parseBoolean(resultSet.getString("retired")));
+		player.setPlayerName(resultSet.getString(Constants.playerName.toString()));
+		player.setPosition(resultSet.getString(Constants.playerPosition.toString()));
+		player.setAge(Float.parseFloat(resultSet.getString(Constants.age.toString())));
+		player.setSkating(Float.parseFloat(resultSet.getString(Constants.skating.toString())));
+		player.setShooting(Float.parseFloat(resultSet.getString(Constants.shooting.toString())));
+		player.setChecking(Float.parseFloat(resultSet.getString(Constants.checking.toString())));
+		player.setSaving(Float.parseFloat(resultSet.getString(Constants.saving.toString())));
+		player.setCaptain(Boolean.parseBoolean(resultSet.getString(Constants.captain.toString())));
+		player.setIsFreeAgent(Boolean.parseBoolean(resultSet.getString(Constants.isFreeAgent.toString())));
+		player.setIsRetired(Boolean.parseBoolean(resultSet.getString(Constants.retired.toString())));
 		return player;
 	}
 

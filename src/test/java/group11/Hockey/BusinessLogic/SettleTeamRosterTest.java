@@ -4,7 +4,6 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,9 +16,6 @@ class SettleTeamRosterTest {
     public TradingModelMock leagueModel;
     public League leagueObj;
     public SettleTeamRoster settleObj ;
-    @Test
-    void settleTeam() {
-    }
 
     @Test
     public void hirePlayerTest() {
@@ -63,13 +59,5 @@ class SettleTeamRosterTest {
         Assert.assertEquals(playerList.get(0).getPlayerName(), "Dick");
         Assert.assertEquals(playerList.get(1).getPlayerName(), "Jerry");
         Assert.assertEquals(playerList.get(2).getPlayerName(), "Tom");
-    }
-
-    @Test
-    void hirePlayerUserTest() {
-    }
-
-    @Test
-    void dropPlayerUserTest() {
     }
 }

@@ -1,11 +1,0 @@
-
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìş
-7
-java:S1116"Remove this empty statement.(ôŸìúÿÿÿÿ
-?
-java:S2189""Add an end condition to this loop.(ø®â8¥ÈÆœØ.
-T
-java:S2589"7Remove this expression which always evaluates to "true"(ø®â8¥ÈÆœØ.
-]	java:S125"<This block of commented-out lines of code should be removed.(ñ¥ùšøÿÿÿÿ8¥ÈÆœØ.
-S
-java:S1068"1Remove this unused "userInputMode" private field.(¾ãÀÒúÿÿÿÿ8¥ÈÆœØ.

@@ -26,7 +26,7 @@ public class UserInputCheck implements IUserInputCheck {
 		boolean checkConferenceName = true;
 		String conferenceName = null;
 		while (checkConferenceName) {
-			display.showMessageOnConsole("Enter Conference Name: ");
+			display.showMessageOnConsole(BusinessConstants.Enter_Conference_Name.getValue().toString());
 			conferenceName = commandLineInput.getValueFromUser();
 			checkConferenceName = validation.isConferenceNameValid(conferenceName, conferencesList);
 		}
@@ -38,7 +38,7 @@ public class UserInputCheck implements IUserInputCheck {
 		boolean checkDiviosneName = true;
 		String divisionName = null;
 		while (checkDiviosneName) {
-			display.showMessageOnConsole("Enter Division Name: ");
+			display.showMessageOnConsole(BusinessConstants.Enter_Division_Name.getValue().toString());
 			divisionName = commandLineInput.getValueFromUser();
 			checkDiviosneName = validation.isDivisionValid(divisionName, conference);
 		}
@@ -51,7 +51,7 @@ public class UserInputCheck implements IUserInputCheck {
 		boolean checkTeamName = true;
 		String teamName = null;
 		while (checkTeamName) {
-			display.showMessageOnConsole("Enter Team Name:");
+			display.showMessageOnConsole(BusinessConstants.Enter_Team_Name.getValue().toString());
 			teamName = commandLineInput.getValueFromUser();
 			checkTeamName = validation.isTeamNameValid(teamName, league);
 		}
@@ -67,7 +67,7 @@ public class UserInputCheck implements IUserInputCheck {
 		boolean checkManagerName = true;
 		String generalManager = null;
 		while (checkManagerName) {
-			display.showMessageOnConsole("Enter generalManager Name: ");
+			display.showMessageOnConsole(BusinessConstants.Enter_General_Manger_Name.getValue().toString());
 			generalManager = commandLineInput.getValueFromUser();
 			checkManagerName = validation.generalManagerNameCheck(generalManager, league);
 		}
@@ -82,7 +82,7 @@ public class UserInputCheck implements IUserInputCheck {
 		boolean checkHeadCoachName = true;
 		String headCoach = null;
 		while (checkHeadCoachName) {
-			display.showMessageOnConsole("Enter headCoach Name: ");
+			display.showMessageOnConsole(BusinessConstants.Enter_headCoach_Name.getValue().toString());
 			headCoach = commandLineInput.getValueFromUser();
 			checkHeadCoachName = validation.headCoachNameCheck(headCoach, league);
 		}
@@ -100,8 +100,8 @@ public class UserInputCheck implements IUserInputCheck {
 		List<Player> goalies = new ArrayList<Player>();
 		Player player = new Player();
 		String playerValue;
-		display.showMessageOnConsole("Select 20 players for team: 18 Skaters and 2 Goalies");
-		for (int i = 0; i < 20; i++) {
+		display.showMessageOnConsole(BusinessConstants.Select_Player.getValue().toString());
+		for (int i = 0; i < Integer.parseInt(BusinessConstants.Number_Of_Total_Players.getValue().toString()); i++) {
 			while (playerValueCheck) {
 				display.showMessageOnConsole("Select " + (i + 1) + " player");
 				playerValue = commandLineInput.getValueFromUser();

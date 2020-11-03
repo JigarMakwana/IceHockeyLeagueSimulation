@@ -22,5 +22,15 @@ public enum Constants {
 	saving,
 	captain,
 	isFreeAgent,
-	retired;
+	retired,
+	averageRetirementAge,
+	maximumAge,
+	randomWinChance,
+	randomInjuryChance,
+	injuryDaysLow,
+	injuryDaysHigh,
+	daysUntilStatIncreaseCheck,
+	lossPoint,
+	randomTradeOfferChance,
+	maxPlayersPerTrade;
 }

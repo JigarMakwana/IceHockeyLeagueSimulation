@@ -122,7 +122,7 @@ public class Validations implements IValidations {
 			return isPlayerValueNotValid;
 		} 
 		if (position.equalsIgnoreCase("forward") || position.equalsIgnoreCase("defense")) {
-			if (skaters.size() <= 18) {
+			if (skaters.size() <= Integer.parseInt(BusinessConstants.Number_Of_Skaters.getValue().toString())) {
 				isPlayerValueNotValid = false;
 				selectedValues.add(playerNumberInInt);
 				return isPlayerValueNotValid;
@@ -130,7 +130,7 @@ public class Validations implements IValidations {
 				display.showMessageOnConsole("Can not select more skaters");
 			}
 		} else if (position.equalsIgnoreCase("goalie")) {
-			if (goalies.size() <= 2) {
+			if (goalies.size() <= Integer.parseInt(BusinessConstants.Number_Of_Goalies.getValue().toString())) {
 				isPlayerValueNotValid = false;
 				selectedValues.add(playerNumberInInt);
 				return isPlayerValueNotValid;

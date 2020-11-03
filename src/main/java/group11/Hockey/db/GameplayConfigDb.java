@@ -74,11 +74,11 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
 			while (resultSet.next()) {
-				Aging aging = new Aging(resultSet.getInt("averageRetirementAge"), resultSet.getInt("maximumAge"));
-				GameResolver gameResolver = new GameResolver(resultSet.getFloat("randomWinChance"));
-				Injuries injuries = new Injuries(resultSet.getFloat("randomInjuryChance"), resultSet.getInt("injuryDaysLow"), resultSet.getInt("injuryDaysHigh"));
-				Training training = new Training(resultSet.getInt("daysUntilStatIncreaseCheck"));
-				Trading trading = new Trading(resultSet.getInt("lossPoint"), resultSet.getFloat("randomTradeOfferChance"), resultSet.getInt("maxPlayersPerTrade"), resultSet.getFloat("randomAcceptanceChance"));
+				Aging aging = new Aging(resultSet.getInt(Constants.averageRetirementAge.toString()), resultSet.getInt(Constants.maximumAge.toString()));
+				GameResolver gameResolver = new GameResolver(resultSet.getFloat(Constants.randomWinChance.toString()));
+				Injuries injuries = new Injuries(resultSet.getFloat(Constants.randomInjuryChance.toString()), resultSet.getInt(Constants.injuryDaysLow.toString()), resultSet.getInt(Constants.injuryDaysHigh.toString()));
+				Training training = new Training(resultSet.getInt(Constants.daysUntilStatIncreaseCheck.toString()));
+				Trading trading = new Trading(resultSet.getInt(Constants.lossPoint.toString()), resultSet.getFloat(Constants.randomTradeOfferChance.toString()), resultSet.getInt(Constants.maxPlayersPerTrade.toString()), resultSet.getFloat("randomAcceptanceChance"));
 				gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
 			}
 			statement.close();

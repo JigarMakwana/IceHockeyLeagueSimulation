@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.db.Constants;
 import group11.Hockey.db.ProcedureCallDb;
 
 public class PlayerDbImpl implements IPlayerDb {
@@ -21,16 +22,16 @@ public class PlayerDbImpl implements IPlayerDb {
 			ResultSet resultSet = statement.getResultSet();
 			while (resultSet.next()) {
 				Player freeagent = new Player();
-				freeagent.setPlayerName(resultSet.getString("playerName"));
-				freeagent.setPosition(resultSet.getString("playerPosition"));
-				freeagent.setAge(Float.parseFloat(resultSet.getString("age")));
-				freeagent.setSkating(Float.parseFloat(resultSet.getString("skating")));
-				freeagent.setShooting(Float.parseFloat(resultSet.getString("shooting")));
-				freeagent.setChecking(Float.parseFloat(resultSet.getString("checking")));
-				freeagent.setSaving(Float.parseFloat(resultSet.getString("saving")));
-				freeagent.setCaptain(Boolean.parseBoolean(resultSet.getString("captain")));
-				freeagent.setIsFreeAgent(Boolean.parseBoolean(resultSet.getString("isFreeAgent")));
-				freeagent.setIsRetired(Boolean.parseBoolean(resultSet.getString("retired")));
+				freeagent.setPlayerName(resultSet.getString(Constants.playerName.toString()));
+				freeagent.setPosition(resultSet.getString(Constants.playerPosition.toString()));
+				freeagent.setAge(Float.parseFloat(resultSet.getString(Constants.age.toString())));
+				freeagent.setSkating(Float.parseFloat(resultSet.getString(Constants.skating.toString())));
+				freeagent.setShooting(Float.parseFloat(resultSet.getString(Constants.shooting.toString())));
+				freeagent.setChecking(Float.parseFloat(resultSet.getString(Constants.checking.toString())));
+				freeagent.setSaving(Float.parseFloat(resultSet.getString(Constants.saving.toString())));
+				freeagent.setCaptain(Boolean.parseBoolean(resultSet.getString(Constants.captain.toString())));
+				freeagent.setIsFreeAgent(Boolean.parseBoolean(resultSet.getString(Constants.isFreeAgent.toString())));
+				freeagent.setIsRetired(Boolean.parseBoolean(resultSet.getString(Constants.retired.toString())));
 				freeAgentsList.add(freeagent);
 			}
 			statement.close();

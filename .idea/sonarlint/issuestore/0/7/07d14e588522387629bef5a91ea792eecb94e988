@@ -1,13 +1,9 @@
 
-W
-java:S11414"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Ç¾†£Ø.
-X	java:S125-"<This block of commented-out lines of code should be removed.(µßîé8Ç¾†£Ø.
-]	java:S125)"<This block of commented-out lines of code should be removed.(¿åä»øÿÿÿÿ8Ç¾†£Ø.
-]	java:S125`"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8Ðó·†Ø.
-U	java:S1066"9Replace this use of System.out or System.err by a logger.(è¯À‰8Õ™‡„×.
-Z	java:S1061"9Replace this use of System.out or System.err by a logger.(Ãº™ëøÿÿÿÿ8Ç¾†£Ø.
-U	java:S106;"9Replace this use of System.out or System.err by a logger.(Ñ¥…¥8Ç¾†£Ø.
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Þ´þÿÿÿÿ8Õ™‡„×.
-]	java:S125@"<This block of commented-out lines of code should be removed.(ª¥’¡üÿÿÿÿ8Õ™‡„×.
+X	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Þ´þÿÿÿÿ8¸«‘°Ø.
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìþ
-X	java:S125""<This block of commented-out lines of code should be removed.(—Ö¤ø8Õ™‡„×.
+X	java:S106"9Replace this use of System.out or System.err by a logger.(Ãº™ëøÿÿÿÿ8Àª‘°Ø.
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Ñ¥…¥8Àª‘°Ø.
+S	java:S106"9Replace this use of System.out or System.err by a logger.(½å²Ä8Àª‘°Ø.
+[	java:S107"<Method has 9 parameters, which is greater than 7 authorized.(”âûÿÿÿÿ8°ã¶²Ø.
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ì‘êÜ8Àª‘°Ø.
+X	java:S106"9Replace this use of System.out or System.err by a logger.(©þêÜúÿÿÿÿ8Àª‘°Ø.

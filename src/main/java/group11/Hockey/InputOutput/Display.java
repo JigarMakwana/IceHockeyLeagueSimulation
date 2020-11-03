@@ -66,8 +66,7 @@ public class Display implements IDisplay {
 	 */
 
 	@Override
-	public  void displayPlayers(List<Player> playersList)
-	{
+	public  void displayPlayers(List<Player> playersList) {
 		int length = playersList.size();
 		System.out.println("Player Name ----- Position ----- Strength");
 		for (int i = 0; i <= length - 1; i++)
@@ -80,8 +79,7 @@ public class Display implements IDisplay {
 
 	@Override
 	public  void displayTradeStatistics(Team team1, List<Player> offeredPlayerList,
-										Team team2, List<Player> requestedPlayerList)
-	{
+										Team team2, List<Player> requestedPlayerList) {
 		System.out.println("\n****** Trade Statistics ******");
 		System.out.println("\nTeam " + team1.getTeamName() + " is offering the trade to " + team2.getTeamName());
 		System.out.println("---- Team " + team1.getTeamName() + "'s Players Offered ----");
@@ -92,8 +90,7 @@ public class Display implements IDisplay {
 
 	@Override
 	public  void displayTradeStatisticsToUser(Team team1, List<Player> offeredPlayerList,
-											  Team team2, List<Player> requestedPlayerList)
-	{
+											  Team team2, List<Player> requestedPlayerList) {
 		System.out.println("\n****** Woaha Trade Offer from AI Team ******");
 		System.out.println("Team " + team1.getTeamName() + " is offering the trade");
 		System.out.println("---- Team " + team1.getTeamName() + "'s Players Offered ----");
@@ -122,7 +119,7 @@ public class Display implements IDisplay {
 
 		}
 	}
-	
+
 	@Override
 	public void printTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
 			String managerName, Coach coach) {

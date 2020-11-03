@@ -73,15 +73,11 @@ public class AITrading {
                         }
                         settleTeamAfterTrade(eligibleTeamList.get(i));
                         settleTeamAfterTrade(tradeTeam.getFirst());
-                        eligibleTeamList.remove(0);
-                        teamLength = eligibleTeamList.size();
                     }
                 }
             }
-            else {
-                eligibleTeamList.remove(i);
-                teamLength = eligibleTeamList.size();
-            }
+            eligibleTeamList.remove(0);
+            teamLength = eligibleTeamList.size();
         }
     }
 

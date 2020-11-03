@@ -1,0 +1,9 @@
+
+X	java:S106"9Replace this use of System.out or System.err by a logger.(ñ¶Þ´þÿÿÿÿ8¸«‘°Ø.
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(öƒìþ
+X	java:S106"9Replace this use of System.out or System.err by a logger.(Ãº™ëøÿÿÿÿ8Àª‘°Ø.
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Ñ¥…¥8Àª‘°Ø.
+S	java:S106"9Replace this use of System.out or System.err by a logger.(½å²Ä8Àª‘°Ø.
+[	java:S107"<Method has 9 parameters, which is greater than 7 authorized.(”âûÿÿÿÿ8°ã¶²Ø.
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ì‘êÜ8Àª‘°Ø.
+X	java:S106"9Replace this use of System.out or System.err by a logger.(©þêÜúÿÿÿÿ8Àª‘°Ø.

@@ -1,0 +1,455 @@
+{
+  "leagueName": "Dalhousie Hockey League",
+  "conferences": [
+    {
+      "conferenceName": "Eastern Conference",
+      "divisions": [
+        {
+          "divisionName": "Atlantic",
+          "teams": [
+            {
+              "teamName": "Boston",
+              "generalManager": "Mister Fred",
+              "headCoach": {
+                "name": "Dave",
+                "skating": 2.0,
+                "shooting": 2.0,
+                "checking": 2.0,
+                "saving": 2.0
+              },
+              "players": [
+                {
+                  "playerName": "Player One",
+                  "position": "forward",
+                  "captain": true,
+                  "isFreeAgent": false,
+                  "age": 50.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 10.0,
+                  "shooting": 10.0,
+                  "checking": 10.0,
+                  "saving": 10.0
+                },
+                {
+                  "playerName": "Player Two",
+                  "position": "defense",
+                  "captain": false,
+                  "isFreeAgent": false,
+                  "age": 20.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 10.0,
+                  "shooting": 10.0,
+                  "checking": 10.0,
+                  "saving": 10.0
+                },
+                {
+                  "playerName": "Player Three",
+                  "position": "goalie",
+                  "captain": false,
+                  "isFreeAgent": false,
+                  "age": 20.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 10.0,
+                  "shooting": 10.0,
+                  "checking": 10.0,
+                  "saving": 10.0
+                }
+              ],
+              "isUserTeam": false,
+              "losses": 0,
+              "wins": 0,
+              "points": 0
+            },
+            {
+              "teamName": "Vancouver Canucks",
+              "generalManager": "John",
+              "headCoach": {
+                "name": "Dave",
+                "skating": 2.0,
+                "shooting": 2.0,
+                "checking": 2.0,
+                "saving": 2.0
+              },
+              "players": [
+                {
+                  "playerName": "Player One",
+                  "position": "forward",
+                  "captain": true,
+                  "isFreeAgent": false,
+                  "age": 50.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 10.0,
+                  "shooting": 10.0,
+                  "checking": 10.0,
+                  "saving": 10.0
+                },
+                {
+                  "playerName": "Player Two",
+                  "position": "defense",
+                  "captain": false,
+                  "isFreeAgent": false,
+                  "age": 20.0,
+                  "isInjured": false,
+                  "IsRetired": false,
+                  "numberOfInjuredDays": 0,
+                  "skating": 10.0,
+                  "shooting": 10.0,
+                  "checking": 10.0,
+                  "saving": 10.0
+                }
+              ],
+              "isUserTeam": false,
+              "losses": 0,
+              "wins": 0,
+              "points": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "freeAgents": [
+    {
+      "playerName": "Player 1",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 2",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 3",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 4",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 5",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 6",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 7",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 8",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 9",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 10",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 11",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 12",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 13",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 14",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 15",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 16",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 17",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 18",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 19",
+      "position": "goalie",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    },
+    {
+      "playerName": "Player 20",
+      "position": "goalie",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    }
+  ],
+  "gamePlayConfig": {
+    "aging": {
+      "averageRetirementAge": 30,
+      "maximumAge": 55
+    },
+    "gameResolver": {
+      "randomWinChance": 0.0
+    },
+    "injuries": {
+      "randomInjuryChance": 1.0,
+      "injuryDaysLow": 1,
+      "injuryDaysHigh": 100
+    },
+    "training": {
+      "daysUntilStatIncreaseCheck": 0
+    },
+    "trading": {
+      "lossPoint": 0,
+      "randomTradeOfferChance": 0.0,
+      "maxPlayersPerTrade": 0,
+      "randomAcceptanceChance": 0.0
+    }
+  },
+  "coaches": [
+    {
+      "name": "Coach 1",
+      "skating": 2.0,
+      "shooting": 2.0,
+      "checking": 2.0,
+      "saving": 2.0
+    }
+  ],
+  "generalManagers": [
+    {
+      "name": "General Manager 1"
+    }
+  ],
+  "retiredPlayers": [
+    {
+      "playerName": "Player One",
+      "position": "forward",
+      "captain": true,
+      "isFreeAgent": false,
+      "age": 50.0,
+      "isInjured": false,
+      "IsRetired": false,
+      "numberOfInjuredDays": 0,
+      "skating": 10.0,
+      "shooting": 10.0,
+      "checking": 10.0,
+      "saving": 10.0
+    }
+  ],
+  "qualifiedTeams": []
+}

@@ -1,52 +1,58 @@
 package group11.Hockey;
 
-import static org.mockito.Mockito.*;
-
-import java.util.List;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.Conference;
-import group11.Hockey.models.Division;
-import group11.Hockey.models.League;
+import group11.Hockey.BusinessLogic.CreateTeam;
+import group11.Hockey.BusinessLogic.ICreateTeam;
+import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.Validations;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.Display;
+import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.models.LeagueModelMock;
-import group11.Hockey.models.Team;
 
 public class CreateTeamTest {
 
+	String leagueName = "DLU";
+	String conferenceName = "Eastern Conference";
+	String divisionName = "Atlantic";
+	String teamName = "Team1";
+	String generalManger = "General Manager 1";
+	String headCoach = "Coach 1";
+	LeagueModelMock leagueMock = new LeagueModelMock();
+	League leagueObj = leagueMock.getLeagueInfo();
+	IDisplay display = new Display();
+	IValidations validation = new Validations(display);
+	IConference conference = new Conference();
+	IDivision division = new Division();
+
 	@Test
 	public void createTeamTest() {
-		String leagueName = "DLU";
-		String conferenceName = "Eastern Conference";
-		String divisionName = "Atlantic";
-		String teamName = "Team1";
-		String generalManger = "Manager1";
-		String headCoach = "HeadCoach1";
-		
-		LeagueModelMock leagueMock = new LeagueModelMock();
-		League leagueObj = leagueMock.getLeagueInfo();
+		ICommandLineInput userInputMode = mock(ICommandLineInput.class);
+		when(userInputMode.getValueFromUser()).thenReturn(conferenceName, divisionName, teamName, generalManger,
+				headCoach, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+				"18", "19", "20");
 
-		IUserInputMode userInputMode = mock(IUserInputMode.class);
-		when(userInputMode.getInt()).thenReturn(1);
-		when(userInputMode.getName()).thenReturn(conferenceName, divisionName, teamName, generalManger, headCoach);
-
-		List<Team> mockTeam = mock(List.class);
-		when(mockTeam.size()).thenReturn(2);
-
-		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
-		when(leagueDbMock.insertLeagueInDb(leagueName, conferenceName, divisionName, teamName, generalManger,
-				headCoach, null, null, null)).thenReturn(true);
-		CreateTeam createTeam = new CreateTeam(userInputMode, leagueObj, leagueDbMock);
-		League modifiedLeagueObj = createTeam.getTeam();
-
-		List<Conference> confList = modifiedLeagueObj.getConferences();
-		List<Division> divList = confList.get(0).getDivisions();
-		List<Team> teamList = divList.get(0).getTeams();
-
-		Assert.assertEquals(mockTeam.size() + 1, teamList.size());
-
+		ICreateTeam createTeam = new CreateTeam(leagueObj, userInputMode, display, validation, conference,
+				division);
+		;
+		createTeam.createTeamMethod();
+		Team newTeam = leagueObj.getConferences().get(0).getDivisions().get(0).getTeams().get(2);
+		Assert.assertTrue(leagueObj.getConferences().get(0).getConferenceName().equalsIgnoreCase(conferenceName));
+		Assert.assertTrue(leagueObj.getConferences().get(0).getDivisions().get(0).getDivisionName()
+				.equalsIgnoreCase(divisionName));
+		Assert.assertTrue(leagueObj.getConferences().get(0).getDivisions().get(0).getTeams().size() == 3);
+		Assert.assertTrue(newTeam.getPlayers().size() == 20);
 	}
 
 }

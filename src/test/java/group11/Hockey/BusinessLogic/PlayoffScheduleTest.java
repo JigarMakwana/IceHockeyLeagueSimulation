@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.PlayoffSchedule;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;

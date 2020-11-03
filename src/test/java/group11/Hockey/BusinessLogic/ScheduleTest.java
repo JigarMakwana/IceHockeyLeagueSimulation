@@ -1,11 +1,10 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic;
 
 import java.util.HashMap;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.Schedule;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 

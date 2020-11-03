@@ -150,7 +150,7 @@ public class SimulateSeason implements ISimulateSeason {
 			}
 			if (dateTime.compareTo(tradeDeadLine) <= 0) {
 				AITrading aiTrading = new AITrading(league);
-				//aiTrading.generateTradeOffers();
+				aiTrading.generateTradeOffers();
 			}
 			AgePlayer ageplayer = new AgePlayer();
 			ageplayer.increaseAge(league, 1);

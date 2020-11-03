@@ -27,7 +27,7 @@ public class Deadlines implements IDeadlines {
 		}
 		return tradeDeadLine;
 	}
-	
+
 	@Override
 	public Date getRegularSeasonDeadline(String startDate) {
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -69,7 +69,7 @@ public class Deadlines implements IDeadlines {
 		int year = Integer.valueOf(dateParts[2]);
 		year++;
 		LocalDate eDate = LocalDate.of(year, Month.APRIL, 10);
-        LocalDate secondWednesday = eDate.with(TemporalAdjusters.dayOfWeekInMonth(2, DayOfWeek.WEDNESDAY));
+		LocalDate secondWednesday = eDate.with(TemporalAdjusters.dayOfWeekInMonth(2, DayOfWeek.WEDNESDAY));
 		String stanleyDate = secondWednesday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		Date stanleyDateTime = null;
 		try {

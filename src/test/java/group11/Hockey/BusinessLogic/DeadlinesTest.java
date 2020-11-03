@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,8 +6,6 @@ import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import group11.Hockey.BusinessLogic.Deadlines;
 
 public class DeadlinesTest {
 

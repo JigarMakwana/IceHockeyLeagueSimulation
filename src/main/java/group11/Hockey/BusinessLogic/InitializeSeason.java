@@ -7,18 +7,13 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
-import group11.Hockey.db.CoachDb;
-import group11.Hockey.db.GameplayConfigDb;
 import group11.Hockey.db.ICoachDb;
 import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.IManagerDb;
 import group11.Hockey.db.IPlayerDb;
-import group11.Hockey.db.ManagerDb;
-import group11.Hockey.db.PlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.db.League.LeagueDbImpl;
 
-public class InitializeSeason implements IInitializeSeason{
+public class InitializeSeason implements IInitializeSeason {
 
 	private ILeagueDb leagueDb;
 	private IGameplayConfigDb gameplayConfigDb;
@@ -27,8 +22,8 @@ public class InitializeSeason implements IInitializeSeason{
 	private IManagerDb managerDb;
 	private League league;
 
-	public InitializeSeason(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
-			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
+	public InitializeSeason(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb, IPlayerDb playerDb,
+			ICoachDb coachDb, IManagerDb managerDb) {
 		super();
 		this.league = league;
 		this.leagueDb = leagueDb;
@@ -40,35 +35,35 @@ public class InitializeSeason implements IInitializeSeason{
 
 	@Override
 	public String startSeasons(int seasonCount) {
-		int count = seasonCount;		
+		int count = seasonCount;
 		int year;
 		String startDate;
-		String lastSimulatedDate=league.getStartDate();
+		String lastSimulatedDate = league.getStartDate();
 		String seasonEndDate = null;
 		String message;
-		IPrintToConsole console=new PrintToConsole();
-		IAdvance advance=new Advance();
-		if((lastSimulatedDate==null)||(lastSimulatedDate.isEmpty())) {
+		IPrintToConsole console = new PrintToConsole();
+		IAdvance advance = new Advance();
+		if ((lastSimulatedDate == null) || (lastSimulatedDate.isEmpty())) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
 			startDate = "29/09/" + Integer.toString(year);
-		}
-		else {
-			IParse parse=new Parse();
-			year=parse.stringToYear(lastSimulatedDate);
-			startDate=lastSimulatedDate;
+		} else {
+			IParse parse = new Parse();
+			year = parse.stringToYear(lastSimulatedDate);
+			startDate = lastSimulatedDate;
 		}
 		while (count > 0) {
-			startDate=advance.getAdvanceDate(startDate, 1);
+			startDate = advance.getAdvanceDate(startDate, 1);
 			league.setStartDate(startDate);
-			message="Start date : " + startDate;
+			message = "Start date : " + startDate;
 			console.print(message);
 			league.setStartDate(startDate);
 			ISchedule regularSeasonSchedule = new Schedule(league);
 			HashMap<String, HashMap<Team, Team>> regularSchedule = null;
 			regularSchedule = regularSeasonSchedule.getSeasonSchedule(startDate);
-			ISimulateSeason simulateSeason = new SimulateSeason(regularSchedule, league, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
+			ISimulateSeason simulateSeason = new SimulateSeason(regularSchedule, league, leagueDb, gameplayConfigDb,
+					playerDb, coachDb, managerDb);
 			seasonEndDate = simulateSeason.StartSimulatingSeason(startDate);
-			startDate=seasonEndDate;
+			startDate = seasonEndDate;
 			year++;
 			count--;
 		}

@@ -21,14 +21,23 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 
 	@Override
 	public HashMap<String, HashMap<Team, Team>> generatePlayoffScheduleRound1(String date) {
-
-		HashMap<String, HashMap<Team, Team>> firstRoundSchedule = new HashMap<>();
-		Team team1, team2, firstHighestTeam = null, secondHighestTeam = null, thirdHighestTeam = null, tempTeam = null;
-		int firstHighestPoints = 0, secondHighestPoints = 0, thirdHighestPoints = 0, tempPoints, teamPoints;
-		String time = "00:00:00", message;
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
 		IAdvance advance = new Advance();
 		IPrintToConsole console = new PrintToConsole();
+		Team team1;
+		Team team2;
+		Team firstHighestTeam = null;
+		Team secondHighestTeam = null;
+		Team thirdHighestTeam = null;
+		Team tempTeam = null;
+		int firstHighestPoints = 0;
+		int secondHighestPoints = 0;
+		int thirdHighestPoints = 0;
+		int tempPoints;
+		int teamPoints;
+		String time = "00:00:00";
+		String message;
+		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		HashMap<String, HashMap<Team, Team>> firstRoundSchedule = new HashMap<>();
 		message = "\n********** Playoff Schedule - First round **********";
 		console.print(message);
 		List<Conference> cconferenceList = league.getConferences();
@@ -68,7 +77,7 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 				roundOne.add(firstHighestTeam);
 				roundOne.add(secondHighestTeam);
 				roundOne.add(thirdHighestTeam);
-				roundOne.add(null); 
+				roundOne.add(null);
 			}
 			firstHighestPoints = 0;
 			secondHighestPoints = 0;
@@ -153,8 +162,6 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 	@Override
 	public HashMap<String, HashMap<Team, Team>> generatePlayoffScheduleRemainingRounds(String date) {
 		IAdvance advance = new Advance();
-		HashMap<String, HashMap<Team, Team>> playoffSchedule = new HashMap<>();
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
 		IPrintToConsole console = new PrintToConsole();
 		Team team1;
 		Team team2;
@@ -166,6 +173,8 @@ public class PlayoffSchedule implements IPlayoffSchedule {
 		int series = 0;
 		int totalSetTeams;
 		int qualifiedTeamsSize;
+		HashMap<String, HashMap<Team, Team>> playoffSchedule = new HashMap<>();
+		List<Team> qualifiedTeams = league.getQualifiedTeams();
 		qualifiedTeamsSize = qualifiedTeams.size();
 		totalSetTeams = (qualifiedTeamsSize / 2);
 		if (totalSetTeams == 4) {

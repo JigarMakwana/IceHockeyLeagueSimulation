@@ -239,7 +239,7 @@ public class Schedule implements ISchedule {
 							scheduledInConferenceMatchCount.put(t1, scheduledInConferenceMatchCount.get(t1) + 1);
 							scheduledInConferenceMatchCount.put(t2, scheduledInConferenceMatchCount.get(t2) + 1);
 						}
-					}	
+					}
 				}
 			}
 			outConLimit = 82 - inConLimitReached - divLimitReached;

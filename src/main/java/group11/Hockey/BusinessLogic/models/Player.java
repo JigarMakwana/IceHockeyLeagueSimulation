@@ -210,7 +210,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	public void increaseAge(League league, int days) {
+	public void increaseAge(ILeague league, int days) {
 		float yearsToIncrease = (float) days / 365;
 		float age;
 		age = this.getAge() + yearsToIncrease;
@@ -220,7 +220,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		decreaseInjuredDaysForPlayer(days);
 	}
 
-	public void replacePlayerWithFreeAgent(League league, List<Player> playersList) {
+	public void replacePlayerWithFreeAgent(ILeague league, List<Player> playersList) {
 		List<Player> freeAgents = league.getFreeAgents();
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 

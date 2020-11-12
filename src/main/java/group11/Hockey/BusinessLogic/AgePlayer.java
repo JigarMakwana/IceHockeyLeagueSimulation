@@ -6,13 +6,27 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
-public class AgePlayer extends RetirePlayer {
+public class AgePlayer extends RetirePlayer implements IState {
 
-	public void increaseAge(League league, int days) {
+	ILeague league;
+	int days;
+
+	public AgePlayer() {
+
+	}
+
+	public AgePlayer(ILeague league, int days) {
+		this.league = league;
+		this.days = days;
+	}
+
+	@Override
+	public IState startState() {
 		List<Player> freeAgents = league.getFreeAgents();
 		List<Conference> conferences = league.getConferences();
 
@@ -43,9 +57,12 @@ public class AgePlayer extends RetirePlayer {
 			}
 		}
 		checkForRetirement(league);
+
+		// call Advance next season or Advance Time
+		return null;
 	}
 
-	private void checkForRetirement(League league) {
+	private void checkForRetirement(ILeague league) {
 		boolean isRetired;
 		List<Player> retiredPlayers = new ArrayList<Player>();
 		List<Player> freeAgents = league.getFreeAgents();

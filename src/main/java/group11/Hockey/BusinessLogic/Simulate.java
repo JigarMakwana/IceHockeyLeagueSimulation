@@ -16,8 +16,7 @@ public class Simulate extends StateMachineState {
 	@Override
 	public StateMachineState startState() {
 		while (seasons > 0) {
-			StateMachineState state = new InitializeSeason(league);
-			StateMachineState currentState = state.startState();
+			StateMachineState currentState = new InitializeSeason(league);
 			do {
 				currentState = currentState.startState();
 			} while (currentState.ShouldContinue());

@@ -4,10 +4,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import group11.Hockey.BusinessLogic.AdvanceTime;
+import group11.Hockey.BusinessLogic.IState;
+import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.TimeLine;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.ICoachDb;
@@ -16,17 +22,18 @@ import group11.Hockey.db.IManagerDb;
 import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class InitializeSeason implements IInitializeSeason {
+public class InitializeSeason extends StateMachineState {
 
 	private ILeagueDb leagueDb;
 	private IGameplayConfigDb gameplayConfigDb;
 	private IPlayerDb playerDb;
 	private ICoachDb coachDb;
 	private IManagerDb managerDb;
-	private League league;
+	private ILeague league;
+	private int seasonCount;
 
 	public InitializeSeason(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb, IPlayerDb playerDb,
-			ICoachDb coachDb, IManagerDb managerDb) {
+			ICoachDb coachDb, IManagerDb managerDb, int seasonCount) {
 		super();
 		this.league = league;
 		this.leagueDb = leagueDb;
@@ -34,11 +41,20 @@ public class InitializeSeason implements IInitializeSeason {
 		this.playerDb = playerDb;
 		this.coachDb = coachDb;
 		this.managerDb = managerDb;
+		this.seasonCount = seasonCount;
+	}
+
+	public InitializeSeason(ILeague league) {
+		this.league = league;
 	}
 
 	@Override
-	public String startSeasons(int seasonCount) {
-		String startDate, lastSimulatedDate = league.getStartDate();
+	public StateMachineState startState() {
+		ITimeLine timeLine = new TimeLine();
+
+		String startDate = league.getStartDate();
+		String lastSimulatedDate = league.getStartDate();
+
 		int year;
 		if ((lastSimulatedDate == null) || (lastSimulatedDate.isEmpty())) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
@@ -48,69 +64,52 @@ public class InitializeSeason implements IInitializeSeason {
 			year = parse.stringToYear(lastSimulatedDate);
 			startDate = lastSimulatedDate;
 		}
+		timeLine.setStartDate(startDate);
+		timeLine.setLastSimulatedDate(lastSimulatedDate);
 
-		int count = seasonCount;
-		String seasonEndDate = null, message;
+		String message;
 		IPrintToConsole console = new PrintToConsole();
 		IAdvance advance = new Advance();
-		while (count > 0) {
-			// startDate = advance.getAdvanceDate(startDate, 1);
-			league.setStartDate(startDate);
-			message = "Start date : " + startDate;
-			console.print(message);
-			league.setStartDate(startDate);
 
-			ISchedule regularSeasonSchedule = new Schedule(league);
-			HashMap<String, HashMap<Team, Team>> schedule = null;
+		league.setStartDate(startDate);
+		message = "Start date : " + startDate;
+		console.print(message);
+		league.setStartDate(startDate);
 
-			IParse parse = new Parse();
-			IDeadlines deadline = new Deadlines();
+		ISchedule regularSeasonSchedule = new Schedule(league);
+		HashMap<String, HashMap<Team, Team>> schedule = null;
 
-			String advanceDate = startDate;
+		IParse parse = new Parse();
+		IDeadlines deadline = new Deadlines();
 
-			schedule = regularSeasonSchedule.getSeasonSchedule(startDate);
+		String currentDate = startDate;
 
-			Date stanleyEndDateTime = deadline.getStanleyPlayoffDeadline(startDate);
-			Date regularSeasonEndDateTime = deadline.getRegularSeasonDeadline(startDate);
-			Date stanleyStartDateTime = deadline.getStanleyPlayoffBeginDate(startDate);
-			String stanleyDate = parse.dateToString(stanleyStartDateTime);
-			IPlayoffSchedule playoff = new PlayoffSchedule(league);
-			String firstRound = advance.getAdvanceDate(stanleyDate, 19);
-			String secondRound = advance.getAdvanceDate(firstRound, 10);
-			String semiFinalRound = advance.getAdvanceDate(secondRound, 5);
-			Date firstRoundEnd = parse.stringToDate(firstRound);
-			Date secondRoundEnd = parse.stringToDate(secondRound);
-			Date semiFinalsEnd = parse.stringToDate(semiFinalRound);
+		Date stanleyEndDateTime = deadline.getStanleyPlayoffDeadline(startDate);
+		Date regularSeasonEndDateTime = deadline.getRegularSeasonDeadline(startDate);
+		Date stanleyStartDateTime = deadline.getStanleyPlayoffBeginDate(startDate);
+		Date tradeDeadLine = deadline.getTradeDeadline(startDate);
+		String stanleyDate = parse.dateToString(stanleyStartDateTime);
+		String firstRound = advance.getAdvanceDate(stanleyDate, 19);
+		String secondRound = advance.getAdvanceDate(firstRound, 10);
+		String semiFinalRound = advance.getAdvanceDate(secondRound, 5);
+		Date firstRoundEnd = parse.stringToDate(firstRound);
+		Date secondRoundEnd = parse.stringToDate(secondRound);
+		Date semiFinalsEnd = parse.stringToDate(semiFinalRound);
 
-			while (parse.stringToDate(advanceDate).compareTo(stanleyEndDateTime) <= 0) {
-				advanceDate = advance.getAdvanceDate(advanceDate, 1);
+		timeLine.setStanleyEndDateTime(stanleyEndDateTime);
+		timeLine.setRegularSeasonEndDateTime(regularSeasonEndDateTime);
+		timeLine.setStanleyDate(stanleyDate);
+		timeLine.setFirstRoundEnd(firstRoundEnd);
+		timeLine.setSecondRoundEnd(secondRoundEnd);
+		timeLine.setSemiFinalsEnd(semiFinalsEnd);
+		timeLine.setCurrentDate(currentDate);
+		timeLine.setTradeDeadLine(tradeDeadLine);
 
-				if (parse.stringToDate(advanceDate).equals(regularSeasonEndDateTime)) {
-					message = "********** Regular season ended **********";
-					console.print(message);
-					message = "\n********** Generating Playoff schedule **********";
-					console.print(message);
-					schedule = playoff.generatePlayoffScheduleRound1(stanleyDate);
-				}
+		league.setTimeLine(timeLine);
+		schedule = regularSeasonSchedule.getSeasonSchedule();
+		league.setSchedule(schedule);
 
-				if (parse.stringToDate(advanceDate).equals(firstRoundEnd)
-						|| parse.stringToDate(advanceDate).equals(secondRoundEnd)
-						|| parse.stringToDate(advanceDate).equals(semiFinalsEnd)) {
-					schedule = playoff.generatePlayoffScheduleRemainingRounds(advanceDate);
-				}
-
-				ISimulateSeason simulateSeason = new SimulateSeason(schedule, league, leagueDb, gameplayConfigDb,
-						playerDb, coachDb, managerDb);
-				boolean isSeasonEnd = simulateSeason.StartSimulatingSeason(startDate, advanceDate);
-				if (isSeasonEnd) {
-					break;
-				}
-			}
-			startDate = advanceDate;
-			year++;
-			count--;
-		}
-		return seasonEndDate;
+		return new AdvanceTime(league);
 	}
 
 }

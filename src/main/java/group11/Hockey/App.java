@@ -1,8 +1,11 @@
 package group11.Hockey;
 
 import group11.Hockey.BusinessLogic.CreateTeam;
+import group11.Hockey.BusinessLogic.IState;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.LoadLeague;
+import group11.Hockey.BusinessLogic.Simulate;
+import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -89,9 +92,12 @@ public class App {
 			seasonsCheck = validation.isNoOfSeasonsValueValid(numberOfSeasons);
 		}
 		int seasons = Integer.parseInt(numberOfSeasons);
-		InitializeSeason initialize = new InitializeSeason(league, leagueDb, gameplayConfigDb, playerDb, coachDb,
-				managerDb);
+		StateMachineState currentState = new Simulate(league, seasons);
+		currentState.startState();
 
-		initialize.startSeasons(seasons);
+//		InitializeSeason initialize = new InitializeSeason(league, leagueDb, gameplayConfigDb, playerDb, coachDb,
+//				managerDb);
+
+		// initialize.startSeasons(seasons);
 	}
 }

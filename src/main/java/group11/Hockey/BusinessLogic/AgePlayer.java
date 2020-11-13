@@ -1,17 +1,20 @@
 package group11.Hockey.BusinessLogic;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.models.IParse;
+import group11.Hockey.models.Parse;
 
-public class AgePlayer extends RetirePlayer implements IState {
+public class AgePlayer extends RetirePlayer {
 
 	ILeague league;
 	int days;
@@ -26,7 +29,24 @@ public class AgePlayer extends RetirePlayer implements IState {
 	}
 
 	@Override
-	public IState startState() {
+	public StateMachineState startState() {
+		agePlayers();
+		// call Advance next season or Advance Time
+		IParse parse = new Parse();
+		ITimeLine timeLine = league.getTimeLine();
+		String currentDate = timeLine.getCurrentDate();
+		Date stanleyEndDateTime = timeLine.getStanleyEndDateTime();
+		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		Date dateTime = parse.stringToDate(currentDate);
+		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
+
+			return new AdvanceToNextSeason(league);
+		} else {
+			return new AdvanceTime(league);
+		}
+	}
+
+	public void agePlayers() {
 		List<Player> freeAgents = league.getFreeAgents();
 		List<Conference> conferences = league.getConferences();
 
@@ -57,9 +77,6 @@ public class AgePlayer extends RetirePlayer implements IState {
 			}
 		}
 		checkForRetirement(league);
-
-		// call Advance next season or Advance Time
-		return null;
 	}
 
 	private void checkForRetirement(ILeague league) {

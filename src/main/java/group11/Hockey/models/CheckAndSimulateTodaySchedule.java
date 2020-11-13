@@ -9,7 +9,7 @@ import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
@@ -17,10 +17,10 @@ import group11.Hockey.InputOutput.PrintToConsole;
 public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySchedule {
 
 	private HashMap<String, HashMap<Team, Team>> schedule;
-	private League league;
+	private ILeague league;
 
 	//
-	public CheckAndSimulateTodaySchedule(HashMap<String, HashMap<Team, Team>> schedule, League league) {
+	public CheckAndSimulateTodaySchedule(HashMap<String, HashMap<Team, Team>> schedule, ILeague league) {
 		super();
 		this.schedule = schedule;
 		this.league = league;

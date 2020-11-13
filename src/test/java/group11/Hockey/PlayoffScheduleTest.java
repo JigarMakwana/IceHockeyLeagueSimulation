@@ -39,7 +39,7 @@ public class PlayoffScheduleTest {
 		}	
 		
 		PlayoffSchedule playoff=new PlayoffSchedule(league);
-		HashMap<String, HashMap<Team, Team>> playoffSchedule = playoff.generatePlayoffScheduleRound1("14/04/2021");
+		HashMap<String, HashMap<Team, Team>> playoffSchedule = playoff.getSchedule();
 		int size=playoffSchedule.size();
 		System.out.println("round1: "+size);
 		Assert.assertEquals(56, size);
@@ -78,7 +78,7 @@ public class PlayoffScheduleTest {
 		league.setQualifiedTeams(teamList);
 		
 		PlayoffSchedule playoff=new PlayoffSchedule(league);
-		HashMap<String, HashMap<Team, Team>> playoffSchedule = playoff.generatePlayoffScheduleRemainingRounds("03/05/2021");
+		HashMap<String, HashMap<Team, Team>> playoffSchedule = playoff.getSchedule();
 		int size=playoffSchedule.size();
 		Assert.assertEquals(7, size);
 }

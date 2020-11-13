@@ -8,11 +8,10 @@ import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
-public abstract class RetirePlayer {
+public abstract class RetirePlayer extends StateMachineState {
 
 	public boolean checkForRetirement(ILeague league, float age) {
 		int likelihoodOfRetirement = getLikelihoodOfRetirement(league, age);

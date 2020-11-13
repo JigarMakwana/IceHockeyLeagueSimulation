@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class SettleTeamRoster {
-    private League leagueObj;
+    private ILeague leagueObj;
     private AITrading aiTradingObj;
     private int teamSize;
     private int skaterSize;
@@ -24,7 +24,7 @@ public class SettleTeamRoster {
     IDisplay display = new Display();
     IUserInputValidation userSelection = new UserInputValidation();
 
-    public SettleTeamRoster(League leagueObj, IConstantSupplier supplier) {
+    public SettleTeamRoster(ILeague leagueObj, IConstantSupplier supplier) {
         this.leagueObj = leagueObj;
         aiTradingObj = new AITrading(leagueObj);
         this.teamSize = supplier.getTeamSize();
@@ -90,7 +90,7 @@ public class SettleTeamRoster {
         }
     }
 
-    public void hirePlayer(League league, List<Player> playerList, Positions playerPosition) throws Exception {
+    public void hirePlayer(ILeague league, List<Player> playerList, Positions playerPosition) throws Exception {
         List<Player> freeAgents = league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(freeAgents);
         Collections.reverse(sortedFreeAgents);
@@ -127,7 +127,7 @@ public class SettleTeamRoster {
         }
     }
 
-    public void dropPlayer(League league, List<Player> playerList, Positions playerPosition)
+    public void dropPlayer(ILeague league, List<Player> playerList, Positions playerPosition)
     {
         List<Player> freeAgents = league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(playerList);
@@ -157,7 +157,7 @@ public class SettleTeamRoster {
         }
     }
 
-    public void hirePlayerUser(League league, List<Player> playerList, Positions playerPosition) throws Exception
+    public void hirePlayerUser(ILeague league, List<Player> playerList, Positions playerPosition) throws Exception
     {
         List<Player> freeAgents = league.getFreeAgents();
         Iterator<Player> freeAgentsItr = freeAgents.iterator();
@@ -212,7 +212,7 @@ public class SettleTeamRoster {
         }
     }
 
-    public void dropPlayerUser(League league, List<Player> playerList, Positions playerPosition)
+    public void dropPlayerUser(ILeague league, List<Player> playerList, Positions playerPosition)
     {
         List<Player> freeAgents = league.getFreeAgents();
         Iterator<Player> playersItr = playerList.iterator();

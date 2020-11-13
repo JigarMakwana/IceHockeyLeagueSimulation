@@ -8,10 +8,12 @@ import group11.Hockey.BusinessLogic.AITrading;
 import group11.Hockey.BusinessLogic.AdvanceToNextSeason;
 import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.IState;
+import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.IAdvance;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
@@ -22,29 +24,24 @@ import group11.Hockey.db.IManagerDb;
 import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class SimulateSeason implements ISimulateSeason {
+public class SimulateSeason implements ISimulateSeason, IState {
 
 	private HashMap<String, HashMap<Team, Team>> schedule;
-	private League league;
-	private ILeagueDb leagueDb;
-	private IGameplayConfigDb gameplayConfigDb;
-	private IPlayerDb playerDb;
-	private ICoachDb coachDb;
-	private IManagerDb managerDb;
+	private ILeague league;
 
-	public SimulateSeason(HashMap<String, HashMap<Team, Team>> regularSchedule, League league, ILeagueDb leagueDb,
-			IGameplayConfigDb gameplayConfigDb, IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
+	public SimulateSeason(HashMap<String, HashMap<Team, Team>> regularSchedule, ILeague league) {
 		this.schedule = regularSchedule;
 		this.league = league;
-		this.leagueDb = leagueDb;
-		this.gameplayConfigDb = gameplayConfigDb;
-		this.playerDb = playerDb;
-		this.coachDb = coachDb;
-		this.managerDb = managerDb;
 	}
 
 	@Override
-	public boolean StartSimulatingSeason(String startDate, String advanceDate) {
+	public IState startState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean StartSimulatingSeason(String startDate, String currentDate) {
 
 		// String startDate = date;
 		Date dateTime, stanleyStartDateTime, stanleyEndDateTime, tradeDeadLine;
@@ -70,19 +67,19 @@ public class SimulateSeason implements ISimulateSeason {
 		// on or before stanley playoff end date
 		List<Team> qualifiedTeams = league.getQualifiedTeams();
 
-		dateTime = parse.stringToDate(advanceDate);
+		dateTime = parse.stringToDate(currentDate);
 
-		int daysDifference = (int) ((parse.stringToDate(advanceDate).getTime()
+		int daysDifference = (int) ((parse.stringToDate(currentDate).getTime()
 				- parse.stringToDate(startDate).getTime()) / (24 * 60 * 60 * 1000));
 		GameplayConfig gameplayConfig = league.getGamePlayConfig();
 		int trainingDays = gameplayConfig.getTraining().getDaysUntilStatIncreaseCheck();
 		if (daysDifference > trainingDays) {
-			TrainingPlayer trainingPlayer = new TrainingPlayer();
+			TrainingPlayer trainingPlayer = new TrainingPlayer(league);
 			trainingPlayer.trainPlayer(league);
 		}
 
 		ICheckAndSimulateTodaySchedule simulateToday = new CheckAndSimulateTodaySchedule(schedule, league);
-		simulateToday.CheckAndSimulateToday(advanceDate);
+		simulateToday.CheckAndSimulateToday(currentDate);
 
 		// on or before trade deadline
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
@@ -90,20 +87,18 @@ public class SimulateSeason implements ISimulateSeason {
 			aiTrading.generateTradeOffers();
 		}
 
-		IState currentState = new AgePlayer(league, 1);
+		StateMachineState currentState = new AgePlayer(league, 1);
 		currentState.startState();
 
 		// on the last day of stanley playoff
-		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
-
-			IState currentState1 = new AdvanceToNextSeason(advanceDate, qualifiedTeams, dateTime, startYear, endYear,
-					league);
-			currentState1.startState();
-
-			league.insertLeagueObject(league, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-			// break;
-			return true;
-		}
+//		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
+//
+//			IState currentState1 = new AdvanceToNextSeason(currentDate, qualifiedTeams, dateTime, startYear, endYear,
+//					league);
+//			currentState1.startState();
+//
+//			return true;
+//		}
 		return false;
 	}
 

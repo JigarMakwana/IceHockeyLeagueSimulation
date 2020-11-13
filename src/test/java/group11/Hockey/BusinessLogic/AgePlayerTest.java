@@ -23,8 +23,8 @@ public class AgePlayerTest {
 		LeagueModelMock leagueModel = new LeagueModelMock();
 		League league = leagueModel.getLeagueInfo();
 
-		AgePlayer agePlayer = new AgePlayer();
-		agePlayer.increaseAge(league, 365);
+		AgePlayer agePlayer = new AgePlayer(league, 365);
+		agePlayer.startState();
 		List<Conference> conferences = league.getConferences();
 		List<Division> divisions = conferences.get(0).getDivisions();
 		List<Team> teams = divisions.get(0).getTeams();

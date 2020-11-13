@@ -2,6 +2,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import group11.Hockey.db.ICoachDb;
@@ -26,14 +27,8 @@ public class League implements ILeague {
 	private List<Player> retiredPlayers = new ArrayList<Player>();
 	private List<Team> qualifiedTeams = new ArrayList<Team>();
 	private String startDate;
-
-	public List<Team> getQualifiedTeams() {
-		return qualifiedTeams;
-	}
-
-	public void setQualifiedTeams(List<Team> qualifiedTeams) {
-		this.qualifiedTeams = qualifiedTeams;
-	}
+	private ITimeLine timeLine;
+	private HashMap<String, HashMap<Team, Team>> schedule;
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {
@@ -48,6 +43,30 @@ public class League implements ILeague {
 
 	public League() {
 		super();
+	}
+
+	public ITimeLine getTimeLine() {
+		return timeLine;
+	}
+
+	public void setTimeLine(ITimeLine timeLine) {
+		this.timeLine = timeLine;
+	}
+
+	public HashMap<String, HashMap<Team, Team>> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(HashMap<String, HashMap<Team, Team>> schedule) {
+		this.schedule = schedule;
+	}
+
+	public List<Team> getQualifiedTeams() {
+		return qualifiedTeams;
+	}
+
+	public void setQualifiedTeams(List<Team> qualifiedTeams) {
+		this.qualifiedTeams = qualifiedTeams;
 	}
 
 	/**
@@ -146,7 +165,7 @@ public class League implements ILeague {
 		return freeAgents != null;
 	}
 
-	public boolean insertLeagueObject(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
+	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
 			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
 		boolean leagueObjectInserted = false;
 		boolean freeAgentInsertionCheck = false;

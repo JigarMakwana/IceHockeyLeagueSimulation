@@ -15,12 +15,11 @@ public class ScheduleTest {
 	public void getSeasonScheduleTest() {
 		SimulationLeagueModelMock leagueModel = new SimulationLeagueModelMock();
 		League league = leagueModel.getLeagueInfo();
-		
+
 		Schedule regularSeasonSchedule = new Schedule(league);
 		HashMap<String, HashMap<Team, Team>> schedule = null;
-		schedule = regularSeasonSchedule.getSeasonSchedule("29/09/2020");
+		schedule = regularSeasonSchedule.getSeasonSchedule();
 		Assert.assertEquals(1312, schedule.size());
 	}
-
 
 }

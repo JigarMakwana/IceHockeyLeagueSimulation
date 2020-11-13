@@ -120,7 +120,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		this.isInjured = isInjured;
 	}
 
-	public boolean checkInjury(League league) {
+	public boolean checkInjury(ILeague league) {
 		if (this.isInjured()) {
 			return this.isInjured();
 		}

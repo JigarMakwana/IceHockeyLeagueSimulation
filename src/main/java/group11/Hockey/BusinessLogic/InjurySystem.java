@@ -3,8 +3,8 @@ package group11.Hockey.BusinessLogic;
 import java.util.Random;
 
 import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
@@ -14,7 +14,7 @@ public class InjurySystem {
 	private int injuryDaysLow;
 	private int injuryDaysHigh;
 
-	public InjurySystem(League league) {
+	public InjurySystem(ILeague league) {
 		super();
 		GameplayConfig gameplayConfig = league.getGamePlayConfig();
 		Injuries injuries = gameplayConfig.getInjuries();

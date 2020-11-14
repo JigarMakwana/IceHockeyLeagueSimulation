@@ -23,7 +23,7 @@ public class Simulate extends StateMachineState {
 			seasons--;
 		}
 
-		return null;
+		return new FinalState();
 	}
 
 }

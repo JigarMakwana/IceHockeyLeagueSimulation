@@ -54,11 +54,7 @@ public class AdvanceToNextSeason extends StateMachineState {
 		// .........................
 		// .........................
 
-		return null;
-	}
-
-	public boolean ShouldContinue() {
-		return false;
+		return new FinalState();
 	}
 
 }

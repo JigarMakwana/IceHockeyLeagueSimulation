@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.AITrading;
+import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
@@ -43,7 +43,7 @@ public class SimulateSeason implements ISimulateSeason {
 
 	@Override
 	public String StartSimulatingSeason(String date) {
-		
+
 		String startDate = date;
 		Date dateTime, stanleyStartDateTime, stanleyEndDateTime, regularSeasonEndDateTime, tradeDeadLine, firstRoundEnd,
 				secondRoundEnd, semiFinalsEnd, finalsEnd;

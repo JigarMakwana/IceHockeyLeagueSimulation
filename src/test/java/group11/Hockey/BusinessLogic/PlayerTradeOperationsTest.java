@@ -1,5 +1,7 @@
 package group11.Hockey.BusinessLogic;
 
+import group11.Hockey.BusinessLogic.Trading.AITrading;
+import group11.Hockey.BusinessLogic.Trading.PlayerTradeOperations;
 import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

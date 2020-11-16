@@ -1,5 +1,8 @@
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.Trading;
 
+import group11.Hockey.BusinessLogic.Positions;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.IPlayerTradeOperations;
+import group11.Hockey.BusinessLogic.Triplet;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.IDisplay;
@@ -9,7 +12,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PlayerTradeOperations {
+/**
+ * This class contain trade-helper operations done on players
+ * @author  Jigar Makwana B00842568
+ */
+
+public class PlayerTradeOperations implements IPlayerTradeOperations {
     private Trading tradingConfig;
     IDisplay display = new Display();
     public PlayerTradeOperations(Trading tradingConfig)
@@ -17,44 +25,34 @@ public class PlayerTradeOperations {
         this.tradingConfig = tradingConfig;
     }
 
-    public List<Player> findWeakestPlayers(Team team)
-    {
+    public List<Player> findWeakestPlayers(Team team) {
         int maxPlayers = tradingConfig.getMaxPlayersPerTrade();
         List<Player> unSortedPlayerList = team.getPlayers();
         List<Player> playerList = sortPlayersByStrength(unSortedPlayerList);
-//        System.out.println(team.getTeamName() + "'s Players");
-//        displayPlayers(playerList);
         List<Player> weakestPlayerList = new ArrayList<Player>();
-        for(int i=0; i < maxPlayers; i++)
-        {
+        for(int i=0; i < maxPlayers; i++) {
             weakestPlayerList.add(playerList.get(i));
         }
-//        System.out.println("\nWeakest Players of team " + team.getTeamName() );
-//        displayPlayers(weakestPlayerList);
         return weakestPlayerList;
     }
 
     public List<Integer> findPlayerPositions(List<Player> playerList){
         List<Integer> playerPositionFlag = new ArrayList<Integer>(Arrays.asList(0,0,0));
-        for(int j=0; j<playerList.size(); j++)
-        {
+        for(int j=0; j<playerList.size(); j++) {
             String position = playerList.get(j).getPosition();
-            if(Positions.FORWARD.toString().equalsIgnoreCase(position))
-            {
+            if(Positions.FORWARD.toString().equalsIgnoreCase(position)) {
                 int index = Positions.FORWARD.ordinal();
                 int value = playerPositionFlag.get(index);
                 value = value + 1;
                 playerPositionFlag.set(index,value);
             }
-            else if(Positions.DEFENSE.toString().equalsIgnoreCase(position))
-            {
+            else if(Positions.DEFENSE.toString().equalsIgnoreCase(position)) {
                 int index = Positions.DEFENSE.ordinal();
                 int value = playerPositionFlag.get(index);
                 value = value + 1;
                 playerPositionFlag.set(index,value);
             }
-            else if(Positions.GOALIE.toString().equalsIgnoreCase(position))
-            {
+            else if(Positions.GOALIE.toString().equalsIgnoreCase(position)) {
                 int index = Positions.GOALIE.ordinal();
                 int value = playerPositionFlag.get(index);
                 value = value + 1;
@@ -64,68 +62,51 @@ public class PlayerTradeOperations {
         return playerPositionFlag;
     }
 
-    public List<Player> findStrongestPlayers(Team team, List<Integer> playerPositionFlag)
-    {
+    public List<Player> findStrongestPlayers(Team team, List<Integer> playerPositionFlag) {
         int maxPlayers = tradingConfig.getMaxPlayersPerTrade();
         List<Player> unSortedPlayerList = team.getPlayers();
         List<Player> playerList = sortPlayersByStrength(unSortedPlayerList);
-//        List<Player> playerList = team.sortPlayersByStrength();
-//        displayPlayers(playerList);
         List<Player> strongestPlayerList = new ArrayList<Player>();
 
         int noOfForwardNeeded = playerPositionFlag.get(Positions.FORWARD.ordinal());
         int noOfDefenseNeeded = playerPositionFlag.get(Positions.DEFENSE.ordinal());
         int noOfGoalieNeeded = playerPositionFlag.get(Positions.GOALIE.ordinal());
 
-        if(noOfForwardNeeded > 0)
-        {
+        if(noOfForwardNeeded > 0) {
             int maxForwardPerTrade = 0;
             List<Player> forwardPlayerList= getForwardList(playerList);
             for(int i=forwardPlayerList.size()-1;
                 maxForwardPerTrade < noOfForwardNeeded;
-                i--,maxForwardPerTrade++)
-            {
+                i--,maxForwardPerTrade++) {
                 strongestPlayerList.add(forwardPlayerList.get(i));
             }
         }
 
-        if(noOfDefenseNeeded > 0)
-        {
+        if(noOfDefenseNeeded > 0) {
             int maxDefensePerTrade = 0;
             List<Player> defencePlayerList= getDefenseList(playerList);
             for(int i=defencePlayerList.size()-1;
                 maxDefensePerTrade < noOfDefenseNeeded;
-                i--,maxDefensePerTrade++)
-            {
+                i--,maxDefensePerTrade++) {
                 strongestPlayerList.add(defencePlayerList.get(i));
             }
         }
 
-        if(noOfGoalieNeeded > 0)
-        {
+        if(noOfGoalieNeeded > 0) {
             int maxGoaliePerTrade = 0;
             List<Player> goaliePlayerList= getGoalieList(playerList);
             for(int i=goaliePlayerList.size()-1;
                 maxGoaliePerTrade < noOfGoalieNeeded;
-                i--,maxGoaliePerTrade++)
-            {
+                i--,maxGoaliePerTrade++) {
                 strongestPlayerList.add(goaliePlayerList.get(i));
             }
         }
-//        for(int i=playerList.size()-1; maxPlayersPerTrade < maxPlayers; i--,maxPlayersPerTrade++)
-//        {
-//            strongestPlayerList.add(playerList.get(i));
-//        }
-//        System.out.println("\nStrongest Players of team " + team.getTeamName() );
-//        displayPlayers(strongestPlayerList);
         return strongestPlayerList;
     }
 
     public Triplet<Team, List<Player>, Float> findStrongestTradeTeam(
-            List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer)
-    {
+            List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer) {
         List<Triplet<Team, List<Player>, Float>> sortedBuffer = tradingTeamsBuffer;
-        /* bubble sort */
         int i, j;
         Triplet temp;
         boolean swapped;
@@ -134,16 +115,14 @@ public class PlayerTradeOperations {
             swapped = false;
             for (j = 0; j < length - i - 1; j++) {
                 if (sortedBuffer.get(j).getThird() >
-                        sortedBuffer.get(j + 1).getThird())
-                {
+                        sortedBuffer.get(j + 1).getThird()) {
                     temp = sortedBuffer.get(j);
                     sortedBuffer.set(j, sortedBuffer.get(j + 1));
                     sortedBuffer.set(j + 1, temp);
                     swapped = true;
                 }
             }
-            if (swapped == false)
-            {
+            if (swapped == false) {
                 break;
             }
         }
@@ -152,32 +131,27 @@ public class PlayerTradeOperations {
         return tradeTeam;
     }
 
-    public Float playersStrengthSum(List<Player> playerList)
-    {
+    public Float playersStrengthSum(List<Player> playerList) {
         Float playersStrengthSum = 0.0f;
-        for(int l=0; l<playerList.size(); l++)
-        {
+        for(int l=0; l<playerList.size(); l++) {
             playersStrengthSum += playerList.get(l).getPlayerStrength();
         }
         return playersStrengthSum;
     }
 
-    public List<Player> getForwardList(List<Player> playerList)
-    {
+    public List<Player> getForwardList(List<Player> playerList) {
         List<Player> forwardPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())).collect(Collectors.toList());
         return forwardPlayerList;
     }
 
-    public List<Player> getDefenseList(List<Player> playerList)
-    {
+    public List<Player> getDefenseList(List<Player> playerList) {
         List<Player> defencePlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())).collect(Collectors.toList());
         return defencePlayerList;
     }
 
-    public List<Player> getGoalieList(List<Player> playerList)
-    {
+    public List<Player> getGoalieList(List<Player> playerList) {
         List<Player> goaliePlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.GOALIE.toString())).collect(Collectors.toList());
         return goaliePlayerList;
@@ -185,7 +159,6 @@ public class PlayerTradeOperations {
 
     public List<Player>  sortPlayersByStrength(List<Player> unSortedPlayerList) {
         List<Player> sortedPlayerList = unSortedPlayerList;
-        /* bubble sort */
         int i, j;
         Player temp;
         boolean swapped;
@@ -201,8 +174,7 @@ public class PlayerTradeOperations {
                     swapped = true;
                 }
             }
-            if (swapped == false)
-            {
+            if (swapped == false) {
                 break;
             }
         }

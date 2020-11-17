@@ -22,11 +22,13 @@ public class TradingModelMock {
 
     private void addLeague() {
 
-        List<Player> playerList1 = new ArrayList<Player>();
-        List<Player> playerList2 = new ArrayList<Player>();
-        List<Player> playerList3 = new ArrayList<Player>();
-        List<Player> playerList4 = new ArrayList<Player>();
-        List<Player> playerList5 = new ArrayList<Player>();
+        List<Player> playerList1 = new ArrayList<>();
+        List<Player> playerList2 = new ArrayList<>();
+        List<Player> playerList3 = new ArrayList<>();
+        List<Player> playerList4 = new ArrayList<>();
+        List<Player> playerList5 = new ArrayList<>();
+        List<IPlayer> inActiveList = new ArrayList<>();
+        List<IPlayer> activeList = new ArrayList<>();
 
         Aging aging = new Aging(30, 55);
         GameResolver gameResolver = new GameResolver(0);

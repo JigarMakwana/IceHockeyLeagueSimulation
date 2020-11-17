@@ -18,7 +18,7 @@ class SettleTeamRosterTest {
 
     @Test
     public void hirePlayerTest() {
-        this.constants = new ConstantSupplier(5,3,2);
+        this.constants = new ConstantSupplier(5,5,3,2,1);
         this.leagueModel = new TradingModelMock(1.0f, 1.0f);
         this.leagueObj = leagueModel.getLeagueInfo();
         this.settleObj = new SettleTeamRoster(leagueObj, constants);
@@ -39,7 +39,7 @@ class SettleTeamRosterTest {
 
     @Test
     void dropPlayerTest() {
-        this.constants = new ConstantSupplier(3,2,1);
+        this.constants = new ConstantSupplier(3,3, 2,1, 1);
         this.leagueModel = new TradingModelMock(1.0f, 1.0f);
         this.leagueObj = leagueModel.getLeagueInfo();
         this.settleObj = new SettleTeamRoster(leagueObj, constants);

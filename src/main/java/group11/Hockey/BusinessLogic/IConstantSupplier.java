@@ -1,9 +1,9 @@
 package group11.Hockey.BusinessLogic;
 
-import java.util.List;
-
 public interface IConstantSupplier {
-    public int getTeamSize();
-    public int getSkaterSize();
-    public int getGoalieSize();
+    int getActiveRosterSize();
+    int getInActiveRosterSize();
+    int getForwardSize();
+    int getDefenseSize();
+    int getGoalieSize();
 }

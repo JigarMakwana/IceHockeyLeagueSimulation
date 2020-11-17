@@ -8,4 +8,6 @@ public interface ITeam {
 	public Coach getHeadCoach();
 	
 	public int getPoints();
+	
+	public boolean isTeamNameValid(String teamName, League league);
 }

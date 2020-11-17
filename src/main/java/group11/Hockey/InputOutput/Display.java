@@ -9,6 +9,19 @@ import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
 public class Display implements IDisplay {
+	
+	private static Display displayInstance = null;
+	
+	private Display() {
+		
+	}
+	
+	public static Display getInstance() {
+		if(displayInstance == null) {
+			displayInstance = new Display();
+		}
+		return 	displayInstance;
+	}
 
 	@Override
 	public void showMessageOnConsole(String message) {

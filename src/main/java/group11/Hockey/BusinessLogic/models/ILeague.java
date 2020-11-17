@@ -28,8 +28,7 @@ public interface ILeague {
 
 	public List<Team> getQualifiedTeams();
 
-	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
-			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb);
+	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb);
 
 	public List<Coach> getCoaches();
 

@@ -1,4 +1,4 @@
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.db;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -8,12 +8,25 @@ import java.nio.file.Paths;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 
-public class SerializeLeague implements ISerialize {
+public class Serialize implements ISerialize {
+
+	private static Serialize serializeLeagueInstance = null;
+
+	private Serialize() {
+
+	}
+
+	public static Serialize getInstance() {
+		if (serializeLeagueInstance == null) {
+			serializeLeagueInstance = new Serialize();
+		}
+		return serializeLeagueInstance;
+	}
 
 	@Override
-	public void serializeLeagueObject(League league) {
+	public void serializeLeagueObject(ILeague league) {
 		Writer writer = null;
 		try {
 			writer = Files.newBufferedWriter(Paths.get("./league.json"));

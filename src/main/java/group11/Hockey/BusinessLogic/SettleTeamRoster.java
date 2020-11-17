@@ -21,7 +21,7 @@ public class SettleTeamRoster {
     private int skaterSize;
     private int goalieSize;
 
-    IDisplay display = new Display();
+    IDisplay display = DefaultHockeyFactory.makeDisplay();
     IUserInputValidation userSelection = new UserInputValidation();
 
     public SettleTeamRoster(ILeague leagueObj, IConstantSupplier supplier) {

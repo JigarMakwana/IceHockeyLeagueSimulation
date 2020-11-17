@@ -8,14 +8,17 @@ import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.IParse;
 import group11.Hockey.models.Parse;
 
 public class AdvanceToNextSeason extends StateMachineState {
 	ILeague league;
+	ILeagueDb leagueDb;
 
-	public AdvanceToNextSeason(ILeague league) {
+	public AdvanceToNextSeason(ILeague league, ILeagueDb leagueDb) {
 		this.league = league;
+		this.leagueDb = leagueDb;
 	}
 
 	@Override
@@ -50,11 +53,9 @@ public class AdvanceToNextSeason extends StateMachineState {
 		AgePlayer agePlayer = new AgePlayer(league, daysBetween);
 		agePlayer.agePlayers();
 
-		// TODO: Make database call
-		// .........................
-		// .........................
+		leagueDb.insertLeagueInDb(league);
 
-		return new FinalState();
+		return DefaultHockeyFactory.makeFinalState();
 	}
 
 }

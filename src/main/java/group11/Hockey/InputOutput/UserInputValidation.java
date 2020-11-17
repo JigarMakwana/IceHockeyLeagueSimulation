@@ -1,5 +1,7 @@
 package group11.Hockey.InputOutput;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+
 /**
  * This class validates the trade related User Inputs when
  * 1. User gives input to respond the trade offered by AI
@@ -8,8 +10,8 @@ package group11.Hockey.InputOutput;
  */
 
 public class UserInputValidation implements IUserInputValidation {
-    IDisplay display = new Display();
-    private ICommandLineInput userInputMode = new CommandLineInput();
+    IDisplay display = DefaultHockeyFactory.makeDisplay();
+    private ICommandLineInput userInputMode = DefaultHockeyFactory.makeCommandLineInput();
 
     @Override
     public int validateUserTradeInput()

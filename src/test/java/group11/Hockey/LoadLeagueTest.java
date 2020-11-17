@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.ILoadLeague;
-import group11.Hockey.BusinessLogic.LoadLeague;
+import group11.Hockey.BusinessLogic.LoadTeam;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.db.Team.ITeamDb;
@@ -24,7 +24,7 @@ public class LoadLeagueTest {
 		when(userInputMode.getValueFromUser()).thenReturn(teamName);
 
 		ITeamDb teamDbMock = new TeamDbMock();
-		ILoadLeague loadLeague = new LoadLeague(userInputMode,teamDbMock);
+		ILoadLeague loadLeague = new LoadTeam(userInputMode,teamDbMock);
 		League league = null;
 		try {
 			league = loadLeague.loadLeagueWithTeamName();

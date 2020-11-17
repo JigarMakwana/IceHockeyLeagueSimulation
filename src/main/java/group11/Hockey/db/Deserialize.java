@@ -1,4 +1,4 @@
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.db;
 
 import java.io.FileReader;
 
@@ -8,7 +8,21 @@ import com.google.gson.Gson;
 
 import group11.Hockey.BusinessLogic.models.League;
 
-public class DeserializeLeague implements IDeserializeLeague {
+public class Deserialize implements IDeserialize {
+	
+	private static Deserialize deserializeLeagueInstance = null;
+	
+	private Deserialize() {
+		
+	}
+	
+	public static Deserialize getInstance()
+	{
+		if(deserializeLeagueInstance == null) {
+			deserializeLeagueInstance = new Deserialize();
+		}
+		return deserializeLeagueInstance;
+	}
 
 	public League deSerializeLeagueObjectFromFile() {
 		FileReader reader;
@@ -21,6 +35,7 @@ public class DeserializeLeague implements IDeserializeLeague {
 			league = gson.fromJson(value, League.class);
 			System.out.println(league.toString());
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Eception occurred while deSerializing the object:" + e.getMessage());
 		}
 		return league;

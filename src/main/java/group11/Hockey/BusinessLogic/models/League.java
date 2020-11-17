@@ -5,10 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import group11.Hockey.db.ICoachDb;
-import group11.Hockey.db.IGameplayConfigDb;
-import group11.Hockey.db.IManagerDb;
-import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 
 /**
@@ -165,72 +161,21 @@ public class League implements ILeague {
 		return freeAgents != null;
 	}
 
-	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
-			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
+	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb) {
 		boolean leagueObjectInserted = false;
-		boolean freeAgentInsertionCheck = false;
-
-		Player playerObj = new Player(leagueName, playerDb);
-		playerObj.deleteLeaguePlayers();
-
-		List<Conference> conferenceList = league.getConferences();
-		for (Conference conference : conferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			if (divisionList == null || divisionList.size() == 0) {
-				leagueObjectInserted = false;
-			} else {
-				for (Division divison : divisionList) {
-					List<Team> teamList = divison.getTeams();
-					if (teamList == null || teamList.size() == 0) {
-						leagueObjectInserted = false;
-					} else {
-						for (Team team : teamList) {
-							List<Player> playerList = team.getPlayers();
-							Coach coach = team.getHeadCoach();
-							if (playerList == null || playerList.size() == 0) {
-
-								leagueObjectInserted = false;
-							} else {
-								for (Player player : playerList) {
-									leagueObjectInserted = leagueDb.insertLeagueInDb(league,
-											conference.getConferenceName(), divison.getDivisionName(), team, coach,
-											player);
-								}
-							}
-						}
-					}
-				}
-			}
+		try {
+			leagueObjectInserted = leagueDb.insertLeagueInDb(league);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-
-		// insert gameplayConfig
-		GameplayConfig gameplayConfig = new GameplayConfig(league.getGamePlayConfig().getAging(),
-				league.getGamePlayConfig().getGameResolver(), league.getGamePlayConfig().getInjuries(),
-				league.getGamePlayConfig().getTraining(), league.getGamePlayConfig().getTrading(), gameplayConfigDb,
-				leagueName);
-
-		// freeAgents and Retired players
-
-		playerObj.insertLeagueFreeAgents(league.getFreeAgents());
-		playerObj.insertLeagueRetiredPlayers(league.getRetiredPlayers());
-		league.setRetiredPlayers(new ArrayList<Player>());
-
-		// coaches
-		Coach coach = new Coach(leagueName, coachDb);
-		coach.insertCoaches(league.getCoaches());
-
-		// generalManagers
-		GeneralManager generalManager = new GeneralManager(leagueName, managerDb);
-		generalManager.insertManager(league.getGeneralManagers());
-
-		if (leagueObjectInserted && freeAgentInsertionCheck) {
-			return true;
-		} else
-			return false;
+		return leagueObjectInserted;
 
 	}
-
-	public boolean isLeagueNameValid(String leagueName, ILeagueDb leagueDb) {
-		return leagueDb.checkLeagueNameExitsInDb(leagueName);
+	
+	public ILeague loadLeague(ILeagueDb leagueDb) {
+		ILeague league;
+		league = leagueDb.loadLeague();
+		return league;
+		
 	}
 }

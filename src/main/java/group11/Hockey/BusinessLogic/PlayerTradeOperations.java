@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class PlayerTradeOperations {
     private Trading tradingConfig;
-    IDisplay display = new Display();
+    IDisplay display = DefaultHockeyFactory.makeDisplay();
     public PlayerTradeOperations(Trading tradingConfig)
     {
         this.tradingConfig = tradingConfig;

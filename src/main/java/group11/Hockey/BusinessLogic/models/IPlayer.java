@@ -26,4 +26,6 @@ public interface IPlayer {
 
 	public boolean isInjured();
 
+	boolean isActive();
+
 }

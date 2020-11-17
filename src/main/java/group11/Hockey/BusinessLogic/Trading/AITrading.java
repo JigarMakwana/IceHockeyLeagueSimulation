@@ -2,6 +2,7 @@ package group11.Hockey.BusinessLogic.Trading;
 import group11.Hockey.BusinessLogic.*;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.IAITrading;
 import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import group11.Hockey.InputOutput.*;
 import java.util.*;
 
@@ -177,7 +178,7 @@ public class AITrading implements IAITrading {
 
     public void settleTeamAfterTrade(Team team) {
         display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size after trade negotiation...");
-        IConstantSupplier constants = new ConstantSupplier(20,18,2);
+        IConstantSupplier constants = new ConstantSupplier(20, 10, 16, 10, 4);
         SettleTeamRoster settleObj = new SettleTeamRoster(leagueObj, constants);
         try{
             settleObj.settleTeam(team);

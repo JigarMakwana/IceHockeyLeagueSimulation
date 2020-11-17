@@ -31,8 +31,8 @@ public class SettleTeamRoster implements ISettleTeamRoster {
     public SettleTeamRoster(League leagueObj, IConstantSupplier supplier) {
         this.leagueObj = leagueObj;
         aiTradingObj = new AITrading(leagueObj);
-        this.teamSize = supplier.getTeamSize();
-        this.skaterSize = supplier.getSkaterSize();
+        this.teamSize = supplier.getActiveRosterSize();
+        this.skaterSize = supplier.getForwardSize();
         this.goalieSize = supplier.getGoalieSize();
     }
 

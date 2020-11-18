@@ -11,6 +11,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.IParse;
 import group11.Hockey.models.Parse;
 
@@ -18,6 +19,7 @@ public class AgePlayer extends RetirePlayer {
 
 	ILeague league;
 	int days;
+	ILeagueDb leagueDb;
 
 	public AgePlayer() {
 
@@ -26,6 +28,12 @@ public class AgePlayer extends RetirePlayer {
 	public AgePlayer(ILeague league, int days) {
 		this.league = league;
 		this.days = days;
+	}
+	
+	public AgePlayer(ILeague league, int days, ILeagueDb leagueDb) {
+		this.league = league;
+		this.days = days;
+		this.leagueDb = leagueDb;
 	}
 
 	@Override
@@ -40,9 +48,9 @@ public class AgePlayer extends RetirePlayer {
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
 
-			return new AdvanceToNextSeason(league);
+			return new AdvanceToNextSeason(league, leagueDb);
 		} else {
-			return new AdvanceTime(league);
+			return new AdvanceTime(league, leagueDb);
 		}
 	}
 

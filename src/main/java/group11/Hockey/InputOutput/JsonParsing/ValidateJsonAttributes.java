@@ -2,11 +2,12 @@ package group11.Hockey.InputOutput.JsonParsing;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class ValidateJsonAttributes {
+public abstract class ValidateJsonAttributes extends StateMachineState{
 	
 	private ILeagueDb leagueDb;
 	
@@ -18,11 +19,6 @@ public class ValidateJsonAttributes {
 		super();
 		this.leagueDb = leagueDb;
 	}	
-
-	public boolean isValidLeagueName(String name) {
-		League leagueModelObj = new League();
-		return leagueModelObj.isLeagueNameValid(name, leagueDb);
-	}
 
 	public boolean isNameAlreadyExists(List<String> list, String name) {
 

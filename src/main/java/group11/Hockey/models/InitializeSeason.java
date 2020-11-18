@@ -5,47 +5,25 @@ import java.util.Date;
 import java.util.HashMap;
 
 import group11.Hockey.BusinessLogic.AdvanceTime;
-import group11.Hockey.BusinessLogic.IState;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.TimeLine;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
-import group11.Hockey.db.ICoachDb;
-import group11.Hockey.db.IGameplayConfigDb;
-import group11.Hockey.db.IManagerDb;
-import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class InitializeSeason extends StateMachineState {
 
-	private ILeagueDb leagueDb;
-	private IGameplayConfigDb gameplayConfigDb;
-	private IPlayerDb playerDb;
-	private ICoachDb coachDb;
-	private IManagerDb managerDb;
 	private ILeague league;
-	private int seasonCount;
+	private ILeagueDb leaugueDb;
 
-	public InitializeSeason(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb, IPlayerDb playerDb,
-			ICoachDb coachDb, IManagerDb managerDb, int seasonCount) {
-		super();
+	public InitializeSeason(ILeague league, ILeagueDb leaugueDb) {
 		this.league = league;
-		this.leagueDb = leagueDb;
-		this.gameplayConfigDb = gameplayConfigDb;
-		this.playerDb = playerDb;
-		this.coachDb = coachDb;
-		this.managerDb = managerDb;
-		this.seasonCount = seasonCount;
-	}
-
-	public InitializeSeason(ILeague league) {
-		this.league = league;
+		this.leaugueDb = leaugueDb;
 	}
 
 	@Override
@@ -109,7 +87,7 @@ public class InitializeSeason extends StateMachineState {
 		schedule = regularSeasonSchedule.getSeasonSchedule();
 		league.setSchedule(schedule);
 
-		return new AdvanceTime(league);
+		return new AdvanceTime(league, leaugueDb);
 	}
 
 }

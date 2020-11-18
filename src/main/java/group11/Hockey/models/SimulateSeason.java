@@ -74,8 +74,8 @@ public class SimulateSeason implements ISimulateSeason, IState {
 		GameplayConfig gameplayConfig = league.getGamePlayConfig();
 		int trainingDays = gameplayConfig.getTraining().getDaysUntilStatIncreaseCheck();
 		if (daysDifference > trainingDays) {
-			TrainingPlayer trainingPlayer = new TrainingPlayer(league);
-			trainingPlayer.trainPlayer(league);
+//			TrainingPlayer trainingPlayer = new TrainingPlayer(league);
+//			trainingPlayer.trainPlayer(league);
 		}
 
 		ICheckAndSimulateTodaySchedule simulateToday = new CheckAndSimulateTodaySchedule(schedule, league);

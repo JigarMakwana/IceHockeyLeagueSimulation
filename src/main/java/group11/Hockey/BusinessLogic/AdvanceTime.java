@@ -6,16 +6,19 @@ import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
+import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.IParse;
 import group11.Hockey.models.Parse;
 import group11.Hockey.models.PlayoffSchedule;
 
 public class AdvanceTime extends StateMachineState {
 	private ILeague league;
+	private ILeagueDb leaugueDb;
 
-	public AdvanceTime(ILeague league) {
+	public AdvanceTime(ILeague league, ILeagueDb leaugueDb) {
 		super();
 		this.league = league;
+		this.leaugueDb = leaugueDb;
 	}
 
 	@Override
@@ -39,15 +42,15 @@ public class AdvanceTime extends StateMachineState {
 			message = "\n********** Generating Playoff schedule **********";
 			System.out.println(message);
 			IScheduleStrategy scheduleStrategy = new PlayoffSchedule(league);
-			return new ScheduleContext(scheduleStrategy, league);
+			return new ScheduleContext(scheduleStrategy, league, leaugueDb);
 		} else if (parse.stringToDate(currentDate).equals(firstRoundEnd)
 				|| parse.stringToDate(currentDate).equals(secondRoundEnd)
 				|| parse.stringToDate(currentDate).equals(semiFinalsEnd)) {
 
 			IScheduleStrategy scheduleStrategy = new PlayoffScheduleFinalRounds(league);
-			return new ScheduleContext(scheduleStrategy, league);
+			return new ScheduleContext(scheduleStrategy, league, leaugueDb);
 		} else {
-			return new TrainingPlayer(league);
+			return new TrainingPlayer(league, leaugueDb);
 		}
 	}
 

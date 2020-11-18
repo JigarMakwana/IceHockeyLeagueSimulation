@@ -11,6 +11,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.models.CheckAndSimulateTodaySchedule;
 import group11.Hockey.models.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.models.IParse;
@@ -18,10 +19,12 @@ import group11.Hockey.models.Parse;
 
 public class TrainingPlayer extends StateMachineState implements ITrainingPlayer {
 	private ILeague league;
+	private ILeagueDb leaugueDb;
 
-	public TrainingPlayer(ILeague league) {
+	public TrainingPlayer(ILeague league, ILeagueDb leaugueDb) {
 		super();
 		this.league = league;
+		this.leaugueDb = leaugueDb;
 	}
 
 	@Override
@@ -64,10 +67,10 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 		// .............
 
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
-			return new AITrading(league);
+			return new AITrading(league, leaugueDb);
 
 		} else {
-			return new AgePlayer(league, 1);
+			return new AgePlayer(league, 1, leaugueDb);
 		}
 
 	}

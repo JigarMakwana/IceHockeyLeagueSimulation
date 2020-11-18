@@ -2,7 +2,7 @@ package group11.Hockey.BusinessLogic;
 
 import group11.Hockey.BusinessLogic.models.League;
 
-public interface ISerialize {
+public interface IRenderTeam {
 
-	public void serializeLeagueObject(League league);
+	public League renderTeam();
 }

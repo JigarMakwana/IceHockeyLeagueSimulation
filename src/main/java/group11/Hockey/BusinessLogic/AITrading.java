@@ -2,6 +2,7 @@ package group11.Hockey.BusinessLogic;
 
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.InputOutput.*;
+import group11.Hockey.db.League.ILeagueDb;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,7 +18,9 @@ public class AITrading extends StateMachineState {
 	private ILeague leagueObj;
 	private Trading tradingConfig;
 	private PlayerTradeOperations playerMiscellaneous;
-	IDisplay display = new Display();
+	private ILeagueDb leagueDb;
+	//
+	IDisplay display = DefaultHockeyFactory.makeDisplay();
 	IUserInputValidation userSelection = new UserInputValidation();
 
 	public AITrading(ILeague leagueObj) {
@@ -25,6 +28,14 @@ public class AITrading extends StateMachineState {
 		GameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
 		this.tradingConfig = gameConfig.getTrading();
 		this.playerMiscellaneous = new PlayerTradeOperations(this.tradingConfig);
+	}
+	
+	public AITrading(ILeague leagueObj, ILeagueDb leagueDb) {
+		this.leagueObj = leagueObj;
+		GameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
+		this.tradingConfig = gameConfig.getTrading();
+		this.playerMiscellaneous = new PlayerTradeOperations(this.tradingConfig);
+		this.leagueDb = leagueDb;
 	}
 
 	@Override
@@ -76,7 +87,7 @@ public class AITrading extends StateMachineState {
 			eligibleTeamList.remove(0);
 			teamLength = eligibleTeamList.size();
 		}
-		return new AgePlayer(leagueObj, 1);
+		return new AgePlayer(leagueObj, 1,leagueDb);
 	}
 
 	public PlayerTradeOperations getPlayerMiscellaneous() {

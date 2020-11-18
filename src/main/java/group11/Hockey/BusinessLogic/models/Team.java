@@ -18,6 +18,33 @@ public class Team implements ITeam {
 	private List<Player> players = null;
 	private boolean isUserTeam = false;
 	private int losses;
+	private int averageShoots;
+	private boolean isOnPenalty;
+	private int penaltyPeriod;
+
+	public boolean isOnPenalty() {
+		return isOnPenalty;
+	}
+
+	public void setOnPenalty(boolean isOnPenality) {
+		this.isOnPenalty = isOnPenality;
+	}
+
+	public int getPenaltyPeriod() {
+		return penaltyPeriod;
+	}
+
+	public void setPenaltyPeriod(int penaltyPeriod) {
+		this.penaltyPeriod = penaltyPeriod;
+	}
+
+	public int getAverageShoots() {
+		return averageShoots;
+	}
+
+	public void setAverageShoots(int averageShoots) {
+		this.averageShoots = averageShoots;
+	}
 
 	private int wins;
 	private int points;

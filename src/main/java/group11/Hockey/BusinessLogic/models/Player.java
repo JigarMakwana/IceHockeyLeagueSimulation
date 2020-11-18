@@ -30,6 +30,42 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private boolean isInjured;
 	private boolean IsRetired;
 	private int numberOfInjuredDays;
+	private int goalsInSeason;
+	private int penalitiesInSeason;
+	private int savesByGoalieInSeason;
+	private int savesByDefenceManinSeason;
+
+	public int getSavesByDefenceManinSeason() {
+		return savesByDefenceManinSeason;
+	}
+
+	public void setSavesByDefenceManinSeason(int savesByDefenceManinSeason) {
+		this.savesByDefenceManinSeason = this.getSavesByDefenceManinSeason() + savesByDefenceManinSeason;
+	}
+
+	public int getGoalsInSeason() {
+		return goalsInSeason;
+	}
+
+	public void setGoalsInSeason(int goalsInSeason) {
+		this.goalsInSeason = this.getGoalsInSeason() + goalsInSeason;
+	}
+
+	public int getPenalitiesInSeason() {
+		return penalitiesInSeason;
+	}
+
+	public void setPenalitiesInSeason(int penalitiesInSeason) {
+		this.penalitiesInSeason = this.getPenalitiesInSeason() + penalitiesInSeason;
+	}
+
+	public int getSavesByGoalieInSeason() {
+		return savesByGoalieInSeason;
+	}
+
+	public void setSavesByGoalieInSeason(int savesInSeason) {
+		this.savesByGoalieInSeason = this.getSavesByGoalieInSeason() + savesInSeason;
+	}
 
 	public Player() {
 		super();

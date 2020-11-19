@@ -2,13 +2,13 @@ package group11.Hockey.BusinessLogic.models.Roster;
 
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class RosterTest {
+public class RosterTest {
     RosterMock mock = new RosterMock();
     IRoster roster = mock.team1Roster;
     @Test
-    void isValidRosterTest() {
+    public void isValidRosterTest() {
         boolean isValidRoster;
         isValidRoster = roster.isValidRoster();
         Assert.assertTrue(isValidRoster);
@@ -18,7 +18,7 @@ class RosterTest {
     }
 
     @Test
-    void isValidActiveRosterTest() {
+    public void isValidActiveRosterTest() {
         boolean isValidActiveRoster;
         isValidActiveRoster = roster.isValidActiveRoster();
         Assert.assertTrue(isValidActiveRoster);
@@ -28,7 +28,7 @@ class RosterTest {
     }
 
     @Test
-    void isValidInActiveRosterTest() {
+    public void isValidInActiveRosterTest() {
         boolean isValidInActiveRoster;
         isValidInActiveRoster = roster.isValidInActiveRoster();
         Assert.assertTrue(isValidInActiveRoster);
@@ -38,7 +38,7 @@ class RosterTest {
     }
 
     @Test
-    void swapPlayersTest() {
+    public void swapPlayersTest() {
         roster.swapPlayers(mock.activePlayer1, mock.inActivePlayer1);
 
         Assert.assertEquals(roster.getActiveRoster().size(), 2);

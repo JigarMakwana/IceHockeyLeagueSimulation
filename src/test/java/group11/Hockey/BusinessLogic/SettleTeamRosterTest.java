@@ -5,12 +5,11 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class SettleTeamRosterTest {
+public class SettleTeamRosterTest {
     public IConstantSupplier constants;
     public TradingModelMock leagueModel;
     public League leagueObj;
@@ -38,7 +37,7 @@ class SettleTeamRosterTest {
     }
 
     @Test
-    void dropPlayerTest() {
+    public void dropPlayerTest() {
         this.constants = new ConstantSupplier(3,3, 2,1, 1);
         this.leagueModel = new TradingModelMock(1.0f, 1.0f);
         this.leagueObj = leagueModel.getLeagueInfo();

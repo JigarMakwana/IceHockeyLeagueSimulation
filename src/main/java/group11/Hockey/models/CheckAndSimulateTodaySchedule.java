@@ -72,18 +72,8 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 
 							if ((dateTime.compareTo(possibleSeasonStart) <= 0)
 									&& (dateTime.compareTo(possibleSeasonEnd) > 0)) {
-								if ((team1.getWins() >= 4) || (team2.getWins() >= 4)) {
-									if (team1.getWins() == 4) {
-										message = "Winner already declared :" + team1.getTeamName() + "(4-"
-												+ team2.getWins() + ")";
-										console.print(message);
-									} else {
-										message = "Winner already declared :" + team2.getTeamName() + "("
-												+ team1.getWins() + "-4)";
-										console.print(message);
-									}
-									continue;
-								} else {
+								if ((team1.getWins() < 4) && (team2.getWins() < 4)) {
+
 									message = "Team Won : " + won.getTeamName();
 									console.print(message);
 									points = won.getPoints();

@@ -1,10 +1,6 @@
 package group11.Hockey.GameSimulation;
 
 import java.util.List;
-import java.util.Random;
-
-import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -82,39 +78,35 @@ public class GamePlay {
 	private void makeShoot(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
 
-		int shootingStat = calculatePlayersShoot(shootingTeamPlayers);
-		int checkingStat = calculatePlayersChecking(defendingTeamPlayers, defendingTeam);
-		int savingStat = calculatePlayersSaving(defendingTeamPlayers);
+		GameContext gameContext = null;
+		GameStrategy gameStrategy = null;
 
 		managePanelty(defendingTeam);
 
+		gameStrategy = new ForwardPlayerActive();
+		gameContext = new GameContext(gameStrategy);
+		int shootingStat = gameContext.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
+
+		gameStrategy = new DefencePlayerActive();
+		gameContext = new GameContext(gameStrategy);
+		int checkingStat = gameContext.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
+
+		gameStrategy = new GoaliePlayerActive();
+		gameContext = new GameContext(gameStrategy);
+		int savingStat = gameContext.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
+
 		if (shootingStat - checkingStat < appConfiguration.saveChance) {
-			int penaltyProbality = new Random().nextInt(appConfiguration.penaltyRandomChance);
-			int index = new Random().nextInt(2);
-			if (penaltyProbality <= appConfiguration.penaltyOccuranceValue) {
-				int penalties = defendingTeamPlayers.get(index + 3).getPenaltiesInSeason() + 1;
-				defendingTeamPlayers.get(index + 3).setPenaltiesInSeason(penalties);
-				defendingTeam.setOnPenalty(true);
-				defendingTeam.setPenaltyPeriod(penaltyPeriod);
-				penalties = defendingTeam.getPenaltiesInSeason() + 1;
-				defendingTeam.setPenaltiesInSeason(penalties);
-			}
-			int saves = defendingTeamPlayers.get(index + 3).getSavesByDefenceManinSeason() + 1;
-			defendingTeamPlayers.get(index + 3).setSavesByDefenceManinSeason(saves);
-			saves = defendingTeam.getSavesInSeason() + 1;
-			defendingTeam.setSavesInSeason(saves);
+			gameStrategy = new DefencePlayerActive();
+			gameContext = new GameContext(gameStrategy);
 		} else if (shootingStat - savingStat < appConfiguration.saveChance) {
-			int saves = defendingTeamPlayers.get(5).getSavesByGoalieInSeason() + 1;
-			defendingTeamPlayers.get(5).setSavesByGoalieInSeason(saves);
-			saves = defendingTeam.getSavesInSeason() + 1;
-			defendingTeam.setSavesInSeason(saves);
+			gameStrategy = new GoaliePlayerActive();
+			gameContext = new GameContext(gameStrategy);
 		} else {
-			int index = new Random().nextInt(3);
-			int goals = shootingTeamPlayers.get(index).getGoalsInSeason() + 1;
-			shootingTeamPlayers.get(index).setGoalsInSeason(goals);
-			goals = ShootingTeam.getGoalsInSeason() + 1;
-			ShootingTeam.setGoalsInSeason(goals);
+			gameStrategy = new ForwardPlayerActive();
+			gameContext = new GameContext(gameStrategy);
 		}
+		gameContext.executeStrategy(shootingTeamPlayers, defendingTeamPlayers, defendingTeam, ShootingTeam,
+				penaltyPeriod);
 	}
 
 	private void managePanelty(ITeam defendingTeam) {
@@ -128,65 +120,11 @@ public class GamePlay {
 		}
 	}
 
-	private int calculatePlayersShoot(List<Player> playersList) {
-		int skating = 0;
-		int numberOfForwardMen = 0;
-		for (Player player : playersList) {
-			if (player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())) {
-				skating += player.getShooting();
-				numberOfForwardMen++;
-			}
-		}
-		if (numberOfForwardMen == 0) {
-			numberOfForwardMen = 1;
-		}
-		return skating / numberOfForwardMen;
-	}
-
-	private int calculatePlayersChecking(List<Player> playersList, ITeam defendingTeam) {
-		int checking = 0;
-		int numberOfDefenseMen = 0;
-		for (Player player : playersList) {
-			if (player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
-				checking += player.getChecking();
-				numberOfDefenseMen++;
-				if (defendingTeam.isOnPenalty()) {
-					checking = (int) (checking * appConfiguration.reduceDefenceStrength);
-					break;
-				}
-			}
-		}
-		if (numberOfDefenseMen == 0) {
-			numberOfDefenseMen = 1;
-		}
-		return checking / numberOfDefenseMen;
-	}
-
-	private int calculatePlayersSaving(List<Player> playersList) {
-		int saving = 0;
-		int numberOfGoalieMen = 0;
-		for (Player player : playersList) {
-			if (player.getPosition().equalsIgnoreCase(Positions.GOALIE.toString())) {
-				saving += player.getSaving();
-				numberOfGoalieMen++;
-			}
-		}
-		if (numberOfGoalieMen == 0) {
-			numberOfGoalieMen = 1;
-		}
-		return saving / numberOfGoalieMen;
-	}
-
 	private void gameSummary(ITeam team1, ITeam team2) {
 
 		int goalsIngame = team1.getGoalsInSeason() + team2.getGoalsInSeason();
 		int penaltiesInGame = team1.getPenaltiesInSeason() + team2.getPenaltiesInSeason();
 		int savesInGame = team1.getSavesInSeason() + team2.getSavesInSeason();
-
-		System.out.println("Goals per game: " + goalsIngame / 2);
-		System.out.println("Penalties per game: " + penaltiesInGame / 2);
-		System.out.println("Shots: " + 60 / 2);
-		System.out.println("Saves: " + savesInGame / 2);
 
 		league.setGoalsInSeason(league.getGoalsInSeason() + goalsIngame);
 		league.setPenaltiesInSeason(league.getPenaltiesInSeason() + penaltiesInGame);
@@ -194,10 +132,6 @@ public class GamePlay {
 		league.setGamesInSeason(league.getGamesInSeason() + 2);
 
 		System.out.println("***********end summary**************");
-		System.out.println("Goals per game: " + league.getGoalsInSeason());
-		System.out.println("Penalties per game: " + league.getPenaltiesInSeason());
-		System.out.println("Saves: " + league.getSavesInSeason());
-		System.out.println("games: " + league.getGamesInSeason());
 
 		System.out.println("Goals per game: " + (float) league.getGoalsInSeason() / league.getGamesInSeason());
 		System.out.println("Penalties per game: " + (float) league.getPenaltiesInSeason() / league.getGamesInSeason());

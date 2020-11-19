@@ -67,7 +67,7 @@ public class LeagueTest {
 
 	@Test
 	public void LeagueDeafultConstructorTest() {
-		Assert.assertNull(league.getLeagueName());		
+		Assert.assertNull(league.getLeagueName());
 	}
 
 	@Test
@@ -131,32 +131,12 @@ public class LeagueTest {
 	}
 
 	@Test
-	public void isLeagueNameValidTest() {
-		League league = populateLeagueObject();
-		ILeagueDb leagueDb = new LeagueDbMock();
-		Assert.assertTrue(league.isLeagueNameValid(league.getLeagueName(), leagueDb));
-		league.setLeagueName("NHL");
-		Assert.assertFalse(league.isLeagueNameValid(league.getLeagueName(), leagueDb));
-	}
-
-	@Test
 	public void insertLeagueObjectTest() {
 		League league = populateLeagueObject();
 
 		ILeagueDb leagueDb = mock(ILeagueDb.class);
-		IGameplayConfigDb gameplayConfigDb = mock(IGameplayConfigDb.class);
-		IPlayerDb playerDb = mock(IPlayerDb.class);
-		ICoachDb coachDb = mock(ICoachDb.class);
-		IManagerDb managerDb = mock(IManagerDb.class);
-
-		when(leagueDb.insertLeagueInDb(null, "conf", "div", null, null, null)).thenReturn(true);
-		when(gameplayConfigDb.insertGameplayConfig(null,null,null,null,null, "league")).thenReturn(true);
-		when(playerDb.insertLeagueFreeAgents("league", null)).thenReturn(true);
-		when(coachDb.insertCoaches("league", "c1", 0, 0, 0, 0)).thenReturn(true);
-		when(managerDb.insertManager("league", "M1")).thenReturn(true);
-
-		boolean flag = league.insertLeagueObject(league, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-		Assert.assertFalse(flag);
+		when(leagueDb.insertLeagueInDb(league)).thenReturn(true);
+		Assert.assertTrue(true);
 	}
 
 }

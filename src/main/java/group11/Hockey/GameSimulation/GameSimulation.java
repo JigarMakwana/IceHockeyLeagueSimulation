@@ -10,14 +10,12 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class GameSimulation {
-	private ILeague league;
 	private List<Player> team;
 	List<Player> playersOnIce = new ArrayList<>();
 	List<Player>[] shifts = new List[40];
 
 	public GameSimulation(ILeague league, List<Player> team) {
 		super();
-		this.league = league;
 		this.team = team;
 	}
 

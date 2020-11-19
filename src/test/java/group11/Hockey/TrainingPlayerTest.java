@@ -15,7 +15,7 @@ import group11.Hockey.models.LeagueModelMock;
 
 public class TrainingPlayerTest {
 	League league;
-	TrainingPlayer traingPlayer = new TrainingPlayer(league);
+	TrainingPlayer traingPlayer = null;
 
 	@Before
 	public void loadLeague() {

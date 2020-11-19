@@ -23,7 +23,6 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 	public CreateTeam() {
 
 	}
-	
 
 	public CreateTeam(League league, ICommandLineInput commandLineInput, IDisplay display, IValidations validation,
 			ILeagueDb leagueDb) {
@@ -36,7 +35,7 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 
 	@Override
 	public StateMachineState startState() {
-		//renderTeam();
+		renderTeam();
 		return DefaultHockeyFactory.makePlayerChoice(league, commandLineInput, leagueDb);
 	}
 

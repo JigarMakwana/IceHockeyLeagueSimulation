@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.Conference;
@@ -19,7 +20,7 @@ import group11.Hockey.models.LeagueTest;
 
 public class ValidationsTest {
 	League league;
-	IDisplay display = new Display();
+	IDisplay display = DefaultHockeyFactory.makeDisplay();
 	IValidations validations = new Validations(display);
 
 	@Before
@@ -37,10 +38,10 @@ public class ValidationsTest {
 		conferenceCheck = validations.isConferenceNameValid(conferenceName, league.getConferences());
 		Assert.assertTrue(conferenceCheck);
 	}
-	
+
 	@Test
 	public void isDivisionValidTest() {
-		//Atlantic Division
+		// Atlantic Division
 		String divisionName = "Atlantic Division";
 		Conference conference = league.getConferences().get(0);
 		boolean divisionCheck = validations.isDivisionValid(divisionName, conference);
@@ -49,7 +50,7 @@ public class ValidationsTest {
 		divisionCheck = validations.isDivisionValid(divisionName, conference);
 		Assert.assertTrue(divisionCheck);
 	}
-	
+
 	@Test
 	public void isTeamNameValidTest() {
 		String teamName = "Vancouver Canucks";
@@ -59,7 +60,7 @@ public class ValidationsTest {
 		teamNameCheck = validations.isTeamNameValid(teamName, league);
 		Assert.assertFalse(teamNameCheck);
 	}
-	
+
 	@Test
 	public void generalManagerNameCheckTest() {
 		String managerName = "Kevin";
@@ -69,7 +70,7 @@ public class ValidationsTest {
 		managerCheck = validations.generalManagerNameCheck(managerName, league);
 		Assert.assertTrue(managerCheck);
 	}
-	
+
 	@Test
 	public void headCoachNameCheckTest() {
 		String headCoach = "C1";
@@ -79,22 +80,21 @@ public class ValidationsTest {
 		coachCheck = validations.headCoachNameCheck(headCoach, league);
 		Assert.assertTrue(coachCheck);
 	}
-	
+
 	@Test
 	public void playerCheckTest() {
 		boolean playerCheck = false;
-		playerCheck = validations.playerCheck("21", league, null, null,
-				null);
+		playerCheck = validations.playerCheck("21", league, null, null, null);
 		Assert.assertTrue(playerCheck);
 		List<Player> forwardDefensePlayerList = new ArrayList<Player>();
 		List<Player> gloalisList = new ArrayList<Player>();
 		forwardDefensePlayerList.add(league.getFreeAgents().get(0));
 		gloalisList.add(league.getFreeAgents().get(1));
 		playerCheck = validations.playerCheck("1", league, Arrays.asList(1), forwardDefensePlayerList, gloalisList);
-		
+
 		Assert.assertTrue(playerCheck);
 	}
-	
+
 	@Test
 	public void isNoOfSeasonsValueValidTest() {
 		String seasons = "2";

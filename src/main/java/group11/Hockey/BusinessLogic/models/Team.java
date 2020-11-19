@@ -21,6 +21,33 @@ public class Team implements ITeam {
 	private int averageShoots;
 	private boolean isOnPenalty;
 	private int penaltyPeriod;
+	private int goalsInSeason;
+	private int penaltiesInSeason;
+	private int savesInSeason;
+
+	public int getGoalsInSeason() {
+		return goalsInSeason;
+	}
+
+	public void setGoalsInSeason(int goalsInSeason) {
+		this.goalsInSeason = goalsInSeason;
+	}
+
+	public int getPenaltiesInSeason() {
+		return penaltiesInSeason;
+	}
+
+	public void setPenaltiesInSeason(int penaltiesInSeason) {
+		this.penaltiesInSeason = penaltiesInSeason;
+	}
+
+	public int getSavesInSeason() {
+		return savesInSeason;
+	}
+
+	public void setSavesInSeason(int savesInSeason) {
+		this.savesInSeason = savesInSeason;
+	}
 
 	public boolean isOnPenalty() {
 		return isOnPenalty;

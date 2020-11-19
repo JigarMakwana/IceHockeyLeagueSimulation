@@ -31,7 +31,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private boolean IsRetired;
 	private int numberOfInjuredDays;
 	private int goalsInSeason;
-	private int penalitiesInSeason;
+	private int penaltiesInSeason;
 	private int savesByGoalieInSeason;
 	private int savesByDefenceManinSeason;
 
@@ -40,7 +40,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public void setSavesByDefenceManinSeason(int savesByDefenceManinSeason) {
-		this.savesByDefenceManinSeason = this.getSavesByDefenceManinSeason() + savesByDefenceManinSeason;
+		this.savesByDefenceManinSeason = savesByDefenceManinSeason;
 	}
 
 	public int getGoalsInSeason() {
@@ -48,15 +48,15 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public void setGoalsInSeason(int goalsInSeason) {
-		this.goalsInSeason = this.getGoalsInSeason() + goalsInSeason;
+		this.goalsInSeason = goalsInSeason;
 	}
 
-	public int getPenalitiesInSeason() {
-		return penalitiesInSeason;
+	public int getPenaltiesInSeason() {
+		return penaltiesInSeason;
 	}
 
-	public void setPenalitiesInSeason(int penalitiesInSeason) {
-		this.penalitiesInSeason = this.getPenalitiesInSeason() + penalitiesInSeason;
+	public void setPenaltiesInSeason(int penaltiesInSeason) {
+		this.penaltiesInSeason = penaltiesInSeason;
 	}
 
 	public int getSavesByGoalieInSeason() {
@@ -64,7 +64,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public void setSavesByGoalieInSeason(int savesInSeason) {
-		this.savesByGoalieInSeason = this.getSavesByGoalieInSeason() + savesInSeason;
+		this.savesByGoalieInSeason = savesInSeason;
 	}
 
 	public Player() {

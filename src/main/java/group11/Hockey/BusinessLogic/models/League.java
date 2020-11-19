@@ -25,6 +25,42 @@ public class League implements ILeague {
 	private String startDate;
 	private ITimeLine timeLine;
 	private HashMap<String, HashMap<Team, Team>> schedule;
+	private int goalsInSeason;
+	private int penaltiesInSeason;
+	private int savesInSeason;
+	private int gamesInSeason;
+
+	public int getGoalsInSeason() {
+		return goalsInSeason;
+	}
+
+	public void setGoalsInSeason(int goalsInSeason) {
+		this.goalsInSeason = goalsInSeason;
+	}
+
+	public int getPenaltiesInSeason() {
+		return penaltiesInSeason;
+	}
+
+	public void setPenaltiesInSeason(int penaltiesInSeason) {
+		this.penaltiesInSeason = penaltiesInSeason;
+	}
+
+	public int getSavesInSeason() {
+		return savesInSeason;
+	}
+
+	public void setSavesInSeason(int savesInSeason) {
+		this.savesInSeason = savesInSeason;
+	}
+
+	public int getGamesInSeason() {
+		return gamesInSeason;
+	}
+
+	public void setGamesInSeason(int gamesInSeason) {
+		this.gamesInSeason = gamesInSeason;
+	}
 
 	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {

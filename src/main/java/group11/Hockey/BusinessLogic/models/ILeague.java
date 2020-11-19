@@ -43,4 +43,21 @@ public interface ILeague {
 	public void setSchedule(HashMap<String, HashMap<Team, Team>> schedule);
 
 	public void setQualifiedTeams(List<Team> qualifiedTeams);
+
+	public int getGoalsInSeason();
+
+	public void setGoalsInSeason(int goalsInSeason);
+
+	public int getPenaltiesInSeason();
+
+	public void setPenaltiesInSeason(int penaltiesInSeason);
+
+	public int getSavesInSeason();
+
+	public void setSavesInSeason(int savesInSeason);
+
+	public int getGamesInSeason();
+
+	public void setGamesInSeason(int gamesInSeason);
+
 }

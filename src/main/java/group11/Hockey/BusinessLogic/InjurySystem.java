@@ -1,12 +1,17 @@
 package group11.Hockey.BusinessLogic;
 
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Injuries;
 import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.Roster.Roster;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 
 public class InjurySystem {
 

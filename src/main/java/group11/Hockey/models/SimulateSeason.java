@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.AITrading;
+import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.AdvanceToNextSeason;
 import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.IState;

@@ -29,6 +29,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private float age;
 	private boolean isInjured;
 	private boolean IsRetired;
+	private boolean isActive;
 	private int numberOfInjuredDays;
 	private int goalsInSeason;
 	private int penaltiesInSeason;

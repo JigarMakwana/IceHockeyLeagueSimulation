@@ -5,45 +5,45 @@ import static org.mockito.Mockito.when;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class AITradingTest {
+public class AITradingTest {
     TradingModelMock leagueModel = new TradingModelMock(1.0f, 1.0f);
     private League leagueObj = leagueModel.getLeagueInfo();
     private AITrading aiTradingObj = new AITrading(leagueObj);
 
     @Test
-    void generateTradeOffersTest() {
-//        aiTradingObj.generateTradeOffers();
-//        List<Team> teamList = new ArrayList<>();
-//        teamList = leagueModel.getTeamList();
-//        Team team1 = teamList.get(0);
-//        List<Player> playerList1 = team1.getPlayers();
-//        Team team2 = teamList.get(1);
-//        List<Player> playerList2 = team2.getPlayers();
-//
-//        Assert.assertEquals(playerList1.get(0).getPlayerName(), "Harry");
-//        Assert.assertEquals(playerList1.get(1).getPlayerName(), "Tom");
-//        Assert.assertEquals(playerList1.get(2).getPlayerName(), "Suresh");
-//        Assert.assertEquals(playerList1.get(3).getPlayerName(), "Lokesh");
-//
-//        Assert.assertEquals(playerList2.get(0).getPlayerName(), "Mahesh");
-//        Assert.assertEquals(playerList2.get(1).getPlayerName(), "Ramesh");
-//        Assert.assertEquals(playerList2.get(2).getPlayerName(), "Dick");
-//        Assert.assertEquals(playerList2.get(3).getPlayerName(), "Jerry");
+    public void generateTradeOffersTest() {
+        aiTradingObj.generateTradeOffers();
+        List<Team> teamList = new ArrayList<>();
+        teamList = leagueModel.getTeamList();
+        Team team1 = teamList.get(0);
+        List<Player> playerList1 = team1.getPlayers();
+        Team team2 = teamList.get(1);
+        List<Player> playerList2 = team2.getPlayers();
+
+        Assert.assertEquals(playerList1.get(0).getPlayerName(), "Harry");
+        Assert.assertEquals(playerList1.get(1).getPlayerName(), "Tom");
+        Assert.assertEquals(playerList1.get(2).getPlayerName(), "Suresh");
+        Assert.assertEquals(playerList1.get(3).getPlayerName(), "Lokesh");
+
+        Assert.assertEquals(playerList2.get(0).getPlayerName(), "Mahesh");
+        Assert.assertEquals(playerList2.get(1).getPlayerName(), "Ramesh");
+        Assert.assertEquals(playerList2.get(2).getPlayerName(), "Dick");
+        Assert.assertEquals(playerList2.get(3).getPlayerName(), "Jerry");
     }
 
     @Test
-    void determineEligibleTeams() {
+    public void determineEligibleTeams() {
         List<Team> teamList = new ArrayList<>();
         teamList = aiTradingObj.determineEligibleTeams();
         Assert.assertEquals(teamList.size(), 2);
     }
 
     @Test
-    void resolveAIToAITradeTest() {
+    public void resolveAIToAITradeTest() {
         Player player1 = new Player(10, 10, 10, 1, "Jatin", "defense", false, false, 25);
         Player player2 = new Player(11, 12, 13, 1, "Alex", "forward", false, false, 30);
         List<Player> offeredPlayerList = new ArrayList<Player>();
@@ -97,7 +97,7 @@ class AITradingTest {
     }
 
     @Test
-    void resolveAIToUserTradeTest() {
+    public void resolveAIToUserTradeTest() {
 //        Player player1 = new Player(10, 10, 10, 1, "Jatin", "defense", false, false, 25);
 //        Player player2 = new Player(11, 12, 13, 1, "Alex", "forward", false, false, 30);
 //        List<Player> offeredPlayerList = new ArrayList<Player>();
@@ -129,14 +129,14 @@ class AITradingTest {
     }
 
     @Test
-    void rejectTradeTest() {
+    public void rejectTradeTest() {
         Team team = new Team("Halifax Superkings", "John", null, null);
         aiTradingObj.rejectTrade(team);
         Assert.assertEquals(team.getLosses(), 0);
     }
 
     @Test
-    void acceptTradeTest() {
+    public void acceptTradeTest() {
         Player player1 = new Player(10, 10, 10, 1, "Jatin", "defense", false, false, 25);
         Player player2 = new Player(11, 12, 13, 1, "Alex", "forward", false, false, 30);
         List<Player> offeredPlayerList = new ArrayList<Player>();
@@ -162,7 +162,7 @@ class AITradingTest {
     }
 
     @Test
-    void resetLossPointsTest() {
+    public void resetLossPointsTest() {
         List<Team> teamList = new ArrayList<>();
         teamList = leagueModel.getTeamList();
         Team team1 = teamList.get(0);

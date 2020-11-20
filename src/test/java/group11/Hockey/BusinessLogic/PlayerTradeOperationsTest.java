@@ -2,13 +2,12 @@ package group11.Hockey.BusinessLogic;
 
 import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class PlayerTradeOperationsTest {
+public class PlayerTradeOperationsTest {
     TradingModelMock leagueModel = new TradingModelMock(1.0f, 1.0f);
     private League leagueObj = leagueModel.getLeagueInfo();
     private Trading tradingConfig = new Trading(2, 1, 2, 1);;
@@ -16,7 +15,7 @@ class PlayerTradeOperationsTest {
     private PlayerTradeOperations playerMiscellaneous = new PlayerTradeOperations(tradingConfig);
 
     @Test
-    void findWeakestPlayersTest() {
+    public void findWeakestPlayersTest() {
         Player player1 = new Player(11, 12, 13, 1, "Player 1", "defense", true, false, 50);
         Player player2 = new Player(7, 8, 9, 1, "Player 2", "forward", true, true, 20);
         Player player3 = new Player(5, 6, 7, 1, "Player 3", "forward", true, true, 20);
@@ -36,7 +35,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void findPlayerPositionsTest() {
+    public void findPlayerPositionsTest() {
         Player player1 = new Player(11, 12, 13, 1, "Player 1", "defense", true, false, 50);
         Player player2 = new Player(7, 8, 9, 1, "Player 2", "forward", true, true, 20);
         Player player3 = new Player(5, 6, 7, 1, "Player 3", "forward", true, true, 20);
@@ -59,7 +58,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void findStrongestPlayersTest() {
+    public void findStrongestPlayersTest() {
         Player player1 = new Player(11, 12, 13, 1, "Player 1", "defense", true, false, 50);
         Player player2 = new Player(7, 8, 9, 1, "Player 2", "forward", true, true, 20);
         Player player3 = new Player(5, 6, 7, 1, "Player 3", "forward", true, true, 20);
@@ -80,7 +79,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void findStrongestTradeTeamTest() {
+    public void findStrongestTradeTeamTest() {
         List<Conference> conferences = leagueObj.getConferences();
         List<Division> divisions = conferences.get(0).getDivisions();
         List<Team> teams = divisions.get(0).getTeams();
@@ -102,7 +101,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void playersStrengthSumTest() {
+    public void playersStrengthSumTest() {
         Player player1 = new Player(10, 10, 10, 10, "Player One", "defense", true, false, 50);
         Player player2 = new Player(10, 10, 10, 10, "Agent one", "forward", true, true, 20);
         List<Player> playerList = new ArrayList<Player>();
@@ -114,7 +113,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void getForwardListTest() {
+    public void getForwardListTest() {
         Player player1 = new Player(10, 10, 10, 10, "Player 1", "defense", true, false, 50);
         Player player2 = new Player(10, 10, 10, 10, "Player 2", "forward", true, true, 20);
         List<Player> playerList = new ArrayList<Player>();
@@ -129,7 +128,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void getDefenseListTest() {
+    public void getDefenseListTest() {
         Player player1 = new Player(10, 10, 10, 10, "Player 1", "defense", true, false, 50);
         Player player2 = new Player(10, 10, 10, 10, "Player 2", "forward", true, true, 20);
         List<Player> playerList = new ArrayList<Player>();
@@ -144,7 +143,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void getGoalieListTest() {
+    public void getGoalieListTest() {
         Player player1 = new Player(10, 10, 10, 10, "Player 1", "goalie", true, false, 50);
         Player player2 = new Player(10, 10, 10, 10, "Player 2", "forward", true, true, 20);
         List<Player> playerList = new ArrayList<Player>();
@@ -159,7 +158,7 @@ class PlayerTradeOperationsTest {
     }
 
     @Test
-    void sortPlayersByStrengthTest() {
+    public void sortPlayersByStrengthTest() {
         Player player1 = new Player(14, 12, 10, 1, "Jatin", "defense", false, false, 25);
         Player player2 = new Player(8, 9, 8, 1, "Alex", "forward", false, false, 30);
         Player player3 = new Player(5, 6, 7, 1, "Jigar", "defense", false, false, 28);

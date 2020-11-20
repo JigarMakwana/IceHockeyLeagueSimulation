@@ -85,9 +85,28 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		this.age = age;
 	}
 
+	public Player(float skating, float shooting, float checking, float saving, String playerName, String position,
+				  boolean captain, boolean isFreeAgent, float age, boolean isActive) {
+		super(skating, shooting, checking, saving);
+		this.playerName = playerName;
+		this.position = position;
+		this.captain = captain;
+		this.isFreeAgent = isFreeAgent;
+		this.isActive = isActive;
+		this.age = age;
+	}
+
 	public Player(String leagueName, IPlayerDb playerDb) {
 		this.playerDb = playerDb;
 		this.leagueName = leagueName;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
 	}
 
 	/**

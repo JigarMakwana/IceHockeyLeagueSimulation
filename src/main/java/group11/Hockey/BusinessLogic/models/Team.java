@@ -18,6 +18,7 @@ public class Team implements ITeam {
 	private List<Player> players = null;
 	private boolean isUserTeam = false;
 	private int losses;
+	private IRoster roster;
 	private int averageShoots;
 	private boolean isOnPenalty;
 	private int penaltyPeriod;
@@ -82,6 +83,14 @@ public class Team implements ITeam {
 		this.generalManager = generalManager;
 		this.headCoach = headCoach;
 		this.players = players;
+		// TODO Creational pattern
+		IConstantSupplier rosterSize = new ConstantSupplier
+				(RosterSize.ACTIVE_ROSTER_SIZE.getNumVal(),
+						RosterSize.INACTIVE_ROSTER_SIZE.getNumVal(),
+						RosterSize.FORWARD_SIZE.getNumVal(),
+						RosterSize.DEFENSE_SIE.getNumVal(),
+						RosterSize.GOALIE_SIZE.getNumVal());
+		// roster =  new Roster(this.players, rosterSize);
 	}
 
 	public Team() {

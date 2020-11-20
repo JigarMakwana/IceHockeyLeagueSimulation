@@ -1,12 +1,8 @@
 package group11.Hockey.models;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import group11.Hockey.BusinessLogic.models.Trading;
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.BeforeClass;
 
 public class TradingTest {
@@ -25,7 +21,7 @@ public class TradingTest {
 
 	@Test
 	public void getRandomTradeOfferChanceTest() {
-		Assert.assertEquals(trading.getRandomTradeOfferChance(),  (float)2);
+		Assert.assertEquals(trading.getRandomTradeOfferChance(),  2,0.0);
 	}
 
 	@Test
@@ -35,7 +31,7 @@ public class TradingTest {
 
 	@Test
 	public void getRandomAcceptanceChanceTest() {
-		Assert.assertEquals(trading.getRandomAcceptanceChance(),  (float)4);
+		Assert.assertEquals(trading.getRandomAcceptanceChance(),  4,0.0);
 	}
 
 }

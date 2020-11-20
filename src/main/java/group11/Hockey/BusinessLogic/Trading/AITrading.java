@@ -99,6 +99,7 @@ public class AITrading implements IAITrading {
                 }
             }
         }
+        // TODO to be removed
         System.out.println("------- ** Teams Eligible for Trade ** -------");
         for (Team team : eligibleTeamList) {
             System.out.println(team.getTeamName());

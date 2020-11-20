@@ -5,6 +5,7 @@ import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ISettleTeamRoster;
 import group11.Hockey.InputOutput.*;
+import group11.Hockey.BusinessLogic.*;
 import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;
@@ -19,16 +20,16 @@ import java.util.List;
  */
 
 public class SettleTeamRoster implements ISettleTeamRoster {
-    private League leagueObj;
+    private ILeague leagueObj;
     private AITrading aiTradingObj;
     private int teamSize;
     private int skaterSize;
     private int goalieSize;
 
-    IDisplay display = new Display();
+    IDisplay display = DefaultHockeyFactory.makeDisplay();
     IUserInputValidation userSelection = new UserInputValidation();
 
-    public SettleTeamRoster(League leagueObj, IConstantSupplier supplier) {
+    public SettleTeamRoster(ILeague leagueObj, IConstantSupplier supplier) {
         this.leagueObj = leagueObj;
         aiTradingObj = new AITrading(leagueObj);
         this.teamSize = supplier.getActiveRosterSize();
@@ -95,7 +96,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
         }
     }
 
-    public void hirePlayer(League league, List<Player> playerList, Positions playerPosition)
+    public void hirePlayer(ILeague league, List<Player> playerList, Positions playerPosition)
             throws Exception {
         List<Player> freeAgents = league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(freeAgents);
@@ -133,7 +134,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
         }
     }
 
-    public void dropPlayer(League league, List<Player> playerList, Positions playerPosition) {
+    public void dropPlayer(ILeague league, List<Player> playerList, Positions playerPosition) {
         List<Player> freeAgents = league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(playerList);
         Iterator<Player> playersItr = sortedFreeAgents.iterator();
@@ -162,7 +163,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
         }
     }
 
-    public void hirePlayerUser(League league, List<Player> playerList, Positions playerPosition)
+    public void hirePlayerUser(ILeague league, List<Player> playerList, Positions playerPosition)
             throws Exception {
         List<Player> freeAgents = league.getFreeAgents();
         Iterator<Player> freeAgentsItr = freeAgents.iterator();
@@ -217,7 +218,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
         }
     }
 
-    public void dropPlayerUser(League league, List<Player> playerList, Positions playerPosition) {
+    public void dropPlayerUser(ILeague league, List<Player> playerList, Positions playerPosition) {
         List<Player> freeAgents = league.getFreeAgents();
         Iterator<Player> playersItr = playerList.iterator();
 

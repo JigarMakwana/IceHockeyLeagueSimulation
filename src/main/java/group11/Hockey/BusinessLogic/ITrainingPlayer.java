@@ -1,8 +1,7 @@
 package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.ILeague;
 
 public interface ITrainingPlayer {
-	public void trainPlayer(League league);
+	public void trainPlayer(ILeague league);
 }

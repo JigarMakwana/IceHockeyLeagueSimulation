@@ -7,19 +7,19 @@ import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.GameplayConfig;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
-public abstract class RetirePlayer {
+public abstract class RetirePlayer extends StateMachineState {
 
-	public boolean checkForRetirement(League league, float age) {
+	public boolean checkForRetirement(ILeague league, float age) {
 		int likelihoodOfRetirement = getLikelihoodOfRetirement(league, age);
 		boolean isRetired = new Random().nextInt(likelihoodOfRetirement) == likelihoodOfRetirement - 1;
 		return isRetired;
 	}
 
-	private int getLikelihoodOfRetirement(League league, float age) {
+	private int getLikelihoodOfRetirement(ILeague league, float age) {
 		GameplayConfig gameplayConfig = league.getGamePlayConfig();
 		Aging ageDetails = gameplayConfig.getAging();
 		int averageRetirementAge = ageDetails.getAverageRetirementAge();
@@ -36,7 +36,7 @@ public abstract class RetirePlayer {
 		return likelihoodOfRetirement;
 	}
 
-	public void retireAndReplacePlayer(League league) {
+	public void retireAndReplacePlayer(ILeague league) {
 		List<Player> retiredPlayerList = league.getRetiredPlayers();
 		List<Conference> conferences = league.getConferences();
 

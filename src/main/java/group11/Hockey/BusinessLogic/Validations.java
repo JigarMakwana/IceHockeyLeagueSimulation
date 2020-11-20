@@ -17,13 +17,22 @@ public class Validations implements IValidations {
 	Division divisionObj = new Division();
 	IDisplay display;
 	
+	private static Validations validationsInstance = null;
+	
 	public Validations(IDisplay display){
 		this.display = display;
 	}
 	
-	public Validations(){
+	private Validations(){
 		
 	}	
+	
+	public static Validations getInstance() {
+		if(validationsInstance == null) {
+			validationsInstance = new Validations();
+		}
+		return validationsInstance;
+	}
 
 
 	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferencesList) {

@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.Injuries;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.Roster.Roster;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 
 public class InjurySystem {
@@ -13,7 +19,7 @@ public class InjurySystem {
 	private int injuryDaysLow;
 	private int injuryDaysHigh;
 
-	public InjurySystem(League league) {
+	public InjurySystem(ILeague league) {
 		super();
 		GameplayConfig gameplayConfig = league.getGamePlayConfig();
 		Injuries injuries = gameplayConfig.getInjuries();
@@ -84,4 +90,5 @@ public class InjurySystem {
 			return false;
 		}
 	}
+
 }

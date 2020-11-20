@@ -1,5 +1,6 @@
 package group11.Hockey.BusinessLogic.Trading;
 
+import group11.Hockey.BusinessLogic.*;
 import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.IPlayerTradeOperations;
 import group11.Hockey.BusinessLogic.Triplet;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class PlayerTradeOperations implements IPlayerTradeOperations {
     private Trading tradingConfig;
-    IDisplay display = new Display();
+    IDisplay display = DefaultHockeyFactory.makeDisplay();
     public PlayerTradeOperations(Trading tradingConfig)
     {
         this.tradingConfig = tradingConfig;

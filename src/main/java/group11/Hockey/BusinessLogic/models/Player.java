@@ -29,8 +29,44 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private float age;
 	private boolean isInjured;
 	private boolean IsRetired;
-	private int numberOfInjuredDays;
 	private boolean isActive;
+	private int numberOfInjuredDays;
+	private int goalsInSeason;
+	private int penaltiesInSeason;
+	private int savesByGoalieInSeason;
+	private int savesByDefenceManinSeason;
+
+	public int getSavesByDefenceManinSeason() {
+		return savesByDefenceManinSeason;
+	}
+
+	public void setSavesByDefenceManinSeason(int savesByDefenceManinSeason) {
+		this.savesByDefenceManinSeason = savesByDefenceManinSeason;
+	}
+
+	public int getGoalsInSeason() {
+		return goalsInSeason;
+	}
+
+	public void setGoalsInSeason(int goalsInSeason) {
+		this.goalsInSeason = goalsInSeason;
+	}
+
+	public int getPenaltiesInSeason() {
+		return penaltiesInSeason;
+	}
+
+	public void setPenaltiesInSeason(int penaltiesInSeason) {
+		this.penaltiesInSeason = penaltiesInSeason;
+	}
+
+	public int getSavesByGoalieInSeason() {
+		return savesByGoalieInSeason;
+	}
+
+	public void setSavesByGoalieInSeason(int savesInSeason) {
+		this.savesByGoalieInSeason = savesInSeason;
+	}
 
 	public Player() {
 		super();
@@ -140,7 +176,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		this.isInjured = isInjured;
 	}
 
-	public boolean checkInjury(League league) {
+	public boolean checkInjury(ILeague league) {
 		if (this.isInjured()) {
 			return this.isInjured();
 		}
@@ -230,7 +266,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	public void increaseAge(League league, int days) {
+	public void increaseAge(ILeague league, int days) {
 		float yearsToIncrease = (float) days / 365;
 		float age;
 		age = this.getAge() + yearsToIncrease;
@@ -240,7 +276,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		decreaseInjuredDaysForPlayer(days);
 	}
 
-	public void replacePlayerWithFreeAgent(League league, List<Player> playersList) {
+	public void replacePlayerWithFreeAgent(ILeague league, List<Player> playersList) {
 		List<Player> freeAgents = league.getFreeAgents();
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 

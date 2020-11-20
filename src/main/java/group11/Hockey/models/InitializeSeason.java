@@ -1,81 +1,93 @@
 package group11.Hockey.models;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
+import group11.Hockey.BusinessLogic.AdvanceTime;
+import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.TimeLine;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
-import group11.Hockey.db.CoachDb;
-import group11.Hockey.db.GameplayConfigDb;
-import group11.Hockey.db.ICoachDb;
-import group11.Hockey.db.IGameplayConfigDb;
-import group11.Hockey.db.IManagerDb;
-import group11.Hockey.db.IPlayerDb;
-import group11.Hockey.db.ManagerDb;
-import group11.Hockey.db.PlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.db.League.LeagueDbImpl;
 
-public class InitializeSeason implements IInitializeSeason{
+public class InitializeSeason extends StateMachineState {
 
-	private ILeagueDb leagueDb;
-	private IGameplayConfigDb gameplayConfigDb;
-	private IPlayerDb playerDb;
-	private ICoachDb coachDb;
-	private IManagerDb managerDb;
-	private League league;
+	private ILeague league;
+	private ILeagueDb leaugueDb;
 
-	public InitializeSeason(League league, ILeagueDb leagueDb, IGameplayConfigDb gameplayConfigDb,
-			IPlayerDb playerDb, ICoachDb coachDb, IManagerDb managerDb) {
-		super();
+	public InitializeSeason(ILeague league, ILeagueDb leaugueDb) {
 		this.league = league;
-		this.leagueDb = leagueDb;
-		this.gameplayConfigDb = gameplayConfigDb;
-		this.playerDb = playerDb;
-		this.coachDb = coachDb;
-		this.managerDb = managerDb;
+		this.leaugueDb = leaugueDb;
 	}
 
 	@Override
-	public String startSeasons(int seasonCount) {
-		String startDate,lastSimulatedDate=league.getStartDate();
+	public StateMachineState startState() {
+		ITimeLine timeLine = new TimeLine();
+
+		String startDate = league.getStartDate();
+		String lastSimulatedDate = league.getStartDate();
+
 		int year;
-		if((lastSimulatedDate==null)||(lastSimulatedDate.isEmpty())) {
+		if ((lastSimulatedDate == null) || (lastSimulatedDate.isEmpty())) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
 			startDate = "29/09/" + Integer.toString(year);
+		} else {
+			IParse parse = new Parse();
+			year = parse.stringToYear(lastSimulatedDate);
+			startDate = lastSimulatedDate;
 		}
-		else {
-			IParse parse=new Parse();
-			year=parse.stringToYear(lastSimulatedDate);
-			startDate=lastSimulatedDate;
-		}
+		timeLine.setStartDate(startDate);
+		timeLine.setLastSimulatedDate(lastSimulatedDate);
 
-		int count = seasonCount;
-		String seasonEndDate = null,message;
-		IPrintToConsole console=new PrintToConsole();
-		IAdvance advance=new Advance();
-		while (count > 0) {
-			startDate=advance.getAdvanceDate(startDate, 1);
-			league.setStartDate(startDate);
-			message="Start date : " + startDate;
-			console.print(message);
-			league.setStartDate(startDate);
+		String message;
+		IPrintToConsole console = new PrintToConsole();
+		IAdvance advance = new Advance();
 
-			ISchedule regularSeasonSchedule = new Schedule(league);
-			HashMap<String, HashMap<Team, Team>> regularSchedule = null;
-			regularSchedule = regularSeasonSchedule.getSeasonSchedule(startDate);
+		league.setStartDate(startDate);
+		message = "Start date : " + startDate;
+		console.print(message);
+		league.setStartDate(startDate);
 
-			ISimulateSeason simulateSeason = new SimulateSeason(regularSchedule, league, leagueDb, gameplayConfigDb, playerDb, coachDb, managerDb);
-			seasonEndDate = simulateSeason.StartSimulatingSeason(startDate);
-			startDate=seasonEndDate;
-			year++;
-			count--;
-		}
-		return seasonEndDate;
+		ISchedule regularSeasonSchedule = new Schedule(league);
+		HashMap<String, HashMap<Team, Team>> schedule = null;
+
+		IParse parse = new Parse();
+		IDeadlines deadline = new Deadlines();
+
+		String currentDate = startDate;
+
+		Date stanleyEndDateTime = deadline.getStanleyPlayoffDeadline(startDate);
+		Date regularSeasonEndDateTime = deadline.getRegularSeasonDeadline(startDate);
+		Date stanleyStartDateTime = deadline.getStanleyPlayoffBeginDate(startDate);
+		Date tradeDeadLine = deadline.getTradeDeadline(startDate);
+		String stanleyDate = parse.dateToString(stanleyStartDateTime);
+		String firstRound = advance.getAdvanceDate(stanleyDate, 19);
+		String secondRound = advance.getAdvanceDate(firstRound, 10);
+		String semiFinalRound = advance.getAdvanceDate(secondRound, 5);
+		Date firstRoundEnd = parse.stringToDate(firstRound);
+		Date secondRoundEnd = parse.stringToDate(secondRound);
+		Date semiFinalsEnd = parse.stringToDate(semiFinalRound);
+
+		timeLine.setStanleyEndDateTime(stanleyEndDateTime);
+		timeLine.setRegularSeasonEndDateTime(regularSeasonEndDateTime);
+		timeLine.setStanleyDate(stanleyDate);
+		timeLine.setFirstRoundEnd(firstRoundEnd);
+		timeLine.setSecondRoundEnd(secondRoundEnd);
+		timeLine.setSemiFinalsEnd(semiFinalsEnd);
+		timeLine.setCurrentDate(currentDate);
+		timeLine.setTradeDeadLine(tradeDeadLine);
+
+		league.setTimeLine(timeLine);
+		schedule = regularSeasonSchedule.getSeasonSchedule();
+		league.setSchedule(schedule);
+
+		return new AdvanceTime(league, leaugueDb);
 	}
 
 }

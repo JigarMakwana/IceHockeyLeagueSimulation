@@ -1,7 +1,7 @@
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.db;
 
 import group11.Hockey.BusinessLogic.models.League;
 
-public interface IDeserializeLeague {
+public interface IDeserialize {
 	public League deSerializeLeagueObjectFromFile();
 }

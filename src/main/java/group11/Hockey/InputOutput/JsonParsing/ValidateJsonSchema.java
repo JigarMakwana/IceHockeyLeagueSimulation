@@ -14,7 +14,7 @@ import org.json.JSONTokener;
 import group11.Hockey.App;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class ValidateJsonSchema extends ValidateJsonAttributes{
+public abstract class ValidateJsonSchema extends ValidateJsonAttributes{
 	
 	public ValidateJsonSchema() {
 		super();

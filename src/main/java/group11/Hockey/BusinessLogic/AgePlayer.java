@@ -1,18 +1,60 @@
 package group11.Hockey.BusinessLogic;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.models.IParse;
+import group11.Hockey.models.Parse;
 
 public class AgePlayer extends RetirePlayer {
 
-	public void increaseAge(League league, int days) {
+	ILeague league;
+	int days;
+	ILeagueDb leagueDb;
+
+	public AgePlayer() {
+
+	}
+
+	public AgePlayer(ILeague league, int days) {
+		this.league = league;
+		this.days = days;
+	}
+	
+	public AgePlayer(ILeague league, int days, ILeagueDb leagueDb) {
+		this.league = league;
+		this.days = days;
+		this.leagueDb = leagueDb;
+	}
+
+	@Override
+	public StateMachineState startState() {
+		agePlayers();
+		// call Advance next season or Advance Time
+		IParse parse = new Parse();
+		ITimeLine timeLine = league.getTimeLine();
+		String currentDate = timeLine.getCurrentDate();
+		Date stanleyEndDateTime = timeLine.getStanleyEndDateTime();
+		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		Date dateTime = parse.stringToDate(currentDate);
+		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
+
+			return new AdvanceToNextSeason(league, leagueDb);
+		} else {
+			return new AdvanceTime(league, leagueDb);
+		}
+	}
+
+	public void agePlayers() {
 		List<Player> freeAgents = league.getFreeAgents();
 		List<Conference> conferences = league.getConferences();
 
@@ -45,7 +87,7 @@ public class AgePlayer extends RetirePlayer {
 		checkForRetirement(league);
 	}
 
-	private void checkForRetirement(League league) {
+	private void checkForRetirement(ILeague league) {
 		boolean isRetired;
 		List<Player> retiredPlayers = new ArrayList<Player>();
 		List<Player> freeAgents = league.getFreeAgents();

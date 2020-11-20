@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.Training;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.BeforeClass;
 
@@ -16,7 +16,7 @@ public class TrainingTest {
 	public static void init() {
 		training = new Training(1);
 	}
-	
+
 	@Test
 	public void getDaysUntilStatIncreaseCheckTest() {
 		Assert.assertEquals(training.getDaysUntilStatIncreaseCheck(),1);

@@ -1,7 +1,7 @@
 /target/
 .idea/
 Hockey.iml
+hs_err_pid4264.log
+.idea/sonarlint/issuestore/d/
 .classpath
 .project
-hs_err_pid5748.log
-replay_pid5748.log

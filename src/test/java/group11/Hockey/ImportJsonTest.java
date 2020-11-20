@@ -7,7 +7,9 @@ import java.net.URL;
 
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.League.ILeagueDb;
 
@@ -24,9 +26,10 @@ public class ImportJsonTest {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeam.json");
 
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
-		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(true);
-		
-		JsonImport importJsonObj = new JsonImport(leagueDbMock);
+		ICommandLineInput commandLineMock = mock(ICommandLineInput.class);
+
+		JsonImport importJsonObj = DefaultHockeyFactory.getJsonImport(jsonFile.getFile(), commandLineMock,
+				leagueDbMock);
 
 		League leagueModelObj = null;
 
@@ -40,12 +43,12 @@ public class ImportJsonTest {
 	public void parseFileDuplicateConfirenceNameTest() throws Exception {
 		URL jsonFile = getClass().getClassLoader().getResource("HockeyTeamInvalid.json");
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
-		when(leagueDbMock.checkLeagueNameExitsInDb("Dalhousie Hockey League")).thenReturn(true);
-		JsonImport importJsonObj = new JsonImport(leagueDbMock);
+		ICommandLineInput commandLineMock = mock(ICommandLineInput.class);
+
+		JsonImport importJsonObj = DefaultHockeyFactory.getJsonImport(jsonFile.getFile(), commandLineMock,
+				leagueDbMock);
 		importJsonObj.parseFile(jsonFile.getPath());
-	    
-		
-		
+
 	}
 
 }

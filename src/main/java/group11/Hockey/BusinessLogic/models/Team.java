@@ -1,14 +1,13 @@
 package group11.Hockey.BusinessLogic.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.ConstantSupplier;
-import group11.Hockey.BusinessLogic.IConstantSupplier;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.BusinessLogic.models.Roster.Roster;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
-import group11.Hockey.db.Team.ITeamDb;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.BusinessLogic.ConstantSupplier;
+import group11.Hockey.BusinessLogic.IConstantSupplier;
 
 /**
  * This class contain all the business logic related to team model
@@ -25,6 +24,61 @@ public class Team implements ITeam {
 	private boolean isUserTeam = false;
 	private int losses;
 	private IRoster roster;
+	private int averageShoots;
+	private boolean isOnPenalty;
+	private int penaltyPeriod;
+	private int goalsInSeason;
+	private int penaltiesInSeason;
+	private int savesInSeason;
+
+	public int getGoalsInSeason() {
+		return goalsInSeason;
+	}
+
+	public void setGoalsInSeason(int goalsInSeason) {
+		this.goalsInSeason = goalsInSeason;
+	}
+
+	public int getPenaltiesInSeason() {
+		return penaltiesInSeason;
+	}
+
+	public void setPenaltiesInSeason(int penaltiesInSeason) {
+		this.penaltiesInSeason = penaltiesInSeason;
+	}
+
+	public int getSavesInSeason() {
+		return savesInSeason;
+	}
+
+	public void setSavesInSeason(int savesInSeason) {
+		this.savesInSeason = savesInSeason;
+	}
+
+	public boolean isOnPenalty() {
+		return isOnPenalty;
+	}
+
+	public void setOnPenalty(boolean isOnPenality) {
+		this.isOnPenalty = isOnPenality;
+	}
+
+	public int getPenaltyPeriod() {
+		return penaltyPeriod;
+	}
+
+	public void setPenaltyPeriod(int penaltyPeriod) {
+		this.penaltyPeriod = penaltyPeriod;
+	}
+
+	public int getAverageShoots() {
+		return averageShoots;
+	}
+
+	public void setAverageShoots(int averageShoots) {
+		this.averageShoots = averageShoots;
+	}
+
 	private int wins;
 	private int points;
 

@@ -9,22 +9,24 @@ import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
 
 public class Schedule implements ISchedule {
 
-	private League league;
+	private ILeague league;
 
-	public Schedule(League league) {
+	public Schedule(ILeague league) {
 		this.league = league;
 	}
 
 	@Override
-	public HashMap<String, HashMap<Team, Team>> getSeasonSchedule(String startDate) {
-
+	public HashMap<String, HashMap<Team, Team>> getSeasonSchedule() {
+		ITimeLine timeLine = league.getTimeLine();
+		String startDate = timeLine.getStartDate();
 		ArrayList<Team> teamName = new ArrayList<Team>();
 		HashMap<Team, Integer> scheduledDivisionMatchCount = new HashMap<>();
 		HashMap<Team, Integer> scheduledInConferenceMatchCount = new HashMap<>();

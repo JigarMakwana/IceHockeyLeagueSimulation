@@ -1,10 +1,11 @@
-package group11.Hockey.models;
+package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
 import group11.Hockey.BusinessLogic.AdvanceTime;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
@@ -19,11 +20,11 @@ import group11.Hockey.db.League.ILeagueDb;
 public class InitializeSeason extends StateMachineState {
 
 	private ILeague league;
-	private ILeagueDb leaugueDb;
+	private ILeagueDb leagueDb;
 
-	public InitializeSeason(ILeague league, ILeagueDb leaugueDb) {
+	public InitializeSeason(ILeague league, ILeagueDb leagueDb) {
 		this.league = league;
-		this.leaugueDb = leaugueDb;
+		this.leagueDb = leagueDb;
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public class InitializeSeason extends StateMachineState {
 		schedule = regularSeasonSchedule.getSeasonSchedule();
 		league.setSchedule(schedule);
 
-		return new AdvanceTime(league, leaugueDb);
+		return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb);
 	}
 
 }

@@ -1,4 +1,7 @@
-package group11.Hockey.GameSimulation;
+/*
+ * Author: RajKumar B00849566
+ */
+package group11.Hockey.BusinessLogic.GameSimulation;
 
 import java.util.List;
 
@@ -28,8 +31,8 @@ public class GoaliePlayerActive extends GameStrategy {
 	public void playGame(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
 
-		int saves = defendingTeamPlayers.get(5).getSavesByGoalieInSeason() + 1;
-		defendingTeamPlayers.get(5).setSavesByGoalieInSeason(saves);
+		int saves = defendingTeamPlayers.get(appConfiguration.goalieStartIndex).getSavesByGoalieInSeason() + 1;
+		defendingTeamPlayers.get(appConfiguration.goalieStartIndex).setSavesByGoalieInSeason(saves);
 		saves = defendingTeam.getSavesInSeason() + 1;
 		defendingTeam.setSavesInSeason(saves);
 	}

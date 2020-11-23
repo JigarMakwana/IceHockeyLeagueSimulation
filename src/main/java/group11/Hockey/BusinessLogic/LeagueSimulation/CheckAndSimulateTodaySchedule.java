@@ -1,10 +1,11 @@
-package group11.Hockey.models;
+package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.InjurySystem;
+import group11.Hockey.BusinessLogic.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -12,7 +13,6 @@ import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.GameSimulation.GamePlay;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
 
@@ -62,7 +62,7 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 							message = id + " teams are " + team1.getTeamName() + " and " + team2.getTeamName();
 							console.print(message);
 							// game play start
-							GamePlay gamePlay = new GamePlay(league, team1, team2);
+							GameSimulation gamePlay = new GameSimulation(league, team1, team2);
 							won = gamePlay.startGamePlay();
 							if (won.getTeamName().equalsIgnoreCase(team1.getTeamName())) {
 								lost = team2;

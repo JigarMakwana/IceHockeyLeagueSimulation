@@ -1,16 +1,21 @@
-package group11.Hockey.GameSimulation;
+/*
+ * Author: RajKumar B00849566
+ */
+package group11.Hockey.BusinessLogic.GameSimulation;
 
 import java.util.List;
+
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
-public class GamePlay {
+public class GameSimulation {
 	private ILeague league;
 	private ITeam team1;
 	private ITeam team2;
 
-	public GamePlay(ILeague league, ITeam team1, ITeam team2) {
+	public GameSimulation(ILeague league, ITeam team1, ITeam team2) {
 		super();
 		this.league = league;
 		this.team1 = team1;
@@ -21,12 +26,20 @@ public class GamePlay {
 		List<Player> team_p1 = team1.getPlayers();
 		List<Player> team_p2 = team2.getPlayers();
 
-		GameSimulation gm1 = new GameSimulation(league, team_p1);
-		List<Player>[] shiftsTeam1 = gm1.getShifts();
-		int shootingStatsTeam1 = gm1.teamSkatingStats();
-		gm1 = new GameSimulation(league, team_p2);
-		List<Player>[] shiftsTeam2 = gm1.getShifts();
-		int shootingStatsTeam2 = gm1.teamSkatingStats();
+		GenerateShiftsTemplate shifts1 = null;
+		GenerateShiftsTemplate shifts2 = null;
+		if (true) {
+			shifts1 = DefaultHockeyFactory.makeGenerateShifts(team_p1);
+			shifts2 = DefaultHockeyFactory.makeGenerateShifts(team_p2);
+		} else {
+			shifts1 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p1);
+			shifts2 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p2);
+		}
+		List<Player>[] shiftsTeam1 = shifts1.getShifts();
+		int shootingStatsTeam1 = teamSkatingStats(team_p1);
+
+		List<Player>[] shiftsTeam2 = shifts2.getShifts();
+		int shootingStatsTeam2 = teamSkatingStats(team_p2);
 		setAverageShootsForTeams(shootingStatsTeam1, shootingStatsTeam2);
 
 		startGame(shiftsTeam1, shiftsTeam2);
@@ -78,32 +91,28 @@ public class GamePlay {
 	private void makeShoot(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
 
-		GameContext gameContext = null;
-		GameStrategy gameStrategy = null;
+		IGameContext gameContext = null;
 
 		managePanelty(defendingTeam);
 
-		gameStrategy = new ForwardPlayerActive();
-		gameContext = new GameContext(gameStrategy);
-		int shootingStat = gameContext.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
+		IGameContext gameContext_forward = DefaultHockeyFactory
+				.makeGameContext(DefaultHockeyFactory.makeForwardPlayerActive());
+		int shootingStat = gameContext_forward.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
 
-		gameStrategy = new DefencePlayerActive();
-		gameContext = new GameContext(gameStrategy);
-		int checkingStat = gameContext.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
+		IGameContext gameContext_defence = DefaultHockeyFactory
+				.makeGameContext(DefaultHockeyFactory.makeDefencePlayerActive());
+		int checkingStat = gameContext_defence.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
 
-		gameStrategy = new GoaliePlayerActive();
-		gameContext = new GameContext(gameStrategy);
-		int savingStat = gameContext.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
+		IGameContext gameContext_goalie = DefaultHockeyFactory
+				.makeGameContext(DefaultHockeyFactory.makeGoaliePlayerActive());
+		int savingStat = gameContext_goalie.getAveragePlayersStrength(shootingTeamPlayers, defendingTeam);
 
 		if (shootingStat - checkingStat < appConfiguration.saveChance) {
-			gameStrategy = new DefencePlayerActive();
-			gameContext = new GameContext(gameStrategy);
+			gameContext = gameContext_defence;
 		} else if (shootingStat - savingStat < appConfiguration.saveChance) {
-			gameStrategy = new GoaliePlayerActive();
-			gameContext = new GameContext(gameStrategy);
+			gameContext = gameContext_goalie;
 		} else {
-			gameStrategy = new ForwardPlayerActive();
-			gameContext = new GameContext(gameStrategy);
+			gameContext = gameContext_forward;
 		}
 		gameContext.executeStrategy(shootingTeamPlayers, defendingTeamPlayers, defendingTeam, ShootingTeam,
 				penaltyPeriod);
@@ -155,6 +164,14 @@ public class GamePlay {
 		} else {
 			return team2;
 		}
+	}
+
+	private int teamSkatingStats(List<Player> team) {
+		int skatingStat = 0;
+		for (Player player : team) {
+			skatingStat += player.getSkating();
+		}
+		return skatingStat;
 	}
 
 }

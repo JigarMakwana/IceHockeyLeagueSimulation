@@ -1,4 +1,7 @@
-package group11.Hockey.GameSimulation;
+/*
+ * Author: RajKumar B00849566
+ */
+package group11.Hockey.BusinessLogic.GameSimulation;
 
 import java.util.List;
 

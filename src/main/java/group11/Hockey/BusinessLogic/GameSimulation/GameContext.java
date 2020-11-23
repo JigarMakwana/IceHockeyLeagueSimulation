@@ -1,11 +1,14 @@
-package group11.Hockey.GameSimulation;
+/*
+ * Author: RajKumar B00849566
+ */
+package group11.Hockey.BusinessLogic.GameSimulation;
 
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
-public class GameContext {
+public class GameContext implements IGameContext {
 	private GameStrategy gameStrategy;
 
 	public GameContext(GameStrategy gameStrategy) {

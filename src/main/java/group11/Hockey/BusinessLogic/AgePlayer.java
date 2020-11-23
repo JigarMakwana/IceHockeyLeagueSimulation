@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ILeague;
@@ -12,8 +14,6 @@ import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.IParse;
-import group11.Hockey.models.Parse;
 
 public class AgePlayer extends RetirePlayer {
 

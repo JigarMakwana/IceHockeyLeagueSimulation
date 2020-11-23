@@ -1,4 +1,7 @@
-package group11.Hockey.GameSimulation;
+/*
+ * Author: RajKumar B00849566
+ */
+package group11.Hockey.BusinessLogic.GameSimulation;
 
 import java.util.List;
 import java.util.Random;
@@ -34,19 +37,31 @@ public class DefencePlayerActive extends GameStrategy {
 			ITeam ShootingTeam, int penaltyPeriod) {
 
 		int penaltyProbality = new Random().nextInt(appConfiguration.penaltyRandomChance);
-		int index = new Random().nextInt(2);
+		int index = bestDefenceMenIndex(defendingTeamPlayers);
+		int defenceMenStartIndex = appConfiguration.defenceMenStartIndex;
 		if (penaltyProbality <= appConfiguration.penaltyOccuranceValue) {
-			int penalties = defendingTeamPlayers.get(index + 3).getPenaltiesInSeason() + 1;
-			defendingTeamPlayers.get(index + 3).setPenaltiesInSeason(penalties);
+			int penalties = defendingTeamPlayers.get(index + defenceMenStartIndex).getPenaltiesInSeason() + 1;
+			defendingTeamPlayers.get(index + defenceMenStartIndex).setPenaltiesInSeason(penalties);
 			defendingTeam.setOnPenalty(true);
 			defendingTeam.setPenaltyPeriod(penaltyPeriod);
 			penalties = defendingTeam.getPenaltiesInSeason() + 1;
 			defendingTeam.setPenaltiesInSeason(penalties);
 		}
-		int saves = defendingTeamPlayers.get(index + 3).getSavesByDefenceManinSeason() + 1;
-		defendingTeamPlayers.get(index + 3).setSavesByDefenceManinSeason(saves);
+		int saves = defendingTeamPlayers.get(index + defenceMenStartIndex).getSavesByDefenceManinSeason() + 1;
+		defendingTeamPlayers.get(index + defenceMenStartIndex).setSavesByDefenceManinSeason(saves);
 		saves = defendingTeam.getSavesInSeason() + 1;
 		defendingTeam.setSavesInSeason(saves);
+	}
+
+	private int bestDefenceMenIndex(List<Player> defendingTeamPlayers) {
+		float player1_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex).getChecking();
+		float player2_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex + 1).getChecking();
+
+		if (player1_checking > player2_checking) {
+			return 0;
+		} else {
+			return 1;
+		}
 	}
 
 }

@@ -1,10 +1,11 @@
-package group11.Hockey.models;
+package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.IScheduleStrategy;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -14,17 +15,12 @@ import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
+import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffSchedule implements IScheduleStrategy {
 
-	private ILeague league;
-
-	public PlayoffSchedule(ILeague league) {
-		this.league = league;
-	}
-
 	@Override
-	public HashMap<String, HashMap<Team, Team>> getSchedule() {
+	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getStanleyDate();
 		HashMap<String, HashMap<Team, Team>> firstRoundSchedule = new HashMap<>();
@@ -166,7 +162,8 @@ public class PlayoffSchedule implements IScheduleStrategy {
 			}
 
 		}
-		return firstRoundSchedule;
+		league.setSchedule(firstRoundSchedule);
+		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb);
 
 	}
 }

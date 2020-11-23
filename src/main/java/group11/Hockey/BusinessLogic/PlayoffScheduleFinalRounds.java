@@ -3,6 +3,7 @@ package group11.Hockey.BusinessLogic;
 import java.util.HashMap;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
@@ -10,16 +11,11 @@ import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
+import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
-	private ILeague league;
 
-	public PlayoffScheduleFinalRounds(ILeague league) {
-		super();
-		this.league = league;
-	}
-
-	public HashMap<String, HashMap<Team, Team>> getSchedule() {
+	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getCurrentDate();
 		IAdvance advance = new Advance();
@@ -84,6 +80,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 				break;
 			}
 		}
-		return playoffSchedule;
+		league.setSchedule(playoffSchedule);
+		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb);
 	}
 }

@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.junit.Assert;
 import org.junit.Test;
-import group11.Hockey.models.Parse;
+
+import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 
 public class ParseTest {
 

@@ -7,13 +7,13 @@ import static org.mockito.Mockito.when;
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.InitializeSeason;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.db.ICoachDb;
 import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.IManagerDb;
 import group11.Hockey.db.IPlayerDb;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.InitializeSeason;
 
 public class InitializeSeasonTest {
 

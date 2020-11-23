@@ -5,9 +5,9 @@ import java.util.HashMap;
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.Schedule;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.models.Schedule;
 
 public class ScheduleTest {
 

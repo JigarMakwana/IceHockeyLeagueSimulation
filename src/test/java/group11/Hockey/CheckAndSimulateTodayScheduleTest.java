@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.models.CheckAndSimulateTodaySchedule;
 
 public class CheckAndSimulateTodayScheduleTest {
 

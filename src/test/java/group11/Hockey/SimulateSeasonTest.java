@@ -12,7 +12,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.ISimulateSeason;
-import group11.Hockey.BusinessLogic.LeagueSimulation.SimulateSeason;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;

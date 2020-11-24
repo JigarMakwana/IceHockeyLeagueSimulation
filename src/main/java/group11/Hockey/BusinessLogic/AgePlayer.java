@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic;
 
 import java.util.ArrayList;
@@ -6,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ILeague;
@@ -29,7 +31,7 @@ public class AgePlayer extends RetirePlayer {
 		this.league = league;
 		this.days = days;
 	}
-	
+
 	public AgePlayer(ILeague league, int days, ILeagueDb leagueDb) {
 		this.league = league;
 		this.days = days;
@@ -40,7 +42,7 @@ public class AgePlayer extends RetirePlayer {
 	public StateMachineState startState() {
 		agePlayers();
 		// call Advance next season or Advance Time
-		IParse parse = new Parse();
+		IParse parse = DefaultHockeyFactory.makeParse();
 		ITimeLine timeLine = league.getTimeLine();
 		String currentDate = timeLine.getCurrentDate();
 		Date stanleyEndDateTime = timeLine.getStanleyEndDateTime();
@@ -48,9 +50,9 @@ public class AgePlayer extends RetirePlayer {
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
 
-			return new AdvanceToNextSeason(league, leagueDb);
+			return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb);
 		} else {
-			return new AdvanceTime(league, leagueDb);
+			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb);
 		}
 	}
 

@@ -183,13 +183,17 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static IGameContext makeGameContext(GameStrategy gameStrategy) {
 		return new GameContext(gameStrategy);
 	}
-	
+
 	public static GenerateShiftsTemplate makeGenerateShifts(List<Player> team) {
 		return new GenerateShifts(team);
 	}
-	
+
 	public static GenerateShiftsTemplate makeGeneratePlayOffShifts(List<Player> team) {
 		return new GeneratePlayOffShifts(team);
 	}
-	
+
+	public static StateMachineState makeAdvanceToNextSeason(ILeague league, ILeagueDb leagueDb) {
+		return new AdvanceToNextSeason(league, leagueDb);
+	}
+
 }

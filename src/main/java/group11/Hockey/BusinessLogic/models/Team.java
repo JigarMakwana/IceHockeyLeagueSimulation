@@ -208,7 +208,7 @@ public class Team implements ITeam {
 		this.isUserTeam = isUserTeam;
 	}
 
-	public boolean isTeamNameValid(String teamName, League league) {
+	public boolean isTeamNameValid(String teamName, ILeague league) {
 		boolean isTeamNameValid = true;
 		List<Conference> cconferenceList = league.getConferences();
 		for (Conference conference : cconferenceList) {
@@ -257,7 +257,7 @@ public class Team implements ITeam {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 
-	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
+	public void addGeneralMangerToTeam(Team team, String generalMangerName, ILeague league) {
 		team.setGeneralManager(generalMangerName);
 		List<GeneralManager> generalManagers = league.getGeneralManagers();
 		for (GeneralManager gm : generalManagers) {
@@ -268,7 +268,7 @@ public class Team implements ITeam {
 		}
 	}
 
-	public void addCoachToTeam(Team team, String coachName, League league) {
+	public void addCoachToTeam(Team team, String coachName, ILeague league) {
 		Coach coach = new Coach();
 		coach.setName(coachName);
 		team.setHeadCoach(coach);

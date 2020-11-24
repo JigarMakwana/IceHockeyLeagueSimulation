@@ -36,9 +36,9 @@ public class AITradingTest {
     }
 
     @Test
-    public void determineEligibleTeams() {
+    public void determineTradeEligibleTeams() {
         List<Team> teamList = new ArrayList<>();
-        teamList = aiTradingObj.determineEligibleTeams();
+        teamList = aiTradingObj.determineTradeEligibleTeams();
         Assert.assertEquals(teamList.size(), 2);
     }
 

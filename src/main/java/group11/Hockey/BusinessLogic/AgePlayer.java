@@ -29,7 +29,7 @@ public class AgePlayer extends RetirePlayer {
 		this.league = league;
 		this.days = days;
 	}
-	
+
 	public AgePlayer(ILeague league, int days, ILeagueDb leagueDb) {
 		this.league = league;
 		this.days = days;
@@ -55,7 +55,7 @@ public class AgePlayer extends RetirePlayer {
 	}
 
 	public void agePlayers() {
-		List<Player> freeAgents = league.getFreeAgents();
+		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		List<Conference> conferences = league.getConferences();
 
 		if (freeAgents.size() > 0) {
@@ -90,7 +90,7 @@ public class AgePlayer extends RetirePlayer {
 	private void checkForRetirement(ILeague league) {
 		boolean isRetired;
 		List<Player> retiredPlayers = new ArrayList<Player>();
-		List<Player> freeAgents = league.getFreeAgents();
+		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		List<Conference> conferences = league.getConferences();
 
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();

@@ -13,4 +13,6 @@ public interface IUserInputCheck {
 	public void generalManagerNameFromUserCheck(Team newTeam, League league);
 	public void headCoachNameFromUserCheck(Team newTeam, League league);
 	public void playerChoiceFromUser(Team newTeam, League league);
+	public int userResolveRosterInput(int listSize);
+	public int validateUserTradeInput();
 }

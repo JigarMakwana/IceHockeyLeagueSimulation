@@ -1,5 +1,7 @@
 package group11.Hockey.BusinessLogic.models;
 
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+
 import java.util.List;
 
 public interface ITeam {
@@ -48,4 +50,10 @@ public interface ITeam {
 	public int getSavesInSeason();
 
 	public void setSavesInSeason(int savesInSeason);
+
+	public boolean isUserTeam();
+
+	public IRoster getRoster();
+
+	public void setRoster(IRoster roster);
 }

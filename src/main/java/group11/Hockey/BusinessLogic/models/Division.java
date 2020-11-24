@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * This class contains the business logic for the division model.
- * 
+ *
  * @author jatinpartaprana
  *
  */
@@ -13,10 +13,10 @@ public class Division implements IDivision {
 	private String divisionName;
 	private List<Team> teams = null;
 
-	public Division(String divisionName, List<Team> teams) {
+	public Division(String divisionName, List<? extends ITeam> teams) {
 		super();
 		this.divisionName = divisionName;
-		this.teams = teams;
+		this.teams = (List<Team>) teams;
 	}
 
 	public Division() {
@@ -49,7 +49,7 @@ public class Division implements IDivision {
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
-	
+
 
 	@Override
 	public String toString() {
@@ -69,7 +69,7 @@ public class Division implements IDivision {
 		}
 		return isDivisionNameValid;
 	}
-	
+
 	public Division getDivisionFromDivisionName(String divisionName, List<Division> divisionList) {
 		Division division = null;
 		for(Division div: divisionList) {
@@ -80,8 +80,8 @@ public class Division implements IDivision {
 		}
 		return division;
 	}
-	
-	
+
+
 	public void addNewTeamInDivision(Team newTeam) {
 		teams.add(newTeam);
 	}

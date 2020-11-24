@@ -2,12 +2,9 @@ package group11.Hockey.BusinessLogic.models;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.db.Team.ITeamDb;
-import group11.Hockey.BusinessLogic.models.Roster.Roster;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-import group11.Hockey.BusinessLogic.ConstantSupplier;
-import group11.Hockey.BusinessLogic.IConstantSupplier;
 
 /**
  * This class contain all the business logic related to team model
@@ -30,6 +27,21 @@ public class Team implements ITeam {
 	private int goalsInSeason;
 	private int penaltiesInSeason;
 	private int savesInSeason;
+	private int wins;
+	private int points;
+
+	public Team(String teamName, String generalManager, Coach headCoach, List<? extends IPlayer> players) {
+		super();
+		this.teamName = teamName;
+		this.generalManager = generalManager;
+		this.headCoach = headCoach;
+		this.players = (List<Player>) players;
+//		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, (List<IPlayer>) players);
+	}
+
+	public Team() {
+
+	}
 
 	public int getGoalsInSeason() {
 		return goalsInSeason;
@@ -79,81 +91,42 @@ public class Team implements ITeam {
 		this.averageShoots = averageShoots;
 	}
 
-	private int wins;
-	private int points;
-
-	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
-		super();
-		this.teamName = teamName;
-		this.generalManager = generalManager;
-		this.headCoach = headCoach;
-		this.players = players;
-		// TODO Creational pattern
-		IConstantSupplier rosterSize = new ConstantSupplier
-				(RosterSize.ACTIVE_ROSTER_SIZE.getNumVal(),
-						RosterSize.INACTIVE_ROSTER_SIZE.getNumVal(),
-						RosterSize.FORWARD_SIZE.getNumVal(),
-						RosterSize.DEFENSE_SIE.getNumVal(),
-						RosterSize.GOALIE_SIZE.getNumVal());
-		// roster =  new Roster(this.players, rosterSize);
-	}
-
-	public Team() {
-
-	}
-
-	/**
-	 * @return the teamName
-	 */
 	public String getTeamName() {
 		return teamName;
 	}
 
-	/**
-	 * @param teamName the teamName to set
-	 */
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
 
-	/**
-	 * @return the generalManager
-	 */
 	public String getGeneralManager() {
 		return generalManager;
 	}
 
-	/**
-	 * @param generalManager the generalManager to set
-	 */
 	public void setGeneralManager(String generalManager) {
 		this.generalManager = generalManager;
 	}
 
-	/**
-	 * @return the headCoach
-	 */
 	public Coach getHeadCoach() {
 		return headCoach;
 	}
 
-	/**
-	 * @param headCoach the headCoach to set
-	 */
 	public void setHeadCoach(Coach headCoach) {
 		this.headCoach = headCoach;
 	}
 
-	/**
-	 * @return the players
-	 */
+	public IRoster getRoster() {
+		return roster;
+	}
+
+	public void setRoster(IRoster roster) {
+		this.roster = roster;
+	}
+
 	public List<Player> getPlayers() {
 		return players;
 	}
 
-	/**
-	 * @param players the players to set
-	 */
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
@@ -194,16 +167,10 @@ public class Team implements ITeam {
 		return teamStrength;
 	}
 
-	/**
-	 * @return the isUserTeam
-	 */
 	public boolean isUserTeam() {
 		return isUserTeam;
 	}
 
-	/**
-	 * @param isUserTeam the isUserTeam to set
-	 */
 	public void setUserTeam(boolean isUserTeam) {
 		this.isUserTeam = isUserTeam;
 	}

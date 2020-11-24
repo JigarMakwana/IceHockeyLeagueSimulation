@@ -36,6 +36,40 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private int savesByGoalieInSeason;
 	private int savesByDefenceManinSeason;
 
+	public Player() {
+		super();
+	}
+
+	public Player(String playerName) {
+		this.playerName = playerName;
+	}
+
+	public Player(float skating, float shooting, float checking, float saving, String playerName, String position,
+				  boolean captain, boolean isFreeAgent, float age) {
+		super(skating, shooting, checking, saving);
+		this.playerName = playerName;
+		this.position = position;
+		this.captain = captain;
+		this.isFreeAgent = isFreeAgent;
+		this.age = age;
+	}
+
+	public Player(float skating, float shooting, float checking, float saving, String playerName, String position,
+				  boolean captain, boolean isFreeAgent, float age, boolean isActive) {
+		super(skating, shooting, checking, saving);
+		this.playerName = playerName;
+		this.position = position;
+		this.captain = captain;
+		this.isFreeAgent = isFreeAgent;
+		this.isActive = isActive;
+		this.age = age;
+	}
+
+	public Player(String leagueName, IPlayerDb playerDb) {
+		this.playerDb = playerDb;
+		this.leagueName = leagueName;
+	}
+
 	public int getSavesByDefenceManinSeason() {
 		return savesByDefenceManinSeason;
 	}
@@ -68,40 +102,6 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		this.savesByGoalieInSeason = savesInSeason;
 	}
 
-	public Player() {
-		super();
-	}
-
-	public Player(String playerName) {
-		this.playerName = playerName;
-	}
-
-	public Player(float skating, float shooting, float checking, float saving, String playerName, String position,
-			boolean captain, boolean isFreeAgent, float age) {
-		super(skating, shooting, checking, saving);
-		this.playerName = playerName;
-		this.position = position;
-		this.captain = captain;
-		this.isFreeAgent = isFreeAgent;
-		this.age = age;
-	}
-
-	public Player(float skating, float shooting, float checking, float saving, String playerName, String position,
-				  boolean captain, boolean isFreeAgent, float age, boolean isActive) {
-		super(skating, shooting, checking, saving);
-		this.playerName = playerName;
-		this.position = position;
-		this.captain = captain;
-		this.isFreeAgent = isFreeAgent;
-		this.isActive = isActive;
-		this.age = age;
-	}
-
-	public Player(String leagueName, IPlayerDb playerDb) {
-		this.playerDb = playerDb;
-		this.leagueName = leagueName;
-	}
-
 	public boolean isActive() {
 		return isActive;
 	}
@@ -110,44 +110,26 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		isActive = active;
 	}
 
-	/**
-	 * @return the playerName
-	 */
 	public String getPlayerName() {
 		return playerName;
 	}
 
-	/**
-	 * @param playerName the playerName to set
-	 */
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
 
-	/**
-	 * @return the position
-	 */
 	public String getPosition() {
 		return position;
 	}
 
-	/**
-	 * @param position the position to set
-	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
-	/**
-	 * @return the captain
-	 */
 	public boolean getCaptain() {
 		return captain;
 	}
 
-	/**
-	 * @param captain the captain to set
-	 */
 	public void setCaptain(boolean captain) {
 		this.captain = captain;
 	}
@@ -277,7 +259,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public void replacePlayerWithFreeAgent(ILeague league, List<Player> playersList) {
-		List<Player> freeAgents = league.getFreeAgents();
+		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 
 		while (freeAgentsItr.hasNext()) {
@@ -290,27 +272,10 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 				break;
 			}
 		}
-		// TODO implement exception if no player is hired from free agents
-	}
-
-	public void dropPlayerToFreeAgent(League league, List<Player> playersList) {
-		List<Player> freeAgents = league.getFreeAgents();
-		Iterator<Player> playersListItr = playersList.iterator();
-
-		while (playersListItr.hasNext()) {
-			Player player = playersListItr.next();
-			if (player.getPosition().equalsIgnoreCase(this.getPosition())) {
-				player.setIsFreeAgent(true);
-				player.setCaptain(this.getCaptain());
-				freeAgents.add(player);
-				playersListItr.remove();
-				break;
-			}
-		}
 	}
 
 	public void removeFreeAgentsFromLeague(League league, List<Player> freeAgents) {
-		List<Player> listOfFreeAgentsInLeague = league.getFreeAgents();
+		List<Player> listOfFreeAgentsInLeague = (List<Player>) league.getFreeAgents();
 		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
 		while (interator.hasNext()) {
 			Player pl = interator.next();

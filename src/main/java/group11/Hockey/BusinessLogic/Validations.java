@@ -16,17 +16,17 @@ public class Validations implements IValidations {
 	Conference conferenceObj = new Conference();
 	Division divisionObj = new Division();
 	IDisplay display;
-	
+
 	private static Validations validationsInstance = null;
-	
+
 	public Validations(IDisplay display){
 		this.display = display;
 	}
-	
+
 	private Validations(){
-		
-	}	
-	
+
+	}
+
 	public static Validations getInstance() {
 		if(validationsInstance == null) {
 			validationsInstance = new Validations();
@@ -129,7 +129,7 @@ public class Validations implements IValidations {
 			display.showMessageOnConsole("This player is already selected");
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
-		} 
+		}
 		if (position.equalsIgnoreCase("forward") || position.equalsIgnoreCase("defense")) {
 			if (skaters.size() <= Integer.parseInt(BusinessConstants.Number_Of_Skaters.getValue().toString())) {
 				isPlayerValueNotValid = false;
@@ -158,7 +158,7 @@ public class Validations implements IValidations {
 
 		return false;
 	}
-	
+
 	public boolean isNoOfSeasonsValueValid(String numberOfSeasons) {
 		boolean isNoOfSeasonsValueValid = false;
 		try {
@@ -176,6 +176,27 @@ public class Validations implements IValidations {
 			isNoOfSeasonsValueValid = true;
 			return isNoOfSeasonsValueValid;
 		}
-		
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public boolean isUserTradeInputValid(int userInput){
+		if((userInput == 1) || (userInput == 0)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public boolean isUserResolveRosterInputValid(int userInput, int listSize){
+		if(((userInput >= 1) && (userInput <= listSize))){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

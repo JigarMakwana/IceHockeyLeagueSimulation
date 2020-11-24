@@ -1,5 +1,7 @@
 package group11.Hockey.BusinessLogic.models.Roster;
 
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +14,8 @@ public class RosterTest {
         boolean isValidRoster;
         isValidRoster = roster.isValidRoster();
         Assert.assertTrue(isValidRoster);
-        roster.setSuppliedActiveRosterSize(3);
+        IPlayer a1 = new Player(15, 18, 12, 1, "Knata", "forward", true, false, 25, true);
+        roster.getActiveRoster().add(a1);
         isValidRoster = roster.isValidRoster();
         Assert.assertFalse(isValidRoster);
     }
@@ -22,7 +25,8 @@ public class RosterTest {
         boolean isValidActiveRoster;
         isValidActiveRoster = roster.isValidActiveRoster();
         Assert.assertTrue(isValidActiveRoster);
-        roster.setSuppliedActiveRosterSize(3);;
+        IPlayer a1 = new Player(15, 18, 12, 1, "sonata", "forward", true, false, 25, true);
+        roster.getActiveRoster().add(a1);
         isValidActiveRoster = roster.isValidActiveRoster();
         Assert.assertFalse(isValidActiveRoster);
     }
@@ -32,7 +36,8 @@ public class RosterTest {
         boolean isValidInActiveRoster;
         isValidInActiveRoster = roster.isValidInActiveRoster();
         Assert.assertTrue(isValidInActiveRoster);
-        roster.setSuppliedInActiveRosterSize(3);
+        IPlayer a1 = new Player(15, 18, 12, 1, "Cooper", "forward", true, false, 25, false);
+        roster.getInActiveRoster().add(a1);
         isValidInActiveRoster = roster.isValidInActiveRoster();
         Assert.assertFalse(isValidInActiveRoster);
     }

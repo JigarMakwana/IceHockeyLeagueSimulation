@@ -555,7 +555,8 @@
       "lossPoint": 0,
       "randomTradeOfferChance": 0.0,
       "maxPlayersPerTrade": 0,
-      "randomAcceptanceChance": 0.0
+      "randomAcceptanceChance": 0.0,
+      "gmTable": {}
     }
   },
   "coaches": [

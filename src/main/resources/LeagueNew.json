@@ -1,0 +1,3581 @@
+{
+	"leagueName": "Dalhousie Hockey League",
+	"gameplayConfig": {
+		"aging": {
+			"averageRetirementAge": 37,
+			"maximumAge": 47,
+			"statDecayChance": 0.02
+		},
+		"injuries": {
+			"randomInjuryChance": 0.99,
+			"injuryDaysLow": 2,
+			"injuryDaysHigh": 138
+		},
+		"training": {
+			"daysUntilStatIncreaseCheck": 218
+		},
+		"trading": {
+			"lossPoint": 4,
+			"randomTradeOfferChance": 0.18,
+			"maxPlayersPerTrade": 2,
+			"randomAcceptanceChance": 0.49,
+			"gmTable": {
+				"shrewd": -0.1,
+				"normal": 0.0,
+				"gambler": 0.1
+			}
+		}
+	},
+	"conferences": [
+		{
+			"conferenceName": "Eastern Conference",
+			"divisions": [
+				{
+					"divisionName": "Pacific",
+					"teams": [
+						{
+							"teamName": "Fargo Blazers",
+							"generalManager": {
+								"name": "Rahul Bonham",
+								"personality": "shrewd"
+							},
+							"headCoach": {
+								"name": "Raghav Plant",
+								"skating": 0.27,
+								"shooting": 0.99,
+								"checking": 0.22,
+								"saving": 0.14
+							},
+							"players": [
+								{
+									"playerName": "Tina Hawkey",
+									"position": "forward",
+									"skating": 16,
+									"shooting": 2,
+									"checking": 2,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 2,
+									"birthMonth": 7,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Pat Cherry",
+									"position": "forward",
+									"skating": 4,
+									"shooting": 1,
+									"checking": 19,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 27,
+									"birthMonth": 2,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Fred Singh",
+									"position": "forward",
+									"skating": 5,
+									"shooting": 2,
+									"checking": 10,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 4,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Bonnie Bonham",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 3,
+									"checking": 5,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 18,
+									"birthMonth": 2,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Walter Bishop",
+									"position": "forward",
+									"skating": 15,
+									"shooting": 12,
+									"checking": 8,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 2,
+									"birthMonth": 4,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Mary Patel",
+									"position": "forward",
+									"skating": 19,
+									"shooting": 14,
+									"checking": 4,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 19,
+									"birthMonth": 12,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Mozhgan Williamson",
+									"position": "forward",
+									"skating": 18,
+									"shooting": 4,
+									"checking": 16,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 7,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Tina Hawkey",
+									"position": "forward",
+									"skating": 13,
+									"shooting": 10,
+									"checking": 15,
+									"saving": 20,
+									"captain": true,
+									"birthDay": 20,
+									"birthMonth": 5,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Rashita Liu",
+									"position": "forward",
+									"skating": 14,
+									"shooting": 16,
+									"checking": 13,
+									"saving": 11,
+									"captain": false,
+									"birthDay": 22,
+									"birthMonth": 5,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Chris Thomson",
+									"position": "forward",
+									"skating": 7,
+									"shooting": 15,
+									"checking": 17,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 16,
+									"birthMonth": 1,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Shakuntala Rogers",
+									"position": "defense",
+									"skating": 20,
+									"shooting": 1,
+									"checking": 20,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 10,
+									"birthMonth": 5,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Don Hawkins",
+									"position": "defense",
+									"skating": 4,
+									"shooting": 20,
+									"checking": 3,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 17,
+									"birthMonth": 1,
+									"birthYear": 1992
+								},
+								{
+									"playerName": "Hardik Burbchuk",
+									"position": "defense",
+									"skating": 8,
+									"shooting": 15,
+									"checking": 4,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 3,
+									"birthYear": 1986
+								},
+								{
+									"playerName": "Rahul Chang",
+									"position": "defense",
+									"skating": 2,
+									"shooting": 20,
+									"checking": 6,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 11,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Raghav Hawkins",
+									"position": "defense",
+									"skating": 13,
+									"shooting": 13,
+									"checking": 2,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 27,
+									"birthMonth": 4,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Rob Page",
+									"position": "defense",
+									"skating": 3,
+									"shooting": 8,
+									"checking": 10,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 12,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Raghav Thomson",
+									"position": "defense",
+									"skating": 17,
+									"shooting": 2,
+									"checking": 20,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 9,
+									"birthMonth": 9,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Rob Fei",
+									"position": "defense",
+									"skating": 15,
+									"shooting": 6,
+									"checking": 11,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 12,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Rahul Wu",
+									"position": "goalie",
+									"skating": 14,
+									"shooting": 10,
+									"checking": 4,
+									"saving": 11,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 11,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Roger Halen",
+									"position": "goalie",
+									"skating": 13,
+									"shooting": 17,
+									"checking": 11,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 11,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Jimmy Burbchuk",
+									"position": "forward",
+									"skating": 19,
+									"shooting": 6,
+									"checking": 6,
+									"saving": 17,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 4,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Sammy Samson",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 4,
+									"checking": 4,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 6,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Tami Burbchuk",
+									"position": "forward",
+									"skating": 20,
+									"shooting": 14,
+									"checking": 13,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 5,
+									"birthMonth": 8,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Roger Page",
+									"position": "forward",
+									"skating": 12,
+									"shooting": 17,
+									"checking": 4,
+									"saving": 4,
+									"captain": false,
+									"birthDay": 9,
+									"birthMonth": 5,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Karan Cherry",
+									"position": "forward",
+									"skating": 13,
+									"shooting": 3,
+									"checking": 8,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 2,
+									"birthMonth": 11,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Don Bishop",
+									"position": "defense",
+									"skating": 20,
+									"shooting": 8,
+									"checking": 19,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 16,
+									"birthMonth": 4,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Roger Burbchuk",
+									"position": "defense",
+									"skating": 12,
+									"shooting": 2,
+									"checking": 10,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 5,
+									"birthMonth": 10,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Tina Chang",
+									"position": "defense",
+									"skating": 10,
+									"shooting": 18,
+									"checking": 18,
+									"saving": 4,
+									"captain": false,
+									"birthDay": 23,
+									"birthMonth": 7,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Zongming Thomson",
+									"position": "goalie",
+									"skating": 18,
+									"shooting": 8,
+									"checking": 4,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 11,
+									"birthMonth": 8,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Wen Morrison",
+									"position": "goalie",
+									"skating": 9,
+									"shooting": 3,
+									"checking": 9,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 8,
+									"birthYear": 2002
+								}
+							]
+						},
+						{
+							"teamName": "Montreal Privateers",
+							"generalManager": {
+								"name": "Chris Halen",
+								"personality": "normal"
+							},
+							"headCoach": {
+								"name": "Mary Chang",
+								"skating": 0.71,
+								"shooting": 0.33,
+								"checking": 0.32,
+								"saving": 0.78
+							},
+							"players": [
+								{
+									"playerName": "Sai Hendrix",
+									"position": "forward",
+									"skating": 16,
+									"shooting": 19,
+									"checking": 15,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 10,
+									"birthMonth": 7,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "John Fei",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 15,
+									"checking": 6,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 4,
+									"birthMonth": 10,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Chris Bishop",
+									"position": "forward",
+									"skating": 12,
+									"shooting": 13,
+									"checking": 15,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 27,
+									"birthMonth": 2,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Tami Morrison",
+									"position": "forward",
+									"skating": 20,
+									"shooting": 7,
+									"checking": 3,
+									"saving": 11,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 4,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Rob Cherry",
+									"position": "forward",
+									"skating": 5,
+									"shooting": 5,
+									"checking": 10,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 18,
+									"birthMonth": 4,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Jimmy Greenbaum",
+									"position": "forward",
+									"skating": 20,
+									"shooting": 17,
+									"checking": 12,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 16,
+									"birthMonth": 11,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Wen Plant",
+									"position": "forward",
+									"skating": 15,
+									"shooting": 9,
+									"checking": 8,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 3,
+									"birthMonth": 8,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Tami Halen",
+									"position": "forward",
+									"skating": 6,
+									"shooting": 6,
+									"checking": 16,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 27,
+									"birthMonth": 10,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Abraham Jones",
+									"position": "forward",
+									"skating": 1,
+									"shooting": 18,
+									"checking": 12,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 25,
+									"birthMonth": 11,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Prabhjot Williamson",
+									"position": "forward",
+									"skating": 18,
+									"shooting": 15,
+									"checking": 12,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 9,
+									"birthMonth": 4,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Don Bishop",
+									"position": "defense",
+									"skating": 13,
+									"shooting": 6,
+									"checking": 1,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 5,
+									"birthYear": 1986
+								},
+								{
+									"playerName": "Don Halen",
+									"position": "defense",
+									"skating": 14,
+									"shooting": 8,
+									"checking": 13,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 5,
+									"birthMonth": 8,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Wen Patel",
+									"position": "defense",
+									"skating": 4,
+									"shooting": 5,
+									"checking": 12,
+									"saving": 6,
+									"captain": true,
+									"birthDay": 6,
+									"birthMonth": 5,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Roger Nelson",
+									"position": "defense",
+									"skating": 18,
+									"shooting": 16,
+									"checking": 8,
+									"saving": 4,
+									"captain": false,
+									"birthDay": 21,
+									"birthMonth": 10,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Wen Hawkins",
+									"position": "defense",
+									"skating": 5,
+									"shooting": 12,
+									"checking": 8,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 3,
+									"birthMonth": 7,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Walter Burbchuk",
+									"position": "defense",
+									"skating": 13,
+									"shooting": 5,
+									"checking": 16,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 2,
+									"birthYear": 1986
+								},
+								{
+									"playerName": "Hardik Patel",
+									"position": "defense",
+									"skating": 15,
+									"shooting": 13,
+									"checking": 8,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 26,
+									"birthMonth": 9,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Rahul Bonham",
+									"position": "defense",
+									"skating": 8,
+									"shooting": 6,
+									"checking": 16,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 20,
+									"birthMonth": 5,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Rob Nelson",
+									"position": "goalie",
+									"skating": 3,
+									"shooting": 14,
+									"checking": 8,
+									"saving": 19,
+									"captain": false,
+									"birthDay": 26,
+									"birthMonth": 10,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Mary Hawkins",
+									"position": "goalie",
+									"skating": 3,
+									"shooting": 19,
+									"checking": 9,
+									"saving": 4,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 2,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Pat Hendrix",
+									"position": "forward",
+									"skating": 11,
+									"shooting": 11,
+									"checking": 1,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 5,
+									"birthMonth": 9,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Fred Cherry",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 10,
+									"checking": 13,
+									"saving": 9,
+									"captain": false,
+									"birthDay": 6,
+									"birthMonth": 3,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Sammy Rogers",
+									"position": "forward",
+									"skating": 8,
+									"shooting": 6,
+									"checking": 13,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 24,
+									"birthMonth": 7,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "John Fei",
+									"position": "forward",
+									"skating": 18,
+									"shooting": 1,
+									"checking": 19,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 26,
+									"birthMonth": 10,
+									"birthYear": 1986
+								},
+								{
+									"playerName": "John Jones",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 14,
+									"checking": 17,
+									"saving": 4,
+									"captain": false,
+									"birthDay": 11,
+									"birthMonth": 4,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Jimmy Bonham",
+									"position": "defense",
+									"skating": 11,
+									"shooting": 4,
+									"checking": 17,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 23,
+									"birthMonth": 3,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Karan Smith",
+									"position": "defense",
+									"skating": 14,
+									"shooting": 4,
+									"checking": 5,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 8,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Don Greenbaum",
+									"position": "defense",
+									"skating": 18,
+									"shooting": 15,
+									"checking": 15,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 2,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "John Chang",
+									"position": "goalie",
+									"skating": 12,
+									"shooting": 10,
+									"checking": 17,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 12,
+									"birthYear": 1993
+								},
+								{
+									"playerName": "Nancy Chang",
+									"position": "goalie",
+									"skating": 9,
+									"shooting": 1,
+									"checking": 8,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 18,
+									"birthMonth": 9,
+									"birthYear": 1985
+								}
+							]
+						},
+						{
+							"teamName": "Sunnyside Astros",
+							"generalManager": {
+								"name": "Zongming Jones",
+								"personality": "gambler"
+							},
+							"headCoach": {
+								"name": "Prabhjot Hendrix",
+								"skating": 0.11,
+								"shooting": 0.28,
+								"checking": 0.77,
+								"saving": 0.13
+							},
+							"players": [
+								{
+									"playerName": "Hardik Bonham",
+									"position": "forward",
+									"skating": 14,
+									"shooting": 12,
+									"checking": 15,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 10,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "John Nelson",
+									"position": "forward",
+									"skating": 7,
+									"shooting": 4,
+									"checking": 14,
+									"saving": 9,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 6,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Mike Greenbaum",
+									"position": "forward",
+									"skating": 8,
+									"shooting": 12,
+									"checking": 7,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 5,
+									"birthMonth": 7,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Zongming Cherry",
+									"position": "forward",
+									"skating": 8,
+									"shooting": 11,
+									"checking": 8,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 7,
+									"birthMonth": 1,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Fred Wu",
+									"position": "forward",
+									"skating": 8,
+									"shooting": 1,
+									"checking": 10,
+									"saving": 19,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 6,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Tina Page",
+									"position": "forward",
+									"skating": 6,
+									"shooting": 7,
+									"checking": 18,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 24,
+									"birthMonth": 10,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Pat Thomson",
+									"position": "forward",
+									"skating": 14,
+									"shooting": 18,
+									"checking": 14,
+									"saving": 19,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 7,
+									"birthYear": 1990
+								},
+								{
+									"playerName": "Raghav Fei",
+									"position": "forward",
+									"skating": 3,
+									"shooting": 2,
+									"checking": 18,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 4,
+									"birthMonth": 6,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Jimmy Thomson",
+									"position": "forward",
+									"skating": 1,
+									"shooting": 17,
+									"checking": 16,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 18,
+									"birthMonth": 10,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Wen Jones",
+									"position": "forward",
+									"skating": 2,
+									"shooting": 12,
+									"checking": 7,
+									"saving": 12,
+									"captain": true,
+									"birthDay": 10,
+									"birthMonth": 1,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Rahul Thomson",
+									"position": "defense",
+									"skating": 18,
+									"shooting": 12,
+									"checking": 8,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 14,
+									"birthMonth": 10,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Sai Smith",
+									"position": "defense",
+									"skating": 19,
+									"shooting": 15,
+									"checking": 18,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 11,
+									"birthMonth": 12,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Don Plant",
+									"position": "defense",
+									"skating": 13,
+									"shooting": 17,
+									"checking": 17,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 8,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Bonnie Rogers",
+									"position": "defense",
+									"skating": 2,
+									"shooting": 8,
+									"checking": 4,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 6,
+									"birthMonth": 7,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Pat Smith",
+									"position": "defense",
+									"skating": 13,
+									"shooting": 17,
+									"checking": 8,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 9,
+									"birthMonth": 5,
+									"birthYear": 1990
+								},
+								{
+									"playerName": "Raghav Jones",
+									"position": "defense",
+									"skating": 10,
+									"shooting": 9,
+									"checking": 11,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 3,
+									"birthMonth": 11,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Zongming Hawkey",
+									"position": "defense",
+									"skating": 13,
+									"shooting": 9,
+									"checking": 9,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 9,
+									"birthMonth": 9,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Fred Chang",
+									"position": "defense",
+									"skating": 20,
+									"shooting": 18,
+									"checking": 2,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 25,
+									"birthMonth": 7,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Roger Smith",
+									"position": "goalie",
+									"skating": 16,
+									"shooting": 11,
+									"checking": 4,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 2,
+									"birthMonth": 1,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Nancy Thomson",
+									"position": "goalie",
+									"skating": 15,
+									"shooting": 5,
+									"checking": 5,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 3,
+									"birthMonth": 11,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Roger Greenbaum",
+									"position": "forward",
+									"skating": 13,
+									"shooting": 18,
+									"checking": 2,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 4,
+									"birthMonth": 8,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Raghav Singh",
+									"position": "forward",
+									"skating": 5,
+									"shooting": 5,
+									"checking": 1,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 16,
+									"birthMonth": 5,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Abraham Liu",
+									"position": "forward",
+									"skating": 15,
+									"shooting": 11,
+									"checking": 16,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 26,
+									"birthMonth": 2,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Zongming Plant",
+									"position": "forward",
+									"skating": 5,
+									"shooting": 8,
+									"checking": 20,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 21,
+									"birthMonth": 9,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Mozhgan Burbchuk",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 4,
+									"checking": 3,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 7,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Walter Halen",
+									"position": "defense",
+									"skating": 3,
+									"shooting": 16,
+									"checking": 17,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 16,
+									"birthMonth": 5,
+									"birthYear": 1990
+								},
+								{
+									"playerName": "Roger Jones",
+									"position": "defense",
+									"skating": 18,
+									"shooting": 7,
+									"checking": 20,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 2,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Raghav Singh",
+									"position": "defense",
+									"skating": 1,
+									"shooting": 17,
+									"checking": 15,
+									"saving": 11,
+									"captain": false,
+									"birthDay": 25,
+									"birthMonth": 7,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Wen Smith",
+									"position": "goalie",
+									"skating": 1,
+									"shooting": 1,
+									"checking": 15,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 5,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Roger Hawkins",
+									"position": "goalie",
+									"skating": 13,
+									"shooting": 13,
+									"checking": 4,
+									"saving": 9,
+									"captain": false,
+									"birthDay": 14,
+									"birthMonth": 5,
+									"birthYear": 1997
+								}
+							]
+						}
+
+					]
+				},
+				{
+					"divisionName": "Central",
+					"teams": [
+						{
+							"teamName": "Atlanta Wild Horses",
+							"generalManager": {
+								"name": "Sai Chang",
+								"personality": "gambler"
+							},
+							"headCoach": {
+								"name": "Walter Fei",
+								"skating": 0.05,
+								"shooting": 0.62,
+								"checking": 0.53,
+								"saving": 0.63
+							},
+							"players": [
+								{
+									"playerName": "Rahul Smith",
+									"position": "forward",
+									"skating": 15,
+									"shooting": 3,
+									"checking": 9,
+									"saving": 13,
+									"captain": false,
+									"birthDay": 17,
+									"birthMonth": 7,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Jimmy Bishop",
+									"position": "forward",
+									"skating": 7,
+									"shooting": 7,
+									"checking": 3,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 11,
+									"birthMonth": 9,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Roger Patel",
+									"position": "forward",
+									"skating": 3,
+									"shooting": 7,
+									"checking": 13,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 18,
+									"birthMonth": 7,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Rahul Hendrix",
+									"position": "forward",
+									"skating": 10,
+									"shooting": 17,
+									"checking": 12,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 22,
+									"birthMonth": 10,
+									"birthYear": 1992
+								},
+								{
+									"playerName": "John Plant",
+									"position": "forward",
+									"skating": 1,
+									"shooting": 3,
+									"checking": 14,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 12,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Rashita Jones",
+									"position": "forward",
+									"skating": 16,
+									"shooting": 18,
+									"checking": 7,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 25,
+									"birthMonth": 3,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Rahul Singh",
+									"position": "forward",
+									"skating": 11,
+									"shooting": 19,
+									"checking": 20,
+									"saving": 11,
+									"captain": false,
+									"birthDay": 21,
+									"birthMonth": 6,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Rahul Marley",
+									"position": "forward",
+									"skating": 20,
+									"shooting": 18,
+									"checking": 13,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 20,
+									"birthMonth": 5,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Rahul Nelson",
+									"position": "forward",
+									"skating": 20,
+									"shooting": 3,
+									"checking": 1,
+									"saving": 2,
+									"captain": true,
+									"birthDay": 9,
+									"birthMonth": 10,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Walter Bonham",
+									"position": "forward",
+									"skating": 1,
+									"shooting": 12,
+									"checking": 7,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 14,
+									"birthMonth": 5,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Tina Wu",
+									"position": "defense",
+									"skating": 1,
+									"shooting": 18,
+									"checking": 15,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 16,
+									"birthMonth": 1,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Rahul Cherry",
+									"position": "defense",
+									"skating": 17,
+									"shooting": 3,
+									"checking": 19,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 27,
+									"birthMonth": 9,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Karan Marley",
+									"position": "defense",
+									"skating": 14,
+									"shooting": 16,
+									"checking": 7,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 12,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Walter Page",
+									"position": "defense",
+									"skating": 14,
+									"shooting": 20,
+									"checking": 14,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 10,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Nancy Samson",
+									"position": "defense",
+									"skating": 20,
+									"shooting": 9,
+									"checking": 18,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 6,
+									"birthMonth": 10,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Prashant Thomson",
+									"position": "defense",
+									"skating": 6,
+									"shooting": 13,
+									"checking": 13,
+									"saving": 9,
+									"captain": false,
+									"birthDay": 17,
+									"birthMonth": 9,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Fred Chang",
+									"position": "defense",
+									"skating": 3,
+									"shooting": 15,
+									"checking": 6,
+									"saving": 19,
+									"captain": false,
+									"birthDay": 4,
+									"birthMonth": 7,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Karan Hawkey",
+									"position": "defense",
+									"skating": 2,
+									"shooting": 5,
+									"checking": 4,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 10,
+									"birthMonth": 9,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Jimmy Jones",
+									"position": "goalie",
+									"skating": 8,
+									"shooting": 3,
+									"checking": 9,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 20,
+									"birthMonth": 4,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Mike Plant",
+									"position": "goalie",
+									"skating": 12,
+									"shooting": 1,
+									"checking": 4,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 10,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Hardik Williamson",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 19,
+									"checking": 15,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 2,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Rashita Smith",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 4,
+									"checking": 7,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 22,
+									"birthMonth": 2,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Sai Hawkey",
+									"position": "forward",
+									"skating": 10,
+									"shooting": 18,
+									"checking": 8,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 28,
+									"birthMonth": 4,
+									"birthYear": 1990
+								},
+								{
+									"playerName": "Fred Page",
+									"position": "forward",
+									"skating": 6,
+									"shooting": 13,
+									"checking": 4,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 19,
+									"birthMonth": 11,
+									"birthYear": 1993
+								},
+								{
+									"playerName": "Mozhgan Singh",
+									"position": "forward",
+									"skating": 4,
+									"shooting": 12,
+									"checking": 14,
+									"saving": 11,
+									"captain": false,
+									"birthDay": 3,
+									"birthMonth": 5,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Tami Samson",
+									"position": "defense",
+									"skating": 8,
+									"shooting": 1,
+									"checking": 19,
+									"saving": 17,
+									"captain": false,
+									"birthDay": 4,
+									"birthMonth": 6,
+									"birthYear": 1992
+								},
+								{
+									"playerName": "Jimmy Halen",
+									"position": "defense",
+									"skating": 13,
+									"shooting": 9,
+									"checking": 20,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 7,
+									"birthMonth": 7,
+									"birthYear": 1988
+								},
+								{
+									"playerName": "Rashita Rogers",
+									"position": "defense",
+									"skating": 16,
+									"shooting": 11,
+									"checking": 1,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 4,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Mohammed Nelson",
+									"position": "goalie",
+									"skating": 19,
+									"shooting": 13,
+									"checking": 2,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 23,
+									"birthMonth": 3,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Pat Burbchuk",
+									"position": "goalie",
+									"skating": 8,
+									"shooting": 18,
+									"checking": 20,
+									"saving": 13,
+									"captain": false,
+									"birthDay": 25,
+									"birthMonth": 10,
+									"birthYear": 1996
+								}
+							]
+						},
+						{
+							"teamName": "Chicago Wild Horses",
+							"generalManager": {
+								"name": "Hardik Plant",
+								"personality": "gambler"
+							},
+							"headCoach": {
+								"name": "Bonnie Hendrix",
+								"skating": 0.7,
+								"shooting": 0.71,
+								"checking": 0.5,
+								"saving": 0.32
+							},
+							"players": [
+								{
+									"playerName": "Abraham Rogers",
+									"position": "forward",
+									"skating": 13,
+									"shooting": 3,
+									"checking": 6,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 10,
+									"birthYear": 1986
+								},
+								{
+									"playerName": "Chris Williamson",
+									"position": "forward",
+									"skating": 17,
+									"shooting": 14,
+									"checking": 7,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 19,
+									"birthMonth": 9,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Shakuntala Thomson",
+									"position": "forward",
+									"skating": 2,
+									"shooting": 15,
+									"checking": 18,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 14,
+									"birthMonth": 3,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Karan Patel",
+									"position": "forward",
+									"skating": 3,
+									"shooting": 13,
+									"checking": 11,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 12,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Tina Fei",
+									"position": "forward",
+									"skating": 4,
+									"shooting": 10,
+									"checking": 10,
+									"saving": 13,
+									"captain": false,
+									"birthDay": 17,
+									"birthMonth": 4,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Sammy Bishop",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 2,
+									"checking": 12,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 5,
+									"birthMonth": 10,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Mohammed Plant",
+									"position": "forward",
+									"skating": 18,
+									"shooting": 19,
+									"checking": 19,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 17,
+									"birthMonth": 3,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Sammy Nelson",
+									"position": "forward",
+									"skating": 11,
+									"shooting": 17,
+									"checking": 6,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 4,
+									"birthMonth": 9,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Hardik Burbchuk",
+									"position": "forward",
+									"skating": 19,
+									"shooting": 3,
+									"checking": 4,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 24,
+									"birthMonth": 9,
+									"birthYear": 1986
+								},
+								{
+									"playerName": "Chris Rogers",
+									"position": "forward",
+									"skating": 5,
+									"shooting": 15,
+									"checking": 19,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 23,
+									"birthMonth": 4,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Shakuntala Halen",
+									"position": "defense",
+									"skating": 15,
+									"shooting": 15,
+									"checking": 13,
+									"saving": 6,
+									"captain": true,
+									"birthDay": 8,
+									"birthMonth": 4,
+									"birthYear": 1995
+								},
+								{
+									"playerName": "Mozhgan Jones",
+									"position": "defense",
+									"skating": 4,
+									"shooting": 9,
+									"checking": 3,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 25,
+									"birthMonth": 6,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Mozhgan Morrison",
+									"position": "defense",
+									"skating": 14,
+									"shooting": 6,
+									"checking": 3,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 6,
+									"birthMonth": 12,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Tina Hendrix",
+									"position": "defense",
+									"skating": 4,
+									"shooting": 10,
+									"checking": 2,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 9,
+									"birthMonth": 5,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Prashant Halen",
+									"position": "defense",
+									"skating": 11,
+									"shooting": 14,
+									"checking": 5,
+									"saving": 11,
+									"captain": false,
+									"birthDay": 14,
+									"birthMonth": 8,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Sammy Greenbaum",
+									"position": "defense",
+									"skating": 1,
+									"shooting": 9,
+									"checking": 11,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 10,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Fred Chang",
+									"position": "defense",
+									"skating": 6,
+									"shooting": 19,
+									"checking": 14,
+									"saving": 16,
+									"captain": false,
+									"birthDay": 24,
+									"birthMonth": 2,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Walter Hawkey",
+									"position": "defense",
+									"skating": 11,
+									"shooting": 17,
+									"checking": 18,
+									"saving": 17,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 8,
+									"birthYear": 1991
+								},
+								{
+									"playerName": "Don Rogers",
+									"position": "goalie",
+									"skating": 14,
+									"shooting": 3,
+									"checking": 18,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 10,
+									"birthYear": 1992
+								},
+								{
+									"playerName": "Mohammed Patel",
+									"position": "goalie",
+									"skating": 12,
+									"shooting": 20,
+									"checking": 20,
+									"saving": 19,
+									"captain": false,
+									"birthDay": 19,
+									"birthMonth": 10,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Prabhjot Liu",
+									"position": "forward",
+									"skating": 19,
+									"shooting": 19,
+									"checking": 13,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 1,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Don Page",
+									"position": "forward",
+									"skating": 8,
+									"shooting": 2,
+									"checking": 14,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 10,
+									"birthMonth": 7,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Rashita Marley",
+									"position": "forward",
+									"skating": 3,
+									"shooting": 9,
+									"checking": 1,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 17,
+									"birthMonth": 10,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Pat Page",
+									"position": "forward",
+									"skating": 18,
+									"shooting": 15,
+									"checking": 19,
+									"saving": 9,
+									"captain": false,
+									"birthDay": 3,
+									"birthMonth": 6,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Mike Chang",
+									"position": "forward",
+									"skating": 4,
+									"shooting": 16,
+									"checking": 6,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 8,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Hardik Khatri",
+									"position": "defense",
+									"skating": 15,
+									"shooting": 20,
+									"checking": 15,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 12,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Rob Hendrix",
+									"position": "defense",
+									"skating": 1,
+									"shooting": 12,
+									"checking": 20,
+									"saving": 13,
+									"captain": false,
+									"birthDay": 5,
+									"birthMonth": 11,
+									"birthYear": 1992
+								},
+								{
+									"playerName": "Tami Chang",
+									"position": "defense",
+									"skating": 3,
+									"shooting": 14,
+									"checking": 15,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 11,
+									"birthMonth": 12,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "John Hawkey",
+									"position": "goalie",
+									"skating": 4,
+									"shooting": 19,
+									"checking": 5,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 8,
+									"birthYear": 1998
+								},
+								{
+									"playerName": "Rob Khatri",
+									"position": "goalie",
+									"skating": 9,
+									"shooting": 4,
+									"checking": 11,
+									"saving": 12,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 5,
+									"birthYear": 1985
+								}
+							]
+						},
+						{
+							"teamName": "Jakarta Wagoneers",
+							"generalManager": {
+								"name": "Rashita Rogers",
+								"personality": "normal"
+							},
+							"headCoach": {
+								"name": "Raghav Marley",
+								"skating": 0.45,
+								"shooting": 0.63,
+								"checking": 0.48,
+								"saving": 0.09
+							},
+							"players": [
+								{
+									"playerName": "Prashant Bishop",
+									"position": "forward",
+									"skating": 17,
+									"shooting": 2,
+									"checking": 6,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 26,
+									"birthMonth": 9,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Mohammed Burbchuk",
+									"position": "forward",
+									"skating": 18,
+									"shooting": 15,
+									"checking": 16,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 11,
+									"birthMonth": 6,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Sammy Hawkey",
+									"position": "forward",
+									"skating": 7,
+									"shooting": 17,
+									"checking": 7,
+									"saving": 13,
+									"captain": false,
+									"birthDay": 18,
+									"birthMonth": 11,
+									"birthYear": 1997
+								},
+								{
+									"playerName": "Rahul Nelson",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 13,
+									"checking": 7,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 7,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Nancy Hawkins",
+									"position": "forward",
+									"skating": 20,
+									"shooting": 12,
+									"checking": 16,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 12,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Sammy Halen",
+									"position": "forward",
+									"skating": 16,
+									"shooting": 11,
+									"checking": 9,
+									"saving": 9,
+									"captain": false,
+									"birthDay": 11,
+									"birthMonth": 5,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Rob Bishop",
+									"position": "forward",
+									"skating": 2,
+									"shooting": 17,
+									"checking": 6,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 16,
+									"birthMonth": 6,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Tina Jones",
+									"position": "forward",
+									"skating": 10,
+									"shooting": 15,
+									"checking": 15,
+									"saving": 20,
+									"captain": false,
+									"birthDay": 3,
+									"birthMonth": 8,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Fred Liu",
+									"position": "forward",
+									"skating": 18,
+									"shooting": 13,
+									"checking": 14,
+									"saving": 2,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 9,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Jimmy Singh",
+									"position": "forward",
+									"skating": 20,
+									"shooting": 20,
+									"checking": 13,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 17,
+									"birthMonth": 11,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Roger Wu",
+									"position": "defense",
+									"skating": 17,
+									"shooting": 20,
+									"checking": 10,
+									"saving": 9,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 9,
+									"birthYear": 1999
+								},
+								{
+									"playerName": "Jimmy Cherry",
+									"position": "defense",
+									"skating": 7,
+									"shooting": 8,
+									"checking": 6,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 12,
+									"birthMonth": 9,
+									"birthYear": 1992
+								},
+								{
+									"playerName": "Mike Page",
+									"position": "defense",
+									"skating": 11,
+									"shooting": 9,
+									"checking": 9,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 23,
+									"birthMonth": 2,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Shakuntala Bishop",
+									"position": "defense",
+									"skating": 7,
+									"shooting": 4,
+									"checking": 12,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 10,
+									"birthMonth": 2,
+									"birthYear": 1992
+								},
+								{
+									"playerName": "Rob Thomson",
+									"position": "defense",
+									"skating": 2,
+									"shooting": 14,
+									"checking": 11,
+									"saving": 11,
+									"captain": true,
+									"birthDay": 20,
+									"birthMonth": 5,
+									"birthYear": 1986
+								},
+								{
+									"playerName": "Tami Jones",
+									"position": "defense",
+									"skating": 6,
+									"shooting": 2,
+									"checking": 19,
+									"saving": 15,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 4,
+									"birthYear": 1985
+								},
+								{
+									"playerName": "Tami Morrison",
+									"position": "defense",
+									"skating": 4,
+									"shooting": 20,
+									"checking": 6,
+									"saving": 14,
+									"captain": false,
+									"birthDay": 19,
+									"birthMonth": 10,
+									"birthYear": 1990
+								},
+								{
+									"playerName": "Zongming Fei",
+									"position": "defense",
+									"skating": 4,
+									"shooting": 15,
+									"checking": 15,
+									"saving": 10,
+									"captain": false,
+									"birthDay": 21,
+									"birthMonth": 6,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Zongming Page",
+									"position": "goalie",
+									"skating": 20,
+									"shooting": 18,
+									"checking": 8,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 13,
+									"birthMonth": 4,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Hardik Samson",
+									"position": "goalie",
+									"skating": 3,
+									"shooting": 7,
+									"checking": 13,
+									"saving": 1,
+									"captain": false,
+									"birthDay": 10,
+									"birthMonth": 2,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Bonnie Wu",
+									"position": "forward",
+									"skating": 17,
+									"shooting": 9,
+									"checking": 9,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 25,
+									"birthMonth": 11,
+									"birthYear": 2002
+								},
+								{
+									"playerName": "Shakuntala Marley",
+									"position": "forward",
+									"skating": 19,
+									"shooting": 4,
+									"checking": 1,
+									"saving": 7,
+									"captain": false,
+									"birthDay": 14,
+									"birthMonth": 7,
+									"birthYear": 1987
+								},
+								{
+									"playerName": "Hardik Smith",
+									"position": "forward",
+									"skating": 9,
+									"shooting": 3,
+									"checking": 10,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 22,
+									"birthMonth": 3,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Sai Greenbaum",
+									"position": "forward",
+									"skating": 1,
+									"shooting": 9,
+									"checking": 6,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 1,
+									"birthMonth": 4,
+									"birthYear": 1996
+								},
+								{
+									"playerName": "Wen Smith",
+									"position": "forward",
+									"skating": 10,
+									"shooting": 20,
+									"checking": 8,
+									"saving": 5,
+									"captain": false,
+									"birthDay": 26,
+									"birthMonth": 2,
+									"birthYear": 2000
+								},
+								{
+									"playerName": "Bonnie Liu",
+									"position": "defense",
+									"skating": 15,
+									"shooting": 19,
+									"checking": 5,
+									"saving": 18,
+									"captain": false,
+									"birthDay": 2,
+									"birthMonth": 2,
+									"birthYear": 1994
+								},
+								{
+									"playerName": "Raghav Wu",
+									"position": "defense",
+									"skating": 18,
+									"shooting": 13,
+									"checking": 10,
+									"saving": 3,
+									"captain": false,
+									"birthDay": 6,
+									"birthMonth": 5,
+									"birthYear": 2001
+								},
+								{
+									"playerName": "Fred Jones",
+									"position": "defense",
+									"skating": 16,
+									"shooting": 16,
+									"checking": 5,
+									"saving": 19,
+									"captain": false,
+									"birthDay": 4,
+									"birthMonth": 9,
+									"birthYear": 1993
+								},
+								{
+									"playerName": "Karan Fei",
+									"position": "goalie",
+									"skating": 8,
+									"shooting": 19,
+									"checking": 14,
+									"saving": 8,
+									"captain": false,
+									"birthDay": 15,
+									"birthMonth": 12,
+									"birthYear": 1989
+								},
+								{
+									"playerName": "Karan Bishop",
+									"position": "goalie",
+									"skating": 8,
+									"shooting": 3,
+									"checking": 1,
+									"saving": 6,
+									"captain": false,
+									"birthDay": 8,
+									"birthMonth": 10,
+									"birthYear": 2001
+								}
+							]
+						}
+
+					]
+				}
+			]
+		}
+	],
+	"freeAgents": [
+		{
+			"playerName": "Don Fei",
+			"position": "defense",
+			"skating": 2,
+			"shooting": 13,
+			"checking": 7,
+			"saving": 11,
+			"birthDay": 19,
+			"birthMonth": 3,
+			"birthYear": 1989
+		},
+		{
+			"playerName": "Tami Halen",
+			"position": "defense",
+			"skating": 3,
+			"shooting": 18,
+			"checking": 9,
+			"saving": 18,
+			"birthDay": 26,
+			"birthMonth": 6,
+			"birthYear": 1994
+		},
+		{
+			"playerName": "Fred Halen",
+			"position": "goalie",
+			"skating": 6,
+			"shooting": 3,
+			"checking": 4,
+			"saving": 5,
+			"birthDay": 19,
+			"birthMonth": 12,
+			"birthYear": 1987
+		},
+		{
+			"playerName": "Pat Plant",
+			"position": "defense",
+			"skating": 5,
+			"shooting": 20,
+			"checking": 3,
+			"saving": 5,
+			"birthDay": 25,
+			"birthMonth": 7,
+			"birthYear": 1985
+		},
+		{
+			"playerName": "Walter Samson",
+			"position": "defense",
+			"skating": 8,
+			"shooting": 8,
+			"checking": 13,
+			"saving": 15,
+			"birthDay": 6,
+			"birthMonth": 1,
+			"birthYear": 2000
+		},
+		{
+			"playerName": "Pat Nelson",
+			"position": "forward",
+			"skating": 14,
+			"shooting": 8,
+			"checking": 20,
+			"saving": 13,
+			"birthDay": 27,
+			"birthMonth": 7,
+			"birthYear": 1998
+		},
+		{
+			"playerName": "Rahul Singh",
+			"position": "defense",
+			"skating": 11,
+			"shooting": 14,
+			"checking": 15,
+			"saving": 15,
+			"birthDay": 28,
+			"birthMonth": 5,
+			"birthYear": 1996
+		},
+		{
+			"playerName": "Don Smith",
+			"position": "defense",
+			"skating": 6,
+			"shooting": 11,
+			"checking": 11,
+			"saving": 10,
+			"birthDay": 17,
+			"birthMonth": 11,
+			"birthYear": 1994
+		},
+		{
+			"playerName": "Sai Khatri",
+			"position": "goalie",
+			"skating": 11,
+			"shooting": 15,
+			"checking": 11,
+			"saving": 4,
+			"birthDay": 17,
+			"birthMonth": 3,
+			"birthYear": 1990
+		},
+		{
+			"playerName": "Mary Hawkins",
+			"position": "goalie",
+			"skating": 1,
+			"shooting": 3,
+			"checking": 2,
+			"saving": 3,
+			"birthDay": 3,
+			"birthMonth": 4,
+			"birthYear": 2001
+		},
+		{
+			"playerName": "Rahul Marley",
+			"position": "goalie",
+			"skating": 11,
+			"shooting": 1,
+			"checking": 5,
+			"saving": 19,
+			"birthDay": 3,
+			"birthMonth": 10,
+			"birthYear": 1985
+		},
+		{
+			"playerName": "Sai Hawkey",
+			"position": "defense",
+			"skating": 14,
+			"shooting": 2,
+			"checking": 18,
+			"saving": 7,
+			"birthDay": 16,
+			"birthMonth": 2,
+			"birthYear": 1990
+		},
+		{
+			"playerName": "Sammy Rogers",
+			"position": "defense",
+			"skating": 4,
+			"shooting": 12,
+			"checking": 6,
+			"saving": 14,
+			"birthDay": 26,
+			"birthMonth": 4,
+			"birthYear": 1988
+		},
+		{
+			"playerName": "Mary Halen",
+			"position": "defense",
+			"skating": 17,
+			"shooting": 20,
+			"checking": 16,
+			"saving": 2,
+			"birthDay": 2,
+			"birthMonth": 10,
+			"birthYear": 1998
+		},
+		{
+			"playerName": "Chris Wu",
+			"position": "forward",
+			"skating": 15,
+			"shooting": 20,
+			"checking": 6,
+			"saving": 3,
+			"birthDay": 23,
+			"birthMonth": 8,
+			"birthYear": 1987
+		},
+		{
+			"playerName": "Sammy Hendrix",
+			"position": "forward",
+			"skating": 7,
+			"shooting": 4,
+			"checking": 12,
+			"saving": 6,
+			"birthDay": 6,
+			"birthMonth": 2,
+			"birthYear": 2002
+		},
+		{
+			"playerName": "Prashant Fei",
+			"position": "defense",
+			"skating": 11,
+			"shooting": 18,
+			"checking": 20,
+			"saving": 8,
+			"birthDay": 16,
+			"birthMonth": 8,
+			"birthYear": 2002
+		},
+		{
+			"playerName": "Tina Bishop",
+			"position": "defense",
+			"skating": 8,
+			"shooting": 19,
+			"checking": 1,
+			"saving": 19,
+			"birthDay": 1,
+			"birthMonth": 10,
+			"birthYear": 1990
+		},
+		{
+			"playerName": "John Hawkey",
+			"position": "goalie",
+			"skating": 10,
+			"shooting": 15,
+			"checking": 17,
+			"saving": 4,
+			"birthDay": 2,
+			"birthMonth": 11,
+			"birthYear": 1986
+		},
+		{
+			"playerName": "Mike Khatri",
+			"position": "forward",
+			"skating": 8,
+			"shooting": 5,
+			"checking": 9,
+			"saving": 12,
+			"birthDay": 21,
+			"birthMonth": 1,
+			"birthYear": 1997
+		},
+		{
+			"playerName": "Shakuntala Singh",
+			"position": "forward",
+			"skating": 1,
+			"shooting": 3,
+			"checking": 18,
+			"saving": 6,
+			"birthDay": 16,
+			"birthMonth": 3,
+			"birthYear": 1991
+		},
+		{
+			"playerName": "Rahul Page",
+			"position": "goalie",
+			"skating": 16,
+			"shooting": 18,
+			"checking": 19,
+			"saving": 2,
+			"birthDay": 8,
+			"birthMonth": 6,
+			"birthYear": 1998
+		},
+		{
+			"playerName": "Rob Greenbaum",
+			"position": "forward",
+			"skating": 20,
+			"shooting": 18,
+			"checking": 12,
+			"saving": 16,
+			"birthDay": 2,
+			"birthMonth": 11,
+			"birthYear": 1998
+		},
+		{
+			"playerName": "Prashant Greenbaum",
+			"position": "defense",
+			"skating": 16,
+			"shooting": 5,
+			"checking": 13,
+			"saving": 10,
+			"birthDay": 5,
+			"birthMonth": 10,
+			"birthYear": 1990
+		},
+		{
+			"playerName": "Abraham Hendrix",
+			"position": "defense",
+			"skating": 5,
+			"shooting": 5,
+			"checking": 20,
+			"saving": 2,
+			"birthDay": 3,
+			"birthMonth": 2,
+			"birthYear": 1994
+		},
+		{
+			"playerName": "Rashita Liu",
+			"position": "defense",
+			"skating": 18,
+			"shooting": 4,
+			"checking": 14,
+			"saving": 6,
+			"birthDay": 6,
+			"birthMonth": 6,
+			"birthYear": 1989
+		},
+		{
+			"playerName": "Mohammed Page",
+			"position": "defense",
+			"skating": 12,
+			"shooting": 15,
+			"checking": 6,
+			"saving": 8,
+			"birthDay": 10,
+			"birthMonth": 2,
+			"birthYear": 1988
+		},
+		{
+			"playerName": "Tami Jones",
+			"position": "forward",
+			"skating": 18,
+			"shooting": 20,
+			"checking": 6,
+			"saving": 14,
+			"birthDay": 6,
+			"birthMonth": 2,
+			"birthYear": 2000
+		},
+		{
+			"playerName": "Karan Chang",
+			"position": "defense",
+			"skating": 2,
+			"shooting": 19,
+			"checking": 2,
+			"saving": 15,
+			"birthDay": 14,
+			"birthMonth": 8,
+			"birthYear": 1994
+		},
+		{
+			"playerName": "Walter Cherry",
+			"position": "defense",
+			"skating": 20,
+			"shooting": 19,
+			"checking": 17,
+			"saving": 1,
+			"birthDay": 8,
+			"birthMonth": 1,
+			"birthYear": 1997
+		},
+		{
+			"playerName": "Roger Plant",
+			"position": "goalie",
+			"skating": 9,
+			"shooting": 9,
+			"checking": 16,
+			"saving": 1,
+			"birthDay": 1,
+			"birthMonth": 6,
+			"birthYear": 1985
+		},
+		{
+			"playerName": "John Patel",
+			"position": "goalie",
+			"skating": 5,
+			"shooting": 6,
+			"checking": 14,
+			"saving": 4,
+			"birthDay": 21,
+			"birthMonth": 12,
+			"birthYear": 1985
+		},
+		{
+			"playerName": "Shakuntala Williamson",
+			"position": "defense",
+			"skating": 11,
+			"shooting": 4,
+			"checking": 16,
+			"saving": 10,
+			"birthDay": 19,
+			"birthMonth": 4,
+			"birthYear": 1995
+		},
+		{
+			"playerName": "Bonnie Liu",
+			"position": "defense",
+			"skating": 11,
+			"shooting": 10,
+			"checking": 15,
+			"saving": 4,
+			"birthDay": 16,
+			"birthMonth": 7,
+			"birthYear": 1998
+		},
+		{
+			"playerName": "Zongming Wu",
+			"position": "goalie",
+			"skating": 14,
+			"shooting": 1,
+			"checking": 4,
+			"saving": 9,
+			"birthDay": 15,
+			"birthMonth": 5,
+			"birthYear": 1998
+		},
+		{
+			"playerName": "Rob Greenbaum",
+			"position": "forward",
+			"skating": 8,
+			"shooting": 10,
+			"checking": 2,
+			"saving": 6,
+			"birthDay": 24,
+			"birthMonth": 10,
+			"birthYear": 1993
+		},
+		{
+			"playerName": "Tami Rogers",
+			"position": "forward",
+			"skating": 6,
+			"shooting": 1,
+			"checking": 18,
+			"saving": 15,
+			"birthDay": 21,
+			"birthMonth": 6,
+			"birthYear": 1996
+		},
+		{
+			"playerName": "John Page",
+			"position": "forward",
+			"skating": 4,
+			"shooting": 4,
+			"checking": 14,
+			"saving": 6,
+			"birthDay": 7,
+			"birthMonth": 2,
+			"birthYear": 1996
+		},
+		{
+			"playerName": "Mike Bishop",
+			"position": "goalie",
+			"skating": 6,
+			"shooting": 1,
+			"checking": 20,
+			"saving": 9,
+			"birthDay": 28,
+			"birthMonth": 3,
+			"birthYear": 1995
+		},
+		{
+			"playerName": "Roger Smith",
+			"position": "goalie",
+			"skating": 4,
+			"shooting": 12,
+			"checking": 16,
+			"saving": 14,
+			"birthDay": 24,
+			"birthMonth": 8,
+			"birthYear": 2001
+		},
+		{
+			"playerName": "Bonnie Samson",
+			"position": "forward",
+			"skating": 16,
+			"shooting": 11,
+			"checking": 8,
+			"saving": 11,
+			"birthDay": 19,
+			"birthMonth": 5,
+			"birthYear": 1993
+		},
+		{
+			"playerName": "John Chang",
+			"position": "defense",
+			"skating": 20,
+			"shooting": 13,
+			"checking": 8,
+			"saving": 1,
+			"birthDay": 3,
+			"birthMonth": 2,
+			"birthYear": 1985
+		},
+		{
+			"playerName": "Prabhjot Khatri",
+			"position": "goalie",
+			"skating": 18,
+			"shooting": 10,
+			"checking": 12,
+			"saving": 12,
+			"birthDay": 11,
+			"birthMonth": 3,
+			"birthYear": 1992
+		},
+		{
+			"playerName": "Rahul Khatri",
+			"position": "defense",
+			"skating": 5,
+			"shooting": 17,
+			"checking": 1,
+			"saving": 4,
+			"birthDay": 6,
+			"birthMonth": 4,
+			"birthYear": 1992
+		},
+		{
+			"playerName": "Prabhjot Jones",
+			"position": "goalie",
+			"skating": 19,
+			"shooting": 4,
+			"checking": 5,
+			"saving": 16,
+			"birthDay": 27,
+			"birthMonth": 8,
+			"birthYear": 1996
+		},
+		{
+			"playerName": "Prabhjot Chang",
+			"position": "goalie",
+			"skating": 6,
+			"shooting": 1,
+			"checking": 17,
+			"saving": 15,
+			"birthDay": 12,
+			"birthMonth": 12,
+			"birthYear": 1987
+		},
+		{
+			"playerName": "Fred Fei",
+			"position": "goalie",
+			"skating": 2,
+			"shooting": 18,
+			"checking": 15,
+			"saving": 11,
+			"birthDay": 6,
+			"birthMonth": 5,
+			"birthYear": 1989
+		},
+		{
+			"playerName": "Bonnie Khatri",
+			"position": "defense",
+			"skating": 20,
+			"shooting": 3,
+			"checking": 6,
+			"saving": 7,
+			"birthDay": 22,
+			"birthMonth": 9,
+			"birthYear": 1986
+		},
+		{
+			"playerName": "Rahul Bishop",
+			"position": "forward",
+			"skating": 6,
+			"shooting": 8,
+			"checking": 5,
+			"saving": 13,
+			"birthDay": 3,
+			"birthMonth": 3,
+			"birthYear": 1988
+		},
+		{
+			"playerName": "Hardik Chang",
+			"position": "defense",
+			"skating": 16,
+			"shooting": 1,
+			"checking": 12,
+			"saving": 13,
+			"birthDay": 21,
+			"birthMonth": 5,
+			"birthYear": 1996
+		},
+		{
+			"playerName": "Roger Burbchuk",
+			"position": "goalie",
+			"skating": 9,
+			"shooting": 9,
+			"checking": 12,
+			"saving": 14,
+			"birthDay": 1,
+			"birthMonth": 9,
+			"birthYear": 1991
+		}
+	],
+	"coaches": [
+		{
+			"name": "Zongming Hawkins",
+			"skating": 0.62,
+			"shooting": 0.32,
+			"checking": 0.3,
+			"saving": 0.64
+		},
+		{
+			"name": "Sai Jones",
+			"skating": 0.52,
+			"shooting": 0.89,
+			"checking": 0.85,
+			"saving": 0.45
+		},
+		{
+			"name": "Rashita Jones",
+			"skating": 0.25,
+			"shooting": 0.91,
+			"checking": 0.21,
+			"saving": 0.44
+		},
+		{
+			"name": "Tina Hawkey",
+			"skating": 0.89,
+			"shooting": 0.1,
+			"checking": 0.57,
+			"saving": 0.43
+		},
+		{
+			"name": "Raghav Thomson",
+			"skating": 0.32,
+			"shooting": 0.76,
+			"checking": 0.7,
+			"saving": 0.57
+		},
+		{
+			"name": "Fred Halen",
+			"skating": 0.26,
+			"shooting": 0.01,
+			"checking": 0.76,
+			"saving": 0.56
+		},
+		{
+			"name": "Rashita Halen",
+			"skating": 0.15,
+			"shooting": 0.52,
+			"checking": 0.65,
+			"saving": 0.84
+		},
+		{
+			"name": "Mozhgan Morrison",
+			"skating": 0.81,
+			"shooting": 0.64,
+			"checking": 0.74,
+			"saving": 0.92
+		},
+		{
+			"name": "Don Burbchuk",
+			"skating": 0.56,
+			"shooting": 0.24,
+			"checking": 0.34,
+			"saving": 0.18
+		},
+		{
+			"name": "Fred Halen",
+			"skating": 0.07,
+			"shooting": 0.97,
+			"checking": 0.9,
+			"saving": 0.21
+		},
+		{
+			"name": "Fred Morrison",
+			"skating": 0.04,
+			"shooting": 0.55,
+			"checking": 0.64,
+			"saving": 0.61
+		},
+		{
+			"name": "Rashita Fei",
+			"skating": 0.11,
+			"shooting": 0.36,
+			"checking": 0.29,
+			"saving": 0.54
+		},
+		{
+			"name": "Raghav Marley",
+			"skating": 0.32,
+			"shooting": 0.44,
+			"checking": 0.49,
+			"saving": 0.3
+		},
+		{
+			"name": "Sammy Patel",
+			"skating": 0.33,
+			"shooting": 0.13,
+			"checking": 0.2,
+			"saving": 0.66
+		},
+		{
+			"name": "Hardik Hawkins",
+			"skating": 0.1,
+			"shooting": 0.53,
+			"checking": 0.6,
+			"saving": 0.35
+		},
+		{
+			"name": "Jimmy Wu",
+			"skating": 0.22,
+			"shooting": 0.68,
+			"checking": 0.28,
+			"saving": 0.17
+		},
+		{
+			"name": "John Hawkins",
+			"skating": 0.82,
+			"shooting": 0.76,
+			"checking": 0.41,
+			"saving": 0.2
+		},
+		{
+			"name": "Don Wu",
+			"skating": 0.12,
+			"shooting": 0.02,
+			"checking": 0.26,
+			"saving": 0.82
+		},
+		{
+			"name": "Prabhjot Halen",
+			"skating": 0.86,
+			"shooting": 0.74,
+			"checking": 0.69,
+			"saving": 0.78
+		},
+		{
+			"name": "Nancy Patel",
+			"skating": 0.62,
+			"shooting": 0.16,
+			"checking": 0.08,
+			"saving": 0.59
+		},
+		{
+			"name": "Prabhjot Hawkey",
+			"skating": 0.96,
+			"shooting": 0.7,
+			"checking": 0.57,
+			"saving": 0.27
+		},
+		{
+			"name": "Shakuntala Hawkey",
+			"skating": 0.63,
+			"shooting": 0.9,
+			"checking": 0.36,
+			"saving": 0.23
+		},
+		{
+			"name": "Raghav Jones",
+			"skating": 0.7,
+			"shooting": 0.29,
+			"checking": 0.21,
+			"saving": 0.74
+		},
+		{
+			"name": "Prabhjot Smith",
+			"skating": 0.98,
+			"shooting": 0.19,
+			"checking": 0.23,
+			"saving": 0.15
+		},
+		{
+			"name": "Raghav Samson",
+			"skating": 0.53,
+			"shooting": 0.58,
+			"checking": 0.98,
+			"saving": 0.17
+		},
+		{
+			"name": "Pat Bonham",
+			"skating": 0.05,
+			"shooting": 0.65,
+			"checking": 0.89,
+			"saving": 0.6
+		},
+		{
+			"name": "Rob Rogers",
+			"skating": 0.0,
+			"shooting": 0.35,
+			"checking": 0.34,
+			"saving": 0.7
+		},
+		{
+			"name": "Tina Cherry",
+			"skating": 0.0,
+			"shooting": 0.01,
+			"checking": 0.68,
+			"saving": 0.74
+		},
+		{
+			"name": "Roger Fei",
+			"skating": 0.93,
+			"shooting": 0.5,
+			"checking": 0.8,
+			"saving": 0.19
+		},
+		{
+			"name": "Prashant Samson",
+			"skating": 0.98,
+			"shooting": 0.91,
+			"checking": 0.0,
+			"saving": 0.81
+		},
+		{
+			"name": "Pat Singh",
+			"skating": 0.6,
+			"shooting": 0.52,
+			"checking": 0.38,
+			"saving": 0.14
+		},
+		{
+			"name": "Raghav Bonham",
+			"skating": 0.06,
+			"shooting": 0.5,
+			"checking": 0.86,
+			"saving": 0.16
+		},
+		{
+			"name": "Mike Smith",
+			"skating": 0.99,
+			"shooting": 0.5,
+			"checking": 0.17,
+			"saving": 0.54
+		},
+		{
+			"name": "Chris Singh",
+			"skating": 0.67,
+			"shooting": 0.45,
+			"checking": 0.52,
+			"saving": 0.43
+		},
+		{
+			"name": "Mary Nelson",
+			"skating": 0.02,
+			"shooting": 0.99,
+			"checking": 0.04,
+			"saving": 0.49
+		},
+		{
+			"name": "Tami Bishop",
+			"skating": 0.78,
+			"shooting": 0.36,
+			"checking": 0.92,
+			"saving": 0.16
+		},
+		{
+			"name": "Shakuntala Samson",
+			"skating": 0.56,
+			"shooting": 0.73,
+			"checking": 0.39,
+			"saving": 0.14
+		},
+		{
+			"name": "Hardik Marley",
+			"skating": 0.57,
+			"shooting": 0.85,
+			"checking": 0.83,
+			"saving": 0.7
+		},
+		{
+			"name": "Prashant Jones",
+			"skating": 0.6,
+			"shooting": 0.7,
+			"checking": 0.51,
+			"saving": 0.77
+		},
+		{
+			"name": "Fred Khatri",
+			"skating": 0.31,
+			"shooting": 0.84,
+			"checking": 0.28,
+			"saving": 0.14
+		},
+		{
+			"name": "Rob Jones",
+			"skating": 0.47,
+			"shooting": 0.58,
+			"checking": 0.19,
+			"saving": 0.74
+		},
+		{
+			"name": "Hardik Singh",
+			"skating": 0.3,
+			"shooting": 0.17,
+			"checking": 0.55,
+			"saving": 0.35
+		},
+		{
+			"name": "Chris Bonham",
+			"skating": 0.48,
+			"shooting": 0.34,
+			"checking": 0.22,
+			"saving": 0.8
+		},
+		{
+			"name": "Zongming Morrison",
+			"skating": 1.0,
+			"shooting": 0.81,
+			"checking": 0.68,
+			"saving": 0.54
+		},
+		{
+			"name": "Mozhgan Rogers",
+			"skating": 0.72,
+			"shooting": 0.02,
+			"checking": 0.63,
+			"saving": 0.44
+		},
+		{
+			"name": "Raghav Khatri",
+			"skating": 0.76,
+			"shooting": 0.8,
+			"checking": 0.99,
+			"saving": 0.17
+		},
+		{
+			"name": "Wen Chang",
+			"skating": 0.54,
+			"shooting": 0.59,
+			"checking": 0.49,
+			"saving": 0.9
+		},
+		{
+			"name": "Rashita Bishop",
+			"skating": 0.74,
+			"shooting": 0.18,
+			"checking": 0.59,
+			"saving": 0.55
+		},
+		{
+			"name": "Tina Hawkins",
+			"skating": 1.0,
+			"shooting": 0.31,
+			"checking": 0.01,
+			"saving": 0.33
+		},
+		{
+			"name": "Tina Hawkins",
+			"skating": 0.17,
+			"shooting": 0.33,
+			"checking": 0.52,
+			"saving": 0.69
+		}
+	],
+	"generalManagers": [
+		{
+			"name": "Mary Greenbaum",
+			"personality": "gambler"
+		},
+		{
+			"name": "Mozhgan Page",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Tina Morrison",
+			"personality": "gambler"
+		},
+		{
+			"name": "Sammy Bishop",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Sai Burbchuk",
+			"personality": "gambler"
+		},
+		{
+			"name": "Zongming Bishop",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Prabhjot Greenbaum",
+			"personality": "normal"
+		},
+		{
+			"name": "Mary Bishop",
+			"personality": "gambler"
+		},
+		{
+			"name": "Bonnie Patel",
+			"personality": "normal"
+		},
+		{
+			"name": "Prabhjot Plant",
+			"personality": "normal"
+		},
+		{
+			"name": "Walter Williamson",
+			"personality": "normal"
+		},
+		{
+			"name": "Wen Singh",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Mohammed Bishop",
+			"personality": "gambler"
+		},
+		{
+			"name": "Prashant Thomson",
+			"personality": "normal"
+		},
+		{
+			"name": "Walter Thomson",
+			"personality": "gambler"
+		},
+		{
+			"name": "Karan Halen",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Chris Chang",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Mozhgan Hawkey",
+			"personality": "gambler"
+		},
+		{
+			"name": "Pat Morrison",
+			"personality": "normal"
+		},
+		{
+			"name": "Prashant Halen",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Roger Thomson",
+			"personality": "normal"
+		},
+		{
+			"name": "Rashita Morrison",
+			"personality": "normal"
+		},
+		{
+			"name": "Sammy Bonham",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Raghav Samson",
+			"personality": "gambler"
+		},
+		{
+			"name": "Zongming Greenbaum",
+			"personality": "gambler"
+		},
+		{
+			"name": "Rahul Page",
+			"personality": "normal"
+		},
+		{
+			"name": "Nancy Page",
+			"personality": "normal"
+		},
+		{
+			"name": "Rob Khatri",
+			"personality": "normal"
+		},
+		{
+			"name": "Nancy Page",
+			"personality": "normal"
+		},
+		{
+			"name": "Prabhjot Wu",
+			"personality": "normal"
+		},
+		{
+			"name": "Fred Bonham",
+			"personality": "normal"
+		},
+		{
+			"name": "Fred Fei",
+			"personality": "normal"
+		},
+		{
+			"name": "Walter Smith",
+			"personality": "normal"
+		},
+		{
+			"name": "Sammy Cherry",
+			"personality": "normal"
+		},
+		{
+			"name": "Tina Halen",
+			"personality": "gambler"
+		},
+		{
+			"name": "Tina Halen",
+			"personality": "gambler"
+		},
+		{
+			"name": "Shakuntala Plant",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Prashant Halen",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Rob Rogers",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Pat Greenbaum",
+			"personality": "normal"
+		},
+		{
+			"name": "Wen Wu",
+			"personality": "normal"
+		},
+		{
+			"name": "Fred Wu",
+			"personality": "normal"
+		},
+		{
+			"name": "Prabhjot Greenbaum",
+			"personality": "normal"
+		},
+		{
+			"name": "Tami Williamson",
+			"personality": "gambler"
+		},
+		{
+			"name": "Wen Khatri",
+			"personality": "gambler"
+		},
+		{
+			"name": "Walter Jones",
+			"personality": "normal"
+		},
+		{
+			"name": "Sai Chang",
+			"personality": "gambler"
+		},
+		{
+			"name": "Sai Bonham",
+			"personality": "gambler"
+		},
+		{
+			"name": "Shakuntala Halen",
+			"personality": "normal"
+		},
+		{
+			"name": "Wen Smith",
+			"personality": "normal"
+		},
+		{
+			"name": "Rob Smith",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Sai Bishop",
+			"personality": "gambler"
+		},
+		{
+			"name": "Jimmy Samson",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Wen Singh",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Wen Bonham",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Chris Thomson",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Hardik Bonham",
+			"personality": "normal"
+		},
+		{
+			"name": "John Thomson",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Shakuntala Bonham",
+			"personality": "gambler"
+		},
+		{
+			"name": "Mike Liu",
+			"personality": "gambler"
+		},
+		{
+			"name": "Rob Fei",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Pat Hendrix",
+			"personality": "normal"
+		},
+		{
+			"name": "Fred Plant",
+			"personality": "normal"
+		},
+		{
+			"name": "John Greenbaum",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Mozhgan Page",
+			"personality": "gambler"
+		},
+		{
+			"name": "Sai Page",
+			"personality": "gambler"
+		},
+		{
+			"name": "Chris Hawkey",
+			"personality": "normal"
+		},
+		{
+			"name": "Rahul Page",
+			"personality": "gambler"
+		},
+		{
+			"name": "Rob Burbchuk",
+			"personality": "gambler"
+		},
+		{
+			"name": "Tina Wu",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Pat Jones",
+			"personality": "gambler"
+		},
+		{
+			"name": "Fred Singh",
+			"personality": "gambler"
+		},
+		{
+			"name": "Mozhgan Plant",
+			"personality": "gambler"
+		},
+		{
+			"name": "Mike Nelson",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Prashant Liu",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Tina Nelson",
+			"personality": "normal"
+		},
+		{
+			"name": "Roger Page",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Sammy Marley",
+			"personality": "gambler"
+		},
+		{
+			"name": "Chris Thomson",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Mary Patel",
+			"personality": "gambler"
+		},
+		{
+			"name": "Bonnie Smith",
+			"personality": "gambler"
+		},
+		{
+			"name": "Nancy Page",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Wen Khatri",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Don Rogers",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Tina Plant",
+			"personality": "gambler"
+		},
+		{
+			"name": "Raghav Hawkey",
+			"personality": "shrewd"
+		},
+		{
+			"name": "Bonnie Bonham",
+			"personality": "gambler"
+		},
+		{
+			"name": "Prashant Khatri",
+			"personality": "normal"
+		},
+		{
+			"name": "Rashita Smith",
+			"personality": "gambler"
+		},
+		{
+			"name": "Karan Rogers",
+			"personality": "normal"
+		}
+	]
+}

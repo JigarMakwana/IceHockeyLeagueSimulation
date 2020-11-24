@@ -40,7 +40,7 @@ public class UserInputValidation implements IUserInputValidation {
     }
 
     @Override
-    public int userIterativeIntegerSelection(int listSize) {
+    public int userResolveRosterInput(int listSize) {
         boolean isValidInput = false;
         int userInput = 0;
         do {

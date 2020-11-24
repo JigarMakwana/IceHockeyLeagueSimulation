@@ -9,6 +9,7 @@ import group11.Hockey.BusinessLogic.AdvanceToNextSeason;
 import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.IState;
 import group11.Hockey.BusinessLogic.StateMachineState;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.IAITrading;
 import group11.Hockey.BusinessLogic.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.GameplayConfig;
@@ -83,8 +84,8 @@ public class SimulateSeason implements ISimulateSeason, IState {
 
 		// on or before trade deadline
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
-			AITrading aiTrading = new AITrading(league);
-			aiTrading.generateTradeOffers();
+//			IAITrading aiTrading = new AITrading(league);
+//			aiTrading.generateTradeOffers();
 		}
 
 		StateMachineState currentState = new AgePlayer(league, 1);

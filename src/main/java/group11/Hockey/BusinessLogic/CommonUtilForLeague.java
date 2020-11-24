@@ -36,7 +36,7 @@ abstract public class CommonUtilForLeague {
 	}
 
 	public void removeFreeAgentsFromLeague(League league, List<Player> freeAgents) {
-		List<Player> listOfFreeAgentsInLeague = league.getFreeAgents();
+		List<Player> listOfFreeAgentsInLeague = (List<Player>) league.getFreeAgents();
 		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
 		while (interator.hasNext()) {
 		    Player pl = interator.next();

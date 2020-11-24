@@ -19,6 +19,10 @@ public enum Attributes {
 	RANDOMTRADEOFFERCHANCE("randomTradeOfferChance"),
 	MAXPLAYERSPERTRADE("maxPlayersPerTrade"),
 	RANDOMACCEPTANCECHANCE("randomAcceptanceChance"),
+	GMTABLE("gmTable"),
+	SHREWD("shrewd"),
+	GAMBLER("gambler"),
+	NORMAL("normal"),
 	CONFERENCES("conferences"),
 	CONFERENCENAME("conferenceName"),
 	DIVISIONS("divisions"),
@@ -40,7 +44,7 @@ public enum Attributes {
 	FREEAGENTS("freeAgents"),
 	COACHES("coaches"),
 	GENERALMANAGERS("generalManagers");
-	
+
 	private String attribute;
 
 	private Attributes(String attribute) {

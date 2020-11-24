@@ -2,7 +2,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import group11.Hockey.db.IGameplayConfigDb;
 
-public class GameplayConfig {
+public class GameplayConfig implements IGameplayConfig{
 	private Aging aging;
 	private GameResolver gameResolver;
 	private Injuries injuries;

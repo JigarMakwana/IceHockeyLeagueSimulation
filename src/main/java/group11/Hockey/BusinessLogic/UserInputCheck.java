@@ -111,9 +111,9 @@ public class UserInputCheck implements IUserInputCheck {
 					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue) - 1).getPosition();
 					if (postion.equalsIgnoreCase(PositionEnum.FORWARD.toString())
 							|| postion.equalsIgnoreCase(PositionEnum.DEFENSE.toString())) {
-						skatersList.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
+						skatersList.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					} else if (postion.equalsIgnoreCase(PositionEnum.GOALIE.toString())) {
-						goalies.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
+						goalies.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					}
 				}
 			}
@@ -125,7 +125,65 @@ public class UserInputCheck implements IUserInputCheck {
 		finalListOfPlayers.addAll(goalies);
 		newTeam.setPlayers(finalListOfPlayers);
 		player.removeFreeAgentsFromLeague(league, finalListOfPlayers);
-
 	}
 
+	/**
+	 * The below method takes and validates the trade related input provided by User
+	 * 1. User gives input to respond the trade offered by AI
+	 * @author  Jigar Makwana B00842568
+	 */
+
+	@Override
+	public int validateUserTradeInput()
+	{
+		boolean isValidInput = false;
+		int userInput = -1;
+		do {
+			while(userInput == -1) {
+				try {
+					userInput = commandLineInput.getInt();
+				} catch (Exception e) {
+					display.showMessageOnConsole("Please enter 0 or 1");
+				}
+			}
+			if(validation.isUserTradeInputValid(userInput)) {
+				break;
+			}
+			else {
+				display.showMessageOnConsole("Please enter 0 or 1");
+				userInput = -1;
+			}
+		} while (isValidInput == false);
+		return userInput;
+	}
+
+	/**
+	 * The below method takes and validates the trade related User Inputs when
+	 * 1. User gives input to select players to add or drop to/from a team
+	 * @author  Jigar Makwana B00842568
+	 */
+
+	@Override
+	public int userResolveRosterInput(int listSize) {
+		boolean isValidInput = false;
+		int userInput = 0;
+		do {
+			while(userInput <= 0) {
+				try {
+					userInput = commandLineInput.getInt();
+				} catch (Exception e) {
+					display.showMessageOnConsole("Please select valid value");
+				}
+			}
+			if(validation.isUserResolveRosterInputValid(userInput, listSize)) {
+				break;
+			}
+			else {
+				display.showMessageOnConsole("Please select valid value");
+				isValidInput = false;
+				userInput = 0;
+			}
+		} while (isValidInput == false);
+		return userInput;
+	}
 }

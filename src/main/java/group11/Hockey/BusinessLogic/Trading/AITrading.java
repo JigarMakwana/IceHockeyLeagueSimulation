@@ -21,10 +21,10 @@ public class AITrading extends StateMachineState {
 	private ILeague leagueObj;
 	private Trading tradingConfig;
 	private PlayerTradeOperations playerMiscellaneous;
+	private ICommandLineInput commandLineInput;
+	private IDisplay display;
+	private IValidations validation;
 	private ILeagueDb leagueDb;
-	//
-	IDisplay display = DefaultHockeyFactory.makeDisplay();
-	IUserInputValidation userSelection = new UserInputValidation();
 
 	public AITrading(ILeague leagueObj) {
 		this.leagueObj = leagueObj;
@@ -41,6 +41,17 @@ public class AITrading extends StateMachineState {
 		this.leagueDb = leagueDb;
 	}
 
+	public AITrading(ILeague leagueObj, ICommandLineInput commandLineInput, IDisplay display, IValidations validation, ILeagueDb leagueDb) {
+		this.leagueObj = leagueObj;
+		this.commandLineInput = commandLineInput;
+		this.display = display;
+		this.validation = validation;
+		this.leagueDb = leagueDb;
+		GameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
+		this.tradingConfig = gameConfig.getTrading();
+		this.playerMiscellaneous = new PlayerTradeOperations(this.tradingConfig);
+	}
+
 	@Override
 	public StateMachineState startState() {
 		this.generateTradeOffers();
@@ -52,7 +63,7 @@ public class AITrading extends StateMachineState {
 	}
 
 	public void generateTradeOffers() {
-		List<Team> eligibleTeamList = determineEligibleTeams();
+		List<Team> eligibleTeamList = determineTradeEligibleTeams();
 		int teamLength = eligibleTeamList.size();
 		boolean isAITeam = false;
 		for (int i = 0; teamLength > 1; i = 0) {
@@ -86,8 +97,8 @@ public class AITrading extends StateMachineState {
 							resolveAIToUserTrade(eligibleTeamList.get(i), weakestPlayerList, tradeTeam.getFirst(),
 									tradeTeam.getSecond());
 						} else {
-							display.displayTradeStatistics(eligibleTeamList.get(i), weakestPlayerList,
-									tradeTeam.getFirst(), tradeTeam.getSecond());
+//							display.displayTradeStatistics(eligibleTeamList.get(i), weakestPlayerList,
+//									tradeTeam.getFirst(), tradeTeam.getSecond());
 							resolveAIToAITrade(eligibleTeamList.get(i), weakestPlayerList, tradeTeam.getFirst(),
 									tradeTeam.getSecond());
 						}
@@ -101,7 +112,7 @@ public class AITrading extends StateMachineState {
 		}
 	}
 
-	public List<Team> determineEligibleTeams() {
+	public List<Team> determineTradeEligibleTeams() {
 		int lossPointCutOff = tradingConfig.getLossPoint();
 		boolean isAITeam;
 		List<Team> eligibleTeamList = new ArrayList<Team>();
@@ -146,10 +157,11 @@ public class AITrading extends StateMachineState {
 
 	public void resolveAIToUserTrade(Team team1, List<Player> offeredPlayerList, Team team2,
 			List<Player> requestedPlayerList) {
-		display.displayTradeStatisticsToUser(team1, offeredPlayerList, team2, requestedPlayerList);
+//		display.displayTradeStatisticsToUser(team1, offeredPlayerList, team2, requestedPlayerList);
 		display.displayAcceptRejectOptionToUser();
+		IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
 
-		int userInput = userSelection.validateUserTradeInput();
+		int userInput = userInputCheck.validateUserTradeInput();
 		if (userInput == 1) {
 			acceptTrade(team1, offeredPlayerList, team2, requestedPlayerList);
 		} else if (userInput == 0) {

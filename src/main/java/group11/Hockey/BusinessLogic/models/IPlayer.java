@@ -26,5 +26,9 @@ public interface IPlayer {
 
 	public boolean isInjured();
 
+	void setIsFreeAgent(boolean isFreeAgent);
+
+	void setCaptain(boolean captain);
+
 	boolean isActive();
 }

@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.InputOutput.JsonParsing;
 
 public enum Attributes {

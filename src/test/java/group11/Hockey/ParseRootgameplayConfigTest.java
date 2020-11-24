@@ -14,6 +14,8 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.IAging;
+import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.InputOutput.JsonParsing.ParseRootgameplayConfig;
@@ -33,8 +35,8 @@ public class ParseRootgameplayConfigTest {
 		League league = new League();
 		ParseRootgameplayConfig parseRoot = new ParseRootgameplayConfig();
 		parseRoot.parseRootElement(league, jsonObject);
-		GameplayConfig gamePlay = league.getGamePlayConfig();
-		Aging age = gamePlay.getAging();
+		IGameplayConfig gamePlay = league.getGamePlayConfig();
+		IAging age = gamePlay.getAging();
 		Assert.assertEquals(age.getMaximumAge(), 50);
 
 	}

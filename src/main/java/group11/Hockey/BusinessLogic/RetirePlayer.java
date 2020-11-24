@@ -6,10 +6,10 @@ package group11.Hockey.BusinessLogic;
 import java.util.List;
 import java.util.Random;
 
-import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.IAging;
+import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -23,8 +23,8 @@ public abstract class RetirePlayer extends StateMachineState {
 	}
 
 	private int getLikelihoodOfRetirement(ILeague league, float age) {
-		GameplayConfig gameplayConfig = league.getGamePlayConfig();
-		Aging ageDetails = gameplayConfig.getAging();
+		IGameplayConfig gameplayConfig = league.getGamePlayConfig();
+		IAging ageDetails = gameplayConfig.getAging();
 		int averageRetirementAge = ageDetails.getAverageRetirementAge();
 		int maximumAge = ageDetails.getMaximumAge();
 		int likelihoodOfRetirement = 1;

@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.InputOutput.JsonParsing;
 
 import java.util.ArrayList;
@@ -7,7 +10,6 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.League;
 

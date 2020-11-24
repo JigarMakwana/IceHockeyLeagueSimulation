@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
  */
 
 public class PlayerTradeOperations implements IPlayerTradeOperations {
-    private Trading tradingConfig;
+    private ITrading tradingConfig;
     IDisplay display = DefaultHockeyFactory.makeDisplay();
-    public PlayerTradeOperations(Trading tradingConfig)
+    public PlayerTradeOperations(ITrading tradingConfig)
     {
         this.tradingConfig = tradingConfig;
     }

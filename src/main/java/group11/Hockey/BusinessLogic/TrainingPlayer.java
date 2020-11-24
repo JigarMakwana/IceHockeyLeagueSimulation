@@ -6,7 +6,7 @@ import java.util.List;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -36,7 +36,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 		Date dateTime = parse.stringToDate(currentDate);
 		Date tradeDeadLine = timeLine.getTradeDeadLine();
 		String startDate = timeLine.getStartDate();
-		GameplayConfig gameplayConfig = league.getGamePlayConfig();
+		IGameplayConfig gameplayConfig = league.getGamePlayConfig();
 
 		int trainingDays = gameplayConfig.getTraining().getDaysUntilStatIncreaseCheck();
 		int daysDifference = (int) ((parse.stringToDate(currentDate).getTime()

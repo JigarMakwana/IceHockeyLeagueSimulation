@@ -309,7 +309,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	public void removeFreeAgentsFromLeague(League league, List<Player> freeAgents) {
+	public void removeFreeAgentsFromLeague(ILeague league, List<Player> freeAgents) {
 		List<Player> listOfFreeAgentsInLeague = league.getFreeAgents();
 		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
 		while (interator.hasNext()) {

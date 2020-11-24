@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -47,7 +47,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void teamNameFromUserCheck(Team newTeam, League league) {
+	public void teamNameFromUserCheck(Team newTeam, ILeague league) {
 		boolean checkTeamName = true;
 		String teamName = null;
 		while (checkTeamName) {
@@ -63,7 +63,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void generalManagerNameFromUserCheck(Team newTeam, League league) {
+	public void generalManagerNameFromUserCheck(Team newTeam, ILeague league) {
 		boolean checkManagerName = true;
 		String generalManager = null;
 		while (checkManagerName) {
@@ -78,7 +78,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void headCoachNameFromUserCheck(Team newTeam, League league) {
+	public void headCoachNameFromUserCheck(Team newTeam, ILeague league) {
 		boolean checkHeadCoachName = true;
 		String headCoach = null;
 		while (checkHeadCoachName) {
@@ -93,7 +93,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void playerChoiceFromUser(Team newTeam, League league) {
+	public void playerChoiceFromUser(Team newTeam, ILeague league) {
 		boolean playerValueCheck = true;
 		List<Integer> selectedValuesFromUser = new ArrayList<Integer>();
 		List<Player> skatersList = new ArrayList<Player>();
@@ -109,10 +109,10 @@ public class UserInputCheck implements IUserInputCheck {
 						goalies);
 				if (playerValueCheck == false) {
 					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue) - 1).getPosition();
-					if (postion.equalsIgnoreCase(PositionEnum.FORWARD.toString())
-							|| postion.equalsIgnoreCase(PositionEnum.DEFENSE.toString())) {
+					if (postion.equalsIgnoreCase(Positions.FORWARD.toString())
+							|| postion.equalsIgnoreCase(Positions.DEFENSE.toString())) {
 						skatersList.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
-					} else if (postion.equalsIgnoreCase(PositionEnum.GOALIE.toString())) {
+					} else if (postion.equalsIgnoreCase(Positions.GOALIE.toString())) {
 						goalies.add(league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					}
 				}

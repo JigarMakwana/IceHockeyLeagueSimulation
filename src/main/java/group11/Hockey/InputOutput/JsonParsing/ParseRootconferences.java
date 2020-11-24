@@ -7,7 +7,6 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -15,7 +14,7 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
-public class ParseRootconferences extends ValidateJsonSchema implements IParseRootElement {
+public class ParseRootconferences extends ValidateJsonAttributes implements IParseRootElement {
 	private List<String> conferenceNamesList = new ArrayList<String>();
 	private List<String> divisionNamesList = new ArrayList<String>();
 	private List<String> teamNameList = new ArrayList<String>();
@@ -153,11 +152,5 @@ public class ParseRootconferences extends ValidateJsonSchema implements IParseRo
 			playersList.add(playerObj);
 		}
 		return playersList;
-	}
-
-	@Override
-	public StateMachineState startState() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

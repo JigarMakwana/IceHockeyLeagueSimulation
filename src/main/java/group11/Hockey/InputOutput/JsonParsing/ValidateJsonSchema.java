@@ -12,16 +12,12 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import group11.Hockey.App;
-import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.BusinessLogic.StateMachineState;
 
-public abstract class ValidateJsonSchema extends ValidateJsonAttributes{
-	
+public abstract class ValidateJsonSchema extends StateMachineState {
+
 	public ValidateJsonSchema() {
 		super();
-	}
-	
-	public ValidateJsonSchema(ILeagueDb leagueDb) {
-		super(leagueDb);
 	}
 
 	public boolean isValidJsonSchema(String jsonFilePath) {
@@ -43,13 +39,12 @@ public abstract class ValidateJsonSchema extends ValidateJsonAttributes{
 			schema.validate(new JSONObject(new JSONTokener(inputStreamJson)));
 			return true;
 		} catch (ValidationException e) {
-			System.out.println("Exception: "+e.getMessage() );
+			System.out.println("Exception: " + e.getMessage());
 			e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
-		}
-		catch (Exception e) {
-			System.out.println("Exception: "+e.getMessage() );
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
 		}
 		return false;
 	}
-	
-	}
+
+}

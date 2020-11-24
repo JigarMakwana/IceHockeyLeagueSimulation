@@ -4,36 +4,36 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.GeneralManager;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
 
 public class Validations implements IValidations {
 
-	Conference conferenceObj = new Conference();
-	Division divisionObj = new Division();
+	IConference conferenceObj = DefaultHockeyFactory.makeConference();
+	IDivision divisionObj = DefaultHockeyFactory.makeDivision();
 	IDisplay display;
-	
+
 	private static Validations validationsInstance = null;
-	
-	public Validations(IDisplay display){
+
+	public Validations(IDisplay display) {
 		this.display = display;
 	}
-	
-	private Validations(){
-		
-	}	
-	
+
+	private Validations() {
+
+	}
+
 	public static Validations getInstance() {
-		if(validationsInstance == null) {
+		if (validationsInstance == null) {
 			validationsInstance = new Validations();
 		}
 		return validationsInstance;
 	}
-
 
 	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferencesList) {
 		boolean conferenceNameCheck = false;
@@ -63,9 +63,8 @@ public class Validations implements IValidations {
 		return divisionNameCheck;
 	}
 
-
-	public boolean isTeamNameValid(String teamName, League league) {
-		Team team = new Team();
+	public boolean isTeamNameValid(String teamName, ILeague league) {
+		ITeam team = DefaultHockeyFactory.makeTeam();
 		if (isStrBlank(teamName)) {
 			return true;
 		} else if (team.isTeamNameValid(teamName, league)) {
@@ -75,8 +74,7 @@ public class Validations implements IValidations {
 		return true;
 	}
 
-
-	public boolean generalManagerNameCheck(String name, League league) {
+	public boolean generalManagerNameCheck(String name, ILeague league) {
 		if (isStrBlank(name)) {
 			return true;
 		} else {
@@ -91,8 +89,7 @@ public class Validations implements IValidations {
 		}
 	}
 
-
-	public boolean headCoachNameCheck(String coachName, League league) {
+	public boolean headCoachNameCheck(String coachName, ILeague league) {
 		boolean coachNameCheck = true;
 		if (isStrBlank(coachName)) {
 			coachNameCheck = true;
@@ -108,7 +105,7 @@ public class Validations implements IValidations {
 		return coachNameCheck;
 	}
 
-	public boolean playerCheck(String playerNumber, League league, List<Integer> selectedValues, List<Player> skaters,
+	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<Player> skaters,
 			List<Player> goalies) {
 		boolean isPlayerValueNotValid = true;
 		int playerNumberInInt = 0;
@@ -129,7 +126,7 @@ public class Validations implements IValidations {
 			display.showMessageOnConsole("This player is already selected");
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
-		} 
+		}
 		if (position.equalsIgnoreCase("forward") || position.equalsIgnoreCase("defense")) {
 			if (skaters.size() <= Integer.parseInt(BusinessConstants.Number_Of_Skaters.getValue().toString())) {
 				isPlayerValueNotValid = false;
@@ -158,17 +155,16 @@ public class Validations implements IValidations {
 
 		return false;
 	}
-	
+
 	public boolean isNoOfSeasonsValueValid(String numberOfSeasons) {
 		boolean isNoOfSeasonsValueValid = false;
 		try {
 			int value = Integer.parseInt(numberOfSeasons);
-			if(value < 0) {
+			if (value < 0) {
 				display.showMessageOnConsole("Select valid value for simulation");
 				isNoOfSeasonsValueValid = true;
 				return isNoOfSeasonsValueValid;
-			}
-			else {
+			} else {
 				return false;
 			}
 		} catch (Exception e) {
@@ -176,6 +172,6 @@ public class Validations implements IValidations {
 			isNoOfSeasonsValueValid = true;
 			return isNoOfSeasonsValueValid;
 		}
-		
+
 	}
 }

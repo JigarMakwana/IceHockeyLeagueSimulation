@@ -25,7 +25,7 @@ public interface ITeam {
 
 	public void setPenaltyPeriod(int penaltyPeriod);
 
-	public boolean isTeamNameValid(String teamName, League league);
+	public boolean isTeamNameValid(String teamName, ILeague league);
 
 	public int getLosses();
 

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.Injuries;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -45,7 +46,7 @@ public class InjurySystemTest {
 		League league = leagueModel.getLeagueInfo();
 		InjurySystem injurySystem = new InjurySystem(league);
 		int injuredDays = injurySystem.determainNumberOfDaysOfInjury();
-		Injuries injuries = league.getGamePlayConfig().getInjuries();
+		IInjuries injuries = league.getGamePlayConfig().getInjuries();
 		boolean flag = injuries.getInjuryDaysLow() < injuredDays || injuredDays >= injuries.getInjuryDaysHigh();
 		Assert.assertTrue(flag);
 	}

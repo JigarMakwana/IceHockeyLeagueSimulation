@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class AITrading extends StateMachineState {
 	private ILeague leagueObj;
-	private Trading tradingConfig;
+	private ITrading tradingConfig;
 	private PlayerTradeOperations playerMiscellaneous;
 	private ILeagueDb leagueDb;
 	//
@@ -28,14 +28,14 @@ public class AITrading extends StateMachineState {
 
 	public AITrading(ILeague leagueObj) {
 		this.leagueObj = leagueObj;
-		GameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
+		IGameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
 		this.tradingConfig = gameConfig.getTrading();
 		this.playerMiscellaneous = new PlayerTradeOperations(this.tradingConfig);
 	}
 
 	public AITrading(ILeague leagueObj, ILeagueDb leagueDb) {
 		this.leagueObj = leagueObj;
-		GameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
+		IGameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
 		this.tradingConfig = gameConfig.getTrading();
 		this.playerMiscellaneous = new PlayerTradeOperations(this.tradingConfig);
 		this.leagueDb = leagueDb;

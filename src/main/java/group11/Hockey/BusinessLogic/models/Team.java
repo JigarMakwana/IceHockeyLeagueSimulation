@@ -3,7 +3,6 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.List;
 
 import group11.Hockey.db.Team.ITeamDb;
-import group11.Hockey.BusinessLogic.models.Roster.Roster;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.ConstantSupplier;
@@ -89,13 +88,10 @@ public class Team implements ITeam {
 		this.headCoach = headCoach;
 		this.players = players;
 		// TODO Creational pattern
-		IConstantSupplier rosterSize = new ConstantSupplier
-				(RosterSize.ACTIVE_ROSTER_SIZE.getNumVal(),
-						RosterSize.INACTIVE_ROSTER_SIZE.getNumVal(),
-						RosterSize.FORWARD_SIZE.getNumVal(),
-						RosterSize.DEFENSE_SIE.getNumVal(),
-						RosterSize.GOALIE_SIZE.getNumVal());
-		// roster =  new Roster(this.players, rosterSize);
+		IConstantSupplier rosterSize = new ConstantSupplier(RosterSize.ACTIVE_ROSTER_SIZE.getNumVal(),
+				RosterSize.INACTIVE_ROSTER_SIZE.getNumVal(), RosterSize.FORWARD_SIZE.getNumVal(),
+				RosterSize.DEFENSE_SIE.getNumVal(), RosterSize.GOALIE_SIZE.getNumVal());
+		// roster = new Roster(this.players, rosterSize);
 	}
 
 	public Team() {

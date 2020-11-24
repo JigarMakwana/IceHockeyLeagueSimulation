@@ -1,19 +1,22 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic.models;
 
 import group11.Hockey.db.IGameplayConfigDb;
 
-public class GameplayConfig {
-	private Aging aging;
-	private GameResolver gameResolver;
-	private Injuries injuries;
-	private Training training;
-	private Trading trading;
+public class GameplayConfig implements IGameplayConfig {
+	private IAging aging;
+	private IGameResolver gameResolver;
+	private IInjuries injuries;
+	private ITraining training;
+	private ITrading trading;
 
 	private IGameplayConfigDb gameplayConfigDb;
 	private String leagueName;
 
-	public GameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries, Training training,
-			Trading trading) {
+	public GameplayConfig(IAging aging, IGameResolver gameResolver, IInjuries injuries, ITraining training,
+			ITrading trading) {
 		super();
 		this.aging = aging;
 		this.gameResolver = gameResolver;
@@ -26,8 +29,8 @@ public class GameplayConfig {
 
 	}
 
-	public GameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries, Training training, Trading trading,
-			IGameplayConfigDb gameplayConfigDb, String leagueName) {
+	public GameplayConfig(IAging aging, IGameResolver gameResolver, IInjuries injuries, ITraining training,
+			ITrading trading, IGameplayConfigDb gameplayConfigDb, String leagueName) {
 		this.aging = aging;
 		this.gameResolver = gameResolver;
 		this.injuries = injuries;
@@ -38,23 +41,23 @@ public class GameplayConfig {
 		saveGameplayConfig();
 	}
 
-	public Aging getAging() {
+	public IAging getAging() {
 		return aging;
 	}
 
-	public GameResolver getGameResolver() {
+	public IGameResolver getGameResolver() {
 		return gameResolver;
 	}
 
-	public Injuries getInjuries() {
+	public IInjuries getInjuries() {
 		return injuries;
 	}
 
-	public Training getTraining() {
+	public ITraining getTraining() {
 		return training;
 	}
 
-	public Trading getTrading() {
+	public ITrading getTrading() {
 		return trading;
 	}
 

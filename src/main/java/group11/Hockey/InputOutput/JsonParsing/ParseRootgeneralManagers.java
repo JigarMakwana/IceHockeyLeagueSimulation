@@ -1,7 +1,9 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.InputOutput.JsonParsing;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.json.simple.JSONArray;

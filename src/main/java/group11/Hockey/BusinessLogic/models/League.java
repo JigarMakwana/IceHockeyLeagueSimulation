@@ -17,7 +17,7 @@ public class League implements ILeague {
 	private String leagueName;
 	private List<Conference> conferences = new ArrayList<Conference>();
 	private List<Player> freeAgents = new ArrayList<Player>();
-	private GameplayConfig gamePlayConfig = new GameplayConfig();
+	private IGameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<Coach> coaches = new ArrayList<Coach>();
 	private List<GeneralManager> generalManagers;
 	private List<Player> retiredPlayers = new ArrayList<Player>();
@@ -147,7 +147,7 @@ public class League implements ILeague {
 		this.freeAgents = freeAgents;
 	}
 
-	public GameplayConfig getGamePlayConfig() {
+	public IGameplayConfig getGamePlayConfig() {
 		return gamePlayConfig;
 	}
 

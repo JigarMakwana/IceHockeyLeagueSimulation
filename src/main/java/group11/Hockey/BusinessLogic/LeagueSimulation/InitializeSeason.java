@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-import group11.Hockey.BusinessLogic.AdvanceTime;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;

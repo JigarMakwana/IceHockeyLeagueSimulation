@@ -108,7 +108,7 @@ public class TradingModelMock {
 
         GeneralManager gm3 = new GeneralManager("Marry Pascal","gambler");
         team3 = new Team("NewYork", gm3, null, playerList3);
-        team3.setUserTeam(true);
+//        team3.setUserTeam(true);
         team3.setLosses(4);
         IRoster roster3 = new Roster(team3.getTeamName(), playerList3, constantSupplier);
         team3.setRoster(roster3);
@@ -150,7 +150,7 @@ public class TradingModelMock {
 
         GeneralManager gm5 = new GeneralManager("John Snow","gambler");
         team5 = new Team("Mexico", gm5, null, playerList5);
-        team5.setLosses(2);
+        team5.setLosses(1);
         IRoster roster5 = new Roster(team5.getTeamName(), playerList5, constantSupplier);
         team5.setRoster(roster5);
 
@@ -232,11 +232,6 @@ public class TradingModelMock {
 
     public League getLeagueInfo() {
         return league;
-    }
-
-    public void setTradingConfig(float randomTradeOfferChance, float randomAcceptanceChance){
-        this.randomTradeOfferChance = randomTradeOfferChance;
-        this.randomAcceptanceChance = randomAcceptanceChance;
     }
 
     public League getLeague() {

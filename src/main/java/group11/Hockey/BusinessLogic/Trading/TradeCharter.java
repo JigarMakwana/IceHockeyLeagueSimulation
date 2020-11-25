@@ -41,4 +41,13 @@ public class TradeCharter implements ITradeCharter {
     public Team getRequestedTeam() {
         return requestedTeam;
     }
+
+    @Override
+    public boolean isCharterValid() {
+        if(offeringTeam == null || requestedTeam == null ||
+                offeredPlayerList == null || requestedPlayerList == null ){
+            return false;
+        }
+        return true;
+    }
 }

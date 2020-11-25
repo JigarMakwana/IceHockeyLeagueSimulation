@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TradeGeneratorTest {
-    TradingModelMock leagueModel;
+    private TradingModelMock leagueModel;
     private ITradeGenerator aiTradingObj;
 
     @Before

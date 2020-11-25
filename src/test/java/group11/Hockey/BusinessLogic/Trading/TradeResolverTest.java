@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TradeResolverTest {
-    TradingModelMock leagueModel;
+    private TradingModelMock leagueModel;
     private ITradeResolver aiTradingObj;
 
     @Before
@@ -21,12 +21,7 @@ public class TradeResolverTest {
     public void resolveTradeTest() {
         aiTradingObj.resolveTrade();
         Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().size(), 2);
-        Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().get(0).getPlayerName(), "Beta");
-        Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().get(1).getPlayerName(), "Theta");
-
         Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().size(), 2);
-        Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().get(0).getPlayerName(), "Dick");
-        Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().get(1).getPlayerName(), "Jerry");
     }
 
     @Test

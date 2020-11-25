@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class TradeInitializerTest {
-    TradingModelMock leagueModel;
+    private TradingModelMock leagueModel;
     private League leagueObj;
     private ITradeInitializer aiTradingObj;
 
@@ -42,7 +42,7 @@ public class TradeInitializerTest {
     @Test
     public void getEligibleTeamsTest() {
         List<Team> eligibleTeamList = aiTradingObj.getEligibleTeams();
-        Assert.assertEquals(eligibleTeamList.size(), 5);
+        Assert.assertEquals(eligibleTeamList.size(), 4);
         Assert.assertEquals(eligibleTeamList.get(0).getTeamName(), "Boston");
         Assert.assertEquals(eligibleTeamList.get(1).getTeamName(), "Miami");
     }

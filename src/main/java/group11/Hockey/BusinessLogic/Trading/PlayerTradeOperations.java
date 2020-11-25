@@ -128,7 +128,7 @@ public class PlayerTradeOperations implements IPlayerTradeOperations {
             }
         }
         Triplet<Team, List<Player>, Float> tradeTeam = sortedBuffer.get(length-1);
-        display.showMessageOnConsole("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
+//        display.showMessageOnConsole("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
         return tradeTeam;
     }
 

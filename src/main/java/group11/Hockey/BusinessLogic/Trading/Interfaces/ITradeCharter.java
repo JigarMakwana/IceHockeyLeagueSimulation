@@ -10,4 +10,5 @@ public interface ITradeCharter {
     List<Player> getRequestedPlayerList();
     Team getOfferingTeam();
     Team getRequestedTeam();
+    boolean isCharterValid();
 }

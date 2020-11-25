@@ -30,25 +30,22 @@ public class TradeRunner implements ITradeRunner {
 
     @Override
     public void runTrading() {
-        ITradeInitializer tradeInitializer = DefaultHockeyFactory.makeTradeInitializer(leagueObj );
+        ITradeInitializer tradeInitializer = DefaultHockeyFactory.makeTradeInitializer(leagueObj);
         List<Team> eligibleTeamList = tradeInitializer.getEligibleTeams();
         ITradingConfig tradingConfig = tradeInitializer.getTradingConfig();
 
         for (int i = 0; eligibleTeamList.size() > 1; i = 0){
             if(tradeInitializer.isTradePossible(eligibleTeamList.get(i))){
-                ITradeGenerator tradeGenerator = DefaultHockeyFactory.makeTradeGenerator
-                        (eligibleTeamList.get(i),tradingConfig, display);
+                ITradeGenerator tradeGenerator = DefaultHockeyFactory.makeTradeGenerator(eligibleTeamList.get(i),tradingConfig, display);
                 ITradeCharter tradeCharter = tradeGenerator.generateTradeOffer(eligibleTeamList);
 
-                ITradeResolver tradeResolver = DefaultHockeyFactory.makeTradeResolver(tradeCharter, tradingConfig,
-                        commandLineInput, validation, display);
+                ITradeResolver tradeResolver = DefaultHockeyFactory.makeTradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
                 tradeResolver.resolveTrade();
 
-                ITradeSettler offeringTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getOfferingTeam(),
-                        (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
+                ITradeSettler offeringTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getOfferingTeam(), (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
                 offeringTeamSettler.settleTeamAfterTrade();
-                ITradeSettler requestedTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getRequestedTeam(),
-                        (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
+
+                ITradeSettler requestedTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getRequestedTeam(), (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
                 requestedTeamSettler.settleTeamAfterTrade();
             }
             eligibleTeamList.remove(0);

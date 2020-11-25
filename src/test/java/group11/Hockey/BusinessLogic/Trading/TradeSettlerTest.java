@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TradeSettlerTest {
-    TradingModelMock leagueModel;
+    private TradingModelMock leagueModel;
     private ITradeSettler dropTest;
     private ITradeSettler hireTest;
 

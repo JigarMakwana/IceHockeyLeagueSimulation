@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TradeResolver implements ITradeResolver {
+    private ITradeCharter tradeCharter;
     private Team offeringTeam;
     private List<Player> offeredPlayerList;
     private Team requestedTeam;
@@ -32,6 +33,7 @@ public class TradeResolver implements ITradeResolver {
 
     public TradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig,
                          ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
+        this.tradeCharter = tradeCharter;
         this.offeringTeam = tradeCharter.getOfferingTeam();
         this.offeredPlayerList = tradeCharter.getOfferedPlayerList();
         this.requestedTeam = tradeCharter.getRequestedTeam();
@@ -47,11 +49,14 @@ public class TradeResolver implements ITradeResolver {
 
     @Override
     public void resolveTrade() {
-        if (requestedTeam.isUserTeam()) {
-            resolveAIToUserTrade();
-        } else {
-            resolveAIToAITrade();
+        if(this.tradeCharter.isCharterValid()){
+            if (this.requestedTeam.isUserTeam()) {
+                resolveAIToUserTrade();
+            } else {
+                resolveAIToAITrade();
+            }
         }
+        return;
     }
 
     @Override
@@ -62,25 +67,25 @@ public class TradeResolver implements ITradeResolver {
     @Override
     public float modifyAcceptanceChance(){
         float modfiedChance = 0.0f;
-        String gmPersonality = offeringTeam.getGeneralManager().getPersonality();
+        String gmPersonality = this.offeringTeam.getGeneralManager().getPersonality();
         if(gmPersonality.equalsIgnoreCase(GMPersonalities.SHREWD.toString())){
-            modfiedChance = tradingConfig.getGmTable().getShrewd();
+            modfiedChance = this.tradingConfig.getGmTable().getShrewd();
         } else if(gmPersonality.equalsIgnoreCase(GMPersonalities.NORMAL.toString())){
-            modfiedChance = tradingConfig.getGmTable().getNormal();
+            modfiedChance = this.tradingConfig.getGmTable().getNormal();
         } else if(gmPersonality.equalsIgnoreCase(GMPersonalities.GAMBLER.toString())){
-            modfiedChance = tradingConfig.getGmTable().getGambler();
+            modfiedChance = this.tradingConfig.getGmTable().getGambler();
         }
         return this.tradingConfig.getRandomAcceptanceChance() + modfiedChance;
     }
 
     private void resolveAIToAITrade(){
-        display.displayTradeStatistics(offeringTeam.getTeamName(), offeredPlayerList,
-                requestedTeam.getTeamName(), requestedPlayerList);
+        this.display.displayTradeStatistics(this.offeringTeam.getTeamName(), this.offeredPlayerList,
+                this.requestedTeam.getTeamName(), this.requestedPlayerList);
 
-        Float playerStrength1 = rosterSearch.playersStrengthSum(offeredPlayerList);
-        Float playerStrength2 = rosterSearch.playersStrengthSum(requestedPlayerList);
+        Float playerStrength1 = this.rosterSearch.playersStrengthSum(this.offeredPlayerList);
+        Float playerStrength2 = this.rosterSearch.playersStrengthSum(this.requestedPlayerList);
 
-        float randomAcceptanceChance = randomFloatGenerator.generateRandomFloat();
+        float randomAcceptanceChance = this.randomFloatGenerator.generateRandomFloat();
         if (randomAcceptanceChance < modifyAcceptanceChance()) {
             acceptTrade();
         } else if (playerStrength1 > playerStrength2) {
@@ -91,10 +96,10 @@ public class TradeResolver implements ITradeResolver {
     }
 
     private void resolveAIToUserTrade(){
-        display.displayTradeStatisticsToUser(offeringTeam.getTeamName(), offeredPlayerList, requestedTeam.getTeamName(), requestedPlayerList);
-        display.displayAcceptRejectOptionToUser();
+        this.display.displayTradeStatisticsToUser(this.offeringTeam.getTeamName(), this.offeredPlayerList, this.requestedTeam.getTeamName(), this.requestedPlayerList);
+        this.display.displayAcceptRejectOptionToUser();
 
-        int userInput = userInputCheck.validateUserTradeInput();
+        int userInput = this.userInputCheck.validateUserTradeInput();
         if (userInput == 1) {
             acceptTrade();
         } else if (userInput == 0) {
@@ -104,34 +109,32 @@ public class TradeResolver implements ITradeResolver {
 
     private void acceptTrade() {
         List<Player> localOfferedPlayerList = new ArrayList<>();
-        for (Player p : offeredPlayerList) {
+        for (Player p : this.offeredPlayerList) {
             localOfferedPlayerList.add(p);
         }
         List<Player> localRequestedPlayerList = new ArrayList<>();
-        for (Player p : requestedPlayerList) {
+        for (Player p : this.requestedPlayerList) {
             localRequestedPlayerList.add(p);
         }
 
         for (Player toBeRemoved : localOfferedPlayerList) {
-            offeredPlayerList.removeIf(player -> player.getPlayerName().equals(toBeRemoved.getPlayerName()));
+            this.offeringTeam.getPlayers().removeIf(player -> player.getPlayerName().equals(toBeRemoved.getPlayerName()));
         }
         for (Player toBeRemoved : localRequestedPlayerList) {
-            requestedPlayerList.removeIf(player -> player.getPlayerName().equals(toBeRemoved.getPlayerName()));
+            this.requestedTeam.getPlayers().removeIf(player -> player.getPlayerName().equals(toBeRemoved.getPlayerName()));
         }
         for (Player toBeAdded : localRequestedPlayerList) {
-            offeredPlayerList.add(toBeAdded);
+            this.offeringTeam.getPlayers().add(toBeAdded);
         }
         for (Player toBeAdded : localOfferedPlayerList) {
-            requestedPlayerList.add(toBeAdded);
+            this.requestedTeam.getPlayers().add(toBeAdded);
         }
-        resetLossPoints(offeringTeam);
-        resetLossPoints(requestedTeam);
-        display.showMessageOnConsole("Trade successfully accepted!");
+        resetLossPoints(this.offeringTeam);
+        this.display.showMessageOnConsole("Trade successfully accepted!");
     }
 
     private void rejectTrade() {
-        display.showMessageOnConsole("Trade is declined.");
-        resetLossPoints(offeringTeam);
+        this.display.showMessageOnConsole("Trade is declined.");
+        resetLossPoints(this.offeringTeam);
     }
-
 }

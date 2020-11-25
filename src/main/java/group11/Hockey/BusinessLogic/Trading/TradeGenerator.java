@@ -36,6 +36,7 @@ public class TradeGenerator implements ITradeGenerator {
 
     @Override
     public ITradeCharter generateTradeOffer(List<Team> eligibleTeamList) {
+        display.showMessageOnConsole("\nGenerating Trade for AI Team " + this.offeringTeam.getTeamName());
         for (int k = 0; k < eligibleTeamList.size(); k++) {
             if(eligibleTeamList.get(k) == this.offeringTeam) {
                 continue;
@@ -53,10 +54,7 @@ public class TradeGenerator implements ITradeGenerator {
 
     private void tradingAlgorithm(Team requestedTeam) {
         List<Integer> playerPositionFlag;
-
-        display.showMessageOnConsole("\nGenerating Trade for AI Team " + this.offeringTeam.getTeamName());
         playerPositionFlag = rosterSearch.findPlayerPositions(weakestPlayerList);
-
         List<Player> requestedPlayerList = requestedTeam.getRoster().getAllPlayerList();
         List<Player> strongestPlayerList = rosterSearch
                 .findStrongestPlayers(requestedPlayerList, playerPositionFlag, this.tradingConfig.getMaxPlayersPerTrade());

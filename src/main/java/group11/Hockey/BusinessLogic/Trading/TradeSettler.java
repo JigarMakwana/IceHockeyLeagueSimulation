@@ -9,7 +9,6 @@ import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class TradeSettler implements ITradeSettler {
@@ -44,6 +43,7 @@ public class TradeSettler implements ITradeSettler {
 
     @Override
     public void settleTeamAfterTrade() {
+        display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size...");
         if(team.getRoster().isValidRoster()){
             return;
         } else {
@@ -54,6 +54,7 @@ public class TradeSettler implements ITradeSettler {
                 hirePlayers();
             }
         }
+        display.showMessageOnConsole("Team " + team.getTeamName() + "'s size successfully settled!\n");
     }
 
     public void dropPlayers(){

@@ -21,9 +21,11 @@ public class TradingModelMock {
     private Trading trading;
     private float randomTradeOfferChance;
     private float randomAcceptanceChance;
-    private Team team1, team2, team3, team4, team5;
+    private Team team1, team2, team3, team4, team5,team6;
+    private List<Player> freeAgentsList;
     private ITradingConfig tradingConfig;
     private IConstantSupplier constantSupplier;
+    private IConstantSupplier csTeam6;
     private ITradeCharter tradeCharter;
     private IDisplay display;
     private IValidations validations;
@@ -32,6 +34,11 @@ public class TradingModelMock {
 
     public TradingModelMock(float randomTradeOfferChance, float randomAcceptanceChance) {
         super();
+        init(randomTradeOfferChance, randomAcceptanceChance);
+        addLeague();
+    }
+
+    private void init(float randomTradeOfferChance, float randomAcceptanceChance){
         teamsList = new ArrayList<Team>();
         this.randomTradeOfferChance = randomTradeOfferChance;
         this.randomAcceptanceChance = randomAcceptanceChance;
@@ -40,8 +47,8 @@ public class TradingModelMock {
                 2, this.randomAcceptanceChance, gmTbale);
         this.tradingConfig = new TradingConfig(2, this.randomTradeOfferChance,
                 2, this.randomAcceptanceChance, gmTbale);
-        this.constantSupplier = new ConstantSupplier(3,1,1,2,1);
-        addLeague();
+        this.constantSupplier = new ConstantSupplier(3,0,1,1,1);
+        this.csTeam6 = new ConstantSupplier(7,0,2,3,2);
     }
 
     private void addLeague() {
@@ -109,7 +116,8 @@ public class TradingModelMock {
         Player player13 = new Player(15, 15, 15, 1, "Alfa", "forward", true, false, 23, true);
         Player player14 = new Player(12, 13, 14, 1, "Beta", "defense", false, false, 24, true);
         Player player15= new Player(10, 15, 9, 18, "Gama", "goalie", false, false, 25, true);
-        Player player16 = new Player(10, 12, 10, 1, "Theta", "defense", false, false, 26, false);
+        Player player16 = new Player(10, 12, 10, 1, "Theta", "defense", false, false, 26, true);
+
         playerList4.add(player13);
         playerList4.add(player14);
         playerList4.add(player15);
@@ -125,10 +133,20 @@ public class TradingModelMock {
         Player player18 = new Player(12, 10, 14, 1, "East", "defense", false, false, 24, true);
         Player player19= new Player(10, 15, 9, 19, "West", "goalie", false, false, 25, true);
         Player player20 = new Player(10, 12, 10, 1, "South", "defense", false, false, 26, false);
+        Player player21 = new Player(2, 2, 2, 1, "Ishan", "forward", false, false, 26, true);
+        Player player22 = new Player(10, 12, 10, 1, "Neirutya", "forward", false, false, 26, true);
+        Player player23 = new Player(2, 2, 2, 1, "Agni", "defense", false, false, 26, true);
+        Player player24= new Player(10, 15, 9, 11, "Vayavya", "goalie", false, false, 25, true);
+
+
         playerList5.add(player17);
         playerList5.add(player18);
         playerList5.add(player19);
         playerList5.add(player20);
+        playerList5.add(player21);
+        playerList5.add(player22);
+        playerList5.add(player23);
+        playerList5.add(player24);
 
         GeneralManager gm5 = new GeneralManager("John Snow","gambler");
         team5 = new Team("Mexico", gm5, null, playerList5);
@@ -136,17 +154,22 @@ public class TradingModelMock {
         IRoster roster5 = new Roster(team5.getTeamName(), playerList5, constantSupplier);
         team5.setRoster(roster5);
 
+        team6 = new Team("Mexico", null, null, playerList4);
+        IRoster roster6 = new Roster(team6.getTeamName(), playerList4, csTeam6);
+        team6.setRoster(roster6);
+
         teamsList.add(team1);
         teamsList.add(team2);
         teamsList.add(team3);
         teamsList.add(team4);
         teamsList.add(team5);
+        teamsList.add(team6);
 
-        List<Division> divisionsList = new ArrayList<Division>();
+        List<Division> divisionsList = new ArrayList<>();
         Division atlanticDivision = new Division("Atlantic", teamsList);
         divisionsList.add(atlanticDivision);
-        List<Conference> conferenceList = new ArrayList<Conference>();
-        List<Player> freeAgentsList = new ArrayList<Player>();
+        List<Conference> conferenceList = new ArrayList<>();
+        freeAgentsList = new ArrayList<>();
         Conference conference = new Conference("Eastern Conference", divisionsList);
         conferenceList.add(conference);
 
@@ -187,6 +210,18 @@ public class TradingModelMock {
         return team1;
     }
 
+    public Team getTeam5() {
+        return team5;
+    }
+
+    public Team getTeam6() {
+        return team6;
+    }
+
+    public List<Player> getFreeAgentsList() {
+        return freeAgentsList;
+    }
+
     public ITradingConfig getTradingConfig() {
         return tradingConfig;
     }
@@ -218,5 +253,13 @@ public class TradingModelMock {
 
     public ICommandLineInput getCommandLineInput() {
         return commandLineInput;
+    }
+
+    public IConstantSupplier getConstantSupplier() {
+        return constantSupplier;
+    }
+
+    public IConstantSupplier getCsTeam6() {
+        return csTeam6;
     }
 }

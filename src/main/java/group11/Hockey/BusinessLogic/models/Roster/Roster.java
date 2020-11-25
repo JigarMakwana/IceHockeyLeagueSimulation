@@ -2,12 +2,14 @@ package group11.Hockey.BusinessLogic.models.Roster;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IConstantSupplier;
+import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Roster implements IRoster {
     private String teamName;
@@ -22,22 +24,19 @@ public class Roster implements IRoster {
     public Roster(String teamName, List<Player> playerList, IConstantSupplier constantSupplier){
         this.teamName = teamName;
         this.allPlayerList = playerList;
-        this.generateSubRoster(this.allPlayerList);
+        this.updateSubRoster(this.allPlayerList);
+        this.constantSupplier = constantSupplier;
+    }
+
+    public void updateSubRoster(List<Player> allPlayerList){
         IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
         this.forwardList =  rosterSearch.getForwardList(allPlayerList);
         this.defenseList =  rosterSearch.getDefenseList(allPlayerList);
         this.goalieList =  rosterSearch.getGoalieList(allPlayerList);
-        this.constantSupplier = constantSupplier;
-    }
-
-    private void generateSubRoster(List<Player> allPlayerList){
-        for(Player p: allPlayerList){
-            if(p.isActive()){
-                activeRosterList.add(p);
-            }else {
-                inActiveRosterList.add(p);
-            }
-        }
+        this. activeRosterList = allPlayerList.stream().filter(player ->
+                player.isActive() == true).collect(Collectors.toList());
+        this. inActiveRosterList = allPlayerList.stream().filter(player ->
+                player.isActive() == false).collect(Collectors.toList());
     }
 
     public boolean isValidRoster(){

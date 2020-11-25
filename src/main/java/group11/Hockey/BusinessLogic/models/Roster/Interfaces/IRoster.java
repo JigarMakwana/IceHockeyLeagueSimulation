@@ -12,6 +12,7 @@ public interface IRoster {
     List<Player> getDefenseList();
     List<Player> getGoalieList();
     String getTeamName();
+    void updateSubRoster(List<Player> allPlayerList);
     boolean isValidRoster();
     boolean isValidActiveRoster();
     boolean isValidInActiveRoster();

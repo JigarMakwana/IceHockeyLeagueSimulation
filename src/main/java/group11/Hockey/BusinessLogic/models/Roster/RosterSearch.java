@@ -153,18 +153,18 @@ public class RosterSearch implements IRosterSearch{
     public List<Player> getDefenseList(List<Player> playerList) {
         List<Player> defenceIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())).collect(Collectors.toList());
-        return defenceIPlayerList;
+        return sortPlayersByStrength(defenceIPlayerList);
     }
 
     public List<Player> getForwardList(List<Player> playerList) {
         List<Player> forwardIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())).collect(Collectors.toList());
-        return forwardIPlayerList;
+        return sortPlayersByStrength(forwardIPlayerList);
     }
 
     public List<Player> getGoalieList(List<Player> playerList) {
         List<Player> goalieIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.GOALIE.toString())).collect(Collectors.toList());
-        return goalieIPlayerList;
+        return sortPlayersByStrength(goalieIPlayerList);
     }
 }

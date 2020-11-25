@@ -30,7 +30,7 @@ public class TradeSettler implements ITradeSettler {
                         IValidations validation, IDisplay display,
                         IConstantSupplier constantSupplier){
         this.team = team;
-        this.teamSize = this.team.getRoster().getAllPlayerList().size();;
+        this.teamSize = this.team.getRoster().getAllPlayerList().size();
         this.teamGoalieSize = this.team.getRoster().getGoalieList().size();
         this.teamForwardSize = this.team.getRoster().getForwardList().size();
         this.teamDefenseSize = this.team.getRoster().getDefenseList().size();
@@ -76,36 +76,66 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void dropGoalie(int noOfGoaliesToBeDropped){
+        List<Player> goalieList = team.getRoster().getGoalieList();
         for(int i=0; i<noOfGoaliesToBeDropped; i++) {
             if(team.isUserTeam() == true) {
-                dropPlayerFromUserTeam(Positions.GOALIE);
+                dropPlayerFromUserTeam(goalieList);
             }
             else {
-                dropPlayerFromAITeam(Positions.GOALIE);
+                dropPlayerFromAITeam(goalieList);
             }
+            updateRosterSubLists();
         }
     }
 
     public void dropForward(int noOfForwardToBeDropped){
+        List<Player> forwardList = team.getRoster().getForwardList();
         for(int i=0; i<noOfForwardToBeDropped; i++) {
             if(team.isUserTeam() == true) {
-                dropPlayerFromUserTeam(Positions.FORWARD);
+                dropPlayerFromUserTeam(forwardList);
             }
             else {
-                dropPlayerFromAITeam(Positions.FORWARD);
+                dropPlayerFromAITeam(forwardList);
             }
+            updateRosterSubLists();
         }
     }
 
     public void dropDefense(int noOfDefenseToBeDropped){
+        List<Player> defenseList = team.getRoster().getDefenseList();
         for(int i=0; i<noOfDefenseToBeDropped; i++) {
             if(team.isUserTeam() == true) {
-                dropPlayerFromUserTeam(Positions.DEFENSE);
+                dropPlayerFromUserTeam(defenseList);
             }
             else {
-                dropPlayerFromAITeam(Positions.DEFENSE);
+                dropPlayerFromAITeam(defenseList);
             }
+            updateRosterSubLists();
         }
+    }
+
+    public void dropPlayerFromAITeam(List<Player> playerList) {
+        if(null == playerList.get(0)){
+            return;
+        } else{
+            Player playerToBeDropped = playerList.get(0);
+            playerToBeDropped.setIsFreeAgent(true);
+            playerToBeDropped.setCaptain(false);
+            freeAgentList.add(playerToBeDropped);
+            team.getRoster().getAllPlayerList().removeIf(player -> player.getPlayerName().equals(playerToBeDropped.getPlayerName()));
+        }
+    }
+
+    public void dropPlayerFromUserTeam(List<Player> playerList) {
+        display.pickPlayer(playerList);
+        IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
+        int userInput = userInputCheck.userResolveRosterInput(playerList.size());
+
+        Player p =  playerList.get(userInput-1);
+        p.setIsFreeAgent(true);
+        p.setCaptain(false);
+        freeAgentList.add(p);
+        team.getRoster().getAllPlayerList().removeIf(player -> player.getPlayerName().equals(p.getPlayerName()));
     }
 
     public void hirePlayers(){
@@ -129,212 +159,88 @@ public class TradeSettler implements ITradeSettler {
 
     public void hireGoalie(int noOfGoaliesToBeHired){
         for(int i=0; i<noOfGoaliesToBeHired; i++) {
+            List<Player> sortedFreeAgents = rosterSearch.getGoalieList(freeAgentList);
             try{
                 if(team.isUserTeam() == true) {
-                    hirePlayerInUserTeam(Positions.GOALIE);
+                    hirePlayerInUserTeam(sortedFreeAgents);
                 }
                 else {
-                    hirePlayerInAITeam(Positions.GOALIE);
+                    Collections.reverse(sortedFreeAgents);
+                    hirePlayerInAITeam(sortedFreeAgents);
                 }
             }catch (Exception e) {
                 e.printStackTrace();
             }
+            updateRosterSubLists();
         }
     }
 
     public void hireForward(int noOfForwardToBeHired){
         for(int i=0; i<noOfForwardToBeHired; i++) {
+            List<Player> sortedFreeAgents = rosterSearch.getForwardList(freeAgentList);
             try {
                 if (team.isUserTeam() == true) {
-                    hirePlayerInUserTeam(Positions.FORWARD);
+                    hirePlayerInUserTeam(sortedFreeAgents);
                 } else {
-                    hirePlayerInAITeam(Positions.FORWARD);
+                    Collections.reverse(sortedFreeAgents);
+                    hirePlayerInAITeam(sortedFreeAgents);
                 }
             }catch (Exception e) {
                 e.printStackTrace();
             }
+            updateRosterSubLists();
         }
     }
 
     public void hireDefense(int noOfDefenseToBeHired){
         for(int i=0; i<noOfDefenseToBeHired; i++) {
+            List<Player> sortedFreeAgents = rosterSearch.getDefenseList(freeAgentList);
             try{
                 if(team.isUserTeam() == true) {
-                    hirePlayerInUserTeam(Positions.DEFENSE);
+                    hirePlayerInUserTeam(sortedFreeAgents);
                 }
                 else {
-                    hirePlayerInAITeam(Positions.DEFENSE);
+                    Collections.reverse(sortedFreeAgents);
+                    hirePlayerInAITeam(sortedFreeAgents);
                 }
             }catch (Exception e) {
                 e.printStackTrace();
             }
+            updateRosterSubLists();
         }
     }
 
-    public void dropPlayerFromAITeam(Positions playerPosition) {
-        List<Player> allPlayerList = team.getRoster().getAllPlayerList();
-        List<Player> sortedPlayersList = rosterSearch.sortPlayersByStrength(allPlayerList);
-        Iterator<Player> playersItr = sortedPlayersList.iterator();
-
-        while (playersItr.hasNext()) {
-            Player player = playersItr.next();
-            if(playerPosition.equals(Positions.GOALIE)) {
-                if (player.getPosition().equalsIgnoreCase(playerPosition.toString())) {
-                    player.setIsFreeAgent(true);
-                    player.setCaptain(false);
-                    freeAgentList.add(player);
-                    playersItr.remove();
-                    break;
-                }
-            } else if(playerPosition.equals(Positions.FORWARD)) {
-                if (player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())) {
-                    player.setIsFreeAgent(true);
-                    player.setCaptain(false);
-                    freeAgentList.add(player);
-                    playersItr.remove();
-                    break;
-                }
-            } else if(playerPosition.equals(Positions.DEFENSE)) {
-                if (player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
-                    player.setIsFreeAgent(true);
-                    player.setCaptain(false);
-                    freeAgentList.add(player);
-                    playersItr.remove();
-                    break;
-                }
-            }
+    public void hirePlayerInAITeam(List<Player> sortedFreeAgents) throws Exception {
+        if(null == sortedFreeAgents.get(0)){
+            throw new Exception("Player is not available in Free Agents to form a Team.");
+        } else{
+            Player playerToBeHired = sortedFreeAgents.get(0);
+            playerToBeHired.setIsFreeAgent(false);
+            team.getRoster().getAllPlayerList().add(playerToBeHired);
+            freeAgentList.removeIf(player -> player.getPlayerName().equals(playerToBeHired.getPlayerName()));
         }
     }
 
-    public void dropPlayerFromUserTeam(Positions playerPosition) {
-        if(playerPosition.equals(Positions.GOALIE)) {
-            List<Player> goaliePlayerList = team.getRoster().getGoalieList();
-            display.pickPlayer(goaliePlayerList);
+    public void hirePlayerInUserTeam(List<Player> sortedFreeAgents) throws Exception {
+        if(null == sortedFreeAgents){
+            throw new Exception("Player is not available in Free Agents to form a Team.");
+        } else {
+            display.pickPlayer(sortedFreeAgents);
             IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-            int userInput = userInputCheck.userResolveRosterInput(goaliePlayerList.size());
+            int userInput = userInputCheck.userResolveRosterInput(sortedFreeAgents.size());
 
-            Player goalie =  goaliePlayerList.get(userInput-1);
-            goalie.setIsFreeAgent(true);
-            goalie.setCaptain(false);
-            freeAgentList.add(goalie);
-            goaliePlayerList.remove(goalie);
-        }
-        else if(playerPosition.equals(Positions.FORWARD)) {
-            List<Player> forwardPlayerList = team.getRoster().getForwardList();
-            display.pickPlayer(forwardPlayerList);
-            IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-            int userInput = userInputCheck.userResolveRosterInput(forwardPlayerList.size());
-
-            Player forward =  forwardPlayerList.get(userInput-1);
-            forward.setIsFreeAgent(true);
-            forward.setCaptain(false);
-            freeAgentList.add(forward);
-            forwardPlayerList.remove(forward);
-        }
-        else if(playerPosition.equals(Positions.DEFENSE)) {
-            List<Player> defensePlayerList = team.getRoster().getDefenseList();
-            display.pickPlayer(defensePlayerList);
-            IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-            int userInput = userInputCheck.userResolveRosterInput(defensePlayerList.size());
-
-            Player defense =  defensePlayerList.get(userInput-1);
-            defense.setIsFreeAgent(true);
-            defense.setCaptain(false);
-            freeAgentList.add(defense);
-            defensePlayerList.remove(defense);
+            Player playerToBeHired =  sortedFreeAgents.get(userInput-1);
+            playerToBeHired.setIsFreeAgent(false);
+            team.getRoster().getAllPlayerList().add(playerToBeHired);
+            freeAgentList.removeIf(player -> player.getPlayerName().equals(playerToBeHired.getPlayerName()));
         }
     }
 
-    public void hirePlayerInAITeam(Positions playerPosition) throws Exception {
-        List<Player> sortedFreeAgents = rosterSearch.sortPlayersByStrength(freeAgentList);
-        Collections.reverse(sortedFreeAgents);
-        Iterator<Player> freeAgentsItr = sortedFreeAgents.iterator();
-        boolean playerHired = false;
-
-        while (freeAgentsItr.hasNext()) {
-            Player freeAgent = freeAgentsItr.next();
-            if(playerPosition.equals(Positions.GOALIE)) {
-                if (freeAgent.getPosition().equalsIgnoreCase(playerPosition.toString())) {
-                    freeAgent.setIsFreeAgent(false);
-                    team.getRoster().getAllPlayerList().add(freeAgent);
-                    freeAgentsItr.remove();
-                    playerHired = true;
-                    break;
-                }
-            }
-            else if(playerPosition.equals(Positions.SKATER)) {
-                if (freeAgent.getPosition().equalsIgnoreCase(Positions.FORWARD.toString()) ||
-                        freeAgent.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
-                    freeAgent.setIsFreeAgent(false);
-                    team.getRoster().getAllPlayerList().add(freeAgent);
-                    freeAgentsItr.remove();
-                    playerHired = true;
-                    break;
-                }
-            }
-        }
-        if(playerPosition.equals(Positions.GOALIE) && playerHired == false) {
-            throw new Exception("Goalie is not available in Free Agents to form a Team.");
-        } else if(playerPosition.equals(Positions.FORWARD) && playerHired == false) {
-            throw new Exception("Forward is not available in Free Agents to form a Team.");
-        } else if(playerPosition.equals(Positions.DEFENSE) && playerHired == false) {
-            throw new Exception("Defense is not available in Free Agents to form a Team.");
-        }
-    }
-
-    public void hirePlayerInUserTeam(Positions playerPosition) throws Exception {
-        Iterator<Player> freeAgentsItr = freeAgentList.iterator();
-        boolean playerHired = false;
-
-        if(playerPosition.equals(Positions.GOALIE)) {
-            List<Player> goalieFreeAgents = rosterSearch.getGoalieList(freeAgentList);
-            if(goalieFreeAgents == null){
-                playerHired = false;
-            } else {
-                display.pickPlayer(goalieFreeAgents);
-                IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-                int userInput = userInputCheck.userResolveRosterInput(goalieFreeAgents.size());
-                Player goalie =  goalieFreeAgents.get(userInput-1);
-                goalie.setIsFreeAgent(false);
-                team.getRoster().getAllPlayerList().add(goalie);
-                freeAgentList.remove(goalie);
-                playerHired = true;
-            }
-        } else if(playerPosition.equals(Positions.FORWARD)) {
-            List<Player> forwardFreeAgents = rosterSearch.getForwardList(freeAgentList);
-            if(forwardFreeAgents == null){
-                playerHired = false;
-            } else {
-                display.pickPlayer(forwardFreeAgents);
-                IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-                int userInput = userInputCheck.userResolveRosterInput(forwardFreeAgents.size());
-                Player forward =  forwardFreeAgents.get(userInput-1);
-                forward.setIsFreeAgent(false);
-                team.getRoster().getAllPlayerList().add(forward);
-                freeAgentList.remove(forward);
-                playerHired = true;
-            }
-        } else if(playerPosition.equals(Positions.DEFENSE)) {
-            List<Player> defenseFreeAgents = rosterSearch.getDefenseList(freeAgentList);
-            if(defenseFreeAgents == null){
-                playerHired = false;
-            } else {
-                display.pickPlayer(defenseFreeAgents);
-                IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-                int userInput = userInputCheck.userResolveRosterInput(defenseFreeAgents.size());
-                Player defense =  defenseFreeAgents.get(userInput-1);
-                defense.setIsFreeAgent(false);
-                team.getRoster().getAllPlayerList().add(defense);
-                freeAgentList.remove(defense);
-                playerHired = true;
-            }
-        }
-        if(playerPosition.equals(Positions.GOALIE) && playerHired == false) {
-            throw new Exception("Goalie is not available in Free Agents to form a Team.");
-        } else if(playerPosition.equals(Positions.FORWARD) && playerHired == false) {
-            throw new Exception("Forward is not available in Free Agents to form a Team.");
-        } else if(playerPosition.equals(Positions.DEFENSE) && playerHired == false) {
-            throw new Exception("Defense is not available in Free Agents to form a Team.");
+    public void updateRosterSubLists(){
+        if(null == team.getRoster().getAllPlayerList()){
+            return;
+        } else {
+            team.getRoster().updateSubRoster(team.getRoster().getAllPlayerList());
         }
     }
 }

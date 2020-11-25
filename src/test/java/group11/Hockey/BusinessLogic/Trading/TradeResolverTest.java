@@ -2,13 +2,20 @@ package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeResolver;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TradeResolverTest {
-    TradingModelMock leagueModel = new TradingModelMock(1.0f, 1.0f);
-    private ITradeResolver aiTradingObj = new TradeResolver(leagueModel.getTradeCharter(),
-            leagueModel.getTradingConfig(), leagueModel.getCommandLineInput(), leagueModel.getValidations(),
-            leagueModel.getDisplay());
+    TradingModelMock leagueModel;
+    private ITradeResolver aiTradingObj;
+
+    @Before
+    public void setUp() throws Exception {
+        leagueModel = new TradingModelMock(1.0f, 1.0f);
+        aiTradingObj = new TradeResolver(leagueModel.getTradeCharter(),
+                leagueModel.getTradingConfig(), leagueModel.getCommandLineInput(), leagueModel.getValidations(),
+                leagueModel.getDisplay());
+    }
 
     @Test
     public void resolveTradeTest() {

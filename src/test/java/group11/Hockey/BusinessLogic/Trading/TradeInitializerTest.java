@@ -5,14 +5,22 @@ import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
 public class TradeInitializerTest {
-    TradingModelMock leagueModel = new TradingModelMock(1.0f, 1.0f);
-    private League leagueObj = leagueModel.getLeagueInfo();
-    private ITradeInitializer aiTradingObj = new TradeInitializer(leagueObj);
+    TradingModelMock leagueModel;
+    private League leagueObj;
+    private ITradeInitializer aiTradingObj;
+
+    @Before
+    public void setUp() throws Exception {
+        leagueModel = new TradingModelMock(1.0f, 1.0f);
+        leagueObj = leagueModel.getLeagueInfo();
+        aiTradingObj = new TradeInitializer(leagueObj);
+    }
 
     @Test
     public void getTradingConfigTest() {

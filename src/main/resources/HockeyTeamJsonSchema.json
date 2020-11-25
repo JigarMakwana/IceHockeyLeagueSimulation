@@ -1,212 +1,207 @@
 {
-   "$schema":"http://json-schema.org/draft-04/schema#",
-   "title":"Hockey Team",
-   "description":"Hockey Team",
-   "type":"object",
-   "required":[
+   "$schema": "http://json-schema.org/draft-04/schema#",
+   "title": "Hockey Team",
+   "description": "Hockey Team",
+   "type": "object",
+   "required": [
       "leagueName",
       "conferences",
       "gameplayConfig",
       "freeAgents",
-      "coaches"
+      "coaches",
+      "gmTable"
    ],
-   "properties":{
-      "leagueName":{
-         "type":"string",
-         "minLength":1
+   "properties": {
+      "leagueName": {
+         "type": "string",
+         "minLength": 1
       },
-      "gameplayConfig":{
-         "type":"object",
-         "required":[
+      "gameplayConfig": {
+         "type": "object",
+         "required": [
             "aging",
             "gameResolver",
             "injuries",
             "training",
             "trading"
          ],
-         "properties":{
-            "aging":{
-               "type":"object",
-               "required":[
+         "properties": {
+            "aging": {
+               "type": "object",
+               "required": [
                   "averageRetirementAge",
                   "maximumAge"
                ],
-               "properties":{
-                  "averageRetirementAge":{
-                     "type":"number"
+               "properties": {
+                  "averageRetirementAge": {
+                     "type": "number"
                   },
-                  "maximumAge":{
-                     "type":"number"
+                  "maximumAge": {
+                     "type": "number"
                   }
                }
             },
-            "gameResolver":{
-               "type":"object",
-               "required":[
+            "gameResolver": {
+               "type": "object",
+               "required": [
                   "randomWinChance"
                ],
-               "properties":{
-                  "randomWinChance":{
-                     "type":"number"
+               "properties": {
+                  "randomWinChance": {
+                     "type": "number"
                   }
                }
             },
-            "injuries":{
-               "type":"object",
-               "required":[
+            "injuries": {
+               "type": "object",
+               "required": [
                   "randomInjuryChance",
                   "injuryDaysLow",
                   "injuryDaysHigh"
                ],
-               "properties":{
-                  "randomInjuryChance":{
-                     "type":"number"
+               "properties": {
+                  "randomInjuryChance": {
+                     "type": "number"
                   },
-                  "injuryDaysLow":{
-                     "type":"number"
+                  "injuryDaysLow": {
+                     "type": "number"
                   },
-                  "injuryDaysHigh":{
-                     "type":"number"
+                  "injuryDaysHigh": {
+                     "type": "number"
                   }
                }
             },
-            "training":{
-               "type":"object",
-               "required":[
+            "training": {
+               "type": "object",
+               "required": [
                   "daysUntilStatIncreaseCheck"
                ],
-               "properties":{
-                  "daysUntilStatIncreaseCheck":{
-                     "type":"number"
+               "properties": {
+                  "daysUntilStatIncreaseCheck": {
+                     "type": "number"
                   }
                }
             },
-            "trading":{
-               "type":"object",
-               "required":[
+            "trading": {
+               "type": "array",
+               "required": [
                   "randomTradeOfferChance",
                   "maxPlayersPerTrade",
                   "randomAcceptanceChance",
                   "gmTable"
                ],
-               "properties":{
-                  "lossPoint":{
-                     "type":"number"
+               "properties": {
+                  "lossPoint": {
+                     "type": "number"
                   },
-                  "randomTradeOfferChance":{
-                     "type":"number"
+                  "randomTradeOfferChance": {
+                     "type": "number"
                   },
-                  "maxPlayersPerTrade":{
-                     "type":"number"
+                  "maxPlayersPerTrade": {
+                     "type": "number"
                   },
-                  "randomAcceptanceChance":{
-                     "type":"number"
+                  "randomAcceptanceChance": {
+                     "type": "number"
                   },
-                  "gmTable":{
-                     "type":"object",
-                     "properties":{
-                        "shrewd":{
-                           "type":"number"
-                        },
-                        "gambler":{
-                           "type":"number"
-                        },
-                        "normal":{
-                           "type":"number"
-                        }
+                  "gmTable": {
+                     "type": "array",
+                     "items": {
+                        "$ref": "#/definitions/gmTable"
                      }
                   }
                }
             }
          },
-         "conferences":{
-            "type":"array",
-            "items":{
-               "$ref":"#/definitions/conference"
+         "conferences": {
+            "type": "array",
+            "items": {
+               "$ref": "#/definitions/conference"
             }
          },
-         "freeAgents":{
-            "type":"array",
-            "items":{
-               "$ref":"#/definitions/player"
+         "freeAgents": {
+            "type": "array",
+            "items": {
+               "$ref": "#/definitions/player"
             }
          },
-         "coaches":{
-            "type":"array",
-            "items":{
-               "$ref":"#/definitions/coaches"
+         "coaches": {
+            "type": "array",
+            "items": {
+               "$ref": "#/definitions/coaches"
             }
          }
       },
-      "definitions":{
-         "conference":{
-            "required":[
+      "definitions": {
+         "conference": {
+            "required": [
                "conferenceName",
                "divisions"
             ],
-            "properties":{
-               "conferenceName":{
-                  "type":"string",
-                  "minLength":1
+            "properties": {
+               "conferenceName": {
+                  "type": "string",
+                  "minLength": 1
                },
-               "divisions":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/definitions/division"
+               "divisions": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/division"
                   }
                }
             }
          },
-         "division":{
-            "required":[
+         "division": {
+            "required": [
                "divisionName",
                "teams"
             ],
-            "properties":{
-               "divisionName":{
-                  "type":"string",
-                  "minLength":1
+            "properties": {
+               "divisionName": {
+                  "type": "string",
+                  "minLength": 1
                },
-               "teams":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/definitions/team"
+               "teams": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/team"
                   }
                }
             }
          },
-         "team":{
-            "required":[
+         "team": {
+            "required": [
                "teamName",
                "generalManager",
                "headCoach",
                "players"
             ],
-            "properties":{
-               "teamName":{
-                  "type":"string",
-                  "minLength":1
+            "properties": {
+               "teamName": {
+                  "type": "string",
+                  "minLength": 1
                },
-               "generalManager":{
-                  "type":"string",
-                  "minLength":1
-               },
-               "headCoach":{
-                  "type":"object",
-                  "items":{
-                     "$ref":"#/definitions/coaches"
+               "generalManager": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/generalManager"
                   }
                },
-               "players":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/definitions/player"
+               "headCoach": {
+                  "type": "object",
+                  "items": {
+                     "$ref": "#/definitions/coaches"
+                  }
+               },
+               "players": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/player"
                   }
                }
             }
          },
-         "player":{
-            "required":[
+         "player": {
+            "required": [
                "playerName",
                "position",
                "skating",
@@ -215,79 +210,114 @@
                "saving",
                "age"
             ],
-            "properties":{
-               "playerName":{
-                  "type":"string",
-                  "minLength":1
+            "properties": {
+               "playerName": {
+                  "type": "string",
+                  "minLength": 1
                },
-               "position":{
-                  "type":"string",
-                  "pattern":"^forward$|^defense$|^goalie$"
+               "position": {
+                  "type": "string",
+                  "pattern": "^forward$|^defense$|^goalie$"
                },
-               "captain":{
-                  "type":"boolean"
+               "captain": {
+                  "type": "boolean"
                },
-               "skating":{
-                  "type":"number",
-                  "minimum":1,
-                  "maximum":20
+               "skating": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 20
                },
-               "shooting":{
-                  "type":"number",
-                  "minimum":1,
-                  "maximum":20
+               "shooting": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 20
                },
-               "checking":{
-                  "type":"number",
-                  "minimum":1,
-                  "maximum":20
+               "checking": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 20
                },
-               "saving":{
-                  "type":"number",
-                  "minimum":1,
-                  "maximum":20
+               "saving": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 20
                },
-               "age":{
-                  "type":"number",
-                  "minimum":1,
-                  "maximum":100
+               "age": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 100
                }
             }
          },
-         "coaches":{
-            "required":[
+         "coaches": {
+            "required": [
                "name",
                "skating",
                "shooting",
                "checking",
                "saving"
             ],
-            "properties":{
-               "name":{
-                  "type":"string",
-                  "minLength":1
+            "properties": {
+               "name": {
+                  "type": "string",
+                  "minLength": 1
                },
-               "skating":{
-                  "type":"number",
-                  "minimum":0,
-                  "maximum":1
+               "skating": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
                },
-               "shooting":{
-                  "type":"number",
-                  "minimum":0,
-                  "maximum":1
+               "shooting": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
                },
-               "checking":{
-                  "type":"number",
-                  "minimum":0,
-                  "maximum":1
+               "checking": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
                },
-               "saving":{
-                  "type":"number",
-                  "minimum":0,
-                  "maximum":1
+               "saving": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+               }
+            }
+         },
+         "gmTable": {
+            "required": [
+               "shrewd",
+               "gambler",
+               "normal"
+            ],
+            "properties": {
+               "shrewd": {
+                  "type": "number"
+               },
+               "gambler": {
+                  "type": "number"
+               },
+               "normal": {
+                  "type": "number"
+               }
+            }
+         },
+         "generalManager": {
+            "required": [
+               "name",
+               "personality"
+            ],
+            "properties": {
+               "name": {
+                  "type": "string",
+                  "minLength": 1
+               },
+               "personality": {
+                  "type": "string",
+                  "minLength": 1
                }
             }
          }
       }
    }
+}

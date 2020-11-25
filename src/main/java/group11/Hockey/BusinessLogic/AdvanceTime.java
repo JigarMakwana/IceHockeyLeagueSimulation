@@ -1,31 +1,33 @@
+/*
+ * Author: RajKumar B00849566
+ */
+
 package group11.Hockey.BusinessLogic;
 
 import java.util.Date;
 
-import group11.Hockey.BusinessLogic.models.Advance;
+import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleContext;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.IParse;
-import group11.Hockey.models.Parse;
-import group11.Hockey.models.PlayoffSchedule;
 
 public class AdvanceTime extends StateMachineState {
 	private ILeague league;
-	private ILeagueDb leaugueDb;
+	private ILeagueDb leagueDb;
 
-	public AdvanceTime(ILeague league, ILeagueDb leaugueDb) {
+	public AdvanceTime(ILeague league, ILeagueDb leagueDb) {
 		super();
 		this.league = league;
-		this.leaugueDb = leaugueDb;
+		this.leagueDb = leagueDb;
 	}
 
 	@Override
 	public StateMachineState startState() {
 		ITimeLine timeLine = league.getTimeLine();
-		IParse parse = new Parse();
-		IAdvance advance = new Advance();
+		IParse parse = DefaultHockeyFactory.makeParse();
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 
 		String currentDate = timeLine.getCurrentDate();
 		Date regularSeasonEndDateTime = timeLine.getRegularSeasonEndDateTime();
@@ -41,16 +43,18 @@ public class AdvanceTime extends StateMachineState {
 			System.out.println(message);
 			message = "\n********** Generating Playoff schedule **********";
 			System.out.println(message);
-			IScheduleStrategy scheduleStrategy = new PlayoffSchedule(league);
-			return new ScheduleContext(scheduleStrategy, league, leaugueDb);
+			IScheduleContext scheduleContext = DefaultHockeyFactory
+					.makeScheduleContext(DefaultHockeyFactory.makePlayoffSchedule());
+			return scheduleContext.executeStrategy(league, leagueDb);
 		} else if (parse.stringToDate(currentDate).equals(firstRoundEnd)
 				|| parse.stringToDate(currentDate).equals(secondRoundEnd)
 				|| parse.stringToDate(currentDate).equals(semiFinalsEnd)) {
 
-			IScheduleStrategy scheduleStrategy = new PlayoffScheduleFinalRounds(league);
-			return new ScheduleContext(scheduleStrategy, league, leaugueDb);
+			IScheduleContext scheduleContext = DefaultHockeyFactory
+					.makeScheduleContext(DefaultHockeyFactory.makePlayoffScheduleFinalRounds());
+			return scheduleContext.executeStrategy(league, leagueDb);
 		} else {
-			return new TrainingPlayer(league, leaugueDb);
+			return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb);
 		}
 	}
 

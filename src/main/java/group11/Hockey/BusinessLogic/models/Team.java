@@ -15,7 +15,8 @@ import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 public class Team implements ITeam {
 
 	private String teamName;
-	private String generalManager;
+//	private String generalManager;
+	private GeneralManager generalManager;
 	private Coach headCoach;
 	private List<Player> players = null;
 	private boolean isUserTeam = false;
@@ -30,7 +31,7 @@ public class Team implements ITeam {
 	private int wins;
 	private int points;
 
-	public Team(String teamName, String generalManager, Coach headCoach, List<? extends IPlayer> players) {
+	public Team(String teamName, GeneralManager generalManager, Coach headCoach, List<? extends IPlayer> players) {
 		super();
 		this.teamName = teamName;
 		this.generalManager = generalManager;
@@ -99,11 +100,11 @@ public class Team implements ITeam {
 		this.teamName = teamName;
 	}
 
-	public String getGeneralManager() {
+	public GeneralManager getGeneralManager() {
 		return generalManager;
 	}
 
-	public void setGeneralManager(String generalManager) {
+	public void setGeneralManager(GeneralManager generalManager) {
 		this.generalManager = generalManager;
 	}
 
@@ -224,11 +225,13 @@ public class Team implements ITeam {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 
-	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
-		team.setGeneralManager(generalMangerName);
+	public void addGeneralMangerToTeam(Team team, GeneralManager gmObj, League league) {
+		team.setGeneralManager(gmObj);
 		List<GeneralManager> generalManagers = league.getGeneralManagers();
 		for (GeneralManager gm : generalManagers) {
-			if (gm.getName() != null && gm.getName().equalsIgnoreCase(generalMangerName)) {
+			if (gm.getName() != null && gm.getPersonality() != null &&
+					gm.getName().equalsIgnoreCase(gmObj.getName()) &&
+					gm.getPersonality().equalsIgnoreCase(gmObj.getPersonality())) {
 				generalManagers.remove(gm);
 				break;
 			}

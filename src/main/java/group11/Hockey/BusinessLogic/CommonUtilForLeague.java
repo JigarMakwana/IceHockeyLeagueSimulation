@@ -12,14 +12,14 @@ import group11.Hockey.BusinessLogic.models.Team;
 abstract public class CommonUtilForLeague {
 
 	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
-		team.setGeneralManager(generalMangerName);
-		List<GeneralManager> generalManagers = league.getGeneralManagers();
-		for (GeneralManager gm : generalManagers) {
-			if (gm.getName() != null && gm.getName().equalsIgnoreCase(generalMangerName)) {
-				generalManagers.remove(gm);
-				break;
-			}
-		}
+//		team.setGeneralManager(generalMangerName);
+//		List<GeneralManager> generalManagers = league.getGeneralManagers();
+//		for (GeneralManager gm : generalManagers) {
+//			if (gm.getName() != null && gm.getName().equalsIgnoreCase(generalMangerName)) {
+//				generalManagers.remove(gm);
+//				break;
+//			}
+//		}
 	}
 
 	public void addCoachToTeam(Team team, String coachName, League league) {

@@ -1,14 +1,33 @@
 package group11.Hockey.BusinessLogic;
 
+import java.util.List;
+
 import group11.Hockey.BusinessLogic.Trading.*;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
 import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import org.json.simple.parser.JSONParser;
 
 import group11.Hockey.BusinessLogic.models.Roster.Roster;
+import group11.Hockey.BusinessLogic.GameSimulation.DefencePlayerActive;
+import group11.Hockey.BusinessLogic.GameSimulation.ForwardPlayerActive;
+import group11.Hockey.BusinessLogic.GameSimulation.GameContext;
+import group11.Hockey.BusinessLogic.GameSimulation.GameStrategy;
+import group11.Hockey.BusinessLogic.GameSimulation.GeneratePlayOffShifts;
+import group11.Hockey.BusinessLogic.GameSimulation.GenerateShifts;
+import group11.Hockey.BusinessLogic.GameSimulation.GenerateShiftsTemplate;
+import group11.Hockey.BusinessLogic.GameSimulation.GoaliePlayerActive;
+import group11.Hockey.BusinessLogic.GameSimulation.IGameContext;
+import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleContext;
+import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
+import group11.Hockey.BusinessLogic.LeagueSimulation.InitializeSeason;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.PlayoffSchedule;
+import group11.Hockey.BusinessLogic.LeagueSimulation.ScheduleContext;
 import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -20,10 +39,6 @@ import group11.Hockey.db.ISerialize;
 import group11.Hockey.db.Serialize;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueSerialisation;
-import group11.Hockey.models.InitializeSeason;
-
-import java.util.Dictionary;
-import java.util.List;
 
 public class DefaultHockeyFactory extends TeamFactory {
 
@@ -40,8 +55,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new League();
 	}
 
-	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput,
-										   ILeagueDb leagueDb) {
+	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb) {
 		return new JsonImport(fileName, commandLineInput, leagueDb);
 	}
 
@@ -67,20 +81,18 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static IUserInputCheck makeUserInputCheck(ICommandLineInput commandLineInput, IValidations validation,
-													 IDisplay display) {
+			IDisplay display) {
 		return new UserInputCheck(commandLineInput, validation, display);
 	}
 
-	public static StateMachineState makeCreateTeam(League league, ICommandLineInput commandLineInput,
-												   ILeagueDb leagueDb) {
+	public static StateMachineState makeCreateTeam(League league, ICommandLineInput commandLineInput, ILeagueDb leagueDb) {
 		IDisplay display = Display.getInstance();
 		IValidations validation = makeValidations(display);
 		return new CreateTeam(league, commandLineInput, display, validation, leagueDb);
 
 	}
 
-	public static StateMachineState makePlayerChoice(League league, ICommandLineInput commandLineInput,
-													 ILeagueDb leagueDb) {
+	public static StateMachineState makePlayerChoice(League league, ICommandLineInput commandLineInput, ILeagueDb leagueDb) {
 		IDisplay display = Display.getInstance();
 		IValidations validation = Validations.getInstance();
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
@@ -125,6 +137,59 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return FinalState.getInstance();
 	}
 
+	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb) {
+		return new AdvanceTime(league, leagueDb);
+	}
+
+	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb) {
+		return new TrainingPlayer(league, leagueDb);
+	}
+
+	public static IScheduleContext makeScheduleContext(IScheduleStrategy scheduleStrategy) {
+		return new ScheduleContext(scheduleStrategy);
+	}
+
+	public static IScheduleStrategy makePlayoffSchedule() {
+		return new PlayoffSchedule();
+	}
+
+	public static IScheduleStrategy makePlayoffScheduleFinalRounds() {
+		return new PlayoffScheduleFinalRounds();
+	}
+
+	public static IParse makeParse() {
+		return new Parse();
+	}
+
+	public static IAdvance makeAdvance() {
+		return new Advance();
+	}
+
+	public static GameStrategy makeDefencePlayerActive() {
+		return new DefencePlayerActive();
+	}
+
+	public static GameStrategy makeForwardPlayerActive() {
+		return new ForwardPlayerActive();
+	}
+
+	public static GameStrategy makeGoaliePlayerActive() {
+		return new GoaliePlayerActive();
+	}
+
+	public static IGameContext makeGameContext(GameStrategy gameStrategy) {
+		return new GameContext(gameStrategy);
+	}
+
+	public static GenerateShiftsTemplate makeGenerateShifts(List<Player> team) {
+		return new GenerateShifts(team);
+	}
+
+	public static GenerateShiftsTemplate makeGeneratePlayOffShifts(List<Player> team) {
+		return new GeneratePlayOffShifts(team);
+	}
+
+
 	public static IConstantSupplier makeConstantSupplier(){
 		int activeRosterSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal();
 		int inActiveRosterSize = RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
@@ -134,7 +199,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new ConstantSupplier(activeRosterSize, inActiveRosterSize, forwardSize, defenseSize, goaliSize);
 	}
 
-	public static Roster makeRoster(String teamName, List<IPlayer> playerList){
+	public static IRoster makeRoster(String teamName, List<Player> playerList){
 		IConstantSupplier rosterSize = makeConstantSupplier();
 		return new Roster(teamName, playerList, rosterSize);
 	}
@@ -148,9 +213,13 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new GameplayConfig(aging, gameResolver, injuries, training, trading);
 	}
 
+	public static IgmTable makeGMTable(float shrewd, float gambler, float normal){
+		return new gmTable(shrewd, gambler, normal);
+	}
+
 	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance,
 											int maxPlayersPerTrade, float randomAcceptanceChance,
-											Dictionary gmTable){
+											IgmTable gmTable){
 		return new Trading(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance, gmTable);
 	}
 
@@ -162,7 +231,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new TradeInitializer(leagueObj);
 	}
 
-	public static ITradeGenerator  makeTradeGenerator(ITeam team, ITradingConfig tradingConfig, IDisplay display){
+	public static ITradeGenerator makeTradeGenerator(Team team, ITradingConfig tradingConfig, IDisplay display){
 		return new TradeGenerator(team, tradingConfig, display);
 	}
 
@@ -172,21 +241,21 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new TradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
 	}
 
-	public static ITradeSettler makeTradeSettler(ITeam team, List<IPlayer> freeAgentList,
+	public static ITradeSettler makeTradeSettler(Team team, List<Player> freeAgentList,
 												 ICommandLineInput commandLineInput,
 												 IValidations validation, IDisplay display,
 												 IConstantSupplier constantSupplier){
 		return new TradeSettler(team, freeAgentList, commandLineInput, validation, display, constantSupplier);
 	}
 
-	public static ITradeCharter makeTradeCharter(ITeam offeringTeam, List<IPlayer> offeredPlayerList,
-												 ITeam requestedteam, List<IPlayer> requestedPlayerList){
+	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList,
+												 Team requestedteam, List<Player> requestedPlayerList){
 		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList);
 	}
 
 	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance,
 												   int maxPlayersPerTrade, float randomAcceptanceChance,
-												   Dictionary gmTable){
+												   IgmTable gmTable){
 		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
 	}
 }

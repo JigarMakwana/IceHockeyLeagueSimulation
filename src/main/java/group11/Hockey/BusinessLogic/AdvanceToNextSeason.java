@@ -3,14 +3,14 @@ package group11.Hockey.BusinessLogic;
 import java.util.Date;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.models.IParse;
-import group11.Hockey.models.Parse;
 
 public class AdvanceToNextSeason extends StateMachineState {
 	ILeague league;

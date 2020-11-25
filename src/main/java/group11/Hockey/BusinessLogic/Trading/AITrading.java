@@ -22,7 +22,7 @@ public class AITrading extends StateMachineState {
 	private Trading tradingConfig;
 	private PlayerTradeOperations playerMiscellaneous;
 	private ICommandLineInput commandLineInput;
-	private IDisplay display;
+	private IDisplay display = DefaultHockeyFactory.makeDisplay();
 	private IValidations validation;
 	private ILeagueDb leagueDb;
 

@@ -55,7 +55,7 @@ public class InjurySystem {
 			//decide which player will replace the injured player
 			//find the player with same position as injured player with highest strength in InActive Roster
 			IPlayer replacementPlayer = new Player();
-			roster.swapPlayers(injuredPlayer, replacementPlayer);
+//			roster.swapPlayers(injuredPlayer, replacementPlayer);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class InjurySystem {
 		//decide which player will replace the recoveredPlayer player
 		//find the player with same position as recovered player with lowest strength in InActive Roster
 		IPlayer replacementPlayer = new Player();
-		roster.swapPlayers(recoveredPlayer, replacementPlayer);
+//		roster.swapPlayers(recoveredPlayer, replacementPlayer);
 	}
 
 	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer){

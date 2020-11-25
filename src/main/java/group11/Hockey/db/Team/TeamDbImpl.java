@@ -6,12 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.db.Constants;
 import group11.Hockey.db.GameplayConfigDb;
 import group11.Hockey.db.IGameplayConfigDb;
@@ -118,7 +113,10 @@ public class TeamDbImpl implements ITeamDb {
 			headCoach.setShooting((Float.parseFloat(resultSet.getString(Constants.coachShooting.toString()))));
 			headCoach.setSkating((Float.parseFloat(resultSet.getString(Constants.coachSkating.toString()))));
 			teamInDivision.setHeadCoach(headCoach);
-			teamInDivision.setGeneralManager(resultSet.getString(Constants.generalManger.toString()));
+			GeneralManager gm = new GeneralManager();
+			gm.setName(Constants.generalMangerName.toString());
+			gm.setPersonality(Constants.generalMangerPersonality.toString());
+			teamInDivision.setGeneralManager(gm);
 			List<Team> teamList = divisionInConference.getTeams();
 			if (teamList == null || teamList.size() == 0) {
 				teamList = new ArrayList<Team>();

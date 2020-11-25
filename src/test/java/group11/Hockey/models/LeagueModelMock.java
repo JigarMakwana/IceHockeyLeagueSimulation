@@ -4,19 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GameResolver;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
-import group11.Hockey.BusinessLogic.models.GeneralManager;
-import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
+import group11.Hockey.BusinessLogic.models.*;
 
 public class LeagueModelMock {
 	private League league;
@@ -35,7 +23,8 @@ public class LeagueModelMock {
 		GameResolver gameResolver = new GameResolver(0);
 		Injuries injuries = new Injuries(1, 1, 100);
 		Training training = new Training(0);
-		Trading trading = new Trading(0, 0, 0, 0);
+		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
+		Trading trading = new Trading(0, 0, 0, 0, gmTbale);
 
 		GameplayConfig gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
 
@@ -55,7 +44,8 @@ public class LeagueModelMock {
 		coach.setShooting(skill);
 		coach.setSkating(skill);
 
-		Team team1 = new Team("Boston", "Mister Fred", coach, playerList);
+		GeneralManager gm1 = new GeneralManager("Mister Fred","normal");
+		Team team1 = new Team("Boston", gm1, coach, playerList);
 
 		playerList = new ArrayList<Player>();
 		Player player4 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
@@ -63,7 +53,8 @@ public class LeagueModelMock {
 		playerList.add(player4);
 		playerList.add(player5);
 
-		Team team2 = new Team("Vancouver Canucks", "John", coach, playerList);
+		GeneralManager gm2 = new GeneralManager("John Smith","shrewd");
+		Team team2 = new Team("Vancouver Canucks", gm2, coach, playerList);
 		teamsList.add(team1);
 		teamsList.add(team2);
 

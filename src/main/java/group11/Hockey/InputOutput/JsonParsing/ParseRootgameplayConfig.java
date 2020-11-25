@@ -1,17 +1,10 @@
 package group11.Hockey.InputOutput.JsonParsing;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.models.*;
 import org.json.simple.JSONObject;
 
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.GameResolver;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
-import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
-
-import java.util.Dictionary;
+import java.util.Map;
 import java.util.Hashtable;
 
 public class ParseRootgameplayConfig implements IParseRootElement {
@@ -40,7 +33,7 @@ public class ParseRootgameplayConfig implements IParseRootElement {
 		Training training = parseTraining(trainingJsonObj);
 
 		JSONObject tradingJsonObj = (JSONObject) gameplayConfigJson.get(Attributes.TRADING.getAttribute());
-		Trading trading = parseTrading(gameplayConfigJson, tradingJsonObj);
+		Trading trading = parseTrading(tradingJsonObj);
 
 		GameplayConfig gameplayConfig = DefaultHockeyFactory.makeGameplayConfig(aging, gameResolver, injuries, training, trading);
 		return gameplayConfig;
@@ -54,9 +47,10 @@ public class ParseRootgameplayConfig implements IParseRootElement {
 	}
 
 	private GameResolver parseGameResolver(JSONObject gameResolverJsonObj) {
-		float randomWinChance = ((Double) gameResolverJsonObj.get(Attributes.RANDOMWINCHANCE.getAttribute())).floatValue();
-		GameResolver gameResolver = new GameResolver(randomWinChance);
-		return gameResolver;
+//		float randomWinChance = ((Double) gameResolverJsonObj.get(Attributes.RANDOMWINCHANCE.getAttribute())).floatValue();
+//		GameResolver gameResolver = new GameResolver(randomWinChance);
+//		return gameResolver;
+		return null;
 	}
 
 	private Injuries parseInjuries(JSONObject injuriesJsonObj) {
@@ -73,30 +67,27 @@ public class ParseRootgameplayConfig implements IParseRootElement {
 		return training;
 	}
 
-	private Trading parseTrading(JSONObject gameplayConfigJson, JSONObject tradingJsonObj) {
+	private Trading parseTrading(JSONObject tradingJsonObj) {
 		int lossPoint = ((Long) tradingJsonObj.get(Attributes.LOSSPOINT.getAttribute())).intValue();
 		float randomTradeOfferChance = ((Double) tradingJsonObj.get(Attributes.RANDOMTRADEOFFERCHANCE.getAttribute())).floatValue();
 		int maxPlayersPerTrade = ((Long) tradingJsonObj.get(Attributes.MAXPLAYERSPERTRADE.getAttribute())).intValue();
 		float randomAcceptanceChance = ((Double) tradingJsonObj.get(Attributes.RANDOMACCEPTANCECHANCE.getAttribute())).floatValue();
 
-		JSONObject gmTableJsonObj = (JSONObject) gameplayConfigJson.get(Attributes.GMTABLE.getAttribute());
-		Dictionary gmTable = parseGMTable(gmTableJsonObj);
+		JSONObject gmTableJsonObj = (JSONObject) tradingJsonObj.get(Attributes.GMTABLE.getAttribute());
+		IgmTable gmTable = parseGMTable(gmTableJsonObj);
 
 		Trading trading = DefaultHockeyFactory.makeTradingConfig(lossPoint, randomTradeOfferChance,
 				maxPlayersPerTrade, randomAcceptanceChance, gmTable);
 		return trading;
 	}
 
-	private Dictionary parseGMTable(JSONObject gmTableJsonObj){
+	private IgmTable parseGMTable(JSONObject gmTableJsonObj){
 		float shrewdValue = ((Double) gmTableJsonObj.get(Attributes.SHREWD.getAttribute())).floatValue();
 		float gamblerValue = ((Double) gmTableJsonObj.get(Attributes.GAMBLER.getAttribute())).floatValue();
 		float normalValue = ((Double) gmTableJsonObj.get(Attributes.NORMAL.getAttribute())).floatValue();
 
-		Dictionary gmTable = new Hashtable();
-		gmTable.put("shrewd", shrewdValue);
-		gmTable.put("gambler", gamblerValue);
-		gmTable.put("normal",normalValue);
+		IgmTable gmTableObj = DefaultHockeyFactory.makeGMTable(shrewdValue, gamblerValue,normalValue);
 
-		return gmTable;
+		return gmTableObj;
 	}
 }

@@ -3,7 +3,7 @@ package group11.Hockey.BusinessLogic.models.Roster;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IConstantSupplier;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 
 import java.util.ArrayList;
@@ -11,15 +11,15 @@ import java.util.List;
 
 public class Roster implements IRoster {
     private String teamName;
-    private List<IPlayer> allPlayerList;
-    private List<IPlayer> forwardList;
-    private List<IPlayer> defenseList;
-    private List<IPlayer> goalieList;
-    private List<IPlayer> activeRosterList = new ArrayList<>();
-    private List<IPlayer> inActiveRosterList = new ArrayList<>();
+    private List<Player> allPlayerList;
+    private List<Player> forwardList;
+    private List<Player> defenseList;
+    private List<Player> goalieList;
+    private List<Player> activeRosterList = new ArrayList<>();
+    private List<Player> inActiveRosterList = new ArrayList<>();
     private IConstantSupplier constantSupplier;
 
-    public Roster(String teamName, List<IPlayer> playerList, IConstantSupplier constantSupplier){
+    public Roster(String teamName, List<Player> playerList, IConstantSupplier constantSupplier){
         this.teamName = teamName;
         this.allPlayerList = playerList;
         this.generateSubRoster(this.allPlayerList);
@@ -30,8 +30,8 @@ public class Roster implements IRoster {
         this.constantSupplier = constantSupplier;
     }
 
-    private void generateSubRoster(List<IPlayer> allPlayerList){
-        for(IPlayer p: allPlayerList){
+    private void generateSubRoster(List<Player> allPlayerList){
+        for(Player p: allPlayerList){
             if(p.isActive()){
                 activeRosterList.add(p);
             }else {
@@ -70,34 +70,34 @@ public class Roster implements IRoster {
         }
     }
 
-    public void swapPlayers(IPlayer one, IPlayer two){
+    public void swapPlayers(Player one, Player two){
         activeRosterList.add(two);
         inActiveRosterList.add(one);
         activeRosterList.remove(one);
         inActiveRosterList.remove(two);
     }
 
-    public List<IPlayer> getAllPlayerList() {
+    public List<Player> getAllPlayerList() {
         return allPlayerList;
     }
 
-    public List<IPlayer> getActiveRoster() {
+    public List<Player> getActiveRoster() {
         return activeRosterList;
     }
 
-    public List<IPlayer> getForwardList() {
+    public List<Player> getForwardList() {
         return forwardList;
     }
 
-    public List<IPlayer> getDefenseList() {
+    public List<Player> getDefenseList() {
         return defenseList;
     }
 
-    public List<IPlayer> getGoalieList() {
+    public List<Player> getGoalieList() {
         return goalieList;
     }
 
-    public List<IPlayer> getInActiveRoster() {
+    public List<Player> getInActiveRoster() {
         return inActiveRosterList;
     }
 

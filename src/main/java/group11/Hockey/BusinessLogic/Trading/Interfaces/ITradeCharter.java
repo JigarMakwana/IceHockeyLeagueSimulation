@@ -1,13 +1,13 @@
 package group11.Hockey.BusinessLogic.Trading.Interfaces;
 
-import group11.Hockey.BusinessLogic.models.IPlayer;
-import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
 
 import java.util.List;
 
 public interface ITradeCharter {
-    List<IPlayer> getOfferedPlayerList();
-    List<IPlayer> getRequestedPlayerList();
-    ITeam getOfferingTeam();
-    ITeam getRequestedTeam();
+    List<Player> getOfferedPlayerList();
+    List<Player> getRequestedPlayerList();
+    Team getOfferingTeam();
+    Team getRequestedTeam();
 }

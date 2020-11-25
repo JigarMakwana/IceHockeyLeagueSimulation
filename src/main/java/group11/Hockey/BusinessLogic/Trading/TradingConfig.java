@@ -1,19 +1,22 @@
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
+import group11.Hockey.BusinessLogic.models.IgmTable;
 
-import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class TradingConfig implements ITradingConfig {
     private final int lossPoint;
     private final float randomTradeOfferChance;
     private final int maxPlayersPerTrade;
     private final float randomAcceptanceChance;
-    private Dictionary gmTable = new Hashtable();
+    private IgmTable gmTable;
 
     public TradingConfig(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade, float randomAcceptanceChance,
-                   Dictionary gmTable) {
+                         IgmTable gmTable) {
         this.lossPoint = lossPoint;
         this.randomTradeOfferChance = randomTradeOfferChance;
         this.maxPlayersPerTrade = maxPlayersPerTrade;
@@ -37,7 +40,7 @@ public class TradingConfig implements ITradingConfig {
         return randomAcceptanceChance;
     }
 
-    public Dictionary getGmTable() {
-        return gmTable;
+    public IgmTable getGmTable() {
+        return this.gmTable;
     }
 }

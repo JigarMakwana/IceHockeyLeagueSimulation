@@ -31,7 +31,7 @@ public class ParseRootgeneralManagersTest {
 		ParseRootgeneralManagers parseRoot = new ParseRootgeneralManagers();
 		parseRoot.parseRootElement(league, jsonObject);
 		List<GeneralManager> lm= league.getGeneralManagers();
-		Assert.assertEquals(lm.size(), 3);
+		Assert.assertEquals(lm.size(), 90);
 
 	}
 

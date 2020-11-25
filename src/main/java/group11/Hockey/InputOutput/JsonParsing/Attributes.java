@@ -30,6 +30,7 @@ public enum Attributes {
 	TEAMS("teams"),
 	TEAMNAME("teamName"),
 	GENERALMANAGER("generalManager"),
+	PERSONALITY("personality"),
 	HEADCOACH("headCoach"),
 	NAME("name"),
 	SKATING("skating"),

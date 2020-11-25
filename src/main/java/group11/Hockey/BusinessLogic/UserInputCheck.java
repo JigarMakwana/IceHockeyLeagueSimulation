@@ -64,16 +64,16 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void generalManagerNameFromUserCheck(Team newTeam, League league) {
-		boolean checkManagerName = true;
-		String generalManager = null;
-		while (checkManagerName) {
-			display.showMessageOnConsole(BusinessConstants.Enter_General_Manger_Name.getValue().toString());
-			generalManager = commandLineInput.getValueFromUser();
-			checkManagerName = validation.generalManagerNameCheck(generalManager, league);
-		}
-		if (generalManager != null) {
-			newTeam.addGeneralMangerToTeam(newTeam, generalManager, league);
-		}
+//		boolean checkManagerName = true;
+//		String generalManager = null;
+//		while (checkManagerName) {
+//			display.showMessageOnConsole(BusinessConstants.Enter_General_Manger_Name.getValue().toString());
+//			generalManager = commandLineInput.getValueFromUser();
+//			checkManagerName = validation.generalManagerNameCheck(generalManager, league);
+//		}
+//		if (generalManager != null) {
+//			newTeam.addGeneralMangerToTeam(newTeam, generalManager, league);
+//		}
 
 	}
 

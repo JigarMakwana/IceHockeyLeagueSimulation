@@ -7,12 +7,14 @@ import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
 import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TradeInitializer implements ITradeInitializer {
     private ILeague leagueObj;
     private Trading tradingConfig;
-    private List<ITeam> eligibleTeams = new ArrayList<>();
+    private List<Team> eligibleTeams = new ArrayList<>();
 
     public TradeInitializer(ILeague leagueObj){
         this.leagueObj = leagueObj;
@@ -37,7 +39,7 @@ public class TradeInitializer implements ITradeInitializer {
         }
         // TODO to be removed
         System.out.println("------- ** Teams Eligible for Trade ** -------");
-        for (ITeam team : this.eligibleTeams) {
+        for (Team team : this.eligibleTeams) {
             System.out.println(team.getTeamName());
         }
     }
@@ -64,7 +66,7 @@ public class TradeInitializer implements ITradeInitializer {
     }
 
     @Override
-    public boolean isTradePossible(ITeam team) {
+    public boolean isTradePossible(Team team) {
         if(team.isUserTeam()){
             return false;
         } else if (isRandomOfferChanceSuccess()){
@@ -75,7 +77,7 @@ public class TradeInitializer implements ITradeInitializer {
     }
 
     @Override
-    public List<ITeam> getEligibleTeams() {
+    public List<Team> getEligibleTeams() {
         return this.eligibleTeams;
     }
 }

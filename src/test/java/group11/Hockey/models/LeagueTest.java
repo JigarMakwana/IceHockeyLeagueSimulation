@@ -4,21 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GameResolver;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
-import group11.Hockey.BusinessLogic.models.GeneralManager;
-import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
 import group11.Hockey.db.ICoachDb;
 import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.IManagerDb;
@@ -43,7 +31,8 @@ public class LeagueTest {
 		Coach coach = new Coach(0, 0, 0, 0, "C1");
 		GeneralManager generalManager = new GeneralManager("Kevin");
 		generalManagerList.add(generalManager);
-		Team team = new Team("Vancouver Canucks", "John", coach, null);
+		GeneralManager gm2 = new GeneralManager("John Smith","shrewd");
+		Team team = new Team("Vancouver Canucks", gm2, coach, null);
 		teamsList.add(team);
 
 		List<Division> divisionsList = new ArrayList<Division>();
@@ -57,8 +46,9 @@ public class LeagueTest {
 
 		List<Coach> coachList = new ArrayList<Coach>();
 		coachList.add(coach);
+		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
 		GameplayConfig gameplayConf = new GameplayConfig(new Aging(0, 0), new GameResolver(0), new Injuries(0, 0, 0),
-				new Training(0), new Trading(0, 0, 0, 0));
+				new Training(0), new Trading(0, 0, 0, 0,gmTbale));
 		League league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf,
 				coachList, generalManagerList);
 		return league;

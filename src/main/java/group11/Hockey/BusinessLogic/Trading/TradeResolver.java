@@ -7,8 +7,9 @@ import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeResolver;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
-import group11.Hockey.BusinessLogic.models.IPlayer;
-import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
@@ -17,16 +18,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TradeResolver implements ITradeResolver {
-    private ITeam offeringTeam;
-    private List<IPlayer> offeredPlayerList;
-    private ITeam requestedTeam;
-    private List<IPlayer> requestedPlayerList;
+    private Team offeringTeam;
+    private List<Player> offeredPlayerList;
+    private Team requestedTeam;
+    private List<Player> requestedPlayerList;
     private ITradingConfig tradingConfig;
     private ICommandLineInput commandLineInput;
     private IValidations validation;
     private IDisplay display;
+    private IUserInputCheck userInputCheck;
+    private IRosterSearch rosterSearch;
+    private IRandomNoGenerator randomFloatGenerator;
 
-    public TradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig, ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
+    public TradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig,
+                         ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
         this.offeringTeam = tradeCharter.getOfferingTeam();
         this.offeredPlayerList = tradeCharter.getOfferedPlayerList();
         this.requestedTeam = tradeCharter.getRequestedTeam();
@@ -35,6 +40,9 @@ public class TradeResolver implements ITradeResolver {
         this.commandLineInput = commandLineInput;
         this.validation = validation;
         this.display = display;
+        this.userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
+        this.rosterSearch = DefaultHockeyFactory.makeRosterSearch();
+        this.randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
     }
 
     @Override
@@ -46,11 +54,45 @@ public class TradeResolver implements ITradeResolver {
         }
     }
 
-    public void resolveAIToUserTrade(){
+    @Override
+    public void resetLossPoints(Team team) {
+        team.setLosses(0);
+    }
+
+    @Override
+    public float modifyAcceptanceChance(){
+        float modfiedChance = 0.0f;
+        String gmPersonality = offeringTeam.getGeneralManager().getPersonality();
+        if(gmPersonality.equalsIgnoreCase(GMPersonalities.SHREWD.toString())){
+            modfiedChance = tradingConfig.getGmTable().getShrewd();
+        } else if(gmPersonality.equalsIgnoreCase(GMPersonalities.NORMAL.toString())){
+            modfiedChance = tradingConfig.getGmTable().getNormal();
+        } else if(gmPersonality.equalsIgnoreCase(GMPersonalities.GAMBLER.toString())){
+            modfiedChance = tradingConfig.getGmTable().getGambler();
+        }
+        return this.tradingConfig.getRandomAcceptanceChance() + modfiedChance;
+    }
+
+    private void resolveAIToAITrade(){
+        display.displayTradeStatistics(offeringTeam.getTeamName(), offeredPlayerList,
+                requestedTeam.getTeamName(), requestedPlayerList);
+
+        Float playerStrength1 = rosterSearch.playersStrengthSum(offeredPlayerList);
+        Float playerStrength2 = rosterSearch.playersStrengthSum(requestedPlayerList);
+
+        float randomAcceptanceChance = randomFloatGenerator.generateRandomFloat();
+        if (randomAcceptanceChance < modifyAcceptanceChance()) {
+            acceptTrade();
+        } else if (playerStrength1 > playerStrength2) {
+            acceptTrade();
+        } else {
+            rejectTrade();
+        }
+    }
+
+    private void resolveAIToUserTrade(){
         display.displayTradeStatisticsToUser(offeringTeam.getTeamName(), offeredPlayerList, requestedTeam.getTeamName(), requestedPlayerList);
         display.displayAcceptRejectOptionToUser();
-
-        IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
 
         int userInput = userInputCheck.validateUserTradeInput();
         if (userInput == 1) {
@@ -60,46 +102,26 @@ public class TradeResolver implements ITradeResolver {
         }
     }
 
-    public void resolveAIToAITrade(){
-        display.displayTradeStatistics(offeringTeam.getTeamName(), offeredPlayerList, requestedTeam.getTeamName(), requestedPlayerList);
-
-        IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-        Float playerStrength1 = rosterSearch.playersStrengthSum(offeredPlayerList);
-        Float playerStrength2 = rosterSearch.playersStrengthSum(requestedPlayerList);
-
-        IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
-        float randomAcceptanceChance = randomFloatGenerator.generateRandomFloat();
-        if (randomAcceptanceChance < this.tradingConfig.getRandomAcceptanceChance()) {
-            acceptTrade();
-        } else if (playerStrength1 > playerStrength2) {
-            acceptTrade();
-        } else {
-            rejectTrade();
-        }
-    }
-
-
-    @Override
-    public void acceptTrade() {
-        List<IPlayer> localOfferedPlayerList = new ArrayList<>();
-        for (IPlayer p : offeredPlayerList) {
+    private void acceptTrade() {
+        List<Player> localOfferedPlayerList = new ArrayList<>();
+        for (Player p : offeredPlayerList) {
             localOfferedPlayerList.add(p);
         }
-        List<IPlayer> localRequestedPlayerList = new ArrayList<>();
-        for (IPlayer p : requestedPlayerList) {
+        List<Player> localRequestedPlayerList = new ArrayList<>();
+        for (Player p : requestedPlayerList) {
             localRequestedPlayerList.add(p);
         }
 
-        for (IPlayer toBeRemoved : localOfferedPlayerList) {
+        for (Player toBeRemoved : localOfferedPlayerList) {
             offeredPlayerList.removeIf(player -> player.getPlayerName().equals(toBeRemoved.getPlayerName()));
         }
-        for (IPlayer toBeRemoved : localRequestedPlayerList) {
+        for (Player toBeRemoved : localRequestedPlayerList) {
             requestedPlayerList.removeIf(player -> player.getPlayerName().equals(toBeRemoved.getPlayerName()));
         }
-        for (IPlayer toBeAdded : localRequestedPlayerList) {
+        for (Player toBeAdded : localRequestedPlayerList) {
             offeredPlayerList.add(toBeAdded);
         }
-        for (IPlayer toBeAdded : localOfferedPlayerList) {
+        for (Player toBeAdded : localOfferedPlayerList) {
             requestedPlayerList.add(toBeAdded);
         }
         resetLossPoints(offeringTeam);
@@ -107,14 +129,9 @@ public class TradeResolver implements ITradeResolver {
         display.showMessageOnConsole("Trade successfully accepted!");
     }
 
-    @Override
-    public void rejectTrade() {
+    private void rejectTrade() {
         display.showMessageOnConsole("Trade is declined.");
         resetLossPoints(offeringTeam);
     }
 
-    @Override
-    public void resetLossPoints(ITeam team) {
-        team.setLosses(0);
-    }
 }

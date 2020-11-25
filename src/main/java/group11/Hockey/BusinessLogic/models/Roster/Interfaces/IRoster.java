@@ -1,19 +1,19 @@
 package group11.Hockey.BusinessLogic.models.Roster.Interfaces;
 
-import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Player;
 
 import java.util.List;
 
 public interface IRoster {
-    List<IPlayer> getAllPlayerList();
-    List<IPlayer> getActiveRoster();
-    List<IPlayer> getInActiveRoster();
-    List<IPlayer> getForwardList();
-    List<IPlayer> getDefenseList();
-    List<IPlayer> getGoalieList();
+    List<Player> getAllPlayerList();
+    List<Player> getActiveRoster();
+    List<Player> getInActiveRoster();
+    List<Player> getForwardList();
+    List<Player> getDefenseList();
+    List<Player> getGoalieList();
     String getTeamName();
     boolean isValidRoster();
     boolean isValidActiveRoster();
     boolean isValidInActiveRoster();
-    void swapPlayers(IPlayer one, IPlayer two);
+    void swapPlayers(Player one, Player two);
 }

@@ -9,7 +9,10 @@
           "teams": [
             {
               "teamName": "Boston",
-              "generalManager": "Mister Fred",
+              "generalManager": {
+                "name": "Mister Fred",
+                "personality": "normal"
+              },
               "headCoach": {
                 "name": "Dave",
                 "skating": 2.0,
@@ -89,7 +92,10 @@
             },
             {
               "teamName": "Vancouver Canucks",
-              "generalManager": "John",
+              "generalManager": {
+                "name": "John Smith",
+                "personality": "shrewd"
+              },
               "headCoach": {
                 "name": "Dave",
                 "skating": 2.0,
@@ -556,7 +562,11 @@
       "randomTradeOfferChance": 0.0,
       "maxPlayersPerTrade": 0,
       "randomAcceptanceChance": 0.0,
-      "gmTable": {}
+      "gmTable": {
+        "shrewd": -0.1,
+        "gambler": 0.1,
+        "normal": 0.0
+      }
     }
   },
   "coaches": [

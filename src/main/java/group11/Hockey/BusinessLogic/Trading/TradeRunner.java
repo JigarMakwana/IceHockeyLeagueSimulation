@@ -5,8 +5,8 @@ import group11.Hockey.BusinessLogic.IConstantSupplier;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.IPlayer;
-import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 
@@ -31,7 +31,7 @@ public class TradeRunner implements ITradeRunner {
     @Override
     public void runTrading() {
         ITradeInitializer tradeInitializer = DefaultHockeyFactory.makeTradeInitializer(leagueObj );
-        List<ITeam> eligibleTeamList = tradeInitializer.getEligibleTeams();
+        List<Team> eligibleTeamList = tradeInitializer.getEligibleTeams();
         ITradingConfig tradingConfig = tradeInitializer.getTradingConfig();
 
         for (int i = 0; eligibleTeamList.size() > 1; i = 0){
@@ -45,10 +45,10 @@ public class TradeRunner implements ITradeRunner {
                 tradeResolver.resolveTrade();
 
                 ITradeSettler offeringTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getOfferingTeam(),
-                        (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
+                        (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
                 offeringTeamSettler.settleTeamAfterTrade();
                 ITradeSettler requestedTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getRequestedTeam(),
-                        (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
+                        (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
                 requestedTeamSettler.settleTeamAfterTrade();
             }
             eligibleTeamList.remove(0);

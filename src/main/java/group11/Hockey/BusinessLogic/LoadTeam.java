@@ -28,15 +28,15 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 		this.display = display;
 		this.validations = validations;
 		this.leagueDb = leagueDb;
-		
+
 	}
-	
+
 	@Override
 	public StateMachineState startState() {
 		league = renderTeam();
 		return DefaultHockeyFactory.makePlayerChoice(league, userInputMode, leagueDb);
 	}
-	
+
 	@Override
 	public League renderTeam() {
 		display.showMessageOnConsole("***Load League***\n");
@@ -63,7 +63,7 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 					for (Team team : teamList) {
 						if (team.getTeamName().equalsIgnoreCase(teamName)) {
 							display.printTeamDetails(league.getLeagueName(), conference.getConferenceName(),
-									division.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
+									division.getDivisionName(), team.getTeamName(), team.getGeneralManager().getName(),
 									team.getHeadCoach());
 						}
 					}
@@ -73,7 +73,7 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 		else {
 			display.showMessageOnConsole("Not a valid Team name ");
 		}
-		
+
 
 		return league;
 	}

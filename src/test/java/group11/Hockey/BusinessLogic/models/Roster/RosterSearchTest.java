@@ -17,7 +17,7 @@ public class RosterSearchTest {
 
     @Test
     public void findWeakestPlayersTest() {
-        List<IPlayer> weakestPlayerList = rosterSearch.findWeakestPlayers(roster.getAllPlayerList(), 2);
+        List<Player> weakestPlayerList = rosterSearch.findWeakestPlayers(roster.getAllPlayerList(), 2);
         Assert.assertEquals(weakestPlayerList.size(), 2);
         Assert.assertEquals(weakestPlayerList.get(0).getPlayerName(), "George");
         Assert.assertEquals(weakestPlayerList.get(1).getPlayerName(), "Dick");
@@ -41,26 +41,26 @@ public class RosterSearchTest {
     public void findStrongestPlayersTest() {
         List<Integer> playerPositionFlag = new ArrayList<Integer>(Arrays.asList(1,0,1));
 
-        List<IPlayer> strongestPlayerList = rosterSearch.findStrongestPlayers(roster.getAllPlayerList(), playerPositionFlag, 2);
+        List<Player> strongestPlayerList = rosterSearch.findStrongestPlayers(roster.getAllPlayerList(), playerPositionFlag, 2);
         Assert.assertEquals(strongestPlayerList.get(0).getPlayerName(), "Tom");
         Assert.assertEquals(strongestPlayerList.get(1).getPlayerName(), "Vikash");
     }
 
     @Test
     public void findStrongestTradeTeamTest() {
-//        List<Triplet<ITeam, List<IPlayer>, Float>> tradingTeamsBuffer= new ArrayList<>();
+//        List<Triplet<ITeam, List<Player>, Float>> tradingTeamsBuffer= new ArrayList<>();
 //
-//        Triplet<ITeam, List<IPlayer>, Float> teamRequestEntry1 =
+//        Triplet<ITeam, List<Player>, Float> teamRequestEntry1 =
 //                Triplet.of(teams.get(0), teams.get(0).getPlayers(),playerMiscellaneous.playersStrengthSum(teams.get(0).getPlayers()));
-//        Triplet<ITeam, List<IPlayer>, Float> teamRequestEntry2 =
+//        Triplet<ITeam, List<Player>, Float> teamRequestEntry2 =
 //                Triplet.of(teams.get(0), teams.get(1).getPlayers(),playerMiscellaneous.playersStrengthSum(teams.get(1).getPlayers()));
-//        Triplet<ITeam, List<IPlayer>, Float> teamRequestEntry3 =
+//        Triplet<ITeam, List<Player>, Float> teamRequestEntry3 =
 //                Triplet.of(teams.get(0), teams.get(2).getPlayers(),playerMiscellaneous.playersStrengthSum(teams.get(2).getPlayers()));
 //
 //        tradingTeamsBuffer.add(teamRequestEntry1);
 //        tradingTeamsBuffer.add(teamRequestEntry2);
 //
-//        Triplet<ITeam, List<IPlayer>, Float> strongestTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
+//        Triplet<ITeam, List<Player>, Float> strongestTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
 //        Assert.assertEquals(strongestTeam.getFirst().getTeamName(), "Boston");
     }
 
@@ -72,7 +72,7 @@ public class RosterSearchTest {
 
     @Test
     public void sortPlayersByStrengthTest() {
-        List<IPlayer> sortedPlayerList = rosterSearch.sortPlayersByStrength(roster.getAllPlayerList());
+        List<Player> sortedPlayerList = rosterSearch.sortPlayersByStrength(roster.getAllPlayerList());
         Assert.assertEquals(sortedPlayerList.get(0).getPlayerName(), "George");
         Assert.assertEquals(sortedPlayerList.get(1).getPlayerName(), "Dick");
         Assert.assertEquals(sortedPlayerList.get(2).getPlayerName(), "Vikash");
@@ -81,19 +81,19 @@ public class RosterSearchTest {
 
     @Test
     public void getDefenseListTest() {
-        List<IPlayer> defenseList = rosterSearch.getDefenseList(roster.getAllPlayerList());
+        List<Player> defenseList = rosterSearch.getDefenseList(roster.getAllPlayerList());
         Assert.assertEquals(defenseList.size(), 2);
     }
 
     @Test
     public void getForwardListTest() {
-        List<IPlayer> forwardList = rosterSearch.getForwardList(roster.getAllPlayerList());
+        List<Player> forwardList = rosterSearch.getForwardList(roster.getAllPlayerList());
         Assert.assertEquals(forwardList.size(), 1);
     }
 
     @Test
     public void getGoalieListTest() {
-        List<IPlayer> goalieList = rosterSearch.getGoalieList(roster.getAllPlayerList());
+        List<Player> goalieList = rosterSearch.getGoalieList(roster.getAllPlayerList());
         Assert.assertEquals(goalieList.size(), 1);
     }
 }

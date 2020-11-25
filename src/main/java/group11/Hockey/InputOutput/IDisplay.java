@@ -14,13 +14,13 @@ public interface IDisplay {
 
 	public void displayListOfPLayers(League league);
 
-	public void displayTradeStatistics(String offeringTeamName, List<IPlayer> offeredPlayerList,
-									   String requestedTeamName, List<IPlayer> requestedPlayerList);
+	public void displayTradeStatistics(String offeringTeamName, List<Player> offeredPlayerList,
+									   String requestedTeamName, List<Player> requestedPlayerList);
 
-	public void displayPlayers(List<IPlayer> playersList);
+	public void displayPlayers(List<Player> playersList);
 
-	public void displayTradeStatisticsToUser(String offeringTeamName, List<IPlayer> offeredPlayerList,
-											 String requestedTeamName, List<IPlayer> requestedPlayerList);
+	public void displayTradeStatisticsToUser(String offeringTeamName, List<Player> offeredPlayerList,
+											 String requestedTeamName, List<Player> requestedPlayerList);
 
 	public void displayAcceptRejectOptionToUser();
 
@@ -28,5 +28,5 @@ public interface IDisplay {
 			String managerName, Coach coach);
 
 	public void displayListOfFreeAgents(List<Player> freeAgentList);
-	public void pickPlayer(List<IPlayer> freeAgentList);
+	public void pickPlayer(List<Player> freeAgentList);
 }

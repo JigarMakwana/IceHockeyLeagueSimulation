@@ -1,21 +1,22 @@
 package group11.Hockey.BusinessLogic.models.Roster.Interfaces;
 
 import group11.Hockey.BusinessLogic.Triplet;
-import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Team;
 
 import java.util.List;
 
 public interface IRosterSearch {
-    List<IPlayer> findWeakestPlayers(List<IPlayer> unSortedPlayerList, int maxPlayersPerTrade);
-    List<Integer> findPlayerPositions(List<IPlayer> playerList);
-    List<IPlayer> findStrongestPlayers(List<IPlayer> unSortedPlayerList, List<Integer> playerPositionFlag,
+    List<Player> findWeakestPlayers(List<Player> unSortedPlayerList, int maxPlayersPerTrade);
+    List<Integer> findPlayerPositions(List<Player> playerList);
+    List<Player> findStrongestPlayers(List<Player> unSortedPlayerList, List<Integer> playerPositionFlag,
                                        int maxPlayersPerTrade);
-    Triplet<ITeam, List<IPlayer>, Float> findStrongestTradeTeam(
-            List<Triplet<ITeam, List<IPlayer>, Float>> tradingTeamsBuffer);
-    Float playersStrengthSum(List<IPlayer> playerList);
-    List<IPlayer> sortPlayersByStrength(List<IPlayer> unSortedPlayerList);
-    List<IPlayer> getDefenseList(List<IPlayer> playerList);
-    List<IPlayer> getForwardList(List<IPlayer> playerList);
-    List<IPlayer> getGoalieList(List<IPlayer> playerList);
+    Triplet<Team, List<Player>, Float> findStrongestTradeTeam(
+            List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer);
+    Float playersStrengthSum(List<Player> playerList);
+    List<Player> sortPlayersByStrength(List<Player> unSortedPlayerList);
+    List<Player> getDefenseList(List<Player> playerList);
+    List<Player> getForwardList(List<Player> playerList);
+    List<Player> getGoalieList(List<Player> playerList);
 }

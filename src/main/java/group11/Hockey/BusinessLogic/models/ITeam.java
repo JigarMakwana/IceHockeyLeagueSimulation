@@ -7,7 +7,9 @@ import java.util.List;
 public interface ITeam {
 	public String getTeamName();
 
-	public String getGeneralManager();
+	public GeneralManager getGeneralManager();
+
+	public void setGeneralManager(GeneralManager generalManager);
 
 	public Coach getHeadCoach();
 

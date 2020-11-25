@@ -1,12 +1,9 @@
 package group11.Hockey.BusinessLogic.Trading.Interfaces;
 
-import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Team;
 
 public interface ITradeResolver {
-    void resolveAIToUserTrade();
-    void resolveAIToAITrade();
-    void acceptTrade();
-    void rejectTrade();
     void resolveTrade();
-    void resetLossPoints(ITeam team);
+    void resetLossPoints(Team team);
+    float modifyAcceptanceChance();
 }

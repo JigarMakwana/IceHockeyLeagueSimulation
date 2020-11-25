@@ -33,7 +33,7 @@ public class ParseRootcoachesTest {
 		ParseRootcoaches parseRootcoaches = new ParseRootcoaches();
 		parseRootcoaches.parseRootElement(league, jsonObject);
 		List<Coach> lc = league.getCoaches();
-		Assert.assertEquals(lc.size(), 3);
+		Assert.assertEquals(lc.size(), 50);
 
 	}
 

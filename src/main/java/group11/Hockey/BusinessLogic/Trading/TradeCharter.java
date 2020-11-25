@@ -1,21 +1,21 @@
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
-import group11.Hockey.BusinessLogic.models.IPlayer;
-import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 
 import java.util.List;
 
 public class TradeCharter implements ITradeCharter {
-    private ITeam offeringTeam;
-    private List<IPlayer> offeredPlayerList;
-    private ITeam requestedTeam;
-    private List<IPlayer> requestedPlayerList;
+    private Team offeringTeam;
+    private List<Player> offeredPlayerList;
+    private Team requestedTeam;
+    private List<Player> requestedPlayerList;
 
 
-    public TradeCharter( ITeam offeringTeam, List<IPlayer> offeredPlayerList,
-                         ITeam requestedTeam, List<IPlayer> requestedPlayerList){
+    public TradeCharter( Team offeringTeam, List<Player> offeredPlayerList,
+                         Team requestedTeam, List<Player> requestedPlayerList){
         this.offeringTeam = offeringTeam;
         this.offeredPlayerList = offeredPlayerList;
         this.requestedTeam = requestedTeam;
@@ -23,22 +23,22 @@ public class TradeCharter implements ITradeCharter {
     }
 
     @Override
-    public List<IPlayer> getOfferedPlayerList() {
+    public List<Player> getOfferedPlayerList() {
         return offeredPlayerList;
     }
 
     @Override
-    public List<IPlayer> getRequestedPlayerList() {
+    public List<Player> getRequestedPlayerList() {
         return requestedPlayerList;
     }
 
     @Override
-    public ITeam getOfferingTeam() {
+    public Team getOfferingTeam() {
         return offeringTeam;
     }
 
     @Override
-    public ITeam getRequestedTeam() {
+    public Team getRequestedTeam() {
         return requestedTeam;
     }
 }

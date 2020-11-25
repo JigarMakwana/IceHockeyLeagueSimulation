@@ -20,20 +20,21 @@ public class Validations implements IValidations {
 
 	private static Validations validationsInstance = null;
 
-	public Validations(IDisplay display) {
+	public Validations(IDisplay display){
 		this.display = display;
 	}
 
-	private Validations() {
+	private Validations(){
 
 	}
 
 	public static Validations getInstance() {
-		if (validationsInstance == null) {
+		if(validationsInstance == null) {
 			validationsInstance = new Validations();
 		}
 		return validationsInstance;
 	}
+
 
 	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferencesList) {
 		boolean conferenceNameCheck = false;
@@ -160,7 +161,7 @@ public class Validations implements IValidations {
 		boolean isNoOfSeasonsValueValid = false;
 		try {
 			int value = Integer.parseInt(numberOfSeasons);
-			if (value < 0) {
+			if(value < 0) {
 				display.showMessageOnConsole("Select valid value for simulation");
 				isNoOfSeasonsValueValid = true;
 				return isNoOfSeasonsValueValid;
@@ -172,6 +173,27 @@ public class Validations implements IValidations {
 			isNoOfSeasonsValueValid = true;
 			return isNoOfSeasonsValueValid;
 		}
+	}
 
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public boolean isUserTradeInputValid(int userInput){
+		if((userInput == 1) || (userInput == 0)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public boolean isUserResolveRosterInputValid(int userInput, int listSize){
+		if(((userInput >= 1) && (userInput <= listSize))){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

@@ -13,7 +13,7 @@ public interface ILeague {
 
 	public String getStartDate();
 
-	public List<Player> getFreeAgents();
+	public List<? extends IPlayer> getFreeAgents();
 
 	public List<Conference> getConferences();
 

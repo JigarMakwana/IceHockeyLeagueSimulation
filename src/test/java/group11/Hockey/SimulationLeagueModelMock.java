@@ -19,7 +19,7 @@ import group11.Hockey.BusinessLogic.models.Training;
 
 public class SimulationLeagueModelMock {
 
-		private League league; 
+		private League league;
 		private List<Team> qualifiedTeams = new ArrayList<Team>();
 		private String startDate;
 		private List<Conference> conferences = new ArrayList<Conference>();
@@ -36,7 +36,7 @@ public class SimulationLeagueModelMock {
 			GameResolver gameResolver = new GameResolver(0);
 			Injuries injuries = new Injuries(1, 1, 100);
 			Training training = new Training(0);
-			Trading trading = new Trading(0, 0, 0, 0);
+			Trading trading = new Trading(0, 0, 0, 0, null);
 
 			GameplayConfig gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
 
@@ -47,15 +47,15 @@ public class SimulationLeagueModelMock {
 			coach.setSaving(skill);
 			coach.setShooting(skill);
 			coach.setSkating(skill);
-				
+
 			List<Team> teamsList = new ArrayList<Team>();
 			List<Player> playerList = new ArrayList<Player>();
 			List<Division> divisionsList = new ArrayList<Division>();
 			List<Conference> conferenceList = new ArrayList<Conference>();
-			List<Team> qualifiedTeams = new ArrayList<Team>();		
+			List<Team> qualifiedTeams = new ArrayList<Team>();
 			Team team1,team2,team3,team4,team5,team6,team7,team8;
 			Player player,player1,player2,player3,player4;
-			
+
 			//Atlantic Division, Eastern Conference
 			/*player1 = new Player(15, 18, 12, 1, "Tom1", "forward", true, false, 25);
 	        player2 = new Player(10, 10, 10, 1, "Dick1", "defense", false, false, 28);
@@ -73,14 +73,14 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team1 = new Team("Boston Bruins", "Don Sweeney", coach, playerList);
-			
+			team1 = new Team("Boston Bruins", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			player1 = new Player(15, 18, 12, 1, "Tom2", "forward", true, false, 25);
-			team2 = new Team("Buffalo Sabres", "Kevyn Adams", coach, playerList);
-			
+			team2 = new Team("Buffalo Sabres", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom2"+i, "forward", true, false, 25);
@@ -90,10 +90,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team3 = new Team("Detroit Red Wings", "Steve Yzerman", coach, playerList);
-			
+			team3 = new Team("Detroit Red Wings", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom3"+i, "forward", true, false, 25);
@@ -103,10 +103,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team4 = new Team("Florida Panthers", "Bill Zito", coach, playerList);
-			
+			team4 = new Team("Florida Panthers", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom5"+i, "forward", true, false, 25);
@@ -116,10 +116,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team5 = new Team("Montreal Canadiens", "Marc Bergevin", coach, playerList);
-			
+			team5 = new Team("Montreal Canadiens", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom6"+i, "forward", true, false, 25);
@@ -129,10 +129,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team6 = new Team("Ottawa Senators", "Pierre Dorion", coach, playerList);
-			
+			team6 = new Team("Ottawa Senators", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom7"+i, "forward", true, false, 25);
@@ -142,10 +142,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team7 = new Team("Tampa Bay Lightning", "Julien BriseBois", coach, playerList);
-			
+			team7 = new Team("Tampa Bay Lightning", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom8"+i, "forward", true, false, 25);
@@ -155,10 +155,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team8 = new Team("Toronto Maple Leafs", "Kyle Dubas", coach, playerList);
-			
+			team8 = new Team("Toronto Maple Leafs", null, coach, playerList);
+
 			teamsList.add(team1);
 			teamsList.add(team2);
 			teamsList.add(team3);
@@ -167,10 +167,10 @@ public class SimulationLeagueModelMock {
 			teamsList.add(team6);
 			teamsList.add(team7);
 			teamsList.add(team8);
-			
+
 			Division division = new Division("Atlantic", teamsList);
 			divisionsList.add(division);
-			
+
 			//Metropolitan Division, Eastern Conference
 			teamsList = new ArrayList<Team>();
 			playerList = new ArrayList<Player>();
@@ -182,10 +182,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team1 = new Team("Carolina Hurricanes", "Don Waddel", coach, playerList);
-			
+			team1 = new Team("Carolina Hurricanes", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom10"+i, "forward", true, false, 25);
@@ -195,10 +195,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team2 = new Team("Columbus Blue Jackets", "Jarmo Kekalainen", coach, playerList);
-			
+			team2 = new Team("Columbus Blue Jackets", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom11"+i, "forward", true, false, 25);
@@ -208,10 +208,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team3 = new Team("New Jersey Devils", "Tom Fitzgerald", coach, playerList);
-			
+			team3 = new Team("New Jersey Devils", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom12"+i, "forward", true, false, 25);
@@ -221,10 +221,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team4 = new Team("New York Islanders", "Lou Lamoriello", coach, playerList);
-			
+			team4 = new Team("New York Islanders", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom13"+i, "forward", true, false, 25);
@@ -234,10 +234,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team5 = new Team("New York Rangers", "Jeff Gorton", coach, playerList);
-			
+			team5 = new Team("New York Rangers", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom14"+i, "forward", true, false, 25);
@@ -247,10 +247,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team6 = new Team("Philidelphia Flyers", "Check Fletcher", coach, playerList);
-			
+			team6 = new Team("Philidelphia Flyers", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom15"+i, "forward", true, false, 25);
@@ -260,10 +260,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team7 = new Team("Pittsburgh Penguins", "Jim Rutherford", coach, playerList);
-			
+			team7 = new Team("Pittsburgh Penguins", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom16"+i, "forward", true, false, 25);
@@ -273,10 +273,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team8 = new Team("Washington Capitals", "Brian MacLellan", coach, playerList);
-			
+			team8 = new Team("Washington Capitals", null, coach, playerList);
+
 			teamsList.add(team1);
 			teamsList.add(team2);
 			teamsList.add(team3);
@@ -285,14 +285,14 @@ public class SimulationLeagueModelMock {
 			teamsList.add(team6);
 			teamsList.add(team7);
 			teamsList.add(team8);
-			
+
 			qualifiedTeams.add(team1);
 			Division division1 = new Division("Metropolitan", teamsList);
 			divisionsList.add(division1);
-			
+
 			Conference conference = new Conference("Eastern Conference", divisionsList);
 			conferenceList.add(conference);
-			
+
 			//Central Division, Western Conference
 			divisionsList = new ArrayList<Division>();
 			playerList = new ArrayList<Player>();
@@ -304,10 +304,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team1 = new Team("Chicago Blackhawks", "Stan Bowman", coach, playerList);
-			
+			team1 = new Team("Chicago Blackhawks", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom18"+i, "forward", true, false, 25);
@@ -317,10 +317,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team2 = new Team("Colorado Avalanche", "Joe Sakic", coach, playerList);	
-			
+			team2 = new Team("Colorado Avalanche", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom19"+i, "forward", true, false, 25);
@@ -330,10 +330,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team3 = new Team("Dallas Stars", "Jim Nill", coach, playerList);
-			
+			team3 = new Team("Dallas Stars", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom20"+i, "forward", true, false, 25);
@@ -343,10 +343,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team4 = new Team("Minnesota Wild", "Bill Guerrin", coach, playerList);
-			
+			team4 = new Team("Minnesota Wild", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom21"+i, "forward", true, false, 25);
@@ -356,10 +356,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team5 = new Team("Nashville Predators", "David Poile", coach, playerList);
-			
+			team5 = new Team("Nashville Predators", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom22"+i, "forward", true, false, 25);
@@ -369,10 +369,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team6 = new Team("St. Louis Blues", "Doug Armstrong", coach, playerList);
-			
+			team6 = new Team("St. Louis Blues", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom23"+i, "forward", true, false, 25);
@@ -382,10 +382,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team7 = new Team("Winnipeg Jets", "Kevin Cheveldayoff", coach, playerList);
-			
+			team7 = new Team("Winnipeg Jets", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom24"+i, "forward", true, false, 25);
@@ -395,10 +395,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team8 = new Team("Minnesota Blues", "Kelly McCrimmons", coach, playerList);
-			
+			team8 = new Team("Minnesota Blues", null, coach, playerList);
+
 			teamsList = new ArrayList<Team>();
 			teamsList.add(team1);
 			teamsList.add(team2);
@@ -408,10 +408,10 @@ public class SimulationLeagueModelMock {
 			teamsList.add(team6);
 			teamsList.add(team7);
 			teamsList.add(team8);
-			
+
 			Division division2 = new Division("Central", teamsList);
 			divisionsList.add(division2);
-			
+
 			//Pacific Division, Western Conference
 			teamsList = new ArrayList<Team>();
 			playerList = new ArrayList<Player>();
@@ -423,10 +423,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team1 = new Team("Anaheim Ducks", "Bob Murray", coach, playerList);
-			
+			team1 = new Team("Anaheim Ducks", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom26"+i, "forward", true, false, 25);
@@ -436,10 +436,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team2 = new Team("Arizona Coyotes", "Bill Armstrong", coach, playerList);	
-			
+			team2 = new Team("Arizona Coyotes", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom27"+i, "forward", true, false, 25);
@@ -449,10 +449,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team3 = new Team("Calgary Flames", "Brad Treliving", coach, playerList);
-			
+			team3 = new Team("Calgary Flames", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom28"+i, "forward", true, false, 25);
@@ -462,10 +462,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team4 = new Team("Edmonton Oilers", "Ken Holland", coach, playerList);
-			
+			team4 = new Team("Edmonton Oilers", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom29"+i, "forward", true, false, 25);
@@ -475,10 +475,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team5 = new Team("Los Angeles Kings", "Rob Blake", coach, playerList);
-			
+			team5 = new Team("Los Angeles Kings", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom30"+i, "forward", true, false, 25);
@@ -488,10 +488,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team6 = new Team("San Jose Sharks", "Doug Wilson", coach, playerList);
-			
+			team6 = new Team("San Jose Sharks", null, coach, playerList);
+
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom31"+i, "forward", true, false, 25);
@@ -501,9 +501,9 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team7 = new Team("Vancouver Canucks", "Jim Benning", coach, playerList);
+			team7 = new Team("Vancouver Canucks", null, coach, playerList);
 			playerList = new ArrayList<Player>();
 			for(int i=0;i<=5;i++) {
 				player1 = new Player(15, 18, 12, 1, "Tom32"+i, "forward", true, false, 25);
@@ -513,10 +513,10 @@ public class SimulationLeagueModelMock {
 				playerList.add(player1);
 				playerList.add(player2);
 				playerList.add(player3);
-				playerList.add(player4);	
+				playerList.add(player4);
 			}
-			team8 = new Team("Vegas Golden Knights", "BKelly McCrimmon", coach, playerList);
-			
+			team8 = new Team("Vegas Golden Knights", null, coach, playerList);
+
 			teamsList.add(team1);
 			teamsList.add(team2);
 			teamsList.add(team3);
@@ -525,15 +525,15 @@ public class SimulationLeagueModelMock {
 			teamsList.add(team6);
 			teamsList.add(team7);
 			teamsList.add(team8);
-			
+
 			qualifiedTeams.add(team1);
 			Division division3 = new Division("Pacific", teamsList);
 			divisionsList.add(division3);
-			
+
 			Conference conference2 = new Conference("Western Conference", divisionsList);
 			conferenceList.add(conference2);
-			
-			
+
+
 			List<Player> freeAgentsList = new ArrayList<Player>();
 			league = new League("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
 			playerList = new ArrayList<Player>();
@@ -577,7 +577,7 @@ public class SimulationLeagueModelMock {
 		public League getLeagueInfo() {
 			return league;
 		}
-		
+
 		public List<Team> getQualifiedTeams() {
 			return qualifiedTeams;
 		}
@@ -585,7 +585,7 @@ public class SimulationLeagueModelMock {
 		public void setQualifiedTeams(List<Team> qualifiedTeams) {
 			this.qualifiedTeams = qualifiedTeams;
 		}
-		
+
 		public String getStartDate() {
 			return startDate;
 		}

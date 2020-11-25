@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 
 public class ParseJsonForTestMock {
 	public JSONObject parseJson() throws FileNotFoundException, IOException, ParseException {
-		String fileName = ParseRootcoachesTest.class.getClassLoader().getResource("HockeyTeam.json").getPath();
+		String fileName = ParseRootcoachesTest.class.getClassLoader().getResource("LeagueNew.json").getPath();
 		JSONParser parser = new JSONParser();
 		Object fileObj = parser.parse(new FileReader(fileName));
 		JSONObject jsonObject = (JSONObject) fileObj;

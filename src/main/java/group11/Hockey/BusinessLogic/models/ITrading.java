@@ -11,4 +11,6 @@ public interface ITrading {
 	public int getMaxPlayersPerTrade();
 
 	public float getRandomAcceptanceChance();
+
+	public IgmTable getGmTable();
 }

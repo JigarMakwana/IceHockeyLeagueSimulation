@@ -35,7 +35,7 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 			float randomTradeOfferChance = trading.getRandomTradeOfferChance();
 			int maxPlayersPerTrade = trading.getMaxPlayersPerTrade();
 			float randomAcceptanceChance = trading.getRandomAcceptanceChance();
-			
+
 			statement.setInt(1, averageRetirementAge);
 			statement.setInt(2, maximumAge);
 			statement.setFloat(3, randomWinChance);
@@ -60,7 +60,7 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 
 			procedureCallDb.closeConnection();
 		}
-		
+
 		return true;
 	}
 
@@ -78,7 +78,7 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 				GameResolver gameResolver = new GameResolver(resultSet.getFloat(Constants.randomWinChance.toString()));
 				Injuries injuries = new Injuries(resultSet.getFloat(Constants.randomInjuryChance.toString()), resultSet.getInt(Constants.injuryDaysLow.toString()), resultSet.getInt(Constants.injuryDaysHigh.toString()));
 				Training training = new Training(resultSet.getInt(Constants.daysUntilStatIncreaseCheck.toString()));
-				Trading trading = new Trading(resultSet.getInt(Constants.lossPoint.toString()), resultSet.getFloat(Constants.randomTradeOfferChance.toString()), resultSet.getInt(Constants.maxPlayersPerTrade.toString()), resultSet.getFloat("randomAcceptanceChance"));
+				Trading trading = new Trading(resultSet.getInt(Constants.lossPoint.toString()), resultSet.getFloat(Constants.randomTradeOfferChance.toString()), resultSet.getInt(Constants.maxPlayersPerTrade.toString()), resultSet.getFloat("randomAcceptanceChance"), null);
 				gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
 			}
 			statement.close();

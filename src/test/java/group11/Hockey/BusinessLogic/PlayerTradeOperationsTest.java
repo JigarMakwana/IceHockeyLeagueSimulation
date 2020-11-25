@@ -2,6 +2,7 @@ package group11.Hockey.BusinessLogic;
 
 import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.Trading.PlayerTradeOperations;
+import group11.Hockey.BusinessLogic.Trading.TradingModelMock;
 import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +13,8 @@ import java.util.List;
 public class PlayerTradeOperationsTest {
     TradingModelMock leagueModel = new TradingModelMock(1.0f, 1.0f);
     private League leagueObj = leagueModel.getLeagueInfo();
-    private Trading tradingConfig = new Trading(2, 1, 2, 1);;
+    IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
+    private Trading tradingConfig = new Trading(2, 1, 2, 1, gmTbale);
     private AITrading aiTradingObj = new AITrading(leagueObj);
     private PlayerTradeOperations playerMiscellaneous = new PlayerTradeOperations(tradingConfig);
 
@@ -28,7 +30,7 @@ public class PlayerTradeOperationsTest {
         playerList.add(player1);
         playerList.add(player2);
         playerList.add(player3);
-        Team team = new Team("Halifax Superkings", "John", null, playerList);
+        Team team = new Team("Halifax Superkings", null, null, playerList);
 
         weakestPlayerList = playerMiscellaneous.findWeakestPlayers(team);
         Assert.assertEquals(weakestPlayerList.size(), 2);
@@ -71,7 +73,7 @@ public class PlayerTradeOperationsTest {
         playerList.add(player1);
         playerList.add(player2);
         playerList.add(player3);
-        Team team = new Team("Halifax Superkings", "John", null, playerList);
+        Team team = new Team("Halifax Superkings", null, null, playerList);
         List<Integer> playerPositionFlag = new ArrayList<Integer>(Arrays.asList(1,1,0));
 
         strongestPlayerList = playerMiscellaneous.findStrongestPlayers(team, playerPositionFlag);

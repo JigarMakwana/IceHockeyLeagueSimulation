@@ -18,4 +18,8 @@ public interface IUserInputCheck {
 	public void headCoachNameFromUserCheck(Team newTeam, ILeague league);
 
 	public void playerChoiceFromUser(Team newTeam, ILeague league);
+
+	public int validateUserTradeInput();
+
+	public int userResolveRosterInput(int listSize);
 }

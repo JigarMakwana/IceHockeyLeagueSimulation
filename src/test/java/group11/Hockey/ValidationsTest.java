@@ -88,8 +88,8 @@ public class ValidationsTest {
 		Assert.assertTrue(playerCheck);
 		List<Player> forwardDefensePlayerList = new ArrayList<Player>();
 		List<Player> gloalisList = new ArrayList<Player>();
-		forwardDefensePlayerList.add(league.getFreeAgents().get(0));
-		gloalisList.add(league.getFreeAgents().get(1));
+		forwardDefensePlayerList.add((Player) league.getFreeAgents().get(0));
+		gloalisList.add((Player) league.getFreeAgents().get(1));
 		playerCheck = validations.playerCheck("1", league, Arrays.asList(1), forwardDefensePlayerList, gloalisList);
 
 		Assert.assertTrue(playerCheck);

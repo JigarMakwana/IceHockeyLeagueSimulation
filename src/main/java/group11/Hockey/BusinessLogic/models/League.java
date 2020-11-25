@@ -9,7 +9,7 @@ import group11.Hockey.db.League.ILeagueDb;
 
 /**
  * This class contains the business logic for the League model
- * 
+ *
  * @author jatinpartaprana
  *
  */
@@ -62,12 +62,12 @@ public class League implements ILeague {
 		this.gamesInSeason = gamesInSeason;
 	}
 
-	public League(String leagueName, List<Conference> conferences, List<Player> freeAgents,
+	public League(String leagueName, List<Conference> conferences, List<? extends IPlayer> freeAgents,
 			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {
 		super();
 		this.leagueName = leagueName;
 		this.conferences = conferences;
-		this.freeAgents = freeAgents;
+		this.freeAgents = (List<Player>) freeAgents;
 		this.gamePlayConfig = gamePlayConfig;
 		this.coaches = coaches;
 		this.generalManagers = generalManagers;
@@ -132,13 +132,14 @@ public class League implements ILeague {
 	/**
 	 * @return the freeAgents
 	 */
-	public List<Player> getFreeAgents() {
+	public List<? extends IPlayer> getFreeAgents() {
 		if (isFreeAgentsNotNull()) {
 			Collections.sort(freeAgents);
 		}
 
 		return freeAgents;
 	}
+
 
 	/**
 	 * @param freeAgents the freeAgents to set
@@ -207,11 +208,11 @@ public class League implements ILeague {
 		return leagueObjectInserted;
 
 	}
-	
+
 	public ILeague loadLeague(ILeagueDb leagueDb) {
 		ILeague league;
 		league = leagueDb.loadLeague();
 		return league;
-		
+
 	}
 }

@@ -1,6 +1,3 @@
-/*
- * Author: RajKumar B00849566
- */
 package group11.Hockey.BusinessLogic.models;
 
 import group11.Hockey.db.IGameplayConfigDb;

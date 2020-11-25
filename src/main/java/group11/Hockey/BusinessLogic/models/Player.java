@@ -110,44 +110,26 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		isActive = active;
 	}
 
-	/**
-	 * @return the playerName
-	 */
 	public String getPlayerName() {
 		return playerName;
 	}
 
-	/**
-	 * @param playerName the playerName to set
-	 */
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
 
-	/**
-	 * @return the position
-	 */
 	public String getPosition() {
 		return position;
 	}
 
-	/**
-	 * @param position the position to set
-	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
-	/**
-	 * @return the captain
-	 */
 	public boolean getCaptain() {
 		return captain;
 	}
 
-	/**
-	 * @param captain the captain to set
-	 */
 	public void setCaptain(boolean captain) {
 		this.captain = captain;
 	}
@@ -277,7 +259,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public void replacePlayerWithFreeAgent(ILeague league, List<Player> playersList) {
-		List<Player> freeAgents = league.getFreeAgents();
+		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 
 		while (freeAgentsItr.hasNext()) {
@@ -294,7 +276,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public void dropPlayerToFreeAgent(League league, List<Player> playersList) {
-		List<Player> freeAgents = league.getFreeAgents();
+		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		Iterator<Player> playersListItr = playersList.iterator();
 
 		while (playersListItr.hasNext()) {
@@ -310,7 +292,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public void removeFreeAgentsFromLeague(ILeague league, List<Player> freeAgents) {
-		List<Player> listOfFreeAgentsInLeague = league.getFreeAgents();
+		List<Player> listOfFreeAgentsInLeague = (List<Player>) league.getFreeAgents();
 		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
 		while (interator.hasNext()) {
 			Player pl = interator.next();

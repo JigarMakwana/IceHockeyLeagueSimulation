@@ -16,12 +16,15 @@ public interface IValidations {
 	public boolean generalManagerNameCheck(String name, ILeague league);
 
 	public boolean headCoachNameCheck(String name, ILeague league);
-	
+
 	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<Player> skaters,
 			List<Player> goalies);
-	
+
 	public boolean isStrBlank(String str);
-	
+
 	public boolean isNoOfSeasonsValueValid(String numberOfSeasons);
 
+	public boolean isUserTradeInputValid(int userInput);
+
+	public boolean isUserResolveRosterInputValid(int userInput, int listSize);
 }

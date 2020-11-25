@@ -3,11 +3,7 @@ package group11.Hockey.db.League;
 import java.util.ArrayList;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.*;
 
 public class LeagueDbMock implements ILeagueDb {
 
@@ -39,7 +35,8 @@ public class LeagueDbMock implements ILeagueDb {
 	public League populateLeagueObject() {
 		League league;
 		List<Team> teamsList = new ArrayList<Team>();
-		Team team = new Team("Toronto Maples", "Kenley", null, null);
+		GeneralManager gm = new GeneralManager("Kenley", "normal");
+		Team team = new Team("Toronto Maples", gm, null, null);
 		teamsList.add(team);
 
 		List<Division> divisionsList = new ArrayList<Division>();

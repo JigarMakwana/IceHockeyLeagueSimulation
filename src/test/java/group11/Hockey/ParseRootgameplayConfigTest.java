@@ -29,7 +29,7 @@ public class ParseRootgameplayConfigTest {
 		ParseJsonForTestMock parseJsonObj = new ParseJsonForTestMock();
 		jsonObject = parseJsonObj.parseJson();
 	}
-	
+
 	@Test
 	public void parseRootElementTest() throws Exception {
 		League league = new League();
@@ -37,7 +37,7 @@ public class ParseRootgameplayConfigTest {
 		parseRoot.parseRootElement(league, jsonObject);
 		IGameplayConfig gamePlay = league.getGamePlayConfig();
 		IAging age = gamePlay.getAging();
-		Assert.assertEquals(age.getMaximumAge(), 50);
+		Assert.assertEquals(age.getMaximumAge(), 47);
 
 	}
 

@@ -98,7 +98,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
 
     public void hirePlayer(ILeague league, List<Player> playerList, Positions playerPosition)
             throws Exception {
-        List<Player> freeAgents = league.getFreeAgents();
+        List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(freeAgents);
         Collections.reverse(sortedFreeAgents);
         Iterator<Player> freeAgentsItr = sortedFreeAgents.iterator();
@@ -135,7 +135,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
     }
 
     public void dropPlayer(ILeague league, List<Player> playerList, Positions playerPosition) {
-        List<Player> freeAgents = league.getFreeAgents();
+        List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(playerList);
         Iterator<Player> playersItr = sortedFreeAgents.iterator();
 
@@ -165,7 +165,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
 
     public void hirePlayerUser(ILeague league, List<Player> playerList, Positions playerPosition)
             throws Exception {
-        List<Player> freeAgents = league.getFreeAgents();
+        List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         Iterator<Player> freeAgentsItr = freeAgents.iterator();
         boolean playerHired = false;
 
@@ -173,7 +173,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
             List<Player> goalieFreeAgents = aiTradingObj.getPlayerMiscellaneous().getGoalieList(freeAgents);
             display.displayListOfFreeAgents(goalieFreeAgents);
 
-            int userInput = userSelection.userIterativeIntegerSelection(goalieFreeAgents.size());
+            int userInput = userSelection.userResolveRosterInput(goalieFreeAgents.size());
             String goalieName =  goalieFreeAgents.get(userInput-1).getPlayerName();
             while (freeAgentsItr.hasNext()) {
                 Player freeAgent = freeAgentsItr.next();
@@ -194,7 +194,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
             skaterFreeAgents.addAll(defenseFreeAgents);
             display.displayListOfFreeAgents(skaterFreeAgents);
 
-            int userInput = userSelection.userIterativeIntegerSelection(skaterFreeAgents.size());
+            int userInput = userSelection.userResolveRosterInput(skaterFreeAgents.size());
 
             String skaterName =  skaterFreeAgents.get(userInput-1).getPlayerName();
             while (freeAgentsItr.hasNext()) {
@@ -219,7 +219,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
     }
 
     public void dropPlayerUser(ILeague league, List<Player> playerList, Positions playerPosition) {
-        List<Player> freeAgents = league.getFreeAgents();
+        List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         Iterator<Player> playersItr = playerList.iterator();
 
         display.showMessageOnConsole("\n**Please select the player to drop**");
@@ -227,7 +227,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
             List<Player> goalieFreeAgents = aiTradingObj.getPlayerMiscellaneous().getGoalieList(freeAgents);
             display.displayListOfFreeAgents(goalieFreeAgents);
 
-            int userInput = userSelection.userIterativeIntegerSelection(goalieFreeAgents.size());
+            int userInput = userSelection.userResolveRosterInput(goalieFreeAgents.size());
 
             String goalieName =  goalieFreeAgents.get(userInput-1).getPlayerName();
             while (playersItr.hasNext()) {
@@ -250,7 +250,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
             skaterFreeAgents.addAll(defenseFreeAgents);
             display.displayListOfFreeAgents(skaterFreeAgents);
 
-            int userInput = userSelection.userIterativeIntegerSelection(skaterFreeAgents.size());
+            int userInput = userSelection.userResolveRosterInput(skaterFreeAgents.size());
 
             String skaterName =  skaterFreeAgents.get(userInput-1).getPlayerName();
             while (playersItr.hasNext()) {

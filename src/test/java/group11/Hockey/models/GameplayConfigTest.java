@@ -2,16 +2,11 @@ package group11.Hockey.models;
 
 import static org.junit.Assert.*;
 
+import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.GameResolver;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
-import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
 import group11.Hockey.db.IGameplayConfigDb;
 
 import static org.mockito.Mockito.mock;
@@ -33,7 +28,8 @@ public class GameplayConfigTest {
 		gameResolver = new GameResolver(0);
 		injuries = new Injuries(0, 0, 0);
 		training = new Training(0);
-		trading = new Trading(0, 0, 0, 0);
+		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
+		trading = new Trading(0, 0, 0, 0, gmTbale);
 		when(gameplayConfigDb.insertGameplayConfig(aging, gameResolver, injuries, training, trading, "league")).thenReturn(true);
 
 		gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading, gameplayConfigDb,

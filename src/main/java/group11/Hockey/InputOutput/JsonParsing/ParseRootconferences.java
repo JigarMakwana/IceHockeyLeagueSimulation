@@ -7,15 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public class ParseRootconferences extends ValidateJsonAttributes implements IParseRootElement {
 	private List<String> conferenceNamesList = new ArrayList<String>();
@@ -90,7 +84,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 				teamObj.setTeamName(teamName);
 			}
 			// get generalManager
-			String generalManager = (String) teamsListJsonObject.get(Attributes.GENERALMANAGER.getAttribute());
+			GeneralManager generalManager = (GeneralManager) teamsListJsonObject.get(Attributes.GENERALMANAGER.getAttribute());
 			teamObj.setGeneralManager(generalManager);
 			setHeadCoach(teamObj, teamsListJsonObject);
 			// parse Teams

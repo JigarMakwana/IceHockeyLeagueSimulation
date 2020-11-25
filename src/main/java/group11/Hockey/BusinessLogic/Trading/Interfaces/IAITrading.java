@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IAITrading {
     void generateTradeOffers();
-    List<Team> determineEligibleTeams();
+    List<Team> determineTradeEligibleTeams();
     void resolveAIToAITrade(Team team1, List<Player> offeredPlayerList,
                                    Team team2, List<Player> requestedPlayerList);
     void resolveAIToUserTrade(Team team1, List<Player> offeredPlayerList,

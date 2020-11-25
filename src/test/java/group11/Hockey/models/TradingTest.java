@@ -1,5 +1,7 @@
 package group11.Hockey.models;
 
+import group11.Hockey.BusinessLogic.models.IgmTable;
+import group11.Hockey.BusinessLogic.models.gmTable;
 import org.junit.Test;
 import group11.Hockey.BusinessLogic.models.Trading;
 import org.junit.Assert;
@@ -11,7 +13,8 @@ public class TradingTest {
 
 	@BeforeClass
 	public static void init() {
-		trading = new Trading(1, 2, 3, 4);
+		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
+		trading = new Trading(1, 2, 3, 4, gmTbale);
 	}
 
 	@Test

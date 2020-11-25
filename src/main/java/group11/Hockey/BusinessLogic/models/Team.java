@@ -2,6 +2,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
@@ -17,7 +18,7 @@ import group11.Hockey.BusinessLogic.IConstantSupplier;
 public class Team implements ITeam {
 
 	private String teamName;
-	private String generalManager;
+	private GeneralManager generalManager;
 	private Coach headCoach;
 	private List<Player> players = null;
 	private boolean isUserTeam = false;
@@ -29,6 +30,21 @@ public class Team implements ITeam {
 	private int goalsInSeason;
 	private int penaltiesInSeason;
 	private int savesInSeason;
+	private int wins;
+	private int points;
+
+	public Team(String teamName, GeneralManager generalManager, Coach headCoach, List<? extends IPlayer> players) {
+		super();
+		this.teamName = teamName;
+		this.generalManager = generalManager;
+		this.headCoach = headCoach;
+		this.players = (List<Player>) players;
+//		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, (List<IPlayer>) players);
+	}
+
+	public Team() {
+
+	}
 
 	public int getGoalsInSeason() {
 		return goalsInSeason;
@@ -78,78 +94,42 @@ public class Team implements ITeam {
 		this.averageShoots = averageShoots;
 	}
 
-	private int wins;
-	private int points;
-
-	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
-		super();
-		this.teamName = teamName;
-		this.generalManager = generalManager;
-		this.headCoach = headCoach;
-		this.players = players;
-		// TODO Creational pattern
-		IConstantSupplier rosterSize = new ConstantSupplier(RosterSize.ACTIVE_ROSTER_SIZE.getNumVal(),
-				RosterSize.INACTIVE_ROSTER_SIZE.getNumVal(), RosterSize.FORWARD_SIZE.getNumVal(),
-				RosterSize.DEFENSE_SIE.getNumVal(), RosterSize.GOALIE_SIZE.getNumVal());
-		// roster = new Roster(this.players, rosterSize);
-	}
-
-	public Team() {
-
-	}
-
-	/**
-	 * @return the teamName
-	 */
 	public String getTeamName() {
 		return teamName;
 	}
 
-	/**
-	 * @param teamName the teamName to set
-	 */
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
 
-	/**
-	 * @return the generalManager
-	 */
-	public String getGeneralManager() {
+	public GeneralManager getGeneralManager() {
 		return generalManager;
 	}
 
-	/**
-	 * @param generalManager the generalManager to set
-	 */
-	public void setGeneralManager(String generalManager) {
+	public void setGeneralManager(GeneralManager generalManager) {
 		this.generalManager = generalManager;
 	}
 
-	/**
-	 * @return the headCoach
-	 */
 	public Coach getHeadCoach() {
 		return headCoach;
 	}
 
-	/**
-	 * @param headCoach the headCoach to set
-	 */
 	public void setHeadCoach(Coach headCoach) {
 		this.headCoach = headCoach;
 	}
 
-	/**
-	 * @return the players
-	 */
+	public IRoster getRoster() {
+		return roster;
+	}
+
+	public void setRoster(IRoster roster) {
+		this.roster = roster;
+	}
+
 	public List<Player> getPlayers() {
 		return players;
 	}
 
-	/**
-	 * @param players the players to set
-	 */
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
@@ -190,16 +170,10 @@ public class Team implements ITeam {
 		return teamStrength;
 	}
 
-	/**
-	 * @return the isUserTeam
-	 */
 	public boolean isUserTeam() {
 		return isUserTeam;
 	}
 
-	/**
-	 * @param isUserTeam the isUserTeam to set
-	 */
 	public void setUserTeam(boolean isUserTeam) {
 		this.isUserTeam = isUserTeam;
 	}
@@ -253,11 +227,13 @@ public class Team implements ITeam {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 
-	public void addGeneralMangerToTeam(Team team, String generalMangerName, ILeague league) {
-		team.setGeneralManager(generalMangerName);
+	public void addGeneralMangerToTeam(Team team, GeneralManager gmObj, ILeague league) {
+		team.setGeneralManager(gmObj);
 		List<GeneralManager> generalManagers = league.getGeneralManagers();
 		for (GeneralManager gm : generalManagers) {
-			if (gm.getName() != null && gm.getName().equalsIgnoreCase(generalMangerName)) {
+			if (gm.getName() != null && gm.getPersonality() != null &&
+					gm.getName().equalsIgnoreCase(gmObj.getName()) &&
+					gm.getPersonality().equalsIgnoreCase(gmObj.getPersonality())) {
 				generalManagers.remove(gm);
 				break;
 			}

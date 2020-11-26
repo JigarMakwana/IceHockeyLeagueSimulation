@@ -1,10 +1,23 @@
 package group11.Hockey.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.models.Aging;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.GameResolver;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.IgmTable;
+import group11.Hockey.BusinessLogic.models.Injuries;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.Trading;
+import group11.Hockey.BusinessLogic.models.Training;
+import group11.Hockey.BusinessLogic.models.gmTable;
 
 public class LeagueModelMock {
 	private League league;
@@ -76,6 +89,10 @@ public class LeagueModelMock {
 		league.setGeneralManagers(generalManagerList);
 		populateFreeAgents(league);
 		playerList.add(player1);
+		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		qualifiedTeams.add(new Team("Rangers",gm2, coach, playerList));
+		qualifiedTeams.add(new Team("Lions", gm2, coach, playerList));
+
 		league.setRetiredPlayers(playerList);
 	}
 
@@ -103,6 +120,29 @@ public class LeagueModelMock {
 		freeAgents.add(new Player(10, 10, 10, 10, "Player 20", "goalie", true, false, 50));
 		league.setFreeAgents(freeAgents);
 	}
+	
+	public void insertDataForDrafing() {
+		List<Team> teamList = league.getConferences().get(0).getDivisions().get(0).getTeams();
+		List<Player> playerList = teamList.get(0).getPlayers();
+		GeneralManager gm = new GeneralManager("John Smith","shrewd");
+		teamList.add(new Team("Rangers1", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers2", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers3", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers4", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers5", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers6", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers7", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers8", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers9", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers10", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers11", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers12", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers13", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers14", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers15", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(new Team("Rangers16", gm, teamList.get(0).getHeadCoach(), playerList));
+	}
+
 
 	public League getLeagueInfo() {
 		return league;

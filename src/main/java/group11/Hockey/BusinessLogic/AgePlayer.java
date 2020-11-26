@@ -57,14 +57,23 @@ public class AgePlayer extends RetirePlayer {
 	}
 
 	public void agePlayers() {
+		IParse parse = DefaultHockeyFactory.makeParse();
+		Date currentDate =  parse.stringToDate(league.getTimeLine().getCurrentDate());
+
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		List<Conference> conferences = league.getConferences();
-
-		if (freeAgents.size() > 0) {
-			for (Player freeAgent : freeAgents) {
-				freeAgent.increaseAge(league, days);
-			}
-		}
+		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
+ 		if (freeAgents.size() > 0) {
+ 			for (Player freeAgent : freeAgents) {
+				Date playerBirthDate = getPlayerBirthDate(freeAgent, parse);
+				if (currentDate.compareTo(playerBirthDate) == 0) {
+					freeAgent.increaseAge(league, days, statDecayChance);
+				}
+				else {
+					freeAgent.decreaseInjuredDaysForPlayer(days);
+				}
+ 			}
+ 		}
 
 		if (conferences.size() > 0) {
 			for (Conference conference : conferences) {
@@ -77,7 +86,14 @@ public class AgePlayer extends RetirePlayer {
 								List<Player> players = team.getPlayers();
 								if (players.size() > 0) {
 									for (Player player : players) {
-										player.increaseAge(league, days);
+										Date playerBirthDate = getPlayerBirthDate(player, parse);
+										if (currentDate.compareTo(playerBirthDate) == 0) {
+											player.increaseAge(league, days, statDecayChance);
+										}
+										else {
+											player.decreaseInjuredDaysForPlayer(days);
+										}
+
 									}
 								}
 							}
@@ -134,5 +150,17 @@ public class AgePlayer extends RetirePlayer {
 		league.setRetiredPlayers(existingRetiredPlayers);
 		retireAndReplacePlayer(league);
 	}
+	
+	private Date getPlayerBirthDate(Player player, IParse parse) {
+		int playerBirthYear = player.getBirthYear();
+		int playerBirthMonth = player.getBirthMonth();
+		int playerBirthDay = player.getBirthDay();
+		String birthDate = Integer.toString(playerBirthDay) + "/" + Integer.toString(playerBirthMonth)
+				+ Integer.toString(playerBirthYear);
+		Date playerBirthDate = parse.stringToDate(birthDate);
+		return playerBirthDate;
+
+	}
+
 
 }

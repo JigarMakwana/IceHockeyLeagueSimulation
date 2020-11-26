@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.models.Advance;
@@ -20,8 +24,8 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 
 	private HashMap<String, HashMap<Team, Team>> schedule;
 	private ILeague league;
+	private static Logger logger = LogManager.getLogger(CheckAndSimulateTodaySchedule.class);
 
-	//
 	public CheckAndSimulateTodaySchedule(HashMap<String, HashMap<Team, Team>> schedule, ILeague league) {
 		super();
 		this.schedule = schedule;
@@ -30,7 +34,7 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 
 	@Override
 	public void CheckAndSimulateToday(String date) {
-
+		logger.info("Entered CheckAndSimulateToday()");
 		String time = "00:00:00", id = date + "T" + time;
 		HashMap<Team, Team> todayTeams = new HashMap<>();
 		todayTeams = schedule.get(id);

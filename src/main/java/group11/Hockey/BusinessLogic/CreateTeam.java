@@ -2,6 +2,9 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
@@ -19,6 +22,7 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 	IValidations validation;
 	League league;
 	ILeagueDb leagueDb;
+	private static Logger logger = LogManager.getLogger(CreateTeam.class);
 
 	public CreateTeam() {
 
@@ -35,12 +39,14 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 
 	@Override
 	public StateMachineState startState() {
+		logger.info("Entered startState()");
 		renderTeam();
 		return DefaultHockeyFactory.makePlayerChoice(league, commandLineInput, leagueDb);
 	}
 
 	@Override
 	public League renderTeam() {
+		logger.info("Entered renderTeam()");
 		System.out.println("***Create Team***\\n");
 		IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
 		List<Conference> conferencesList = league.getConferences();
@@ -63,6 +69,7 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 	}
 
 //	public void createTeamMethod() {
+//		logger.info("Entered createTeamMethod()");
 //		System.out.println("***Create Team***\\n");
 //		IUserInputCheck userInputCheck = new UserInputCheck(commandLineInput, validation, display);
 //		List<Conference> conferencesList = league.getConferences();

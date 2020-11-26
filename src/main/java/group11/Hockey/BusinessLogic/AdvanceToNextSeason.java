@@ -3,6 +3,9 @@ package group11.Hockey.BusinessLogic;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.models.Advance;
@@ -15,6 +18,7 @@ import group11.Hockey.db.League.ILeagueDb;
 public class AdvanceToNextSeason extends StateMachineState {
 	ILeague league;
 	ILeagueDb leagueDb;
+	private static Logger logger = LogManager.getLogger(AdvanceTime.class);
 
 	public AdvanceToNextSeason(ILeague league, ILeagueDb leagueDb) {
 		this.league = league;
@@ -23,6 +27,8 @@ public class AdvanceToNextSeason extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
+
+		logger.info("Entered AdvanceToNextSeason.java");
 		IParse parse = new Parse();
 		IAdvance advance = new Advance();
 

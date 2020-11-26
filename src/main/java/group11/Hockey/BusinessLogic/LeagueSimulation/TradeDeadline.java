@@ -9,9 +9,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+
 public class TradeDeadline {
 	
+	private static Logger logger = LogManager.getLogger(TradeDeadline.class);
+	
 	public Date getTradeDeadline(String startDate) {
+		logger.info("Entered getTradeDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");			
 		int year = Integer.valueOf(dateParts[2]);
@@ -23,7 +30,7 @@ public class TradeDeadline {
 		try {
 			tradeDeadLine = myFormat.parse(TradeEndDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			logger.error("Exception occured : "+e);
 			e.printStackTrace();
 		}	
 	    return tradeDeadLine;

@@ -3,6 +3,9 @@ package group11.Hockey.BusinessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -14,8 +17,10 @@ public class UserInputCheck implements IUserInputCheck {
 	private ICommandLineInput commandLineInput;
 	IValidations validation;
 	IDisplay display;
+	private static Logger logger = LogManager.getLogger(UserInputCheck.class);
 
 	public UserInputCheck(ICommandLineInput commandLineInput, IValidations validation, IDisplay display) {
+		logger.info("Entered UserInputCheck()");
 		this.commandLineInput = commandLineInput;
 		this.validation = validation;
 		this.display = display;
@@ -23,6 +28,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public String conferenceNameFromUserCheck(List<Conference> conferencesList) {
+		logger.info("Entered conferenceNameFromUserCheck()");
 		boolean checkConferenceName = true;
 		String conferenceName = null;
 		while (checkConferenceName) {
@@ -35,6 +41,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public String divisonNameFromUserCheck(Conference conference) {
+		logger.info("Entered divisonNameFromUserCheck()");
 		boolean checkDiviosneName = true;
 		String divisionName = null;
 		while (checkDiviosneName) {
@@ -48,6 +55,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void teamNameFromUserCheck(Team newTeam, ILeague league) {
+		logger.info("Entered teamNameFromUserCheck()");
 		boolean checkTeamName = true;
 		String teamName = null;
 		while (checkTeamName) {
@@ -64,6 +72,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void generalManagerNameFromUserCheck(Team newTeam, ILeague league) {
+//		logger.info("Entered generalManagerNameFromUserCheck()");
 //		boolean checkManagerName = true;
 //		String generalManager = null;
 //		while (checkManagerName) {
@@ -79,6 +88,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void headCoachNameFromUserCheck(Team newTeam, ILeague league) {
+		logger.info("Entered headCoachNameFromUserCheck()");
 		boolean checkHeadCoachName = true;
 		String headCoach = null;
 		while (checkHeadCoachName) {
@@ -94,6 +104,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void playerChoiceFromUser(Team newTeam, ILeague league) {
+		logger.info("Entered playerChoiceFromUser()");
 		boolean playerValueCheck = true;
 		List<Integer> selectedValuesFromUser = new ArrayList<Integer>();
 		List<Player> skatersList = new ArrayList<Player>();
@@ -136,6 +147,7 @@ public class UserInputCheck implements IUserInputCheck {
 	@Override
 	public int validateUserTradeInput()
 	{
+		logger.info("Entered validateUserTradeInput()");
 		boolean isValidInput = false;
 		int userInput = -1;
 		do {
@@ -143,13 +155,16 @@ public class UserInputCheck implements IUserInputCheck {
 				try {
 					userInput = commandLineInput.getInt();
 				} catch (Exception e) {
+					logger.error("Error occured : "+e);
 					display.showMessageOnConsole("Please enter 0 or 1");
 				}
 			}
 			if(validation.isUserTradeInputValid(userInput)) {
+				logger.info("Trade value is valid");
 				break;
 			}
 			else {
+				logger.error("Invalid value given");
 				display.showMessageOnConsole("Please enter 0 or 1");
 				userInput = -1;
 			}
@@ -165,6 +180,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public int userResolveRosterInput(int listSize) {
+		logger.info("Entered userResolveRosterInput()");
 		boolean isValidInput = false;
 		int userInput = 0;
 		do {
@@ -172,13 +188,16 @@ public class UserInputCheck implements IUserInputCheck {
 				try {
 					userInput = commandLineInput.getInt();
 				} catch (Exception e) {
+					logger.error("Error occured : "+e);
 					display.showMessageOnConsole("Please select valid value");
 				}
 			}
 			if(validation.isUserResolveRosterInputValid(userInput, listSize)) {
+				logger.info("Roster value is valid");
 				break;
 			}
 			else {
+				logger.error("Invalid value selected");
 				display.showMessageOnConsole("Please select valid value");
 				isValidInput = false;
 				userInput = 0;

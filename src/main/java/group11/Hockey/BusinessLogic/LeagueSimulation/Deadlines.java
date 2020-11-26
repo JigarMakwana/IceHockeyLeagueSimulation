@@ -8,10 +8,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public class Deadlines implements IDeadlines {
+	
+	private static Logger logger = LogManager.getLogger(Deadlines.class);
 
 	@Override
 	public Date getTradeDeadline(String startDate) {
+		logger.info("Entered getTradeDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
@@ -23,7 +29,7 @@ public class Deadlines implements IDeadlines {
 		try {
 			tradeDeadLine = myFormat.parse(TradeEndDate);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			logger.error("Error occured : "+e);
 			e.printStackTrace();
 		}
 		return tradeDeadLine;
@@ -31,6 +37,7 @@ public class Deadlines implements IDeadlines {
 	
 	@Override
 	public Date getRegularSeasonDeadline(String startDate) {
+		logger.info("Entered getRegularSeasonDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
@@ -42,6 +49,7 @@ public class Deadlines implements IDeadlines {
 		try {
 			regularDeadLine = myFormat.parse(regularSeasonEndDate);
 		} catch (Exception e) {
+			logger.error("Error occured : "+e);
 			e.printStackTrace();
 		}
 		return regularDeadLine;
@@ -49,6 +57,7 @@ public class Deadlines implements IDeadlines {
 
 	@Override
 	public Date getStanleyPlayoffDeadline(String startDate) {
+		logger.info("Entered getStanleyPlayoffDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
@@ -58,6 +67,7 @@ public class Deadlines implements IDeadlines {
 		try {
 			stanleyPlayoffDeadLine = myFormat.parse(playoffEndDate);
 		} catch (Exception e) {
+			logger.error("Error occured : "+e);
 			e.printStackTrace();
 		}
 		return stanleyPlayoffDeadLine;
@@ -65,6 +75,7 @@ public class Deadlines implements IDeadlines {
 
 	@Override
 	public Date getStanleyPlayoffBeginDate(String startDate) {
+		logger.info("Entered getStanleyPlayoffBeginDate()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
@@ -76,6 +87,7 @@ public class Deadlines implements IDeadlines {
 		try {
 			stanleyDateTime = myFormat.parse(stanleyDate);
 		} catch (Exception e) {
+			logger.error("Error occured : "+e);
 			e.printStackTrace();
 		}
 		return stanleyDateTime;

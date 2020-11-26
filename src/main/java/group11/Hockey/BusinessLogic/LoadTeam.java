@@ -2,6 +2,9 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ITeam;
@@ -17,6 +20,7 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 	IDisplay display;
 	IValidations validations;
 	ILeagueDb leagueDb;
+	private static Logger logger = LogManager.getLogger(LoadTeam.class);
 
 	public LoadTeam() {
 
@@ -33,28 +37,33 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 
 	@Override
 	public StateMachineState startState() {
+		logger.info("Entered startState()");
 		league = renderTeam();
 		return DefaultHockeyFactory.makePlayerChoice(league, userInputMode, leagueDb);
 	}
 
 	@Override
 	public League renderTeam() {
+		logger.info("Entered renderTeam()");
 		display.showMessageOnConsole("***Load League***\n");
 		String teamName;
 		boolean isTeamNameValid = false;
 		display.showMessageOnConsole("Enter Team Name: ");
 		teamName = userInputMode.getValueFromUser();
 		if (validations.isStrBlank(teamName)) {
+			logger.error("Invalid team name :");
 			display.showMessageOnConsole("Not a valid Team name ");
 		}
 		League league = DefaultHockeyFactory.makeLeague();
 		league = (League) league.loadLeague(leagueDb);
 		if (league.getLeagueName() == null || league.getLeagueName() == "") {
-			display.showMessageOnConsole("Team name does not exist in the system");
+			logger.error("Team name "+teamName+" doesn't exist in system");
+			display.showMessageOnConsole("Team name "+teamName+" does not exist in the system");
 		}
 		ITeam teamInLeague = DefaultHockeyFactory.makeTeam();
 		isTeamNameValid = teamInLeague.isTeamNameValid(teamName, league);
 		if(isTeamNameValid) {
+			logger.info("Team name "+teamName+" is valid");
 			List<Conference> conferenceList = league.getConferences();
 			for (Conference conference : conferenceList) {
 				List<Division> divisionList = conference.getDivisions();
@@ -71,6 +80,7 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 			}
 		}
 		else {
+			logger.error("Team name is not valid");
 			display.showMessageOnConsole("Not a valid Team name ");
 		}
 

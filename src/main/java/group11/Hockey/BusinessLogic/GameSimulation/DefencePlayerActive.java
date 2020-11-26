@@ -6,14 +6,20 @@ package group11.Hockey.BusinessLogic.GameSimulation;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class DefencePlayerActive extends GameStrategy {
+	
+	private static Logger logger = LogManager.getLogger(DefencePlayerActive.class);
 
 	@Override
 	public int calculateAveragePlayersStrength(List<Player> playersList, ITeam defendingTeam) {
+		logger.info("Entered calculateAveragePlayersStrength()");
 		int checking = 0;
 		int numberOfDefenseMen = 0;
 		for (Player player : playersList) {
@@ -35,7 +41,7 @@ public class DefencePlayerActive extends GameStrategy {
 	@Override
 	public void playGame(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
-
+		logger.info("Entered playGame()");
 		int penaltyProbality = new Random().nextInt(appConfiguration.penaltyRandomChance);
 		int index = bestDefenceMenIndex(defendingTeamPlayers);
 		int defenceMenStartIndex = appConfiguration.defenceMenStartIndex;
@@ -54,6 +60,7 @@ public class DefencePlayerActive extends GameStrategy {
 	}
 
 	private int bestDefenceMenIndex(List<Player> defendingTeamPlayers) {
+		logger.info("Entered bestDefenceMenIndex()");
 		float player1_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex).getChecking();
 		float player2_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex + 1).getChecking();
 

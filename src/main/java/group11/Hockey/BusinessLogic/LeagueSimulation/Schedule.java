@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
@@ -18,6 +21,7 @@ import group11.Hockey.InputOutput.PrintToConsole;
 public class Schedule implements ISchedule {
 
 	private ILeague league;
+	private static Logger logger = LogManager.getLogger(Schedule.class);
 
 	public Schedule(ILeague league) {
 		this.league = league;
@@ -25,6 +29,7 @@ public class Schedule implements ISchedule {
 
 	@Override
 	public HashMap<String, HashMap<Team, Team>> getSeasonSchedule() {
+		logger.info("Entered getSeasonSchedule()");
 		ITimeLine timeLine = league.getTimeLine();
 		String startDate = timeLine.getStartDate();
 		ArrayList<Team> teamName = new ArrayList<Team>();
@@ -100,6 +105,7 @@ public class Schedule implements ISchedule {
 			}
 
 			// ensures team schedules 24 games
+			logger.info("Scheduling Inside division games for "+t1.getTeamName());
 			for (int j = i + 1; j < totalTeams; j++) {
 				t2 = teamName.get(j);
 				div2 = teamDivision.get(t2);
@@ -182,6 +188,7 @@ public class Schedule implements ISchedule {
 			}
 
 			// In conference but not same division starts
+			logger.info("Scheduling Inside conference games for "+t1.getTeamName());
 			for (int j = i + 1; j < totalTeams; j++) {
 				t2 = teamName.get(j);
 				div2 = teamDivision.get(t2);
@@ -267,6 +274,7 @@ public class Schedule implements ISchedule {
 			}
 
 			outConLimit = 82 - inConLimitReached - divLimitReached;
+			logger.info("Scheduling Outside the conference games for "+t1.getTeamName());
 			for (int j = i + 1; j < totalTeams; j++) {
 				t2 = teamName.get(j);
 				div2 = teamDivision.get(t2);

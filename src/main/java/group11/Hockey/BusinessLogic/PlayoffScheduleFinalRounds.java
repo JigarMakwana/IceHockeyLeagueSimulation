@@ -3,6 +3,9 @@ package group11.Hockey.BusinessLogic;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
@@ -15,7 +18,9 @@ import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 
+	private static Logger logger = LogManager.getLogger(PlayoffScheduleFinalRounds.class);
 	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
+		logger.info("Entered getSchedule()");
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getCurrentDate();
 		IAdvance advance = new Advance();
@@ -32,12 +37,15 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		qualifiedTeamsSize = qualifiedTeams.size();
 		totalSetTeams = (qualifiedTeamsSize / 2);
 		if (totalSetTeams == 4) {
+			logger.info("Playoff Schedule - Second round");
 			message = "\n********** Playoff Schedule - Second round **********";
 			console.print(message);
 		} else if (totalSetTeams == 2) {
+			logger.info("Playoff Schedule - Semi-Final round");
 			message = "\n********** Playoff Schedule - Semi-Final round **********";
 			console.print(message);
 		} else if (totalSetTeams == 1) {
+			logger.info("Playoff Schedule - Final round");
 			message = "\n********** Playoff Schedule - Final round **********";
 			console.print(message);
 		}
@@ -62,6 +70,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 				try {
 					time = advance.getAdvanceTime(time, 6);
 				} catch (Exception e) {
+					logger.error("Error occured : "+e);
 					e.printStackTrace();
 				}
 
@@ -70,6 +79,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 						date = advance.getAdvanceDate(date, 1);
 						time = "00:00:00";
 					} catch (Exception e1) {
+						logger.error("Error occured : "+e1);
 						e1.printStackTrace();
 					}
 				}

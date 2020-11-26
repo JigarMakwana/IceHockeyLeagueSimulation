@@ -35,6 +35,10 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private int penaltiesInSeason;
 	private int savesByGoalieInSeason;
 	private int savesByDefenceManinSeason;
+	private int birthDay;
+	private int birthMonth;
+	private int birthYear;
+
 
 	public int getSavesByDefenceManinSeason() {
 		return savesByDefenceManinSeason;
@@ -157,6 +161,31 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	public void setInjured(boolean isInjured) {
 		this.isInjured = isInjured;
 	}
+	
+	public int getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(int birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public int getBirthMonth() {
+		return birthMonth;
+	}
+
+	public void setBirthMonth(int birthMonth) {
+		this.birthMonth = birthMonth;
+	}
+
+	public int getBirthYear() {
+		return birthYear;
+	}
+
+	public void setBirthYear(int birthYear) {
+		this.birthYear = birthYear;
+	}
+
 
 	public boolean checkInjury(ILeague league) {
 		if (this.isInjured()) {
@@ -238,7 +267,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		return "playerName=" + playerName + ", position=" + position + ", captain=" + captain;
 	}
 
-	private void decreaseInjuredDaysForPlayer(int days) {
+	public void decreaseInjuredDaysForPlayer(int days) {
 		if (this.isInjured()) {
 			int numberOfDaysLeftToHeal = this.getNumberOfInjuredDays() - days;
 			this.setNumberOfInjuredDays(numberOfDaysLeftToHeal > 0 ? numberOfDaysLeftToHeal : 0);
@@ -248,13 +277,16 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	public void increaseAge(ILeague league, int days) {
-		float yearsToIncrease = (float) days / 365;
+	public void increaseAge(ILeague league, int days, float statDecayChance) {
 		float age;
-		age = this.getAge() + yearsToIncrease;
+		age = this.getAge() + 1;
 		this.setAge(age);
 		AgePlayer agePlayer = new AgePlayer();
 		this.setIsRetired(agePlayer.checkForRetirement(league, age));
+		checkAndDecrementPlayerShootingStat(statDecayChance);
+		checkAndDecrementPlayerCheckingStat(statDecayChance);
+		checkAndDecrementPlayerSkatingStat(statDecayChance);
+		checkAndDecrementPlayerSavingStat(statDecayChance);
 		decreaseInjuredDaysForPlayer(days);
 	}
 
@@ -303,5 +335,34 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 			}
 		}
 	}
+	
+	private void checkAndDecrementPlayerShootingStat(float statDecayChance) {
+		float randomValue = (float) Math.random();
+		if(randomValue > statDecayChance) {
+			this.setShooting(this.getShooting() - 1);
+		}
+	}
+	
+	private void checkAndDecrementPlayerCheckingStat(float statDecayChance) {
+		float randomValue = (float) Math.random();
+		if(randomValue > statDecayChance) {
+			this.setChecking(this.getChecking() - 1);
+		}
+	}
+	
+	private void checkAndDecrementPlayerSkatingStat(float statDecayChance) {
+		float randomValue = (float) Math.random();
+		if(randomValue > statDecayChance) {
+			this.setSkating(this.getSkating() - 1);
+		}
+	}
+	
+	private void checkAndDecrementPlayerSavingStat(float statDecayChance) {
+		float randomValue = (float) Math.random();
+		if(randomValue > statDecayChance) {
+			this.setSaving(this.getSaving() - 1);
+		}
+	}
+
 
 }

@@ -207,8 +207,7 @@
                "skating",
                "shooting",
                "checking",
-               "saving",
-               "age"
+               "saving"
             ],
             "properties": {
                "playerName": {
@@ -241,11 +240,6 @@
                   "type": "number",
                   "minimum": 1,
                   "maximum": 20
-               },
-               "age": {
-                  "type": "number",
-                  "minimum": 1,
-                  "maximum": 100
                }
             }
          },

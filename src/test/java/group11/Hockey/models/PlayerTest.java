@@ -107,7 +107,8 @@ public class PlayerTest {
 	public void increaseAgeTest() {
 		LeagueModelMock leagueModel = new LeagueModelMock();
 		League league = leagueModel.getLeagueInfo();
-		playerWithParams.increaseAge(league, 365);
+		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
+		playerWithParams.increaseAge(league, 365, statDecayChance);
 		Assert.assertEquals(age + 1, 31, 31);
 	}
 

@@ -1,13 +1,11 @@
 package group11.Hockey.BusinessLogic.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.db.Team.ITeamDb;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-import group11.Hockey.BusinessLogic.ConstantSupplier;
-import group11.Hockey.BusinessLogic.IConstantSupplier;
+import group11.Hockey.db.Team.ITeamDb;
 
 /**
  * This class contain all the business logic related to team model
@@ -15,7 +13,7 @@ import group11.Hockey.BusinessLogic.IConstantSupplier;
  * @author jatinpartaprana
  *
  */
-public class Team implements ITeam {
+public class Team implements ITeam, Comparable<Team>  {
 
 	private String teamName;
 	private GeneralManager generalManager;
@@ -252,6 +250,33 @@ public class Team implements ITeam {
 			}
 		}
 	}
+	
+	@Override
+	public int compareTo(Team team) {
+		if(this.getPoints() > team.getPoints()) {
+			return 1;
+		}
+		else {
+			return -1;
+		}
+	}
+	
+	public List<Team> orderTeamsInLeagueStandings(ILeague league){
+		List<Team> teamsOrderedInReverse = new ArrayList<>();
+		for(IConference conference: league.getConferences()) {
+			for(IDivision divison : conference.getDivisions()) {
+				List<Team> team = divison.getTeams();
+				teamsOrderedInReverse.addAll(team);
+			}
+		}
+		sortTeam(teamsOrderedInReverse);
+		return teamsOrderedInReverse;
+	}
+	
+	public void sortTeam(List<Team> teamsOrderedInReverse){
+		 Collections.sort(teamsOrderedInReverse);
+	}
+
 
 	@Override
 	public String toString() {

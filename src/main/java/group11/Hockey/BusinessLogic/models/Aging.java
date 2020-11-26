@@ -6,6 +6,7 @@ package group11.Hockey.BusinessLogic.models;
 public class Aging implements IAging{
 	private int averageRetirementAge;
 	private int maximumAge;
+	private float statDecayChance;
 
 	public Aging(int averageRetirementAge, int maximumAge) {
 		super();
@@ -20,5 +21,14 @@ public class Aging implements IAging{
 	public int getMaximumAge() {
 		return maximumAge;
 	}
+	
+	public float getStatDecayChance() {
+		return statDecayChance;
+	}
+
+	public void setStatDecayChance(float statDecayChance) {
+		this.statDecayChance = statDecayChance;
+	}
+
 
 }

@@ -7,4 +7,9 @@ public interface IConference {
 	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferences);
 
 	public Conference getConferencefromConferenceName(String conferenceName, List<Conference> conferences);
+
+	public List<Division> getDivisions();
+
+	public void setDivisions(List<Division> divisions);
+
 }

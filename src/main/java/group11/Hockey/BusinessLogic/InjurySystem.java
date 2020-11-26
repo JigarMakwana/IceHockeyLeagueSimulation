@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.ILeague;
@@ -20,6 +23,7 @@ public class InjurySystem {
 	private float randomInjuryChance;
 	private int injuryDaysLow;
 	private int injuryDaysHigh;
+	private static Logger logger = LogManager.getLogger(InjurySystem.class);
 
 	public InjurySystem(ILeague league) {
 		super();
@@ -31,8 +35,10 @@ public class InjurySystem {
 	}
 
 	public void setInjuryToPlayers(Team team) {
+		logger.info("Entered setInjuryToPlayers()");
 		for (Player player : team.getPlayers()) {
 			if (determainIsPlayerInjured()) {
+				logger.info("Player "+player.getPlayerName()+" is injured");
 				player.setInjured(true);
 				player.setNumberOfInjuredDays(determainNumberOfDaysOfInjury());
 			}
@@ -40,17 +46,20 @@ public class InjurySystem {
 	}
 
 	public boolean determainIsPlayerInjured() {
+		logger.info("Entered determainIsPlayerInjured()");
 		float probabilityOfInjury = new Random().nextFloat();
 		boolean isPlayerInjured = randomInjuryChance >= probabilityOfInjury;
 		return isPlayerInjured;
 	}
 
 	public int determainNumberOfDaysOfInjury() {
+		logger.info("Entered determainNumberOfDaysOfInjury()");
 		int numberOfInjuredDays = new Random().nextInt((injuryDaysHigh - injuryDaysLow) + 1) + injuryDaysLow;
 		return numberOfInjuredDays;
 	}
 
 	public void settleInjuredPlayer(IRoster roster, IPlayer injuredPlayer) {
+		logger.info("Entered settleInjuredPlayer()");
 		// TODO When players are injured,
 		// swap them for an uninjured player on the inactive roster (if there is one).
 		if (isInjuredSwappingPossible(roster, injuredPlayer)) {
@@ -63,6 +72,7 @@ public class InjurySystem {
 	}
 
 	public void settleRecoveredPlayer(IRoster roster, IPlayer recoveredPlayer) {
+		logger.info("Entered settleRecoveredPlayer()");
 		// TODO When players recover from injuries, if they are better than players on
 		// the active roster
 		// swap them back to the active roster.
@@ -74,12 +84,14 @@ public class InjurySystem {
 	}
 
 	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer) {
+		logger.info("Entered isInjuredSwappingPossible()");
 		// TODO injuredPlayer.getPosition() should return Position and not String
 		// check if UnInjured Player Available on InActive Rsoter
 		return isUnInjuredPlayerAvailable(roster, Positions.DEFENSE);
 	}
 
 	public boolean isUnInjuredPlayerAvailable(IRoster roster, Positions position) {
+		logger.info("Entered isUnInjuredPlayerAvailable()");
 		int minUnInjuredPlayerRequired = 1;
 		List<IPlayer> filteredPosition = roster.getInActiveRoster().stream()
 				.filter(player -> player.getPosition().equals(position)).collect(Collectors.toList());
@@ -88,8 +100,10 @@ public class InjurySystem {
 				.collect(Collectors.toList());
 
 		if (filteredUnInjured.size() >= minUnInjuredPlayerRequired) {
+			logger.info("Uninjured player available");
 			return true;
 		} else {
+			logger.info("Uninjured player is not available");
 			return false;
 		}
 	}

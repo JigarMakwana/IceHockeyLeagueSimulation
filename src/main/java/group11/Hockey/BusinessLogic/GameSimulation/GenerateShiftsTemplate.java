@@ -6,6 +6,9 @@ package group11.Hockey.BusinessLogic.GameSimulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.Player;
 
@@ -13,6 +16,7 @@ public abstract class GenerateShiftsTemplate {
 	private List<Player> team;
 	List<Player> playersOnIce = new ArrayList<>();
 	List<Player>[] shifts = new List[appConfiguration.shifts];
+	private static Logger logger = LogManager.getLogger(GenerateShiftsTemplate.class);
 
 	public GenerateShiftsTemplate(List<Player> team) {
 		super();
@@ -20,7 +24,7 @@ public abstract class GenerateShiftsTemplate {
 	}
 
 	public List<Player>[] getShifts() {
-
+		logger.info("Entered getShifts()");
 		for (int i = 0; i < appConfiguration.shifts; i++) {
 			shifts[i] = new ArrayList<>();
 		}
@@ -31,7 +35,7 @@ public abstract class GenerateShiftsTemplate {
 	}
 
 	public void generateShifts(int limtOfPlayers, String position) {
-
+		logger.info("Entered generateShifts()");
 		int shift = 0;
 		do {
 			for (Player player : team) {

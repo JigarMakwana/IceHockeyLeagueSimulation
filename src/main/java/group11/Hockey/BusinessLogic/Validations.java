@@ -2,6 +2,9 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.GeneralManager;
@@ -17,6 +20,7 @@ public class Validations implements IValidations {
 	IConference conferenceObj = DefaultHockeyFactory.makeConference();
 	IDivision divisionObj = DefaultHockeyFactory.makeDivision();
 	IDisplay display;
+	private static Logger logger = LogManager.getLogger(Validations.class);
 
 	private static Validations validationsInstance = null;
 
@@ -37,6 +41,7 @@ public class Validations implements IValidations {
 
 
 	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferencesList) {
+		logger.info("Entered isConferenceNameValid()");
 		boolean conferenceNameCheck = false;
 		if (isStrBlank(conferenceName)) {
 			conferenceNameCheck = true;
@@ -51,6 +56,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isDivisionValid(String divisionName, Conference conferenceItem) {
+		logger.info("Entered isDivisionValid()");
 		boolean divisionNameCheck = false;
 		if (isStrBlank(divisionName)) {
 			divisionNameCheck = true;
@@ -65,6 +71,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isTeamNameValid(String teamName, ILeague league) {
+		logger.info("Entered isTeamNameValid()");
 		ITeam team = DefaultHockeyFactory.makeTeam();
 		if (isStrBlank(teamName)) {
 			return true;
@@ -76,6 +83,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean generalManagerNameCheck(String name, ILeague league) {
+		logger.info("Entered generalManagerNameCheck()");
 		if (isStrBlank(name)) {
 			return true;
 		} else {
@@ -91,6 +99,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean headCoachNameCheck(String coachName, ILeague league) {
+		logger.info("Entered headCoachNameCheck()");
 		boolean coachNameCheck = true;
 		if (isStrBlank(coachName)) {
 			coachNameCheck = true;
@@ -108,11 +117,13 @@ public class Validations implements IValidations {
 
 	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<Player> skaters,
 			List<Player> goalies) {
+		logger.info("Entered playerCheck()");
 		boolean isPlayerValueNotValid = true;
 		int playerNumberInInt = 0;
 		try {
 			playerNumberInInt = Integer.parseInt(playerNumber);
 		} catch (Exception e) {
+			logger.error("Error occured : "+e);
 			display.showMessageOnConsole("Select valid value");
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
@@ -150,6 +161,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isStrBlank(String str) {
+		logger.info("Entered isStrBlank()");
 		if (str == null || str.isEmpty() || str.split(" +").length == 0) {
 			return true;
 		}
@@ -158,10 +170,12 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isNoOfSeasonsValueValid(String numberOfSeasons) {
+		logger.info("Entered isNoOfSeasonsValueValid()");
 		boolean isNoOfSeasonsValueValid = false;
 		try {
 			int value = Integer.parseInt(numberOfSeasons);
 			if(value < 0) {
+				logger.error("Simulation input is invalid");
 				display.showMessageOnConsole("Select valid value for simulation");
 				isNoOfSeasonsValueValid = true;
 				return isNoOfSeasonsValueValid;
@@ -169,6 +183,7 @@ public class Validations implements IValidations {
 				return false;
 			}
 		} catch (Exception e) {
+			logger.error("Error occured : "+e);
 			display.showMessageOnConsole("Select valid value for simulation");
 			isNoOfSeasonsValueValid = true;
 			return isNoOfSeasonsValueValid;
@@ -179,9 +194,12 @@ public class Validations implements IValidations {
 	 * @author  Jigar Makwana B00842568
 	 */
 	public boolean isUserTradeInputValid(int userInput){
+		logger.info("Entered isUserTradeInputValid()");
 		if((userInput == 1) || (userInput == 0)){
+			logger.info("Trade input is valid");
 			return true;
 		} else {
+			logger.error("Trade input is invalid");
 			return false;
 		}
 	}
@@ -190,9 +208,12 @@ public class Validations implements IValidations {
 	 * @author  Jigar Makwana B00842568
 	 */
 	public boolean isUserResolveRosterInputValid(int userInput, int listSize){
+		logger.info("Entered isUserResolveRosterInputValid()");
 		if(((userInput >= 1) && (userInput <= listSize))){
+			logger.info("Roster input is valid");
 			return true;
 		} else {
+			logger.error("Roster input is invalid");
 			return false;
 		}
 	}

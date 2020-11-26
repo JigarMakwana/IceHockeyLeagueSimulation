@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class GeneratingPlayers {
 	enum PlayerEnum {
 		player
 	}
+	
+	private static Logger logger = LogManager.getLogger(GeneratingPlayers.class);
 
 	public List<Player> generatePlayers(int numbersOfPlayersToGenerate) {
-
+		logger.info("Entered generatePlayers()");
 		List<Player> listOfPlayers = new ArrayList<>();
 		String player = PlayerEnum.player.toString();
 		int forwardsToGenerate = numbersOfPlayersToGenerate / 2;
@@ -42,6 +47,7 @@ public class GeneratingPlayers {
 	}
 
 	private Player populatePlayer(String playerName) {
+		logger.info("Entered populatePlayer()");
 		Player player = new Player();
 		player.setPlayerName(playerName);
 		player.setBirthDay(11);
@@ -55,6 +61,7 @@ public class GeneratingPlayers {
 	}
 
 	public void setStatForForwardPlayer(Player player) {
+		logger.info("Entered setStatForForwardPlayer()");
 		int skatingStat = getNumberInRange(12, 20);
 		int savingStat = getNumberInRange(1, 7);
 		int checkingStat = getNumberInRange(9, 18);
@@ -66,6 +73,7 @@ public class GeneratingPlayers {
 	}
 
 	public void setStatDefensePlayer(Player player) {
+		logger.info("Entered setStatDefensePlayer()");
 		int skatingStat = getNumberInRange(10, 19);
 		int savingStat = getNumberInRange(1, 12);
 		int checkingStat = getNumberInRange(12, 20);
@@ -77,6 +85,7 @@ public class GeneratingPlayers {
 	}
 
 	public void setStatGoaliePlayer(Player player) {
+		logger.info("Entered setStatGoaliePlayer()");
 		int skatingStat = getNumberInRange(8, 15);
 		int savingStat = getNumberInRange(12, 20);
 		int checkingStat = getNumberInRange(1, 12);
@@ -88,6 +97,7 @@ public class GeneratingPlayers {
 	}
 
 	public int getNumberInRange(int minRange, int maxRange) {
+		logger.info("Entered getNumberInRange()");
 		Random random = new Random();
 		int randomValue = random.nextInt(maxRange - minRange + 1) + minRange;
 		return randomValue;

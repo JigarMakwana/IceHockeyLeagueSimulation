@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
@@ -18,9 +21,12 @@ import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffSchedule implements IScheduleStrategy {
+	
+	private static Logger logger = LogManager.getLogger(PlayoffSchedule.class);
 
 	@Override
 	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
+		logger.info("Entered getSchedule() and started scheduling");
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getStanleyDate();
 		HashMap<String, HashMap<Team, Team>> firstRoundSchedule = new HashMap<>();
@@ -136,6 +142,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 					try {
 						time = advance.getAdvanceTime(time, 6);
 					} catch (Exception e) {
+						logger.error("Exception occured : "+e);
 						e.printStackTrace();
 					}
 
@@ -144,6 +151,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 							date = advance.getAdvanceDate(date, 1);
 							time = "00:00:00";
 						} catch (Exception e1) {
+							logger.error("Exception occured : "+e1);
 							e1.printStackTrace();
 						}
 					}

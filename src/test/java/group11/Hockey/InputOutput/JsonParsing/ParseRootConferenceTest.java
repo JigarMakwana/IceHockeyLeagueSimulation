@@ -30,7 +30,7 @@ public class ParseRootConferenceTest {
 		ParseRootconferences parseRoot = new ParseRootconferences();
 		parseRoot.parseRootElement(league, jsonObject);
 		List<Conference> lc = league.getConferences();
-		Assert.assertEquals(lc.size(), 1);
+		Assert.assertEquals(lc.size(), 2);
 
 	}
 

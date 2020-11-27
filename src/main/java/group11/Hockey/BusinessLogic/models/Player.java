@@ -4,12 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.AgePlayer;
-import group11.Hockey.BusinessLogic.DefensePosition;
-import group11.Hockey.BusinessLogic.ForwardPosition;
-import group11.Hockey.BusinessLogic.GoaliePosition;
-import group11.Hockey.BusinessLogic.IPlayerStrengthStrategy;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.IPlayerStrengthContext;
 import group11.Hockey.BusinessLogic.InjurySystem;
-import group11.Hockey.BusinessLogic.PlayerStrength;
 import group11.Hockey.BusinessLogic.PlayerStrengthContext;
 import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.db.IPlayerDb;
@@ -215,13 +212,13 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public float getPlayerStrength() {
-		PlayerStrengthContext playerStrength = null;
+		IPlayerStrengthContext playerStrength = null;
 		if (this.position.equalsIgnoreCase(Positions.FORWARD.toString())) {
-			playerStrength = new PlayerStrengthContext(new ForwardPosition(this));
+			playerStrength = new PlayerStrengthContext(DefaultHockeyFactory.makeForwarsPosition(this));
 		} else if (this.position.equalsIgnoreCase(Positions.DEFENSE.toString())) {
-			playerStrength = new PlayerStrengthContext(new DefensePosition(this));
+			playerStrength = new PlayerStrengthContext(DefaultHockeyFactory.makeDefensePosition(this));
 		} else {
-			playerStrength = new PlayerStrengthContext(new GoaliePosition(this));
+			playerStrength = DefaultHockeyFactory.makePlayerStrengthContext(DefaultHockeyFactory.makeGoaliePosition(this));
 		}
 		return playerStrength.executeStrategy();
 	}

@@ -18,7 +18,7 @@ public class JsonImportTest {
 		ICommandLineInput commandLineMock = mock(ICommandLineInput.class);
 
 		JsonImport importJsonObj = DefaultHockeyFactory.getJsonImport(jsonFile.getFile(), commandLineMock,
-				leagueDbMock);
+				leagueDbMock, null);
 		StateMachineState league = importJsonObj.startState();
 		Assert.assertNull(league);
 	}

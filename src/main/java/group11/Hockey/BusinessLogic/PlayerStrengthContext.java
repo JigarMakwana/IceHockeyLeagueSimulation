@@ -3,7 +3,7 @@
  */
 package group11.Hockey.BusinessLogic;
 
-public class PlayerStrengthContext {
+public class PlayerStrengthContext implements IPlayerStrengthContext {
 	private IPlayerStrengthStrategy currentContext;
 
 	public PlayerStrengthContext(IPlayerStrengthStrategy currentContext) {

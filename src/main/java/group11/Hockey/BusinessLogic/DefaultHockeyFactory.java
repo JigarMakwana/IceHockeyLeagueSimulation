@@ -264,4 +264,37 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static ITradeDraft makeTradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display) {
 		return new TradeDraft(offeringTeam, tradingConfig, display);
 	}
+
+	public static StateMachineState makeAgePlayer(ILeague league, int days, ILeagueDb leagueDb, IDisplay display) {
+		return new AgePlayer(league, days, leagueDb, display);
+	}
+
+	public static IPlayerStrengthStrategy makeDefensePosition(IPlayer player) {
+		return new DefensePosition(player);
+	}
+
+	public static IPlayerStrengthStrategy makeForwarsPosition(IPlayer player) {
+		return new ForwardPosition(player);
+	}
+
+	public static IPlayerStrengthStrategy makeGoaliePosition(IPlayer player) {
+		return new GoaliePosition(player);
+	}
+
+	public static IPlayer makePlayer(float skating, float shooting, float checking, float saving, String playerName,
+			String position, boolean captain, boolean isFreeAgent, float age) {
+		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age);
+	}
+
+	public static IInjurySystem makeInjurySystem(ILeague league) {
+		return new InjurySystem(league);
+	}
+
+	public static IPlayerStrengthContext makePlayerStrengthContext(IPlayerStrengthStrategy currentContext) {
+		return new PlayerStrengthContext(currentContext);
+	}
+
+	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
+		return new Simulate(league, seasons, leagueDb, display);
+	}
 }

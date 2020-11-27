@@ -3,12 +3,12 @@
  */
 package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public class GoaliePosition implements IPlayerStrengthStrategy {
-	private Player player;
+	private IPlayer player;
 
-	public GoaliePosition(Player player) {
+	public GoaliePosition(IPlayer player) {
 		super();
 		this.player = player;
 	}

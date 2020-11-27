@@ -3,13 +3,13 @@
  */
 package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public class ForwardPosition implements IPlayerStrengthStrategy {
 
-	private Player player;
+	private IPlayer player;
 
-	public ForwardPosition(Player player) {
+	public ForwardPosition(IPlayer player) {
 		super();
 		this.player = player;
 	}

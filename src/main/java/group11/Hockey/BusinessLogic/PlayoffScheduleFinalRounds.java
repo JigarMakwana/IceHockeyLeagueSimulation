@@ -12,11 +12,22 @@ import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
+
+	IDisplay display;
+
+	public PlayoffScheduleFinalRounds(IDisplay display) {
+		this.display = display;
+	}
+
+	public PlayoffScheduleFinalRounds() {
+
+	}
 
 	private static Logger logger = LogManager.getLogger(PlayoffScheduleFinalRounds.class);
 	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
@@ -91,6 +102,6 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 			}
 		}
 		league.setSchedule(playoffSchedule);
-		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb);
+		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display);
 	}
 }

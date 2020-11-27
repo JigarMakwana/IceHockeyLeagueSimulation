@@ -37,7 +37,7 @@ public class PlayerChoice  extends StateMachineState {
 			seasonsCheck = validation.isNoOfSeasonsValueValid(numberOfSeasons);
 		}
 		int seasons = Integer.parseInt(numberOfSeasons);
-		return DefaultHockeyFactory.makeSimulate(league, seasons, leagueDb);
+		return DefaultHockeyFactory.makeSimulate(league, seasons, leagueDb, display);
 	}
 
 }

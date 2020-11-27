@@ -12,16 +12,19 @@ import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class AdvanceToNextSeason extends StateMachineState {
 	ILeague league;
 	ILeagueDb leagueDb;
+	IDisplay display;
 	private static Logger logger = LogManager.getLogger(AdvanceTime.class);
 
-	public AdvanceToNextSeason(ILeague league, ILeagueDb leagueDb) {
+	public AdvanceToNextSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		this.league = league;
 		this.leagueDb = leagueDb;
+		this.display = display;
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class AdvanceToNextSeason extends StateMachineState {
 		timeLine.setLastSimulatedDate(advanced);
 		league.setStartDate(advanced);
 
-		AgePlayer agePlayer = new AgePlayer(league, daysBetween);
+		AgePlayer agePlayer = new AgePlayer(league, daysBetween, display);
 		agePlayer.agePlayers();
 
 		leagueDb.insertLeagueInDb(league);

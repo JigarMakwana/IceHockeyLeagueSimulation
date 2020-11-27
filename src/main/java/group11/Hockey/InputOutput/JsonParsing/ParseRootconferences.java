@@ -83,9 +83,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			} else {
 				teamObj.setTeamName(teamName);
 			}
-			// get generalManager
-			GeneralManager generalManager = (GeneralManager) teamsListJsonObject.get(Attributes.GENERALMANAGER.getAttribute());
-			teamObj.setGeneralManager(generalManager);
+			setGeneralManager(teamObj, teamsListJsonObject);
 			setHeadCoach(teamObj, teamsListJsonObject);
 			// parse Teams
 			List<Player> playersList = parsePlayers(teamsListJsonObject);
@@ -100,6 +98,17 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 		return teamsList;
 	}
 
+	private void setGeneralManager(Team team, JSONObject listJsonObject) {
+		JSONObject generalManager = (JSONObject) listJsonObject.get(Attributes.GENERALMANAGER.getAttribute());
+		String name = (String) generalManager.get(Attributes.NAME.getAttribute());
+		String personality = (String) generalManager.get(Attributes.PERSONALITY.getAttribute());
+		GeneralManager gm = new GeneralManager();
+		gm.setName(name);
+		gm.setPersonality(personality);
+		team.setGeneralManager(gm);
+		
+	}
+	
 	private void setHeadCoach(Team team, JSONObject listJsonObject) {
 		JSONObject headCoach = (JSONObject) listJsonObject.get(Attributes.HEADCOACH.getAttribute());
 		String name = (String) headCoach.get(Attributes.NAME.getAttribute());
@@ -131,9 +140,6 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			// get captain
 			Boolean captain = (Boolean) playersListJsonObject.get(Attributes.CAPTAIN.getAttribute());
 			playerObj.setCaptain(captain);
-			// get age
-			float age = ((Long) playersListJsonObject.get(Attributes.AGE.getAttribute())).floatValue();
-			playerObj.setAge(age);
 			// get skating
 			float skating = ((Long) playersListJsonObject.get(Attributes.SKATING.getAttribute())).intValue();
 			playerObj.setSkating(skating);
@@ -145,7 +151,13 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			playerObj.setChecking(checking);
 			// get saving
 			float saving = ((Long) playersListJsonObject.get(Attributes.SAVING.getAttribute())).intValue();
+			int birthDay =  ((Long) playersListJsonObject.get(Attributes.BIRTHDAY.getAttribute())).intValue();
+			int birthMonth =  ((Long) playersListJsonObject.get(Attributes.BIRTHMONTH.getAttribute())).intValue();
+			int birthYear =  ((Long) playersListJsonObject.get(Attributes.BIRTHYEAR.getAttribute())).intValue();
 			playerObj.setSaving(saving);
+			playerObj.setBirthDay(birthDay);
+			playerObj.setBirthMonth(birthMonth);
+			playerObj.setBirthYear(birthYear);
 			playersList.add(playerObj);
 		}
 		return playersList;

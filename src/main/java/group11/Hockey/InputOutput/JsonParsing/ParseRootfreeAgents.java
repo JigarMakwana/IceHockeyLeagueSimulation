@@ -33,8 +33,6 @@ public class ParseRootfreeAgents implements IParseRootElement {
 			String playerName = (String) playersListJsonObject.get(Attributes.PLAYERNAME.getAttribute());
 			// get position
 			String position = (String) playersListJsonObject.get(Attributes.POSITION.getAttribute());
-			// get age
-			float age = ((Long) playersListJsonObject.get(Attributes.AGE.getAttribute())).floatValue();
 			// get skating
 			float skating = ((Long) playersListJsonObject.get(Attributes.SKATING.getAttribute())).intValue();
 			// get shooting
@@ -42,9 +40,14 @@ public class ParseRootfreeAgents implements IParseRootElement {
 			// get checking
 			float checking = ((Long) playersListJsonObject.get(Attributes.CHECKING.getAttribute())).intValue();
 			// get saving
-			float saving = ((Long) playersListJsonObject.get("saving")).intValue();
-
-			freeAgentsObj = new Player(skating, shooting, checking, saving, playerName, position, false, true, age);
+			float saving = ((Long) playersListJsonObject.get(Attributes.SAVING.getAttribute())).intValue();
+			int birthDay =  ((Long) playersListJsonObject.get(Attributes.BIRTHDAY.getAttribute())).intValue();
+			int birthMonth =  ((Long) playersListJsonObject.get(Attributes.BIRTHMONTH.getAttribute())).intValue();
+			int birthYear =  ((Long) playersListJsonObject.get(Attributes.BIRTHYEAR.getAttribute())).intValue();
+			freeAgentsObj = new Player(skating, shooting, checking, saving, playerName, position, false, true, 0);
+			freeAgentsObj.setBirthDay(birthDay);
+			freeAgentsObj.setBirthMonth(birthMonth);
+			freeAgentsObj.setBirthYear(birthYear);
 			freeAgentsList.add(freeAgentsObj);
 		}
 		return freeAgentsList;

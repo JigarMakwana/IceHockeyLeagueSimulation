@@ -8,8 +8,7 @@
       "conferences",
       "gameplayConfig",
       "freeAgents",
-      "coaches",
-      "gmTable"
+      "coaches"
    ],
    "properties": {
       "leagueName": {
@@ -20,7 +19,6 @@
          "type": "object",
          "required": [
             "aging",
-            "gameResolver",
             "injuries",
             "training",
             "trading"
@@ -83,7 +81,7 @@
                }
             },
             "trading": {
-               "type": "array",
+               "type": "object",
                "required": [
                   "randomTradeOfferChance",
                   "maxPlayersPerTrade",
@@ -104,7 +102,7 @@
                      "type": "number"
                   },
                   "gmTable": {
-                     "type": "array",
+                     "type": "object",
                      "items": {
                         "$ref": "#/definitions/gmTable"
                      }
@@ -240,6 +238,19 @@
                   "type": "number",
                   "minimum": 1,
                   "maximum": 20
+               },
+               "birthDay":{
+                "type": "number",
+                  "minimum": 1,
+                  "maximum": 31
+               },
+                "birthMonth":{
+                "type": "number",
+                  "minimum": 1,
+                  "maximum": 12
+               },
+                "birthYear":{
+                "type": "number"
                }
             }
          },

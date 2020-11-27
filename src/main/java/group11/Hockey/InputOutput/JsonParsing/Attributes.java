@@ -47,7 +47,10 @@ public enum Attributes {
 	AGE("age"),
 	FREEAGENTS("freeAgents"),
 	COACHES("coaches"),
-	GENERALMANAGERS("generalManagers");
+	GENERALMANAGERS("generalManagers"),
+	BIRTHDAY("birthDay"),
+	BIRTHMONTH("birthMonth"),
+	BIRTHYEAR("birthYear");
 
 	private String attribute;
 

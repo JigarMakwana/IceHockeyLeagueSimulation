@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.models.LeagueModelMock;
+import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 
 public class DraftPlayerTest {
 

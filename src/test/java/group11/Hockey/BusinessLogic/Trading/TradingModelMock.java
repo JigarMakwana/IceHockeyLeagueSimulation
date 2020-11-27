@@ -5,7 +5,6 @@ import group11.Hockey.BusinessLogic.IConstantSupplier;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
-import group11.Hockey.BusinessLogic.Trading.TradingConfig;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Roster;
@@ -195,7 +194,7 @@ public class TradingModelMock {
         List<Player> requestedPlayerList = new ArrayList<>();
         requestedPlayerList.add(player14);
         requestedPlayerList.add(player16);
-        tradeCharter = DefaultHockeyFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList);
+        tradeCharter = DefaultHockeyFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList, -1);
 
         commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
         display = DefaultHockeyFactory.makeDisplay();

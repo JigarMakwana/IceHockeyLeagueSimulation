@@ -9,6 +9,7 @@ import group11.Hockey.BusinessLogic.models.Team;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,6 +91,27 @@ public class RosterSearch implements IRosterSearch{
         return strongestPlayerList;
     }
 
+    public Player findStrongestPlayerByPosition(List<Player> unSortedPlayerList, Positions positions) {
+        List<Player> playerList = sortPlayersByStrength(unSortedPlayerList);
+        for(Player p: playerList){
+            if(p.getPosition().equalsIgnoreCase(positions.toString())){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Player findWeakestPlayerByPosition(List<Player> unSortedPlayerList, Positions positions) {
+        List<Player> playerList = sortPlayersByStrength(unSortedPlayerList);
+        Collections.reverse(playerList);
+        for(Player p: playerList){
+            if(p.getPosition().equalsIgnoreCase(positions.toString())){
+                return p;
+            }
+        }
+        return null;
+    }
+
     public Triplet<Team, List<Player>, Float> findStrongestTradeTeam(
             List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer) {
         List<Triplet<Team, List<Player>, Float>> sortedBuffer = tradingTeamsBuffer;
@@ -118,14 +140,6 @@ public class RosterSearch implements IRosterSearch{
         return tradeTeam;
     }
 
-    public Float playersStrengthSum(List<Player> playerList) {
-        Float playersStrengthSum = 0.0f;
-        for(int l=0; l<playerList.size(); l++) {
-            playersStrengthSum += playerList.get(l).getPlayerStrength();
-        }
-        return playersStrengthSum;
-    }
-
     public List<Player> sortPlayersByStrength(List<Player> unSortedPlayerList) {
         List<Player> sortedPlayerList = unSortedPlayerList;
         int i, j;
@@ -148,6 +162,17 @@ public class RosterSearch implements IRosterSearch{
             }
         }
         return sortedPlayerList;
+    }
+
+    public float getRosterStrength(List<Player> playerList){
+        float teamStrength = 0;
+        if (playerList == null || playerList.size() == 0) {
+            return 0;
+        }
+        for (Player player : playerList) {
+            teamStrength += player.getPlayerStrength();
+        }
+        return teamStrength;
     }
 
     public List<Player> getDefenseList(List<Player> playerList) {

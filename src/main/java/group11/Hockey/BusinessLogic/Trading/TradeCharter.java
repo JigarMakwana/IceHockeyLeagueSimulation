@@ -12,14 +12,16 @@ public class TradeCharter implements ITradeCharter {
     private List<Player> offeredPlayerList;
     private Team requestedTeam;
     private List<Player> requestedPlayerList;
+    private int draftRoundIdx;
 
 
     public TradeCharter( Team offeringTeam, List<Player> offeredPlayerList,
-                         Team requestedTeam, List<Player> requestedPlayerList){
+                         Team requestedTeam, List<Player> requestedPlayerList, int draftRoundIdx){
         this.offeringTeam = offeringTeam;
         this.offeredPlayerList = offeredPlayerList;
         this.requestedTeam = requestedTeam;
         this.requestedPlayerList = requestedPlayerList;
+        this.draftRoundIdx = draftRoundIdx;
     }
 
     @Override
@@ -40,6 +42,11 @@ public class TradeCharter implements ITradeCharter {
     @Override
     public Team getRequestedTeam() {
         return requestedTeam;
+    }
+
+    @Override
+    public int getDraftRoundIdx() {
+        return draftRoundIdx;
     }
 
     @Override

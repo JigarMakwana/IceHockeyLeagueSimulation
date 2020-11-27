@@ -97,7 +97,16 @@
               "penaltiesInSeason": 0,
               "savesInSeason": 0,
               "wins": 0,
-              "points": 0
+              "points": 0,
+              "tradedPicks": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ]
             },
             {
               "teamName": "Vancouver Canucks",
@@ -167,7 +176,16 @@
               "penaltiesInSeason": 0,
               "savesInSeason": 0,
               "wins": 0,
-              "points": 0
+              "points": 0,
+              "tradedPicks": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ]
             }
           ]
         }
@@ -730,7 +748,16 @@
       "penaltiesInSeason": 0,
       "savesInSeason": 0,
       "wins": 0,
-      "points": 0
+      "points": 0,
+      "tradedPicks": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
     },
     {
       "teamName": "Lions",
@@ -778,7 +805,16 @@
       "penaltiesInSeason": 0,
       "savesInSeason": 0,
       "wins": 0,
-      "points": 0
+      "points": 0,
+      "tradedPicks": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
     }
   ],
   "goalsInSeason": 0,

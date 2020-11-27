@@ -58,4 +58,8 @@ public interface ITeam {
 	public IRoster getRoster();
 
 	public void setRoster(IRoster roster);
+
+	public List<Boolean> getTradedPicks();
+
+	public void setTradedPicks(int index);
 }

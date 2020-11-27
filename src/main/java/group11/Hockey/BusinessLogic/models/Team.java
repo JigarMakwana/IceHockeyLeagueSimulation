@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.PlayerDraft;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.db.Team.ITeamDb;
 
@@ -30,6 +31,7 @@ public class Team implements ITeam, Comparable<Team>  {
 	private int savesInSeason;
 	private int wins;
 	private int points;
+	private List<Boolean> tradedPicks;
 
 	public Team(String teamName, GeneralManager generalManager, Coach headCoach, List<? extends IPlayer> players) {
 		super();
@@ -37,6 +39,7 @@ public class Team implements ITeam, Comparable<Team>  {
 		this.generalManager = generalManager;
 		this.headCoach = headCoach;
 		this.players = (List<Player>) players;
+		this.tradedPicks = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
 //		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, (List<IPlayer>) players);
 	}
 
@@ -250,7 +253,7 @@ public class Team implements ITeam, Comparable<Team>  {
 			}
 		}
 	}
-	
+
 	@Override
 	public int compareTo(Team team) {
 		if(this.getPoints() > team.getPoints()) {
@@ -260,7 +263,7 @@ public class Team implements ITeam, Comparable<Team>  {
 			return -1;
 		}
 	}
-	
+
 	public List<Team> orderTeamsInLeagueStandings(ILeague league){
 		List<Team> teamsOrderedInReverse = new ArrayList<>();
 		for(IConference conference: league.getConferences()) {
@@ -272,11 +275,18 @@ public class Team implements ITeam, Comparable<Team>  {
 		sortTeam(teamsOrderedInReverse);
 		return teamsOrderedInReverse;
 	}
-	
+
 	public void sortTeam(List<Team> teamsOrderedInReverse){
 		 Collections.sort(teamsOrderedInReverse);
 	}
 
+	public List<Boolean> getTradedPicks() {
+		return tradedPicks;
+	}
+
+	public void setTradedPicks(int index) {
+		tradedPicks.set(index, true);
+	}
 
 	@Override
 	public String toString() {

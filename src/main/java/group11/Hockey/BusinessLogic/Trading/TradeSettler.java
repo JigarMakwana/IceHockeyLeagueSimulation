@@ -42,7 +42,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     @Override
-    public void settleTeamAfterTrade() {
+    public void settleTeam() {
         display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size...");
         if(team.getRoster().isValidRoster()){
             return;

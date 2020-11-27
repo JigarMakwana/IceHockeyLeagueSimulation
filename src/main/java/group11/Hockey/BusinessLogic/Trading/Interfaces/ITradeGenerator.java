@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ITradeGenerator {
     ITradeCharter generateTradeOffer(List<Team> teamList);
-    void tradeDraftPicks();
+    ITradeCharter tradeDraftPicks(List<Team> teamList);
 }

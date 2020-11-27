@@ -102,8 +102,8 @@ public class AITrading extends StateMachineState {
 							resolveAIToAITrade(eligibleTeamList.get(i), weakestPlayerList, tradeTeam.getFirst(),
 									tradeTeam.getSecond());
 						}
-						settleTeamAfterTrade(eligibleTeamList.get(i));
-						settleTeamAfterTrade(tradeTeam.getFirst());
+						settleTeam(eligibleTeamList.get(i));
+						settleTeam(tradeTeam.getFirst());
 					}
 				}
 			}
@@ -205,7 +205,7 @@ public class AITrading extends StateMachineState {
 		team.setLosses(0);
 	}
 
-	public void settleTeamAfterTrade(Team team) {
+	public void settleTeam(Team team) {
 		display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size after trade negotiation...");
 		IConstantSupplier constants = new ConstantSupplier(20, 10, 16, 10, 4);
 		SettleTeamRoster settleObj = new SettleTeamRoster(leagueObj, constants);

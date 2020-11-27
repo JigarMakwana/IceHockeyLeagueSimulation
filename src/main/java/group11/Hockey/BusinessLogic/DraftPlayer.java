@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 
 public class DraftPlayer extends StateMachineState implements IDraftPlayer {
@@ -51,14 +52,14 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 				indexForGeneratedPlayers++;
 			}
 		}
-		
+
 		for (Team team : draftingTeams) {
 			List<IPlayer> extraPlayers = teamSettler(team);
 			@SuppressWarnings("unchecked")
 			List<IPlayer> freeAgents = (List<IPlayer>) DefaultHockeyFactory.makeLeague().getFreeAgents();
 			freeAgents.addAll(extraPlayers);
 		}
-		
+
 
 	}
 
@@ -72,7 +73,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 		}
 		return teamsForRegularSeason;
 	}
-	
+
 	public List<IPlayer> teamSettler(Team team) {
 		List<IPlayer> extraPlayers = new ArrayList<IPlayer>();
 		List<Player> players = team.getPlayers();
@@ -101,9 +102,9 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 			}
 		}
 		}
-			
+
 			return extraPlayers;
-		
+
 	}
 
 	private void populateExtraPlayerList(List<IPlayer> extraPlayers, List<Player> playerList,

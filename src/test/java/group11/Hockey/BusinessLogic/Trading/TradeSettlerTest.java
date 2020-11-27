@@ -25,11 +25,11 @@ public class TradeSettlerTest {
 
     @Test
     public void settleTeamAfterTradeTest() {
-        dropTest.settleTeamAfterTrade();
+        dropTest.settleTeam();
         Assert.assertEquals(leagueModel.getTeam5().getRoster().getAllPlayerList().size(), 5);
         Assert.assertEquals(leagueModel.getFreeAgentsList().size(), 11);
 
-        hireTest.settleTeamAfterTrade();
+        hireTest.settleTeam();
         Assert.assertEquals(leagueModel.getTeam6().getRoster().getAllPlayerList().size(), 7);
         Assert.assertEquals(leagueModel.getFreeAgentsList().size(), 8);
     }

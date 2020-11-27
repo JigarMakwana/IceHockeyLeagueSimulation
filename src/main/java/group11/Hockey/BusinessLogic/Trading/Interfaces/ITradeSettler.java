@@ -5,7 +5,7 @@ import group11.Hockey.BusinessLogic.models.Player;
 import java.util.List;
 
 public interface ITradeSettler {
-   void settleTeamAfterTrade();
+   void settleTeam();
    void dropPlayers();
    void hirePlayers();
    void dropPlayerFromUserTeam(List<Player> playerList);

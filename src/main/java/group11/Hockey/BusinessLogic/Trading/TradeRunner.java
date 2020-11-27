@@ -43,10 +43,10 @@ public class TradeRunner implements ITradeRunner {
                 tradeResolver.resolveTrade();
 
                 ITradeSettler offeringTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getOfferingTeam(), (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
-                offeringTeamSettler.settleTeamAfterTrade();
+                offeringTeamSettler.settleTeam();
 
                 ITradeSettler requestedTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getRequestedTeam(), (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
-                requestedTeamSettler.settleTeamAfterTrade();
+                requestedTeamSettler.settleTeam();
             }
             eligibleTeamList.remove(0);
         }

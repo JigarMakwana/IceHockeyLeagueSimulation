@@ -2,7 +2,6 @@ package group11.Hockey.BusinessLogic.models.Roster;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IConstantSupplier;
-import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;

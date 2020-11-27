@@ -10,7 +10,6 @@ import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.IDisplay;
-import javafx.util.Pair;
 
 import java.util.*;
 
@@ -46,9 +45,10 @@ public class TradeGenerator implements ITradeGenerator {
         } else {
             List<Player> combinations = new ArrayList<>();
             findCombinations(requestedTeam.getPlayers(), combinations,0, requestedTeam.getPlayers().size() - 1, 0, tradingConfig.getMaxPlayersPerTrade());
-            Pair<Float, List<Player>> requestedPlayers = findBestCombination();
-            if(requestedPlayers.getKey() > offeringTeam.getTeamStrength()){
-                return DefaultHockeyFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, requestedPlayers.getValue());
+            Map<Float, List<Player>> requestedPlayers = findBestCombination();
+            Map.Entry<Float, List<Player>> entry = requestedPlayers.entrySet().iterator().next();
+            if(entry.getKey() > offeringTeam.getTeamStrength()){
+                return DefaultHockeyFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue());
             }
         }
 //        findBestCombination();
@@ -88,7 +88,7 @@ public class TradeGenerator implements ITradeGenerator {
         }
     }
 
-    public Pair<Float, List<Player>> findBestCombination(){
+    public Map<Float, List<Player>> findBestCombination(){
         List<Player> tradePlayerList = new ArrayList<>();
         float newTeamStrength = 0.0f;
         List<Player> activeRoster = offeringTeam.getRoster().getActiveRoster();
@@ -109,7 +109,8 @@ public class TradeGenerator implements ITradeGenerator {
                 }
             }
         }
-        Pair<Float, List<Player>> requestedPlayers = new Pair<>(newTeamStrength,tradePlayerList);
+        Map<Float, List<Player>> requestedPlayers = new HashMap<>();
+        requestedPlayers.put(newTeamStrength,tradePlayerList);
         return requestedPlayers;
     }
 

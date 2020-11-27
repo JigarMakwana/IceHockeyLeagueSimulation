@@ -10,9 +10,9 @@ import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.Injuries;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.models.LeagueModelMock;
 
 public class InjurySystemTest {
 

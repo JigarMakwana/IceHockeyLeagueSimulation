@@ -8,8 +8,7 @@
       "conferences",
       "gameplayConfig",
       "freeAgents",
-      "coaches",
-      "gmTable"
+      "coaches"
    ],
    "properties": {
       "leagueName": {
@@ -20,7 +19,6 @@
          "type": "object",
          "required": [
             "aging",
-            "gameResolver",
             "injuries",
             "training",
             "trading"

@@ -28,5 +28,6 @@ public interface IDisplay {
 			String managerName, Coach coach);
 
 	public void displayListOfFreeAgents(List<Player> freeAgentList);
+
 	public void pickPlayer(List<Player> freeAgentList);
 }

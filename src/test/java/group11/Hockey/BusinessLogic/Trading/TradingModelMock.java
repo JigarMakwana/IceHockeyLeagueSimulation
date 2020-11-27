@@ -4,7 +4,7 @@ import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IConstantSupplier;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Roster;
@@ -22,7 +22,7 @@ public class TradingModelMock {
     private float randomAcceptanceChance;
     private Team team1, team2, team3, team4, team5,team6;
     private List<Player> freeAgentsList;
-    private ITradingConfig tradingConfig;
+    private ITradeConfig tradingConfig;
     private IConstantSupplier constantSupplier;
     private IConstantSupplier csTeam6;
     private ITradeCharter tradeCharter;
@@ -44,7 +44,7 @@ public class TradingModelMock {
         IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
         this.trading = new Trading(2, this.randomTradeOfferChance,
                 2, this.randomAcceptanceChance, gmTbale);
-        this.tradingConfig = new TradingConfig(2, this.randomTradeOfferChance,
+        this.tradingConfig = new TradeConfig(2, this.randomTradeOfferChance,
                 2, this.randomAcceptanceChance, gmTbale);
         this.constantSupplier = new ConstantSupplier(3,0,1,1,1);
         this.csTeam6 = new ConstantSupplier(7,0,2,3,2);
@@ -194,7 +194,7 @@ public class TradingModelMock {
         List<Player> requestedPlayerList = new ArrayList<>();
         requestedPlayerList.add(player14);
         requestedPlayerList.add(player16);
-        tradeCharter = DefaultHockeyFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList, -1);
+        tradeCharter = TradingFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList, -1);
 
         commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
         display = DefaultHockeyFactory.makeDisplay();
@@ -221,7 +221,7 @@ public class TradingModelMock {
         return freeAgentsList;
     }
 
-    public ITradingConfig getTradingConfig() {
+    public ITradeConfig getTradingConfig() {
         return tradingConfig;
     }
 

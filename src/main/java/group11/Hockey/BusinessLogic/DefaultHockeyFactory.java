@@ -2,13 +2,13 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.Trading.*;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomFloatGenerator;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
+import group11.Hockey.BusinessLogic.Enums.RosterSize;
 import org.json.simple.parser.JSONParser;
 
 import group11.Hockey.BusinessLogic.models.Roster.Roster;
@@ -228,41 +228,5 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static IRandomNoGenerator makeRandomFloatGenerator(){
 		return new RandomFloatGenerator();
-	}
-
-	public static ITradeInitializer makeTradeInitializer(ILeague leagueObj){
-		return new TradeInitializer(leagueObj);
-	}
-
-	public static ITradeGenerator makeTradeGenerator(Team team, ITradingConfig tradingConfig, IDisplay display){
-		return new TradeGenerator(team, tradingConfig, display);
-	}
-
-	public static ITradeResolver makeTradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig,
-												   ICommandLineInput commandLineInput,
-												   IValidations validation, IDisplay display){
-		return new TradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
-	}
-
-	public static ITradeSettler makeTradeSettler(Team team, List<Player> freeAgentList,
-												 ICommandLineInput commandLineInput,
-												 IValidations validation, IDisplay display,
-												 IConstantSupplier constantSupplier){
-		return new TradeSettler(team, freeAgentList, commandLineInput, validation, display, constantSupplier);
-	}
-
-	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList,
-												 Team requestedteam, List<Player> requestedPlayerList, int roundIdx){
-		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList, roundIdx);
-	}
-
-	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance,
-												   int maxPlayersPerTrade, float randomAcceptanceChance,
-												   IgmTable gmTable){
-		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
-	}
-
-	public static ITradeDraft makeTradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display){
-		return new TradeDraft(offeringTeam, tradingConfig, display);
 	}
 }

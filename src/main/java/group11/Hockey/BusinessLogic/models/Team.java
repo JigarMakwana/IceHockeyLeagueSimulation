@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.PlayerDraft;
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.db.Team.ITeamDb;
 

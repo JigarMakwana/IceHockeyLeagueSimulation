@@ -1,11 +1,14 @@
+/*
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.PlayerDraft;
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeDraft;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
-import group11.Hockey.BusinessLogic.Triplet;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -17,12 +20,12 @@ public class TradeDraft implements ITradeDraft {
     private static List<Map<Team, Map<Team, List<Boolean>>>> draftTradeTracker;
     private Team offeringTeam;
     private List<Player> weakestPlayerList;
-    private ITradingConfig tradingConfig;
+    private ITradeConfig tradingConfig;
     private IDisplay display;
     private IRosterSearch rosterSearch;
     private List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer = new ArrayList<>();
 
-    public TradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display) {
+    public TradeDraft(Team offeringTeam, ITradeConfig tradingConfig, IDisplay display) {
         this.draftTradeTracker = new ArrayList<>();
         this.offeringTeam = offeringTeam;
         this.tradingConfig = tradingConfig;
@@ -105,7 +108,7 @@ public class TradeDraft implements ITradeDraft {
         }
         if (tradingTeamsBuffer.size() > 0) {
             Triplet<Team, List<Player>, Float> tradeTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
-            return DefaultHockeyFactory.makeTradeCharter(this.offeringTeam, null,
+            return TradingFactory.makeTradeCharter(this.offeringTeam, null,
                     tradeTeam.getFirst(), tradeTeam.getSecond(), roundIdx);
         }
         return null;

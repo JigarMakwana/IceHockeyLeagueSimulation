@@ -1,9 +1,11 @@
+/*
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 
 import java.util.List;
 

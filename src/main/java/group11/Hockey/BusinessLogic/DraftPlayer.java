@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
+import group11.Hockey.BusinessLogic.Enums.RosterSize;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.models.ILeague;

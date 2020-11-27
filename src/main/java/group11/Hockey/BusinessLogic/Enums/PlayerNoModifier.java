@@ -1,4 +1,7 @@
-package group11.Hockey.BusinessLogic.Trading;
+/*
+ * Author: Jigar Makwana B00842568
+ */
+package group11.Hockey.BusinessLogic.Enums;
 
 public enum PlayerNoModifier {
     MULTIPLE_PLAYER_MODIFIER(0.05f);

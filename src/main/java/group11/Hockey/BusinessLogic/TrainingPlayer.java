@@ -19,7 +19,6 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedu
 import group11.Hockey.BusinessLogic.LeagueSimulation.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
-import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class TrainingPlayer extends StateMachineState implements ITrainingPlayer {
@@ -77,7 +76,8 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
 			logger.info("Performing trading");
-			return new AITrading(league, leaugueDb, display);
+//			return new AITrading(league, leaugueDb, display);
+			return null;
 
 		} else {
 			logger.info("Performing aging");

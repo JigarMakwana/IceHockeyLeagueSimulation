@@ -1,9 +1,14 @@
+/*
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.*;
+import group11.Hockey.BusinessLogic.Enums.GMPersonalities;
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
 import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -11,7 +16,6 @@ import group11.Hockey.InputOutput.IDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class TradeResolver implements ITradeResolver {
     private ITradeCharter tradeCharter;
@@ -19,7 +23,7 @@ public class TradeResolver implements ITradeResolver {
     private List<Player> offeredPlayerList;
     private Team requestedTeam;
     private List<Player> requestedPlayerList;
-    private ITradingConfig tradingConfig;
+    private ITradeConfig tradingConfig;
     private ICommandLineInput commandLineInput;
     private IValidations validation;
     private IDisplay display;
@@ -27,7 +31,7 @@ public class TradeResolver implements ITradeResolver {
     private IRosterSearch rosterSearch;
     private IRandomNoGenerator randomFloatGenerator;
 
-    public TradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig,
+    public TradeResolver(ITradeCharter tradeCharter, ITradeConfig tradingConfig,
                          ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
         this.tradeCharter = tradeCharter;
         this.offeringTeam = tradeCharter.getOfferingTeam();

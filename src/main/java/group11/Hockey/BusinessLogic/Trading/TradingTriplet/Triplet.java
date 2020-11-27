@@ -1,4 +1,9 @@
-package group11.Hockey.BusinessLogic;
+/**
+ * Author: Jigar Makwana B00842568
+ * Generic Triplet
+ * Used in Trading to hold three objects of different type
+ */
+package group11.Hockey.BusinessLogic.Trading.TradingTriplet;
 
 import java.util.Comparator;
 

@@ -9,12 +9,12 @@ import java.util.Random;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.Positions;
+import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class DefencePlayerActive extends GameStrategy {
-	
+
 	private static Logger logger = LogManager.getLogger(DefencePlayerActive.class);
 
 	@Override

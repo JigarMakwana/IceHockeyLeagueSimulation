@@ -73,7 +73,6 @@ public class Display implements IDisplay {
 	/**
 	 * @author  Jigar Makwana B00842568
 	 */
-
 	@Override
 	public  void displayPlayers(List<Player> playersList) {
 		int length = playersList.size();
@@ -86,6 +85,9 @@ public class Display implements IDisplay {
 		}
 	}
 
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
 	@Override
 	public  void displayTradeStatistics(String offeringTeamName, List<Player> offeredPlayerList,
 										String requestedTeamName, List<Player> requestedPlayerList) {
@@ -97,6 +99,9 @@ public class Display implements IDisplay {
 		this.displayPlayers(requestedPlayerList);
 	}
 
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
 	@Override
 	public  void displayTradeStatisticsToUser(String offeringTeamName, List<Player> offeredPlayerList,
 											  String requestedTeamName, List<Player> requestedPlayerList) {
@@ -108,11 +113,17 @@ public class Display implements IDisplay {
 		this.displayPlayers(requestedPlayerList);
 	}
 
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
 	@Override
 	public void displayAcceptRejectOptionToUser() {
 		System.out.println("Press 1 to Accept the trade\nPress 0 to Reject the trade.");
 	}
 
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
 	@Override
 	public void displayListOfFreeAgents(List<Player> freeAgentList) {
 		System.out.println("******Select Players for Team******: ");
@@ -129,6 +140,9 @@ public class Display implements IDisplay {
 		}
 	}
 
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
 	@Override
 	public void pickPlayer(List<Player> playerList) {
 		System.out.println("\n**Please select the player to drop**");

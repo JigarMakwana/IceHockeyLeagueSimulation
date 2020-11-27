@@ -9,7 +9,7 @@ import group11.Hockey.BusinessLogic.ForwardPosition;
 import group11.Hockey.BusinessLogic.GoaliePosition;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.PlayerStrength;
-import group11.Hockey.BusinessLogic.Positions;
+import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.db.IPlayerDb;
 
 /**
@@ -161,7 +161,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	public void setInjured(boolean isInjured) {
 		this.isInjured = isInjured;
 	}
-	
+
 	public int getBirthDay() {
 		return birthDay;
 	}
@@ -262,7 +262,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		return (int) this.getPlayerStrength() - (int) player.getPlayerStrength();
 	}
 
-	
+
 
 	@Override
 	public String toString() {
@@ -340,28 +340,28 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 			}
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerShootingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if(randomValue > statDecayChance) {
 			this.setShooting(this.getShooting() - 1);
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerCheckingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if(randomValue > statDecayChance) {
 			this.setChecking(this.getChecking() - 1);
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerSkatingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if(randomValue > statDecayChance) {
 			this.setSkating(this.getSkating() - 1);
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerSavingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if(randomValue > statDecayChance) {

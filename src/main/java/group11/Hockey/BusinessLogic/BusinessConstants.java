@@ -10,16 +10,16 @@ public enum BusinessConstants {
 	Number_Of_Skaters("18"),
 	Number_Of_Goalies("2"),
 	Number_Of_Total_Players("20");
-	
 
-	
+
+
 	String value;
 	BusinessConstants(String value){
 		this.value = value;
 	}
-	
+
 	String getValue() {
 		return value;
 	}
-	
+
 }

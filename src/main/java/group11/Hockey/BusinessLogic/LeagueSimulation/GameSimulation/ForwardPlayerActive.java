@@ -8,14 +8,14 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.Positions;
+import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class ForwardPlayerActive extends GameStrategy {
-	
+
 	private static Logger logger = LogManager.getLogger(ForwardPlayerActive.class);
-	
+
 	public int calculateAveragePlayersStrength(List<Player> playersList, ITeam defendingTeam) {
 		logger.info("Entered calculateAveragePlayersStrength()");
 		int skating = 0;

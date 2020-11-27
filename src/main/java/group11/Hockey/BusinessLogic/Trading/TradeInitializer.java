@@ -1,15 +1,16 @@
+/*
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IRandomNoGenerator;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
 import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TradeInitializer implements ITradeInitializer {
     private ILeague leagueObj;
@@ -39,8 +40,8 @@ public class TradeInitializer implements ITradeInitializer {
         }
     }
 
-    public ITradingConfig getTradingConfig(){
-        ITradingConfig configTrading = DefaultHockeyFactory.makeConfigTrading(
+    public ITradeConfig getTradingConfig(){
+        ITradeConfig configTrading = TradingFactory.makeTradeConfig(
                 tradingConfig.getLossPoint(),
                 tradingConfig.getRandomTradeOfferChance(),
                 tradingConfig.getMaxPlayersPerTrade(),

@@ -1,12 +1,16 @@
+/*
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IRandomNoGenerator;
+import group11.Hockey.BusinessLogic.Enums.PlayerNoModifier;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeDraft;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
-import group11.Hockey.BusinessLogic.Triplet;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
@@ -17,13 +21,13 @@ import java.util.*;
 public class TradeGenerator implements ITradeGenerator {
     private Team offeringTeam;
     private List<Player> offeredPlayerList;
-    private ITradingConfig tradingConfig;
+    private ITradeConfig tradingConfig;
     private IDisplay display;
     private IRosterSearch rosterSearch;
     private List<List<Player>> playerCombinations;
     private List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer = new ArrayList<>();
 
-    public TradeGenerator(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display){
+    public TradeGenerator(Team offeringTeam, ITradeConfig tradingConfig, IDisplay display){
         this.offeringTeam = offeringTeam;
         this.tradingConfig = tradingConfig;
         this.display = display;
@@ -43,13 +47,13 @@ public class TradeGenerator implements ITradeGenerator {
             Map<Float, List<Player>> requestedPlayers = findBestCombination();
             Map.Entry<Float, List<Player>> entry = requestedPlayers.entrySet().iterator().next();
             if(entry.getKey() > offeringTeam.getTeamStrength()){
-                return DefaultHockeyFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue(), -1);
+                return TradingFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue(), -1);
             }
             if(offeringTeam.getTeamStrength() < averageTeamStrength(eligibleTeamList)){
                 return tradeDraftPicks(eligibleTeamList);
             }
         }
-        return DefaultHockeyFactory.makeTradeCharter(null,null,null, null, -1);
+        return TradingFactory.makeTradeCharter(null,null,null, null, -1);
     }
 
     public Team findStrongestTeam(List<Team> eligibleTeamList){
@@ -108,7 +112,7 @@ public class TradeGenerator implements ITradeGenerator {
 
     @Override
     public ITradeCharter tradeDraftPicks(List<Team> eligibleTeamList) {
-        ITradeDraft tradeDraft = DefaultHockeyFactory.makeTradeDraft(offeringTeam,tradingConfig,display);
+        ITradeDraft tradeDraft = TradingFactory.makeTradeDraft(offeringTeam,tradingConfig,display);
         return tradeDraft.generateTradeOffer(eligibleTeamList);
     }
 

@@ -1,7 +1,7 @@
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 import org.junit.Assert;
@@ -24,7 +24,7 @@ public class TradeInitializerTest {
 
     @Test
     public void getTradingConfigTest() {
-        ITradingConfig config = aiTradingObj.getTradingConfig();
+        ITradeConfig config = aiTradingObj.getTradingConfig();
         Assert.assertEquals(config.getRandomTradeOfferChance(), 1.0f, 0.0001);
         Assert.assertEquals(config.getRandomAcceptanceChance(), 1.0f, 0.0001);
         Assert.assertEquals(config.getLossPoint(), 2);

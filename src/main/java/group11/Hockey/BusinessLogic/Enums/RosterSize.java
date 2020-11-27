@@ -1,4 +1,7 @@
-package group11.Hockey.BusinessLogic.models.Roster;
+/*
+ * Author: Jigar Makwana B00842568
+ */
+package group11.Hockey.BusinessLogic.Enums;
 
 public enum RosterSize {
     FORWARD_SIZE(2),

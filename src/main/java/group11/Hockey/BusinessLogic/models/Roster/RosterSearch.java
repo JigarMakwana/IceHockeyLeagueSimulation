@@ -1,11 +1,13 @@
+/*
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.models.Roster;
 
-import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.BusinessLogic.Triplet;
+import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
-import group11.Hockey.BusinessLogic.models.Team;
 
 import java.util.ArrayList;
 import java.util.Arrays;

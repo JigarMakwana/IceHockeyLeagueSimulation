@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
-import javafx.geometry.Pos;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

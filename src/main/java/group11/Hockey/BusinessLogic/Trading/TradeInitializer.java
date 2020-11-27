@@ -32,15 +32,10 @@ public class TradeInitializer implements ITradeInitializer {
                 List<Team> teamList = division.getTeams();
                 for (Team team : teamList) {
                     if ((team.getLosses() >= lossPointCutOff)) {
-                        this.eligibleTeams.add(team);
+                        eligibleTeams.add(team);
                     }
                 }
             }
-        }
-        // TODO to be removed
-        System.out.println("------- ** Teams Eligible for Trade ** -------");
-        for (Team team : this.eligibleTeams) {
-            System.out.println(team.getTeamName());
         }
     }
 
@@ -78,6 +73,6 @@ public class TradeInitializer implements ITradeInitializer {
 
     @Override
     public List<Team> getEligibleTeams() {
-        return this.eligibleTeams;
+        return eligibleTeams;
     }
 }

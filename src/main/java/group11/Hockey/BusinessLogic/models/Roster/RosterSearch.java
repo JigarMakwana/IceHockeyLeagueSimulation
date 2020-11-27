@@ -150,6 +150,17 @@ public class RosterSearch implements IRosterSearch{
         return sortedPlayerList;
     }
 
+    public float getRosterStrength(List<Player> playerList){
+        float teamStrength = 0;
+        if (playerList == null || playerList.size() == 0) {
+            return 0;
+        }
+        for (Player player : playerList) {
+            teamStrength += player.getPlayerStrength();
+        }
+        return teamStrength;
+    }
+
     public List<Player> getDefenseList(List<Player> playerList) {
         List<Player> defenceIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())).collect(Collectors.toList());

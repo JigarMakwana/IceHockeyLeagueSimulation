@@ -38,6 +38,7 @@ public class JsonImport extends ValidateJsonSchema {
 			League league = parseFile(fileName);
 			stateMachineState = DefaultHockeyFactory.makeCreateTeam(league, commandLineInput, leagueDb);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Exception occurred :" + e.getMessage());
 		}
 		return stateMachineState;

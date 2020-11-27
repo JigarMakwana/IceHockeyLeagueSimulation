@@ -14,6 +14,7 @@ public interface IRosterSearch {
                                        int maxPlayersPerTrade);
     Triplet<Team, List<Player>, Float> findStrongestTradeTeam(
             List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer);
+    float getRosterStrength(List<Player> playerList);
     Float playersStrengthSum(List<Player> playerList);
     List<Player> sortPlayersByStrength(List<Player> unSortedPlayerList);
     List<Player> getDefenseList(List<Player> playerList);

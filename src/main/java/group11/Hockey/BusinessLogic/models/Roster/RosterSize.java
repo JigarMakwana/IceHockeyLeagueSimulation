@@ -5,10 +5,7 @@ public enum RosterSize {
     DEFENSE_SIE(2),
     GOALIE_SIZE(2),
     ACTIVE_ROSTER_SIZE(5),
-    INACTIVE_ROSTER_SIZE(1),
-    ACTIVE_FORWARD_SIZE(16),
-    ACTIVE_DEFENSE_SIE(10),
-    ACTIVE_GOALIE_SIZE(4);
+    INACTIVE_ROSTER_SIZE(1);
 
     private int numVal;
 

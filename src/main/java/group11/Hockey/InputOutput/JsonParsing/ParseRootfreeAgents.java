@@ -42,7 +42,7 @@ public class ParseRootfreeAgents implements IParseRootElement {
 			// get checking
 			float checking = ((Long) playersListJsonObject.get(Attributes.CHECKING.getAttribute())).intValue();
 			// get saving
-			float saving = ((Long) playersListJsonObject.get("saving")).intValue();
+			float saving = ((Long) playersListJsonObject.get(Attributes.SAVING.getAttribute())).intValue();
 
 			freeAgentsObj = new Player(skating, shooting, checking, saving, playerName, position, false, true, age);
 			freeAgentsList.add(freeAgentsObj);

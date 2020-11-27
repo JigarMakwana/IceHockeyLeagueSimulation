@@ -12,11 +12,11 @@ import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.UserInputCheck;
 import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
-import group11.Hockey.models.LeagueModelMock;
 
 public class UserInputCheckTest {
 

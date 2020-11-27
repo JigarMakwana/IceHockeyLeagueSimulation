@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.db.ISerialize;
 import group11.Hockey.db.Serialize;
-import group11.Hockey.models.LeagueModelMock;
 
 public class SerializeLeagueTest {
 

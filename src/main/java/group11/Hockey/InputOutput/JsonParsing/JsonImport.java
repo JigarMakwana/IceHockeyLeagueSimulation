@@ -6,10 +6,13 @@ package group11.Hockey.InputOutput.JsonParsing;
 import java.io.FileReader;
 import java.util.Iterator;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.FinalState;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -21,14 +24,12 @@ public class JsonImport extends ValidateJsonSchema {
 	String fileName;
 	ICommandLineInput commandLineInput;
 	ILeagueDb leagueDb;
+	private static Logger logger = LogManager.getLogger(JsonImport.class);
 
 	public JsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb) {
 		this.fileName = fileName;
 		this.commandLineInput = commandLineInput;
 		this.leagueDb = leagueDb;
-	}
-
-	public JsonImport() {
 	}
 
 	@Override
@@ -38,12 +39,12 @@ public class JsonImport extends ValidateJsonSchema {
 			League league = parseFile(fileName);
 			stateMachineState = DefaultHockeyFactory.makeCreateTeam(league, commandLineInput, leagueDb);
 		} catch (Exception e) {
-			System.out.println("Exception occurred :" + e.getMessage());
+			logger.error("Exception occurred :" + e.getMessage());
 		}
 		return stateMachineState;
 	}
 
-	public League parseFile(String fileName) throws Exception {
+	private League parseFile(String fileName) throws Exception {
 		if (isValidJsonSchema(fileName)) {
 			JSONParser parser = DefaultHockeyFactory.makeJSONParser();
 			fileObj = parser.parse(new FileReader(fileName));

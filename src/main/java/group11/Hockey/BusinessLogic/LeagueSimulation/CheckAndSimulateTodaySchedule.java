@@ -7,9 +7,8 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.InjurySystem;
-import group11.Hockey.BusinessLogic.GameSimulation.GameSimulation;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;

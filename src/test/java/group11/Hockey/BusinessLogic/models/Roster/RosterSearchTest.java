@@ -66,7 +66,7 @@ public class RosterSearchTest {
 
     @Test
     public void playersStrengthSumTest() {
-        Float playersplayersStrengthSum = rosterSearch.playersStrengthSum(roster.getAllPlayerList());
+        Float playersplayersStrengthSum = rosterSearch.getRosterStrength(roster.getAllPlayerList());
         Assert.assertEquals(playersplayersStrengthSum, 77.5, 0.0001);
     }
 

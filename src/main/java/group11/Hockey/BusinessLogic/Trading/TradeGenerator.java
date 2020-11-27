@@ -43,13 +43,13 @@ public class TradeGenerator implements ITradeGenerator {
             Map<Float, List<Player>> requestedPlayers = findBestCombination();
             Map.Entry<Float, List<Player>> entry = requestedPlayers.entrySet().iterator().next();
             if(entry.getKey() > offeringTeam.getTeamStrength()){
-                return DefaultHockeyFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue(), false);
+                return DefaultHockeyFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue(), -1);
             }
             if(offeringTeam.getTeamStrength() < averageTeamStrength(eligibleTeamList)){
                 return tradeDraftPicks(eligibleTeamList);
             }
         }
-        return DefaultHockeyFactory.makeTradeCharter(null,null,null, null, false);
+        return DefaultHockeyFactory.makeTradeCharter(null,null,null, null, -1);
     }
 
     public Team findStrongestTeam(List<Team> eligibleTeamList){

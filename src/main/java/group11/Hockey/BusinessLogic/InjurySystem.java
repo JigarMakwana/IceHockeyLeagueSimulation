@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import javafx.geometry.Pos;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -58,36 +60,50 @@ public class InjurySystem {
 		return numberOfInjuredDays;
 	}
 
-	public void settleInjuredPlayer(IRoster roster, IPlayer injuredPlayer) {
-		logger.info("Entered settleInjuredPlayer()");
-		// TODO When players are injured,
-		// swap them for an uninjured player on the inactive roster (if there is one).
-		if (isInjuredSwappingPossible(roster, injuredPlayer)) {
-			// decide which player will replace the injured player
-			// find the player with same position as injured player with highest strength in
-			// InActive Roster
-			IPlayer replacementPlayer = new Player();
-//			roster.swapPlayers(injuredPlayer, replacementPlayer);
+	public void settleRecoveredPlayer(IRoster roster, Player recoveredPlayer) {
+		logger.info("Entered settleRecoveredPlayer()");
+		Positions position = findInjuredPlayerPosition(recoveredPlayer);
+		IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
+		Player replacement = rosterSearch.findWeakestPlayerByPosition(roster.getActiveRoster(),position);
+		if(null == replacement){
+			return;
+		} else {
+			replacement.setActive(false);
+			recoveredPlayer.setActive(true);
+			roster.swapPlayers(recoveredPlayer, replacement);
 		}
 	}
 
-	public void settleRecoveredPlayer(IRoster roster, IPlayer recoveredPlayer) {
-		logger.info("Entered settleRecoveredPlayer()");
-		// TODO When players recover from injuries, if they are better than players on
-		// the active roster
-		// swap them back to the active roster.
-		// decide which player will replace the recoveredPlayer player
-		// find the player with same position as recovered player with lowest strength
-		// in InActive Roster
-		IPlayer replacementPlayer = new Player();
-//		roster.swapPlayers(recoveredPlayer, replacementPlayer);
+	public void settleInjuredPlayer(IRoster roster, Player injuredPlayer) {
+		logger.info("Entered settleInjuredPlayer()");
+		if (isInjuredSwappingPossible(roster, injuredPlayer)) {
+			Positions position = findInjuredPlayerPosition(injuredPlayer);
+			IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
+			Player replacement = rosterSearch.findStrongestPlayerByPosition(roster.getInActiveRoster(),position);
+			if(null == replacement){
+				return;
+			} else {
+				replacement.setActive(true);
+				injuredPlayer.setActive(false);
+				roster.swapPlayers(injuredPlayer, replacement);
+			}
+		}
 	}
 
-	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer) {
+	public boolean isInjuredSwappingPossible(IRoster roster, Player injuredPlayer) {
 		logger.info("Entered isInjuredSwappingPossible()");
-		// TODO injuredPlayer.getPosition() should return Position and not String
-		// check if UnInjured Player Available on InActive Rsoter
-		return isUnInjuredPlayerAvailable(roster, Positions.DEFENSE);
+		Positions position = findInjuredPlayerPosition(injuredPlayer);
+		return isUnInjuredPlayerAvailable(roster, position);
+	}
+
+	public Positions findInjuredPlayerPosition(Player injuredPlayer){
+		if (injuredPlayer.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())) {
+			return Positions.FORWARD;
+		} else if (injuredPlayer.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
+			return Positions.DEFENSE;
+		} else {
+			return Positions.GOALIE;
+		}
 	}
 
 	public boolean isUnInjuredPlayerAvailable(IRoster roster, Positions position) {
@@ -107,5 +123,4 @@ public class InjurySystem {
 			return false;
 		}
 	}
-
 }

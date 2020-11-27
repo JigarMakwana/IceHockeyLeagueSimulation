@@ -253,8 +253,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList,
-												 Team requestedteam, List<Player> requestedPlayerList, boolean isDraftTrade){
-		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList, isDraftTrade);
+												 Team requestedteam, List<Player> requestedPlayerList, int roundIdx){
+		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList, roundIdx);
 	}
 
 	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance,

@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface ITradeDraft {
     void clearDraftTradeTracker();
-    List<Map<Team, Map<Team, List<Integer>>>> getDraftTradeTracker();
+    List<Map<Team, Map<Team, List<Boolean>>>> getDraftTradeTracker();
     ITradeCharter generateTradeOffer(List<Team> eligibleTeamList);
 }

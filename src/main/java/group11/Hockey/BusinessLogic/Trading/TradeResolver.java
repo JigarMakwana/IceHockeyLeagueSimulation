@@ -1,9 +1,6 @@
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IRandomNoGenerator;
-import group11.Hockey.BusinessLogic.IUserInputCheck;
-import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.*;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
@@ -14,6 +11,7 @@ import group11.Hockey.InputOutput.IDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TradeResolver implements ITradeResolver {
     private ITradeCharter tradeCharter;
@@ -53,7 +51,8 @@ public class TradeResolver implements ITradeResolver {
             } else {
                 resolveAIToAITrade();
             }
-        } else if(tradeCharter.isDraftTrade()){
+        } else if(tradeCharter.getDraftRoundIdx() <= PlayerDraft.ROUND_7.getNumVal() ||
+                tradeCharter.getDraftRoundIdx() >= PlayerDraft.ROUNDS_1.getNumVal()){
             resolveDraftTrade();
         }
         return;
@@ -83,7 +82,9 @@ public class TradeResolver implements ITradeResolver {
         float randomAcceptanceChance = randomFloatGenerator.generateRandomFloat();
         if (randomAcceptanceChance < modifyAcceptanceChance()) {
             acceptTrade();
-            //                tradedPicks.set(i, true);
+            offeringTeam.setTradedPicks(tradeCharter.getDraftRoundIdx());
+            TradeDraft.updateDraftTradeTracker(offeringTeam,requestedTeam, tradeCharter.getDraftRoundIdx());
+
         } else {
             rejectTrade();
         }

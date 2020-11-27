@@ -194,7 +194,7 @@ public class TradingModelMock {
         List<Player> requestedPlayerList = new ArrayList<>();
         requestedPlayerList.add(player14);
         requestedPlayerList.add(player16);
-        tradeCharter = DefaultHockeyFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList, false);
+        tradeCharter = DefaultHockeyFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList, -1);
 
         commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
         display = DefaultHockeyFactory.makeDisplay();

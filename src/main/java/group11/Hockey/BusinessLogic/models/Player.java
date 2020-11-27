@@ -262,9 +262,14 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		return (int) this.getPlayerStrength() - (int) player.getPlayerStrength();
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "playerName=" + playerName + ", position=" + position + ", captain=" + captain;
+		return "Player [playerName=" + playerName + ", position=" + position + ", captain=" + captain + ", isFreeAgent="
+				+ isFreeAgent + ", leagueName=" + leagueName + ", age=" + age + ", isInjured=" + isInjured
+				+ ", IsRetired=" + IsRetired + ", birthDay=" + birthDay + ", birthMonth=" + birthMonth + ", birthYear="
+				+ birthYear + "]";
 	}
 
 	public void decreaseInjuredDaysForPlayer(int days) {

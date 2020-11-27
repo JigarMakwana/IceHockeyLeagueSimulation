@@ -56,11 +56,9 @@ public class TeamTest {
 	@Test
 	public void getPlayersTest() {
 
-		Assert.assertEquals("playerName=" + player1.getPlayerName() + ", position=" + player1.getPosition()
-				+ ", captain=" + player1.getCaptain(), team.getPlayers().get(0).toString());
+		Assert.assertEquals(player1.getPlayerName(), team.getPlayers().get(0).getPlayerName());
 
-		Assert.assertEquals("playerName=" + player2.getPlayerName() + ", position=" + player2.getPosition()
-				+ ", captain=" + player2.getCaptain(), team.getPlayers().get(1).toString());
+		Assert.assertEquals(player2.getPlayerName(), team.getPlayers().get(1).getPlayerName());
 		Assert.assertTrue(team.getPlayers().size() == 2);
 	}
 

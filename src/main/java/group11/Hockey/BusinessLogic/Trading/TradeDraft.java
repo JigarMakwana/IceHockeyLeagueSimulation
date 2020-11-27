@@ -59,21 +59,13 @@ public class TradeDraft implements ITradeDraft {
         display.showMessageOnConsole("Trading draft picks...");
         for(int i=PlayerDraft.ROUND_7.getNumVal(); i>=0; i--){
             if(tradedPicks.get(i) == false){
-                if(i >= PlayerDraft.ROUND_4.getNumVal()){
-//                    tradeRound();
-                } else if(i < PlayerDraft.ROUND_4.getNumVal()){
-                    return tradeStarRound(eligibleTeamList);
-                }
-//                tradedPicks.set(i, true);
+                return tradeRound(eligibleTeamList);
             }
         }
         return null;
     }
-    public void tradeRound(List<Team> eligibleTeamList){
 
-    }
-
-    public ITradeCharter tradeStarRound(List<Team> eligibleTeamList){
+    public ITradeCharter tradeRound(List<Team> eligibleTeamList){
         for (int k = 0; k < eligibleTeamList.size(); k++) {
             if(eligibleTeamList.get(k) == this.offeringTeam) {
                 continue;
@@ -84,7 +76,7 @@ public class TradeDraft implements ITradeDraft {
         if (tradingTeamsBuffer.size() > 0) {
             Triplet<Team, List<Player>, Float> tradeTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
             return DefaultHockeyFactory.makeTradeCharter(this.offeringTeam, null,
-                    tradeTeam.getFirst(), tradeTeam.getSecond());
+                    tradeTeam.getFirst(), tradeTeam.getSecond(), true);
         }
         return null;
     }

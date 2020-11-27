@@ -15,5 +15,5 @@ public interface IAITrading {
     void acceptTrade(Team team1, List<Player> offeredPlayerList,
                             Team team2, List<Player> requestedPlayerList);
     void resetLossPoints(Team team);
-    void settleTeamAfterTrade(Team team);
+    void settleTeam(Team team);
 }

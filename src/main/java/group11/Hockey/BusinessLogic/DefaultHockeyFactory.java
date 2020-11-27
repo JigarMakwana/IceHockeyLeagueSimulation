@@ -80,12 +80,12 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static IUserInputCheck makeUserInputCheck(ICommandLineInput commandLineInput, IValidations validation,
-			IDisplay display) {
+													 IDisplay display) {
 		return new UserInputCheck(commandLineInput, validation, display);
 	}
 
 	public static StateMachineState makeCreateTeam(League league, ICommandLineInput commandLineInput,
-			ILeagueDb leagueDb) {
+												   ILeagueDb leagueDb) {
 		IDisplay display = Display.getInstance();
 		IValidations validation = makeValidations(display);
 		return new CreateTeam(league, commandLineInput, display, validation, leagueDb);
@@ -93,7 +93,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static StateMachineState makePlayerChoice(League league, ICommandLineInput commandLineInput,
-			ILeagueDb leagueDb) {
+													 ILeagueDb leagueDb) {
 		IDisplay display = Display.getInstance();
 		IValidations validation = Validations.getInstance();
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
@@ -253,8 +253,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList,
-												 Team requestedteam, List<Player> requestedPlayerList){
-		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList);
+												 Team requestedteam, List<Player> requestedPlayerList, boolean isDraftTrade){
+		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList, isDraftTrade);
 	}
 
 	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance,

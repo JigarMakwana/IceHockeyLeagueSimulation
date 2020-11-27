@@ -3,6 +3,7 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
@@ -94,6 +95,9 @@ public class LeagueModelMock {
 		qualifiedTeams.add(new Team("Lions", gm2, coach, playerList));
 
 		league.setRetiredPlayers(playerList);
+		TimeLine timeLine = new TimeLine();
+		timeLine.setCurrentDate("27/11/2020");
+		league.setTimeLine(timeLine);
 	}
 
 	public void populateFreeAgents(League league) {

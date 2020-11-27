@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class App {
@@ -16,12 +17,13 @@ public class App {
 		System.out.println("Welcome to Hockey Simulation!");
 		ILeagueDb leagueDb = DefaultHockeyFactory.makeLeagueSerialisation();
 		ICommandLineInput commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
+		IDisplay display = DefaultHockeyFactory.makeDisplay();
 		StateMachineState currentState = null;
 		try {
 			if (args.length > 0) {
 				String jsonFile = args[0];
 				logger.info("Json provided");
-				currentState = DefaultHockeyFactory.getJsonImport(jsonFile, commandLineInput, leagueDb);
+				currentState = DefaultHockeyFactory.getJsonImport(jsonFile, commandLineInput, leagueDb, display);
 
 			} else {
 				logger.info("No Json provided");

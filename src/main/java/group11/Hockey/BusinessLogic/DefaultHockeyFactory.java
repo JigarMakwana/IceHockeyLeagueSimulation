@@ -54,7 +54,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new League();
 	}
 
-	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb, IDisplay display) {
+	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb,
+			IDisplay display) {
 		return new JsonImport(fileName, commandLineInput, leagueDb, display);
 	}
 
@@ -80,11 +81,12 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static IUserInputCheck makeUserInputCheck(ICommandLineInput commandLineInput, IValidations validation,
-													 IDisplay display) {
+			IDisplay display) {
 		return new UserInputCheck(commandLineInput, validation, display);
 	}
 
 	public static StateMachineState makeCreateTeam(League league, ICommandLineInput commandLineInput,
+
 			ILeagueDb leagueDb, IDisplay display) {
 		IValidations validation = makeValidations(display);
 		return new CreateTeam(league, commandLineInput, display, validation, leagueDb);
@@ -93,7 +95,6 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static StateMachineState makePlayerChoice(League league, ICommandLineInput commandLineInput,
 			ILeagueDb leagueDb, IDisplay display) {
-
 		IValidations validation = Validations.getInstance();
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
 	}
@@ -193,7 +194,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new AdvanceToNextSeason(league, leagueDb, display);
 	}
 
-	public static IConstantSupplier makeConstantSupplier(){
+	public static IConstantSupplier makeConstantSupplier() {
 		int activeRosterSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal();
 		int inActiveRosterSize = RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
 		int forwardSize = RosterSize.FORWARD_SIZE.getNumVal();
@@ -202,67 +203,98 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new ConstantSupplier(activeRosterSize, inActiveRosterSize, forwardSize, defenseSize, goaliSize);
 	}
 
-	public static IRoster makeRoster(String teamName, List<Player> playerList){
+	public static IRoster makeRoster(String teamName, List<Player> playerList) {
 		IConstantSupplier rosterSize = makeConstantSupplier();
 		return new Roster(teamName, playerList, rosterSize);
 	}
 
-	public static IRosterSearch makeRosterSearch(){
+	public static IRosterSearch makeRosterSearch() {
 		return new RosterSearch();
 	}
 
 	public static GameplayConfig makeGameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries,
-													Training training, Trading trading){
+			Training training, Trading trading) {
 		return new GameplayConfig(aging, gameResolver, injuries, training, trading);
 	}
 
-	public static IgmTable makeGMTable(float shrewd, float gambler, float normal){
+	public static IgmTable makeGMTable(float shrewd, float gambler, float normal) {
 		return new gmTable(shrewd, gambler, normal);
 	}
 
-	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance,
-											int maxPlayersPerTrade, float randomAcceptanceChance,
-											IgmTable gmTable){
+	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
+			float randomAcceptanceChance, IgmTable gmTable) {
 		return new Trading(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance, gmTable);
 	}
 
-	public static IRandomNoGenerator makeRandomFloatGenerator(){
+	public static IRandomNoGenerator makeRandomFloatGenerator() {
 		return new RandomFloatGenerator();
 	}
 
-	public static ITradeInitializer makeTradeInitializer(ILeague leagueObj){
+	public static ITradeInitializer makeTradeInitializer(ILeague leagueObj) {
 		return new TradeInitializer(leagueObj);
 	}
 
-	public static ITradeGenerator makeTradeGenerator(Team team, ITradingConfig tradingConfig, IDisplay display){
+	public static ITradeGenerator makeTradeGenerator(Team team, ITradingConfig tradingConfig, IDisplay display) {
 		return new TradeGenerator(team, tradingConfig, display);
 	}
 
 	public static ITradeResolver makeTradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig,
-												   ICommandLineInput commandLineInput,
-												   IValidations validation, IDisplay display){
+			ICommandLineInput commandLineInput, IValidations validation, IDisplay display) {
 		return new TradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
 	}
 
 	public static ITradeSettler makeTradeSettler(Team team, List<Player> freeAgentList,
-												 ICommandLineInput commandLineInput,
-												 IValidations validation, IDisplay display,
-												 IConstantSupplier constantSupplier){
+			ICommandLineInput commandLineInput, IValidations validation, IDisplay display,
+			IConstantSupplier constantSupplier) {
 		return new TradeSettler(team, freeAgentList, commandLineInput, validation, display, constantSupplier);
 	}
 
-	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList,
-												 Team requestedteam, List<Player> requestedPlayerList, int roundIdx){
+	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList, Team requestedteam,
+			List<Player> requestedPlayerList, int roundIdx) {
 		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList, roundIdx);
+
 	}
 
-	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance,
-												   int maxPlayersPerTrade, float randomAcceptanceChance,
-												   IgmTable gmTable){
-		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
+	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
+			float randomAcceptanceChance, IgmTable gmTable) {
+		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,
+				gmTable);
 	}
 
-	public static ITradeDraft makeTradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display){
+	public static ITradeDraft makeTradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display) {
 		return new TradeDraft(offeringTeam, tradingConfig, display);
+	}
+
+	public static StateMachineState makeAgePlayer(ILeague league, int days, ILeagueDb leagueDb, IDisplay display) {
+		return new AgePlayer(league, days, leagueDb, display);
+	}
+
+	public static IPlayerStrengthStrategy makeDefensePosition(IPlayer player) {
+		return new DefensePosition(player);
+	}
+
+	public static IPlayerStrengthStrategy makeForwarsPosition(IPlayer player) {
+		return new ForwardPosition(player);
+	}
+
+	public static IPlayerStrengthStrategy makeGoaliePosition(IPlayer player) {
+		return new GoaliePosition(player);
+	}
+
+	public static IPlayer makePlayer(float skating, float shooting, float checking, float saving, String playerName,
+			String position, boolean captain, boolean isFreeAgent, float age) {
+		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age);
+	}
+
+	public static IInjurySystem makeInjurySystem(ILeague league) {
+		return new InjurySystem(league);
+	}
+
+	public static IPlayerStrengthContext makePlayerStrengthContext(IPlayerStrengthStrategy currentContext) {
+		return new PlayerStrengthContext(currentContext);
+	}
+
+	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
+		return new Simulate(league, seasons, leagueDb, display);
 	}
 }

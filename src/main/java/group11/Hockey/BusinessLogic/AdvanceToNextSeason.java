@@ -54,7 +54,6 @@ public class AdvanceToNextSeason extends StateMachineState {
 				+ winner.getTeamName() + " **********";
 		System.out.println(message);
 		currentDate = advance.getAdvanceDate(currentDate, daysBetween);
-		// league.setStartDate(currentDate);
 		timeLine.setLastSimulatedDate(advanced);
 		league.setStartDate(advanced);
 

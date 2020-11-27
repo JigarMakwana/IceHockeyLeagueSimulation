@@ -15,6 +15,7 @@ import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -32,7 +33,7 @@ public class CreateTeamTest {
 	String generalManger = "General Manager 1";
 	String headCoach = "Coach 1";
 	LeagueModelMock leagueMock = new LeagueModelMock();
-	League leagueObj = leagueMock.getLeagueInfo();
+	ILeague leagueObj = leagueMock.getLeagueInfo();
 	IDisplay display = DefaultHockeyFactory.makeDisplay();
 	IValidations validation = new Validations(display);
 	IConference conference = new Conference();

@@ -106,7 +106,7 @@ public class PlayerTest {
 	@Test
 	public void increaseAgeTest() {
 		LeagueModelMock leagueModel = new LeagueModelMock();
-		League league = leagueModel.getLeagueInfo();
+		ILeague league = leagueModel.getLeagueInfo();
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
 		playerWithParams.increaseAge(league, 365, statDecayChance);
 		Assert.assertEquals(age + 1, 31, 31);
@@ -120,7 +120,7 @@ public class PlayerTest {
 		playerList.add(player1);
 
 		LeagueModelMock leagueModel = new LeagueModelMock();
-		League league = leagueModel.getLeagueInfo();
+		ILeague league = leagueModel.getLeagueInfo();
 		List<Player> playerList2 = new ArrayList<Player>();
 		playerList2.add(player2);
 		league.setFreeAgents(playerList2);
@@ -132,7 +132,7 @@ public class PlayerTest {
 	@Test
 	public void removeFreeAgentsFromLeagueTest() {
 		LeagueModelMock leagueModelMock = new LeagueModelMock();
-		League league = leagueModelMock.getLeagueInfo();
+		ILeague league = leagueModelMock.getLeagueInfo();
 		Player player = new Player();
 		Player freeAgent1 = new Player(10, 10, 10, 10, "Player 1", "forward", true, false, 50);
 		Player freeAgent2 = new Player(10, 10, 10, 10, "Player 2", "forward", true, false, 50);

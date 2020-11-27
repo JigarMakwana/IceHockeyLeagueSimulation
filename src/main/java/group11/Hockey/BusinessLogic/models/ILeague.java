@@ -59,4 +59,10 @@ public interface ILeague {
 
 	public void setGamesInSeason(int gamesInSeason);
 
+	public void setFreeAgents(List<Player> player);
+
+	public void setCoaches(List<Coach> coach);
+
+	public void setGeneralManagers(List<GeneralManager> generalManagers);
+
 }

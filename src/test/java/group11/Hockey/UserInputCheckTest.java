@@ -11,7 +11,7 @@ import group11.Hockey.BusinessLogic.IUserInputCheck;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.UserInputCheck;
 import group11.Hockey.BusinessLogic.Validations;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.Display;
@@ -26,7 +26,7 @@ public class UserInputCheckTest {
 	String generalManger = "General Manager 1";
 	String headCoach = "Coach 1";
 	LeagueModelMock leagueMock = new LeagueModelMock();
-	League leagueObj = leagueMock.getLeagueInfo();
+	ILeague leagueObj = leagueMock.getLeagueInfo();
 	ICommandLineInput userInputMode = mock(ICommandLineInput.class);
 	IDisplay display = DefaultHockeyFactory.makeDisplay();
 	IValidations validations = DefaultHockeyFactory.makeValidations(display);

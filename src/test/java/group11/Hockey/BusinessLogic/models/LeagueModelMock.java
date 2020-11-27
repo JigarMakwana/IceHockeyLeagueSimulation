@@ -3,24 +3,8 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GameResolver;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
-import group11.Hockey.BusinessLogic.models.GeneralManager;
-import group11.Hockey.BusinessLogic.models.IgmTable;
-import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
-import group11.Hockey.BusinessLogic.models.gmTable;
-
 public class LeagueModelMock {
-	private League league;
+	private ILeague league;
 
 	public LeagueModelMock() {
 		super();
@@ -42,6 +26,9 @@ public class LeagueModelMock {
 		GameplayConfig gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
 
 		Player player1 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
+		player1.setBirthDay(20);
+		player1.setBirthMonth(8);
+		player1.setBirthYear(1990);
 		Player player2 = new Player(10, 10, 10, 10, "Player Two", "defense", false, false, 20);
 		Player player3 = new Player(10, 10, 10, 10, "Player Three", "goalie", false, false, 20);
 		playerList.add(player1);
@@ -57,7 +44,7 @@ public class LeagueModelMock {
 		coach.setShooting(skill);
 		coach.setSkating(skill);
 
-		GeneralManager gm1 = new GeneralManager("Mister Fred","normal");
+		GeneralManager gm1 = new GeneralManager("Mister Fred", "normal");
 		Team team1 = new Team("Boston", gm1, coach, playerList);
 
 		playerList = new ArrayList<Player>();
@@ -66,7 +53,7 @@ public class LeagueModelMock {
 		playerList.add(player4);
 		playerList.add(player5);
 
-		GeneralManager gm2 = new GeneralManager("John Smith","shrewd");
+		GeneralManager gm2 = new GeneralManager("John Smith", "shrewd");
 		Team team2 = new Team("Vancouver Canucks", gm2, coach, playerList);
 		teamsList.add(team1);
 		teamsList.add(team2);
@@ -90,13 +77,16 @@ public class LeagueModelMock {
 		populateFreeAgents(league);
 		playerList.add(player1);
 		List<Team> qualifiedTeams = league.getQualifiedTeams();
-		qualifiedTeams.add(new Team("Rangers",gm2, coach, playerList));
+		qualifiedTeams.add(new Team("Rangers", gm2, coach, playerList));
 		qualifiedTeams.add(new Team("Lions", gm2, coach, playerList));
 
 		league.setRetiredPlayers(playerList);
+		TimeLine timeLine = new TimeLine();
+		timeLine.setCurrentDate("27/11/2020");
+		league.setTimeLine(timeLine);
 	}
 
-	public void populateFreeAgents(League league) {
+	public void populateFreeAgents(ILeague league) {
 		List<Player> freeAgents = new ArrayList<Player>();
 		freeAgents.add(new Player(10, 10, 10, 10, "Player 1", "forward", true, false, 50));
 		freeAgents.add(new Player(10, 10, 10, 10, "Player 2", "forward", true, false, 50));
@@ -120,11 +110,11 @@ public class LeagueModelMock {
 		freeAgents.add(new Player(10, 10, 10, 10, "Player 20", "goalie", true, false, 50));
 		league.setFreeAgents(freeAgents);
 	}
-	
+
 	public void insertDataForDrafing() {
 		List<Team> teamList = league.getConferences().get(0).getDivisions().get(0).getTeams();
 		List<Player> playerList = teamList.get(0).getPlayers();
-		GeneralManager gm = new GeneralManager("John Smith","shrewd");
+		GeneralManager gm = new GeneralManager("John Smith", "shrewd");
 		teamList.add(new Team("Rangers1", gm, teamList.get(0).getHeadCoach(), playerList));
 		teamList.add(new Team("Rangers2", gm, teamList.get(0).getHeadCoach(), playerList));
 		teamList.add(new Team("Rangers3", gm, teamList.get(0).getHeadCoach(), playerList));
@@ -143,8 +133,7 @@ public class LeagueModelMock {
 		teamList.add(new Team("Rangers16", gm, teamList.get(0).getHeadCoach(), playerList));
 	}
 
-
-	public League getLeagueInfo() {
+	public ILeague getLeagueInfo() {
 		return league;
 	}
 

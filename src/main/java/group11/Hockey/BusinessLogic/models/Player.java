@@ -7,8 +7,10 @@ import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.DefensePosition;
 import group11.Hockey.BusinessLogic.ForwardPosition;
 import group11.Hockey.BusinessLogic.GoaliePosition;
+import group11.Hockey.BusinessLogic.IPlayerStrengthStrategy;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.PlayerStrength;
+import group11.Hockey.BusinessLogic.PlayerStrengthContext;
 import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.db.IPlayerDb;
 
@@ -38,7 +40,6 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private int birthDay;
 	private int birthMonth;
 	private int birthYear;
-
 
 	public int getSavesByDefenceManinSeason() {
 		return savesByDefenceManinSeason;
@@ -91,7 +92,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public Player(float skating, float shooting, float checking, float saving, String playerName, String position,
-				  boolean captain, boolean isFreeAgent, float age, boolean isActive) {
+			boolean captain, boolean isFreeAgent, float age, boolean isActive) {
 		super(skating, shooting, checking, saving);
 		this.playerName = playerName;
 		this.position = position;
@@ -161,7 +162,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	public void setInjured(boolean isInjured) {
 		this.isInjured = isInjured;
 	}
-	
+
 	public int getBirthDay() {
 		return birthDay;
 	}
@@ -185,7 +186,6 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	public void setBirthYear(int birthYear) {
 		this.birthYear = birthYear;
 	}
-
 
 	public boolean checkInjury(ILeague league) {
 		if (this.isInjured()) {
@@ -215,16 +215,15 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	}
 
 	public float getPlayerStrength() {
-		float strength;
-		PlayerStrength playerStrength = new PlayerStrength();
+		PlayerStrengthContext playerStrength = null;
 		if (this.position.equalsIgnoreCase(Positions.FORWARD.toString())) {
-			strength = playerStrength.calculatePlayerStrength(new ForwardPosition(this));
+			playerStrength = new PlayerStrengthContext(new ForwardPosition(this));
 		} else if (this.position.equalsIgnoreCase(Positions.DEFENSE.toString())) {
-			strength = playerStrength.calculatePlayerStrength(new DefensePosition(this));
+			playerStrength = new PlayerStrengthContext(new DefensePosition(this));
 		} else {
-			strength = playerStrength.calculatePlayerStrength(new GoaliePosition(this));
+			playerStrength = new PlayerStrengthContext(new GoaliePosition(this));
 		}
-		return strength;
+		return playerStrength.executeStrategy();
 	}
 
 	public boolean insertLeagueFreeAgents(List<Player> listOfFreeAgents) {
@@ -261,8 +260,6 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	public int compareTo(Player player) {
 		return (int) this.getPlayerStrength() - (int) player.getPlayerStrength();
 	}
-
-	
 
 	@Override
 	public String toString() {
@@ -340,34 +337,33 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 			}
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerShootingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
-		if(randomValue > statDecayChance) {
+		if (randomValue > statDecayChance) {
 			this.setShooting(this.getShooting() - 1);
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerCheckingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
-		if(randomValue > statDecayChance) {
+		if (randomValue > statDecayChance) {
 			this.setChecking(this.getChecking() - 1);
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerSkatingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
-		if(randomValue > statDecayChance) {
+		if (randomValue > statDecayChance) {
 			this.setSkating(this.getSkating() - 1);
 		}
 	}
-	
+
 	private void checkAndDecrementPlayerSavingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
-		if(randomValue > statDecayChance) {
+		if (randomValue > statDecayChance) {
 			this.setSaving(this.getSaving() - 1);
 		}
 	}
-
 
 }

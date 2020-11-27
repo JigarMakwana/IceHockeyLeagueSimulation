@@ -1,10 +1,7 @@
 package group11.Hockey.InputOutput.JsonParsing;
 
-import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -12,13 +9,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.InputOutput.JsonParsing.ParseRootgameplayConfig;
 
 public class ParseRootgameplayConfigTest {
 

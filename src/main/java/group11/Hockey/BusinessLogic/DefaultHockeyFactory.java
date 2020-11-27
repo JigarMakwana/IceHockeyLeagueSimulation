@@ -194,9 +194,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new AdvanceToNextSeason(league, leagueDb);
 	}
 
-
-
-	public static IConstantSupplier makeConstantSupplier(){
+	public static IConstantSupplier makeConstantSupplier() {
 		int activeRosterSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal();
 		int inActiveRosterSize = RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
 		int forwardSize = RosterSize.FORWARD_SIZE.getNumVal();
@@ -205,63 +203,60 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new ConstantSupplier(activeRosterSize, inActiveRosterSize, forwardSize, defenseSize, goaliSize);
 	}
 
-	public static IRoster makeRoster(String teamName, List<Player> playerList){
+	public static IRoster makeRoster(String teamName, List<Player> playerList) {
 		IConstantSupplier rosterSize = makeConstantSupplier();
 		return new Roster(teamName, playerList, rosterSize);
 	}
 
-	public static IRosterSearch makeRosterSearch(){
+	public static IRosterSearch makeRosterSearch() {
 		return new RosterSearch();
 	}
 
 	public static GameplayConfig makeGameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries,
-													Training training, Trading trading){
+			Training training, Trading trading) {
 		return new GameplayConfig(aging, gameResolver, injuries, training, trading);
 	}
 
-	public static IgmTable makeGMTable(float shrewd, float gambler, float normal){
+	public static IgmTable makeGMTable(float shrewd, float gambler, float normal) {
 		return new gmTable(shrewd, gambler, normal);
 	}
 
-	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance,
-											int maxPlayersPerTrade, float randomAcceptanceChance,
-											IgmTable gmTable){
+	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
+			float randomAcceptanceChance, IgmTable gmTable) {
 		return new Trading(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance, gmTable);
 	}
 
-	public static IRandomNoGenerator makeRandomFloatGenerator(){
+	public static IRandomNoGenerator makeRandomFloatGenerator() {
 		return new RandomFloatGenerator();
 	}
 
-	public static ITradeInitializer makeTradeInitializer(ILeague leagueObj){
+	public static ITradeInitializer makeTradeInitializer(ILeague leagueObj) {
 		return new TradeInitializer(leagueObj);
 	}
 
-	public static ITradeGenerator makeTradeGenerator(Team team, ITradingConfig tradingConfig, IDisplay display){
+	public static ITradeGenerator makeTradeGenerator(Team team, ITradingConfig tradingConfig, IDisplay display) {
 		return new TradeGenerator(team, tradingConfig, display);
 	}
 
 	public static ITradeResolver makeTradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig,
-												   ICommandLineInput commandLineInput,
-												   IValidations validation, IDisplay display){
+			ICommandLineInput commandLineInput, IValidations validation, IDisplay display) {
 		return new TradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
 	}
 
 	public static ITradeSettler makeTradeSettler(Team team, List<Player> freeAgentList,
-												 ICommandLineInput commandLineInput,
-												 IValidations validation, IDisplay display,
-												 IConstantSupplier constantSupplier){
+			ICommandLineInput commandLineInput, IValidations validation, IDisplay display,
+			IConstantSupplier constantSupplier) {
 		return new TradeSettler(team, freeAgentList, commandLineInput, validation, display, constantSupplier);
 	}
 
-	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList,
-												 Team requestedteam, List<Player> requestedPlayerList){
+	public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList, Team requestedteam,
+			List<Player> requestedPlayerList) {
 		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList);
 	}
 
-	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance,
-												   int maxPlayersPerTrade, float randomAcceptanceChance,
-												   IgmTable gmTable){
-		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
+	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
+			float randomAcceptanceChance, IgmTable gmTable) {
+		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,
+				gmTable);
 	}
 }

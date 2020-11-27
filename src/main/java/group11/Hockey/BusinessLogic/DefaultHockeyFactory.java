@@ -194,8 +194,6 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new AdvanceToNextSeason(league, leagueDb);
 	}
 
-
-
 	public static IConstantSupplier makeConstantSupplier(){
 		int activeRosterSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal();
 		int inActiveRosterSize = RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
@@ -263,5 +261,9 @@ public class DefaultHockeyFactory extends TeamFactory {
 												   int maxPlayersPerTrade, float randomAcceptanceChance,
 												   IgmTable gmTable){
 		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
+	}
+
+	public static ITradeDraft makeTradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display){
+		return new TradeDraft(offeringTeam, tradingConfig, display);
 	}
 }

@@ -5,6 +5,7 @@ import group11.Hockey.BusinessLogic.IRandomNoGenerator;
 import group11.Hockey.BusinessLogic.IUserInputCheck;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeGenerator;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeResolver;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
 import group11.Hockey.BusinessLogic.models.Player;

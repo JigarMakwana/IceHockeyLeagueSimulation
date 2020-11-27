@@ -18,6 +18,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class AgePlayer extends RetirePlayer {
@@ -25,21 +26,24 @@ public class AgePlayer extends RetirePlayer {
 	ILeague league;
 	int days;
 	ILeagueDb leagueDb;
+	IDisplay display;
 	private static Logger logger = LogManager.getLogger(AgePlayer.class);
 
 	public AgePlayer() {
 
 	}
 
-	public AgePlayer(ILeague league, int days) {
+	public AgePlayer(ILeague league, int days, IDisplay display) {
 		this.league = league;
 		this.days = days;
+		this.display = display;
 	}
 
-	public AgePlayer(ILeague league, int days, ILeagueDb leagueDb) {
+	public AgePlayer(ILeague league, int days, ILeagueDb leagueDb, IDisplay display) {
 		this.league = league;
 		this.days = days;
 		this.leagueDb = leagueDb;
+		this.display = display;
 	}
 
 	@Override
@@ -55,10 +59,10 @@ public class AgePlayer extends RetirePlayer {
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
 			logger.info("Date is end of stanley playoffs");
-			return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb);
+			return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
 		} else {
 			logger.info("Date is not end of stanley playoffs");
-			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb);
+			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display);
 		}
 	}
 
@@ -179,7 +183,7 @@ public class AgePlayer extends RetirePlayer {
 		int playerBirthYear = player.getBirthYear();
 		int playerBirthMonth = player.getBirthMonth();
 		int playerBirthDay = player.getBirthDay();
-		String birthDate = Integer.toString(playerBirthDay) + "/" + Integer.toString(playerBirthMonth)
+		String birthDate = Integer.toString(playerBirthDay) + "/" + Integer.toString(playerBirthMonth) +  "/"
 				+ Integer.toString(playerBirthYear);
 		Date playerBirthDate = parse.stringToDate(birthDate);
 		return playerBirthDate;

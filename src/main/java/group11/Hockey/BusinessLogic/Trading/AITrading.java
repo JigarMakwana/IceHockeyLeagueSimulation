@@ -22,7 +22,7 @@ public class AITrading extends StateMachineState {
 	private ITrading tradingConfig;
 	private PlayerTradeOperations playerMiscellaneous;
 	private ICommandLineInput commandLineInput;
-	private IDisplay display = DefaultHockeyFactory.makeDisplay();
+	private IDisplay display ;
 	private IValidations validation;
 	private ILeagueDb leagueDb;
 
@@ -33,9 +33,10 @@ public class AITrading extends StateMachineState {
 		this.playerMiscellaneous = new PlayerTradeOperations(this.tradingConfig);
 	}
 
-	public AITrading(ILeague leagueObj, ILeagueDb leagueDb) {
+	public AITrading(ILeague leagueObj, ILeagueDb leagueDb, IDisplay display) {
 		this.leagueObj = leagueObj;
 		IGameplayConfig gameConfig = this.leagueObj.getGamePlayConfig();
+		this.display = display;
 		this.tradingConfig = gameConfig.getTrading();
 		this.playerMiscellaneous = new PlayerTradeOperations(this.tradingConfig);
 		this.leagueDb = leagueDb;
@@ -55,7 +56,7 @@ public class AITrading extends StateMachineState {
 	@Override
 	public StateMachineState startState() {
 		this.generateTradeOffers();
-		return new AgePlayer(leagueObj, 1,leagueDb);
+		return new AgePlayer(leagueObj, 1,leagueDb, display);
 	}
 
 	public PlayerTradeOperations getPlayerMiscellaneous() {

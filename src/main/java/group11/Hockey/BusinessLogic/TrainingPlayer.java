@@ -14,6 +14,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
@@ -24,12 +25,14 @@ import group11.Hockey.db.League.ILeagueDb;
 public class TrainingPlayer extends StateMachineState implements ITrainingPlayer {
 	private ILeague league;
 	private ILeagueDb leaugueDb;
+	IDisplay display;
 	private static Logger logger = LogManager.getLogger(TrainingPlayer.class);
 
-	public TrainingPlayer(ILeague league, ILeagueDb leaugueDb) {
+	public TrainingPlayer(ILeague league, ILeagueDb leaugueDb, IDisplay display) {
 		super();
 		this.league = league;
 		this.leaugueDb = leaugueDb;
+		this.display = display;
 	}
 
 	@Override
@@ -74,11 +77,11 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
 			logger.info("Performing trading");
-			return new AITrading(league, leaugueDb);
+			return new AITrading(league, leaugueDb, display);
 
 		} else {
 			logger.info("Performing aging");
-			return new AgePlayer(league, 1, leaugueDb);
+			return new AgePlayer(league, 1, leaugueDb, display);
 		}
 
 	}

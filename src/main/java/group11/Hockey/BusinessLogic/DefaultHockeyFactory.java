@@ -54,8 +54,9 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new League();
 	}
 
-	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb) {
-		return new JsonImport(fileName, commandLineInput, leagueDb);
+	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb,
+			IDisplay display) {
+		return new JsonImport(fileName, commandLineInput, leagueDb, display);
 	}
 
 	public static IDivision makeDivision() {
@@ -85,22 +86,21 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static StateMachineState makeCreateTeam(League league, ICommandLineInput commandLineInput,
-			ILeagueDb leagueDb) {
-		IDisplay display = Display.getInstance();
+
+			ILeagueDb leagueDb, IDisplay display) {
 		IValidations validation = makeValidations(display);
 		return new CreateTeam(league, commandLineInput, display, validation, leagueDb);
 
 	}
 
 	public static StateMachineState makePlayerChoice(League league, ICommandLineInput commandLineInput,
-			ILeagueDb leagueDb) {
-		IDisplay display = Display.getInstance();
+			ILeagueDb leagueDb, IDisplay display) {
 		IValidations validation = Validations.getInstance();
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
 	}
 
-	public static StateMachineState makeSimulate(League league, int seasons, ILeagueDb leagueDb) {
-		return new Simulate(league, seasons, leagueDb);
+	public static StateMachineState makeSimulate(League league, int seasons, ILeagueDb leagueDb, IDisplay display) {
+		return new Simulate(league, seasons, leagueDb, display);
 	}
 
 	public static JSONParser makeJSONParser() {
@@ -130,20 +130,20 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	}
 
-	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb) {
-		return new InitializeSeason(league, leagueDb);
+	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+		return new InitializeSeason(league, leagueDb, display);
 	}
 
 	public static StateMachineState makeFinalState() {
 		return FinalState.getInstance();
 	}
 
-	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb) {
-		return new AdvanceTime(league, leagueDb);
+	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+		return new AdvanceTime(league, leagueDb, display);
 	}
 
-	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb) {
-		return new TrainingPlayer(league, leagueDb);
+	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+		return new TrainingPlayer(league, leagueDb, display);
 	}
 
 	public static IScheduleContext makeScheduleContext(IScheduleStrategy scheduleStrategy) {
@@ -154,8 +154,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayoffSchedule();
 	}
 
-	public static IScheduleStrategy makePlayoffScheduleFinalRounds() {
-		return new PlayoffScheduleFinalRounds();
+	public static IScheduleStrategy makePlayoffScheduleFinalRounds(IDisplay display) {
+		return new PlayoffScheduleFinalRounds(display);
 	}
 
 	public static IParse makeParse() {
@@ -190,8 +190,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new GeneratePlayOffShifts(team);
 	}
 
-	public static StateMachineState makeAdvanceToNextSeason(ILeague league, ILeagueDb leagueDb) {
-		return new AdvanceToNextSeason(league, leagueDb);
+	public static StateMachineState makeAdvanceToNextSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+		return new AdvanceToNextSeason(league, leagueDb, display);
 	}
 
 	public static IConstantSupplier makeConstantSupplier() {

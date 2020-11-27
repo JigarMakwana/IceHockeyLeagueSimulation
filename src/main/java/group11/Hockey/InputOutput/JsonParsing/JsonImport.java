@@ -15,6 +15,7 @@ import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.ICommandLineInput;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class JsonImport extends ValidateJsonSchema {
@@ -23,20 +24,24 @@ public class JsonImport extends ValidateJsonSchema {
 	String fileName;
 	ICommandLineInput commandLineInput;
 	ILeagueDb leagueDb;
+	IDisplay display;
 	private static Logger logger = LogManager.getLogger(JsonImport.class);
 
-	public JsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb) {
+	public JsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb, IDisplay display) {
 		this.fileName = fileName;
 		this.commandLineInput = commandLineInput;
 		this.leagueDb = leagueDb;
+		this.display = display;
 	}
+	
+	
 
 	@Override
 	public StateMachineState startState() {
 		StateMachineState stateMachineState = null;
 		try {
 			League league = parseFile(fileName);
-			stateMachineState = DefaultHockeyFactory.makeCreateTeam(league, commandLineInput, leagueDb);
+			stateMachineState = DefaultHockeyFactory.makeCreateTeam(league, commandLineInput, leagueDb, display);
 		} catch (Exception e) {
 			logger.error("Exception occurred :" + e.getMessage());
 		}

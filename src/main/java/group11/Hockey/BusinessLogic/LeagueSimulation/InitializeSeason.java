@@ -12,6 +12,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.TimeLine;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
@@ -20,10 +21,12 @@ public class InitializeSeason extends StateMachineState {
 
 	private ILeague league;
 	private ILeagueDb leagueDb;
+	IDisplay display;
 
-	public InitializeSeason(ILeague league, ILeagueDb leagueDb) {
+	public InitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		this.league = league;
 		this.leagueDb = leagueDb;
+		this.display= display;
 	}
 
 	@Override
@@ -87,7 +90,7 @@ public class InitializeSeason extends StateMachineState {
 		schedule = regularSeasonSchedule.getSeasonSchedule();
 		league.setSchedule(schedule);
 
-		return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb);
+		return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display);
 	}
 
 }

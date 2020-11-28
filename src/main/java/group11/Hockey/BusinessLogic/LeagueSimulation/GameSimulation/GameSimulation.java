@@ -48,7 +48,7 @@ public class GameSimulation implements IGameSimulation {
 			shiftsTeam1 = shifts1.getShifts();
 			shiftsTeam2 = shifts2.getShifts();
 		} catch (Exception e) {
-			logger.error("error while generating shifts "+ e);
+			logger.error("error while generating shifts " + e);
 		}
 		int shootingStatsTeam1 = teamSkatingStats(team_p1);
 
@@ -155,6 +155,7 @@ public class GameSimulation implements IGameSimulation {
 		league.setSavesInSeason(league.getSavesInSeason() + savesInGame);
 		league.setGamesInSeason(league.getGamesInSeason() + 2);
 
+		System.out.println("***Game Summary***");
 		System.out.println("Goals per game: " + (float) league.getGoalsInSeason() / league.getGamesInSeason());
 		System.out.println("Penalties per game: " + (float) league.getPenaltiesInSeason() / league.getGamesInSeason());
 		System.out.println("Shots: " + 60 / 2);

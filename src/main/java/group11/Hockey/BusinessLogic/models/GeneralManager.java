@@ -7,7 +7,7 @@ import java.util.List;
 
 import group11.Hockey.db.IManagerDb;
 
-public class GeneralManager {
+public class GeneralManager implements IGeneralManager {
 	private String name;
 	private String personality;
 	private IManagerDb managerDb;

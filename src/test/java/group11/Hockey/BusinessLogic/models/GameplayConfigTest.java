@@ -1,8 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-import static org.junit.Assert.*;
-
-import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,26 +12,26 @@ import static org.mockito.Mockito.when;
 
 public class GameplayConfigTest {
 
-	private static GameplayConfig gameplayConfig;
-	private static Aging aging;
-	private static GameResolver gameResolver;
-	private static Injuries injuries;
-	private static Training training;
-	private static Trading trading;
+	private static IGameplayConfig gameplayConfig;
+	private static IAging aging;
+	private static IGameResolver gameResolver;
+	private static IInjuries injuries;
+	private static ITraining training;
+	private static ITrading trading;
 
 	@BeforeClass
 	public static void init() {
 		IGameplayConfigDb gameplayConfigDb = mock(IGameplayConfigDb.class);
-		aging = new Aging(30, 55);
-		gameResolver = new GameResolver(0);
-		injuries = new Injuries(0, 0, 0);
-		training = new Training(0);
-		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
-		trading = new Trading(0, 0, 0, 0, gmTbale);
-		when(gameplayConfigDb.insertGameplayConfig(aging, gameResolver, injuries, training, trading, "league")).thenReturn(true);
+		aging = DefaultHockeyFactory.makeAging(Constants.age1, Constants.age2);
+		gameResolver = DefaultHockeyFactory.makeGameResolver(0);
+		injuries = DefaultHockeyFactory.makeInjuries(0, 0, 0);
+		training = DefaultHockeyFactory.makeTraining(0);
+		IgmTable gmTbale = DefaultHockeyFactory.makeGMTable(-0.1f, 0.1f, 0.0f);
+		trading = DefaultHockeyFactory.makeTradingConfig(0, 0, 0, 0, gmTbale);
+		when(gameplayConfigDb.insertGameplayConfig(aging, gameResolver, injuries, training, trading, "league"))
+				.thenReturn(true);
 
-		gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading, gameplayConfigDb,
-				"league");
+		gameplayConfig = DefaultHockeyFactory.makeGameplayConfig(aging, gameResolver, injuries, training, trading);
 	}
 
 	@Test

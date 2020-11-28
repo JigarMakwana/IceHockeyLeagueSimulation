@@ -25,7 +25,7 @@ public interface IDisplay {
 	public void displayAcceptRejectOptionToUser();
 
 	public void printTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
-			String managerName, Coach coach);
+			String managerName, ICoach coach);
 
 	public void displayListOfFreeAgents(List<Player> freeAgentList);
 	public void pickPlayer(List<Player> freeAgentList);

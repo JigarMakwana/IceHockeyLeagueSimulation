@@ -17,8 +17,8 @@ import group11.Hockey.db.Team.ITeamDb;
 public class Team implements ITeam, Comparable<Team>  {
 
 	private String teamName;
-	private GeneralManager generalManager;
-	private Coach headCoach;
+	private IGeneralManager generalManager;
+	private ICoach headCoach;
 	private List<Player> players = null;
 	private boolean isUserTeam = false;
 	private int losses;
@@ -33,7 +33,7 @@ public class Team implements ITeam, Comparable<Team>  {
 	private int points;
 	private List<Boolean> tradedPicks;
 
-	public Team(String teamName, GeneralManager generalManager, Coach headCoach, List<? extends IPlayer> players) {
+	public Team(String teamName, IGeneralManager generalManager,ICoach headCoach, List<? extends IPlayer> players) {
 		super();
 		this.teamName = teamName;
 		this.generalManager = generalManager;
@@ -103,7 +103,7 @@ public class Team implements ITeam, Comparable<Team>  {
 		this.teamName = teamName;
 	}
 
-	public GeneralManager getGeneralManager() {
+	public IGeneralManager getGeneralManager() {
 		return generalManager;
 	}
 
@@ -111,7 +111,7 @@ public class Team implements ITeam, Comparable<Team>  {
 		this.generalManager = generalManager;
 	}
 
-	public Coach getHeadCoach() {
+	public ICoach getHeadCoach() {
 		return headCoach;
 	}
 

@@ -12,7 +12,7 @@ import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
-public class GoaliePlayerActive extends GameStrategy {
+public class GoaliePlayerActive implements IGameStrategy {
 	
 	private static Logger logger = LogManager.getLogger(GoaliePlayerActive.class);
 

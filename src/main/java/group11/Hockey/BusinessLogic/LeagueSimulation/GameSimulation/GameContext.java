@@ -12,10 +12,10 @@ import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class GameContext implements IGameContext {
-	private GameStrategy gameStrategy;
+	private IGameStrategy gameStrategy;
 	private static Logger logger = LogManager.getLogger(GameContext.class);
 
-	public GameContext(GameStrategy gameStrategy) {
+	public GameContext(IGameStrategy gameStrategy) {
 		super();
 		this.gameStrategy = gameStrategy;
 	}

@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
@@ -56,7 +56,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 				for (Division division : divisionList) {
 					List<Team> teamList = division.getTeams();
 					for (Team team : teamList) {
-						Coach headCoach = team.getHeadCoach();
+						ICoach headCoach = team.getHeadCoach();
 						List<Player> playerList = team.getPlayers();
 						for (Player player : playerList) {
 							changePlayerSkatingSkill(player, headCoach.getSkating(), league);
@@ -104,7 +104,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerSkatingSkill(Player player, float coachSkatingStatValue, ILeague league) {
 		logger.info("Entered changePlayerSkatingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName()+" is not injured so changing skating skill");
+			logger.info(player.getPlayerName() + " is not injured so changing skating skill");
 			boolean coachStat = comapreCoachStat(coachSkatingStatValue);
 			if (coachStat) {
 				float skatingSkill = player.getSkating() + 1;
@@ -119,7 +119,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerShootingSkill(Player player, float coachShootingStatValue, ILeague league) {
 		logger.info("Entered changePlayerShootingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName()+" is not injured so changing shooting skill");
+			logger.info(player.getPlayerName() + " is not injured so changing shooting skill");
 			boolean coachStat = comapreCoachStat(coachShootingStatValue);
 			if (coachStat) {
 				float shootingSkill = player.getShooting() + 1;
@@ -134,7 +134,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerCheckingSkill(Player player, float coachCheckingStatValue, ILeague league) {
 		logger.info("Entered changePlayerCheckingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName()+" is not injured so changing checking skill");
+			logger.info(player.getPlayerName() + " is not injured so changing checking skill");
 			boolean coachStat = comapreCoachStat(coachCheckingStatValue);
 			if (coachStat) {
 				float checkingSkill = player.getChecking() + 1;
@@ -148,7 +148,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerSavingSkill(Player player, float coachSavingStatValue, ILeague league) {
 		logger.info("Entered changePlayerSavingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName()+" is not injured so changing saving skill");
+			logger.info(player.getPlayerName() + " is not injured so changing saving skill");
 			boolean coachStat = comapreCoachStat(coachSavingStatValue);
 			if (coachStat) {
 				float savingSkill = player.getSaving() + 1;

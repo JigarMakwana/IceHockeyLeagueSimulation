@@ -6,10 +6,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Team;
-
 import org.junit.Assert;
 
 

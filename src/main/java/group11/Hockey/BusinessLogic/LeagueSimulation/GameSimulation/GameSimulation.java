@@ -5,19 +5,15 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
-public class GameSimulation {
+public class GameSimulation implements IGameSimulation {
 	private ILeague league;
 	private ITeam team1;
 	private ITeam team2;
-	private static Logger logger = LogManager.getLogger(GameSimulation.class);
 
 	public GameSimulation(ILeague league, ITeam team1, ITeam team2) {
 		super();
@@ -27,7 +23,6 @@ public class GameSimulation {
 	}
 
 	public ITeam startGamePlay() {
-		logger.info("Entered startGamePlay()");
 		List<Player> team_p1 = team1.getPlayers();
 		List<Player> team_p2 = team2.getPlayers();
 
@@ -54,7 +49,6 @@ public class GameSimulation {
 	}
 
 	private void setAverageShootsForTeams(int teamOneShoots, int teamTwoShoots) {
-		logger.info("Entered setAverageShootsForTeams()");
 		int averageShootsTeam1 = 0;
 		int averageShootsTeam2 = 0;
 		int shootingDifference = teamOneShoots - teamTwoShoots;
@@ -70,7 +64,6 @@ public class GameSimulation {
 	}
 
 	private void startGame(List<Player>[] shiftsTeam1, List<Player>[] shiftsTeam2) {
-		logger.info("Entered startGame()");
 		int averageShootsTeam1 = team1.getAverageShoots();
 		int averageShootsTeam2 = team2.getAverageShoots();
 		for (int shift = 0; shift < appConfiguration.shifts / 2; shift++) {
@@ -97,8 +90,7 @@ public class GameSimulation {
 
 	private void makeShoot(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
-		logger.info("Entered makeShoot()");
-		
+
 		IGameContext gameContext = null;
 
 		managePanelty(defendingTeam);
@@ -127,7 +119,6 @@ public class GameSimulation {
 	}
 
 	private void managePanelty(ITeam defendingTeam) {
-		logger.info("Entered managePanelty()");
 		int penaltyPeriod = defendingTeam.getPenaltyPeriod();
 		if (penaltyPeriod > 0) {
 			penaltyPeriod--;
@@ -139,8 +130,6 @@ public class GameSimulation {
 	}
 
 	private void gameSummary(ITeam team1, ITeam team2) {
-		logger.info("Entered gameSummary()");
-		
 		int goalsIngame = team1.getGoalsInSeason() + team2.getGoalsInSeason();
 		int penaltiesInGame = team1.getPenaltiesInSeason() + team2.getPenaltiesInSeason();
 		int savesInGame = team1.getSavesInSeason() + team2.getSavesInSeason();
@@ -166,7 +155,6 @@ public class GameSimulation {
 	}
 
 	private ITeam setWinnerTeam(ITeam team1, ITeam team2) {
-		logger.info("Entered setWinnerTeam()");
 		int goalsTeam1 = team1.getGoalsInSeason();
 		int goalsTeam2 = team2.getGoalsInSeason();
 
@@ -178,7 +166,6 @@ public class GameSimulation {
 	}
 
 	private int teamSkatingStats(List<Player> team) {
-		logger.info("Entered teamSkatingStats()");
 		int skatingStat = 0;
 		for (Player player : team) {
 			skatingStat += player.getSkating();

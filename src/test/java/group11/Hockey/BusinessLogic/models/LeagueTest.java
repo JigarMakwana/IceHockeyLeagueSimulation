@@ -3,35 +3,29 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Test;
 
-import group11.Hockey.db.ICoachDb;
-import group11.Hockey.db.IGameplayConfigDb;
-import group11.Hockey.db.IManagerDb;
-import group11.Hockey.db.IPlayerDb;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.db.League.ILeagueDb;
-import group11.Hockey.db.League.LeagueDbMock;
-import org.junit.Assert;
 
+import org.junit.Assert;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class LeagueTest {
 
-	Conference westernConference = new Conference("Westeren Conference", null);
-	Conference easternConference = new Conference("Eastern Conference", null);
+	IConference westernConference = DefaultHockeyFactory.makeConference("Westeren Conference", null);
+	IConference easternConference = DefaultHockeyFactory.makeConference("Eastern Conference", null);
 	List<Conference> conferenceList = new ArrayList<Conference>();
 	League league = new League();
 
 	public League populateLeagueObject() {
 		List<Team> teamsList = new ArrayList<Team>();
 		List<GeneralManager> generalManagerList = new ArrayList<GeneralManager>();
-		Coach coach = new Coach(0, 0, 0, 0, "C1");
-		GeneralManager generalManager = new GeneralManager("Kevin");
-		generalManagerList.add(generalManager);
-		GeneralManager gm2 = new GeneralManager("John Smith","shrewd");
+		ICoach coach = DefaultHockeyFactory.makeCoach(0, 0, 0, 0, "C1");
+		IGeneralManager generalManager = DefaultHockeyFactory.makeGeneralManager("Kevin", null);
+		generalManagerList.add((GeneralManager) generalManager);
+		IGeneralManager gm2 = DefaultHockeyFactory.makeGeneralManager("John Smith", "shrewd");
 		Team team = new Team("Vancouver Canucks", gm2, coach, null);
 		teamsList.add(team);
 
@@ -45,10 +39,10 @@ public class LeagueTest {
 		Player secondFreeAgent = new Player(0, 0, 0, 0, "Player 2", "Goalie", true, false, 0);
 
 		List<Coach> coachList = new ArrayList<Coach>();
-		coachList.add(coach);
+		coachList.add((Coach) coach);
 		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
 		GameplayConfig gameplayConf = new GameplayConfig(new Aging(0, 0), new GameResolver(0), new Injuries(0, 0, 0),
-				new Training(0), new Trading(0, 0, 0, 0,gmTbale));
+				new Training(0), new Trading(0, 0, 0, 0, gmTbale));
 		League league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf,
 				coachList, generalManagerList);
 		return league;
@@ -82,7 +76,7 @@ public class LeagueTest {
 
 	@Test
 	public void setConferencesTest() {
-		league.setConferences(Arrays.asList(westernConference, easternConference));
+		league.setConferences(Arrays.asList((Conference) westernConference, (Conference) easternConference));
 		Assert.assertTrue(league.getConferences().size() == 2);
 		Assert.assertEquals("Westeren Conference", league.getConferences().get(0).getConferenceName());
 
@@ -91,8 +85,8 @@ public class LeagueTest {
 	@Test
 	public void getConferencesTest() {
 
-		conferenceList.add(westernConference);
-		conferenceList.add(easternConference);
+		conferenceList.add((Conference) westernConference);
+		conferenceList.add((Conference) easternConference);
 
 		League league = new League("DHL", conferenceList, null, null, null, null);
 

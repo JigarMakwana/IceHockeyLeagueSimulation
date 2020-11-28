@@ -10,8 +10,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.IGeneralManager;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.DefaultInputOutputFactory;
 
 public class ParseRootgeneralManagersTest {
 	private static JSONObject jsonObject;
@@ -25,9 +26,9 @@ public class ParseRootgeneralManagersTest {
 	@Test
 	public void parseRootElementTest() throws Exception {
 		League league = new League();
-		ParseRootgeneralManagers parseRoot = new ParseRootgeneralManagers();
+		IParseRootElement parseRoot = DefaultInputOutputFactory.makeParseRootgeneralManagers();
 		parseRoot.parseRootElement(league, jsonObject);
-		List<GeneralManager> lm = league.getGeneralManagers();
+		List<IGeneralManager> lm = league.getGeneralManagers();
 		Assert.assertEquals(lm.size(), 90);
 
 	}

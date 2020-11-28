@@ -31,7 +31,7 @@ public interface ILeague {
 
 	public List<ICoach> getCoaches();
 
-	public List<GeneralManager> getGeneralManagers();
+	public List<IGeneralManager> getGeneralManagers();
 
 	public ITimeLine getTimeLine();
 
@@ -63,6 +63,9 @@ public interface ILeague {
 
 	public void setCoaches(List<ICoach> coach);
 
-	public void setGeneralManagers(List<GeneralManager> generalManagers);
+	public void setGeneralManagers(List<IGeneralManager> generalManagers);
 
+	public void setConferences(List<IConference> confList);
+
+	public void setGamePlayConfig(IGameplayConfig gameConfig);
 }

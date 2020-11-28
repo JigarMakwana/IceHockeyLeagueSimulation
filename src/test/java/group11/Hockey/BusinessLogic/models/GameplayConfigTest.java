@@ -31,17 +31,12 @@ public class GameplayConfigTest {
 		when(gameplayConfigDb.insertGameplayConfig(aging, gameResolver, injuries, training, trading, "league"))
 				.thenReturn(true);
 
-		gameplayConfig = DefaultHockeyFactory.makeGameplayConfig(aging, gameResolver, injuries, training, trading);
+		gameplayConfig = DefaultHockeyFactory.makeGameplayConfig(aging, injuries, training, trading);
 	}
 
 	@Test
 	public void getAgingTest() {
 		Assert.assertEquals(gameplayConfig.getAging(), aging);
-	}
-
-	@Test
-	public void getGameResolver() {
-		Assert.assertEquals(gameplayConfig.getGameResolver(), gameResolver);
 	}
 
 	@Test

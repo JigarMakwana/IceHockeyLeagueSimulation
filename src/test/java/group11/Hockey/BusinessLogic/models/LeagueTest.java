@@ -21,7 +21,7 @@ public class LeagueTest {
 
 	public ILeague populateLeagueObject() {
 		List<Team> teamsList = new ArrayList<Team>();
-		List<GeneralManager> generalManagerList = new ArrayList<GeneralManager>();
+		List<IGeneralManager> generalManagerList = new ArrayList<>();
 		ICoach coach = DefaultHockeyFactory.makeCoach(0, 0, 0, 0, "C1");
 		IGeneralManager generalManager = DefaultHockeyFactory.makeGeneralManager("Kevin", null);
 		generalManagerList.add((GeneralManager) generalManager);
@@ -41,8 +41,8 @@ public class LeagueTest {
 		List<ICoach> coachList = new ArrayList<>();
 		coachList.add(coach);
 		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
-		GameplayConfig gameplayConf = new GameplayConfig(new Aging(0, 0), new GameResolver(0), new Injuries(0, 0, 0),
-				new Training(0), new Trading(0, 0, 0, 0, gmTbale));
+		GameplayConfig gameplayConf = new GameplayConfig(new Aging(0, 0), new Injuries(0, 0, 0), new Training(0),
+				new Trading(0, 0, 0, 0, gmTbale));
 		ILeague league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf,
 				coachList, generalManagerList);
 		return league;

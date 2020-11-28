@@ -9,7 +9,7 @@ public interface ITeam {
 
 	public IGeneralManager getGeneralManager();
 
-	public void setGeneralManager(GeneralManager generalManager);
+	public void setGeneralManager(IGeneralManager generalManager);
 
 	public ICoach getHeadCoach();
 

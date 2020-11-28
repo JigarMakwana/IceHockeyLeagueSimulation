@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.InputOutput.DefaultInputOutputFactory;
 
 public class ParseRootfreeAgentsTest {
 
@@ -26,7 +27,7 @@ public class ParseRootfreeAgentsTest {
 	@Test
 	public void parseRootElementTest() throws Exception {
 		League league = new League();
-		ParseRootfreeAgents parseRoot = new ParseRootfreeAgents();
+		IParseRootElement parseRoot = DefaultInputOutputFactory.makeParseRootfreeAgents();
 		parseRoot.parseRootElement(league, jsonObject);
 		List<Player> lc = (List<Player>) league.getFreeAgents();
 		Assert.assertEquals(lc.size(), 51);

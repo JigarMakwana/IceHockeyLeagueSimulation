@@ -17,13 +17,12 @@ public class LeagueModelMock {
 		List<Player> playerList = new ArrayList<Player>();
 
 		Aging aging = new Aging(30, 55);
-		GameResolver gameResolver = new GameResolver(0);
 		Injuries injuries = new Injuries(1, 1, 100);
 		Training training = new Training(0);
 		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
 		Trading trading = new Trading(0, 0, 0, 0, gmTbale);
 
-		GameplayConfig gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
+		GameplayConfig gameplayConfig = new GameplayConfig(aging, injuries, training, trading);
 
 		Player player1 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
 		player1.setBirthDay(20);
@@ -70,8 +69,8 @@ public class LeagueModelMock {
 		List<ICoach> coachList = new ArrayList<>();
 		coachList.add(new Coach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
 		league.setCoaches(coachList);
-		List<GeneralManager> generalManagerList = new ArrayList<GeneralManager>();
-		GeneralManager generalManager = new GeneralManager("General Manager 1");
+		List<IGeneralManager> generalManagerList = new ArrayList<>();
+		IGeneralManager generalManager = new GeneralManager("General Manager 1");
 		generalManagerList.add(generalManager);
 		league.setGeneralManagers(generalManagerList);
 		populateFreeAgents(league);

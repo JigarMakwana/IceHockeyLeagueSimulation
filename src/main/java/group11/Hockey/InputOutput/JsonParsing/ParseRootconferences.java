@@ -18,7 +18,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 	private List<String> teamNameList = new ArrayList<String>();
 
 	@Override
-	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
+	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
 		List<IConference> conferencesList = parseConferences(jsonObject);
 		leagueModelObj.setConferences(conferencesList);
 	}

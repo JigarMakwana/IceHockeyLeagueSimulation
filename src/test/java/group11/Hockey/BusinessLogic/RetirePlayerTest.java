@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.Assert;
 
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;

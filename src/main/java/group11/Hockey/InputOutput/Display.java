@@ -28,8 +28,8 @@ public class Display implements IDisplay {
 	public void displayListOfGeneralMangers(League league) {
 		int count = 1;
 		System.out.println("Available General Manger List: ");
-		List<GeneralManager> generalManagers = league.getGeneralManagers();
-		for (GeneralManager generalManger : generalManagers) {
+		List<IGeneralManager> generalManagers = league.getGeneralManagers();
+		for (IGeneralManager generalManger : generalManagers) {
 			System.out.println(count + ") General Manager Name: " + generalManger.getName());
 			count++;
 		}

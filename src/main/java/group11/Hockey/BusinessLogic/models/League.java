@@ -19,7 +19,7 @@ public class League implements ILeague {
 	private List<Player> freeAgents = new ArrayList<Player>();
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<ICoach> coaches = new ArrayList<>();
-	private List<GeneralManager> generalManagers;
+	private List<IGeneralManager> generalManagers;
 	private List<Player> retiredPlayers = new ArrayList<Player>();
 	private List<Team> qualifiedTeams = new ArrayList<Team>();
 	private String startDate;
@@ -63,7 +63,7 @@ public class League implements ILeague {
 	}
 
 	public League(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
-			GameplayConfig gamePlayConfig, List<ICoach> coaches, List<GeneralManager> generalManagers) {
+			GameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers) {
 		super();
 		this.leagueName = leagueName;
 		this.conferences = conferences;
@@ -140,7 +140,6 @@ public class League implements ILeague {
 		return freeAgents;
 	}
 
-
 	/**
 	 * @param freeAgents the freeAgents to set
 	 */
@@ -152,7 +151,7 @@ public class League implements ILeague {
 		return gamePlayConfig;
 	}
 
-	public void setGamePlayConfig(GameplayConfig gamePlayConfig) {
+	public void setGamePlayConfig(IGameplayConfig gamePlayConfig) {
 		this.gamePlayConfig = gamePlayConfig;
 	}
 
@@ -164,11 +163,11 @@ public class League implements ILeague {
 		this.coaches = coaches;
 	}
 
-	public List<GeneralManager> getGeneralManagers() {
+	public List<IGeneralManager> getGeneralManagers() {
 		return generalManagers;
 	}
 
-	public void setGeneralManagers(List<GeneralManager> generalManagers) {
+	public void setGeneralManagers(List<IGeneralManager> generalManagers) {
 		this.generalManagers = generalManagers;
 	}
 

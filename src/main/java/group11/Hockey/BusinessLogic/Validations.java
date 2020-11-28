@@ -9,6 +9,7 @@ import group11.Hockey.BusinessLogic.models.GeneralManager;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
+import group11.Hockey.BusinessLogic.models.IGeneralManager;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -85,8 +86,8 @@ public class Validations implements IValidations {
 		if (isStrBlank(name)) {
 			return true;
 		} else {
-			List<GeneralManager> generalMangerList = league.getGeneralManagers();
-			for (GeneralManager generalManger : generalMangerList) {
+			List<IGeneralManager> generalMangerList = league.getGeneralManagers();
+			for (IGeneralManager generalManger : generalMangerList) {
 				if (generalManger.getName().equalsIgnoreCase(name)) {
 					return false;
 				}

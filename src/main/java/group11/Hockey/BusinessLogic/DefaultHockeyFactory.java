@@ -215,9 +215,9 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new RosterSearch();
 	}
 
-	public static GameplayConfig makeGameplayConfig(IAging aging, IGameResolver gameResolver, IInjuries injuries,
+	public static GameplayConfig makeGameplayConfig(IAging aging, IInjuries injuries,
 			ITraining training, ITrading trading) {
-		return new GameplayConfig(aging, gameResolver, injuries, training, trading);
+		return new GameplayConfig(aging, injuries, training, trading);
 	}
 
 	public static IgmTable makeGMTable(float shrewd, float gambler, float normal) {

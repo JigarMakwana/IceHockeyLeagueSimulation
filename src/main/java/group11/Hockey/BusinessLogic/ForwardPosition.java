@@ -3,11 +3,15 @@
  */
 package group11.Hockey.BusinessLogic;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public class ForwardPosition implements IPlayerStrengthStrategy {
 
 	private IPlayer player;
+	private static Logger logger = LogManager.getLogger(ForwardPosition.class);
 
 	public ForwardPosition(IPlayer player) {
 		super();
@@ -16,9 +20,11 @@ public class ForwardPosition implements IPlayerStrengthStrategy {
 
 	@Override
 	public float claculateStrength() {
-		float playerStrength = player.getSkating() + player.getShooting() + (player.getChecking() / 2);
+		int reduceStrengthBy = BusinessConstants.Reduce_strength_by.getIntValue();
+		float playerStrength = player.getSkating() + player.getShooting() + (player.getChecking() / reduceStrengthBy);
 		if (player.isInjured()) {
-			playerStrength = playerStrength / 2;
+			logger.warn("Player strength is reduced by " + reduceStrengthBy);
+			playerStrength = playerStrength / reduceStrengthBy;
 		}
 		return playerStrength;
 	}

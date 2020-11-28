@@ -47,7 +47,7 @@ public class TradeInitializer implements ITradeInitializer {
 	}
 
 	private boolean isRandomOfferChanceSuccess() {
-		IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
+		IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomNumberGenerator();
 		float randomTradeOfferChance = randomFloatGenerator.generateRandomFloat();
 		if (randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()) {
 			return true;

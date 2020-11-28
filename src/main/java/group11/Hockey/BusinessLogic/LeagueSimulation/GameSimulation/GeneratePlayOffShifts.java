@@ -6,11 +6,15 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class GeneratePlayOffShifts extends GenerateShiftsTemplate {
 
 	private List<Player> team;
+	private static Logger logger = LogManager.getLogger(GeneratePlayOffShifts.class);
 
 	public GeneratePlayOffShifts(List<Player> team) {
 		super(team);
@@ -18,7 +22,7 @@ public class GeneratePlayOffShifts extends GenerateShiftsTemplate {
 	}
 
 	@Override
-	public void generateGoalieShift(String position) {
+	public void generateGoalieShift(String position) throws Exception {
 		int shift = 0;
 		List<Player> goalies = new ArrayList<>();
 		for (Player player : team) {
@@ -27,7 +31,8 @@ public class GeneratePlayOffShifts extends GenerateShiftsTemplate {
 			}
 		}
 		if (goalies.size() < 2) {
-			goalies.add(goalies.get(0));
+			logger.warn("no sufficient goalies");
+			throw new Exception("no sufficient goalies");
 		}
 		int index = bestGoalieIndex(goalies);
 		do {

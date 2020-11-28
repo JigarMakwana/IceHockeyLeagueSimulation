@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 
 import java.util.List;
@@ -16,7 +19,7 @@ import junit.framework.Assert;
 public class GeneratePlayOffShiftsTest {
 
 	@Test
-	public void generateGoalieShiftTest() {
+	public void generateGoalieShiftTest() throws Exception {
 		ILeague league = new LeagueModelMock().getLeagueInfo();
 		IConference conf = league.getConferences().get(0);
 		IDivision div = conf.getDivisions().get(0);

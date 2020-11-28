@@ -216,7 +216,8 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		} else if (this.position.equalsIgnoreCase(Positions.DEFENSE.toString())) {
 			playerStrength = new PlayerStrengthContext(DefaultHockeyFactory.makeDefensePosition(this));
 		} else {
-			playerStrength = DefaultHockeyFactory.makePlayerStrengthContext(DefaultHockeyFactory.makeGoaliePosition(this));
+			playerStrength = DefaultHockeyFactory
+					.makePlayerStrengthContext(DefaultHockeyFactory.makeGoaliePosition(this));
 		}
 		return playerStrength.executeStrategy();
 	}
@@ -298,23 +299,6 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 				freeAgent.setCaptain(this.getCaptain());
 				playersList.add(freeAgent);
 				freeAgentsItr.remove();
-				break;
-			}
-		}
-		// TODO implement exception if no player is hired from free agents
-	}
-
-	public void dropPlayerToFreeAgent(League league, List<Player> playersList) {
-		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
-		Iterator<Player> playersListItr = playersList.iterator();
-
-		while (playersListItr.hasNext()) {
-			Player player = playersListItr.next();
-			if (player.getPosition().equalsIgnoreCase(this.getPosition())) {
-				player.setIsFreeAgent(true);
-				player.setCaptain(this.getCaptain());
-				freeAgents.add(player);
-				playersListItr.remove();
 				break;
 			}
 		}

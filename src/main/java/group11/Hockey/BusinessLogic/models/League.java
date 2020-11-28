@@ -63,7 +63,7 @@ public class League implements ILeague {
 	}
 
 	public League(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
-			GameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers) {
+			IGameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers) {
 		super();
 		this.leagueName = leagueName;
 		this.conferences = conferences;
@@ -199,11 +199,7 @@ public class League implements ILeague {
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb) {
 		boolean leagueObjectInserted = false;
-		try {
-			leagueObjectInserted = leagueDb.insertLeagueInDb(league);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		leagueObjectInserted = leagueDb.insertLeagueInDb(league);
 		return leagueObjectInserted;
 
 	}

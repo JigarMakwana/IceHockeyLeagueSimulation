@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import org.apache.log4j.LogManager;
@@ -13,18 +14,24 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import group11.Hockey.InputOutput.IDisplay;
+import group11.Hockey.db.League.ILeagueDb;
 
 public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 	ILeague league;
+	ILeagueDb leagueDb;
+	IDisplay display;
 	private static Logger logger = LogManager.getLogger(DraftPlayer.class);
-	DraftPlayer(ILeague league) {
+	DraftPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		this.league = league;
+		this.leagueDb = leagueDb;
+		this.display = display;
 	}
 
 	@Override
 	public StateMachineState startState() {
 		draftPlayer();
-		return null;
+		return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
 	}
 
 	@Override
@@ -42,7 +49,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 		GeneratingPlayers generatingPlayers = new GeneratingPlayers();
 		List<Player> generatedPlayers = generatingPlayers.generatePlayers(numbersOfPlayersToGenerate);
 		Collections.sort(generatedPlayers);
-
+		//List<Map<Team, Map<Team, List<Boolean>>>> draftTradeTracker = league.getDraftTradeTracker();
 		for (int round = 1; round <= 7; round++) {
 			for (Team team : draftingTeams) {
 				if (generatedPlayers.get(indexForGeneratedPlayers) != null) {
@@ -62,6 +69,8 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 
 
 	}
+	
+	
 
 	public List<Team> selectTeamFromRegularSeasonStandinfo(List<Team> regularSeasonTeams) {
 		logger.info("Entered selectTeamFromRegularSeasonStandinfo()");

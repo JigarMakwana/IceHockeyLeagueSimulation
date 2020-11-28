@@ -15,8 +15,6 @@ import group11.Hockey.db.IPlayerDb;
  * This is model class for Player and it contains all the business logic related
  * to player
  *
- * @author jatinpartaprana
- *
  */
 public class Player extends Stats implements Comparable<Player>, IPlayer {
 	private String playerName;

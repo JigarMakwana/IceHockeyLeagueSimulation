@@ -61,13 +61,13 @@ public class LeagueModelMock {
 		List<Division> divisionsList = new ArrayList<Division>();
 		Division atlanticDivision = new Division("Atlantic", teamsList);
 		divisionsList.add(atlanticDivision);
-		List<Conference> conferenceList = new ArrayList<Conference>();
+		List<IConference> conferenceList = new ArrayList<>();
 		List<Player> freeAgentsList = new ArrayList<Player>();
-		Conference conference = new Conference("Eastern Conference", divisionsList);
+		IConference conference = new Conference("Eastern Conference", divisionsList);
 		conferenceList.add(conference);
 		league = new League("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
 		playerList = new ArrayList<Player>();
-		List<Coach> coachList = new ArrayList<Coach>();
+		List<ICoach> coachList = new ArrayList<>();
 		coachList.add(new Coach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
 		league.setCoaches(coachList);
 		List<GeneralManager> generalManagerList = new ArrayList<GeneralManager>();

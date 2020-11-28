@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ICoach;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
@@ -50,8 +50,8 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 		int daysDifference = (int) ((parse.stringToDate(currentDate).getTime()
 				- parse.stringToDate(startDate).getTime()) / (24 * 60 * 60 * 1000));
 		if (daysDifference > trainingDays) {
-			List<Conference> conferenceList = league.getConferences();
-			for (Conference conference : conferenceList) {
+			List<IConference> conferenceList = league.getConferences();
+			for (IConference conference : conferenceList) {
 				List<Division> divisionList = conference.getDivisions();
 				for (Division division : divisionList) {
 					List<Team> teamList = division.getTeams();

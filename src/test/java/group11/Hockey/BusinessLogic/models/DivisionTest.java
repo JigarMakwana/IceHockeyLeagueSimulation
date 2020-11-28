@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import org.junit.Assert;
 
-
 public class DivisionTest {
 	Division division = new Division();
 
@@ -23,7 +22,7 @@ public class DivisionTest {
 	public void DivisionParameterizedConstructorTest() {
 		Division division = new Division("Atlantic Division", Arrays.asList(new Team()));
 		Assert.assertEquals("Atlantic Division", division.getDivisionName());
-		Assert.assertTrue(division.getTeams().size()==1);
+		Assert.assertTrue(division.getTeams().size() == 1);
 	}
 
 	@Test
@@ -71,36 +70,42 @@ public class DivisionTest {
 	@Test
 	public void isDivisionNameValidTest() {
 		LeagueTest leagueTest = new LeagueTest();
-		League leagueObject = leagueTest.populateLeagueObject();
+		ILeague leagueObject = leagueTest.populateLeagueObject();
 		String divisionName = "Eastern Zone";
 		boolean divisionNameValid;
-		divisionNameValid = division.isDivisionNameValid(divisionName, leagueObject.getConferences().get(0).getDivisions());
+		divisionNameValid = division.isDivisionNameValid(divisionName,
+				leagueObject.getConferences().get(0).getDivisions());
 		Assert.assertFalse(divisionNameValid);
 		divisionName = "Atlantic Division";
-		divisionNameValid = division.isDivisionNameValid(divisionName, leagueObject.getConferences().get(0).getDivisions());
+		divisionNameValid = division.isDivisionNameValid(divisionName,
+				leagueObject.getConferences().get(0).getDivisions());
 		Assert.assertTrue(divisionNameValid);
 	}
 
 	@Test
 	public void getDivisionFromDivisionNameTest() {
 		LeagueTest leagueTest = new LeagueTest();
-		League leagueObject = leagueTest.populateLeagueObject();
+		ILeague leagueObject = leagueTest.populateLeagueObject();
 		Division divisionFromName;
-		divisionFromName = division.getDivisionFromDivisionName("Eastern Zone", leagueObject.getConferences().get(0).getDivisions());
+		divisionFromName = division.getDivisionFromDivisionName("Eastern Zone",
+				leagueObject.getConferences().get(0).getDivisions());
 		Assert.assertNull(divisionFromName);
-		divisionFromName = division.getDivisionFromDivisionName("Atlantic Division", leagueObject.getConferences().get(0).getDivisions());
+		divisionFromName = division.getDivisionFromDivisionName("Atlantic Division",
+				leagueObject.getConferences().get(0).getDivisions());
 		Assert.assertNotNull(divisionFromName);
-		Assert.assertEquals("Atlantic Division", leagueObject.getConferences().get(0).getDivisions().get(0).getDivisionName());
+		Assert.assertEquals("Atlantic Division",
+				leagueObject.getConferences().get(0).getDivisions().get(0).getDivisionName());
 	}
 
 	@Test
 	public void addNewTeamInDivisionTest() {
 		LeagueTest leagueTest = new LeagueTest();
-		League leagueObject = leagueTest.populateLeagueObject();
+		ILeague leagueObject = leagueTest.populateLeagueObject();
 		Team team = new Team("Dalhousie Tigers", null, null, null);
 		Division divisionFromLeagueObject = leagueObject.getConferences().get(0).getDivisions().get(0);
 		divisionFromLeagueObject.addNewTeamInDivision(team);
-		Assert.assertTrue(leagueObject.getConferences().get(0).getDivisions().get(0).getTeams().get(1).getTeamName().equalsIgnoreCase("Dalhousie Tigers"));
+		Assert.assertTrue(leagueObject.getConferences().get(0).getDivisions().get(0).getTeams().get(1).getTeamName()
+				.equalsIgnoreCase("Dalhousie Tigers"));
 	}
 
 }

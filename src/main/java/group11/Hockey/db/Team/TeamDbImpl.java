@@ -31,16 +31,16 @@ public class TeamDbImpl implements ITeamDb {
 			while (resultSet.next()) {
 				league.setLeagueName(resultSet.getString(Constants.leagueName.toString()));
 				league.setStartDate(resultSet.getString(Constants.leagueStartDate.toString()));
-				Conference conferenceInLeague = null;
+				IConference conferenceInLeague = null;
 				Division divisionInConference = null;
 				Team teamInDivision = null;
-				boolean conferencExits = conference.isConferenceNameValid(resultSet.getString(Constants.conferenceName.toString()),
-						league.getConferences());
+				boolean conferencExits = conference.isConferenceNameValid(
+						resultSet.getString(Constants.conferenceName.toString()), league.getConferences());
 				if (conferencExits) {
 					conferenceInLeague = conference.getConferencefromConferenceName(
 							resultSet.getString(Constants.conferenceName.toString()), league.getConferences());
 				} else {
-					List<Conference> conferenceList = league.getConferences();
+					List<IConference> conferenceList = league.getConferences();
 					conferenceInLeague = new Conference(resultSet.getString(Constants.conferenceName.toString()), null);
 					conferenceList.add(conferenceInLeague);
 				}
@@ -75,14 +75,14 @@ public class TeamDbImpl implements ITeamDb {
 		return league;
 	}
 
-	private Division populateDivisionInConference(Division divison, ResultSet resultSet, Conference conferenceInLeague)
+	private Division populateDivisionInConference(Division divison, ResultSet resultSet, IConference conferenceInLeague)
 			throws SQLException {
 		Division divisionInConference;
 		boolean divisionExits = divison.isDivisionNameValid(resultSet.getString(Constants.divisionName.toString()),
 				conferenceInLeague.getDivisions());
 		if (divisionExits) {
-			divisionInConference = divison.getDivisionFromDivisionName(resultSet.getString(Constants.divisionName.toString()),
-					conferenceInLeague.getDivisions());
+			divisionInConference = divison.getDivisionFromDivisionName(
+					resultSet.getString(Constants.divisionName.toString()), conferenceInLeague.getDivisions());
 		} else {
 			divisionInConference = new Division(resultSet.getString(Constants.divisionName.toString()), null);
 			List<Division> divisionList = conferenceInLeague.getDivisions();
@@ -100,9 +100,11 @@ public class TeamDbImpl implements ITeamDb {
 	private Team pupulateTeamInDivision(Team team, ResultSet resultSet, Division divisionInConference)
 			throws SQLException {
 		Team teamInDivision;
-		boolean teamExists = team.teamExistsInDivision(resultSet.getString(Constants.teamName.toString()), divisionInConference);
+		boolean teamExists = team.teamExistsInDivision(resultSet.getString(Constants.teamName.toString()),
+				divisionInConference);
 		if (teamExists) {
-			teamInDivision = team.getTeamFromDivision(resultSet.getString(Constants.teamName.toString()), divisionInConference);
+			teamInDivision = team.getTeamFromDivision(resultSet.getString(Constants.teamName.toString()),
+					divisionInConference);
 		} else {
 			teamInDivision = new Team();
 			teamInDivision.setTeamName(resultSet.getString(Constants.teamName.toString()));

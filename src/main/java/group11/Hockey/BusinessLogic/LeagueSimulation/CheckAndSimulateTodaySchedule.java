@@ -13,6 +13,7 @@ import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -53,8 +54,8 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 		IPrintToConsole console = new PrintToConsole();
 		String message;
 		while (schedule.containsKey(id)) {
-			List<Conference> cconferenceList = league.getConferences();
-			for (Conference conference : cconferenceList) {
+			List<IConference> cconferenceList = league.getConferences();
+			for (IConference conference : cconferenceList) {
 				List<Division> divisionList = conference.getDivisions();
 				for (Division division : divisionList) {
 					List<Team> teamList = division.getTeams();

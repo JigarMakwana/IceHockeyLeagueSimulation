@@ -1,6 +1,5 @@
 package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.Trading.PlayerTradeOperations;
 import group11.Hockey.BusinessLogic.Trading.TradingModelMock;
 import group11.Hockey.BusinessLogic.models.*;
@@ -15,7 +14,6 @@ public class PlayerTradeOperationsTest {
     private League leagueObj = leagueModel.getLeagueInfo();
     IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
     private Trading tradingConfig = new Trading(2, 1, 2, 1, gmTbale);
-    private AITrading aiTradingObj = new AITrading(leagueObj);
     private PlayerTradeOperations playerMiscellaneous = new PlayerTradeOperations(tradingConfig);
 
     @Test
@@ -84,7 +82,7 @@ public class PlayerTradeOperationsTest {
 
     @Test
     public void findStrongestTradeTeamTest() {
-        List<Conference> conferences = leagueObj.getConferences();
+        List<IConference> conferences = leagueObj.getConferences();
         List<Division> divisions = conferences.get(0).getDivisions();
         List<Team> teams = divisions.get(0).getTeams();
         List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer= new ArrayList<>();

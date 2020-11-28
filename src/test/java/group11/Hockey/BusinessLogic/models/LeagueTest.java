@@ -16,10 +16,10 @@ public class LeagueTest {
 
 	IConference westernConference = DefaultHockeyFactory.makeConference("Westeren Conference", null);
 	IConference easternConference = DefaultHockeyFactory.makeConference("Eastern Conference", null);
-	List<Conference> conferenceList = new ArrayList<Conference>();
+	List<IConference> conferenceList = new ArrayList<>();
 	League league = new League();
 
-	public League populateLeagueObject() {
+	public ILeague populateLeagueObject() {
 		List<Team> teamsList = new ArrayList<Team>();
 		List<GeneralManager> generalManagerList = new ArrayList<GeneralManager>();
 		ICoach coach = DefaultHockeyFactory.makeCoach(0, 0, 0, 0, "C1");
@@ -32,18 +32,18 @@ public class LeagueTest {
 		List<Division> divisionsList = new ArrayList<Division>();
 		Division atlanticDivision = new Division("Atlantic Division", teamsList);
 		divisionsList.add(atlanticDivision);
-		List<Conference> conferenceList = new ArrayList<Conference>();
-		Conference conference = new Conference("Westeren Conference", divisionsList);
+		List<IConference> conferenceList = new ArrayList<>();
+		IConference conference = new Conference("Westeren Conference", divisionsList);
 		conferenceList.add(conference);
 		Player firstFreeAgent = new Player(0, 0, 0, 0, "Player 1", "forward", true, false, 0);
 		Player secondFreeAgent = new Player(0, 0, 0, 0, "Player 2", "Goalie", true, false, 0);
 
-		List<Coach> coachList = new ArrayList<Coach>();
-		coachList.add((Coach) coach);
+		List<ICoach> coachList = new ArrayList<>();
+		coachList.add(coach);
 		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
 		GameplayConfig gameplayConf = new GameplayConfig(new Aging(0, 0), new GameResolver(0), new Injuries(0, 0, 0),
 				new Training(0), new Trading(0, 0, 0, 0, gmTbale));
-		League league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf,
+		ILeague league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf,
 				coachList, generalManagerList);
 		return league;
 
@@ -109,14 +109,14 @@ public class LeagueTest {
 
 	@Test
 	public void getFreeAgentsTest() {
-		League league = populateLeagueObject();
+		ILeague league = populateLeagueObject();
 		Assert.assertTrue(league.getFreeAgents().size() == 2);
 		Assert.assertEquals("Player 1", league.getFreeAgents().get(0).getPlayerName());
 	}
 
 	@Test
 	public void insertLeagueObjectTest() {
-		League league = populateLeagueObject();
+		ILeague league = populateLeagueObject();
 
 		ILeagueDb leagueDb = mock(ILeagueDb.class);
 		when(leagueDb.insertLeagueInDb(league)).thenReturn(true);

@@ -1,9 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-import group11.Hockey.BusinessLogic.models.IgmTable;
-import group11.Hockey.BusinessLogic.models.gmTable;
 import org.junit.Test;
-import group11.Hockey.BusinessLogic.models.Trading;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 

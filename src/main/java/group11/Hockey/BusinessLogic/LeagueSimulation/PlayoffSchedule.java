@@ -13,6 +13,7 @@ import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -50,8 +51,8 @@ public class PlayoffSchedule implements IScheduleStrategy {
 		message = "\n********** Playoff Schedule - First round **********";
 		console.print(message);
 
-		List<Conference> cconferenceList = league.getConferences();
-		for (Conference conference : cconferenceList) {
+		List<IConference> cconferenceList = league.getConferences();
+		for (IConference conference : cconferenceList) {
 			List<Team> roundOne = new ArrayList<Team>();
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {

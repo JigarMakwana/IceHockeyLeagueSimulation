@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface IConference {
 
-	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferences);
+	public boolean isConferenceNameValid(String conferenceName, List<IConference> conferences);
 
-	public Conference getConferencefromConferenceName(String conferenceName, List<Conference> conferences);
+	public IConference getConferencefromConferenceName(String conferenceName, List<IConference> conferences);
 
 	public List<Division> getDivisions();
 

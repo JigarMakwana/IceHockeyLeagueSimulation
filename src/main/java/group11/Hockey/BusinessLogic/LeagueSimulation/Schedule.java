@@ -12,6 +12,7 @@ import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -37,16 +38,16 @@ public class Schedule implements ISchedule {
 		HashMap<Team, Integer> scheduledInConferenceMatchCount = new HashMap<>();
 		HashMap<Team, Integer> scheduledOutConferenceMatchCount = new HashMap<>();
 		HashMap<String, Integer> simulatedHashmap = new HashMap<>();
-		HashMap<Team, Conference> teamConference = new HashMap<>();
+		HashMap<Team, IConference> teamConference = new HashMap<>();
 		HashMap<Team, Division> teamDivision = new HashMap<>();
-		HashMap<Conference, Integer> conTeamCount = new HashMap<>();
+		HashMap<IConference, Integer> conTeamCount = new HashMap<>();
 		HashMap<Division, Integer> divTeamCount = new HashMap<>();
 		HashMap<Team, Integer> totalGameCount = new HashMap<>();
 		HashMap<String, HashMap<Team, Team>> regularSchedule = new HashMap<>();
 
 		int totalTeams = 0;
-		List<Conference> cconferenceList = league.getConferences();
-		for (Conference conference : cconferenceList) {
+		List<IConference> cconferenceList = league.getConferences();
+		for (IConference conference : cconferenceList) {
 			conTeamCount.put(conference, 0);
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
@@ -71,7 +72,7 @@ public class Schedule implements ISchedule {
 		String message;
 		Team t1, t2;
 		Division div1, div2;
-		Conference con1, con2;
+		IConference con1, con2;
 		int divLimit, divLimitReached, inConLimit, inConLimitReached, outConLimit, outConLimitReached, team1DivCount,
 				team1InConCount, team1OutConCount, totalGames = 0, team2DivCount, team2InConCount, team2OutConCount,
 				totalDivTeams, totalInConTeams, totalOutConTeams, team2TotalCount;
@@ -359,7 +360,7 @@ public class Schedule implements ISchedule {
 				}
 			}
 		}
-		for (Conference conference : cconferenceList) {
+		for (IConference conference : cconferenceList) {
 			conTeamCount.put(conference, 0);
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {

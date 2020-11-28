@@ -3,12 +3,7 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.GeneralManager;
 import org.junit.Test;
-
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.db.Team.ITeamDb;
 import group11.Hockey.db.Team.TeamDbMock;
 import org.junit.Assert;
@@ -17,7 +12,7 @@ import org.junit.BeforeClass;
 public class TeamTest {
 
 	private static LeagueTest leagueTest;
-	private static League league;
+	private static ILeague league;
 	private static Team team;
 	private static Player player1;
 	private static Player player2;

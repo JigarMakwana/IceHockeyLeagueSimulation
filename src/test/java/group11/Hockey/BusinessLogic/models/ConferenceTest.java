@@ -13,7 +13,7 @@ import org.junit.Assert;
 public class ConferenceTest {
 
 	LeagueTest leagueTest = new LeagueTest();
-	List<Conference> conferenceList = leagueTest.populateLeagueObject().getConferences();
+	List<IConference> conferenceList = leagueTest.populateLeagueObject().getConferences();
 	IConference conference = DefaultHockeyFactory.makeConference();
 
 	@Test

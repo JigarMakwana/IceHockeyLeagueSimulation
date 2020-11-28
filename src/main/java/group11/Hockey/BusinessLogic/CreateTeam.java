@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
@@ -49,12 +48,12 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 		logger.info("Entered renderTeam()");
 		System.out.println("***Create Team***\\n");
 		IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-		List<Conference> conferencesList = league.getConferences();
+		List<IConference> conferencesList = league.getConferences();
 		IConference conference = DefaultHockeyFactory.makeConference();
 		IDivision division = DefaultHockeyFactory.makeDivision();
 		Team newTeam = DefaultHockeyFactory.makeTeam();
 		String conferenceName = userInputCheck.conferenceNameFromUserCheck(conferencesList);
-		Conference conferenceItem = conference.getConferencefromConferenceName(conferenceName, conferencesList);
+		IConference conferenceItem = conference.getConferencefromConferenceName(conferenceName, conferencesList);
 		String divisionName = userInputCheck.divisonNameFromUserCheck(conferenceItem);
 		Division divisionItem = division.getDivisionFromDivisionName(divisionName, conferenceItem.getDivisions());
 		userInputCheck.teamNameFromUserCheck(newTeam, league);

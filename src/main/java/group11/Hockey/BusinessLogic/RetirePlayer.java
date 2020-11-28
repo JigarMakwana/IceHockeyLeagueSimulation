@@ -6,9 +6,9 @@ package group11.Hockey.BusinessLogic;
 import java.util.List;
 import java.util.Random;
 
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAging;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -40,10 +40,10 @@ public abstract class RetirePlayer extends StateMachineState {
 
 	public void retireAndReplacePlayer(ILeague league) {
 		List<Player> retiredPlayerList = league.getRetiredPlayers();
-		List<Conference> conferences = league.getConferences();
+		List<IConference> conferences = league.getConferences();
 
 		if (conferences.size() > 0) {
-			for (Conference conference : conferences) {
+			for (IConference conference : conferences) {
 				List<Division> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
 					for (Division division : divisions) {

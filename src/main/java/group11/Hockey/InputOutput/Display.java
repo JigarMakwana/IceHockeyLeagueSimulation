@@ -38,9 +38,9 @@ public class Display implements IDisplay {
 
 	@Override
 	public void displayListOfCoaches(League league) {
-		List<Coach> coaches = league.getCoaches();
+		List<ICoach> coaches = league.getCoaches();
 		System.out.println("Available Coaches List: ");
-		for (Coach coach : coaches) {
+		for (ICoach coach : coaches) {
 			System.out.println("******Coach Details******");
 			System.out.println("Coach Name: " + coach.getName());
 			System.out.println("Skating :" + coach.getSkating());

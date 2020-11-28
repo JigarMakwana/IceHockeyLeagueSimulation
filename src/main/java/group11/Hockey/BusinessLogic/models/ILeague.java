@@ -15,7 +15,7 @@ public interface ILeague {
 
 	public List<? extends IPlayer> getFreeAgents();
 
-	public List<Conference> getConferences();
+	public List<IConference> getConferences();
 
 	public List<Player> getRetiredPlayers();
 
@@ -29,7 +29,7 @@ public interface ILeague {
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb);
 
-	public List<Coach> getCoaches();
+	public List<ICoach> getCoaches();
 
 	public List<GeneralManager> getGeneralManagers();
 
@@ -61,7 +61,7 @@ public interface ILeague {
 
 	public void setFreeAgents(List<Player> player);
 
-	public void setCoaches(List<Coach> coach);
+	public void setCoaches(List<ICoach> coach);
 
 	public void setGeneralManagers(List<GeneralManager> generalManagers);
 

@@ -28,7 +28,7 @@ public class LeagueDbMock implements ILeagueDb {
 //			return true;
 //		} else {
 //			return false;
-		//}
+		// }
 		return false;
 	}
 
@@ -42,8 +42,8 @@ public class LeagueDbMock implements ILeagueDb {
 		List<Division> divisionsList = new ArrayList<Division>();
 		Division atlanticDivision = new Division("Atlantic Division", teamsList);
 		divisionsList.add(atlanticDivision);
-		List<Conference> conferenceList = new ArrayList<Conference>();
-		Conference conference = new Conference("Westeren Conference", divisionsList);
+		List<IConference> conferenceList = new ArrayList<>();
+		IConference conference = new Conference("Westeren Conference", divisionsList);
 		conferenceList.add(conference);
 		// add free agents
 		league = new League("NHL", conferenceList, null, null, null, null);

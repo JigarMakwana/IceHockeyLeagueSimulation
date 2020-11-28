@@ -7,6 +7,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -32,8 +33,8 @@ abstract public class CommonUtilForLeague {
 		Coach coach = new Coach();
 		coach.setName(coachName);
 		team.setHeadCoach(coach);
-		List<Coach> coaches = league.getCoaches();
-		for (Coach ch : coaches) {
+		List<ICoach> coaches = league.getCoaches();
+		for (ICoach ch : coaches) {
 			if (ch.getName() != null && ch.getName().equalsIgnoreCase(coach.getName())) {
 				logger.info("Coach "+ch.getName()+" is added to team "+team.getTeamName());
 				coaches.remove(ch);

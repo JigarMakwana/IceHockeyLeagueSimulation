@@ -15,10 +15,10 @@ import group11.Hockey.db.League.ILeagueDb;
  */
 public class League implements ILeague {
 	private String leagueName;
-	private List<Conference> conferences = new ArrayList<Conference>();
+	private List<IConference> conferences = new ArrayList<>();
 	private List<Player> freeAgents = new ArrayList<Player>();
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
-	private List<Coach> coaches = new ArrayList<Coach>();
+	private List<ICoach> coaches = new ArrayList<>();
 	private List<GeneralManager> generalManagers;
 	private List<Player> retiredPlayers = new ArrayList<Player>();
 	private List<Team> qualifiedTeams = new ArrayList<Team>();
@@ -62,8 +62,8 @@ public class League implements ILeague {
 		this.gamesInSeason = gamesInSeason;
 	}
 
-	public League(String leagueName, List<Conference> conferences, List<? extends IPlayer> freeAgents,
-			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {
+	public League(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
+			GameplayConfig gamePlayConfig, List<ICoach> coaches, List<GeneralManager> generalManagers) {
 		super();
 		this.leagueName = leagueName;
 		this.conferences = conferences;
@@ -118,14 +118,14 @@ public class League implements ILeague {
 	/**
 	 * @return the conferences
 	 */
-	public List<Conference> getConferences() {
+	public List<IConference> getConferences() {
 		return conferences;
 	}
 
 	/**
 	 * @param conferences the conferences to set
 	 */
-	public void setConferences(List<Conference> conferences) {
+	public void setConferences(List<IConference> conferences) {
 		this.conferences = conferences;
 	}
 
@@ -156,11 +156,11 @@ public class League implements ILeague {
 		this.gamePlayConfig = gamePlayConfig;
 	}
 
-	public List<Coach> getCoaches() {
+	public List<ICoach> getCoaches() {
 		return coaches;
 	}
 
-	public void setCoaches(List<Coach> coaches) {
+	public void setCoaches(List<ICoach> coaches) {
 		this.coaches = coaches;
 	}
 

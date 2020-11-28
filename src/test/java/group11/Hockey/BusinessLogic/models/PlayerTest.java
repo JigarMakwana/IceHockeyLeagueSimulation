@@ -2,9 +2,6 @@ package group11.Hockey.BusinessLogic.models;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.db.IPlayerDb;
 
 import static org.mockito.Mockito.mock;

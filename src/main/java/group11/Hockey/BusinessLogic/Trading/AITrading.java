@@ -11,10 +11,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * This class contain all the logic to trade
- * 1. Between AI Teams and
- * 2. Between AI to User Teams
- * @author  Jigar Makwana B00842568
+ * This class contain all the logic to trade 1. Between AI Teams and 2. Between
+ * AI to User Teams
+ * 
+ * @author Jigar Makwana B00842568
  */
 
 public class AITrading extends StateMachineState {
@@ -22,7 +22,7 @@ public class AITrading extends StateMachineState {
 	private ITrading tradingConfig;
 	private PlayerTradeOperations playerMiscellaneous;
 	private ICommandLineInput commandLineInput;
-	private IDisplay display ;
+	private IDisplay display;
 	private IValidations validation;
 	private ILeagueDb leagueDb;
 
@@ -42,7 +42,8 @@ public class AITrading extends StateMachineState {
 		this.leagueDb = leagueDb;
 	}
 
-	public AITrading(ILeague leagueObj, ICommandLineInput commandLineInput, IDisplay display, IValidations validation, ILeagueDb leagueDb) {
+	public AITrading(ILeague leagueObj, ICommandLineInput commandLineInput, IDisplay display, IValidations validation,
+			ILeagueDb leagueDb) {
 		this.leagueObj = leagueObj;
 		this.commandLineInput = commandLineInput;
 		this.display = display;
@@ -56,7 +57,7 @@ public class AITrading extends StateMachineState {
 	@Override
 	public StateMachineState startState() {
 		this.generateTradeOffers();
-		return new AgePlayer(leagueObj, 1,leagueDb, display);
+		return new AgePlayer(leagueObj, 1, leagueDb, display);
 	}
 
 	public PlayerTradeOperations getPlayerMiscellaneous() {
@@ -117,8 +118,8 @@ public class AITrading extends StateMachineState {
 		int lossPointCutOff = tradingConfig.getLossPoint();
 		boolean isAITeam;
 		List<Team> eligibleTeamList = new ArrayList<Team>();
-		List<Conference> conferenceList = leagueObj.getConferences();
-		for (Conference conference : conferenceList) {
+		List<IConference> conferenceList = leagueObj.getConferences();
+		for (IConference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
 				List<Team> teamList = division.getTeams();

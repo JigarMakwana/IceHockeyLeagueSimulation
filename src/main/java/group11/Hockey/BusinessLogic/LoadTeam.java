@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -64,8 +64,8 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 		isTeamNameValid = teamInLeague.isTeamNameValid(teamName, league);
 		if(isTeamNameValid) {
 			logger.info("Team name "+teamName+" is valid");
-			List<Conference> conferenceList = league.getConferences();
-			for (Conference conference : conferenceList) {
+			List<IConference> conferenceList = league.getConferences();
+			for (IConference conference : conferenceList) {
 				List<Division> divisionList = conference.getDivisions();
 				for (Division division : divisionList) {
 					List<Team> teamList = division.getTeams();

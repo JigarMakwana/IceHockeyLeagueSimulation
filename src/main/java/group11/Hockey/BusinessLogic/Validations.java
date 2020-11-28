@@ -5,9 +5,8 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
@@ -24,23 +23,22 @@ public class Validations implements IValidations {
 
 	private static Validations validationsInstance = null;
 
-	public Validations(IDisplay display){
+	public Validations(IDisplay display) {
 		this.display = display;
 	}
 
-	private Validations(){
+	private Validations() {
 
 	}
 
 	public static Validations getInstance() {
-		if(validationsInstance == null) {
+		if (validationsInstance == null) {
 			validationsInstance = new Validations();
 		}
 		return validationsInstance;
 	}
 
-
-	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferencesList) {
+	public boolean isConferenceNameValid(String conferenceName, List<IConference> conferencesList) {
 		logger.info("Entered isConferenceNameValid()");
 		boolean conferenceNameCheck = false;
 		if (isStrBlank(conferenceName)) {
@@ -55,7 +53,7 @@ public class Validations implements IValidations {
 		return conferenceNameCheck;
 	}
 
-	public boolean isDivisionValid(String divisionName, Conference conferenceItem) {
+	public boolean isDivisionValid(String divisionName, IConference conferenceItem) {
 		logger.info("Entered isDivisionValid()");
 		boolean divisionNameCheck = false;
 		if (isStrBlank(divisionName)) {
@@ -104,8 +102,8 @@ public class Validations implements IValidations {
 		if (isStrBlank(coachName)) {
 			coachNameCheck = true;
 		} else {
-			List<Coach> coachList = league.getCoaches();
-			for (Coach coach : coachList) {
+			List<ICoach> coachList = league.getCoaches();
+			for (ICoach coach : coachList) {
 				if (coach != null && coach.getName().equalsIgnoreCase(coachName)) {
 					coachNameCheck = false;
 					return coachNameCheck;
@@ -123,7 +121,7 @@ public class Validations implements IValidations {
 		try {
 			playerNumberInInt = Integer.parseInt(playerNumber);
 		} catch (Exception e) {
-			logger.error("Error occured : "+e);
+			logger.error("Error occured : " + e);
 			display.showMessageOnConsole("Select valid value");
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
@@ -174,7 +172,7 @@ public class Validations implements IValidations {
 		boolean isNoOfSeasonsValueValid = false;
 		try {
 			int value = Integer.parseInt(numberOfSeasons);
-			if(value < 0) {
+			if (value < 0) {
 				logger.error("Simulation input is invalid");
 				display.showMessageOnConsole("Select valid value for simulation");
 				isNoOfSeasonsValueValid = true;
@@ -183,7 +181,7 @@ public class Validations implements IValidations {
 				return false;
 			}
 		} catch (Exception e) {
-			logger.error("Error occured : "+e);
+			logger.error("Error occured : " + e);
 			display.showMessageOnConsole("Select valid value for simulation");
 			isNoOfSeasonsValueValid = true;
 			return isNoOfSeasonsValueValid;
@@ -191,11 +189,11 @@ public class Validations implements IValidations {
 	}
 
 	/**
-	 * @author  Jigar Makwana B00842568
+	 * @author Jigar Makwana B00842568
 	 */
-	public boolean isUserTradeInputValid(int userInput){
+	public boolean isUserTradeInputValid(int userInput) {
 		logger.info("Entered isUserTradeInputValid()");
-		if((userInput == 1) || (userInput == 0)){
+		if ((userInput == 1) || (userInput == 0)) {
 			logger.info("Trade input is valid");
 			return true;
 		} else {
@@ -205,11 +203,11 @@ public class Validations implements IValidations {
 	}
 
 	/**
-	 * @author  Jigar Makwana B00842568
+	 * @author Jigar Makwana B00842568
 	 */
-	public boolean isUserResolveRosterInputValid(int userInput, int listSize){
+	public boolean isUserResolveRosterInputValid(int userInput, int listSize) {
 		logger.info("Entered isUserResolveRosterInputValid()");
-		if(((userInput >= 1) && (userInput <= listSize))){
+		if (((userInput >= 1) && (userInput <= listSize))) {
 			logger.info("Roster input is valid");
 			return true;
 		} else {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,17 +19,17 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 
 	@Override
 	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
-		List<Conference> conferencesList = parseConferences(jsonObject);
+		List<IConference> conferencesList = parseConferences(jsonObject);
 		leagueModelObj.setConferences(conferencesList);
 	}
 
-	private List<Conference> parseConferences(JSONObject jsonObject) throws Exception {
-		Conference conference;
-		List<Conference> conferencesList = new ArrayList<Conference>();
+	private List<IConference> parseConferences(JSONObject jsonObject) throws Exception {
+		IConference conference;
+		List<IConference> conferencesList = new ArrayList<>();
 		JSONArray ConferenceJSONArray = (JSONArray) jsonObject.get(Attributes.CONFERENCES.getAttribute());
 		Iterator<JSONObject> ConferencesListIterator = ConferenceJSONArray.iterator();
 		while (ConferencesListIterator.hasNext()) {
-			conference = new Conference();
+			conference = DefaultHockeyFactory.makeConference();
 			// get conferenceName
 			JSONObject ConferencesListJsonObject = ConferencesListIterator.next();
 			String conferenceName = (String) ConferencesListJsonObject.get(Attributes.CONFERENCENAME.getAttribute());

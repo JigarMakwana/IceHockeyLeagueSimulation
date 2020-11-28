@@ -12,8 +12,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -72,7 +72,7 @@ public class AgePlayer extends RetirePlayer {
 		Date currentDate =  parse.stringToDate(league.getTimeLine().getCurrentDate());
 
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
-		List<Conference> conferences = league.getConferences();
+		List<IConference> conferences = league.getConferences();
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
  		if (freeAgents.size() > 0) {
  			logger.info("Freeagents exists so trying to loop over them");
@@ -91,7 +91,7 @@ public class AgePlayer extends RetirePlayer {
 
 		if (conferences.size() > 0) {
 			logger.info("Conferences exists in"+league.getLeagueName()+", so looping over them");
-			for (Conference conference : conferences) {
+			for (IConference conference : conferences) {
 				List<Division> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
 					logger.info("Divisions exists in"+conference.getConferenceName()+", so looping over them");
@@ -130,7 +130,7 @@ public class AgePlayer extends RetirePlayer {
 		boolean isRetired;
 		List<Player> retiredPlayers = new ArrayList<Player>();
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
-		List<Conference> conferences = league.getConferences();
+		List<IConference> conferences = league.getConferences();
 
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 
@@ -146,7 +146,7 @@ public class AgePlayer extends RetirePlayer {
 
 		if (conferences.size() > 0) {
 			logger.info("Conferences exists in"+league.getLeagueName()+", so looping over them");
-			for (Conference conference : conferences) {
+			for (IConference conference : conferences) {
 				List<Division> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
 					logger.info("Divisions exists in"+conference.getConferenceName()+", so looping over them");

@@ -8,7 +8,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.League;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -28,7 +28,7 @@ public class ParseRootcoachesTest {
 		League league = DefaultHockeyFactory.makeLeague();
 		ParseRootcoaches parseRootcoaches = new ParseRootcoaches();
 		parseRootcoaches.parseRootElement(league, jsonObject);
-		List<Coach> lc = league.getCoaches();
+		List<ICoach> lc = league.getCoaches();
 		Assert.assertEquals(lc.size(), 50);
 
 	}

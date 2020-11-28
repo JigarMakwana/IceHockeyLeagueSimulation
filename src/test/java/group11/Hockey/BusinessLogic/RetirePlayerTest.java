@@ -7,6 +7,7 @@ import org.junit.Assert;
 
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -31,7 +32,7 @@ public class RetirePlayerTest {
 
 		AgePlayer retirePlayer = new AgePlayer();
 		retirePlayer.retireAndReplacePlayer(league);
-		List<Conference> conferences = league.getConferences();
+		List<IConference> conferences = league.getConferences();
 		List<Division> divisions = conferences.get(0).getDivisions();
 		List<Team> teams = divisions.get(0).getTeams();
 		List<Player> players = teams.get(0).getPlayers();

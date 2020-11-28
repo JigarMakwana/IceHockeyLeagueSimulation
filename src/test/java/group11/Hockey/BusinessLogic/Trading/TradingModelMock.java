@@ -167,9 +167,9 @@ public class TradingModelMock {
         List<Division> divisionsList = new ArrayList<>();
         Division atlanticDivision = new Division("Atlantic", teamsList);
         divisionsList.add(atlanticDivision);
-        List<Conference> conferenceList = new ArrayList<>();
+        List<IConference> conferenceList = new ArrayList<>();
         freeAgentsList = new ArrayList<>();
-        Conference conference = new Conference("Eastern Conference", divisionsList);
+        IConference conference = new Conference("Eastern Conference", divisionsList);
         conferenceList.add(conference);
 
         Player firstFreeAgent = new Player(2, 4, 6, 1, "firstFreeAgent", "forward", true, false, 25);

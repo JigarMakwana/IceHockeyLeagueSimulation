@@ -16,7 +16,7 @@
         </category>
 
         <root>
-            <priority value="INFO"></priority>
+            <priority value="error"></priority>
             <appender-ref ref="console" />
         </root>
 

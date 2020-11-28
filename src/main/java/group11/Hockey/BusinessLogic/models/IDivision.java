@@ -6,7 +6,7 @@ public interface IDivision {
 
 	public boolean isDivisionNameValid(String divisionName, List<Division> divisionList);
 	public Division getDivisionFromDivisionName(String divisionName, List<Division> divisionList);
-	public void addNewTeamInDivision(Team newTeam);
-	public List<Team> getTeams();
-	public void setTeams(List<Team> teams);
+	public void addNewTeamInDivision(ITeam newTeam);
+	public List<ITeam> getTeams();
+	public void setTeams(List<ITeam> teams);
 }

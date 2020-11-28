@@ -7,19 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public abstract class GenerateShiftsTemplate {
-	private List<Player> team;
-	List<Player> playersOnIce = new ArrayList<>();
-	List<Player>[] shifts = new List[appConfiguration.shifts];
+	private List<IPlayer> team;
+	List<IPlayer> playersOnIce = new ArrayList<>();
+	List<IPlayer>[] shifts = new List[appConfiguration.shifts];
 
-	public GenerateShiftsTemplate(List<Player> team) {
+	public GenerateShiftsTemplate(List<IPlayer> team) {
 		super();
 		this.team = team;
 	}
 
-	public List<Player>[] getShifts() throws Exception {
+	
+
+	public List<IPlayer>[] getShifts() throws Exception{
 		for (int i = 0; i < appConfiguration.shifts; i++) {
 			shifts[i] = new ArrayList<>();
 		}
@@ -32,7 +34,7 @@ public abstract class GenerateShiftsTemplate {
 	public void generateShifts(int limtOfPlayers, String position) {
 		int shift = 0;
 		do {
-			for (Player player : team) {
+			for (IPlayer player : team) {
 				if (player.getPosition().equalsIgnoreCase(position)) {
 					playersOnIce.add(player);
 				}

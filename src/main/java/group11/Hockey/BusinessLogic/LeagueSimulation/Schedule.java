@@ -9,13 +9,12 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
 
@@ -29,21 +28,21 @@ public class Schedule implements ISchedule {
 	}
 
 	@Override
-	public HashMap<String, HashMap<Team, Team>> getSeasonSchedule() {
+	public HashMap<String, HashMap<ITeam,ITeam>> getSeasonSchedule() {
 		logger.info("Entered getSeasonSchedule()");
 		ITimeLine timeLine = league.getTimeLine();
 		String startDate = timeLine.getStartDate();
-		ArrayList<Team> teamName = new ArrayList<Team>();
-		HashMap<Team, Integer> scheduledDivisionMatchCount = new HashMap<>();
-		HashMap<Team, Integer> scheduledInConferenceMatchCount = new HashMap<>();
-		HashMap<Team, Integer> scheduledOutConferenceMatchCount = new HashMap<>();
+		ArrayList<ITeam> teamName = new ArrayList<>();
+		HashMap<ITeam, Integer> scheduledDivisionMatchCount = new HashMap<>();
+		HashMap<ITeam, Integer> scheduledInConferenceMatchCount = new HashMap<>();
+		HashMap<ITeam, Integer> scheduledOutConferenceMatchCount = new HashMap<>();
 		HashMap<String, Integer> simulatedHashmap = new HashMap<>();
-		HashMap<Team, IConference> teamConference = new HashMap<>();
-		HashMap<Team, Division> teamDivision = new HashMap<>();
+		HashMap<ITeam, IConference> teamConference = new HashMap<>();
+		HashMap<ITeam, Division> teamDivision = new HashMap<>();
 		HashMap<IConference, Integer> conTeamCount = new HashMap<>();
 		HashMap<Division, Integer> divTeamCount = new HashMap<>();
-		HashMap<Team, Integer> totalGameCount = new HashMap<>();
-		HashMap<String, HashMap<Team, Team>> regularSchedule = new HashMap<>();
+		HashMap<ITeam, Integer> totalGameCount = new HashMap<>();
+		HashMap<String, HashMap<ITeam, ITeam>> regularSchedule = new HashMap<>();
 
 		int totalTeams = 0;
 		List<IConference> cconferenceList = league.getConferences();
@@ -52,8 +51,8 @@ public class Schedule implements ISchedule {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
 				divTeamCount.put(division, 0);
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					teamName.add(team);
 					scheduledDivisionMatchCount.put(team, 0);
 					scheduledInConferenceMatchCount.put(team, 0);
@@ -70,7 +69,7 @@ public class Schedule implements ISchedule {
 
 		IPrintToConsole console = new PrintToConsole();
 		String message;
-		Team t1, t2;
+		ITeam t1, t2;
 		Division div1, div2;
 		IConference con1, con2;
 		int divLimit, divLimitReached, inConLimit, inConLimitReached, outConLimit, outConLimitReached, team1DivCount,
@@ -127,7 +126,7 @@ public class Schedule implements ISchedule {
 							time = advance.getAdvanceTime(time, 1);
 						}
 
-						HashMap<Team, Team> schedule = new HashMap<>();
+						HashMap<ITeam, ITeam> schedule = new HashMap<>();
 						schedule.put(t1, t2);
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
@@ -171,7 +170,7 @@ public class Schedule implements ISchedule {
 								time = advance.getAdvanceTime(time, 1);
 							}
 
-							HashMap<Team, Team> schedule = new HashMap<>();
+							HashMap<ITeam, ITeam> schedule = new HashMap<>();
 							schedule.put(t1, t2);
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
@@ -214,7 +213,7 @@ public class Schedule implements ISchedule {
 							time = advance.getAdvanceTime(time, 1);
 						}
 
-						HashMap<Team, Team> schedule = new HashMap<>();
+						HashMap<ITeam, ITeam> schedule = new HashMap<>();
 						schedule.put(t1, t2);
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
@@ -258,7 +257,7 @@ public class Schedule implements ISchedule {
 								time = advance.getAdvanceTime(time, 1);
 							}
 
-							HashMap<Team, Team> schedule = new HashMap<>();
+							HashMap<ITeam, ITeam> schedule = new HashMap<>();
 							schedule.put(t1, t2);
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
@@ -299,7 +298,7 @@ public class Schedule implements ISchedule {
 							time = advance.getAdvanceTime(time, 1);
 						}
 
-						HashMap<Team, Team> schedule = new HashMap<>();
+						HashMap<ITeam, ITeam> schedule = new HashMap<>();
 						schedule.put(t1, t2);
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
@@ -343,7 +342,7 @@ public class Schedule implements ISchedule {
 								time = advance.getAdvanceTime(time, 1);
 							}
 
-							HashMap<Team, Team> schedule = new HashMap<>();
+							HashMap<ITeam, ITeam> schedule = new HashMap<>();
 							schedule.put(t1, t2);
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
@@ -365,8 +364,8 @@ public class Schedule implements ISchedule {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
 				divTeamCount.put(division, 0);
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					totalGames += (scheduledDivisionMatchCount.get(team)) + (scheduledInConferenceMatchCount.get(team))
 							+ (scheduledOutConferenceMatchCount.get(team));
 				}

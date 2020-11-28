@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -54,7 +56,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void teamNameFromUserCheck(Team newTeam, ILeague league) {
+	public void teamNameFromUserCheck(ITeam newTeam, ILeague league) {
 		logger.info("Entered teamNameFromUserCheck()");
 		boolean checkTeamName = true;
 		String teamName = null;
@@ -71,7 +73,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void generalManagerNameFromUserCheck(Team newTeam, ILeague league) {
+	public void generalManagerNameFromUserCheck(ITeam newTeam, ILeague league) {
 //		logger.info("Entered generalManagerNameFromUserCheck()");
 //		boolean checkManagerName = true;
 //		String generalManager = null;
@@ -87,7 +89,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void headCoachNameFromUserCheck(Team newTeam, ILeague league) {
+	public void headCoachNameFromUserCheck(ITeam newTeam, ILeague league) {
 		logger.info("Entered headCoachNameFromUserCheck()");
 		boolean checkHeadCoachName = true;
 		String headCoach = null;
@@ -103,12 +105,12 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void playerChoiceFromUser(Team newTeam, ILeague league) {
+	public void playerChoiceFromUser(ITeam newTeam, ILeague league) {
 		logger.info("Entered playerChoiceFromUser()");
 		boolean playerValueCheck = true;
 		List<Integer> selectedValuesFromUser = new ArrayList<Integer>();
-		List<Player> skatersList = new ArrayList<Player>();
-		List<Player> goalies = new ArrayList<Player>();
+		List<IPlayer> skatersList = new ArrayList<>();
+		List<IPlayer> goalies = new ArrayList<>();
 		Player player = new Player();
 		String playerValue;
 		display.showMessageOnConsole(BusinessConstants.Select_Player.getValue().toString());
@@ -131,7 +133,7 @@ public class UserInputCheck implements IUserInputCheck {
 			playerValueCheck = true;
 		}
 
-		List<Player> finalListOfPlayers = new ArrayList<Player>();
+		List<IPlayer> finalListOfPlayers = new ArrayList<>();
 		finalListOfPlayers.addAll(skatersList);
 		finalListOfPlayers.addAll(goalies);
 		newTeam.setPlayers(finalListOfPlayers);

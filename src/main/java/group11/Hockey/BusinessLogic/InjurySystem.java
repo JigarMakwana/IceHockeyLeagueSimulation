@@ -32,7 +32,7 @@ public class InjurySystem implements IInjurySystem {
 	}
 
 	public void setInjuryToPlayers(ITeam team) {
-		for (Player player : team.getPlayers()) {
+		for (IPlayer player : team.getPlayers()) {
 			if (determainIsPlayerInjured()) {
 				player.setInjured(true);
 				player.setNumberOfInjuredDays(determainNumberOfDaysOfInjury());
@@ -53,11 +53,11 @@ public class InjurySystem implements IInjurySystem {
 		return numberOfInjuredDays;
 	}
 
-	public void settleRecoveredPlayer(IRoster roster, Player recoveredPlayer) {
+	public void settleRecoveredPlayer(IRoster roster, IPlayer recoveredPlayer) {
 		logger.info("Entered settleRecoveredPlayer()");
 		Positions position = findInjuredPlayerPosition(recoveredPlayer);
 		IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-		Player replacement = rosterSearch.findWeakestPlayerByPosition(roster.getActiveRoster(), position);
+		IPlayer replacement = rosterSearch.findWeakestPlayerByPosition(roster.getActiveRoster(), position);
 		if (null == replacement) {
 			return;
 		} else {
@@ -67,12 +67,12 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
-	public void settleInjuredPlayer(IRoster roster, Player injuredPlayer) {
+	public void settleInjuredPlayer(IRoster roster, IPlayer injuredPlayer) {
 		logger.info("Entered settleInjuredPlayer()");
 		if (isInjuredSwappingPossible(roster, injuredPlayer)) {
 			Positions position = findInjuredPlayerPosition(injuredPlayer);
 			IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-			Player replacement = rosterSearch.findStrongestPlayerByPosition(roster.getInActiveRoster(), position);
+			IPlayer replacement = rosterSearch.findStrongestPlayerByPosition(roster.getInActiveRoster(), position);
 			if (null == replacement) {
 				return;
 			} else {
@@ -83,13 +83,13 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
-	public boolean isInjuredSwappingPossible(IRoster roster, Player injuredPlayer) {
+	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer) {
 		logger.info("Entered isInjuredSwappingPossible()");
 		Positions position = findInjuredPlayerPosition(injuredPlayer);
 		return isUnInjuredPlayerAvailable(roster, position);
 	}
 
-	public Positions findInjuredPlayerPosition(Player injuredPlayer) {
+	public Positions findInjuredPlayerPosition(IPlayer injuredPlayer) {
 		if (injuredPlayer.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())) {
 			return Positions.FORWARD;
 		} else if (injuredPlayer.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {

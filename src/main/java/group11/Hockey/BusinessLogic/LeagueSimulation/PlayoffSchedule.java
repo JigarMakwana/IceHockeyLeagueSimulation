@@ -14,6 +14,7 @@ import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
@@ -40,11 +41,11 @@ public class PlayoffSchedule implements IScheduleStrategy {
 		logger.info("Entered getSchedule() and started scheduling");
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getStanleyDate();
-		HashMap<String, HashMap<Team, Team>> firstRoundSchedule = new HashMap<>();
-		Team team1, team2, firstHighestTeam = null, secondHighestTeam = null, thirdHighestTeam = null, tempTeam = null;
+		HashMap<String, HashMap<ITeam, ITeam>> firstRoundSchedule = new HashMap<>();
+		ITeam team1, team2, firstHighestTeam = null, secondHighestTeam = null, thirdHighestTeam = null, tempTeam = null;
 		int firstHighestPoints = 0, secondHighestPoints = 0, thirdHighestPoints = 0, tempPoints, teamPoints;
 		String time = "00:00:00", message;
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 		IAdvance advance = new Advance();
 		IPrintToConsole console = new PrintToConsole();
 		message = "\n********** Playoff Schedule - First round **********";
@@ -52,7 +53,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 
 		List<IConference> cconferenceList = league.getConferences();
 		for (IConference conference : cconferenceList) {
-			List<Team> roundOne = new ArrayList<Team>();
+			List<ITeam> roundOne = new ArrayList<>();
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
 				firstHighestPoints = 0;
@@ -62,8 +63,8 @@ public class PlayoffSchedule implements IScheduleStrategy {
 				secondHighestTeam = null;
 				thirdHighestTeam = null;
 				tempTeam = null;
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					teamPoints = team.getPoints();
 					if (teamPoints > firstHighestPoints) {
 						tempPoints = secondHighestPoints;
@@ -101,8 +102,8 @@ public class PlayoffSchedule implements IScheduleStrategy {
 			secondHighestTeam = null;
 			tempTeam = null;
 			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					if ((team == roundOne.get(0)) || (team == roundOne.get(1)) || (team == roundOne.get(2))
 							|| (team == roundOne.get(4)) || (team == roundOne.get(5)) || (team == roundOne.get(6))) {
 						continue;
@@ -144,7 +145,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 					team1 = roundOne.get(teamNumber1);
 					team2 = roundOne.get(teamNumber2);
 
-					HashMap<Team, Team> schedule = new HashMap<>();
+					HashMap<ITeam, ITeam> schedule = new HashMap<>();
 					schedule.put(team1, team2);
 					firstRoundSchedule.put(date + "T" + time, schedule);
 					message = "Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date
@@ -167,8 +168,8 @@ public class PlayoffSchedule implements IScheduleStrategy {
 						}
 					}
 				}
-				qualifiedTeams.add(team1);
-				qualifiedTeams.add(team2);
+				qualifiedTeams.add((Team)team1);
+				qualifiedTeams.add((Team)team2);
 				team1.setWins(0);
 				team2.setWins(0);
 				if ((teamNumber1 < teamNumber2) && (teamNumber2 - teamNumber1 > 1)) {

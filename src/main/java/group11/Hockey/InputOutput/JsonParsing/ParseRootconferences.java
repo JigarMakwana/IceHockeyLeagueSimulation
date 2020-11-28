@@ -61,7 +61,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			} else {
 				divisionObj.setDivisionName(divisionName);
 				// parse Teams
-				List<Team> teamsList = parseTeams(divisionsListJsonObject);
+				List<ITeam> teamsList = parseTeams(divisionsListJsonObject);
 				divisionObj.setTeams(teamsList);
 				divisionsList.add(divisionObj);
 			}
@@ -69,9 +69,9 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 		return divisionsList;
 	}
 
-	private List<Team> parseTeams(JSONObject divisionsListJsonObject) throws Exception {
+	private List<ITeam> parseTeams(JSONObject divisionsListJsonObject) throws Exception {
 		Team teamObj;
-		List<Team> teamsList = new ArrayList<Team>();
+		List<ITeam> teamsList = new ArrayList<>();
 		JSONArray teamsJSONArray = (JSONArray) divisionsListJsonObject.get(Attributes.TEAMS.getAttribute());
 		Iterator<JSONObject> teamsListIterator = teamsJSONArray.iterator();
 		while (teamsListIterator.hasNext()) {
@@ -87,7 +87,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			setGeneralManager(teamObj, teamsListJsonObject);
 			setHeadCoach(teamObj, teamsListJsonObject);
 			// parse Teams
-			List<Player> playersList = parsePlayers(teamsListJsonObject);
+			List<IPlayer> playersList = parsePlayers(teamsListJsonObject);
 			if (playersList != null && playersList.size() > 0) {
 				teamObj.setPlayers(playersList);
 				if (hasInvalidCaptain(playersList)) {
@@ -121,9 +121,9 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 		team.setHeadCoach(coach);
 	}
 
-	private List<Player> parsePlayers(JSONObject teamsListJsonObject) {
+	private List<IPlayer> parsePlayers(JSONObject teamsListJsonObject) {
 		Player playerObj;
-		List<Player> playersList = new ArrayList<Player>();
+		List<IPlayer> playersList = new ArrayList<>();
 		JSONArray playersJsonArray = (JSONArray) teamsListJsonObject.get(Attributes.PLAYERS.getAttribute());
 		if (playersJsonArray == null) {
 			return playersList;

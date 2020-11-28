@@ -9,13 +9,13 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public class GenerateShifts extends GenerateShiftsTemplate {
-	private List<Player> team;
+	private List<IPlayer> team;
 	private static Logger logger = LogManager.getLogger(GenerateShifts.class);
 
-	public GenerateShifts(List<Player> team) {
+	public GenerateShifts(List<IPlayer> team) {
 		super(team);
 		this.team = team;
 	}
@@ -23,8 +23,8 @@ public class GenerateShifts extends GenerateShiftsTemplate {
 	@Override
 	public void generateGoalieShift(String position) throws Exception {
 		int shift = 0;
-		List<Player> goalies = new ArrayList<>();
-		for (Player player : team) {
+		List<IPlayer> goalies = new ArrayList<>();
+		for (IPlayer player : team) {
 			if (player.getPosition().equalsIgnoreCase(position)) {
 				goalies.add(player);
 			}

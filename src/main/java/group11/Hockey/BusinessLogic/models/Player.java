@@ -288,7 +288,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		decreaseInjuredDaysForPlayer(days);
 	}
 
-	public void replacePlayerWithFreeAgent(ILeague league, List<Player> playersList) {
+	public void replacePlayerWithFreeAgent(ILeague league, List<IPlayer> playersList) {
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 
@@ -304,12 +304,12 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	public void removeFreeAgentsFromLeague(ILeague league, List<Player> freeAgents) {
+	public void removeFreeAgentsFromLeague(ILeague league, List<IPlayer> freeAgents) {
 		List<Player> listOfFreeAgentsInLeague = (List<Player>) league.getFreeAgents();
 		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
 		while (interator.hasNext()) {
 			Player pl = interator.next();
-			for (Player freeAgent : freeAgents) {
+			for (IPlayer freeAgent : freeAgents) {
 				if (freeAgent.toString().equalsIgnoreCase(pl.toString())) {
 					interator.remove();
 				}
@@ -317,32 +317,34 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	private void checkAndDecrementPlayerShootingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerShootingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setShooting(this.getShooting() - 1);
 		}
 	}
 
-	private void checkAndDecrementPlayerCheckingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerCheckingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setChecking(this.getChecking() - 1);
 		}
 	}
 
-	private void checkAndDecrementPlayerSkatingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerSkatingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setSkating(this.getSkating() - 1);
 		}
 	}
 
-	private void checkAndDecrementPlayerSavingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerSavingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setSaving(this.getSaving() - 1);
 		}
 	}
+
+	
 
 }

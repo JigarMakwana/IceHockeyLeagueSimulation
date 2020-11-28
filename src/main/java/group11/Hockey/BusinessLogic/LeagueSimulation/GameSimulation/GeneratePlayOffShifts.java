@@ -9,14 +9,15 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public class GeneratePlayOffShifts extends GenerateShiftsTemplate {
 
-	private List<Player> team;
 	private static Logger logger = LogManager.getLogger(GeneratePlayOffShifts.class);
 
-	public GeneratePlayOffShifts(List<Player> team) {
+	private List<IPlayer> team;
+
+	public GeneratePlayOffShifts(List<IPlayer> team) {
 		super(team);
 		this.team = team;
 	}
@@ -24,8 +25,8 @@ public class GeneratePlayOffShifts extends GenerateShiftsTemplate {
 	@Override
 	public void generateGoalieShift(String position) throws Exception {
 		int shift = 0;
-		List<Player> goalies = new ArrayList<>();
-		for (Player player : team) {
+		List<IPlayer> goalies = new ArrayList<>();
+		for (IPlayer player : team) {
 			if (player.getPosition().equalsIgnoreCase(position)) {
 				goalies.add(player);
 			}
@@ -42,7 +43,7 @@ public class GeneratePlayOffShifts extends GenerateShiftsTemplate {
 
 	}
 
-	private int bestGoalieIndex(List<Player> goalies) {
+	private int bestGoalieIndex(List<IPlayer> goalies) {
 		float player1_savings = goalies.get(0).getSaving();
 		float player2_savings = goalies.get(1).getSaving();
 

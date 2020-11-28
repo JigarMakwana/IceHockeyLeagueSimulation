@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
@@ -42,13 +44,13 @@ public class AdvanceToNextSeason extends StateMachineState {
 		String stanleyDate = timeLine.getStanleyDate();
 		int endYear = parse.stringToYear(stanleyDate);
 
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 
 		int year = parse.stringToYear(currentDate);
 		String advanced = "29/09/" + Integer.toString(year);
 		Date advancedDate = parse.stringToDate(advanced);
 		int daysBetween = (int) ((advancedDate.getTime() - dateTime.getTime()) / (24 * 60 * 60 * 1000));
-		Team winner = qualifiedTeams.get(0);
+		ITeam winner = qualifiedTeams.get(0);
 		qualifiedTeams.remove(winner);
 		String message = "\n********** Winner team of the season(" + startYear + "/" + endYear + ") is "
 				+ winner.getTeamName() + " **********";

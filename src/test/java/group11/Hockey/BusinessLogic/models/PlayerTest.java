@@ -109,7 +109,7 @@ public class PlayerTest {
 				Constants.playerStats, Constants.playerName, Constants.forward, true, false, 50);
 		Player player2 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
 				Constants.playerStats, "Agent one", Constants.forward, true, true, 20);
-		List<Player> playerList = new ArrayList<Player>();
+		List<IPlayer> playerList = new ArrayList<>();
 		playerList.add(player1);
 
 		LeagueModelMock leagueModel = new LeagueModelMock();
@@ -131,7 +131,7 @@ public class PlayerTest {
 				Constants.playerStats, Constants.playerName, Constants.forward, true, false, 50);
 		Player freeAgent2 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
 				Constants.playerStats, "Player 2", Constants.forward, true, false, 50);
-		List<Player> freeAgents = new ArrayList<Player>();
+		List<IPlayer> freeAgents = new ArrayList<>();
 		freeAgents.add(freeAgent1);
 		freeAgents.add(freeAgent2);
 		player.removeFreeAgentsFromLeague(league, freeAgents);

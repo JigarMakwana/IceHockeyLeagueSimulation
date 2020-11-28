@@ -13,6 +13,9 @@ import group11.Hockey.InputOutput.IDisplay;
 
 import java.util.*;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public class TradeDraft implements ITradeDraft {
     private static List<Map<Team, Map<Team, List<Boolean>>>> draftTradeTracker;
     private Team offeringTeam;
@@ -21,6 +24,7 @@ public class TradeDraft implements ITradeDraft {
     private IDisplay display;
     private IRosterSearch rosterSearch;
     private List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer = new ArrayList<>();
+    private static Logger logger = LogManager.getLogger(TradeDraft.class);
 
     public TradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display) {
         this.draftTradeTracker = new ArrayList<>();
@@ -32,21 +36,25 @@ public class TradeDraft implements ITradeDraft {
         setWeakestPlayerList();
     }
     private void setWeakestPlayerList(){
+    	logger.info("Entered setWeakestPlayerList()");
         this.weakestPlayerList = this.rosterSearch.findWeakestPlayers(this.offeringTeam.getRoster().getAllPlayerList(),
                 this.tradingConfig.getMaxPlayersPerTrade());
     }
 
     @Override
     public void clearDraftTradeTracker() {
+    	logger.info("Entered clearDraftTradeTracker()");
         draftTradeTracker.clear();
     }
 
     @Override
     public List<Map<Team, Map<Team, List<Boolean>>>> getDraftTradeTracker() {
+    	logger.info("Entered getDraftTradeTracker()");
         return draftTradeTracker;
     }
 
     public static void updateDraftTradeTracker(Team offeringTeam, Team requestedTeam, int draftRound) {
+    	logger.info("Entered updateDraftTradeTracker()");
         if(null == draftTradeTracker){
             addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
         } else {
@@ -72,6 +80,7 @@ public class TradeDraft implements ITradeDraft {
     }
 
     private static Map<Team, List<Boolean>> addToInnerMap(Team requestedTeam, int draftRound){
+    	logger.info("Entered addToInnerMap()");
         List<Boolean> roundTracker = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
         roundTracker.set(draftRound,true);
         Map<Team, List<Boolean>> tradeDetail = new HashMap<>();
@@ -79,6 +88,7 @@ public class TradeDraft implements ITradeDraft {
         return tradeDetail;
     }
     private static void addToOuterMap(Team offeringTeam, Map<Team, List<Boolean>> tradeDetail){
+    	logger.info("Entered addToOuterMap()");
         Map<Team, Map<Team, List<Boolean>>> entry = new HashMap<>();
         entry.put(offeringTeam,tradeDetail);
         draftTradeTracker.add(entry);
@@ -86,6 +96,7 @@ public class TradeDraft implements ITradeDraft {
 
     @Override
     public ITradeCharter generateTradeOffer(List<Team> eligibleTeamList) {
+    	logger.info("Entered generateTradeOffer()");
         display.showMessageOnConsole("Trading draft picks...");
         for(int i=PlayerDraft.ROUND_7.getNumVal(); i>=0; i--){
             if(offeringTeam.getTradedPicks().get(i) == false){
@@ -96,6 +107,7 @@ public class TradeDraft implements ITradeDraft {
     }
 
     public ITradeCharter tradeRound(List<Team> eligibleTeamList, int roundIdx){
+    	logger.info("Entered tradeRound()");
         for (int k = 0; k < eligibleTeamList.size(); k++) {
             if(eligibleTeamList.get(k) == this.offeringTeam) {
                 continue;
@@ -112,6 +124,7 @@ public class TradeDraft implements ITradeDraft {
     }
 
     private void tradingAlgorithm(Team requestedTeam) {
+    	logger.info("Entered tradingAlgorithm()");
         List<Integer> playerPositionFlag;
         playerPositionFlag = rosterSearch.findPlayerPositions(weakestPlayerList);
         List<Player> requestedPlayerList = requestedTeam.getRoster().getAllPlayerList();

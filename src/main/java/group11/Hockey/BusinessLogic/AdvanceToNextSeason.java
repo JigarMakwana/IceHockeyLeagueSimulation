@@ -30,7 +30,7 @@ public class AdvanceToNextSeason extends StateMachineState {
 	@Override
 	public StateMachineState startState() {
 
-		logger.info("Entered AdvanceToNextSeason.java");
+		logger.info("Entered startState()");
 		IParse parse = new Parse();
 		IAdvance advance = new Advance();
 

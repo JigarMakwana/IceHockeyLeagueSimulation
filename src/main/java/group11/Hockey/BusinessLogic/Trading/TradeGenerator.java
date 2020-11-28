@@ -14,6 +14,9 @@ import group11.Hockey.InputOutput.IDisplay;
 
 import java.util.*;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public class TradeGenerator implements ITradeGenerator {
     private Team offeringTeam;
     private List<Player> offeredPlayerList;
@@ -22,6 +25,7 @@ public class TradeGenerator implements ITradeGenerator {
     private IRosterSearch rosterSearch;
     private List<List<Player>> playerCombinations;
     private List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer = new ArrayList<>();
+    private static Logger logger = LogManager.getLogger(TradeGenerator.class);
 
     public TradeGenerator(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display){
         this.offeringTeam = offeringTeam;
@@ -34,6 +38,7 @@ public class TradeGenerator implements ITradeGenerator {
 
     @Override
     public ITradeCharter generateTradeOffer(List<Team> eligibleTeamList) {
+    	logger.info("Entered generateTradeOffer()");
         display.showMessageOnConsole("\nGenerating Trade for AI Team " + offeringTeam.getTeamName());
         Team requestedTeam = findStrongestTeam(eligibleTeamList);
         if(requestedTeam == offeringTeam) {
@@ -53,12 +58,14 @@ public class TradeGenerator implements ITradeGenerator {
     }
 
     public Team findStrongestTeam(List<Team> eligibleTeamList){
+    	logger.info("Entered findStrongestTeam()");
         Collections.sort(eligibleTeamList);
         return eligibleTeamList.get(0);
     }
 
     private void findCombinations(List<Player> playerList,List<Player> combinations, int start, int end, int index, int r) {
-        if (index == r) {
+    	logger.info("Entered findCombinations()");
+    	if (index == r) {
             List<Player> temp = new ArrayList<>();
             for (int i=0; i<r; i++){
                 temp.add(combinations.get(i));
@@ -73,6 +80,7 @@ public class TradeGenerator implements ITradeGenerator {
     }
 
     public Map<Float, List<Player>> findBestCombination(){
+    	logger.info("Entered findBestCombination()");
         List<Player> tradePlayerList = new ArrayList<>();
         float newTeamStrength = 0.0f;
         List<Player> activeRoster = offeringTeam.getRoster().getActiveRoster();
@@ -99,6 +107,7 @@ public class TradeGenerator implements ITradeGenerator {
     }
 
     public float averageTeamStrength(List<Team> eligibleTeamList){
+    	logger.info("Entered averageTeamStrength()");
         float sum = 0.0f;
         for(int i=0 ; i<eligibleTeamList.size(); i++){
             sum += eligibleTeamList.get(i).getTeamStrength();
@@ -108,6 +117,7 @@ public class TradeGenerator implements ITradeGenerator {
 
     @Override
     public ITradeCharter tradeDraftPicks(List<Team> eligibleTeamList) {
+    	logger.info("Entered tradeDraftPicks()");
         ITradeDraft tradeDraft = DefaultHockeyFactory.makeTradeDraft(offeringTeam,tradingConfig,display);
         return tradeDraft.generateTradeOffer(eligibleTeamList);
     }

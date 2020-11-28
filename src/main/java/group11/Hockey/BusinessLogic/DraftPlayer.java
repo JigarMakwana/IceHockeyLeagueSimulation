@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import org.apache.log4j.LogManager;
@@ -30,6 +29,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 
 	@Override
 	public StateMachineState startState() {
+		logger.info("Entered startState()");
 		draftPlayer();
 		return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
 	}
@@ -84,6 +84,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 	}
 
 	public List<IPlayer> teamSettler(Team team) {
+		logger.info("Entered teamSettler()");
 		List<IPlayer> extraPlayers = new ArrayList<IPlayer>();
 		List<Player> players = team.getPlayers();
 		if (players.size() > 30) {
@@ -118,6 +119,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 
 	private void populateExtraPlayerList(List<IPlayer> extraPlayers, List<Player> playerList,
 			int extraPlayersCount) {
+		logger.info("Entered populateExtraPlayerList()");
 		for(int i=0; i< extraPlayersCount; i++) {
 			extraPlayers.add(playerList.get(i));
 		}

@@ -1,5 +1,8 @@
 package group11.Hockey.BusinessLogic.models;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.db.IGameplayConfigDb;
 
 public class GameplayConfig implements IGameplayConfig {
@@ -8,9 +11,12 @@ public class GameplayConfig implements IGameplayConfig {
 	private IInjuries injuries;
 	private ITraining training;
 	private ITrading trading;
+	
 
 	private IGameplayConfigDb gameplayConfigDb;
 	private String leagueName;
+	
+	private static Logger logger = LogManager.getLogger(GameplayConfig.class);
 
 	public GameplayConfig(IAging aging, IInjuries injuries, ITraining training,
 			ITrading trading) {
@@ -38,26 +44,32 @@ public class GameplayConfig implements IGameplayConfig {
 	}
 
 	public IAging getAging() {
+		logger.info("Entered getAging()");
 		return aging;
 	}
 
 	public IGameResolver getGameResolver() {
+		logger.info("Entered getGameResolver()");
 		return gameResolver;
 	}
 
 	public IInjuries getInjuries() {
+		logger.info("Entered getInjuries()");
 		return injuries;
 	}
 
 	public ITraining getTraining() {
+		logger.info("Entered getTraining()");
 		return training;
 	}
 
 	public ITrading getTrading() {
+		logger.info("Entered getTrading()");
 		return trading;
 	}
 
 	private void saveGameplayConfig() {
+		logger.info("Entered saveGameplayConfig()");
 		gameplayConfigDb.insertGameplayConfig(aging, gameResolver, injuries, training, trading, leagueName);
 	}
 

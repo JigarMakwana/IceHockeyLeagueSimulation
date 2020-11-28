@@ -30,7 +30,7 @@ public class App {
 				currentState = DefaultHockeyFactory.makeLoadTeam(commandLineInput, leagueDb);
 			}
 		} catch (Exception e) {
-			logger.warn("Exception caught : "+e);
+			logger.warn("Exception occured : "+e);
 			System.exit(0);
 		}
 		do {

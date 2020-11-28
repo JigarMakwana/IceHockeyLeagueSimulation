@@ -1,8 +1,5 @@
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.IConstantSupplier;
-import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ISettleTeamRoster;
 import group11.Hockey.InputOutput.*;
 import group11.Hockey.BusinessLogic.*;
@@ -12,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * This class contain logic to settle the teams after trade negotiation
@@ -25,6 +25,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
     private int teamSize;
     private int skaterSize;
     private int goalieSize;
+    private static Logger logger = LogManager.getLogger(SettleTeamRoster.class);
 
     IDisplay display = DefaultHockeyFactory.makeDisplay();
     IUserInputValidation userSelection = new UserInputValidation();
@@ -39,6 +40,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
 
     public void settleTeam(Team team)
             throws Exception {
+    	logger.info("Entered settleTeam()");
         int noOfPlayers = team.getPlayers().size();
         List<Player> playerList = team.getPlayers();
         List<Integer> playerPositionFlag = aiTradingObj.getPlayerMiscellaneous().findPlayerPositions(playerList);
@@ -98,6 +100,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
 
     public void hirePlayer(ILeague league, List<Player> playerList, Positions playerPosition)
             throws Exception {
+    	logger.info("Entered hirePlayer()");
         List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(freeAgents);
         Collections.reverse(sortedFreeAgents);
@@ -135,6 +138,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
     }
 
     public void dropPlayer(ILeague league, List<Player> playerList, Positions playerPosition) {
+    	logger.info("Entered dropPlayer()");
         List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         List<Player> sortedFreeAgents = aiTradingObj.getPlayerMiscellaneous().sortPlayersByStrength(playerList);
         Iterator<Player> playersItr = sortedFreeAgents.iterator();
@@ -165,6 +169,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
 
     public void hirePlayerUser(ILeague league, List<Player> playerList, Positions playerPosition)
             throws Exception {
+    	logger.info("Entered hirePlayerUser()");
         List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         Iterator<Player> freeAgentsItr = freeAgents.iterator();
         boolean playerHired = false;
@@ -219,6 +224,7 @@ public class SettleTeamRoster implements ISettleTeamRoster {
     }
 
     public void dropPlayerUser(ILeague league, List<Player> playerList, Positions playerPosition) {
+    	logger.info("Entered dropPlayerUser()");
         List<Player> freeAgents = (List<Player>) league.getFreeAgents();
         Iterator<Player> playersItr = playerList.iterator();
 

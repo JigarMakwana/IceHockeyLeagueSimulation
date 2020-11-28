@@ -1,14 +1,14 @@
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.*;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.IAITrading;
 import group11.Hockey.BusinessLogic.models.*;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 import group11.Hockey.InputOutput.*;
 import group11.Hockey.db.League.ILeagueDb;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * This class contain all the logic to trade 1. Between AI Teams and 2. Between
@@ -25,6 +25,7 @@ public class AITrading extends StateMachineState {
 	private IDisplay display;
 	private IValidations validation;
 	private ILeagueDb leagueDb;
+	private static Logger logger = LogManager.getLogger(AITrading.class);
 
 	public AITrading(ILeague leagueObj) {
 		this.leagueObj = leagueObj;
@@ -56,15 +57,18 @@ public class AITrading extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
+		logger.info("Entered startState()");
 		this.generateTradeOffers();
 		return new AgePlayer(leagueObj, 1, leagueDb, display);
 	}
 
 	public PlayerTradeOperations getPlayerMiscellaneous() {
+		logger.info("Entered getPlayerMiscellaneous()");
 		return playerMiscellaneous;
 	}
 
 	public void generateTradeOffers() {
+		logger.info("Entered generateTradeOffers()");
 		List<Team> eligibleTeamList = determineTradeEligibleTeams();
 		int teamLength = eligibleTeamList.size();
 		boolean isAITeam = false;
@@ -115,6 +119,7 @@ public class AITrading extends StateMachineState {
 	}
 
 	public List<Team> determineTradeEligibleTeams() {
+		logger.info("Entered determineTradeEligibleTeams()");
 		int lossPointCutOff = tradingConfig.getLossPoint();
 		boolean isAITeam;
 		List<Team> eligibleTeamList = new ArrayList<Team>();
@@ -125,6 +130,7 @@ public class AITrading extends StateMachineState {
 				List<Team> teamList = division.getTeams();
 				for (Team team : teamList) {
 					if ((team.getLosses() >= lossPointCutOff)) {
+						logger.info(team.getTeamName()+" team is eligible for trading");
 						eligibleTeamList.add(team);
 					}
 				}
@@ -138,6 +144,7 @@ public class AITrading extends StateMachineState {
 	}
 
 	private float generateRandomNumber() {
+		logger.info("Entered generateRandomNumber()");
 		Random rand = new Random();
 		float randomTradeOfferChance = rand.nextFloat();
 		return randomTradeOfferChance;
@@ -145,38 +152,47 @@ public class AITrading extends StateMachineState {
 
 	public void resolveAIToAITrade(Team team1, List<Player> offeredPlayerList, Team team2,
 			List<Player> requestedPlayerList) {
+		logger.info("Entered resolveAIToAITrade()");
 		Float playerStrength1 = playerMiscellaneous.playersStrengthSum(offeredPlayerList);
 		Float playerStrength2 = playerMiscellaneous.playersStrengthSum(requestedPlayerList);
 		float randomAcceptanceChance = this.generateRandomNumber();
 		if (randomAcceptanceChance < tradingConfig.getRandomAcceptanceChance()) {
+			logger.info("AI to AI Trade accepted");
 			acceptTrade(team1, offeredPlayerList, team2, requestedPlayerList);
 		} else if (playerStrength1 > playerStrength2) {
+			logger.info("AI to AI Trade accepted");
 			acceptTrade(team1, offeredPlayerList, team2, requestedPlayerList);
 		} else {
+			logger.info("AI to AI Trade rejected");
 			rejectTrade(team1);
 		}
 	}
 
 	public void resolveAIToUserTrade(Team team1, List<Player> offeredPlayerList, Team team2,
 			List<Player> requestedPlayerList) {
+		logger.info("Entered resolveAIToUserTrade()");
 //		display.displayTradeStatisticsToUser(team1, offeredPlayerList, team2, requestedPlayerList);
 		display.displayAcceptRejectOptionToUser();
 		IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
 
 		int userInput = userInputCheck.validateUserTradeInput();
 		if (userInput == 1) {
+			logger.info("AI to User Trade accepted");
 			acceptTrade(team1, offeredPlayerList, team2, requestedPlayerList);
 		} else if (userInput == 0) {
+			logger.info("AI to User Trade rejected");
 			rejectTrade(team1);
 		}
 	}
 
 	public void rejectTrade(Team team) {
+		logger.info("Entered rejectTrade()");
 		display.showMessageOnConsole("Trade is declined.");
 		resetLossPoints(team);
 	}
 
 	public void acceptTrade(Team team1, List<Player> offeredPlayerList, Team team2, List<Player> requestedPlayerList) {
+		logger.info("Entered acceptTrade()");
 		List<Player> localOfferedPlayerList = new ArrayList<>();
 		for (Player p : offeredPlayerList) {
 			localOfferedPlayerList.add(p);
@@ -204,10 +220,12 @@ public class AITrading extends StateMachineState {
 	}
 
 	public void resetLossPoints(Team team) {
+		logger.info("Entered resetLossPoints()");
 		team.setLosses(0);
 	}
 
 	public void settleTeam(Team team) {
+		logger.info("Entered settleTeam()");
 		display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size after trade negotiation...");
 		IConstantSupplier constants = new ConstantSupplier(20, 10, 16, 10, 4);
 		SettleTeamRoster settleObj = new SettleTeamRoster(leagueObj, constants);
@@ -215,6 +233,7 @@ public class AITrading extends StateMachineState {
 			settleObj.settleTeam(team);
 			display.showMessageOnConsole("Team " + team.getTeamName() + "'s size successfully settled!");
 		} catch (Exception e) {
+			logger.error("Exception occured : "+e);
 			display.showMessageOnConsole("Teams cannot be settled after trade negotiation.");
 		}
 	}

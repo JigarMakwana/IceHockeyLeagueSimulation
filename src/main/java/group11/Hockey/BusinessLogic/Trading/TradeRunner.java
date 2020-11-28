@@ -12,12 +12,16 @@ import group11.Hockey.InputOutput.IDisplay;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public class TradeRunner implements ITradeRunner {
     private ILeague leagueObj;
     private ICommandLineInput commandLineInput;
     private IValidations validation;
     private IDisplay display;
     private IConstantSupplier constantSupplier;
+    private static Logger logger = LogManager.getLogger(TradeRunner.class);
 
     public TradeRunner(ILeague leagueObj, ICommandLineInput commandLineInput, IValidations validation,
                        IDisplay display, IConstantSupplier constantSupplier){
@@ -30,6 +34,7 @@ public class TradeRunner implements ITradeRunner {
 
     @Override
     public void runTrading() {
+    	logger.info("Entered runTrading()");
         ITradeInitializer tradeInitializer = DefaultHockeyFactory.makeTradeInitializer(leagueObj);
         List<Team> eligibleTeamList = tradeInitializer.getEligibleTeams();
         ITradingConfig tradingConfig = tradeInitializer.getTradingConfig();

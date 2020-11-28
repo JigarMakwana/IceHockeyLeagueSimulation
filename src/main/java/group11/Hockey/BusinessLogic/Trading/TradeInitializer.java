@@ -7,14 +7,16 @@ import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
 import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class TradeInitializer implements ITradeInitializer {
 	private ILeague leagueObj;
 	private ITrading tradingConfig;
 	private List<Team> eligibleTeams = new ArrayList<>();
+	private static Logger logger = LogManager.getLogger(TradeInitializer.class);
 
 	public TradeInitializer(ILeague leagueObj) {
 		this.leagueObj = leagueObj;
@@ -24,6 +26,7 @@ public class TradeInitializer implements ITradeInitializer {
 	}
 
 	private void setEligibleTeams() {
+		logger.info("Entered setEligibleTeams()");
 		int lossPointCutOff = tradingConfig.getLossPoint();
 		List<IConference> conferenceList = leagueObj.getConferences();
 		for (IConference conference : conferenceList) {
@@ -40,6 +43,7 @@ public class TradeInitializer implements ITradeInitializer {
 	}
 
 	public ITradingConfig getTradingConfig() {
+		logger.info("Entered getTradingConfig()");
 		ITradingConfig configTrading = DefaultHockeyFactory.makeConfigTrading(tradingConfig.getLossPoint(),
 				tradingConfig.getRandomTradeOfferChance(), tradingConfig.getMaxPlayersPerTrade(),
 				tradingConfig.getRandomAcceptanceChance(), tradingConfig.getGmTable());
@@ -47,6 +51,7 @@ public class TradeInitializer implements ITradeInitializer {
 	}
 
 	private boolean isRandomOfferChanceSuccess() {
+		logger.info("Entered isRandomOfferChanceSuccess()");
 		IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
 		float randomTradeOfferChance = randomFloatGenerator.generateRandomFloat();
 		if (randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()) {
@@ -58,6 +63,7 @@ public class TradeInitializer implements ITradeInitializer {
 
 	@Override
 	public boolean isTradePossible(Team team) {
+		logger.info("Entered isTradePossible()");
 		if (team.isUserTeam()) {
 			return false;
 		} else if (isRandomOfferChanceSuccess()) {
@@ -69,6 +75,7 @@ public class TradeInitializer implements ITradeInitializer {
 
 	@Override
 	public List<Team> getEligibleTeams() {
+		logger.info("Entered getEligibleTeams()");
 		return eligibleTeams;
 	}
 }

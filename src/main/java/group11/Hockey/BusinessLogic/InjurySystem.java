@@ -1,7 +1,6 @@
 package group11.Hockey.BusinessLogic;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
@@ -16,7 +15,7 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 
-public class InjurySystem implements IInjurySystem{
+public class InjurySystem implements IInjurySystem {
 
 	private float randomInjuryChance;
 	private int injuryDaysLow;
@@ -42,13 +41,15 @@ public class InjurySystem implements IInjurySystem{
 	}
 
 	public boolean determainIsPlayerInjured() {
-		float probabilityOfInjury = new Random().nextFloat();
+		float probabilityOfInjury = DefaultHockeyFactory.makeRandomNumberGenerator().generateRandomFloat();
 		boolean isPlayerInjured = randomInjuryChance >= probabilityOfInjury;
 		return isPlayerInjured;
 	}
 
 	public int determainNumberOfDaysOfInjury() {
-		int numberOfInjuredDays = new Random().nextInt((injuryDaysHigh - injuryDaysLow) + 1) + injuryDaysLow;
+		int numberOfInjuredDays = DefaultHockeyFactory.makeRandomNumberGenerator()
+				.generateRandomInt((injuryDaysHigh - injuryDaysLow) + 1);
+		numberOfInjuredDays += injuryDaysLow;
 		return numberOfInjuredDays;
 	}
 

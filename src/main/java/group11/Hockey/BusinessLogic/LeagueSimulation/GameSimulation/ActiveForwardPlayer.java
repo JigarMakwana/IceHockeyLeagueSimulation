@@ -9,11 +9,12 @@ import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
-public class ForwardPlayerActive implements IGameStrategy {
+public class ActiveForwardPlayer implements IGameStrategy {
 
 	public int calculateAveragePlayersStrength(List<Player> playersList, ITeam defendingTeam) {
 		int skating = 0;
 		int numberOfForwardMen = 0;
+		int playerStrength = 0;
 		for (Player player : playersList) {
 			if (player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())) {
 				skating += player.getShooting();
@@ -23,7 +24,8 @@ public class ForwardPlayerActive implements IGameStrategy {
 		if (numberOfForwardMen == 0) {
 			numberOfForwardMen = 1;
 		}
-		return skating / numberOfForwardMen;
+		playerStrength = skating / numberOfForwardMen;
+		return playerStrength;
 	}
 
 	public void playGame(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,

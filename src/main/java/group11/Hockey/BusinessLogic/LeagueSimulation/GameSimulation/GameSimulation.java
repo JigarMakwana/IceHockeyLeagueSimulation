@@ -5,6 +5,9 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
@@ -14,6 +17,7 @@ public class GameSimulation implements IGameSimulation {
 	private ILeague league;
 	private ITeam team1;
 	private ITeam team2;
+	private static Logger logger = LogManager.getLogger(GameSimulation.class);
 
 	public GameSimulation(ILeague league, ITeam team1, ITeam team2) {
 		super();
@@ -25,26 +29,36 @@ public class GameSimulation implements IGameSimulation {
 	public ITeam startGamePlay() {
 		List<Player> team_p1 = team1.getPlayers();
 		List<Player> team_p2 = team2.getPlayers();
+		List<Player>[] shiftsTeam1 = null;
+		List<Player>[] shiftsTeam2 = null;
 
 		GenerateShiftsTemplate shifts1 = null;
 		GenerateShiftsTemplate shifts2 = null;
-		if (true) {
-			shifts1 = DefaultHockeyFactory.makeGenerateShifts(team_p1);
-			shifts2 = DefaultHockeyFactory.makeGenerateShifts(team_p2);
-		} else {
+		if (league.getQualifiedTeams().size() > 0) {
+			logger.info("Generate shifts for playoff schedule");
 			shifts1 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p1);
 			shifts2 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p2);
+		} else {
+			logger.info("Generate shifts for normal schedule");
+			shifts1 = DefaultHockeyFactory.makeGenerateShifts(team_p1);
+			shifts2 = DefaultHockeyFactory.makeGenerateShifts(team_p2);
 		}
-		List<Player>[] shiftsTeam1 = shifts1.getShifts();
+
+		try {
+			shiftsTeam1 = shifts1.getShifts();
+			shiftsTeam2 = shifts2.getShifts();
+		} catch (Exception e) {
+			logger.error("error while generating shifts "+ e);
+		}
 		int shootingStatsTeam1 = teamSkatingStats(team_p1);
 
-		List<Player>[] shiftsTeam2 = shifts2.getShifts();
 		int shootingStatsTeam2 = teamSkatingStats(team_p2);
 		setAverageShootsForTeams(shootingStatsTeam1, shootingStatsTeam2);
 
 		startGame(shiftsTeam1, shiftsTeam2);
 		ITeam winnerTeam = setWinnerTeam(team1, team2);
 		gameSummary(team1, team2);
+		resetTeamStats(team1, team2);
 		return winnerTeam;
 	}
 
@@ -70,11 +84,13 @@ public class GameSimulation implements IGameSimulation {
 
 			for (int i = 0; i < 2; i++) {
 				if (averageShootsTeam1 > 0) {
-					makeShoot(shiftsTeam1[shift], shiftsTeam2[shift], team1, team2, 3);
+					makeShoot(shiftsTeam1[shift], shiftsTeam2[shift], team1, team2,
+							appConfiguration.numberOfShoots_high);
 					averageShootsTeam1--;
 				} else {
 					if (averageShootsTeam2 > 0) {
-						makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1, 3);
+						makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1,
+								appConfiguration.numberOfShoots_high);
 						averageShootsTeam2--;
 					}
 				}
@@ -82,7 +98,7 @@ public class GameSimulation implements IGameSimulation {
 		}
 		for (int shift = appConfiguration.shifts / 2; shift < appConfiguration.shifts; shift++) {
 			if (averageShootsTeam2 > 0) {
-				makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1, 2);
+				makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1, appConfiguration.numberOfShoots_low);
 				averageShootsTeam2--;
 			}
 		}
@@ -90,7 +106,7 @@ public class GameSimulation implements IGameSimulation {
 
 	private void makeShoot(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
-
+		logger.info("Team initiating the shoot");
 		IGameContext gameContext = null;
 
 		managePanelty(defendingTeam);
@@ -139,13 +155,13 @@ public class GameSimulation implements IGameSimulation {
 		league.setSavesInSeason(league.getSavesInSeason() + savesInGame);
 		league.setGamesInSeason(league.getGamesInSeason() + 2);
 
-		System.out.println("***********end summary**************");
-
 		System.out.println("Goals per game: " + (float) league.getGoalsInSeason() / league.getGamesInSeason());
 		System.out.println("Penalties per game: " + (float) league.getPenaltiesInSeason() / league.getGamesInSeason());
 		System.out.println("Shots: " + 60 / 2);
 		System.out.println("Saves: " + (float) league.getSavesInSeason() / league.getGamesInSeason());
+	}
 
+	private void resetTeamStats(ITeam team1, ITeam team2) {
 		team1.setGoalsInSeason(0);
 		team2.setGoalsInSeason(0);
 		team1.setPenaltiesInSeason(0);

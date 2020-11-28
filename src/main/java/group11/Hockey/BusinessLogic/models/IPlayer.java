@@ -31,4 +31,10 @@ public interface IPlayer {
 	void setCaptain(boolean captain);
 
 	boolean isActive();
+
+	public void setBirthDay(int age);
+
+	public void setBirthMonth(int age);
+
+	public void setBirthYear(int age);
 }

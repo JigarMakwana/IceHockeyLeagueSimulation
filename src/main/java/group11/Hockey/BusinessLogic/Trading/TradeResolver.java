@@ -40,7 +40,7 @@ public class TradeResolver implements ITradeResolver {
         this.display = display;
         this.userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
         this.rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-        this.randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
+        this.randomFloatGenerator = DefaultHockeyFactory.makeRandomNumberGenerator();
     }
 
     @Override

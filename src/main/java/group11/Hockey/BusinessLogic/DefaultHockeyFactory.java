@@ -19,14 +19,14 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.InitializeSeason;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.PlayoffSchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ScheduleContext;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.DefencePlayerActive;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ForwardPlayerActive;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveDefencePlayer;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveForwardPlayer;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GeneratePlayOffShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShiftsTemplate;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GoaliePlayerActive;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveGoaliePlayer;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
@@ -170,15 +170,15 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static IGameStrategy makeDefencePlayerActive() {
-		return new DefencePlayerActive();
+		return new ActiveDefencePlayer();
 	}
 
 	public static IGameStrategy makeForwardPlayerActive() {
-		return new ForwardPlayerActive();
+		return new ActiveForwardPlayer();
 	}
 
 	public static IGameStrategy makeGoaliePlayerActive() {
-		return new GoaliePlayerActive();
+		return new ActiveGoaliePlayer();
 	}
 
 	public static IGameContext makeGameContext(IGameStrategy gameStrategy) {
@@ -229,8 +229,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Trading(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance, gmTable);
 	}
 
-	public static IRandomNoGenerator makeRandomFloatGenerator() {
-		return new RandomFloatGenerator();
+	public static IRandomNoGenerator makeRandomNumberGenerator() {
+		return new RandomNumberGenerator();
 	}
 
 	public static ITradeInitializer makeTradeInitializer(ILeague leagueObj) {

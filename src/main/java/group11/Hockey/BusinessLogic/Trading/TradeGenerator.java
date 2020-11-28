@@ -84,7 +84,7 @@ public class TradeGenerator implements ITradeGenerator {
                 if(calStrength > newTeamStrength){
                     newTeamStrength = calStrength;
                     tradePlayerList = playerCombinations.get(j);
-                    IRandomNoGenerator rand = DefaultHockeyFactory.makeRandomFloatGenerator();
+                    IRandomNoGenerator rand = DefaultHockeyFactory.makeRandomNumberGenerator();
                     rand.generateRandomFloat();
                     if(rand.generateRandomFloat() > PlayerNoModifier.MULTIPLE_PLAYER_MODIFIER.getNumVal()){
                         offeredPlayerList.clear();

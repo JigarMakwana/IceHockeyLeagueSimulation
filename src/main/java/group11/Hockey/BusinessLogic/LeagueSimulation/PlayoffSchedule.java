@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;

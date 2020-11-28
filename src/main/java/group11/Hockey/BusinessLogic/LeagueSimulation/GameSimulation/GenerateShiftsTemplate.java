@@ -19,7 +19,7 @@ public abstract class GenerateShiftsTemplate {
 		this.team = team;
 	}
 
-	public List<Player>[] getShifts() {
+	public List<Player>[] getShifts() throws Exception {
 		for (int i = 0; i < appConfiguration.shifts; i++) {
 			shifts[i] = new ArrayList<>();
 		}
@@ -48,5 +48,5 @@ public abstract class GenerateShiftsTemplate {
 		} while (shift < appConfiguration.shifts);
 	}
 
-	public abstract void generateGoalieShift(String position);
+	public abstract void generateGoalieShift(String position) throws Exception;
 }

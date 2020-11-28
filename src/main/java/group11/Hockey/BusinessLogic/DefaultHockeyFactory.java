@@ -76,10 +76,10 @@ import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.Deserialize;
-import group11.Hockey.db.ICoachDb;
 import group11.Hockey.db.IDeserialize;
 import group11.Hockey.db.ISerialize;
 import group11.Hockey.db.Serialize;
+import group11.Hockey.db.Coach.ICoachDb;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueSerialisation;
 

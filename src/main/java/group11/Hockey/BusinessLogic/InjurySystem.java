@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;

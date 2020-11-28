@@ -15,8 +15,6 @@ import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public abstract class RetirePlayer extends StateMachineState {
 	private static Logger logger = LogManager.getLogger(RetirePlayer.class);

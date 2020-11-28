@@ -1,23 +1,24 @@
-package group11.Hockey.db;
+/*
+ * Author: RajKumar B00849566
+ */
+package group11.Hockey.db.Manager;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
-public class CoachDb implements ICoachDb {
+import group11.Hockey.db.DefaultDatabaseFactory;
+import group11.Hockey.db.IProcedureCallDb;
+
+public class ManagerDb implements IManagerDb {
 
 	@Override
-	public boolean insertCoaches(String leagueName, String coachName, float skating, float shooting, float checking,
-			float saving) {
-		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call insertCoaches(?, ?, ?, ?, ?, ?, ?)}");
+	public boolean insertManager(String leagueName, String managerName) {
+		IProcedureCallDb procedureCallDb = DefaultDatabaseFactory.makeProcedureCallDb("{call insertManagers(?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
 		try {
 			statement.setString(1, leagueName);
-			statement.setString(2, coachName);
-			statement.setFloat(3, skating);
-			statement.setFloat(4, shooting);
-			statement.setFloat(5, checking);
-			statement.setFloat(6, saving);
+			statement.setString(2, managerName);
 
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();

@@ -18,11 +18,10 @@ import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.db.ICoachDb;
-import group11.Hockey.db.IGameplayConfigDb;
-import group11.Hockey.db.IManagerDb;
-import group11.Hockey.db.IPlayerDb;
+import group11.Hockey.db.Coach.ICoachDb;
+import group11.Hockey.db.GameplayConfig.IGameplayConfigDb;
 import group11.Hockey.db.League.ILeagueDb;
+import group11.Hockey.db.Manager.IManagerDb;
 
 public class SimulateSeasonTest {
 

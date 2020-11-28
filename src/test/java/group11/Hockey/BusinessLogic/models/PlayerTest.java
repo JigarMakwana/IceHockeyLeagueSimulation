@@ -2,7 +2,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import org.junit.Assert;
 import org.junit.Test;
-import group11.Hockey.db.IPlayerDb;
+import group11.Hockey.db.Player.IPlayerDb;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

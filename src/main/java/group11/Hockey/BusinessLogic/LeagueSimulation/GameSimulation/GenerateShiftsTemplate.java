@@ -12,7 +12,7 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 public abstract class GenerateShiftsTemplate {
 	private List<IPlayer> team;
 	List<IPlayer> playersOnIce = new ArrayList<>();
-	List<IPlayer>[] shifts = new List[appConfiguration.shifts];
+	List<IPlayer>[] shifts = new ArrayList[appConfiguration.shifts];
 
 	public GenerateShiftsTemplate(List<IPlayer> team) {
 		super();

@@ -12,6 +12,7 @@ import org.junit.Test;
 import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.DefaultInputOutputFactory;
 
 public class ParseRootgameplayConfigTest {
 
@@ -26,7 +27,7 @@ public class ParseRootgameplayConfigTest {
 	@Test
 	public void parseRootElementTest() throws Exception {
 		League league = new League();
-		ParseRootgameplayConfig parseRoot = new ParseRootgameplayConfig();
+		IParseRootElement parseRoot = DefaultInputOutputFactory.makeParseRootgameplayConfig();
 		parseRoot.parseRootElement(league, jsonObject);
 		IGameplayConfig gamePlay = league.getGamePlayConfig();
 		IAging age = gamePlay.getAging();

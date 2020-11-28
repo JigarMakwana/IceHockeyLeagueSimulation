@@ -107,7 +107,7 @@ public class Team implements ITeam, Comparable<Team> {
 		return generalManager;
 	}
 
-	public void setGeneralManager(GeneralManager generalManager) {
+	public void setGeneralManager(IGeneralManager generalManager) {
 		this.generalManager = generalManager;
 	}
 
@@ -228,10 +228,10 @@ public class Team implements ITeam, Comparable<Team> {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 
-	public void addGeneralMangerToTeam(Team team, GeneralManager gmObj, ILeague league) {
+	public void addGeneralMangerToTeam(Team team, IGeneralManager gmObj, ILeague league) {
 		team.setGeneralManager(gmObj);
-		List<GeneralManager> generalManagers = league.getGeneralManagers();
-		for (GeneralManager gm : generalManagers) {
+		List<IGeneralManager> generalManagers = league.getGeneralManagers();
+		for (IGeneralManager gm : generalManagers) {
 			if (gm.getName() != null && gm.getPersonality() != null && gm.getName().equalsIgnoreCase(gmObj.getName())
 					&& gm.getPersonality().equalsIgnoreCase(gmObj.getPersonality())) {
 				generalManagers.remove(gm);

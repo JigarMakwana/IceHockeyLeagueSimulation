@@ -68,22 +68,27 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 	public GameplayConfig loadGameConfig(String leagueName) {
 		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call getGameConfig(?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
-		GameplayConfig gameplayConfig = null ;
+		GameplayConfig gameplayConfig = null;
 		try {
 			statement.setString(1, leagueName);
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
 			while (resultSet.next()) {
-				Aging aging = new Aging(resultSet.getInt(Constants.averageRetirementAge.toString()), resultSet.getInt(Constants.maximumAge.toString()));
-				GameResolver gameResolver = new GameResolver(resultSet.getFloat(Constants.randomWinChance.toString()));
-				Injuries injuries = new Injuries(resultSet.getFloat(Constants.randomInjuryChance.toString()), resultSet.getInt(Constants.injuryDaysLow.toString()), resultSet.getInt(Constants.injuryDaysHigh.toString()));
+				Aging aging = new Aging(resultSet.getInt(Constants.averageRetirementAge.toString()),
+						resultSet.getInt(Constants.maximumAge.toString()));
+				Injuries injuries = new Injuries(resultSet.getFloat(Constants.randomInjuryChance.toString()),
+						resultSet.getInt(Constants.injuryDaysLow.toString()),
+						resultSet.getInt(Constants.injuryDaysHigh.toString()));
 				Training training = new Training(resultSet.getInt(Constants.daysUntilStatIncreaseCheck.toString()));
-				Trading trading = new Trading(resultSet.getInt(Constants.lossPoint.toString()), resultSet.getFloat(Constants.randomTradeOfferChance.toString()), resultSet.getInt(Constants.maxPlayersPerTrade.toString()), resultSet.getFloat("randomAcceptanceChance"), null);
-				gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
+				Trading trading = new Trading(resultSet.getInt(Constants.lossPoint.toString()),
+						resultSet.getFloat(Constants.randomTradeOfferChance.toString()),
+						resultSet.getInt(Constants.maxPlayersPerTrade.toString()),
+						resultSet.getFloat("randomAcceptanceChance"), null);
+				gameplayConfig = new GameplayConfig(aging, injuries, training, trading);
 			}
 			statement.close();
 			procedureCallDb.closeConnection();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			procedureCallDb.closeConnection();
 			System.out.println("Exception occured while getting the callable statment ");
 		} finally {

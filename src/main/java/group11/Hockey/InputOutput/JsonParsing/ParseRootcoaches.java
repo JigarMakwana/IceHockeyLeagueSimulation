@@ -11,14 +11,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.ICoach;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 
 public class ParseRootcoaches implements IParseRootElement {
 
 	@Override
-	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
+	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
 		List<ICoach> coachesList = parseCoaches(jsonObject);
 		leagueModelObj.setCoaches(coachesList);
 	}

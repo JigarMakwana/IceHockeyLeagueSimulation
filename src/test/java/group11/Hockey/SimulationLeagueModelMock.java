@@ -12,6 +12,7 @@ import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.GeneralManager;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IGeneralManager;
 import group11.Hockey.BusinessLogic.models.Injuries;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
@@ -35,12 +36,11 @@ public class SimulationLeagueModelMock {
 	private void addLeague() {
 		startDate = "29/09/2020";
 		Aging aging = new Aging(30, 55);
-		GameResolver gameResolver = new GameResolver(0);
 		Injuries injuries = new Injuries(1, 1, 100);
 		Training training = new Training(0);
 		Trading trading = new Trading(0, 0, 0, 0, null);
 
-		GameplayConfig gameplayConfig = new GameplayConfig(aging, gameResolver, injuries, training, trading);
+		GameplayConfig gameplayConfig = new GameplayConfig(aging, injuries, training, trading);
 
 		float skill = (float) 2.0;
 		Coach coach = new Coach();
@@ -541,8 +541,8 @@ public class SimulationLeagueModelMock {
 		List<ICoach> coachList = new ArrayList<>();
 		coachList.add(new Coach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
 		league.setCoaches(coachList);
-		List<GeneralManager> generalManagerList = new ArrayList<GeneralManager>();
-		GeneralManager generalManager = new GeneralManager("General Manager 1");
+		List<IGeneralManager> generalManagerList = new ArrayList<>();
+		IGeneralManager generalManager = new GeneralManager("General Manager 1");
 		generalManagerList.add(generalManager);
 		league.setGeneralManagers(generalManagerList);
 		populateFreeAgents(league);

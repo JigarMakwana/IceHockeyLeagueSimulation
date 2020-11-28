@@ -11,9 +11,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.InputOutput.DefaultInputOutputFactory;
 
 public class ParseRootConferenceTest {
 
@@ -27,8 +28,8 @@ public class ParseRootConferenceTest {
 
 	@Test
 	public void parseRootElementTest() throws Exception {
-		League league = DefaultHockeyFactory.makeLeague();
-		ParseRootconferences parseRoot = new ParseRootconferences();
+		ILeague league = DefaultHockeyFactory.makeLeague();
+		IParseRootElement parseRoot = DefaultInputOutputFactory.makeParseRootconferences();
 		parseRoot.parseRootElement(league, jsonObject);
 		List<IConference> lc = league.getConferences();
 		Assert.assertEquals(lc.size(), 2);

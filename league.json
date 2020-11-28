@@ -640,9 +640,6 @@
       "maximumAge": 55,
       "statDecayChance": 0.0
     },
-    "gameResolver": {
-      "randomWinChance": 0.0
-    },
     "injuries": {
       "randomInjuryChance": 1.0,
       "injuryDaysLow": 1,

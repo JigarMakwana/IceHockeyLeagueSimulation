@@ -1,27 +1,29 @@
-package group11.Hockey.db;
+/*
+ * Author: RajKumar B00849566
+ */
+package group11.Hockey.db.GameplayConfig;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.GameResolver;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.IGameResolver;
+import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.ITrading;
 import group11.Hockey.BusinessLogic.models.ITraining;
-import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
+import group11.Hockey.db.Constants;
+import group11.Hockey.db.DefaultDatabaseFactory;
+import group11.Hockey.db.IProcedureCallDb;
 
 public class GameplayConfigDb implements IGameplayConfigDb {
 
 	@Override
 	public boolean insertGameplayConfig(IAging aging, IGameResolver gameResolver, IInjuries injuries,
 			ITraining training, ITrading trading, String leagueName) {
-		ProcedureCallDb procedureCallDb = new ProcedureCallDb(
-				"{call insertGameplayConfig(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+		IProcedureCallDb procedureCallDb = DefaultDatabaseFactory
+				.makeProcedureCallDb("{call insertGameplayConfig(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		try {
 			int averageRetirementAge = aging.getAverageRetirementAge();
@@ -65,26 +67,30 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 	}
 
 	@Override
-	public GameplayConfig loadGameConfig(String leagueName) {
-		ProcedureCallDb procedureCallDb = new ProcedureCallDb("{call getGameConfig(?)}");
+	public IGameplayConfig loadGameConfig(String leagueName) {
+		IProcedureCallDb procedureCallDb = DefaultDatabaseFactory.makeProcedureCallDb("{call getGameConfig(?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
-		GameplayConfig gameplayConfig = null;
+		IGameplayConfig gameplayConfig = null;
 		try {
 			statement.setString(1, leagueName);
 			procedureCallDb.executeProcedure();
 			ResultSet resultSet = statement.getResultSet();
 			while (resultSet.next()) {
-				Aging aging = new Aging(resultSet.getInt(Constants.averageRetirementAge.toString()),
+				IAging aging = DefaultHockeyFactory.makeAging(
+						resultSet.getInt(Constants.averageRetirementAge.toString()),
 						resultSet.getInt(Constants.maximumAge.toString()));
-				Injuries injuries = new Injuries(resultSet.getFloat(Constants.randomInjuryChance.toString()),
+				IInjuries injuries = DefaultHockeyFactory.makeInjuries(
+						resultSet.getFloat(Constants.randomInjuryChance.toString()),
 						resultSet.getInt(Constants.injuryDaysLow.toString()),
 						resultSet.getInt(Constants.injuryDaysHigh.toString()));
-				Training training = new Training(resultSet.getInt(Constants.daysUntilStatIncreaseCheck.toString()));
-				Trading trading = new Trading(resultSet.getInt(Constants.lossPoint.toString()),
+				ITraining training = DefaultHockeyFactory
+						.makeTraining(resultSet.getInt(Constants.daysUntilStatIncreaseCheck.toString()));
+				ITrading trading = (ITrading) DefaultHockeyFactory.makeConfigTrading(
+						resultSet.getInt(Constants.lossPoint.toString()),
 						resultSet.getFloat(Constants.randomTradeOfferChance.toString()),
 						resultSet.getInt(Constants.maxPlayersPerTrade.toString()),
 						resultSet.getFloat("randomAcceptanceChance"), null);
-				gameplayConfig = new GameplayConfig(aging, injuries, training, trading);
+				gameplayConfig = DefaultHockeyFactory.makeGameplayConfig(aging, injuries, training, trading);
 			}
 			statement.close();
 			procedureCallDb.closeConnection();
@@ -92,7 +98,6 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 			procedureCallDb.closeConnection();
 			System.out.println("Exception occured while getting the callable statment ");
 		} finally {
-
 			procedureCallDb.closeConnection();
 		}
 		return gameplayConfig;

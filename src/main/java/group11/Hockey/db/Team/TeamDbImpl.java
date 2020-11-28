@@ -8,9 +8,9 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.db.Constants;
-import group11.Hockey.db.GameplayConfigDb;
-import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.ProcedureCallDb;
+import group11.Hockey.db.GameplayConfig.GameplayConfigDb;
+import group11.Hockey.db.GameplayConfig.IGameplayConfigDb;
 import group11.Hockey.db.Player.IPlayerDb;
 import group11.Hockey.db.Player.PlayerDbImpl;
 

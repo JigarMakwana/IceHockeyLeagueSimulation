@@ -1,6 +1,6 @@
 package group11.Hockey.BusinessLogic.models;
 
-import group11.Hockey.db.IGameplayConfigDb;
+import group11.Hockey.db.GameplayConfig.IGameplayConfigDb;
 
 public class GameplayConfig implements IGameplayConfig {
 	private IAging aging;

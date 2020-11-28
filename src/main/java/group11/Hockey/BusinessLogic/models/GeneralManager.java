@@ -5,7 +5,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import java.util.List;
 
-import group11.Hockey.db.IManagerDb;
+import group11.Hockey.db.Manager.IManagerDb;
 
 public class GeneralManager implements IGeneralManager {
 	private String name;

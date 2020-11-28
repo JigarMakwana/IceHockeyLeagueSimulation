@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.db.ICoachDb;
+import group11.Hockey.db.Coach.ICoachDb;
 
 public class CoachTest {
 

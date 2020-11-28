@@ -58,8 +58,7 @@ public class AgePlayer extends RetirePlayer {
 		List<Team> qualifiedTeams = league.getQualifiedTeams();
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
-			logger.info("Date is end of stanley playoffs");
-			return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
+			return DefaultHockeyFactory.makeDraftPlayer(league, leagueDb, display);
 		} else {
 			logger.info("Date is not end of stanley playoffs");
 			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display);

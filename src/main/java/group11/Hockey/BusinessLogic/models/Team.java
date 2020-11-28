@@ -11,7 +11,6 @@ import group11.Hockey.db.Team.ITeamDb;
 /**
  * This class contain all the business logic related to team model
  *
- * @author jatinpartaprana
  *
  */
 public class Team implements ITeam, Comparable<Team> {

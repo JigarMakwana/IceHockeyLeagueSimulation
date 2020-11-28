@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * This class contains the business logic for the Conference model
  * 
- * @author jatinpartaprana
  *
  */
 public class Conference implements IConference {

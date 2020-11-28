@@ -47,7 +47,6 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 		logger.info("Entered renderTeam()");
 		display.showMessageOnConsole("***Load League***\n");
 		String teamName;
-		boolean isTeamNameValid = false;
 		display.showMessageOnConsole("Enter Team Name: ");
 		teamName = userInputMode.getValueFromUser();
 		if (validations.isStrBlank(teamName)) {
@@ -61,8 +60,7 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 			display.showMessageOnConsole("Team name "+teamName+" does not exist in the system");
 		}
 		ITeam teamInLeague = DefaultHockeyFactory.makeTeam();
-		isTeamNameValid = teamInLeague.isTeamNameValid(teamName, league);
-		if(isTeamNameValid) {
+		teamInLeague.isTeamNameValid(teamName, league);
 			logger.info("Team name "+teamName+" is valid");
 			List<IConference> conferenceList = league.getConferences();
 			for (IConference conference : conferenceList) {
@@ -78,12 +76,6 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 					}
 				}
 			}
-		}
-		else {
-			logger.error("Team name is not valid");
-			display.showMessageOnConsole("Not a valid Team name ");
-		}
-
 
 		return league;
 	}

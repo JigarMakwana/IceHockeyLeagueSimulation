@@ -336,4 +336,9 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static IGeneralManager makeGeneralManager(String name, String personality) {
 		return new GeneralManager(name, personality);
 	}
+	
+	public static StateMachineState makeDraftPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+		return new DraftPlayer(league, leagueDb, display);
+
+	}
 }

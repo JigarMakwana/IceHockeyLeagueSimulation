@@ -8,7 +8,7 @@
         </appender>
 		
   		<logger name="group11.Hockey.App" additivity="false">
-  			<level value="warn" />
+  			<level value="WARN" />
   			<appender-ref ref="console"/>
   		</logger>
         <category name="se.jayway.ddsteps">
@@ -16,7 +16,7 @@
         </category>
 
         <root>
-            <priority value="error"></priority>
+            <priority value="INFO"></priority>
             <appender-ref ref="console" />
         </root>
 

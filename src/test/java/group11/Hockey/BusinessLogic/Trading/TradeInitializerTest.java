@@ -1,14 +1,15 @@
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Team;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
+import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.League;
 
 public class TradeInitializerTest {
     private TradingModelMock leagueModel;
@@ -41,7 +42,7 @@ public class TradeInitializerTest {
 
     @Test
     public void getEligibleTeamsTest() {
-        List<Team> eligibleTeamList = aiTradingObj.getEligibleTeams();
+        List<ITeam> eligibleTeamList = aiTradingObj.getEligibleTeams();
         Assert.assertEquals(eligibleTeamList.size(), 4);
         Assert.assertEquals(eligibleTeamList.get(0).getTeamName(), "Boston");
         Assert.assertEquals(eligibleTeamList.get(1).getTeamName(), "Miami");

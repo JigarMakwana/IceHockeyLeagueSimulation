@@ -1,20 +1,20 @@
 package group11.Hockey.BusinessLogic.models.Roster;
 
-import group11.Hockey.BusinessLogic.ConstantSupplier;
-import group11.Hockey.BusinessLogic.IConstantSupplier;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import group11.Hockey.BusinessLogic.ConstantSupplier;
+import group11.Hockey.BusinessLogic.IConstantSupplier;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 
 public class RosterMock {
     Player activePlayer1;
     Player activePlayer2;
     Player inActivePlayer1;
     Player inActivePlayer2;
-    List<Player> allPlayerList = new ArrayList<>();
+    List<IPlayer> allPlayerList = new ArrayList<>();
     IRoster team1Roster;
 
     public RosterMock(){

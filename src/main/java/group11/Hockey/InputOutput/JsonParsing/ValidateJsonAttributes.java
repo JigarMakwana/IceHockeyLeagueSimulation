@@ -2,7 +2,7 @@ package group11.Hockey.InputOutput.JsonParsing;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public abstract class ValidateJsonAttributes {
 
@@ -20,9 +20,9 @@ public abstract class ValidateJsonAttributes {
 		}
 	}
 
-	public boolean hasInvalidCaptain(List<Player> playersList) {
+	public boolean hasInvalidCaptain(List<IPlayer> playersList) {
 		int captains = 0;
-		for (Player player : playersList) {
+		for (IPlayer player : playersList) {
 			if (player.getCaptain()) {
 				captains = captains + 1;
 			}

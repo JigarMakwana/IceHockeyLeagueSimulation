@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
@@ -22,11 +21,11 @@ import group11.Hockey.InputOutput.PrintToConsole;
 
 public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySchedule {
 
-	private HashMap<String, HashMap<Team, Team>> schedule;
+	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
 	private ILeague league;
 	private static Logger logger = LogManager.getLogger(CheckAndSimulateTodaySchedule.class);
 
-	public CheckAndSimulateTodaySchedule(HashMap<String, HashMap<Team, Team>> schedule, ILeague league) {
+	public CheckAndSimulateTodaySchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule, ILeague league) {
 		super();
 		this.schedule = schedule;
 		this.league = league;
@@ -36,11 +35,11 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 	public void CheckAndSimulateToday(String date) {
 		logger.info("Entered CheckAndSimulateToday()");
 		String time = "00:00:00", id = date + "T" + time;
-		HashMap<Team, Team> todayTeams = new HashMap<>();
+		HashMap<ITeam, ITeam> todayTeams = new HashMap<>();
 		todayTeams = schedule.get(id);
 		int points, updatePoints, year, updateWin, loss;
 		Date possibleSeasonEnd, possibleSeasonStart, dateTime;
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 
 		IParse parse = new Parse();
 		dateTime = parse.stringToDate(date);
@@ -48,7 +47,7 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 		possibleSeasonStart = parse.stringToDate("29/09/" + Integer.toString(year));
 		possibleSeasonEnd = parse.getFirstSaturdayOfAprilInYear(year);
 
-		Team team1, team2;
+		ITeam team1, team2;
 		ITeam won, lost;
 		IAdvance advance = new Advance();
 		IPrintToConsole console = new PrintToConsole();
@@ -58,8 +57,8 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 			for (IConference conference : cconferenceList) {
 				List<Division> divisionList = conference.getDivisions();
 				for (Division division : divisionList) {
-					List<Team> teamList = division.getTeams();
-					for (Team team : teamList) {
+					List<ITeam> teamList = division.getTeams();
+					for (ITeam team : teamList) {
 						if (todayTeams.containsKey(team)) {
 							team1 = team;
 							team2 = todayTeams.get(team);

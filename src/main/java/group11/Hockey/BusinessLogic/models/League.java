@@ -20,11 +20,11 @@ public class League implements ILeague {
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<ICoach> coaches = new ArrayList<>();
 	private List<IGeneralManager> generalManagers;
-	private List<Player> retiredPlayers = new ArrayList<Player>();
-	private List<Team> qualifiedTeams = new ArrayList<Team>();
+	private List<IPlayer> retiredPlayers = new ArrayList<>();
+	private List<ITeam> qualifiedTeams = new ArrayList<>();
 	private String startDate;
 	private ITimeLine timeLine;
-	private HashMap<String, HashMap<Team, Team>> schedule;
+	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
 	private int goalsInSeason;
 	private int penaltiesInSeason;
 	private int savesInSeason;
@@ -85,19 +85,19 @@ public class League implements ILeague {
 		this.timeLine = timeLine;
 	}
 
-	public HashMap<String, HashMap<Team, Team>> getSchedule() {
+	public HashMap<String, HashMap<ITeam, ITeam>> getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(HashMap<String, HashMap<Team, Team>> schedule) {
+	public void setSchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule) {
 		this.schedule = schedule;
 	}
 
-	public List<Team> getQualifiedTeams() {
+	public List<ITeam> getQualifiedTeams() {
 		return qualifiedTeams;
 	}
 
-	public void setQualifiedTeams(List<Team> qualifiedTeams) {
+	public void setQualifiedTeams(List<ITeam> qualifiedTeams) {
 		this.qualifiedTeams = qualifiedTeams;
 	}
 
@@ -171,11 +171,11 @@ public class League implements ILeague {
 		this.generalManagers = generalManagers;
 	}
 
-	public List<Player> getRetiredPlayers() {
+	public List<IPlayer> getRetiredPlayers() {
 		return retiredPlayers;
 	}
 
-	public void setRetiredPlayers(List<Player> retiredPlayers) {
+	public void setRetiredPlayers(List<IPlayer> retiredPlayers) {
 		this.retiredPlayers = retiredPlayers;
 	}
 
@@ -199,7 +199,9 @@ public class League implements ILeague {
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb) {
 		boolean leagueObjectInserted = false;
+
 		leagueObjectInserted = leagueDb.insertLeagueInDb(league);
+
 		return leagueObjectInserted;
 
 	}

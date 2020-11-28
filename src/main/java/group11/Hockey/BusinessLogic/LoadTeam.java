@@ -66,8 +66,8 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 			for (IConference conference : conferenceList) {
 				List<Division> divisionList = conference.getDivisions();
 				for (Division division : divisionList) {
-					List<Team> teamList = division.getTeams();
-					for (Team team : teamList) {
+					List<ITeam> teamList = division.getTeams();
+					for (ITeam team : teamList) {
 						if (team.getTeamName().equalsIgnoreCase(teamName)) {
 							display.printTeamDetails(league.getLeagueName(), conference.getConferenceName(),
 									division.getDivisionName(), team.getTeamName(), team.getGeneralManager().getName(),

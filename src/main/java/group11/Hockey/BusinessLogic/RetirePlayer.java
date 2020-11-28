@@ -13,6 +13,8 @@ import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
@@ -46,7 +48,7 @@ public abstract class RetirePlayer extends StateMachineState {
 	}
 
 	public void retireAndReplacePlayer(ILeague league) {
-		List<Player> retiredPlayerList = league.getRetiredPlayers();
+		List<IPlayer> retiredPlayerList = league.getRetiredPlayers();
 		List<IConference> conferences = league.getConferences();
 
 		if (conferences.size() > 0) {
@@ -54,12 +56,12 @@ public abstract class RetirePlayer extends StateMachineState {
 				List<Division> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
 					for (Division division : divisions) {
-						List<Team> teams = division.getTeams();
+						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
-							for (Team team : teams) {
-								List<Player> playersList = team.getPlayers();
+							for (ITeam team : teams) {
+								List<IPlayer> playersList = team.getPlayers();
 								if (retiredPlayerList.size() > 0) {
-									for (Player retiredPlayer : retiredPlayerList) {
+									for (IPlayer retiredPlayer : retiredPlayerList) {
 										boolean removed = playersList.remove(retiredPlayer);
 										if (removed) {
 											logger.warn("Player is retired and replaced with FreeAgents");

@@ -17,12 +17,12 @@ import java.util.List;
 
 public class TradingModelMock {
 	private League league;
-	private List<Team> teamsList;
+	private List<ITeam> teamsList;
 	private Trading trading;
 	private float randomTradeOfferChance;
 	private float randomAcceptanceChance;
 	private Team team1, team2, team3, team4, team5, team6;
-	private List<Player> freeAgentsList;
+	private List<IPlayer> freeAgentsList;
 	private ITradingConfig tradingConfig;
 	private IConstantSupplier constantSupplier;
 	private IConstantSupplier csTeam6;
@@ -38,7 +38,7 @@ public class TradingModelMock {
 	}
 
 	private void init(float randomTradeOfferChance, float randomAcceptanceChance) {
-		teamsList = new ArrayList<Team>();
+		teamsList = new ArrayList<>();
 		this.randomTradeOfferChance = randomTradeOfferChance;
 		this.randomAcceptanceChance = randomAcceptanceChance;
 		IgmTable gmTbale = new gmTable(-0.1f, 0.1f, 0.0f);
@@ -50,11 +50,11 @@ public class TradingModelMock {
 
 	private void addLeague() {
 
-		List<Player> playerList1 = new ArrayList<>();
-		List<Player> playerList2 = new ArrayList<>();
-		List<Player> playerList3 = new ArrayList<>();
-		List<Player> playerList4 = new ArrayList<>();
-		List<Player> playerList5 = new ArrayList<>();
+		List<IPlayer> playerList1 = new ArrayList<>();
+		List<IPlayer> playerList2 = new ArrayList<>();
+		List<IPlayer> playerList3 = new ArrayList<>();
+		List<IPlayer> playerList4 = new ArrayList<>();
+		List<IPlayer> playerList5 = new ArrayList<>();
 
 		Aging aging = new Aging(30, 55);
 		Injuries injuries = new Injuries(1, 1, 100);
@@ -184,10 +184,10 @@ public class TradingModelMock {
 
 		league = new League("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
 
-		List<Player> offeredPlayerList = new ArrayList<>();
+		List<IPlayer> offeredPlayerList = new ArrayList<>();
 		offeredPlayerList.add(player2);
 		offeredPlayerList.add(player4);
-		List<Player> requestedPlayerList = new ArrayList<>();
+		List<IPlayer> requestedPlayerList = new ArrayList<>();
 		requestedPlayerList.add(player14);
 		requestedPlayerList.add(player16);
 		tradeCharter = DefaultHockeyFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList, -1);
@@ -197,7 +197,7 @@ public class TradingModelMock {
 		validations = DefaultHockeyFactory.makeValidations(display);
 	}
 
-	public List<Team> getTeamList() {
+	public List<ITeam> getTeamList() {
 		return teamsList;
 	}
 
@@ -213,7 +213,7 @@ public class TradingModelMock {
 		return team6;
 	}
 
-	public List<Player> getFreeAgentsList() {
+	public List<IPlayer> getFreeAgentsList() {
 		return freeAgentsList;
 	}
 

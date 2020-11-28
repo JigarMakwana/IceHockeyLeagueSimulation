@@ -4,15 +4,17 @@
 package group11.Hockey.BusinessLogic;
 
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public class AgePlayerTest {
 	private static ILeague league;
@@ -38,9 +40,9 @@ public class AgePlayerTest {
 		agePlayer.agePlayers();
 		List<IConference> conferences = league.getConferences();
 		List<Division> divisions = conferences.get(0).getDivisions();
-		List<Team> teams = divisions.get(0).getTeams();
-		List<Player> players = teams.get(0).getPlayers();
-		Player player = players.get(0);
+		List<ITeam> teams = divisions.get(0).getTeams();
+		List<IPlayer> players = teams.get(0).getPlayers();
+		IPlayer player = players.get(0);
 		Assert.assertEquals(20, player.getAge(), 20);
 	}
 

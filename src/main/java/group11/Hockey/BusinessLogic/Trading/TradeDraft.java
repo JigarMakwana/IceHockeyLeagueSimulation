@@ -1,28 +1,33 @@
 package group11.Hockey.BusinessLogic.Trading;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.PlayerDraft;
+import group11.Hockey.BusinessLogic.Triplet;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeDraft;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
-import group11.Hockey.BusinessLogic.Triplet;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.IDisplay;
 
-import java.util.*;
-
 public class TradeDraft implements ITradeDraft {
-    private static List<Map<Team, Map<Team, List<Boolean>>>> draftTradeTracker;
-    private Team offeringTeam;
-    private List<Player> weakestPlayerList;
+    private static List<Map<ITeam, Map<ITeam, List<Boolean>>>> draftTradeTracker;
+    private ITeam offeringTeam;
+    private List<IPlayer> weakestPlayerList;
     private ITradingConfig tradingConfig;
     private IDisplay display;
     private IRosterSearch rosterSearch;
-    private List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer = new ArrayList<>();
+    private List<Triplet<ITeam, List<IPlayer>, Float>> tradingTeamsBuffer = new ArrayList<>();
 
-    public TradeDraft(Team offeringTeam, ITradingConfig tradingConfig, IDisplay display) {
+    public TradeDraft(ITeam offeringTeam, ITradingConfig tradingConfig, IDisplay display) {
         this.draftTradeTracker = new ArrayList<>();
         this.offeringTeam = offeringTeam;
         this.tradingConfig = tradingConfig;
@@ -42,21 +47,21 @@ public class TradeDraft implements ITradeDraft {
     }
 
     @Override
-    public List<Map<Team, Map<Team, List<Boolean>>>> getDraftTradeTracker() {
+    public List<Map<ITeam, Map<ITeam, List<Boolean>>>> getDraftTradeTracker() {
         return draftTradeTracker;
     }
 
-    public static void updateDraftTradeTracker(Team offeringTeam, Team requestedTeam, int draftRound) {
+    public static void updateDraftTradeTracker(ITeam offeringTeam, ITeam requestedTeam, int draftRound) {
         if(null == draftTradeTracker){
             addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
         } else {
-            for (Map<Team, Map<Team, List<Boolean>>> map : draftTradeTracker) {
-                for(Team key: map.keySet()){
+            for (Map<ITeam, Map<ITeam, List<Boolean>>> map : draftTradeTracker) {
+                for(ITeam key: map.keySet()){
                     if (offeringTeam.equals(key)) {
-                        for (Map<Team, List<Boolean>> innerMap : map.values()) {
-                            for(Team key2: map.keySet()){
+                        for (Map<ITeam, List<Boolean>> innerMap : map.values()) {
+                            for(ITeam key2: map.keySet()){
                                 if (requestedTeam.equals(key2)) {
-                                    Map.Entry<Team, List<Boolean>> entry = innerMap.entrySet().iterator().next();
+                                    Map.Entry<ITeam, List<Boolean>> entry = innerMap.entrySet().iterator().next();
                                     List<Boolean> roundTracker = entry.getValue();
                                     roundTracker.set(draftRound,true);
                                     break;
@@ -71,21 +76,21 @@ public class TradeDraft implements ITradeDraft {
         }
     }
 
-    private static Map<Team, List<Boolean>> addToInnerMap(Team requestedTeam, int draftRound){
+    private static Map<ITeam, List<Boolean>> addToInnerMap(ITeam requestedTeam, int draftRound){
         List<Boolean> roundTracker = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
         roundTracker.set(draftRound,true);
-        Map<Team, List<Boolean>> tradeDetail = new HashMap<>();
+        Map<ITeam, List<Boolean>> tradeDetail = new HashMap<>();
         tradeDetail.put(requestedTeam,roundTracker);
         return tradeDetail;
     }
-    private static void addToOuterMap(Team offeringTeam, Map<Team, List<Boolean>> tradeDetail){
-        Map<Team, Map<Team, List<Boolean>>> entry = new HashMap<>();
+    private static void addToOuterMap(ITeam offeringTeam, Map<ITeam, List<Boolean>> tradeDetail){
+        Map<ITeam, Map<ITeam, List<Boolean>>> entry = new HashMap<>();
         entry.put(offeringTeam,tradeDetail);
         draftTradeTracker.add(entry);
     }
 
     @Override
-    public ITradeCharter generateTradeOffer(List<Team> eligibleTeamList) {
+    public ITradeCharter generateTradeOffer(List<ITeam> eligibleTeamList) {
         display.showMessageOnConsole("Trading draft picks...");
         for(int i=PlayerDraft.ROUND_7.getNumVal(); i>=0; i--){
             if(offeringTeam.getTradedPicks().get(i) == false){
@@ -95,7 +100,7 @@ public class TradeDraft implements ITradeDraft {
         return null;
     }
 
-    public ITradeCharter tradeRound(List<Team> eligibleTeamList, int roundIdx){
+    public ITradeCharter tradeRound(List<ITeam> eligibleTeamList, int roundIdx){
         for (int k = 0; k < eligibleTeamList.size(); k++) {
             if(eligibleTeamList.get(k) == this.offeringTeam) {
                 continue;
@@ -104,21 +109,21 @@ public class TradeDraft implements ITradeDraft {
             }
         }
         if (tradingTeamsBuffer.size() > 0) {
-            Triplet<Team, List<Player>, Float> tradeTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
+            Triplet<ITeam, List<IPlayer>, Float> tradeTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
             return DefaultHockeyFactory.makeTradeCharter(this.offeringTeam, null,
                     tradeTeam.getFirst(), tradeTeam.getSecond(), roundIdx);
         }
         return null;
     }
 
-    private void tradingAlgorithm(Team requestedTeam) {
+    private void tradingAlgorithm(ITeam requestedTeam) {
         List<Integer> playerPositionFlag;
         playerPositionFlag = rosterSearch.findPlayerPositions(weakestPlayerList);
-        List<Player> requestedPlayerList = requestedTeam.getRoster().getAllPlayerList();
-        List<Player> strongestPlayerList = rosterSearch
+        List<IPlayer> requestedPlayerList = requestedTeam.getRoster().getAllPlayerList();
+        List<IPlayer> strongestPlayerList = rosterSearch
                 .findStrongestPlayers(requestedPlayerList, playerPositionFlag, tradingConfig.getMaxPlayersPerTrade());
         Float playersStrengthSum = rosterSearch.getRosterStrength(strongestPlayerList);
-        Triplet<Team, List<Player>, Float> teamRequestEntry =
+        Triplet<ITeam, List<IPlayer>, Float> teamRequestEntry =
                 Triplet.of(requestedTeam, strongestPlayerList, playersStrengthSum);
         tradingTeamsBuffer.add(teamRequestEntry);
     }

@@ -16,7 +16,7 @@ public class LeagueModelMock {
 
 	private void addLeague() {
 
-		List<Player> playerList = new ArrayList<Player>();
+		List<IPlayer> playerList = new ArrayList<>();
 
 		IAging aging = DefaultHockeyFactory.makeAging(30, 55);
 		IInjuries injuries = DefaultHockeyFactory.makeInjuries(1, 1, 100);
@@ -47,7 +47,7 @@ public class LeagueModelMock {
 		GeneralManager gm1 = new GeneralManager("Mister Fred", "normal");
 		Team team1 = new Team("Boston", gm1, coach, playerList);
 
-		playerList = new ArrayList<Player>();
+		playerList = new ArrayList<>();
 		Player player4 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
 		Player player5 = new Player(10, 10, 10, 10, "Player Two", "defense", false, false, 20);
 		playerList.add(player4);
@@ -66,7 +66,7 @@ public class LeagueModelMock {
 		IConference conference = new Conference("Eastern Conference", divisionsList);
 		conferenceList.add(conference);
 		league = new League("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
-		playerList = new ArrayList<Player>();
+		playerList = new ArrayList<>();
 		List<ICoach> coachList = new ArrayList<>();
 		coachList.add(new Coach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
 		league.setCoaches(coachList);
@@ -76,7 +76,7 @@ public class LeagueModelMock {
 		league.setGeneralManagers(generalManagerList);
 		populateFreeAgents(league);
 		playerList.add((Player) player1);
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 		qualifiedTeams.add(new Team("Rangers", gm2, coach, playerList));
 		qualifiedTeams.add(new Team("Lions", gm2, coach, playerList));
 
@@ -132,8 +132,8 @@ public class LeagueModelMock {
 	}
 
 	public void insertDataForDrafing() {
-		List<Team> teamList = league.getConferences().get(0).getDivisions().get(0).getTeams();
-		List<Player> playerList = teamList.get(0).getPlayers();
+		List<ITeam> teamList = league.getConferences().get(0).getDivisions().get(0).getTeams();
+		List<IPlayer> playerList = teamList.get(0).getPlayers();
 		GeneralManager gm = new GeneralManager("John Smith", "shrewd");
 		teamList.add(new Team("Rangers1", gm, teamList.get(0).getHeadCoach(), playerList));
 		teamList.add(new Team("Rangers2", gm, teamList.get(0).getHeadCoach(), playerList));

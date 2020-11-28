@@ -11,12 +11,12 @@ import java.util.List;
 public class Division implements IDivision {
 
 	private String divisionName;
-	private List<Team> teams = null;
+	private List<ITeam> teams = null;
 
 	public Division(String divisionName, List<? extends ITeam> teams) {
 		super();
 		this.divisionName = divisionName;
-		this.teams = (List<Team>) teams;
+		this.teams = (List<ITeam>) teams;
 	}
 
 	public Division() {
@@ -39,14 +39,14 @@ public class Division implements IDivision {
 	/**
 	 * @return the teams
 	 */
-	public List<Team> getTeams() {
+	public List<ITeam> getTeams() {
 		return teams;
 	}
 
 	/**
 	 * @param teams the teams to set
 	 */
-	public void setTeams(List<Team> teams) {
+	public void setTeams(List<ITeam> teams) {
 		this.teams = teams;
 	}
 
@@ -82,7 +82,7 @@ public class Division implements IDivision {
 	}
 
 
-	public void addNewTeamInDivision(Team newTeam) {
+	public void addNewTeamInDivision(ITeam newTeam) {
 		teams.add(newTeam);
 	}
 }

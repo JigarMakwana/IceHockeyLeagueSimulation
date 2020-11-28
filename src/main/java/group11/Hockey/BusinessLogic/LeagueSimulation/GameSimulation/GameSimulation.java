@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
 
 public class GameSimulation implements IGameSimulation {
 	private ILeague league;
@@ -26,11 +26,13 @@ public class GameSimulation implements IGameSimulation {
 		this.team2 = team2;
 	}
 
-	public ITeam startGamePlay() {
-		List<Player> team_p1 = team1.getPlayers();
-		List<Player> team_p2 = team2.getPlayers();
-		List<Player>[] shiftsTeam1 = null;
-		List<Player>[] shiftsTeam2 = null;
+	public ITeam startGamePlay()  {
+
+		List<IPlayer> team_p1 = team1.getPlayers();
+		List<IPlayer> team_p2 = team2.getPlayers();
+		List<IPlayer>[] shiftsTeam1 = null;
+		List<IPlayer>[] shiftsTeam2 = null;
+
 
 		GenerateShiftsTemplate shifts1 = null;
 		GenerateShiftsTemplate shifts2 = null;
@@ -50,7 +52,8 @@ public class GameSimulation implements IGameSimulation {
 		} catch (Exception e) {
 			logger.error("error while generating shifts " + e);
 		}
-		int shootingStatsTeam1 = teamSkatingStats(team_p1);
+
+		int shootingStatsTeam1 = teamSkatingStats(team_p1);		
 
 		int shootingStatsTeam2 = teamSkatingStats(team_p2);
 		setAverageShootsForTeams(shootingStatsTeam1, shootingStatsTeam2);
@@ -77,7 +80,7 @@ public class GameSimulation implements IGameSimulation {
 		team2.setAverageShoots(averageShootsTeam2);
 	}
 
-	private void startGame(List<Player>[] shiftsTeam1, List<Player>[] shiftsTeam2) {
+	private void startGame(List<IPlayer>[] shiftsTeam1, List<IPlayer>[] shiftsTeam2) {
 		int averageShootsTeam1 = team1.getAverageShoots();
 		int averageShootsTeam2 = team2.getAverageShoots();
 		for (int shift = 0; shift < appConfiguration.shifts / 2; shift++) {
@@ -104,7 +107,7 @@ public class GameSimulation implements IGameSimulation {
 		}
 	}
 
-	private void makeShoot(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
+	private void makeShoot(List<IPlayer> shootingTeamPlayers, List<IPlayer> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
 		logger.info("Team initiating the shoot");
 		IGameContext gameContext = null;
@@ -182,9 +185,9 @@ public class GameSimulation implements IGameSimulation {
 		}
 	}
 
-	private int teamSkatingStats(List<Player> team) {
+	private int teamSkatingStats(List<IPlayer> team) {
 		int skatingStat = 0;
-		for (Player player : team) {
+		for (IPlayer player : team) {
 			skatingStat += player.getSkating();
 		}
 		return skatingStat;

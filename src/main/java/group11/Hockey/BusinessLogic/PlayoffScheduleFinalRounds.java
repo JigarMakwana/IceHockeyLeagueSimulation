@@ -10,6 +10,7 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
@@ -35,10 +36,10 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getCurrentDate();
 		IAdvance advance = new Advance();
-		HashMap<String, HashMap<Team, Team>> playoffSchedule = new HashMap<>();
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		HashMap<String, HashMap<ITeam, ITeam>> playoffSchedule = new HashMap<>();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 		IPrintToConsole console = new PrintToConsole();
-		Team team1, team2;
+		ITeam team1, team2;
 		String message;
 
 		String time = "00:00:00";
@@ -72,7 +73,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 				team1.setWins(0);
 				team2.setWins(0);
 
-				HashMap<Team, Team> schedule = new HashMap<>();
+				HashMap<ITeam, ITeam> schedule = new HashMap<>();
 				schedule.put(team1, team2);
 				playoffSchedule.put(date + "T" + time, schedule);
 				message = "Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date + " at "

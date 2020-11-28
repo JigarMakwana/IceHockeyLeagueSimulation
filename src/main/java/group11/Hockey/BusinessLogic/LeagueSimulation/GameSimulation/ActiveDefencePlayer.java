@@ -10,18 +10,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.Positions;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
 
 public class ActiveDefencePlayer implements IGameStrategy {
 	private static Logger logger = LogManager.getLogger(ActiveDefencePlayer.class);
 
 	@Override
-	public int calculateAveragePlayersStrength(List<Player> playersList, ITeam defendingTeam) {
+	public int calculateAveragePlayersStrength(List<IPlayer> playersList, ITeam defendingTeam) {
 		int checking = 0;
 		int numberOfDefenseMen = 0;
 		int playerStrength = 0;
-		for (Player player : playersList) {
+		
+		for (IPlayer player : playersList) {
+
 			if (player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
 				checking += player.getChecking();
 				numberOfDefenseMen++;
@@ -39,8 +41,8 @@ public class ActiveDefencePlayer implements IGameStrategy {
 		return playerStrength;
 	}
 
-	@Override
-	public void playGame(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
+	
+	public void playGame(List<IPlayer> shootingTeamPlayers, List<IPlayer> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
 		int penaltyProbality = new Random().nextInt(appConfiguration.penaltyRandomChance);
 		int index = bestDefenceMenIndex(defendingTeamPlayers);
@@ -59,7 +61,7 @@ public class ActiveDefencePlayer implements IGameStrategy {
 		defendingTeam.setSavesInSeason(saves);
 	}
 
-	private int bestDefenceMenIndex(List<Player> defendingTeamPlayers) {
+	private int bestDefenceMenIndex(List<IPlayer> defendingTeamPlayers) {
 		float player1_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex).getChecking();
 		float player2_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex + 1).getChecking();
 

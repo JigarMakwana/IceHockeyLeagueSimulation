@@ -6,69 +6,69 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.db.ICoachDb;
 
 public class CoachTest {
 
-	private static Coach coach;
+	private static ICoach coach;
 
 	@BeforeClass
 	public static void init() {
-		coach = new Coach((float) 1.1, (float) 1.2, (float) 1.3, (float) 1.4, "head coach");
+		coach = DefaultHockeyFactory.makeCoach(Constants.stat1, Constants.stat2, Constants.stat3, Constants.stat4,
+				Constants.headCoach);
 	}
 
 	@Test
 	public void getNameTest() {
-		Assert.assertEquals(coach.getName(), "head coach");
+		Assert.assertEquals(coach.getName(), Constants.headCoach);
 	}
 
 	@Test
 	public void setNameTest() {
-		coach.setName("head coach");
-		Assert.assertEquals(coach.getName(), "head coach");
+		coach.setName(Constants.headCoach);
+		Assert.assertEquals(coach.getName(), Constants.headCoach);
 	}
-	
+
 	@Test
 	public void getSkatingTest() {
-		Assert.assertEquals(coach.getSkating(), (float) 1.1, 1.1);
+		Assert.assertEquals(coach.getSkating(), (float) Constants.stat1, 1.1);
 	}
 
 	@Test
 	public void getShootingTest() {
-		Assert.assertEquals(coach.getShooting(), (float) 1.2, 1.2);
+		Assert.assertEquals(coach.getShooting(), Constants.stat2, 1.2);
 	}
 
 	@Test
 	public void getCheckingTest() {
-		Assert.assertEquals(coach.getChecking(), (float) 1.3, 1.3);
+		Assert.assertEquals(coach.getChecking(), Constants.stat3, 1.3);
 	}
 
 	@Test
 	public void getSavingTest() {
-		Assert.assertEquals(coach.getSaving(), (float) 1.4, 1.4);
+		Assert.assertEquals(coach.getSaving(), Constants.stat4, 1.4);
 	}
 
 	@Test
 	public void insertCoachesTest() {
 
 		List<Coach> coachesList = new ArrayList<Coach>();
-		coachesList.add(coach);
+		coachesList.add((Coach) coach);
 
 		ICoachDb coachDb = mock(ICoachDb.class);
-		when(coachDb.insertCoaches("leaguename", "head coach", (float) 1.1, (float) 1.2, (float) 1.3, (float) 1.4))
-				.thenReturn(true);
+		when(coachDb.insertCoaches(Constants.leagueName, Constants.headCoach, (float) Constants.stat1, Constants.stat2,
+				Constants.stat3, Constants.stat4)).thenReturn(true);
 
-		Coach coach2 = new Coach("leaguename", coachDb);
+		ICoach coach2 = DefaultHockeyFactory.makeCoach(Constants.leagueName, coachDb);
 
-		boolean flag = coach2.insertCoaches(coachesList);
+		boolean flag = ((Coach) coach2).insertCoaches(coachesList);
 		Assert.assertTrue(flag);
 
 	}
-
-	
 
 }

@@ -7,11 +7,11 @@ import java.util.List;
 public interface ITeam {
 	public String getTeamName();
 
-	public GeneralManager getGeneralManager();
+	public IGeneralManager getGeneralManager();
 
 	public void setGeneralManager(GeneralManager generalManager);
 
-	public Coach getHeadCoach();
+	public ICoach getHeadCoach();
 
 	public int getPoints();
 

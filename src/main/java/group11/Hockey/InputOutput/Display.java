@@ -147,7 +147,7 @@ public class Display implements IDisplay {
 
 	@Override
 	public void printTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
-			String managerName, Coach coach) {
+			String managerName, ICoach coach) {
 		showMessageOnConsole("**Team details:");
 		showMessageOnConsole("League name-> " + leagueName);
 		showMessageOnConsole("-Conference name-> " + conferenceName);

@@ -12,4 +12,8 @@ public interface IConference {
 
 	public void setDivisions(List<Division> divisions);
 
+	public void setConferenceName(String name);
+
+	public String getConferenceName();
+
 }

@@ -22,18 +22,21 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.ScheduleContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.DefencePlayerActive;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ForwardPlayerActive;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameContext;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameStrategy;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GeneratePlayOffShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShiftsTemplate;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GoaliePlayerActive;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
 import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.Deserialize;
+import group11.Hockey.db.ICoachDb;
 import group11.Hockey.db.IDeserialize;
 import group11.Hockey.db.ISerialize;
 import group11.Hockey.db.Serialize;
@@ -166,19 +169,19 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Advance();
 	}
 
-	public static GameStrategy makeDefencePlayerActive() {
+	public static IGameStrategy makeDefencePlayerActive() {
 		return new DefencePlayerActive();
 	}
 
-	public static GameStrategy makeForwardPlayerActive() {
+	public static IGameStrategy makeForwardPlayerActive() {
 		return new ForwardPlayerActive();
 	}
 
-	public static GameStrategy makeGoaliePlayerActive() {
+	public static IGameStrategy makeGoaliePlayerActive() {
 		return new GoaliePlayerActive();
 	}
 
-	public static IGameContext makeGameContext(GameStrategy gameStrategy) {
+	public static IGameContext makeGameContext(IGameStrategy gameStrategy) {
 		return new GameContext(gameStrategy);
 	}
 
@@ -212,8 +215,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new RosterSearch();
 	}
 
-	public static GameplayConfig makeGameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries,
-			Training training, Trading trading) {
+	public static GameplayConfig makeGameplayConfig(IAging aging, IGameResolver gameResolver, IInjuries injuries,
+			ITraining training, ITrading trading) {
 		return new GameplayConfig(aging, gameResolver, injuries, training, trading);
 	}
 
@@ -296,5 +299,41 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
 		return new Simulate(league, seasons, leagueDb, display);
+	}
+
+	public static IGameSimulation makeGameSimulation(ILeague league, ITeam team1, ITeam team2) {
+		return new GameSimulation(league, team1, team2);
+	}
+
+	public static IAging makeAging(int averageRetirementAge, int maximumAge) {
+		return new Aging(averageRetirementAge, maximumAge);
+	}
+
+	public static ICoach makeCoach(float skating, float shooting, float checking, float saving, String name) {
+		return new Coach(skating, shooting, checking, saving, name);
+	}
+
+	public static ICoach makeCoach(String name, ICoachDb coachDb) {
+		return new Coach(name, coachDb);
+	}
+
+	public static IConference makeConference(String name, List<Division> divisions) {
+		return new Conference(name, divisions);
+	}
+
+	public static IGameResolver makeGameResolver(float randomWinChance) {
+		return new GameResolver(randomWinChance);
+	}
+
+	public static IInjuries makeInjuries(float randomInjuryChance, int injuryDaysLow, int injuryDaysHigh) {
+		return new Injuries(randomInjuryChance, injuryDaysLow, injuryDaysHigh);
+	}
+
+	public static ITraining makeTraining(int daysUntilStatIncreaseCheck) {
+		return new Training(daysUntilStatIncreaseCheck);
+	}
+
+	public static IGeneralManager makeGeneralManager(String name, String personality) {
+		return new GeneralManager(name, personality);
 	}
 }

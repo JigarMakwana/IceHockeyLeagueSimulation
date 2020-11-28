@@ -6,10 +6,12 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
+import group11.Hockey.InputOutput.IDisplay;
 
 public class DraftPlayerTest {
 
 	ILeague league;
+	IDisplay display = DefaultHockeyFactory.makeDisplay();
 
 	@Before
 	public void loadLeague() {
@@ -21,7 +23,7 @@ public class DraftPlayerTest {
 
 	@Test
 	public void draftPlayerTest() {
-		DraftPlayer draftPlayer = new DraftPlayer(league);
+		DraftPlayer draftPlayer = new DraftPlayer(league, null, display);
 		draftPlayer.draftPlayer();
 		Assert.assertTrue(league.getConferences().get(0).getDivisions().get(0).getTeams().size() == 18);
 		Assert.assertTrue(
@@ -30,7 +32,7 @@ public class DraftPlayerTest {
 
 	@Test
 	public void selectTeamFromRegularSeasonStandinfoTest() {
-		DraftPlayer draftPlayer = new DraftPlayer(league);
+		DraftPlayer draftPlayer = new DraftPlayer(league,null, display);
 		draftPlayer
 				.selectTeamFromRegularSeasonStandinfo(league.getConferences().get(0).getDivisions().get(0).getTeams());
 		Assert.assertTrue(league.getConferences().get(0).getDivisions().get(0).getTeams().size() == 17);

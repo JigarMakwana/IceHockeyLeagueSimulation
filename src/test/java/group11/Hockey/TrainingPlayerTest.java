@@ -15,12 +15,13 @@ import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 
 public class TrainingPlayerTest {
 	ILeague league;
-	TrainingPlayer traingPlayer = new TrainingPlayer(league, null, null);
+	TrainingPlayer traingPlayer;
 
 	@Before
 	public void loadLeague() {
 		LeagueModelMock leagueMock = new LeagueModelMock();
 		league = leagueMock.getLeagueInfo();
+		traingPlayer = new TrainingPlayer(league, null, null,null,null);
 	}
 
 	@Test

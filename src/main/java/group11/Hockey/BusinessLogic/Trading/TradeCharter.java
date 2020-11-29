@@ -1,11 +1,13 @@
+/**
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
 
 public class TradeCharter implements ITradeCharter {
     private ITeam offeringTeam;
@@ -56,5 +58,16 @@ public class TradeCharter implements ITradeCharter {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean isDraftTradeCharter() {
+        if(offeringTeam == null || requestedTeam == null ||
+                offeredPlayerList == null || requestedPlayerList == null ){
+            return false;
+        } else if(offeringTeam == null) {
+            return true;
+        }
+        return false;
     }
 }

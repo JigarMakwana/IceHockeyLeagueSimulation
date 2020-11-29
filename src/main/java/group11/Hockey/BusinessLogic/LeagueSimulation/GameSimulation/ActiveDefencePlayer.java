@@ -9,9 +9,10 @@ import java.util.Random;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Player;
 
 public class ActiveDefencePlayer implements IGameStrategy {
 	private static Logger logger = LogManager.getLogger(ActiveDefencePlayer.class);
@@ -21,7 +22,7 @@ public class ActiveDefencePlayer implements IGameStrategy {
 		int checking = 0;
 		int numberOfDefenseMen = 0;
 		int playerStrength = 0;
-		
+
 		for (IPlayer player : playersList) {
 
 			if (player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
@@ -41,7 +42,7 @@ public class ActiveDefencePlayer implements IGameStrategy {
 		return playerStrength;
 	}
 
-	
+
 	public void playGame(List<IPlayer> shootingTeamPlayers, List<IPlayer> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
 		int penaltyProbality = new Random().nextInt(appConfiguration.penaltyRandomChance);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import group11.Hockey.BusinessLogic.Enums.Positions;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -13,7 +14,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 	enum PlayerEnum {
 		player
 	}
-	
+
 	private static Logger logger = LogManager.getLogger(GeneratingPlayers.class);
 
 	public List<Player> generatePlayers(int numbersOfPlayersToGenerate) {

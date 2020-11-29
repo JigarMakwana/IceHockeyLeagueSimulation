@@ -9,7 +9,7 @@ import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
 /**
- * 
+ *
  * @author Jatin Partap Rana
  *
  */
@@ -21,7 +21,7 @@ public class PlayerChoice  extends StateMachineState {
 	IValidations validation;
 	ILeagueDb leagueDb;
 	private static Logger logger = LogManager.getLogger(PlayerChoice.class);
-	
+
 	public PlayerChoice(ILeague league, ICommandLineInput commandLineInput, IDisplay display, IValidations validation,
 			ILeagueDb leagueDb){
 		this.commandLineInput = commandLineInput;
@@ -42,7 +42,7 @@ public class PlayerChoice  extends StateMachineState {
 			seasonsCheck = validation.isNoOfSeasonsValueValid(numberOfSeasons);
 		}
 		int seasons = Integer.parseInt(numberOfSeasons);
-		return DefaultHockeyFactory.makeSimulate(league, seasons, leagueDb, display);
+		return DefaultHockeyFactory.makeSimulate(league, seasons, leagueDb, display, commandLineInput, validation);
 	}
 
 }

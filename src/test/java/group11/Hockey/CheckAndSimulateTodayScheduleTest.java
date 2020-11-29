@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public class CheckAndSimulateTodayScheduleTest {
 
@@ -22,7 +18,7 @@ public class CheckAndSimulateTodayScheduleTest {
 
 		HashMap<String, HashMap<ITeam, ITeam>> regularSchedule=new HashMap<>();
 		HashMap<ITeam, ITeam> schedule = new HashMap<>();
-		List<Player> playerList = new ArrayList<Player>();
+		List<IPlayer> playerList = new ArrayList<>();
 		Team team1,team2,team3,team4;
 
 		float skill = (float) 2.0;

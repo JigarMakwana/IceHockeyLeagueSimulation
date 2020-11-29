@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -19,6 +20,7 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
@@ -28,6 +30,8 @@ public class AgePlayer extends RetirePlayer {
 	int days;
 	ILeagueDb leagueDb;
 	IDisplay display;
+	private ICommandLineInput commandLineInput;
+	private IValidations validation;
 	private static Logger logger = LogManager.getLogger(AgePlayer.class);
 
 	public AgePlayer() {
@@ -47,6 +51,15 @@ public class AgePlayer extends RetirePlayer {
 		this.display = display;
 	}
 
+	public AgePlayer(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		this.league = league;
+		this.days = days;
+		this.leagueDb = leagueDb;
+		this.display = display;
+		this.commandLineInput = commandLineInput;
+		this.validation = validation;
+	}
+
 	@Override
 	public StateMachineState startState() {
 		agePlayers();
@@ -60,8 +73,8 @@ public class AgePlayer extends RetirePlayer {
 			logger.info("Move to DraftPlayer State");
 			return DefaultHockeyFactory.makeDraftPlayer(league, leagueDb, display);
 		} else {
-			logger.info("Move to AdvanceTime state");
-			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display);
+			logger.info("Date is not end of stanley playoffs");
+			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display, commandLineInput, validation);
 		}
 	}
 

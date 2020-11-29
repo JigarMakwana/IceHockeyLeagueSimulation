@@ -1,8 +1,13 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -40,18 +45,21 @@ public class InjurySystem implements IInjurySystem {
 	}
 
 	public boolean determainIsPlayerInjured() {
-		float probabilityOfInjury = DefaultHockeyFactory.makeRandomNumberGenerator().generateRandomFloat();
+		float probabilityOfInjury = RandomNoFactory.makeRandomFloatGenerator().generateRandomNo();
 		boolean isPlayerInjured = randomInjuryChance >= probabilityOfInjury;
 		return isPlayerInjured;
 	}
 
 	public int determainNumberOfDaysOfInjury() {
-		int numberOfInjuredDays = DefaultHockeyFactory.makeRandomNumberGenerator()
-				.generateRandomInt((injuryDaysHigh - injuryDaysLow) + 1);
+		int numberOfInjuredDays = (int) RandomNoFactory.makeRandomIntGenerator()
+				.generateRandomNo((injuryDaysHigh - injuryDaysLow) + 1);
 		numberOfInjuredDays += injuryDaysLow;
 		return numberOfInjuredDays;
 	}
 
+	/*
+	 * Author: Jigar Makwana B00842568
+	 */
 	public void settleRecoveredPlayer(IRoster roster, IPlayer recoveredPlayer) {
 		logger.info("Entered settleRecoveredPlayer()");
 		Positions position = findInjuredPlayerPosition(recoveredPlayer);
@@ -66,6 +74,9 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
+	/*
+	 * Author: Jigar Makwana B00842568
+	 */
 	public void settleInjuredPlayer(IRoster roster, IPlayer injuredPlayer) {
 		logger.info("Entered settleInjuredPlayer()");
 		if (isInjuredSwappingPossible(roster, injuredPlayer)) {
@@ -82,12 +93,18 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
+	/*
+	 * Author: Jigar Makwana B00842568
+	 */
 	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer) {
 		logger.info("Entered isInjuredSwappingPossible()");
 		Positions position = findInjuredPlayerPosition(injuredPlayer);
 		return isUnInjuredPlayerAvailable(roster, position);
 	}
 
+	/*
+	 * Author: Jigar Makwana B00842568
+	 */
 	public Positions findInjuredPlayerPosition(IPlayer injuredPlayer) {
 		if (injuredPlayer.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())) {
 			return Positions.FORWARD;
@@ -98,6 +115,9 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
+	/*
+	 * Author: Jigar Makwana B00842568
+	 */
 	public boolean isUnInjuredPlayerAvailable(IRoster roster, Positions position) {
 		logger.info("Entered isUnInjuredPlayerAvailable()");
 		int minUnInjuredPlayerRequired = 1;

@@ -85,7 +85,7 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 						resultSet.getInt(Constants.injuryDaysHigh.toString()));
 				ITraining training = DefaultHockeyFactory
 						.makeTraining(resultSet.getInt(Constants.daysUntilStatIncreaseCheck.toString()));
-				ITrading trading = (ITrading) DefaultHockeyFactory.makeConfigTrading(
+				ITrading trading = DefaultHockeyFactory.makeTradingConfig(
 						resultSet.getInt(Constants.lossPoint.toString()),
 						resultSet.getFloat(Constants.randomTradeOfferChance.toString()),
 						resultSet.getInt(Constants.maxPlayersPerTrade.toString()),

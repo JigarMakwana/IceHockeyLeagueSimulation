@@ -6,7 +6,7 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 import java.util.ArrayList;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.Positions;
+import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public abstract class GenerateShiftsTemplate {
@@ -19,7 +19,7 @@ public abstract class GenerateShiftsTemplate {
 		this.team = team;
 	}
 
-	
+
 
 	public List<IPlayer>[] getShifts() throws Exception{
 		for (int i = 0; i < appConfiguration.shifts; i++) {

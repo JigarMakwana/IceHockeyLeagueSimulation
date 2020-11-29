@@ -5,6 +5,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import group11.Hockey.db.League.ILeagueDb;
 
@@ -58,6 +59,10 @@ public interface ILeague {
 	public int getGamesInSeason();
 
 	public void setGamesInSeason(int gamesInSeason);
+
+	List<Map<ITeam, Map<ITeam, List<Boolean>>>> getDraftTradeTracker();
+
+	void setDraftTradeTracker(ITeam offeringTeam, ITeam requestedTeam, int draftRound);
 
 	public void setFreeAgents(List<Player> player);
 

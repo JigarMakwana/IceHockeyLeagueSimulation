@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.PlayerDraft;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.db.Team.ITeamDb;
 
@@ -32,14 +33,14 @@ public class Team implements ITeam, Comparable<Team> {
 	private int points;
 	private List<Boolean> tradedPicks;
 
-	public Team(String teamName, IGeneralManager generalManager, ICoach headCoach, List<? extends IPlayer> players) {
+	public Team(String teamName, IGeneralManager generalManager, ICoach headCoach, List<IPlayer> players) {
 		super();
 		this.teamName = teamName;
 		this.generalManager = generalManager;
 		this.headCoach = headCoach;
-		this.players = (List<IPlayer>) players;
+		this.players = players;
 		this.tradedPicks = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
-//		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, (List<IPlayer>) players);
+		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, players);
 	}
 
 	public Team() {
@@ -277,15 +278,19 @@ public class Team implements ITeam, Comparable<Team> {
 		for(ITeam team: teamsOrderedInReverse) {
 			teams.add((Team)team);
 		}
-		 Collections.sort(teams);
-		 return teams;
+		Collections.sort(teams);
+		return teams;
 	}
 
 	public List<Boolean> getTradedPicks() {
 		return tradedPicks;
 	}
 
-	public void setTradedPicks(int index) {
+	public void setTradedPicks(List<Boolean> tradedPicks) {
+		this.tradedPicks = tradedPicks;
+	}
+
+	public void updateTradedPicks(int index) {
 		tradedPicks.set(index, true);
 	}
 

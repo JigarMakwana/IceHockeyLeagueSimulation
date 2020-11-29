@@ -6,14 +6,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TradeGeneratorTest {
+public class TradeDraftTest {
     private TradingModelMock leagueModel;
     private ITradeGenerator aiTradingObj;
 
     @Before
     public void setUp() throws Exception {
         leagueModel = TradingMockFactory.makeTradingMock(1.0f, 1.0f);
-        aiTradingObj = TradingFactory.makeTradeGenerator(leagueModel.getTeam1(), leagueModel.getTradingConfig(), leagueModel.getDisplay());
+        aiTradingObj = TradingFactory.makeTradeDraft(leagueModel.getTeam1(), leagueModel.getTradingConfig(), leagueModel.getDisplay());
     }
 
     @Test

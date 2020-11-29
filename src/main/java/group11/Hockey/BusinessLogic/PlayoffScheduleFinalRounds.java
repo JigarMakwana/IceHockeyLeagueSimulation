@@ -3,6 +3,7 @@ package group11.Hockey.BusinessLogic;
 import java.util.HashMap;
 import java.util.List;
 
+import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,9 +18,13 @@ import group11.Hockey.db.League.ILeagueDb;
 public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 
 	IDisplay display;
+	private ICommandLineInput commandLineInput;
+	private IValidations validation;
 
-	public PlayoffScheduleFinalRounds(IDisplay display) {
+	public PlayoffScheduleFinalRounds(IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
 		this.display = display;
+		this.commandLineInput = commandLineInput;
+		this.validation = validation;
 	}
 
 	public PlayoffScheduleFinalRounds() {
@@ -98,6 +103,6 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 			}
 		}
 		league.setSchedule(playoffSchedule);
-		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display);
+		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display, commandLineInput, validation);
 	}
 }

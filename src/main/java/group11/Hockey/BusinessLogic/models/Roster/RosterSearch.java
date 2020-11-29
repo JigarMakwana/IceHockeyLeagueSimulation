@@ -1,4 +1,16 @@
+/*
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.models.Roster;
+
+import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import group11.Hockey.BusinessLogic.models.Team;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,14 +18,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.BusinessLogic.Triplet;
-import group11.Hockey.BusinessLogic.models.IPlayer;
-import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
-
 public class RosterSearch implements IRosterSearch{
+    private static Logger logger = LogManager.getLogger(RosterSearch.class);
 
     public List<IPlayer> findWeakestPlayers(List<IPlayer> unSortedPlayerList, int maxPlayersPerTrade) {
         List<IPlayer> playerList = sortPlayersByStrength(unSortedPlayerList);
@@ -25,7 +31,7 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public List<Integer> findPlayerPositions(List<IPlayer> playerList){
-        List<Integer> playerPositionFlag = new ArrayList<Integer>(Arrays.asList(0,0,0));
+        List<Integer> playerPositionFlag = new ArrayList<>(Arrays.asList(0,0,0));
         for(int j=0; j<playerList.size(); j++) {
             String position = playerList.get(j).getPosition();
             if(Positions.FORWARD.toString().equalsIgnoreCase(position)) {
@@ -95,6 +101,7 @@ public class RosterSearch implements IRosterSearch{
         List<IPlayer> playerList = sortPlayersByStrength(unSortedPlayerList);
         for(IPlayer p: playerList){
             if(p.getPosition().equalsIgnoreCase(positions.toString())){
+                logger.info("Found strongest player " + p.getPlayerName());
                 return p;
             }
         }
@@ -106,6 +113,7 @@ public class RosterSearch implements IRosterSearch{
         Collections.reverse(playerList);
         for(IPlayer p: playerList){
             if(p.getPosition().equalsIgnoreCase(positions.toString())){
+                logger.info("Found weakest player " + p.getPlayerName());
                 return p;
             }
         }
@@ -135,8 +143,7 @@ public class RosterSearch implements IRosterSearch{
             }
         }
         Triplet<ITeam, List<IPlayer>, Float> tradeTeam = sortedBuffer.get(length-1);
-        // TODO logInfo
-//        display.showMessageOnConsole("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
+        logger.info("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
         return tradeTeam;
     }
 
@@ -191,5 +198,22 @@ public class RosterSearch implements IRosterSearch{
         List<IPlayer> goalieIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.GOALIE.toString())).collect(Collectors.toList());
         return sortPlayersByStrength(goalieIPlayerList);
+    }
+
+    public float averageTeamStrength(List<ITeam> eligibleTeamList){
+        float sum = 0.0f;
+        for(int i=0 ; i<eligibleTeamList.size(); i++){
+            sum += eligibleTeamList.get(i).getTeamStrength();
+        }
+        return sum/eligibleTeamList.size();
+    }
+
+    public ITeam findStrongestTeam(List<ITeam> eligibleTeamList){
+        List<Team> teams = new ArrayList<>();
+        for(ITeam team: eligibleTeamList) {
+            teams.add((Team)team);
+        }
+        Collections.sort(teams);
+        return teams.get(0);
     }
 }

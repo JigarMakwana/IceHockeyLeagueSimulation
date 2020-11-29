@@ -5,6 +5,7 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -21,8 +22,8 @@ public abstract class RetirePlayer extends StateMachineState {
 
 	public boolean checkForRetirement(ILeague league, float age) {
 		int likelihoodOfRetirement = getLikelihoodOfRetirement(league, age);
-		boolean isRetired = DefaultHockeyFactory.makeRandomNumberGenerator()
-				.generateRandomInt(likelihoodOfRetirement) == likelihoodOfRetirement - 1;
+		boolean isRetired = RandomNoFactory.makeRandomIntGenerator()
+				.generateRandomNo(likelihoodOfRetirement) == likelihoodOfRetirement - 1;
 		return isRetired;
 	}
 

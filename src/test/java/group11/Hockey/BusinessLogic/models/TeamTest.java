@@ -19,7 +19,7 @@ public class TeamTest {
 
 	@BeforeClass
 	public static void init() {
-		List<Player> listOfPlayers = new ArrayList<Player>();
+		List<IPlayer> listOfPlayers = new ArrayList<>();
 		leagueTest = new LeagueTest();
 		league = leagueTest.populateLeagueObject();
 

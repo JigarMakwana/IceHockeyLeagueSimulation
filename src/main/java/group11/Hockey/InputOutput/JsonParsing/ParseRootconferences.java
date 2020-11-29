@@ -4,11 +4,14 @@
 package group11.Hockey.InputOutput.JsonParsing;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -94,6 +97,10 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 					throw new Exception("Team " + teamName + " has no/more captain(s)");
 				}
 			}
+			IRoster roster = DefaultHockeyFactory.makeRoster(teamName, playersList);
+			teamObj.setRoster(roster);
+			List<Boolean> tradedPicks = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
+			teamObj.setTradedPicks(tradedPicks);
 			teamsList.add(teamObj);
 		}
 		return teamsList;
@@ -107,9 +114,9 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 		gm.setName(name);
 		gm.setPersonality(personality);
 		team.setGeneralManager(gm);
-		
+
 	}
-	
+
 	private void setHeadCoach(Team team, JSONObject listJsonObject) {
 		JSONObject headCoach = (JSONObject) listJsonObject.get(Attributes.HEADCOACH.getAttribute());
 		String name = (String) headCoach.get(Attributes.NAME.getAttribute());

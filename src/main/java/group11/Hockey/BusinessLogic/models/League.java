@@ -1,10 +1,8 @@
 package group11.Hockey.BusinessLogic.models;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.db.League.ILeagueDb;
 
 /**
@@ -20,7 +18,6 @@ public class League implements ILeague {
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<ICoach> coaches = new ArrayList<>();
 	private List<IGeneralManager> generalManagers;
-
 	private List<IPlayer> retiredPlayers = new ArrayList<>();
 	private List<ITeam> qualifiedTeams = new ArrayList<>();
 	private List<ITeam> presidentTeams = new ArrayList<>();
@@ -38,6 +35,7 @@ public class League implements ILeague {
 	private int penaltiesInSeason;
 	private int savesInSeason;
 	private int gamesInSeason;
+	private List<Map<ITeam, Map<ITeam, List<Boolean>>>> draftTradeTracker;
 
 	public int getGoalsInSeason() {
 		return goalsInSeason;
@@ -145,7 +143,6 @@ public class League implements ILeague {
 		if (isFreeAgentsNotNull()) {
 			Collections.sort(freeAgents);
 		}
-
 		return freeAgents;
 	}
 
@@ -221,7 +218,62 @@ public class League implements ILeague {
 		return league;
 
 	}
-	
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public List<Map<ITeam, Map<ITeam, List<Boolean>>>> getDraftTradeTracker() {
+		return this.draftTradeTracker;
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public void setDraftTradeTracker(ITeam offeringTeam, ITeam requestedTeam, int draftRound) {
+		if(null == draftTradeTracker){
+			addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
+		} else {
+			for (Map<ITeam, Map<ITeam, List<Boolean>>> map : draftTradeTracker) {
+				for(ITeam key: map.keySet()){
+					if (offeringTeam.equals(key)) {
+						for (Map<ITeam, List<Boolean>> innerMap : map.values()) {
+							for(ITeam key2: map.keySet()){
+								if (requestedTeam.equals(key2)) {
+									Map.Entry<ITeam, List<Boolean>> entry = innerMap.entrySet().iterator().next();
+									List<Boolean> roundTracker = entry.getValue();
+									roundTracker.set(draftRound,true);
+									break;
+								}
+								addToInnerMap(requestedTeam, draftRound);
+							}
+						}
+					}
+				}
+				addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
+			}
+		}
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	private Map<ITeam, List<Boolean>> addToInnerMap(ITeam requestedTeam, int draftRound){
+		List<Boolean> roundTracker = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
+		roundTracker.set(draftRound,true);
+		Map<ITeam, List<Boolean>> tradeDetail = new HashMap<>();
+		tradeDetail.put(requestedTeam,roundTracker);
+		return tradeDetail;
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	private void addToOuterMap(ITeam offeringTeam, Map<ITeam, List<Boolean>> tradeDetail){
+		Map<ITeam, Map<ITeam, List<Boolean>>> entry = new HashMap<>();
+		entry.put(offeringTeam,tradeDetail);
+		draftTradeTracker.add(entry);
+	}
+
 	public List<ITeam> getPresidentTeams() {
 		return presidentTeams;
 	}

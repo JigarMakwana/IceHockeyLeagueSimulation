@@ -3,13 +3,14 @@ package group11.Hockey.BusinessLogic;
 import java.util.Date;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.Trading.TradingFactory;
+import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
@@ -22,21 +23,26 @@ import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 /**
- * 
+ *
  * @author Jatin Partap Rana
  *
  */
 public class TrainingPlayer extends StateMachineState implements ITrainingPlayer {
 	private ILeague league;
 	private ILeagueDb leaugueDb;
-	IDisplay display;
+	private IDisplay display;
+	private ICommandLineInput commandLineInput;
+	private IValidations validation;
 	private static Logger logger = LogManager.getLogger(TrainingPlayer.class);
 
-	public TrainingPlayer(ILeague league, ILeagueDb leaugueDb, IDisplay display) {
+	public TrainingPlayer(ILeague league, ILeagueDb leaugueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
+	) {
 		super();
 		this.league = league;
 		this.leaugueDb = leaugueDb;
 		this.display = display;
+		this.commandLineInput = commandLineInput;
+		this.validation = validation;
 	}
 
 	@Override
@@ -79,8 +85,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
 			logger.info("Performing trading");
-			return new AITrading(league, leaugueDb, display);
-
+			return TradingFactory.makeTradeRunner(league, leaugueDb, commandLineInput, validation, display);
 		} else {
 			logger.info("Performing aging");
 			return new AgePlayer(league, 1, leaugueDb, display);

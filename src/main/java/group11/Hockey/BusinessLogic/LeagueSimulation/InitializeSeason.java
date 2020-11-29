@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
@@ -12,6 +13,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.TimeLine;
+import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.InputOutput.PrintToConsole;
@@ -21,12 +23,17 @@ public class InitializeSeason extends StateMachineState {
 
 	private ILeague league;
 	private ILeagueDb leagueDb;
-	IDisplay display;
+	private IDisplay display;
+	private ICommandLineInput commandLineInput;
+	private IValidations validation;
 
-	public InitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+	public InitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
+	) {
 		this.league = league;
 		this.leagueDb = leagueDb;
 		this.display= display;
+		this.commandLineInput = commandLineInput;
+		this.validation = validation;
 	}
 
 	@Override
@@ -90,7 +97,7 @@ public class InitializeSeason extends StateMachineState {
 		schedule = regularSeasonSchedule.getSeasonSchedule();
 		league.setSchedule(schedule);
 
-		return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display);
+		return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display, commandLineInput, validation);
 	}
 
 }

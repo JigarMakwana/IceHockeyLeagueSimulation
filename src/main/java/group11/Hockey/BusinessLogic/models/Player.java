@@ -8,8 +8,9 @@ import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IPlayerStrengthContext;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.PlayerStrengthContext;
-import group11.Hockey.BusinessLogic.Positions;
 import group11.Hockey.db.Player.IPlayerDb;
+import group11.Hockey.BusinessLogic.Enums.Positions;
+
 
 /**
  * This is model class for Player and it contains all the business logic related
@@ -345,6 +346,6 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	
+
 
 }

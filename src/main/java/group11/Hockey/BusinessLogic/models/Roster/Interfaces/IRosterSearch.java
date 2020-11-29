@@ -1,12 +1,14 @@
+/**
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.models.Roster.Interfaces;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.BusinessLogic.Triplet;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
 
 public interface IRosterSearch {
     List<IPlayer> findWeakestPlayers(List<IPlayer> unSortedPlayerList, int maxPlayersPerTrade);
@@ -22,4 +24,6 @@ public interface IRosterSearch {
     List<IPlayer> getDefenseList(List<IPlayer> playerList);
     List<IPlayer> getForwardList(List<IPlayer> playerList);
     List<IPlayer> getGoalieList(List<IPlayer> playerList);
+    float averageTeamStrength(List<ITeam> eligibleTeamList);
+    ITeam findStrongestTeam(List<ITeam> eligibleTeamList);
 }

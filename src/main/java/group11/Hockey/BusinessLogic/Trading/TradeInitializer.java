@@ -1,15 +1,16 @@
+/**
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IRandomNoGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.IRandomFloatGenerator;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeInitializer;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TradeInitializer implements ITradeInitializer {
 	private ILeague leagueObj;
@@ -39,33 +40,38 @@ public class TradeInitializer implements ITradeInitializer {
 		}
 	}
 
-	public ITradingConfig getTradingConfig() {
-		ITradingConfig configTrading = DefaultHockeyFactory.makeConfigTrading(tradingConfig.getLossPoint(),
-				tradingConfig.getRandomTradeOfferChance(), tradingConfig.getMaxPlayersPerTrade(),
-				tradingConfig.getRandomAcceptanceChance(), tradingConfig.getGmTable());
-		return configTrading;
-	}
+    private boolean isRandomOfferChanceSuccess() {
+		IRandomFloatGenerator randomFloatGenerator = RandomNoFactory.makeRandomFloatGenerator();
+        float randomTradeOfferChance = randomFloatGenerator.generateRandomNo();
+        if(randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	private boolean isRandomOfferChanceSuccess() {
-		IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomNumberGenerator();
-		float randomTradeOfferChance = randomFloatGenerator.generateRandomFloat();
-		if (randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    @Override
+    public ITradeConfig getTradingConfig(){
+        ITradeConfig configTrading = TradingFactory.makeTradeConfig(
+                tradingConfig.getLossPoint(),
+                tradingConfig.getRandomTradeOfferChance(),
+                tradingConfig.getMaxPlayersPerTrade(),
+                tradingConfig.getRandomAcceptanceChance(),
+                tradingConfig.getGmTable()
+        );
+        return configTrading;
+    }
 
-	@Override
-	public boolean isTradePossible(ITeam team) {
-		if (team.isUserTeam()) {
-			return false;
-		} else if (isRandomOfferChanceSuccess()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    @Override
+    public boolean isTradePossible(ITeam team) {
+        if(team.isUserTeam()){
+            return false;
+        } else if (isRandomOfferChanceSuccess()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 	@Override
 	public List<ITeam> getEligibleTeams() {

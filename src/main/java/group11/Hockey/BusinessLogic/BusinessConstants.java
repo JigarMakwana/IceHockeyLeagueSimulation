@@ -16,15 +16,15 @@ public enum BusinessConstants {
 	Reduce_strength_by(2),
 	Likelihood_Of_Retirement_Low(1000),
 	Likelihood_Of_Retirement_High(750);
-	
 
-	
+
+
 	String value;
 	int intValue;
 	BusinessConstants(String value){
 		this.value = value;
 	}
-	
+
 	BusinessConstants(int intValue) {
 		this.intValue = intValue;
 	}
@@ -32,7 +32,7 @@ public enum BusinessConstants {
 	String getValue() {
 		return value;
 	}
-	
+
 	int getIntValue() {
 		return intValue;
 	}

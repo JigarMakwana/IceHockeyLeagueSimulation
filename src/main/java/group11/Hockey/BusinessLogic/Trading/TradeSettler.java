@@ -1,19 +1,20 @@
+/**
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
-import java.util.Collections;
-import java.util.List;
-
-import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IConstantSupplier;
-import group11.Hockey.BusinessLogic.IUserInputCheck;
-import group11.Hockey.BusinessLogic.IValidations;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeSettler;
+import group11.Hockey.BusinessLogic.*;
+import group11.Hockey.BusinessLogic.Enums.RosterSize;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeSettler;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
+
+import java.util.Collections;
+import java.util.List;
 
 public class TradeSettler implements ITradeSettler {
     private ITeam team;
@@ -25,33 +26,35 @@ public class TradeSettler implements ITradeSettler {
     private ICommandLineInput commandLineInput;
     private IValidations validation;
     private IDisplay display;
-    private IConstantSupplier constantSupplier;
     private IRosterSearch rosterSearch;
 
-    public TradeSettler(ITeam team, List<IPlayer> freeAgentList,
-                        ICommandLineInput commandLineInput,
-                        IValidations validation, IDisplay display,
-                        IConstantSupplier constantSupplier){
+    public TradeSettler(ITeam team, List<IPlayer> freeAgentList, ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
         this.team = team;
-        this.teamSize = this.team.getRoster().getAllPlayerList().size();
-        this.teamGoalieSize = this.team.getRoster().getGoalieList().size();
-        this.teamForwardSize = this.team.getRoster().getForwardList().size();
-        this.teamDefenseSize = this.team.getRoster().getDefenseList().size();
         this.freeAgentList = freeAgentList;
         this.commandLineInput = commandLineInput;
         this.validation = validation;
         this.display = display;
-        this.constantSupplier = constantSupplier;
         this.rosterSearch = DefaultHockeyFactory.makeRosterSearch();
+        initPlayers(team);
+    }
+
+    public void initPlayers(ITeam team){
+        if (null == team){
+            return;
+        }
+        this.teamSize = team.getRoster().getAllPlayerList().size();
+        this.teamGoalieSize = team.getRoster().getGoalieList().size();
+        this.teamForwardSize = team.getRoster().getForwardList().size();
+        this.teamDefenseSize = team.getRoster().getDefenseList().size();
     }
 
     @Override
     public void settleTeam() {
-        display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size...");
-        if(team.getRoster().isValidRoster()){
+        if(null == team || team.getRoster().isValidRoster()){
             return;
         } else {
-            int constantTeamSize = constantSupplier.getInActiveRosterSize() + constantSupplier.getActiveRosterSize();
+            display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size...");
+            int constantTeamSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal() + RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
             if(teamSize > constantTeamSize) {
                 dropPlayers();
             } else if (teamSize < constantTeamSize){
@@ -62,25 +65,21 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void dropPlayers(){
-        int constantGoalieSize = constantSupplier.getGoalieSize();
-        int constantForwardSize = constantSupplier.getForwardSize();
-        int constantDefenseSize = constantSupplier.getDefenseSize();
-
-        if(teamGoalieSize > constantGoalieSize) {
-            int noOfGoaliesToBeDropped = teamGoalieSize - constantGoalieSize;
+        if(teamGoalieSize > RosterSize.GOALIE_SIZE.getNumVal()) {
+            int noOfGoaliesToBeDropped = teamGoalieSize - RosterSize.GOALIE_SIZE.getNumVal();
             dropGoalie(noOfGoaliesToBeDropped);
         }
-        if(teamForwardSize > constantForwardSize){
-            int noOfForwardToBeDropped = teamForwardSize - constantForwardSize;
+        if(teamForwardSize > RosterSize.FORWARD_SIZE.getNumVal()){
+            int noOfForwardToBeDropped = teamForwardSize - RosterSize.FORWARD_SIZE.getNumVal();
             dropForward(noOfForwardToBeDropped);
         }
-        if(teamDefenseSize > constantDefenseSize){
-            int noOfDefenseToBeDropped = teamDefenseSize - constantDefenseSize;
+        if(teamDefenseSize > RosterSize.DEFENSE_SIZE.getNumVal()){
+            int noOfDefenseToBeDropped = teamDefenseSize - RosterSize.DEFENSE_SIZE.getNumVal();
             dropDefense(noOfDefenseToBeDropped);
         }
     }
 
-    public void dropGoalie(int noOfGoaliesToBeDropped){
+    private void dropGoalie(int noOfGoaliesToBeDropped){
         List<IPlayer> goalieList = team.getRoster().getGoalieList();
         for(int i=0; i<noOfGoaliesToBeDropped; i++) {
             if(team.isUserTeam() == true) {
@@ -93,7 +92,7 @@ public class TradeSettler implements ITradeSettler {
         }
     }
 
-    public void dropForward(int noOfForwardToBeDropped){
+    private void dropForward(int noOfForwardToBeDropped){
         List<IPlayer> forwardList = team.getRoster().getForwardList();
         for(int i=0; i<noOfForwardToBeDropped; i++) {
             if(team.isUserTeam() == true) {
@@ -144,25 +143,21 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void hirePlayers(){
-        int constantGoalieSize = constantSupplier.getGoalieSize();
-        int constantForwardSize = constantSupplier.getForwardSize();
-        int constantDefenseSize = constantSupplier.getDefenseSize();
-
-        if(teamGoalieSize < constantGoalieSize) {
-            int noOfGoaliesToBeHired = constantGoalieSize - teamGoalieSize;
+        if(teamGoalieSize < RosterSize.GOALIE_SIZE.getNumVal()) {
+            int noOfGoaliesToBeHired = RosterSize.GOALIE_SIZE.getNumVal() - teamGoalieSize;
             hireGoalie(noOfGoaliesToBeHired);
         }
-        if(teamForwardSize < constantForwardSize){
-            int noOfForwardToBeHired = constantForwardSize - teamForwardSize;
+        if(teamForwardSize < RosterSize.FORWARD_SIZE.getNumVal()){
+            int noOfForwardToBeHired = RosterSize.FORWARD_SIZE.getNumVal() - teamForwardSize;
             hireForward(noOfForwardToBeHired);
         }
-        if(teamDefenseSize < constantDefenseSize){
-            int noOfDefenseToBeHired = constantDefenseSize - teamDefenseSize;
+        if(teamDefenseSize < RosterSize.DEFENSE_SIZE.getNumVal()){
+            int noOfDefenseToBeHired = RosterSize.DEFENSE_SIZE.getNumVal() - teamDefenseSize;
             hireDefense(noOfDefenseToBeHired);
         }
     }
 
-    public void hireGoalie(int noOfGoaliesToBeHired){
+    private void hireGoalie(int noOfGoaliesToBeHired){
         for(int i=0; i<noOfGoaliesToBeHired; i++) {
             List<IPlayer> sortedFreeAgents = rosterSearch.getGoalieList(freeAgentList);
             try{
@@ -180,7 +175,7 @@ public class TradeSettler implements ITradeSettler {
         }
     }
 
-    public void hireForward(int noOfForwardToBeHired){
+    private void hireForward(int noOfForwardToBeHired){
         for(int i=0; i<noOfForwardToBeHired; i++) {
             List<IPlayer> sortedFreeAgents = rosterSearch.getForwardList(freeAgentList);
             try {
@@ -197,7 +192,7 @@ public class TradeSettler implements ITradeSettler {
         }
     }
 
-    public void hireDefense(int noOfDefenseToBeHired){
+    private void hireDefense(int noOfDefenseToBeHired){
         for(int i=0; i<noOfDefenseToBeHired; i++) {
             List<IPlayer> sortedFreeAgents = rosterSearch.getDefenseList(freeAgentList);
             try{
@@ -215,9 +210,9 @@ public class TradeSettler implements ITradeSettler {
         }
     }
 
-    public void hirePlayerInAITeam(List<IPlayer> sortedFreeAgents) throws Exception {
-        if(null == sortedFreeAgents.get(0)){
-            throw new Exception("Player is not available in Free Agents to form a Team.");
+    private void hirePlayerInAITeam(List<IPlayer> sortedFreeAgents) throws Exception {
+        if(sortedFreeAgents.size() == 0){
+            throw new Exception("There are No enough Free Agents available to settle a Team.");
         } else{
         	IPlayer playerToBeHired = sortedFreeAgents.get(0);
             playerToBeHired.setIsFreeAgent(false);
@@ -228,7 +223,7 @@ public class TradeSettler implements ITradeSettler {
 
     public void hirePlayerInUserTeam(List<IPlayer> sortedFreeAgents) throws Exception {
         if(null == sortedFreeAgents){
-            throw new Exception("Player is not available in Free Agents to form a Team.");
+            throw new Exception("IPlayer is not available in Free Agents to form a Team.");
         } else {
             display.pickPlayer(sortedFreeAgents);
             IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
@@ -241,7 +236,7 @@ public class TradeSettler implements ITradeSettler {
         }
     }
 
-    public void updateRosterSubLists(){
+    private void updateRosterSubLists(){
         if(null == team.getRoster().getAllPlayerList()){
             return;
         } else {

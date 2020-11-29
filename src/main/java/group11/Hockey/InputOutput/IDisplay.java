@@ -14,8 +14,8 @@ public interface IDisplay {
 
 	public void displayListOfPLayers(ILeague league);
 
-	public void displayTradeStatistics(String offeringTeamName, List<IPlayer> offeredPlayerList,
-									   String requestedTeamName, List<IPlayer> requestedPlayerList);
+	public void displayTradeStatistics(ITeam offeringTeamName, List<IPlayer> offeredPlayerList,
+									   ITeam requestedTeamName, List<IPlayer> requestedPlayerList);
 
 	public void displayPlayers(List<IPlayer> playersList);
 
@@ -28,5 +28,6 @@ public interface IDisplay {
 			String managerName, ICoach coach);
 
 	public void displayListOfFreeAgents(List<IPlayer> freeAgentList);
+
 	public void pickPlayer(List<IPlayer> freeAgentList);
 }

@@ -1,58 +1,60 @@
+/**
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IConstantSupplier;
+import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.IValidations;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeResolver;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeRunner;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeSettler;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
+import group11.Hockey.BusinessLogic.StateMachineState;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.*;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
+import group11.Hockey.db.League.ILeagueDb;
 
-public class TradeRunner implements ITradeRunner {
+public class TradeRunner extends StateMachineState implements ITradeRunner {
     private ILeague leagueObj;
+    private ILeagueDb leagueDb;
     private ICommandLineInput commandLineInput;
     private IValidations validation;
     private IDisplay display;
-    private IConstantSupplier constantSupplier;
 
-    public TradeRunner(ILeague leagueObj, ICommandLineInput commandLineInput, IValidations validation,
-                       IDisplay display, IConstantSupplier constantSupplier){
+    public TradeRunner(ILeague leagueObj, ILeagueDb leagueDb, ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
         this.leagueObj = leagueObj;
+        this.leagueDb = leagueDb;
         this.commandLineInput = commandLineInput;
         this.validation = validation;
         this.display = display;
-        this.constantSupplier = constantSupplier;
+    }
+
+    @Override
+    public StateMachineState startState() {
+        this.runTrading();
+        return new AgePlayer(leagueObj, leagueDb, display, commandLineInput, validation);
     }
 
     @Override
     public void runTrading() {
-        ITradeInitializer tradeInitializer = DefaultHockeyFactory.makeTradeInitializer(leagueObj);
+        ITradeInitializer tradeInitializer = TradingFactory.makeTradeInitializer(leagueObj);
         List<ITeam> eligibleTeamList = tradeInitializer.getEligibleTeams();
-        ITradingConfig tradingConfig = tradeInitializer.getTradingConfig();
+        ITradeConfig tradingConfig = tradeInitializer.getTradingConfig();
 
         for (int i = 0; eligibleTeamList.size() > 1; i = 0){
             if(tradeInitializer.isTradePossible(eligibleTeamList.get(i))){
-                ITradeGenerator tradeGenerator = DefaultHockeyFactory.makeTradeGenerator(eligibleTeamList.get(i),tradingConfig, display);
+                ITradeGenerator tradeGenerator = TradingFactory.makeTradeGenerator(eligibleTeamList.get(i),tradingConfig, display);
                 ITradeCharter tradeCharter = tradeGenerator.generateTradeOffer(eligibleTeamList);
 
-                ITradeResolver tradeResolver = DefaultHockeyFactory.makeTradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
+                ITradeResolver tradeResolver = TradingFactory.makeTradeResolver(leagueObj, tradeCharter, tradingConfig, commandLineInput, validation, display);
                 tradeResolver.resolveTrade();
 
-                ITradeSettler offeringTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getOfferingTeam(), (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
+                ITradeSettler offeringTeamSettler = TradingFactory.makeTradeSettler(tradeCharter.getOfferingTeam(), (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display);
                 offeringTeamSettler.settleTeam();
 
-                ITradeSettler requestedTeamSettler = DefaultHockeyFactory.makeTradeSettler(tradeCharter.getRequestedTeam(), (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display, constantSupplier);
+                ITradeSettler requestedTeamSettler = TradingFactory.makeTradeSettler(tradeCharter.getRequestedTeam(), (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display);
                 requestedTeamSettler.settleTeam();
             }
             eligibleTeamList.remove(0);

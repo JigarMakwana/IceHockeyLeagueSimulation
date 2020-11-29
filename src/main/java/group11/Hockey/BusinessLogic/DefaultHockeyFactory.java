@@ -2,6 +2,9 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
 import group11.Hockey.BusinessLogic.Trophy.CalderMemorial;
 import group11.Hockey.BusinessLogic.Trophy.EndOfRegularSeasonSubject;
 import group11.Hockey.BusinessLogic.Trophy.EndOfStanleySubject;
@@ -14,10 +17,6 @@ import group11.Hockey.BusinessLogic.Trophy.Trophy;
 import group11.Hockey.BusinessLogic.Trophy.Veniza;
 import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
 import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophySubject;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSize;
 
 import org.json.simple.parser.JSONParser;
 
@@ -42,20 +41,6 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShif
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
-import group11.Hockey.BusinessLogic.Trading.TradeCharter;
-import group11.Hockey.BusinessLogic.Trading.TradeDraft;
-import group11.Hockey.BusinessLogic.Trading.TradeGenerator;
-import group11.Hockey.BusinessLogic.Trading.TradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.TradeResolver;
-import group11.Hockey.BusinessLogic.Trading.TradeSettler;
-import group11.Hockey.BusinessLogic.Trading.TradingConfig;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeDraft;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeResolver;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeSettler;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.Coach;
@@ -159,8 +144,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
 	}
 
-	public static StateMachineState makeSimulate(League league, int seasons, ILeagueDb leagueDb, IDisplay display) {
-		return new Simulate(league, seasons, leagueDb, display);
+	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		return new Simulate(league, seasons, leagueDb, display, commandLineInput, validation);
 	}
 
 	public static JSONParser makeJSONParser() {
@@ -190,20 +175,22 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	}
 
-	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
-		return new InitializeSeason(league, leagueDb, display);
+	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		return new InitializeSeason(league, leagueDb, display, commandLineInput, validation);
 	}
 
 	public static StateMachineState makeFinalState() {
 		return FinalState.getInstance();
 	}
 
-	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb, IDisplay display) {
-		return new AdvanceTime(league, leagueDb, display);
+	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
+	) {
+		return new AdvanceTime(league, leagueDb, display, commandLineInput, validation);
 	}
 
-	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
-		return new TrainingPlayer(league, leagueDb, display);
+	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
+	) {
+		return new TrainingPlayer(league, leagueDb, display, commandLineInput, validation);
 	}
 
 	public static IScheduleContext makeScheduleContext(IScheduleStrategy scheduleStrategy) {
@@ -214,8 +201,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayoffSchedule();
 	}
 
-	public static IScheduleStrategy makePlayoffScheduleFinalRounds(IDisplay display) {
-		return new PlayoffScheduleFinalRounds(display);
+	public static IScheduleStrategy makePlayoffScheduleFinalRounds(IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		return new PlayoffScheduleFinalRounds(display, commandLineInput, validation);
 	}
 
 	public static IParse makeParse() {
@@ -225,7 +212,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static IAdvance makeAdvance() {
 		return new Advance();
 	}
-	
+
 	public static IPrintToConsole makePrintToConsole() {
 		return new PrintToConsole();
 	}
@@ -253,23 +240,13 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static GenerateShiftsTemplate makeGeneratePlayOffShifts(List<IPlayer> team) {
 		return new GeneratePlayOffShifts(team);
 	}
-	
+
 	public static StateMachineState makeAdvanceToNextSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		return new AdvanceToNextSeason(league, leagueDb, display);
 	}
 
-	public static IConstantSupplier makeConstantSupplier() {
-		int activeRosterSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal();
-		int inActiveRosterSize = RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
-		int forwardSize = RosterSize.FORWARD_SIZE.getNumVal();
-		int defenseSize = RosterSize.DEFENSE_SIE.getNumVal();
-		int goaliSize = RosterSize.GOALIE_SIZE.getNumVal();
-		return new ConstantSupplier(activeRosterSize, inActiveRosterSize, forwardSize, defenseSize, goaliSize);
-	}
-
-	public static IRoster makeRoster(String teamName, List<IPlayer> playerList) {
-		IConstantSupplier rosterSize = makeConstantSupplier();
-		return new Roster(teamName, playerList, rosterSize);
+	public static IRoster makeRoster(String teamName, List<IPlayer> playerList){
+		return new Roster(teamName, playerList);
 	}
 
 	public static IRosterSearch makeRosterSearch() {
@@ -288,45 +265,6 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
 			float randomAcceptanceChance, IgmTable gmTable) {
 		return new Trading(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance, gmTable);
-	}
-
-	public static IRandomNoGenerator makeRandomNumberGenerator() {
-		return new RandomNumberGenerator();
-	}
-
-	public static ITradeInitializer makeTradeInitializer(ILeague leagueObj) {
-		return new TradeInitializer(leagueObj);
-	}
-
-	public static ITradeGenerator makeTradeGenerator(ITeam team, ITradingConfig tradingConfig, IDisplay display) {
-		return new TradeGenerator(team, tradingConfig, display);
-	}
-
-	public static ITradeResolver makeTradeResolver(ITradeCharter tradeCharter, ITradingConfig tradingConfig,
-			ICommandLineInput commandLineInput, IValidations validation, IDisplay display) {
-		return new TradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
-	}
-
-	public static ITradeSettler makeTradeSettler(ITeam team, List<IPlayer> freeAgentList,
-			ICommandLineInput commandLineInput, IValidations validation, IDisplay display,
-			IConstantSupplier constantSupplier) {
-		return new TradeSettler(team, freeAgentList, commandLineInput, validation, display, constantSupplier);
-	}
-
-	public static ITradeCharter makeTradeCharter(ITeam offeringTeam, List<IPlayer> offeredPlayerList, ITeam requestedteam,
-			List<IPlayer> requestedPlayerList, int roundIdx) {
-		return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList, roundIdx);
-
-	}
-
-	public static ITradingConfig makeConfigTrading(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
-			float randomAcceptanceChance, IgmTable gmTable) {
-		return new TradingConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,
-				gmTable);
-	}
-
-	public static ITradeDraft makeTradeDraft(ITeam offeringTeam, ITradingConfig tradingConfig, IDisplay display) {
-		return new TradeDraft(offeringTeam, tradingConfig, display);
 	}
 
 	public static StateMachineState makeAgePlayer(ILeague league, int days, ILeagueDb leagueDb, IDisplay display) {
@@ -397,7 +335,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static IGeneralManager makeGeneralManager(String name, String personality) {
 		return new GeneralManager(name, personality);
 	}
-	
+
 	public static IPlayer makePlayer() {
 		return new Player();
 	}
@@ -414,45 +352,44 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static ITrophySubject makeEndOfRegularSeasonSubject(ILeague league) {
 		return new EndOfRegularSeasonSubject(league);
 	}
-	
+
 	public static ITrophySubject makeEndOfStanleySubject(ILeague league) {
 		return new EndOfStanleySubject(league);
 	}
-	
+
 	public static ITrophyObserver makePresident(ILeague league) {
 		return new President(league);
 	}
-	
+
 	public static ITrophyObserver makeCalderMemorial(ILeague league) {
 		return new CalderMemorial(league);
 	}
-	
+
 	public static ITrophyObserver makeVeniza(ILeague league) {
 		return new Veniza(league);
 	}
-		
+
 	public static ITrophyObserver makeJackAdams(ILeague league) {
 		return new JackAdams(league);
 	}
-	
+
 	public static ITrophyObserver makeMauriceRichard(ILeague league) {
 		return new MauriceRichard(league);
 	}
-	
+
 	public static ITrophyObserver makeRobHawkeyMemorial(ILeague league) {
 		return new RobHawkeyMemorial(league);
 	}
-	
+
 	public static ITrophyObserver makeParticipation(ILeague league) {
 		return new Participation(league);
 	}
-	
+
 	public static IGeneratingPlayers makeGeneratePlayer() {
 		return new GeneratingPlayers();
 	}
-	
+
 	public static Gson makeGson() {
 		return new GsonBuilder().setPrettyPrinting().create();
 	}
-	
 }

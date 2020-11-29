@@ -5,7 +5,7 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.Positions;
+import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 

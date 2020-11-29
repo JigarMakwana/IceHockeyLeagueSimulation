@@ -1,10 +1,11 @@
-package group11.Hockey.BusinessLogic.Trading.Interfaces;
+/**
+ * Author: Jigar Makwana B00842568
+ */
+package group11.Hockey.BusinessLogic.Trading.TradingInterfaces;
 
 import group11.Hockey.BusinessLogic.models.IgmTable;
 
-import java.util.Map;
-
-public interface ITradingConfig {
+public interface ITradeConfig {
     int getLossPoint();
     float getRandomTradeOfferChance();
     int getMaxPlayersPerTrade();

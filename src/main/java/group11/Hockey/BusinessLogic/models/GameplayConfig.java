@@ -12,8 +12,7 @@ public class GameplayConfig implements IGameplayConfig {
 	private IGameplayConfigDb gameplayConfigDb;
 	private String leagueName;
 
-	public GameplayConfig(IAging aging, IInjuries injuries, ITraining training,
-			ITrading trading) {
+	public GameplayConfig(IAging aging, IInjuries injuries, ITraining training, ITrading trading) {
 		super();
 		this.aging = aging;
 		this.injuries = injuries;

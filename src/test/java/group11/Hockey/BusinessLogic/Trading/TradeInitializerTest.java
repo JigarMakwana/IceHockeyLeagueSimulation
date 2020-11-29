@@ -2,14 +2,14 @@ package group11.Hockey.BusinessLogic.Trading;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeInitializer;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.models.League;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradingConfig;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.League;
 
 public class TradeInitializerTest {
     private TradingModelMock leagueModel;
@@ -18,14 +18,14 @@ public class TradeInitializerTest {
 
     @Before
     public void setUp() throws Exception {
-        leagueModel = new TradingModelMock(1.0f, 1.0f);
+        leagueModel = TradingMockFactory.makeTradingMock(1.0f, 1.0f);
         leagueObj = leagueModel.getLeagueInfo();
-        aiTradingObj = new TradeInitializer(leagueObj);
+        aiTradingObj = TradingFactory.makeTradeInitializer(leagueObj);
     }
 
     @Test
     public void getTradingConfigTest() {
-        ITradingConfig config = aiTradingObj.getTradingConfig();
+        ITradeConfig config = aiTradingObj.getTradingConfig();
         Assert.assertEquals(config.getRandomTradeOfferChance(), 1.0f, 0.0001);
         Assert.assertEquals(config.getRandomAcceptanceChance(), 1.0f, 0.0001);
         Assert.assertEquals(config.getLossPoint(), 2);
@@ -43,8 +43,6 @@ public class TradeInitializerTest {
     @Test
     public void getEligibleTeamsTest() {
         List<ITeam> eligibleTeamList = aiTradingObj.getEligibleTeams();
-        Assert.assertEquals(eligibleTeamList.size(), 4);
-        Assert.assertEquals(eligibleTeamList.get(0).getTeamName(), "Boston");
-        Assert.assertEquals(eligibleTeamList.get(1).getTeamName(), "Miami");
+        Assert.assertEquals(eligibleTeamList.size(), 3);
     }
 }

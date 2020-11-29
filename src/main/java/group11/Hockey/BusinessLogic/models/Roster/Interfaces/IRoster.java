@@ -1,3 +1,6 @@
+/**
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.models.Roster.Interfaces;
 
 import java.util.List;
@@ -12,7 +15,6 @@ public interface IRoster {
     List<IPlayer> getForwardList();
     List<IPlayer> getDefenseList();
     List<IPlayer> getGoalieList();
-    String getTeamName();
     void updateSubRoster(List<IPlayer> allPlayerList);
     boolean isValidRoster();
     boolean isValidActiveRoster();

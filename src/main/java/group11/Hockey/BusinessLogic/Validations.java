@@ -113,8 +113,8 @@ public class Validations implements IValidations {
 		return coachNameCheck;
 	}
 
-	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<IPlayer> skaters,
-			List<IPlayer> goalies) {
+	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<IPlayer> forwards,
+			List<IPlayer> defense, List<IPlayer> goalies) {
 		logger.info("Entered playerCheck()");
 		boolean isPlayerValueNotValid = true;
 		int playerNumberInInt = 0;
@@ -137,15 +137,25 @@ public class Validations implements IValidations {
 			isPlayerValueNotValid = true;
 			return isPlayerValueNotValid;
 		}
-		if (position.equalsIgnoreCase("forward") || position.equalsIgnoreCase("defense")) {
-			if (skaters.size() <= Integer.parseInt(BusinessConstants.Number_Of_Skaters.getValue().toString())) {
+		if (position.equalsIgnoreCase("forward")) {
+			if (forwards.size() <= Integer.parseInt(BusinessConstants.Number_Of_Forward.getValue().toString())) {
 				isPlayerValueNotValid = false;
 				selectedValues.add(playerNumberInInt);
 				return isPlayerValueNotValid;
 			} else {
-				display.showMessageOnConsole("Can not select more skaters");
+				display.showMessageOnConsole("Can not select more forward player");
 			}
-		} else if (position.equalsIgnoreCase("goalie")) {
+		} 
+		if (position.equalsIgnoreCase("defense")) {
+			if (defense.size() <= Integer.parseInt(BusinessConstants.Number_Of_Defense.getValue().toString())) {
+				isPlayerValueNotValid = false;
+				selectedValues.add(playerNumberInInt);
+				return isPlayerValueNotValid;
+			} else {
+				display.showMessageOnConsole("Can not select more defense players");
+			}
+		}
+		else if (position.equalsIgnoreCase("goalie")) {
 			if (goalies.size() <= Integer.parseInt(BusinessConstants.Number_Of_Goalies.getValue().toString())) {
 				isPlayerValueNotValid = false;
 				selectedValues.add(playerNumberInInt);

@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 
 import org.junit.Test;
@@ -12,7 +15,7 @@ import junit.framework.Assert;
 
 public class GameSimulationTest {
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void startGamePlayTest() {
 		ILeague league = new LeagueModelMock().getLeagueInfo();
 		IConference conf = league.getConferences().get(0);

@@ -6,22 +6,26 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.ICoach;
-import group11.Hockey.BusinessLogic.models.IConference;
-import group11.Hockey.BusinessLogic.models.IGameplayConfig;
-import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.Trading.AITrading;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.ICoach;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
+import group11.Hockey.BusinessLogic.models.IGameplayConfig;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
+import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
-
+/**
+ * 
+ * @author Jatin Partap Rana
+ *
+ */
 public class TrainingPlayer extends StateMachineState implements ITrainingPlayer {
 	private ILeague league;
 	private ILeagueDb leaugueDb;
@@ -38,7 +42,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	@Override
 	public StateMachineState startState() {
 		logger.info("Entered startState()");
-		IParse parse = new Parse();
+		IParse parse = DefaultHockeyFactory.makeParse();
 		ITimeLine timeLine = league.getTimeLine();
 		String currentDate = timeLine.getCurrentDate();
 		Date dateTime = parse.stringToDate(currentDate);
@@ -53,12 +57,12 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			List<IConference> conferenceList = league.getConferences();
 			for (IConference conference : conferenceList) {
 				List<Division> divisionList = conference.getDivisions();
-				for (Division division : divisionList) {
-					List<Team> teamList = division.getTeams();
-					for (Team team : teamList) {
+				for (IDivision division : divisionList) {
+					List<ITeam> teamList = division.getTeams();
+					for (ITeam team : teamList) {
 						ICoach headCoach = team.getHeadCoach();
-						List<Player> playerList = team.getPlayers();
-						for (Player player : playerList) {
+						List<IPlayer> playerList = team.getPlayers();
+						for (IPlayer player : playerList) {
 							changePlayerSkatingSkill(player, headCoach.getSkating(), league);
 							changePlayerShootingSkill(player, headCoach.getShooting(), league);
 							changePlayerCheckingSkill(player, headCoach.getChecking(), league);
@@ -69,11 +73,9 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			}
 		}
 
-		// TODO: call simulate game
 		ICheckAndSimulateTodaySchedule simulateToday = new CheckAndSimulateTodaySchedule(league.getSchedule(), league);
 		simulateToday.CheckAndSimulateToday(currentDate);
-		// .............
-		// .............
+
 
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
 			logger.info("Performing trading");
@@ -101,7 +103,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 		return coachStat;
 	}
 
-	public void changePlayerSkatingSkill(Player player, float coachSkatingStatValue, ILeague league) {
+	public void changePlayerSkatingSkill(IPlayer player, float coachSkatingStatValue, ILeague league) {
 		logger.info("Entered changePlayerSkatingSkill()");
 		if (player.isInjured() == false) {
 			logger.info(player.getPlayerName() + " is not injured so changing skating skill");
@@ -116,7 +118,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 
 	}
 
-	public void changePlayerShootingSkill(Player player, float coachShootingStatValue, ILeague league) {
+	public void changePlayerShootingSkill(IPlayer player, float coachShootingStatValue, ILeague league) {
 		logger.info("Entered changePlayerShootingSkill()");
 		if (player.isInjured() == false) {
 			logger.info(player.getPlayerName() + " is not injured so changing shooting skill");
@@ -131,7 +133,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 
 	}
 
-	public void changePlayerCheckingSkill(Player player, float coachCheckingStatValue, ILeague league) {
+	public void changePlayerCheckingSkill(IPlayer player, float coachCheckingStatValue, ILeague league) {
 		logger.info("Entered changePlayerCheckingSkill()");
 		if (player.isInjured() == false) {
 			logger.info(player.getPlayerName() + " is not injured so changing checking skill");
@@ -145,7 +147,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 		}
 	}
 
-	public void changePlayerSavingSkill(Player player, float coachSavingStatValue, ILeague league) {
+	public void changePlayerSavingSkill(IPlayer player, float coachSavingStatValue, ILeague league) {
 		logger.info("Entered changePlayerSavingSkill()");
 		if (player.isInjured() == false) {
 			logger.info(player.getPlayerName() + " is not injured so changing saving skill");

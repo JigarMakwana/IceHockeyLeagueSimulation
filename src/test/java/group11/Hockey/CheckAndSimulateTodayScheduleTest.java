@@ -8,7 +8,8 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
@@ -17,10 +18,10 @@ public class CheckAndSimulateTodayScheduleTest {
 	@Test
 	public void CheckAndSimulateTodayTest() {
 		SimulationLeagueModelMock leagueModel = new SimulationLeagueModelMock();
-		League league = leagueModel.getLeagueInfo();
+		ILeague league = leagueModel.getLeagueInfo();
 
-		HashMap<String, HashMap<Team, Team>> regularSchedule=new HashMap<>();
-		HashMap<Team, Team> schedule = new HashMap<>();
+		HashMap<String, HashMap<ITeam, ITeam>> regularSchedule=new HashMap<>();
+		HashMap<ITeam, ITeam> schedule = new HashMap<>();
 		List<Player> playerList = new ArrayList<Player>();
 		Team team1,team2,team3,team4;
 

@@ -5,14 +5,13 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.GeneralManager;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.IGeneralManager;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.InputOutput.IDisplay;
 
 public class Validations implements IValidations {
@@ -105,7 +104,7 @@ public class Validations implements IValidations {
 		} else {
 			List<ICoach> coachList = league.getCoaches();
 			for (ICoach coach : coachList) {
-				if (coach != null && coach.getName().equalsIgnoreCase(coachName)) {
+				if (coach.getName().equalsIgnoreCase(coachName)) {
 					coachNameCheck = false;
 					return coachNameCheck;
 				}
@@ -114,8 +113,8 @@ public class Validations implements IValidations {
 		return coachNameCheck;
 	}
 
-	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<Player> skaters,
-			List<Player> goalies) {
+	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<IPlayer> skaters,
+			List<IPlayer> goalies) {
 		logger.info("Entered playerCheck()");
 		boolean isPlayerValueNotValid = true;
 		int playerNumberInInt = 0;

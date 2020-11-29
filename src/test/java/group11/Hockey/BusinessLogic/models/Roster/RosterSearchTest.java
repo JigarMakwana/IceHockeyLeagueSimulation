@@ -17,7 +17,7 @@ public class RosterSearchTest {
 
     @Test
     public void findWeakestPlayersTest() {
-        List<Player> weakestPlayerList = rosterSearch.findWeakestPlayers(roster.getAllPlayerList(), 2);
+        List<IPlayer> weakestPlayerList = rosterSearch.findWeakestPlayers(roster.getAllPlayerList(), 2);
         Assert.assertEquals(weakestPlayerList.size(), 2);
         Assert.assertEquals(weakestPlayerList.get(0).getPlayerName(), "George");
         Assert.assertEquals(weakestPlayerList.get(1).getPlayerName(), "Dick");
@@ -41,7 +41,7 @@ public class RosterSearchTest {
     public void findStrongestPlayersTest() {
         List<Integer> playerPositionFlag = new ArrayList<Integer>(Arrays.asList(1,0,1));
 
-        List<Player> strongestPlayerList = rosterSearch.findStrongestPlayers(roster.getAllPlayerList(), playerPositionFlag, 2);
+        List<IPlayer> strongestPlayerList = rosterSearch.findStrongestPlayers(roster.getAllPlayerList(), playerPositionFlag, 2);
         Assert.assertEquals(strongestPlayerList.get(0).getPlayerName(), "Tom");
         Assert.assertEquals(strongestPlayerList.get(1).getPlayerName(), "Vikash");
     }
@@ -72,7 +72,7 @@ public class RosterSearchTest {
 
     @Test
     public void sortPlayersByStrengthTest() {
-        List<Player> sortedPlayerList = rosterSearch.sortPlayersByStrength(roster.getAllPlayerList());
+        List<IPlayer> sortedPlayerList = rosterSearch.sortPlayersByStrength(roster.getAllPlayerList());
         Assert.assertEquals(sortedPlayerList.get(0).getPlayerName(), "George");
         Assert.assertEquals(sortedPlayerList.get(1).getPlayerName(), "Dick");
         Assert.assertEquals(sortedPlayerList.get(2).getPlayerName(), "Vikash");
@@ -81,19 +81,19 @@ public class RosterSearchTest {
 
     @Test
     public void getDefenseListTest() {
-        List<Player> defenseList = rosterSearch.getDefenseList(roster.getAllPlayerList());
+        List<IPlayer> defenseList = rosterSearch.getDefenseList(roster.getAllPlayerList());
         Assert.assertEquals(defenseList.size(), 2);
     }
 
     @Test
     public void getForwardListTest() {
-        List<Player> forwardList = rosterSearch.getForwardList(roster.getAllPlayerList());
+        List<IPlayer> forwardList = rosterSearch.getForwardList(roster.getAllPlayerList());
         Assert.assertEquals(forwardList.size(), 1);
     }
 
     @Test
     public void getGoalieListTest() {
-        List<Player> goalieList = rosterSearch.getGoalieList(roster.getAllPlayerList());
+        List<IPlayer> goalieList = rosterSearch.getGoalieList(roster.getAllPlayerList());
         Assert.assertEquals(goalieList.size(), 1);
     }
 }

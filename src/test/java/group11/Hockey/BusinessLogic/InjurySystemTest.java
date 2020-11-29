@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic;
 
 import java.util.List;
@@ -9,9 +12,9 @@ import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public class InjurySystemTest {
 
@@ -21,8 +24,8 @@ public class InjurySystemTest {
 		ILeague league = leagueModel.getLeagueInfo();
 		List<IConference> conferences = league.getConferences();
 		List<Division> divisions = conferences.get(0).getDivisions();
-		List<Team> teams = divisions.get(0).getTeams();
-		List<Player> players = teams.get(0).getPlayers();
+		List<ITeam> teams = divisions.get(0).getTeams();
+		List<IPlayer> players = teams.get(0).getPlayers();
 
 		IInjurySystem injurySystem = DefaultHockeyFactory.makeInjurySystem(league);
 		injurySystem.setInjuryToPlayers(teams.get(0));

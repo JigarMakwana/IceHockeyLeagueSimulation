@@ -14,7 +14,7 @@ import java.util.Map;
 public class TradeInitializer implements ITradeInitializer {
 	private ILeague leagueObj;
 	private ITrading tradingConfig;
-	private List<Team> eligibleTeams = new ArrayList<>();
+	private List<ITeam> eligibleTeams = new ArrayList<>();
 
 	public TradeInitializer(ILeague leagueObj) {
 		this.leagueObj = leagueObj;
@@ -29,8 +29,8 @@ public class TradeInitializer implements ITradeInitializer {
 		for (IConference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					if ((team.getLosses() >= lossPointCutOff)) {
 						eligibleTeams.add(team);
 					}
@@ -47,7 +47,7 @@ public class TradeInitializer implements ITradeInitializer {
 	}
 
 	private boolean isRandomOfferChanceSuccess() {
-		IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
+		IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomNumberGenerator();
 		float randomTradeOfferChance = randomFloatGenerator.generateRandomFloat();
 		if (randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()) {
 			return true;
@@ -57,7 +57,7 @@ public class TradeInitializer implements ITradeInitializer {
 	}
 
 	@Override
-	public boolean isTradePossible(Team team) {
+	public boolean isTradePossible(ITeam team) {
 		if (team.isUserTeam()) {
 			return false;
 		} else if (isRandomOfferChanceSuccess()) {
@@ -68,7 +68,7 @@ public class TradeInitializer implements ITradeInitializer {
 	}
 
 	@Override
-	public List<Team> getEligibleTeams() {
+	public List<ITeam> getEligibleTeams() {
 		return eligibleTeams;
 	}
 }

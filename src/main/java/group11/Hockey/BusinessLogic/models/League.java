@@ -16,10 +16,11 @@ import group11.Hockey.db.League.ILeagueDb;
 public class League implements ILeague {
 	private String leagueName;
 	private List<IConference> conferences = new ArrayList<>();
-	private List<Player> freeAgents = new ArrayList<Player>();
+	private List<Player> freeAgents = new ArrayList<>();
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<ICoach> coaches = new ArrayList<>();
 	private List<IGeneralManager> generalManagers;
+
 	private List<IPlayer> retiredPlayers = new ArrayList<>();
 	private List<ITeam> qualifiedTeams = new ArrayList<>();
 	private List<ITeam> presidentTeams = new ArrayList<>();
@@ -29,10 +30,10 @@ public class League implements ILeague {
 	private List<IPlayer> mauriceRichardPlayers = new ArrayList<>();
 	private List<IPlayer> robHawkeyPlayers = new ArrayList<>();
 	private List<ITeam> participationTeams = new ArrayList<>();
-	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
 
 	private String startDate;
-	private ITimeLine timeLine;	
+	private ITimeLine timeLine;
+	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
 	private int goalsInSeason;
 	private int penaltiesInSeason;
 	private int savesInSeason;
@@ -100,7 +101,7 @@ public class League implements ILeague {
 	public void setSchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule) {
 		this.schedule = schedule;
 	}
-	
+
 	public List<ITeam> getQualifiedTeams() {
 		return qualifiedTeams;
 	}
@@ -140,7 +141,7 @@ public class League implements ILeague {
 	/**
 	 * @return the freeAgents
 	 */
-	public List<? extends IPlayer> getFreeAgents() {
+	public List<? extends Player> getFreeAgents() {
 		if (isFreeAgentsNotNull()) {
 			Collections.sort(freeAgents);
 		}
@@ -276,6 +277,5 @@ public class League implements ILeague {
 	public void setParticipationTeams(List<ITeam> participationTeams) {
 		this.participationTeams = participationTeams;
 	}
-
 
 }

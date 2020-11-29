@@ -25,7 +25,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void displayListOfGeneralMangers(League league) {
+	public void displayListOfGeneralMangers(ILeague league) {
 		int count = 1;
 		System.out.println("Available General Manger List: ");
 		List<IGeneralManager> generalManagers = league.getGeneralManagers();
@@ -37,7 +37,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void displayListOfCoaches(League league) {
+	public void displayListOfCoaches(ILeague league) {
 		List<ICoach> coaches = league.getCoaches();
 		System.out.println("Available Coaches List: ");
 		for (ICoach coach : coaches) {
@@ -51,7 +51,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void displayListOfPLayers(League league) {
+	public void displayListOfPLayers(ILeague league) {
 		int count = 1;
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		System.out.println("******Select Players for Team******: ");
@@ -75,7 +75,7 @@ public class Display implements IDisplay {
 	 */
 
 	@Override
-	public  void displayPlayers(List<Player> playersList) {
+	public  void displayPlayers(List<IPlayer> playersList) {
 		int length = playersList.size();
 		System.out.println("Player Name ----- Position ----- Strength");
 		for (int i = 0; i <= length - 1; i++)
@@ -87,8 +87,8 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public  void displayTradeStatistics(String offeringTeamName, List<Player> offeredPlayerList,
-										String requestedTeamName, List<Player> requestedPlayerList) {
+	public  void displayTradeStatistics(String offeringTeamName, List<IPlayer> offeredPlayerList,
+										String requestedTeamName, List<IPlayer> requestedPlayerList) {
 		System.out.println("\n****** Trade Statistics ******");
 		System.out.println("\nTeam " + offeringTeamName + " is offering the trade to " + requestedTeamName);
 		System.out.println("---- Team " + offeringTeamName + "'s Players Offered ----");
@@ -98,8 +98,8 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public  void displayTradeStatisticsToUser(String offeringTeamName, List<Player> offeredPlayerList,
-											  String requestedTeamName, List<Player> requestedPlayerList) {
+	public  void displayTradeStatisticsToUser(String offeringTeamName, List<IPlayer> offeredPlayerList,
+											  String requestedTeamName, List<IPlayer> requestedPlayerList) {
 		System.out.println("\n****** Woaha Trade Offer from AI Team ******");
 		System.out.println("Team " + offeringTeamName + " is offering the trade");
 		System.out.println("---- Team " + offeringTeamName + "'s Players Offered ----");
@@ -114,7 +114,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void displayListOfFreeAgents(List<Player> freeAgentList) {
+	public void displayListOfFreeAgents(List<IPlayer> freeAgentList) {
 		System.out.println("******Select Players for Team******: ");
 		System.out.println("******List of free agents******: ");
 		for(int i=0; i<freeAgentList.size(); i++)
@@ -130,7 +130,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void pickPlayer(List<Player> playerList) {
+	public void pickPlayer(List<IPlayer> playerList) {
 		System.out.println("\n**Please select the player to drop**");
 		System.out.println("******List of players******: ");
 		for(int i=0; i<playerList.size(); i++)

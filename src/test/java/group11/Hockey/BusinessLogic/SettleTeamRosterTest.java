@@ -1,14 +1,17 @@
 package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.BusinessLogic.Trading.SettleTeamRoster;
-import group11.Hockey.BusinessLogic.Trading.TradingModelMock;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-import org.junit.Assert;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import group11.Hockey.BusinessLogic.Trading.SettleTeamRoster;
+import group11.Hockey.BusinessLogic.Trading.TradingModelMock;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Team;
 
 public class SettleTeamRosterTest {
     public IConstantSupplier constants;
@@ -23,10 +26,10 @@ public class SettleTeamRosterTest {
         this.leagueObj = leagueModel.getLeagueInfo();
         this.settleObj = new SettleTeamRoster(leagueObj, constants);
 
-        List<Team> teamList = new ArrayList<>();
+        List<ITeam> teamList = new ArrayList<>();
         teamList = leagueModel.getTeamList();
-        Team team1 = teamList.get(0);
-        List<Player> playerList = team1.getPlayers();
+        ITeam team1 = teamList.get(0);
+        List<IPlayer> playerList = team1.getPlayers();
         try{
             settleObj.hirePlayer(leagueObj, playerList, Positions.GOALIE);
         }
@@ -44,10 +47,10 @@ public class SettleTeamRosterTest {
         this.leagueObj = leagueModel.getLeagueInfo();
         this.settleObj = new SettleTeamRoster(leagueObj, constants);
 
-        List<Team> teamList = new ArrayList<>();
+        List<ITeam> teamList = new ArrayList<>();
         teamList = leagueModel.getTeamList();
-        Team team1 = teamList.get(0);
-        List<Player> playerList = team1.getPlayers();
+        ITeam team1 = teamList.get(0);
+        List<IPlayer> playerList = team1.getPlayers();
         try{
             settleObj.dropPlayer(leagueObj, playerList, Positions.GOALIE);
         }

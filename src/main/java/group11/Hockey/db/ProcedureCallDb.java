@@ -4,7 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ProcedureCallDb {
+public class ProcedureCallDb implements IProcedureCallDb{
 
 	private String procedureName;
 	ConnectionUtil connectionUtil = new ConnectionUtil();

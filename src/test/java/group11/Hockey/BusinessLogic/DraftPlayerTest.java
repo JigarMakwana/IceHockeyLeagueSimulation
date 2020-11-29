@@ -1,11 +1,16 @@
 package group11.Hockey.BusinessLogic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
+import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
 
 public class DraftPlayerTest {
@@ -33,8 +38,13 @@ public class DraftPlayerTest {
 	@Test
 	public void selectTeamFromRegularSeasonStandinfoTest() {
 		DraftPlayer draftPlayer = new DraftPlayer(league,null, display);
+		List<ITeam> teams=  league.getConferences().get(0).getDivisions().get(0).getTeams();
+		List<Team> fetchedTeam = new ArrayList<>();
+		for(ITeam team: teams) {
+			fetchedTeam.add((Team)team);
+		}
 		draftPlayer
-				.selectTeamFromRegularSeasonStandinfo(league.getConferences().get(0).getDivisions().get(0).getTeams());
-		Assert.assertTrue(league.getConferences().get(0).getDivisions().get(0).getTeams().size() == 17);
+				.selectTeamFromRegularSeasonStandinfo(fetchedTeam);
+		Assert.assertTrue(league.getConferences().get(0).getDivisions().get(0).getTeams().size() == 18);
 	}
 }

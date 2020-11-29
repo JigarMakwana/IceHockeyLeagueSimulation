@@ -8,9 +8,9 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.db.Constants;
-import group11.Hockey.db.GameplayConfigDb;
-import group11.Hockey.db.IGameplayConfigDb;
 import group11.Hockey.db.ProcedureCallDb;
+import group11.Hockey.db.GameplayConfig.GameplayConfigDb;
+import group11.Hockey.db.GameplayConfig.IGameplayConfigDb;
 import group11.Hockey.db.Player.IPlayerDb;
 import group11.Hockey.db.Player.PlayerDbImpl;
 
@@ -33,7 +33,7 @@ public class TeamDbImpl implements ITeamDb {
 				league.setStartDate(resultSet.getString(Constants.leagueStartDate.toString()));
 				IConference conferenceInLeague = null;
 				Division divisionInConference = null;
-				Team teamInDivision = null;
+				ITeam teamInDivision = null;
 				boolean conferencExits = conference.isConferenceNameValid(
 						resultSet.getString(Constants.conferenceName.toString()), league.getConferences());
 				if (conferencExits) {
@@ -48,9 +48,9 @@ public class TeamDbImpl implements ITeamDb {
 				teamInDivision = pupulateTeamInDivision(team, resultSet, divisionInConference);
 				Player player = populatePlayerDetails(resultSet);
 
-				List<Player> playerList = teamInDivision.getPlayers();
+				List<IPlayer> playerList = teamInDivision.getPlayers();
 				if (playerList == null || playerList.size() == 0) {
-					playerList = new ArrayList<Player>();
+					playerList = new ArrayList<>();
 					playerList.add(player);
 					teamInDivision.setPlayers(playerList);
 				} else {
@@ -97,9 +97,9 @@ public class TeamDbImpl implements ITeamDb {
 		return divisionInConference;
 	}
 
-	private Team pupulateTeamInDivision(Team team, ResultSet resultSet, Division divisionInConference)
+	private ITeam pupulateTeamInDivision(ITeam team, ResultSet resultSet, Division divisionInConference)
 			throws SQLException {
-		Team teamInDivision;
+		ITeam teamInDivision;
 		boolean teamExists = team.teamExistsInDivision(resultSet.getString(Constants.teamName.toString()),
 				divisionInConference);
 		if (teamExists) {
@@ -119,9 +119,9 @@ public class TeamDbImpl implements ITeamDb {
 			gm.setName(Constants.generalMangerName.toString());
 			gm.setPersonality(Constants.generalMangerPersonality.toString());
 			teamInDivision.setGeneralManager(gm);
-			List<Team> teamList = divisionInConference.getTeams();
+			List<ITeam> teamList = divisionInConference.getTeams();
 			if (teamList == null || teamList.size() == 0) {
-				teamList = new ArrayList<Team>();
+				teamList = new ArrayList<>();
 				teamList.add(teamInDivision);
 				divisionInConference.setTeams(teamList);
 			} else {

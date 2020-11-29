@@ -1,11 +1,14 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic.models;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.db.GameplayConfig.IGameplayConfigDb;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import group11.Hockey.db.IGameplayConfigDb;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

@@ -9,7 +9,7 @@ import group11.Hockey.BusinessLogic.IPlayerStrengthContext;
 import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.PlayerStrengthContext;
 import group11.Hockey.BusinessLogic.Positions;
-import group11.Hockey.db.IPlayerDb;
+import group11.Hockey.db.Player.IPlayerDb;
 
 /**
  * This is model class for Player and it contains all the business logic related
@@ -216,7 +216,8 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		} else if (this.position.equalsIgnoreCase(Positions.DEFENSE.toString())) {
 			playerStrength = new PlayerStrengthContext(DefaultHockeyFactory.makeDefensePosition(this));
 		} else {
-			playerStrength = DefaultHockeyFactory.makePlayerStrengthContext(DefaultHockeyFactory.makeGoaliePosition(this));
+			playerStrength = DefaultHockeyFactory
+					.makePlayerStrengthContext(DefaultHockeyFactory.makeGoaliePosition(this));
 		}
 		return playerStrength.executeStrategy();
 	}
@@ -287,7 +288,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		decreaseInjuredDaysForPlayer(days);
 	}
 
-	public void replacePlayerWithFreeAgent(ILeague league, List<Player> playersList) {
+	public void replacePlayerWithFreeAgent(ILeague league, List<IPlayer> playersList) {
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 
@@ -301,31 +302,14 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 				break;
 			}
 		}
-		// TODO implement exception if no player is hired from free agents
 	}
 
-	public void dropPlayerToFreeAgent(League league, List<Player> playersList) {
-		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
-		Iterator<Player> playersListItr = playersList.iterator();
-
-		while (playersListItr.hasNext()) {
-			Player player = playersListItr.next();
-			if (player.getPosition().equalsIgnoreCase(this.getPosition())) {
-				player.setIsFreeAgent(true);
-				player.setCaptain(this.getCaptain());
-				freeAgents.add(player);
-				playersListItr.remove();
-				break;
-			}
-		}
-	}
-
-	public void removeFreeAgentsFromLeague(ILeague league, List<Player> freeAgents) {
+	public void removeFreeAgentsFromLeague(ILeague league, List<IPlayer> freeAgents) {
 		List<Player> listOfFreeAgentsInLeague = (List<Player>) league.getFreeAgents();
 		Iterator<Player> interator = listOfFreeAgentsInLeague.iterator();
 		while (interator.hasNext()) {
 			Player pl = interator.next();
-			for (Player freeAgent : freeAgents) {
+			for (IPlayer freeAgent : freeAgents) {
 				if (freeAgent.toString().equalsIgnoreCase(pl.toString())) {
 					interator.remove();
 				}
@@ -333,32 +317,34 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		}
 	}
 
-	private void checkAndDecrementPlayerShootingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerShootingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setShooting(this.getShooting() - 1);
 		}
 	}
 
-	private void checkAndDecrementPlayerCheckingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerCheckingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setChecking(this.getChecking() - 1);
 		}
 	}
 
-	private void checkAndDecrementPlayerSkatingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerSkatingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setSkating(this.getSkating() - 1);
 		}
 	}
 
-	private void checkAndDecrementPlayerSavingStat(float statDecayChance) {
+	public void checkAndDecrementPlayerSavingStat(float statDecayChance) {
 		float randomValue = (float) Math.random();
 		if (randomValue > statDecayChance) {
 			this.setSaving(this.getSaving() - 1);
 		}
 	}
+
+	
 
 }

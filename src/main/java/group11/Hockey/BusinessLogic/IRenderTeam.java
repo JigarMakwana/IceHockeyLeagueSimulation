@@ -1,8 +1,8 @@
 package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 
 public interface IRenderTeam {
 
-	public League renderTeam();
+	public ILeague renderTeam();
 }

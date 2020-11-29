@@ -1,7 +1,6 @@
 package group11.Hockey.BusinessLogic;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
@@ -11,12 +10,11 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 
-public class InjurySystem implements IInjurySystem{
+public class InjurySystem implements IInjurySystem {
 
 	private float randomInjuryChance;
 	private int injuryDaysLow;
@@ -33,7 +31,7 @@ public class InjurySystem implements IInjurySystem{
 	}
 
 	public void setInjuryToPlayers(ITeam team) {
-		for (Player player : team.getPlayers()) {
+		for (IPlayer player : team.getPlayers()) {
 			if (determainIsPlayerInjured()) {
 				player.setInjured(true);
 				player.setNumberOfInjuredDays(determainNumberOfDaysOfInjury());
@@ -42,21 +40,23 @@ public class InjurySystem implements IInjurySystem{
 	}
 
 	public boolean determainIsPlayerInjured() {
-		float probabilityOfInjury = new Random().nextFloat();
+		float probabilityOfInjury = DefaultHockeyFactory.makeRandomNumberGenerator().generateRandomFloat();
 		boolean isPlayerInjured = randomInjuryChance >= probabilityOfInjury;
 		return isPlayerInjured;
 	}
 
 	public int determainNumberOfDaysOfInjury() {
-		int numberOfInjuredDays = new Random().nextInt((injuryDaysHigh - injuryDaysLow) + 1) + injuryDaysLow;
+		int numberOfInjuredDays = DefaultHockeyFactory.makeRandomNumberGenerator()
+				.generateRandomInt((injuryDaysHigh - injuryDaysLow) + 1);
+		numberOfInjuredDays += injuryDaysLow;
 		return numberOfInjuredDays;
 	}
 
-	public void settleRecoveredPlayer(IRoster roster, Player recoveredPlayer) {
+	public void settleRecoveredPlayer(IRoster roster, IPlayer recoveredPlayer) {
 		logger.info("Entered settleRecoveredPlayer()");
 		Positions position = findInjuredPlayerPosition(recoveredPlayer);
 		IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-		Player replacement = rosterSearch.findWeakestPlayerByPosition(roster.getActiveRoster(), position);
+		IPlayer replacement = rosterSearch.findWeakestPlayerByPosition(roster.getActiveRoster(), position);
 		if (null == replacement) {
 			return;
 		} else {
@@ -66,12 +66,12 @@ public class InjurySystem implements IInjurySystem{
 		}
 	}
 
-	public void settleInjuredPlayer(IRoster roster, Player injuredPlayer) {
+	public void settleInjuredPlayer(IRoster roster, IPlayer injuredPlayer) {
 		logger.info("Entered settleInjuredPlayer()");
 		if (isInjuredSwappingPossible(roster, injuredPlayer)) {
 			Positions position = findInjuredPlayerPosition(injuredPlayer);
 			IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-			Player replacement = rosterSearch.findStrongestPlayerByPosition(roster.getInActiveRoster(), position);
+			IPlayer replacement = rosterSearch.findStrongestPlayerByPosition(roster.getInActiveRoster(), position);
 			if (null == replacement) {
 				return;
 			} else {
@@ -82,13 +82,13 @@ public class InjurySystem implements IInjurySystem{
 		}
 	}
 
-	public boolean isInjuredSwappingPossible(IRoster roster, Player injuredPlayer) {
+	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer) {
 		logger.info("Entered isInjuredSwappingPossible()");
 		Positions position = findInjuredPlayerPosition(injuredPlayer);
 		return isUnInjuredPlayerAvailable(roster, position);
 	}
 
-	public Positions findInjuredPlayerPosition(Player injuredPlayer) {
+	public Positions findInjuredPlayerPosition(IPlayer injuredPlayer) {
 		if (injuredPlayer.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())) {
 			return Positions.FORWARD;
 		} else if (injuredPlayer.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {

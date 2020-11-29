@@ -8,25 +8,25 @@ public interface IDisplay {
 
 	public void showMessageOnConsole(String message);
 
-	public void displayListOfGeneralMangers(League league);
+	public void displayListOfGeneralMangers(ILeague league);
 
-	public void displayListOfCoaches(League league);
+	public void displayListOfCoaches(ILeague league);
 
-	public void displayListOfPLayers(League league);
+	public void displayListOfPLayers(ILeague league);
 
-	public void displayTradeStatistics(String offeringTeamName, List<Player> offeredPlayerList,
-									   String requestedTeamName, List<Player> requestedPlayerList);
+	public void displayTradeStatistics(String offeringTeamName, List<IPlayer> offeredPlayerList,
+									   String requestedTeamName, List<IPlayer> requestedPlayerList);
 
-	public void displayPlayers(List<Player> playersList);
+	public void displayPlayers(List<IPlayer> playersList);
 
-	public void displayTradeStatisticsToUser(String offeringTeamName, List<Player> offeredPlayerList,
-											 String requestedTeamName, List<Player> requestedPlayerList);
+	public void displayTradeStatisticsToUser(String offeringTeamName, List<IPlayer> offeredPlayerList,
+											 String requestedTeamName, List<IPlayer> requestedPlayerList);
 
 	public void displayAcceptRejectOptionToUser();
 
 	public void printTeamDetails(String leagueName, String conferenceName, String divisionName, String teamName,
 			String managerName, ICoach coach);
 
-	public void displayListOfFreeAgents(List<Player> freeAgentList);
-	public void pickPlayer(List<Player> freeAgentList);
+	public void displayListOfFreeAgents(List<IPlayer> freeAgentList);
+	public void pickPlayer(List<IPlayer> freeAgentList);
 }

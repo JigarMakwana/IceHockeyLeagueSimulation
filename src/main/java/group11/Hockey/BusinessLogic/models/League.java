@@ -141,7 +141,7 @@ public class League implements ILeague {
 	/**
 	 * @return the freeAgents
 	 */
-	public List<? extends Player> getFreeAgents() {
+	public List<? extends IPlayer> getFreeAgents() {
 		if (isFreeAgentsNotNull()) {
 			Collections.sort(freeAgents);
 		}

@@ -8,7 +8,6 @@ import group11.Hockey.db.League.ILeagueDb;
 /**
  * This class contains the business logic for the League model
  *
- * @author jatinpartaprana
  *
  */
 public class League implements ILeague {
@@ -200,7 +199,7 @@ public class League implements ILeague {
 	}
 
 	private boolean isFreeAgentsNotNull() {
-		return freeAgents != null;
+		return freeAgents.size() > 0;
 	}
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb) {

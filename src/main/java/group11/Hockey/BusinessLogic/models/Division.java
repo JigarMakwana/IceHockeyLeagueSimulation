@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * This class contains the business logic for the division model.
  *
- * @author jatinpartaprana
  *
  */
 public class Division implements IDivision {

@@ -71,7 +71,7 @@ public class LeagueModelMock {
 		coachList.add(new Coach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
 		league.setCoaches(coachList);
 		List<IGeneralManager> generalManagerList = new ArrayList<>();
-		IGeneralManager generalManager = new GeneralManager("General Manager 1");
+		IGeneralManager generalManager = new GeneralManager("General Manager 1", "normal");
 		generalManagerList.add(generalManager);
 		league.setGeneralManagers(generalManagerList);
 		populateFreeAgents(league);

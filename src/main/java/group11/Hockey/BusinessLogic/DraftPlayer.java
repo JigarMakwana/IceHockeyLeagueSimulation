@@ -31,7 +31,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 	@Override
 	public StateMachineState startState() {
 		draftPlayer();
-		return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
+		return DefaultHockeyFactory.makeTrophy(league, leagueDb, display);
 	}
 
 	@Override

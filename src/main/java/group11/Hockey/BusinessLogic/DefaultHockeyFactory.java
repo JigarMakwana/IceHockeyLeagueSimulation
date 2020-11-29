@@ -4,6 +4,18 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.Trading.*;
 import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
+import group11.Hockey.BusinessLogic.Trophy.CalderMemorial;
+import group11.Hockey.BusinessLogic.Trophy.EndOfRegularSeasonSubject;
+import group11.Hockey.BusinessLogic.Trophy.EndOfStanleySubject;
+import group11.Hockey.BusinessLogic.Trophy.JackAdams;
+import group11.Hockey.BusinessLogic.Trophy.MauriceRichard;
+import group11.Hockey.BusinessLogic.Trophy.Participation;
+import group11.Hockey.BusinessLogic.Trophy.President;
+import group11.Hockey.BusinessLogic.Trophy.RobHawkeyMemorial;
+import group11.Hockey.BusinessLogic.Trophy.Trophy;
+import group11.Hockey.BusinessLogic.Trophy.Veniza;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophySubject;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
@@ -34,6 +46,8 @@ import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
+import group11.Hockey.InputOutput.IPrintToConsole;
+import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.Deserialize;
 import group11.Hockey.db.ICoachDb;
@@ -168,6 +182,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static IAdvance makeAdvance() {
 		return new Advance();
 	}
+	
+	public static IPrintToConsole makePrintToConsole() {
+		return new PrintToConsole();
+	}
 
 	public static IGameStrategy makeDefencePlayerActive() {
 		return new DefencePlayerActive();
@@ -192,7 +210,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static GenerateShiftsTemplate makeGeneratePlayOffShifts(List<Player> team) {
 		return new GeneratePlayOffShifts(team);
 	}
-
+	
 	public static StateMachineState makeAdvanceToNextSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		return new AdvanceToNextSeason(league, leagueDb, display);
 	}
@@ -341,4 +359,45 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new DraftPlayer(league, leagueDb, display);
 
 	}
+
+	public static StateMachineState makeTrophy(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+		return new Trophy(league, leagueDb, display);
+	}
+
+	public static ITrophySubject makeEndOfRegularSeasonSubject(ILeague league) {
+		return new EndOfRegularSeasonSubject(league);
+	}
+	
+	public static ITrophySubject makeEndOfStanleySubject(ILeague league) {
+		return new EndOfStanleySubject(league);
+	}
+	
+	public static ITrophyObserver makePresident(ILeague league) {
+		return new President(league);
+	}
+	
+	public static ITrophyObserver makeCalderMemorial(ILeague league) {
+		return new CalderMemorial(league);
+	}
+	
+	public static ITrophyObserver makeVeniza(ILeague league) {
+		return new Veniza(league);
+	}
+		
+	public static ITrophyObserver makeJackAdams(ILeague league) {
+		return new JackAdams(league);
+	}
+	
+	public static ITrophyObserver makeMauriceRichard(ILeague league) {
+		return new MauriceRichard(league);
+	}
+	
+	public static ITrophyObserver makeRobHawkeyMemorial(ILeague league) {
+		return new RobHawkeyMemorial(league);
+	}
+	
+	public static ITrophyObserver makeParticipation(ILeague league) {
+		return new Participation(league);
+	}
+	
 }

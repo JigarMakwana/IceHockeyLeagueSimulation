@@ -22,6 +22,13 @@ public class League implements ILeague {
 	private List<IGeneralManager> generalManagers;
 	private List<Player> retiredPlayers = new ArrayList<Player>();
 	private List<Team> qualifiedTeams = new ArrayList<Team>();
+	private List<Team> presidentTeams = new ArrayList<Team>();
+	private List<Player> calderPlayers = new ArrayList<Player>();
+	private List<Player> venizaPlayers = new ArrayList<Player>();
+	private List<ICoach> jackAdamsCoaches = new ArrayList<ICoach>();
+	private List<Player> mauriceRichardPlayers = new ArrayList<Player>();
+	private List<Player> robHawkeyPlayers = new ArrayList<Player>();
+	private List<Team> participationTeams = new ArrayList<Team>();
 	private String startDate;
 	private ITimeLine timeLine;
 	private HashMap<String, HashMap<Team, Team>> schedule;
@@ -214,4 +221,61 @@ public class League implements ILeague {
 		return league;
 
 	}
+	
+	public List<Team> getPresidentTeams() {
+		return presidentTeams;
+	}
+
+	public void setPresidentTeams(List<Team> presidentTeams) {
+		this.presidentTeams = presidentTeams;
+	}
+
+	public List<Player> getCalderPlayers() {
+		return calderPlayers;
+	}
+
+	public void setCalderPlayers(List<Player> calderPlayers) {
+		this.calderPlayers = calderPlayers;
+	}
+
+	public List<Player> getVenizaPlayers() {
+		return venizaPlayers;
+	}
+
+	public void setVenizaTeams(List<Player> venizaPlayers) {
+		this.venizaPlayers = venizaPlayers;
+	}
+
+	public List<ICoach> getJackAdamsCoaches() {
+		return jackAdamsCoaches;
+	}
+
+	public void setJackAdamsCoaches(List<ICoach> jackAdamsCoaches) {
+		this.jackAdamsCoaches = jackAdamsCoaches;
+	}
+
+	public List<Player> getMauriceRichardPlayers() {
+		return mauriceRichardPlayers;
+	}
+
+	public void setMauriceRichardPlayers(List<Player> mauriceRichardPlayers) {
+		this.mauriceRichardPlayers = mauriceRichardPlayers;
+	}
+
+	public List<Player> getRobHawkeyPlayers() {
+		return robHawkeyPlayers;
+	}
+
+	public void setRobHawkeyPlayers(List<Player> robHawkeyPlayers) {
+		this.robHawkeyPlayers = robHawkeyPlayers;
+	}
+
+	public List<Team> getParticipationTeams() {
+		return participationTeams;
+	}
+
+	public void setParticipationTeams(List<Team> participationTeams) {
+		this.participationTeams = participationTeams;
+	}
+
 }

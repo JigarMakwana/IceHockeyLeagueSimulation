@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleContext;
-import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
@@ -46,10 +45,10 @@ public class AdvanceTime extends StateMachineState {
 		if (parse.stringToDate(currentDate).equals(regularSeasonEndDateTime)) {
 			logger.info(currentDate+" is regular season end date");
 			String message = "********** Regular season ended **********";
-			System.out.println(message);
+			display.showMessageOnConsole(message);
 			DefaultHockeyFactory.makeEndOfRegularSeasonSubject(league);
 			message = "\n********** Generating Playoff schedule **********";
-			System.out.println(message);
+			display.showMessageOnConsole(message);
 			IScheduleContext scheduleContext = DefaultHockeyFactory
 					.makeScheduleContext(DefaultHockeyFactory.makePlayoffSchedule());
 			return scheduleContext.executeStrategy(league, leagueDb);

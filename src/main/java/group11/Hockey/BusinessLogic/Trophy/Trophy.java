@@ -10,9 +10,9 @@ import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
@@ -41,16 +41,16 @@ public class Trophy extends StateMachineState {
 		String stanleyDate = timeLine.getStanleyDate();
 		int endYear = parse.stringToYear(stanleyDate);
 
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
-		List<Team> presidentTeams = league.getPresidentTeams();
-		List<Player> calderPlayers = league.getCalderPlayers();
-		List<Player> venizaPlayers = league.getVenizaPlayers();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
+		List<ITeam> presidentTeams = league.getPresidentTeams();
+		List<IPlayer> calderPlayers = league.getCalderPlayers();
+		List<IPlayer> venizaPlayers = league.getVenizaPlayers();
 		List<ICoach> jackAdamsCoaches = league.getJackAdamsCoaches();
-		List<Player> mauricePlayers = league.getMauriceRichardPlayers();
-		List<Player> robHawkeyPlayers = league.getRobHawkeyPlayers();
-		List<Team> participationTeams = league.getParticipationTeams();
+		List<IPlayer> mauricePlayers = league.getMauriceRichardPlayers();
+		List<IPlayer> robHawkeyPlayers = league.getRobHawkeyPlayers();
+		List<ITeam> participationTeams = league.getParticipationTeams();
 		
-		Team winner = qualifiedTeams.get(0);
+		ITeam winner = qualifiedTeams.get(0);
 		qualifiedTeams.remove(winner);
 		String message = "\n********** Winner team of the season(" + startYear + "/" + endYear + ") is "
 				+ winner.getTeamName() + " **********";

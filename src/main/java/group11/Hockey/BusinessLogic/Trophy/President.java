@@ -6,7 +6,7 @@ import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.ITeam;
 
 public class President implements ITrophyObserver {
 	ILeague league;
@@ -17,15 +17,15 @@ public class President implements ITrophyObserver {
 	
 	@Override
 	public void AwardTrophy() {
-		List<Team> presidentTeams = league.getPresidentTeams();		
-		Team president = null;
+		List<ITeam> presidentTeams = league.getPresidentTeams();		
+		ITeam president = null;
 		int presidentPoints=0;		
 		List<IConference> conferenceList = league.getConferences();
 		for (IConference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					if(team.getPoints()>=presidentPoints) {
 						president=team;
 						presidentPoints=president.getPoints();

@@ -6,8 +6,8 @@ import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 
 public class CalderMemorial implements ITrophyObserver{
 	ILeague league;
@@ -18,18 +18,18 @@ public class CalderMemorial implements ITrophyObserver{
 	
 	@Override
 	public void AwardTrophy() {
-		List<Player> calderPlayers = league.getCalderPlayers();		
-		Player calder=null;
+		List<IPlayer> calderPlayers = league.getCalderPlayers();		
+		IPlayer calder=null;
 		float calderPoints=0;
 		float playerPoints;
 		List<IConference> conferenceList = league.getConferences();
 		for (IConference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
-					List<Player> playersList = team.getPlayers();
-					for (Player player : playersList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
+					List<IPlayer> playersList = team.getPlayers();
+					for (IPlayer player : playersList) {
 						playerPoints=player.getSkating()+player.getShooting()+player.getChecking()+player.getSaving();
 						if(playerPoints>calderPoints) {
 							calder=player;

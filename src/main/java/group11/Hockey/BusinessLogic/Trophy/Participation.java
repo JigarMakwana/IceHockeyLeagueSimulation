@@ -6,7 +6,7 @@ import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.ITeam;
 
 public class Participation implements ITrophyObserver {
 	ILeague league;
@@ -18,15 +18,15 @@ public class Participation implements ITrophyObserver {
 	
 	@Override
 	public void AwardTrophy() {
-		List<Team> participationTeams = league.getParticipationTeams();
-		Team participation = null;		
+		List<ITeam> participationTeams = league.getParticipationTeams();
+		ITeam participation = null;		
 		Integer participationPoints=maxPoints;
 		List<IConference> conferenceList = league.getConferences();
 		for (IConference conference : conferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					if(team.getPoints()<=participationPoints && team.getPoints()>0) {
 						participation=team;
 						participationPoints=participation.getPoints();

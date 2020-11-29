@@ -20,18 +20,19 @@ public class League implements ILeague {
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<ICoach> coaches = new ArrayList<>();
 	private List<IGeneralManager> generalManagers;
-	private List<Player> retiredPlayers = new ArrayList<Player>();
-	private List<Team> qualifiedTeams = new ArrayList<Team>();
-	private List<Team> presidentTeams = new ArrayList<Team>();
-	private List<Player> calderPlayers = new ArrayList<Player>();
-	private List<Player> venizaPlayers = new ArrayList<Player>();
-	private List<ICoach> jackAdamsCoaches = new ArrayList<ICoach>();
-	private List<Player> mauriceRichardPlayers = new ArrayList<Player>();
-	private List<Player> robHawkeyPlayers = new ArrayList<Player>();
-	private List<Team> participationTeams = new ArrayList<Team>();
+	private List<IPlayer> retiredPlayers = new ArrayList<>();
+	private List<ITeam> qualifiedTeams = new ArrayList<>();
+	private List<ITeam> presidentTeams = new ArrayList<>();
+	private List<IPlayer> calderPlayers = new ArrayList<>();
+	private List<IPlayer> venizaPlayers = new ArrayList<>();
+	private List<ICoach> jackAdamsCoaches = new ArrayList<>();
+	private List<IPlayer> mauriceRichardPlayers = new ArrayList<>();
+	private List<IPlayer> robHawkeyPlayers = new ArrayList<>();
+	private List<ITeam> participationTeams = new ArrayList<>();
+	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
+
 	private String startDate;
-	private ITimeLine timeLine;
-	private HashMap<String, HashMap<Team, Team>> schedule;
+	private ITimeLine timeLine;	
 	private int goalsInSeason;
 	private int penaltiesInSeason;
 	private int savesInSeason;
@@ -70,7 +71,7 @@ public class League implements ILeague {
 	}
 
 	public League(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
-			GameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers) {
+			IGameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers) {
 		super();
 		this.leagueName = leagueName;
 		this.conferences = conferences;
@@ -92,19 +93,19 @@ public class League implements ILeague {
 		this.timeLine = timeLine;
 	}
 
-	public HashMap<String, HashMap<Team, Team>> getSchedule() {
+	public HashMap<String, HashMap<ITeam, ITeam>> getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(HashMap<String, HashMap<Team, Team>> schedule) {
+	public void setSchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule) {
 		this.schedule = schedule;
 	}
-
-	public List<Team> getQualifiedTeams() {
+	
+	public List<ITeam> getQualifiedTeams() {
 		return qualifiedTeams;
 	}
 
-	public void setQualifiedTeams(List<Team> qualifiedTeams) {
+	public void setQualifiedTeams(List<ITeam> qualifiedTeams) {
 		this.qualifiedTeams = qualifiedTeams;
 	}
 
@@ -178,11 +179,11 @@ public class League implements ILeague {
 		this.generalManagers = generalManagers;
 	}
 
-	public List<Player> getRetiredPlayers() {
+	public List<IPlayer> getRetiredPlayers() {
 		return retiredPlayers;
 	}
 
-	public void setRetiredPlayers(List<Player> retiredPlayers) {
+	public void setRetiredPlayers(List<IPlayer> retiredPlayers) {
 		this.retiredPlayers = retiredPlayers;
 	}
 
@@ -206,11 +207,9 @@ public class League implements ILeague {
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb) {
 		boolean leagueObjectInserted = false;
-		try {
-			leagueObjectInserted = leagueDb.insertLeagueInDb(league);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+
+		leagueObjectInserted = leagueDb.insertLeagueInDb(league);
+
 		return leagueObjectInserted;
 
 	}
@@ -222,27 +221,27 @@ public class League implements ILeague {
 
 	}
 	
-	public List<Team> getPresidentTeams() {
+	public List<ITeam> getPresidentTeams() {
 		return presidentTeams;
 	}
 
-	public void setPresidentTeams(List<Team> presidentTeams) {
+	public void setPresidentTeams(List<ITeam> presidentTeams) {
 		this.presidentTeams = presidentTeams;
 	}
 
-	public List<Player> getCalderPlayers() {
+	public List<IPlayer> getCalderPlayers() {
 		return calderPlayers;
 	}
 
-	public void setCalderPlayers(List<Player> calderPlayers) {
+	public void setCalderPlayers(List<IPlayer> calderPlayers) {
 		this.calderPlayers = calderPlayers;
 	}
 
-	public List<Player> getVenizaPlayers() {
+	public List<IPlayer> getVenizaPlayers() {
 		return venizaPlayers;
 	}
 
-	public void setVenizaTeams(List<Player> venizaPlayers) {
+	public void setVenizaTeams(List<IPlayer> venizaPlayers) {
 		this.venizaPlayers = venizaPlayers;
 	}
 
@@ -254,28 +253,29 @@ public class League implements ILeague {
 		this.jackAdamsCoaches = jackAdamsCoaches;
 	}
 
-	public List<Player> getMauriceRichardPlayers() {
+	public List<IPlayer> getMauriceRichardPlayers() {
 		return mauriceRichardPlayers;
 	}
 
-	public void setMauriceRichardPlayers(List<Player> mauriceRichardPlayers) {
+	public void setMauriceRichardPlayers(List<IPlayer> mauriceRichardPlayers) {
 		this.mauriceRichardPlayers = mauriceRichardPlayers;
 	}
 
-	public List<Player> getRobHawkeyPlayers() {
+	public List<IPlayer> getRobHawkeyPlayers() {
 		return robHawkeyPlayers;
 	}
 
-	public void setRobHawkeyPlayers(List<Player> robHawkeyPlayers) {
+	public void setRobHawkeyPlayers(List<IPlayer> robHawkeyPlayers) {
 		this.robHawkeyPlayers = robHawkeyPlayers;
 	}
 
-	public List<Team> getParticipationTeams() {
+	public List<ITeam> getParticipationTeams() {
 		return participationTeams;
 	}
 
-	public void setParticipationTeams(List<Team> participationTeams) {
+	public void setParticipationTeams(List<ITeam> participationTeams) {
 		this.participationTeams = participationTeams;
 	}
+
 
 }

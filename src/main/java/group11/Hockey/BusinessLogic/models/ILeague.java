@@ -17,15 +17,15 @@ public interface ILeague {
 
 	public List<IConference> getConferences();
 
-	public List<Player> getRetiredPlayers();
+	public List<IPlayer> getRetiredPlayers();
 
-	public void setRetiredPlayers(List<Player> players);
+	public void setRetiredPlayers(List<IPlayer> players);
 
 	public IGameplayConfig getGamePlayConfig();
 
 	public void setStartDate(String date);
 
-	public List<Team> getQualifiedTeams();
+	public List<ITeam> getQualifiedTeams();
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb);
 
@@ -37,11 +37,11 @@ public interface ILeague {
 
 	public void setTimeLine(ITimeLine timeLine);
 
-	public HashMap<String, HashMap<Team, Team>> getSchedule();
+	public HashMap<String, HashMap<ITeam, ITeam>> getSchedule();
 
-	public void setSchedule(HashMap<String, HashMap<Team, Team>> schedule);
+	public void setSchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule);
 
-	public void setQualifiedTeams(List<Team> qualifiedTeams);
+	public void setQualifiedTeams(List<ITeam> qualifiedTeams);
 
 	public int getGoalsInSeason();
 
@@ -69,18 +69,18 @@ public interface ILeague {
 
 	public void setGamePlayConfig(IGameplayConfig gameConfig);
 
-	public List<Team> getPresidentTeams();
+	public List<ITeam> getPresidentTeams();
 
-	public List<Team> getParticipationTeams();
+	public List<ITeam> getParticipationTeams();
 
-	public List<Player> getRobHawkeyPlayers();
+	public List<IPlayer> getRobHawkeyPlayers();
 
-	public List<Player> getVenizaPlayers();
+	public List<IPlayer> getVenizaPlayers();
 
-	public List<Player> getMauriceRichardPlayers();
+	public List<IPlayer> getMauriceRichardPlayers();
 
 	public List<ICoach> getJackAdamsCoaches();
 
-	public List<Player> getCalderPlayers();
+	public List<IPlayer> getCalderPlayers();
 
 }

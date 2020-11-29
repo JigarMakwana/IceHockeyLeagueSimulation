@@ -3,7 +3,7 @@
  */
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 
@@ -58,5 +58,16 @@ public class TradeCharter implements ITradeCharter {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean isDraftTradeCharter() {
+        if(offeringTeam == null || requestedTeam == null ||
+                offeredPlayerList == null || requestedPlayerList == null ){
+            return false;
+        } else if(offeringTeam == null) {
+            return true;
+        }
+        return false;
     }
 }

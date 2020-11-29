@@ -1,11 +1,9 @@
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeSettler;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeSettler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class TradeSettlerTest {
     private TradingModelMock leagueModel;
@@ -14,47 +12,39 @@ public class TradeSettlerTest {
 
     @Before
     public void setUp() throws Exception {
-        leagueModel = new TradingModelMock(1.0f, 1.0f);
-        dropTest = new TradeSettler(leagueModel.getTeam5(), leagueModel.getFreeAgentsList(),
-                leagueModel.getCommandLineInput(),leagueModel.getValidations(),leagueModel.getDisplay(),
-                leagueModel.getConstantSupplier());
-        hireTest = new TradeSettler(leagueModel.getTeam6(), leagueModel.getFreeAgentsList(),
-                leagueModel.getCommandLineInput(),leagueModel.getValidations(),leagueModel.getDisplay(),
-                leagueModel.getCsTeam6());
+        leagueModel = TradingMockFactory.makeTradingMock(1.0f, 1.0f);
     }
 
     @Test
-    public void settleTeamAfterTradeTest() {
+    public void settleTeam() {
+        leagueModel.addPlayertoTeam2();
+        dropTest = TradingFactory.makeTradeSettler(leagueModel.getTeam2(), leagueModel.getFreeAgentsList(),
+                leagueModel.getCommandLineInput(),leagueModel.getValidations(),leagueModel.getDisplay());
         dropTest.settleTeam();
-        Assert.assertEquals(leagueModel.getTeam5().getRoster().getAllPlayerList().size(), 5);
-        Assert.assertEquals(leagueModel.getFreeAgentsList().size(), 11);
+        Assert.assertEquals(leagueModel.getTeam2().getRoster().getAllPlayerList().size(), 30);
 
+        leagueModel.dropPlayerFromTeam2();
+        hireTest = new TradeSettler(leagueModel.getTeam2(), leagueModel.getFreeAgentsList(),
+                leagueModel.getCommandLineInput(),leagueModel.getValidations(),leagueModel.getDisplay());
         hireTest.settleTeam();
-        Assert.assertEquals(leagueModel.getTeam6().getRoster().getAllPlayerList().size(), 7);
-        Assert.assertEquals(leagueModel.getFreeAgentsList().size(), 8);
+        Assert.assertEquals(leagueModel.getTeam2().getRoster().getAllPlayerList().size(), 30);
     }
 
     @Test
     public void dropPlayersTest() {
+        leagueModel.addPlayertoTeam2();
+        dropTest = TradingFactory.makeTradeSettler(leagueModel.getTeam2(), leagueModel.getFreeAgentsList(),
+                leagueModel.getCommandLineInput(),leagueModel.getValidations(),leagueModel.getDisplay());
         dropTest.dropPlayers();
-        Assert.assertEquals(leagueModel.getTeam5().getRoster().getAllPlayerList().size(), 5);
-        Assert.assertEquals(leagueModel.getFreeAgentsList().size(), 11);
+        Assert.assertEquals(leagueModel.getTeam2().getRoster().getAllPlayerList().size(), 30);
     }
 
     @Test
     public void hirePlayersTest() {
+        leagueModel.dropPlayerFromTeam2();
+        hireTest = new TradeSettler(leagueModel.getTeam2(), leagueModel.getFreeAgentsList(),
+                leagueModel.getCommandLineInput(),leagueModel.getValidations(),leagueModel.getDisplay());
         hireTest.hirePlayers();
-        Assert.assertEquals(leagueModel.getTeam6().getRoster().getAllPlayerList().size(), 7);
-        Assert.assertEquals(leagueModel.getFreeAgentsList().size(), 3);
-    }
-
-    @Test
-    public void dropPlayerFromUserTeamTest() {
-//        dropTest.dropPlayerFromUserTeam(leagueModel.getTeam5().getRoster().getAllPlayerList());
-    }
-
-    @Test
-    public void hirePlayerInUserTeamTest() {
-//        dropTest.hirePlayerInUserTeam(leagueModel.getTeam6().getRoster().getAllPlayerList());
+        Assert.assertEquals(leagueModel.getTeam2().getRoster().getAllPlayerList().size(), 30);
     }
 }

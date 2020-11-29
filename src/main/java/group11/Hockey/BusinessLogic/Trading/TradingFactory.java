@@ -4,17 +4,19 @@
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.*;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.*;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
+import group11.Hockey.db.League.ILeagueDb;
 
 import java.util.List;
 
 public class TradingFactory {
 
-    public TradingFactory() {
-        super();
+    public static StateMachineState makeTradeRunner(ILeague leagueObj, ILeagueDb leagueDb, ICommandLineInput commandLineInput, IValidations validation, IDisplay display ){
+        return new TradeRunner(leagueObj, leagueDb, commandLineInput, validation, display) {
+        };
     }
 
     public static ITradeInitializer makeTradeInitializer(ILeague leagueObj){
@@ -25,14 +27,14 @@ public class TradingFactory {
         return new TradeGenerator(team, tradingConfig, display);
     }
 
-    public static ITradeResolver makeTradeResolver(ITradeCharter tradeCharter, ITradeConfig tradingConfig, ICommandLineInput commandLineInput,
+    public static ITradeResolver makeTradeResolver(ILeague leagueObj, ITradeCharter tradeCharter, ITradeConfig tradingConfig, ICommandLineInput commandLineInput,
                                                    IValidations validation, IDisplay display){
-        return new TradeResolver(tradeCharter, tradingConfig, commandLineInput, validation, display);
+        return new TradeResolver(leagueObj, tradeCharter, tradingConfig, commandLineInput, validation, display);
     }
 
     public static ITradeSettler makeTradeSettler(Team team, List<Player> freeAgentList, ICommandLineInput commandLineInput, IValidations validation,
-                                                 IDisplay display, IConstantSupplier constantSupplier){
-        return new TradeSettler(team, freeAgentList, commandLineInput, validation, display, constantSupplier);
+                                                 IDisplay display){
+        return new TradeSettler(team, freeAgentList, commandLineInput, validation, display);
     }
 
     public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList, Team requestedteam,
@@ -45,7 +47,7 @@ public class TradingFactory {
         return new TradeConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
     }
 
-    public static ITradeDraft makeTradeDraft(Team offeringTeam, ITradeConfig tradingConfig, IDisplay display){
+    public static ITradeGenerator makeTradeDraft(Team offeringTeam, ITradeConfig tradingConfig, IDisplay display){
         return new TradeDraft(offeringTeam, tradingConfig, display);
     }
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -27,6 +28,8 @@ public class AgePlayer extends RetirePlayer {
 	int days;
 	ILeagueDb leagueDb;
 	IDisplay display;
+	private ICommandLineInput commandLineInput;
+	private IValidations validation;
 	private static Logger logger = LogManager.getLogger(AgePlayer.class);
 
 	public AgePlayer() {
@@ -46,6 +49,15 @@ public class AgePlayer extends RetirePlayer {
 		this.display = display;
 	}
 
+	public AgePlayer(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		this.league = league;
+		this.days = days;
+		this.leagueDb = leagueDb;
+		this.display = display;
+		this.commandLineInput = commandLineInput;
+		this.validation = validation;
+	}
+
 	@Override
 	public StateMachineState startState() {
 		logger.info("Entered startState()");
@@ -62,7 +74,7 @@ public class AgePlayer extends RetirePlayer {
 			return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
 		} else {
 			logger.info("Date is not end of stanley playoffs");
-			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display);
+			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display, commandLineInput, validation);
 		}
 	}
 
@@ -177,7 +189,7 @@ public class AgePlayer extends RetirePlayer {
 		league.setRetiredPlayers(existingRetiredPlayers);
 		retireAndReplacePlayer(league);
 	}
-	
+
 	private Date getPlayerBirthDate(Player player, IParse parse) {
 		logger.info("Entered getPlayerBirthDate()");
 		int playerBirthYear = player.getBirthYear();

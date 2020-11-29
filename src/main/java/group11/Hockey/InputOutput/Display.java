@@ -89,13 +89,17 @@ public class Display implements IDisplay {
 	 * @author  Jigar Makwana B00842568
 	 */
 	@Override
-	public  void displayTradeStatistics(String offeringTeamName, List<Player> offeredPlayerList,
-										String requestedTeamName, List<Player> requestedPlayerList) {
+	public  void displayTradeStatistics(Team offeringTeamName, List<Player> offeredPlayerList,
+										Team requestedTeamName, List<Player> requestedPlayerList) {
 		System.out.println("\n****** Trade Statistics ******");
-		System.out.println("\nTeam " + offeringTeamName + " is offering the trade to " + requestedTeamName);
-		System.out.println("---- Team " + offeringTeamName + "'s Players Offered ----");
-		this.displayPlayers(offeredPlayerList);
-		System.out.println("---- Team " + requestedTeamName + "'s Players Requested ----");
+		System.out.println("\nTeam " + offeringTeamName.getTeamName() + " is offering the trade to " + requestedTeamName.getTeamName());
+		if(null == offeredPlayerList){
+			System.out.println("---- Team " + offeringTeamName.getTeamName() + " wants to trade their draft pick away ----");
+		} else {
+			System.out.println("---- Team " + offeringTeamName.getTeamName() + "'s Players Offered ----");
+			this.displayPlayers(offeredPlayerList);
+		}
+		System.out.println("---- Team " + requestedTeamName.getTeamName() + "'s Players Requested ----");
 		this.displayPlayers(requestedPlayerList);
 	}
 

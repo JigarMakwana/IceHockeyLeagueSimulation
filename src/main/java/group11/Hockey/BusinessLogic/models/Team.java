@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.db.Team.ITeamDb;
@@ -40,7 +41,7 @@ public class Team implements ITeam, Comparable<Team>  {
 		this.headCoach = headCoach;
 		this.players = (List<Player>) players;
 		this.tradedPicks = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
-//		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, (List<IPlayer>) players);
+		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, (List<Player>) players);
 	}
 
 	public Team() {

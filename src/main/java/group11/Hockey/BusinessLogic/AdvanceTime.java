@@ -6,6 +6,7 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.Date;
 
+import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -20,13 +21,18 @@ import group11.Hockey.db.League.ILeagueDb;
 public class AdvanceTime extends StateMachineState {
 	private ILeague league;
 	private ILeagueDb leagueDb;
-	 IDisplay display;
+	private IDisplay display;
+	private ICommandLineInput commandLineInput;
+	private IValidations validation;
 
-	public AdvanceTime(ILeague league, ILeagueDb leagueDb,  IDisplay display) {
+	public AdvanceTime(ILeague league, ILeagueDb leagueDb,  IDisplay display, ICommandLineInput commandLineInput, IValidations validation
+	) {
 		super();
 		this.league = league;
 		this.leagueDb = leagueDb;
 		this.display = display;
+		this.commandLineInput = commandLineInput;
+		this.validation = validation;
 	}
 
 	@Override
@@ -60,11 +66,11 @@ public class AdvanceTime extends StateMachineState {
 				|| parse.stringToDate(currentDate).equals(semiFinalsEnd)) {
 			logger.info("Date is not regular season end date but some date in stanley playoffs");
 			IScheduleContext scheduleContext = DefaultHockeyFactory
-					.makeScheduleContext(DefaultHockeyFactory.makePlayoffScheduleFinalRounds(display));
+					.makeScheduleContext(DefaultHockeyFactory.makePlayoffScheduleFinalRounds(display, commandLineInput, validation));
 			return scheduleContext.executeStrategy(league, leagueDb);
 		} else {
 			logger.info("Date is neither regular season end date nor stanley playoffs date");
-			return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display);
+			return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display, commandLineInput, validation);
 		}
 	}
 

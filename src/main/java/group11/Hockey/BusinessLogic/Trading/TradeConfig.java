@@ -3,7 +3,7 @@
  */
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
 import group11.Hockey.BusinessLogic.models.IgmTable;
 
 public class TradeConfig implements ITradeConfig {

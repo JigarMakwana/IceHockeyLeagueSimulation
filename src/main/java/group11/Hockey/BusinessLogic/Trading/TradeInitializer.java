@@ -3,10 +3,10 @@
  */
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeInitializer;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.IRandomNoGenerator;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeInitializer;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;
@@ -40,6 +40,17 @@ public class TradeInitializer implements ITradeInitializer {
         }
     }
 
+    private boolean isRandomOfferChanceSuccess() {
+        IRandomNoGenerator randomFloatGenerator = RandomNoFactory.makeRandomFloatGenerator();
+        float randomTradeOfferChance = randomFloatGenerator.generateRandomFloat();
+        if(randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public ITradeConfig getTradingConfig(){
         ITradeConfig configTrading = TradingFactory.makeTradeConfig(
                 tradingConfig.getLossPoint(),
@@ -49,16 +60,6 @@ public class TradeInitializer implements ITradeInitializer {
                 tradingConfig.getGmTable()
         );
         return configTrading;
-    }
-
-    private boolean isRandomOfferChanceSuccess() {
-        IRandomNoGenerator randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
-        float randomTradeOfferChance = randomFloatGenerator.generateRandomFloat();
-        if(randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()){
-            return true;
-        } else {
-            return false;
-        }
     }
 
     @Override

@@ -1,7 +1,7 @@
 /*
  * Author: Jigar Makwana B00842568
  */
-package group11.Hockey.BusinessLogic.RandomNumGenerator;
+package group11.Hockey.BusinessLogic.Trading.RandomNumGenerator;
 
 import java.util.Random;
 

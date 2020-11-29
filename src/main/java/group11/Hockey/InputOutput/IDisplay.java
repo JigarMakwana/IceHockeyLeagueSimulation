@@ -14,8 +14,8 @@ public interface IDisplay {
 
 	public void displayListOfPLayers(League league);
 
-	public void displayTradeStatistics(String offeringTeamName, List<Player> offeredPlayerList,
-									   String requestedTeamName, List<Player> requestedPlayerList);
+	public void displayTradeStatistics(Team offeringTeamName, List<Player> offeredPlayerList,
+									   Team requestedTeamName, List<Player> requestedPlayerList);
 
 	public void displayPlayers(List<Player> playersList);
 

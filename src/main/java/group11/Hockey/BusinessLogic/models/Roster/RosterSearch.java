@@ -8,6 +8,8 @@ import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RosterSearch implements IRosterSearch{
+    private static Logger logger = LogManager.getLogger(RosterSearch.class);
 
     public List<Player> findWeakestPlayers(List<Player> unSortedPlayerList, int maxPlayersPerTrade) {
         List<Player> playerList = sortPlayersByStrength(unSortedPlayerList);
@@ -97,6 +100,7 @@ public class RosterSearch implements IRosterSearch{
         List<Player> playerList = sortPlayersByStrength(unSortedPlayerList);
         for(Player p: playerList){
             if(p.getPosition().equalsIgnoreCase(positions.toString())){
+                logger.info("Found strongest player " + p.getPlayerName());
                 return p;
             }
         }
@@ -108,6 +112,7 @@ public class RosterSearch implements IRosterSearch{
         Collections.reverse(playerList);
         for(Player p: playerList){
             if(p.getPosition().equalsIgnoreCase(positions.toString())){
+                logger.info("Found weakest player " + p.getPlayerName());
                 return p;
             }
         }
@@ -137,8 +142,7 @@ public class RosterSearch implements IRosterSearch{
             }
         }
         Triplet<Team, List<Player>, Float> tradeTeam = sortedBuffer.get(length-1);
-        // TODO logInfo
-//        display.showMessageOnConsole("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
+        logger.info("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
         return tradeTeam;
     }
 
@@ -193,5 +197,18 @@ public class RosterSearch implements IRosterSearch{
         List<Player> goalieIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.GOALIE.toString())).collect(Collectors.toList());
         return sortPlayersByStrength(goalieIPlayerList);
+    }
+
+    public float averageTeamStrength(List<Team> eligibleTeamList){
+        float sum = 0.0f;
+        for(int i=0 ; i<eligibleTeamList.size(); i++){
+            sum += eligibleTeamList.get(i).getTeamStrength();
+        }
+        return sum/eligibleTeamList.size();
+    }
+
+    public Team findStrongestTeam(List<Team> eligibleTeamList){
+        Collections.sort(eligibleTeamList);
+        return eligibleTeamList.get(0);
     }
 }

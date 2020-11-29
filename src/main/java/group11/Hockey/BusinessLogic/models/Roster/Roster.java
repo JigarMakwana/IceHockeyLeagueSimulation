@@ -4,7 +4,7 @@
 package group11.Hockey.BusinessLogic.models.Roster;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IConstantSupplier;
+import group11.Hockey.BusinessLogic.Enums.RosterSize;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
@@ -21,34 +21,34 @@ public class Roster implements IRoster {
     private List<Player> goalieList;
     private List<Player> activeRosterList = new ArrayList<>();
     private List<Player> inActiveRosterList = new ArrayList<>();
-    private IConstantSupplier constantSupplier;
 
-    public Roster(String teamName, List<Player> playerList, IConstantSupplier constantSupplier){
+    public Roster(String teamName, List<Player> playerList){
         this.teamName = teamName;
         this.allPlayerList = playerList;
         this.updateSubRoster(this.allPlayerList);
-        this.constantSupplier = constantSupplier;
     }
 
     public void updateSubRoster(List<Player> allPlayerList){
         IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-        this.forwardList =  rosterSearch.getForwardList(allPlayerList);
-        this.defenseList =  rosterSearch.getDefenseList(allPlayerList);
-        this.goalieList =  rosterSearch.getGoalieList(allPlayerList);
-        this. activeRosterList = allPlayerList.stream().filter(player ->
-                player.isActive() == true).collect(Collectors.toList());
-        this. inActiveRosterList = allPlayerList.stream().filter(player ->
-                player.isActive() == false).collect(Collectors.toList());
+        if(allPlayerList == null){
+            return;
+        } else {
+            this.forwardList =  rosterSearch.getForwardList(allPlayerList);
+            this.defenseList =  rosterSearch.getDefenseList(allPlayerList);
+            this.goalieList =  rosterSearch.getGoalieList(allPlayerList);
+            this. activeRosterList = allPlayerList.stream().filter(player -> player.isActive() == true).collect(Collectors.toList());
+            this. inActiveRosterList = allPlayerList.stream().filter(player -> player.isActive() == false).collect(Collectors.toList());
+        }
     }
 
     public boolean isValidRoster(){
-        int tamSize =  constantSupplier.getActiveRosterSize() + constantSupplier.getInActiveRosterSize();
+        int tamSize =  RosterSize.ACTIVE_ROSTER_SIZE.getNumVal() + RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
         if(allPlayerList.size() == tamSize &&
                 isValidActiveRoster() &&
                 isValidInActiveRoster() &&
-                forwardList.size() == constantSupplier.getForwardSize() &&
-                defenseList.size() == constantSupplier.getDefenseSize() &&
-                goalieList.size() == constantSupplier.getGoalieSize()){
+                forwardList.size() == RosterSize.FORWARD_SIZE.getNumVal() &&
+                defenseList.size() == RosterSize.DEFENSE_SIZE.getNumVal() &&
+                goalieList.size() == RosterSize.GOALIE_SIZE.getNumVal()){
             return true;
         } else{
             return false;
@@ -56,7 +56,7 @@ public class Roster implements IRoster {
     }
 
     public boolean isValidActiveRoster(){
-        if(constantSupplier.getActiveRosterSize() == activeRosterList.size()){
+        if(RosterSize.ACTIVE_ROSTER_SIZE.getNumVal() == activeRosterList.size()){
             return true;
         }else{
             return false;
@@ -64,7 +64,7 @@ public class Roster implements IRoster {
     }
 
     public boolean isValidInActiveRoster(){
-        if(constantSupplier.getInActiveRosterSize() == inActiveRosterList.size()){
+        if(RosterSize.INACTIVE_ROSTER_SIZE.getNumVal() == inActiveRosterList.size()){
             return true;
         }else{
             return false;
@@ -102,7 +102,4 @@ public class Roster implements IRoster {
         return inActiveRosterList;
     }
 
-    public String getTeamName() {
-        return teamName;
-    }
 }

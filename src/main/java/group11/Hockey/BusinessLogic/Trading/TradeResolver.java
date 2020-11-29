@@ -6,8 +6,10 @@ package group11.Hockey.BusinessLogic.Trading;
 import group11.Hockey.BusinessLogic.*;
 import group11.Hockey.BusinessLogic.Enums.GMPersonalities;
 import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
-import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.*;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.IRandomNoGenerator;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.*;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
@@ -18,33 +20,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TradeResolver implements ITradeResolver {
+    private ILeague leagueObj;
     private ITradeCharter tradeCharter;
     private Team offeringTeam;
     private List<Player> offeredPlayerList;
     private Team requestedTeam;
     private List<Player> requestedPlayerList;
     private ITradeConfig tradingConfig;
-    private ICommandLineInput commandLineInput;
-    private IValidations validation;
     private IDisplay display;
     private IUserInputCheck userInputCheck;
     private IRosterSearch rosterSearch;
     private IRandomNoGenerator randomFloatGenerator;
 
-    public TradeResolver(ITradeCharter tradeCharter, ITradeConfig tradingConfig,
+    public TradeResolver(ILeague leagueObj, ITradeCharter tradeCharter, ITradeConfig tradingConfig,
                          ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
+        this.leagueObj = leagueObj;
         this.tradeCharter = tradeCharter;
         this.offeringTeam = tradeCharter.getOfferingTeam();
         this.offeredPlayerList = tradeCharter.getOfferedPlayerList();
         this.requestedTeam = tradeCharter.getRequestedTeam();
         this.requestedPlayerList = tradeCharter.getRequestedPlayerList();
         this.tradingConfig = tradingConfig;
-        this.commandLineInput = commandLineInput;
-        this.validation = validation;
         this.display = display;
         this.userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
         this.rosterSearch = DefaultHockeyFactory.makeRosterSearch();
-        this.randomFloatGenerator = DefaultHockeyFactory.makeRandomFloatGenerator();
+        this.randomFloatGenerator = RandomNoFactory.makeRandomFloatGenerator();
     }
 
     @Override
@@ -55,8 +55,8 @@ public class TradeResolver implements ITradeResolver {
             } else {
                 resolveAIToAITrade();
             }
-        } else if(tradeCharter.getDraftRoundIdx() <= PlayerDraft.ROUND_7.getNumVal() ||
-                tradeCharter.getDraftRoundIdx() >= PlayerDraft.ROUNDS_1.getNumVal()){
+        } else if((tradeCharter.isDraftTradeCharter()) && (tradeCharter.getDraftRoundIdx() <= PlayerDraft.ROUND_7.getNumVal() ||
+                tradeCharter.getDraftRoundIdx() >= PlayerDraft.ROUNDS_1.getNumVal())){
             resolveDraftTrade();
         }
         return;
@@ -82,21 +82,21 @@ public class TradeResolver implements ITradeResolver {
     }
 
     public void resolveDraftTrade(){
-        display.showMessageOnConsole("Resolving draft picks trading...");
+        display.showMessageOnConsole("Resolving draft picks trading between " + offeringTeam.getTeamName() +
+                " and " + requestedTeam.getTeamName());
         float randomAcceptanceChance = randomFloatGenerator.generateRandomFloat();
         if (randomAcceptanceChance < modifyAcceptanceChance()) {
             acceptTrade();
             offeringTeam.setTradedPicks(tradeCharter.getDraftRoundIdx());
-            TradeDraft.updateDraftTradeTracker(offeringTeam,requestedTeam, tradeCharter.getDraftRoundIdx());
-
+            leagueObj.setDraftTradeTracker(offeringTeam,requestedTeam, tradeCharter.getDraftRoundIdx());
         } else {
             rejectTrade();
         }
     }
 
     private void resolveAIToAITrade(){
-        display.displayTradeStatistics(offeringTeam.getTeamName(), offeredPlayerList,
-                requestedTeam.getTeamName(), requestedPlayerList);
+        display.showMessageOnConsole("\nResolving Trade between team " + offeringTeam.getTeamName() +
+                " and " + requestedTeam.getTeamName());
 
         Float playerStrength1 = rosterSearch.getRosterStrength(offeredPlayerList);
         Float playerStrength2 = rosterSearch.getRosterStrength(requestedPlayerList);
@@ -123,7 +123,8 @@ public class TradeResolver implements ITradeResolver {
         }
     }
 
-    private void acceptTrade() {
+    @Override
+    public void acceptTrade() {
         List<Player> localOfferedPlayerList = new ArrayList<>();
         if(null == offeredPlayerList){
         } else {
@@ -158,7 +159,8 @@ public class TradeResolver implements ITradeResolver {
         display.showMessageOnConsole("Trade successfully accepted!");
     }
 
-    private void rejectTrade() {
+    @Override
+    public void rejectTrade() {
         display.showMessageOnConsole("Trade is declined.");
         resetLossPoints(offeringTeam);
     }

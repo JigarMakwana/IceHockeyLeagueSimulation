@@ -1,7 +1,7 @@
 /**
  * Author: Jigar Makwana B00842568
  * Generic Triplet
- * Used in Trading to hold three objects of different type
+ * Used in Trading to hold three objects of different types
  */
 package group11.Hockey.BusinessLogic.Trading.TradingTriplet;
 

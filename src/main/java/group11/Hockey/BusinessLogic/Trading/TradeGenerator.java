@@ -5,11 +5,11 @@ package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.PlayerNoModifier;
-import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeCharter;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeDraft;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeGenerator;
-import group11.Hockey.BusinessLogic.Trading.Interfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.IRandomNoGenerator;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeGenerator;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
+import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -39,7 +39,7 @@ public class TradeGenerator implements ITradeGenerator {
     @Override
     public ITradeCharter generateTradeOffer(List<Team> eligibleTeamList) {
         display.showMessageOnConsole("\nGenerating Trade for AI Team " + offeringTeam.getTeamName());
-        Team requestedTeam = findStrongestTeam(eligibleTeamList);
+        Team requestedTeam = rosterSearch.findStrongestTeam(eligibleTeamList);
         if(requestedTeam == offeringTeam) {
         } else {
             List<Player> combinations = new ArrayList<>();
@@ -47,18 +47,19 @@ public class TradeGenerator implements ITradeGenerator {
             Map<Float, List<Player>> requestedPlayers = findBestCombination();
             Map.Entry<Float, List<Player>> entry = requestedPlayers.entrySet().iterator().next();
             if(entry.getKey() > offeringTeam.getTeamStrength()){
+                display.displayTradeStatistics(offeringTeam, offeredPlayerList, requestedTeam, entry.getValue());
                 return TradingFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue(), -1);
             }
-            if(offeringTeam.getTeamStrength() < averageTeamStrength(eligibleTeamList)){
+            if(offeringTeam.getTeamStrength() < rosterSearch.averageTeamStrength(eligibleTeamList)){
                 return tradeDraftPicks(eligibleTeamList);
             }
         }
         return TradingFactory.makeTradeCharter(null,null,null, null, -1);
     }
 
-    public Team findStrongestTeam(List<Team> eligibleTeamList){
-        Collections.sort(eligibleTeamList);
-        return eligibleTeamList.get(0);
+    public ITradeCharter tradeDraftPicks(List<Team> eligibleTeamList) {
+        ITradeGenerator tradeDraft = TradingFactory.makeTradeDraft(offeringTeam,tradingConfig,display);
+        return tradeDraft.generateTradeOffer(eligibleTeamList);
     }
 
     private void findCombinations(List<Player> playerList,List<Player> combinations, int start, int end, int index, int r) {
@@ -76,9 +77,10 @@ public class TradeGenerator implements ITradeGenerator {
         }
     }
 
-    public Map<Float, List<Player>> findBestCombination(){
+    private Map<Float, List<Player>> findBestCombination(){
         List<Player> tradePlayerList = new ArrayList<>();
         float newTeamStrength = 0.0f;
+        offeringTeam.getRoster().updateSubRoster(offeringTeam.getPlayers());
         List<Player> activeRoster = offeringTeam.getRoster().getActiveRoster();
         for(int i=0; i<activeRoster.size(); i++){
             for(int j=0; j<playerCombinations.size(); j++){
@@ -88,7 +90,7 @@ public class TradeGenerator implements ITradeGenerator {
                 if(calStrength > newTeamStrength){
                     newTeamStrength = calStrength;
                     tradePlayerList = playerCombinations.get(j);
-                    IRandomNoGenerator rand = DefaultHockeyFactory.makeRandomFloatGenerator();
+                    IRandomNoGenerator rand = RandomNoFactory.makeRandomFloatGenerator();
                     rand.generateRandomFloat();
                     if(rand.generateRandomFloat() > PlayerNoModifier.MULTIPLE_PLAYER_MODIFIER.getNumVal()){
                         offeredPlayerList.clear();
@@ -101,19 +103,4 @@ public class TradeGenerator implements ITradeGenerator {
         requestedPlayers.put(newTeamStrength,tradePlayerList);
         return requestedPlayers;
     }
-
-    public float averageTeamStrength(List<Team> eligibleTeamList){
-        float sum = 0.0f;
-        for(int i=0 ; i<eligibleTeamList.size(); i++){
-            sum += eligibleTeamList.get(i).getTeamStrength();
-        }
-        return sum/eligibleTeamList.size();
-    }
-
-    @Override
-    public ITradeCharter tradeDraftPicks(List<Team> eligibleTeamList) {
-        ITradeDraft tradeDraft = TradingFactory.makeTradeDraft(offeringTeam,tradingConfig,display);
-        return tradeDraft.generateTradeOffer(eligibleTeamList);
-    }
-
 }

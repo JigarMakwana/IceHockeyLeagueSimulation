@@ -24,4 +24,6 @@ public interface IRosterSearch {
     List<Player> getDefenseList(List<Player> playerList);
     List<Player> getForwardList(List<Player> playerList);
     List<Player> getGoalieList(List<Player> playerList);
+    float averageTeamStrength(List<Team> eligibleTeamList);
+    Team findStrongestTeam(List<Team> eligibleTeamList);
 }

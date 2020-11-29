@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -22,17 +24,20 @@ import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffSchedule implements IScheduleStrategy {
-	
+
 	IDisplay display;
-	
+	private ICommandLineInput commandLineInput;
+	private IValidations validation;
 	public PlayoffSchedule() {
-		
+
 	}
-	
-	public PlayoffSchedule(IDisplay display) {
+
+	public PlayoffSchedule(IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
 		this.display = display;
+		this.commandLineInput = commandLineInput;
+		this.validation = validation;
 	}
-	
+
 	private static Logger logger = LogManager.getLogger(PlayoffSchedule.class);
 
 	@Override
@@ -182,7 +187,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 
 		}
 		league.setSchedule(firstRoundSchedule);
-		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display);
+		return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display, commandLineInput, validation);
 
 	}
 }

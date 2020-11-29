@@ -1,10 +1,8 @@
 package group11.Hockey.BusinessLogic.models;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.db.League.ILeagueDb;
 
 /**
@@ -29,6 +27,7 @@ public class League implements ILeague {
 	private int penaltiesInSeason;
 	private int savesInSeason;
 	private int gamesInSeason;
+	private List<Map<Team, Map<Team, List<Boolean>>>> draftTradeTracker;
 
 	public int getGoalsInSeason() {
 		return goalsInSeason;
@@ -214,5 +213,47 @@ public class League implements ILeague {
 		league = leagueDb.loadLeague();
 		return league;
 
+	}
+
+	public List<Map<Team, Map<Team, List<Boolean>>>> getDraftTradeTracker() {
+		return draftTradeTracker;
+	}
+
+	public void setDraftTradeTracker(Team offeringTeam, Team requestedTeam, int draftRound) {
+		if(null == draftTradeTracker){
+			addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
+		} else {
+			for (Map<Team, Map<Team, List<Boolean>>> map : draftTradeTracker) {
+				for(Team key: map.keySet()){
+					if (offeringTeam.equals(key)) {
+						for (Map<Team, List<Boolean>> innerMap : map.values()) {
+							for(Team key2: map.keySet()){
+								if (requestedTeam.equals(key2)) {
+									Map.Entry<Team, List<Boolean>> entry = innerMap.entrySet().iterator().next();
+									List<Boolean> roundTracker = entry.getValue();
+									roundTracker.set(draftRound,true);
+									break;
+								}
+								addToInnerMap(requestedTeam, draftRound);
+							}
+						}
+					}
+				}
+				addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
+			}
+		}
+	}
+
+	private Map<Team, List<Boolean>> addToInnerMap(Team requestedTeam, int draftRound){
+		List<Boolean> roundTracker = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
+		roundTracker.set(draftRound,true);
+		Map<Team, List<Boolean>> tradeDetail = new HashMap<>();
+		tradeDetail.put(requestedTeam,roundTracker);
+		return tradeDetail;
+	}
+	private void addToOuterMap(Team offeringTeam, Map<Team, List<Boolean>> tradeDetail){
+		Map<Team, Map<Team, List<Boolean>>> entry = new HashMap<>();
+		entry.put(offeringTeam,tradeDetail);
+		draftTradeTracker.add(entry);
 	}
 }

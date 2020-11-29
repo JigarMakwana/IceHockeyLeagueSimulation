@@ -1,7 +1,7 @@
 /*
  * Author: Jigar Makwana B00842568
  */
-package group11.Hockey.BusinessLogic.Trading.Interfaces;
+package group11.Hockey.BusinessLogic.Trading.TradingInterfaces;
 
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -15,4 +15,5 @@ public interface ITradeCharter {
     Team getRequestedTeam();
     int getDraftRoundIdx();
     boolean isCharterValid();
+    boolean isDraftTradeCharter();
 }

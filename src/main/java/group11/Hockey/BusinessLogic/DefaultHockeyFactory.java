@@ -2,8 +2,6 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomNoGenerator;
-import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomFloatGenerator;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
@@ -98,8 +96,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
 	}
 
-	public static StateMachineState makeSimulate(League league, int seasons, ILeagueDb leagueDb, IDisplay display) {
-		return new Simulate(league, seasons, leagueDb, display);
+	public static StateMachineState makeSimulate(League league, int seasons, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		return new Simulate(league, seasons, leagueDb, display, commandLineInput, validation);
 	}
 
 	public static JSONParser makeJSONParser() {
@@ -129,20 +127,22 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	}
 
-	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
-		return new InitializeSeason(league, leagueDb, display);
+	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		return new InitializeSeason(league, leagueDb, display, commandLineInput, validation);
 	}
 
 	public static StateMachineState makeFinalState() {
 		return FinalState.getInstance();
 	}
 
-	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb, IDisplay display) {
-		return new AdvanceTime(league, leagueDb, display);
+	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
+	) {
+		return new AdvanceTime(league, leagueDb, display, commandLineInput, validation);
 	}
 
-	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
-		return new TrainingPlayer(league, leagueDb, display);
+	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
+	) {
+		return new TrainingPlayer(league, leagueDb, display, commandLineInput, validation);
 	}
 
 	public static IScheduleContext makeScheduleContext(IScheduleStrategy scheduleStrategy) {
@@ -153,8 +153,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayoffSchedule();
 	}
 
-	public static IScheduleStrategy makePlayoffScheduleFinalRounds(IDisplay display) {
-		return new PlayoffScheduleFinalRounds(display);
+	public static IScheduleStrategy makePlayoffScheduleFinalRounds(IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+		return new PlayoffScheduleFinalRounds(display, commandLineInput, validation);
 	}
 
 	public static IParse makeParse() {
@@ -193,18 +193,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new AdvanceToNextSeason(league, leagueDb, display);
 	}
 
-	public static IConstantSupplier makeConstantSupplier(){
-		int activeRosterSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal();
-		int inActiveRosterSize = RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
-		int forwardSize = RosterSize.FORWARD_SIZE.getNumVal();
-		int defenseSize = RosterSize.DEFENSE_SIE.getNumVal();
-		int goaliSize = RosterSize.GOALIE_SIZE.getNumVal();
-		return new ConstantSupplier(activeRosterSize, inActiveRosterSize, forwardSize, defenseSize, goaliSize);
-	}
-
 	public static IRoster makeRoster(String teamName, List<Player> playerList){
-		IConstantSupplier rosterSize = makeConstantSupplier();
-		return new Roster(teamName, playerList, rosterSize);
+		return new Roster(teamName, playerList);
 	}
 
 	public static IRosterSearch makeRosterSearch(){
@@ -224,9 +214,5 @@ public class DefaultHockeyFactory extends TeamFactory {
 											int maxPlayersPerTrade, float randomAcceptanceChance,
 											IgmTable gmTable){
 		return new Trading(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance, gmTable);
-	}
-
-	public static IRandomNoGenerator makeRandomFloatGenerator(){
-		return new RandomFloatGenerator();
 	}
 }

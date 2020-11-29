@@ -1,6 +1,5 @@
 package group11.Hockey;
 
-import group11.Hockey.BusinessLogic.IValidations;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -18,7 +17,6 @@ public class App {
 		ILeagueDb leagueDb = DefaultHockeyFactory.makeLeagueSerialisation();
 		ICommandLineInput commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
 		IDisplay display = DefaultHockeyFactory.makeDisplay();
-		IValidations validations = DefaultHockeyFactory.makeValidations(display);
 		display.showMessageOnConsole("Welcome to Hockey Simulation!");
 		StateMachineState currentState = null;
 		try {

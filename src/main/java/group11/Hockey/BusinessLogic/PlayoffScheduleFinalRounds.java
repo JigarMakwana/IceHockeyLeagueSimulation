@@ -51,15 +51,15 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		if (totalSetTeams == 4) {
 			logger.info("Playoff Schedule - Second round");
 			message = "\n********** Playoff Schedule - Second round **********";
-			display.showMessageOnConsole(message);
+			logger.info(message);
 		} else if (totalSetTeams == 2) {
 			logger.info("Playoff Schedule - Semi-Final round");
 			message = "\n********** Playoff Schedule - Semi-Final round **********";
-			display.showMessageOnConsole(message);
+			logger.info(message);
 		} else if (totalSetTeams == 1) {
 			logger.info("Playoff Schedule - Final round");
 			message = "\n********** Playoff Schedule - Final round **********";
-			display.showMessageOnConsole(message);
+			logger.info(message);
 		}
 		// final sets of teams(team1,team2)
 		while (teams < totalSetTeams) {
@@ -78,7 +78,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 				playoffSchedule.put(date + "T" + time, schedule);
 				message = "Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date + " at "
 						+ time;
-				display.showMessageOnConsole(message);
+				logger.info(message);
 				try {
 					time = advance.getAdvanceTime(time, 6);
 				} catch (Exception e) {

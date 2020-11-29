@@ -17,6 +17,7 @@ public class AdvanceTime extends StateMachineState {
 	private ILeague league;
 	private ILeagueDb leagueDb;
 	 IDisplay display;
+	 private static Logger logger = LogManager.getLogger(AdvanceTime.class);
 
 	public AdvanceTime(ILeague league, ILeagueDb leagueDb,  IDisplay display) {
 		super();
@@ -26,9 +27,8 @@ public class AdvanceTime extends StateMachineState {
 	}
 
 	@Override
-	public StateMachineState startState() {
-		Logger logger = LogManager.getLogger(AdvanceTime.class);
-		logger.info("Entered AdvanceTime.java");
+	public StateMachineState startState() {		
+		logger.info("Entered startState()");
 		ITimeLine timeLine = league.getTimeLine();
 		IParse parse = DefaultHockeyFactory.makeParse();
 		IAdvance advance = DefaultHockeyFactory.makeAdvance();
@@ -43,23 +43,24 @@ public class AdvanceTime extends StateMachineState {
 		timeLine.setCurrentDate(currentDate);
 
 		if (parse.stringToDate(currentDate).equals(regularSeasonEndDateTime)) {
-			logger.info("Date is regular season end date");
+			logger.info(currentDate+" is regular season end date");
 			String message = "********** Regular season ended **********";
-			System.out.println(message);
+			display.showMessageOnConsole(message);
+			DefaultHockeyFactory.makeEndOfRegularSeasonSubject(league);
 			message = "\n********** Generating Playoff schedule **********";
-			System.out.println(message);
+			display.showMessageOnConsole(message);
 			IScheduleContext scheduleContext = DefaultHockeyFactory
 					.makeScheduleContext(DefaultHockeyFactory.makePlayoffSchedule());
 			return scheduleContext.executeStrategy(league, leagueDb);
 		} else if (parse.stringToDate(currentDate).equals(firstRoundEnd)
 				|| parse.stringToDate(currentDate).equals(secondRoundEnd)
 				|| parse.stringToDate(currentDate).equals(semiFinalsEnd)) {
-			logger.info("Date is not regular season end date but some date in stanley playoffs");
+			logger.info(currentDate+" is not regular season end date but some date in stanley playoffs");
 			IScheduleContext scheduleContext = DefaultHockeyFactory
 					.makeScheduleContext(DefaultHockeyFactory.makePlayoffScheduleFinalRounds(display));
 			return scheduleContext.executeStrategy(league, leagueDb);
 		} else {
-			logger.info("Date is neither regular season end date nor stanley playoffs date");
+			logger.info(currentDate+" is neither regular season end date nor stanley playoffs date");
 			return DefaultHockeyFactory.makeTrainingPlayer(league, leagueDb, display);
 		}
 	}

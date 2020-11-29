@@ -16,12 +16,21 @@ import group11.Hockey.db.League.ILeagueDb;
 public class League implements ILeague {
 	private String leagueName;
 	private List<IConference> conferences = new ArrayList<>();
-	private List<Player> freeAgents = new ArrayList<Player>();
+	private List<Player> freeAgents = new ArrayList<>();
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
 	private List<ICoach> coaches = new ArrayList<>();
 	private List<IGeneralManager> generalManagers;
+
 	private List<IPlayer> retiredPlayers = new ArrayList<>();
 	private List<ITeam> qualifiedTeams = new ArrayList<>();
+	private List<ITeam> presidentTeams = new ArrayList<>();
+	private List<IPlayer> calderPlayers = new ArrayList<>();
+	private List<IPlayer> venizaPlayers = new ArrayList<>();
+	private List<ICoach> jackAdamsCoaches = new ArrayList<>();
+	private List<IPlayer> mauriceRichardPlayers = new ArrayList<>();
+	private List<IPlayer> robHawkeyPlayers = new ArrayList<>();
+	private List<ITeam> participationTeams = new ArrayList<>();
+
 	private String startDate;
 	private ITimeLine timeLine;
 	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
@@ -212,4 +221,61 @@ public class League implements ILeague {
 		return league;
 
 	}
+	
+	public List<ITeam> getPresidentTeams() {
+		return presidentTeams;
+	}
+
+	public void setPresidentTeams(List<ITeam> presidentTeams) {
+		this.presidentTeams = presidentTeams;
+	}
+
+	public List<IPlayer> getCalderPlayers() {
+		return calderPlayers;
+	}
+
+	public void setCalderPlayers(List<IPlayer> calderPlayers) {
+		this.calderPlayers = calderPlayers;
+	}
+
+	public List<IPlayer> getVenizaPlayers() {
+		return venizaPlayers;
+	}
+
+	public void setVenizaTeams(List<IPlayer> venizaPlayers) {
+		this.venizaPlayers = venizaPlayers;
+	}
+
+	public List<ICoach> getJackAdamsCoaches() {
+		return jackAdamsCoaches;
+	}
+
+	public void setJackAdamsCoaches(List<ICoach> jackAdamsCoaches) {
+		this.jackAdamsCoaches = jackAdamsCoaches;
+	}
+
+	public List<IPlayer> getMauriceRichardPlayers() {
+		return mauriceRichardPlayers;
+	}
+
+	public void setMauriceRichardPlayers(List<IPlayer> mauriceRichardPlayers) {
+		this.mauriceRichardPlayers = mauriceRichardPlayers;
+	}
+
+	public List<IPlayer> getRobHawkeyPlayers() {
+		return robHawkeyPlayers;
+	}
+
+	public void setRobHawkeyPlayers(List<IPlayer> robHawkeyPlayers) {
+		this.robHawkeyPlayers = robHawkeyPlayers;
+	}
+
+	public List<ITeam> getParticipationTeams() {
+		return participationTeams;
+	}
+
+	public void setParticipationTeams(List<ITeam> participationTeams) {
+		this.participationTeams = participationTeams;
+	}
+
 }

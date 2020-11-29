@@ -7,15 +7,11 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
-import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
-import group11.Hockey.InputOutput.IPrintToConsole;
-import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
@@ -35,10 +31,9 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		logger.info("Entered getSchedule()");
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getCurrentDate();
-		IAdvance advance = new Advance();
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 		HashMap<String, HashMap<ITeam, ITeam>> playoffSchedule = new HashMap<>();
 		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
-		IPrintToConsole console = new PrintToConsole();
 		ITeam team1, team2;
 		String message;
 
@@ -51,15 +46,15 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		if (totalSetTeams == 4) {
 			logger.info("Playoff Schedule - Second round");
 			message = "\n********** Playoff Schedule - Second round **********";
-			console.print(message);
+			display.showMessageOnConsole(message);
 		} else if (totalSetTeams == 2) {
 			logger.info("Playoff Schedule - Semi-Final round");
 			message = "\n********** Playoff Schedule - Semi-Final round **********";
-			console.print(message);
+			display.showMessageOnConsole(message);
 		} else if (totalSetTeams == 1) {
 			logger.info("Playoff Schedule - Final round");
 			message = "\n********** Playoff Schedule - Final round **********";
-			console.print(message);
+			display.showMessageOnConsole(message);
 		}
 		// final sets of teams(team1,team2)
 		while (teams < totalSetTeams) {
@@ -78,7 +73,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 				playoffSchedule.put(date + "T" + time, schedule);
 				message = "Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date + " at "
 						+ time;
-				console.print(message);
+				display.showMessageOnConsole(message);
 				try {
 					time = advance.getAdvanceTime(time, 6);
 				} catch (Exception e) {

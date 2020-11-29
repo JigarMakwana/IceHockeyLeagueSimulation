@@ -1,7 +1,6 @@
 package group11.Hockey.BusinessLogic;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,9 +10,7 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
@@ -21,7 +18,7 @@ public class AdvanceToNextSeason extends StateMachineState {
 	ILeague league;
 	ILeagueDb leagueDb;
 	IDisplay display;
-	private static Logger logger = LogManager.getLogger(AdvanceTime.class);
+	private static Logger logger = LogManager.getLogger(AdvanceToNextSeason.class);
 
 	public AdvanceToNextSeason(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		this.league = league;
@@ -31,30 +28,18 @@ public class AdvanceToNextSeason extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
-
-		logger.info("Entered AdvanceToNextSeason.java");
+		logger.info("Entered startState()");
 		IParse parse = new Parse();
 		IAdvance advance = new Advance();
 
 		ITimeLine timeLine = league.getTimeLine();
 		String currentDate = timeLine.getCurrentDate();
 		Date dateTime = parse.stringToDate(currentDate);
-		String startDate = timeLine.getStartDate();
-		int startYear = parse.stringToYear(startDate);
-		String stanleyDate = timeLine.getStanleyDate();
-		int endYear = parse.stringToYear(stanleyDate);
-
-		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 
 		int year = parse.stringToYear(currentDate);
 		String advanced = "29/09/" + Integer.toString(year);
 		Date advancedDate = parse.stringToDate(advanced);
 		int daysBetween = (int) ((advancedDate.getTime() - dateTime.getTime()) / (24 * 60 * 60 * 1000));
-		ITeam winner = qualifiedTeams.get(0);
-		qualifiedTeams.remove(winner);
-		String message = "\n********** Winner team of the season(" + startYear + "/" + endYear + ") is "
-				+ winner.getTeamName() + " **********";
-		System.out.println(message);
 		currentDate = advance.getAdvanceDate(currentDate, daysBetween);
 		timeLine.setLastSimulatedDate(advanced);
 		league.setStartDate(advanced);

@@ -68,4 +68,19 @@ public interface ILeague {
 	public void setConferences(List<IConference> confList);
 
 	public void setGamePlayConfig(IGameplayConfig gameConfig);
+
+	public List<ITeam> getPresidentTeams();
+
+	public List<ITeam> getParticipationTeams();
+
+	public List<IPlayer> getRobHawkeyPlayers();
+
+	public List<IPlayer> getVenizaPlayers();
+
+	public List<IPlayer> getMauriceRichardPlayers();
+
+	public List<ICoach> getJackAdamsCoaches();
+
+	public List<IPlayer> getCalderPlayers();
+
 }

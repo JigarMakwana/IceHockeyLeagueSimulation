@@ -121,13 +121,33 @@ public class LeagueModelMock {
 		freeAgents
 				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 16", "forward", true, false, 50));
 		freeAgents
-				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 17", "forward", true, false, 50));
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 1", "defense", true, false, 50));
 		freeAgents
-				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 18", "forward", true, false, 50));
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 2", "defense", true, false, 50));
 		freeAgents
-				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 19", "goalie", true, false, 50));
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 3", "defense", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 4", "defense", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 5", "defense", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 6", "defense", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 7", "defense", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 8", "defense", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 9", "defense", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 10", "defense", true, false, 50));
 		freeAgents
 				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 20", "goalie", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 21", "goalie", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 22", "goalie", true, false, 50));
+		freeAgents
+				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 23", "goalie", true, false, 50));
 		league.setFreeAgents(freeAgents);
 	}
 

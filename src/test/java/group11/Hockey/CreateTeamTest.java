@@ -41,7 +41,7 @@ public class CreateTeamTest {
 		ICommandLineInput commandLineMock = mock(ICommandLineInput.class);
 		when(commandLineMock.getValueFromUser()).thenReturn(conferenceName, divisionName, teamName, generalManger,
 				headCoach, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
-				"18", "19", "20");
+				"18", "19", "20","21","22","23","24","25","26","27","28","29","30");
 
 		ILeagueDb leagueDbMock = mock(ILeagueDb.class);
 		CreateTeam createTeam = (CreateTeam) DefaultHockeyFactory.makeCreateTeam(leagueObj, commandLineMock, leagueDbMock, display);
@@ -51,7 +51,7 @@ public class CreateTeamTest {
 		Assert.assertTrue(leagueObj.getConferences().get(0).getDivisions().get(0).getDivisionName()
 				.equalsIgnoreCase(divisionName));
 		Assert.assertTrue(leagueObj.getConferences().get(0).getDivisions().get(0).getTeams().size() == 3);
-		Assert.assertTrue(newTeam.getPlayers().size() == 20);
+		Assert.assertTrue(newTeam.getPlayers().size() == 30);
 	}
 
 }

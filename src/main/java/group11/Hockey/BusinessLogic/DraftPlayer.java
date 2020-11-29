@@ -48,7 +48,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 		draftingTeams.addAll(selectTeamFromRegularSeasonStandinfo(teamsInReverseOrder));
 		draftingTeams.addAll(playOffTeamsInReverseOrder);
 		numbersOfPlayersToGenerate = draftingTeams.size() * 7;
-		GeneratingPlayers generatingPlayers = new GeneratingPlayers();
+		IGeneratingPlayers generatingPlayers = DefaultHockeyFactory.makeGeneratePlayer();
 		List<Player> generatedPlayers = generatingPlayers.generatePlayers(numbersOfPlayersToGenerate);
 		Collections.sort(generatedPlayers);
 		for (int round = 1; round <= 7; round++) {

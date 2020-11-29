@@ -6,10 +6,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
-
+/**
+ * 
+ * @author Jatin Partap Rana
+ *
+ */
 public class Serialize implements ISerialize {
 
 	private static Serialize serializeLeagueInstance = null;
@@ -30,7 +34,7 @@ public class Serialize implements ISerialize {
 		Writer writer = null;
 		try {
 			writer = Files.newBufferedWriter(Paths.get("./league.json"));
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			Gson gson = DefaultHockeyFactory.makeGson();
 			gson.toJson(league, writer);
 			writer.close();
 		} catch (IOException e) {

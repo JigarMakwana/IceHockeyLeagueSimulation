@@ -11,10 +11,11 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
-
+/*
+ * Jatin Rana And Jigar
+ */
 public class UserInputCheck implements IUserInputCheck {
 	private ICommandLineInput commandLineInput;
 	IValidations validation;
@@ -111,7 +112,7 @@ public class UserInputCheck implements IUserInputCheck {
 		List<Integer> selectedValuesFromUser = new ArrayList<Integer>();
 		List<IPlayer> skatersList = new ArrayList<>();
 		List<IPlayer> goalies = new ArrayList<>();
-		Player player = new Player();
+		IPlayer player = DefaultHockeyFactory.makePlayer();
 		String playerValue;
 		display.showMessageOnConsole(BusinessConstants.Select_Player.getValue().toString());
 		for (int i = 0; i < Integer.parseInt(BusinessConstants.Number_Of_Total_Players.getValue().toString()); i++) {

@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.models.Player;
 
-public class GeneratingPlayers {
+public class GeneratingPlayers implements IGeneratingPlayers{
 	enum PlayerEnum {
 		player
 	}

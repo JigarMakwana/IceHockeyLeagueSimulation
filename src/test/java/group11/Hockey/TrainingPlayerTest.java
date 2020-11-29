@@ -56,6 +56,7 @@ public class TrainingPlayerTest {
 		ICoach coach = team.getHeadCoach();
 		List<IPlayer> players = team.getPlayers();
 		traingPlayer.changePlayerShootingSkill(players.get(0), coach.getShooting(), league);
+		Assert.assertTrue(players.size() > 0);
 	}
 
 	@Test
@@ -64,6 +65,7 @@ public class TrainingPlayerTest {
 		ICoach coach = team.getHeadCoach();
 		List<IPlayer> players = team.getPlayers();
 		traingPlayer.changePlayerCheckingSkill(players.get(0), coach.getChecking(), league);
+		Assert.assertTrue(players.size() > 0);
 	}
 
 	@Test
@@ -72,5 +74,6 @@ public class TrainingPlayerTest {
 		ICoach coach = team.getHeadCoach();
 		List<IPlayer> players = team.getPlayers();
 		traingPlayer.changePlayerSavingSkill(players.get(0), coach.getSaving(), league);
+		Assert.assertTrue(players.size() > 0);
 	}
 }

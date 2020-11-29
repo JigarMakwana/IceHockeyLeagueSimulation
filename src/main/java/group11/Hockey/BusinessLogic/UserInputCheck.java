@@ -68,11 +68,8 @@ public class UserInputCheck implements IUserInputCheck {
 			teamName = commandLineInput.getValueFromUser();
 			checkTeamName = validation.isTeamNameValid(teamName, league);
 		}
-		if (teamName != null) {
 			newTeam.setTeamName(teamName);
 			newTeam.setUserTeam(true);
-		}
-
 	}
 
 	@Override
@@ -103,9 +100,7 @@ public class UserInputCheck implements IUserInputCheck {
 			headCoach = commandLineInput.getValueFromUser();
 			checkHeadCoachName = validation.headCoachNameCheck(headCoach, league);
 		}
-		if (headCoach != null) {
 			newTeam.addCoachToTeam(newTeam, headCoach, league);
-		}
 
 	}
 

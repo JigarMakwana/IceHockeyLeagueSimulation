@@ -104,7 +104,7 @@ public class Validations implements IValidations {
 		} else {
 			List<ICoach> coachList = league.getCoaches();
 			for (ICoach coach : coachList) {
-				if (coach != null && coach.getName().equalsIgnoreCase(coachName)) {
+				if (coach.getName().equalsIgnoreCase(coachName)) {
 					coachNameCheck = false;
 					return coachNameCheck;
 				}

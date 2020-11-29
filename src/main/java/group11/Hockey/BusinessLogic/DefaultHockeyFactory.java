@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.json.simple.parser.JSONParser;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
@@ -13,12 +16,12 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.PlayoffSchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ScheduleContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveDefencePlayer;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveForwardPlayer;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveGoaliePlayer;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GeneratePlayOffShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShiftsTemplate;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveGoaliePlayer;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
@@ -128,14 +131,14 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new UserInputCheck(commandLineInput, validation, display);
 	}
 
-	public static StateMachineState makeCreateTeam(League league, ICommandLineInput commandLineInput,
+	public static StateMachineState makeCreateTeam(ILeague league, ICommandLineInput commandLineInput,
 			ILeagueDb leagueDb, IDisplay display) {
 		IValidations validation = makeValidations(display);
 		return new CreateTeam(league, commandLineInput, display, validation, leagueDb);
 
 	}
 
-	public static StateMachineState makePlayerChoice(League league, ICommandLineInput commandLineInput,
+	public static StateMachineState makePlayerChoice(ILeague league, ICommandLineInput commandLineInput,
 			ILeagueDb leagueDb, IDisplay display) {
 		IValidations validation = Validations.getInstance();
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
@@ -375,9 +378,21 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static IGeneralManager makeGeneralManager(String name, String personality) {
 		return new GeneralManager(name, personality);
 	}
+	
+	public static IPlayer makePlayer() {
+		return new Player();
+	}
 
 	public static StateMachineState makeDraftPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		return new DraftPlayer(league, leagueDb, display);
 
+	}
+	
+	public static IGeneratingPlayers makeGeneratePlayer() {
+		return new GeneratingPlayers();
+	}
+	
+	public static Gson makeGson() {
+		return new GsonBuilder().setPrettyPrinting().create();
 	}
 }

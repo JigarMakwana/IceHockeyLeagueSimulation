@@ -9,20 +9,23 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.Trading.AITrading;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
-
+/**
+ * 
+ * @author Jatin Partap Rana
+ *
+ */
 public class TrainingPlayer extends StateMachineState implements ITrainingPlayer {
 	private ILeague league;
 	private ILeagueDb leaugueDb;
@@ -39,7 +42,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	@Override
 	public StateMachineState startState() {
 		logger.info("Entered startState()");
-		IParse parse = new Parse();
+		IParse parse = DefaultHockeyFactory.makeParse();
 		ITimeLine timeLine = league.getTimeLine();
 		String currentDate = timeLine.getCurrentDate();
 		Date dateTime = parse.stringToDate(currentDate);
@@ -54,7 +57,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			List<IConference> conferenceList = league.getConferences();
 			for (IConference conference : conferenceList) {
 				List<Division> divisionList = conference.getDivisions();
-				for (Division division : divisionList) {
+				for (IDivision division : divisionList) {
 					List<ITeam> teamList = division.getTeams();
 					for (ITeam team : teamList) {
 						ICoach headCoach = team.getHeadCoach();
@@ -70,11 +73,9 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			}
 		}
 
-		// TODO: call simulate game
 		ICheckAndSimulateTodaySchedule simulateToday = new CheckAndSimulateTodaySchedule(league.getSchedule(), league);
 		simulateToday.CheckAndSimulateToday(currentDate);
-		// .............
-		// .............
+
 
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
 			logger.info("Performing trading");

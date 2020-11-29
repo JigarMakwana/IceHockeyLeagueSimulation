@@ -25,7 +25,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void displayListOfGeneralMangers(League league) {
+	public void displayListOfGeneralMangers(ILeague league) {
 		int count = 1;
 		System.out.println("Available General Manger List: ");
 		List<IGeneralManager> generalManagers = league.getGeneralManagers();
@@ -37,7 +37,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void displayListOfCoaches(League league) {
+	public void displayListOfCoaches(ILeague league) {
 		List<ICoach> coaches = league.getCoaches();
 		System.out.println("Available Coaches List: ");
 		for (ICoach coach : coaches) {
@@ -51,7 +51,7 @@ public class Display implements IDisplay {
 	}
 
 	@Override
-	public void displayListOfPLayers(League league) {
+	public void displayListOfPLayers(ILeague league) {
 		int count = 1;
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		System.out.println("******Select Players for Team******: ");

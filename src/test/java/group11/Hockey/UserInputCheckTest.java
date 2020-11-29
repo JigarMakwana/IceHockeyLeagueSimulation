@@ -3,18 +3,16 @@ package group11.Hockey;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IUserInputCheck;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.UserInputCheck;
-import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 

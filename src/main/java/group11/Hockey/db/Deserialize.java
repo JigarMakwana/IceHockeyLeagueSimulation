@@ -6,8 +6,13 @@ import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.League;
-
+/**
+ * 
+ * @author Jatin Partap Rana
+ *
+ */
 public class Deserialize implements IDeserialize {
 	
 	private static Deserialize deserializeLeagueInstance = null;
@@ -31,7 +36,7 @@ public class Deserialize implements IDeserialize {
 			reader = new FileReader("./league.json");
 			JSONParser jsonParser = new JSONParser();
 			String value = jsonParser.parse(reader).toString();
-			Gson gson = new Gson();
+			Gson gson = DefaultHockeyFactory.makeGson();
 			league = gson.fromJson(value, League.class);
 			System.out.println(league.toString());
 		} catch (Exception e) {

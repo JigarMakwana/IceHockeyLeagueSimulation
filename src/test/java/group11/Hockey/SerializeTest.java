@@ -10,7 +10,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.db.ISerialize;
 
-public class SerializeLeagueTest {
+public class SerializeTest {
 
 	@Test
 	public void serializeLeagueObjectTest() {

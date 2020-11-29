@@ -84,13 +84,14 @@ public class ValidationsTest {
 	@Test
 	public void playerCheckTest() {
 		boolean playerCheck = false;
-		playerCheck = validations.playerCheck("21", league, null, null, null);
+		playerCheck = validations.playerCheck("21", league, null, null, null, null);
 		Assert.assertTrue(playerCheck);
 		List<IPlayer> forwardDefensePlayerList = new ArrayList<>();
 		List<IPlayer> gloalisList = new ArrayList<>();
+		List<IPlayer> defenseList = new ArrayList<>();
 		forwardDefensePlayerList.add((Player) league.getFreeAgents().get(0));
 		gloalisList.add((Player) league.getFreeAgents().get(1));
-		playerCheck = validations.playerCheck("1", league, Arrays.asList(1), forwardDefensePlayerList, gloalisList);
+		playerCheck = validations.playerCheck("1", league, Arrays.asList(1), forwardDefensePlayerList, defenseList, gloalisList);
 
 		Assert.assertTrue(playerCheck);
 	}

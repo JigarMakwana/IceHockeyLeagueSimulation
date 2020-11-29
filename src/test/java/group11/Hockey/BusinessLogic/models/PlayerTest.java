@@ -135,7 +135,7 @@ public class PlayerTest {
 		freeAgents.add(freeAgent1);
 		freeAgents.add(freeAgent2);
 		player.removeFreeAgentsFromLeague(league, freeAgents);
-		Assert.assertTrue(league.getFreeAgents().size() == 18);
+		Assert.assertTrue(league.getFreeAgents().size() == 28);
 	}
 
 }

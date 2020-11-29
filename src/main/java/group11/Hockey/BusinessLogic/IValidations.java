@@ -17,8 +17,8 @@ public interface IValidations {
 
 	public boolean headCoachNameCheck(String name, ILeague league);
 
-	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<IPlayer> skaters,
-			List<IPlayer> goalies);
+	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<IPlayer> forwards,
+			 List<IPlayer> defense, List<IPlayer> goalies);
 
 	public boolean isStrBlank(String str);
 

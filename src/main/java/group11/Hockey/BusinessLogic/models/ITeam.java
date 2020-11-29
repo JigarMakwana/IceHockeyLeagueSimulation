@@ -81,7 +81,7 @@ public interface ITeam {
 
 	public League loadLeagueWithTeamName(String teamName, ITeamDb teamDb);
 
-	public void addGeneralMangerToTeam(Team team, IGeneralManager gmObj, ILeague league);
+	public void addGeneralMangerToTeam(ITeam team, IGeneralManager gmObj, ILeague league);
 
 	public void addCoachToTeam(ITeam team, String coachName, ILeague league);
 

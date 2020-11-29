@@ -228,7 +228,7 @@ public class Team implements ITeam, Comparable<Team> {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 
-	public void addGeneralMangerToTeam(Team team, IGeneralManager gmObj, ILeague league) {
+	public void addGeneralMangerToTeam(ITeam team, IGeneralManager gmObj, ILeague league) {
 		team.setGeneralManager(gmObj);
 		List<IGeneralManager> generalManagers = league.getGeneralManagers();
 		for (IGeneralManager gm : generalManagers) {

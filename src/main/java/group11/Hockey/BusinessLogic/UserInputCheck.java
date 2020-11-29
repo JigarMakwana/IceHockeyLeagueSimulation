@@ -8,6 +8,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IGeneralManager;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
@@ -76,17 +77,19 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void generalManagerNameFromUserCheck(ITeam newTeam, ILeague league) {
-//		logger.info("Entered generalManagerNameFromUserCheck()");
-//		boolean checkManagerName = true;
-//		String generalManager = null;
-//		while (checkManagerName) {
-//			display.showMessageOnConsole(BusinessConstants.Enter_General_Manger_Name.getValue().toString());
-//			generalManager = commandLineInput.getValueFromUser();
-//			checkManagerName = validation.generalManagerNameCheck(generalManager, league);
-//		}
-//		if (generalManager != null) {
-//			newTeam.addGeneralMangerToTeam(newTeam, generalManager, league);
-//		}
+		logger.info("Entered generalManagerNameFromUserCheck()");
+		boolean checkManagerName = true;
+		String generalManager = null;
+
+		while (checkManagerName) {
+			display.showMessageOnConsole(BusinessConstants.Enter_General_Manger_Name.getValue().toString());
+			generalManager = commandLineInput.getValueFromUser();
+			checkManagerName = validation.generalManagerNameCheck(generalManager, league);
+		}
+
+		IGeneralManager gmObj = DefaultHockeyFactory.makeGeneralManager(generalManager,
+				BusinessConstants.Personality.getValue().toString());
+		newTeam.addGeneralMangerToTeam(newTeam, gmObj, league);
 
 	}
 
@@ -111,7 +114,8 @@ public class UserInputCheck implements IUserInputCheck {
 		logger.info("Entered playerChoiceFromUser()");
 		boolean playerValueCheck = true;
 		List<Integer> selectedValuesFromUser = new ArrayList<Integer>();
-		List<IPlayer> skatersList = new ArrayList<>();
+		List<IPlayer> forwardList = new ArrayList<>();
+		List<IPlayer> defenseList = new ArrayList<>();
 		List<IPlayer> goalies = new ArrayList<>();
 		IPlayer player = DefaultHockeyFactory.makePlayer();
 		String playerValue;
@@ -120,13 +124,14 @@ public class UserInputCheck implements IUserInputCheck {
 			while (playerValueCheck) {
 				display.showMessageOnConsole("Select " + (i + 1) + " player");
 				playerValue = commandLineInput.getValueFromUser();
-				playerValueCheck = validation.playerCheck(playerValue, league, selectedValuesFromUser, skatersList,
-						goalies);
+				playerValueCheck = validation.playerCheck(playerValue, league, selectedValuesFromUser, forwardList,
+						defenseList, goalies);
 				if (playerValueCheck == false) {
 					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue) - 1).getPosition();
-					if (postion.equalsIgnoreCase(Positions.FORWARD.toString())
-							|| postion.equalsIgnoreCase(Positions.DEFENSE.toString())) {
-						skatersList.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
+					if (postion.equalsIgnoreCase(Positions.FORWARD.toString())) {
+						forwardList.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
+					} else if (postion.equalsIgnoreCase(Positions.DEFENSE.toString())) {
+						defenseList.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					} else if (postion.equalsIgnoreCase(Positions.GOALIE.toString())) {
 						goalies.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					}
@@ -136,7 +141,8 @@ public class UserInputCheck implements IUserInputCheck {
 		}
 
 		List<IPlayer> finalListOfPlayers = new ArrayList<>();
-		finalListOfPlayers.addAll(skatersList);
+		finalListOfPlayers.addAll(forwardList);
+		finalListOfPlayers.addAll(defenseList);
 		finalListOfPlayers.addAll(goalies);
 		newTeam.setPlayers(finalListOfPlayers);
 		player.removeFreeAgentsFromLeague(league, finalListOfPlayers);

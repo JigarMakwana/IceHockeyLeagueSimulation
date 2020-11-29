@@ -9,24 +9,27 @@ import java.util.Random;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
 
-public class DefencePlayerActive extends GameStrategy {
-
-	private static Logger logger = LogManager.getLogger(DefencePlayerActive.class);
+public class ActiveDefencePlayer implements IGameStrategy {
+	private static Logger logger = LogManager.getLogger(ActiveDefencePlayer.class);
 
 	@Override
-	public int calculateAveragePlayersStrength(List<Player> playersList, ITeam defendingTeam) {
-		logger.info("Entered calculateAveragePlayersStrength()");
+	public int calculateAveragePlayersStrength(List<IPlayer> playersList, ITeam defendingTeam) {
 		int checking = 0;
 		int numberOfDefenseMen = 0;
-		for (Player player : playersList) {
+		int playerStrength = 0;
+
+		for (IPlayer player : playersList) {
+
 			if (player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())) {
 				checking += player.getChecking();
 				numberOfDefenseMen++;
 				if (defendingTeam.isOnPenalty()) {
+					logger.warn("Defence player is on penality");
 					checking = (int) (checking * appConfiguration.reduceDefenceStrength);
 					break;
 				}
@@ -35,13 +38,13 @@ public class DefencePlayerActive extends GameStrategy {
 		if (numberOfDefenseMen == 0) {
 			numberOfDefenseMen = 1;
 		}
-		return checking / numberOfDefenseMen;
+		playerStrength = checking / numberOfDefenseMen;
+		return playerStrength;
 	}
 
-	@Override
-	public void playGame(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
+
+	public void playGame(List<IPlayer> shootingTeamPlayers, List<IPlayer> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
-		logger.info("Entered playGame()");
 		int penaltyProbality = new Random().nextInt(appConfiguration.penaltyRandomChance);
 		int index = bestDefenceMenIndex(defendingTeamPlayers);
 		int defenceMenStartIndex = appConfiguration.defenceMenStartIndex;
@@ -59,8 +62,7 @@ public class DefencePlayerActive extends GameStrategy {
 		defendingTeam.setSavesInSeason(saves);
 	}
 
-	private int bestDefenceMenIndex(List<Player> defendingTeamPlayers) {
-		logger.info("Entered bestDefenceMenIndex()");
+	private int bestDefenceMenIndex(List<IPlayer> defendingTeamPlayers) {
 		float player1_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex).getChecking();
 		float player2_checking = defendingTeamPlayers.get(appConfiguration.defenceMenStartIndex + 1).getChecking();
 

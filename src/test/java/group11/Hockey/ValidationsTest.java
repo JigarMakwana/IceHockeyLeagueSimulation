@@ -11,15 +11,15 @@ import org.junit.Test;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.Validations;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.LeagueTest;
 import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.IDisplay;
 
 public class ValidationsTest {
-	League league;
+	ILeague league;
 	IDisplay display = DefaultHockeyFactory.makeDisplay();
 	IValidations validations = new Validations(display);
 
@@ -43,7 +43,7 @@ public class ValidationsTest {
 	public void isDivisionValidTest() {
 		// Atlantic Division
 		String divisionName = "Atlantic Division";
-		Conference conference = league.getConferences().get(0);
+		IConference conference = league.getConferences().get(0);
 		boolean divisionCheck = validations.isDivisionValid(divisionName, conference);
 		Assert.assertFalse(divisionCheck);
 		divisionName = "Division";
@@ -86,8 +86,8 @@ public class ValidationsTest {
 		boolean playerCheck = false;
 		playerCheck = validations.playerCheck("21", league, null, null, null);
 		Assert.assertTrue(playerCheck);
-		List<Player> forwardDefensePlayerList = new ArrayList<Player>();
-		List<Player> gloalisList = new ArrayList<Player>();
+		List<IPlayer> forwardDefensePlayerList = new ArrayList<>();
+		List<IPlayer> gloalisList = new ArrayList<>();
 		forwardDefensePlayerList.add((Player) league.getFreeAgents().get(0));
 		gloalisList.add((Player) league.getFreeAgents().get(1));
 		playerCheck = validations.playerCheck("1", league, Arrays.asList(1), forwardDefensePlayerList, gloalisList);

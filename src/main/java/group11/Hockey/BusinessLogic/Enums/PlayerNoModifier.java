@@ -4,7 +4,8 @@
 package group11.Hockey.BusinessLogic.Enums;
 
 public enum PlayerNoModifier {
-    MULTIPLE_PLAYER_MODIFIER(0.05f);
+    MULTIPLE_PLAYER_MODIFIER(0.05f),
+    DRAFTTRADE_MODIFIER(0.50f);
 
     private float numVal;
 

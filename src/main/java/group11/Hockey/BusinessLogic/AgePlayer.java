@@ -13,9 +13,11 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -60,18 +62,16 @@ public class AgePlayer extends RetirePlayer {
 
 	@Override
 	public StateMachineState startState() {
-		logger.info("Entered startState()");
 		agePlayers();
-		// call Advance next season or Advance Time
 		IParse parse = DefaultHockeyFactory.makeParse();
 		ITimeLine timeLine = league.getTimeLine();
 		String currentDate = timeLine.getCurrentDate();
 		Date stanleyEndDateTime = timeLine.getStanleyEndDateTime();
-		List<Team> qualifiedTeams = league.getQualifiedTeams();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
-			logger.info("Date is end of stanley playoffs");
-			return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
+			logger.info("Move to DraftPlayer State");
+			return DefaultHockeyFactory.makeDraftPlayer(league, leagueDb, display);
 		} else {
 			logger.info("Date is not end of stanley playoffs");
 			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display, commandLineInput, validation);
@@ -79,50 +79,41 @@ public class AgePlayer extends RetirePlayer {
 	}
 
 	public void agePlayers() {
-		logger.info("Entered agePlayers()");
 		IParse parse = DefaultHockeyFactory.makeParse();
-		Date currentDate =  parse.stringToDate(league.getTimeLine().getCurrentDate());
+		Date currentDate = parse.stringToDate(league.getTimeLine().getCurrentDate());
 
-		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
-		List<Conference> conferences = league.getConferences();
+		List<IPlayer> freeAgents = (List<IPlayer>) league.getFreeAgents();
+		List<IConference> conferences = league.getConferences();
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
- 		if (freeAgents.size() > 0) {
- 			logger.info("Freeagents exists so trying to loop over them");
- 			for (Player freeAgent : freeAgents) {
+		if (freeAgents.size() > 0) {
+			logger.info("Freeagents exists so trying to loop over them");
+			for (IPlayer freeAgent : freeAgents) {
 				Date playerBirthDate = getPlayerBirthDate(freeAgent, parse);
 				if (currentDate.compareTo(playerBirthDate) == 0) {
-					logger.info("Date is "+freeAgent.getPlayerName()+"'s birthday");
 					freeAgent.increaseAge(league, days, statDecayChance);
-				}
-				else {
-					logger.info("Date is "+freeAgent.getPlayerName()+"'s birthday");
+				} else {
 					freeAgent.decreaseInjuredDaysForPlayer(days);
 				}
- 			}
- 		}
+			}
+		}
 
 		if (conferences.size() > 0) {
-			logger.info("Conferences exists in"+league.getLeagueName()+", so looping over them");
-			for (Conference conference : conferences) {
+			for (IConference conference : conferences) {
 				List<Division> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
-					logger.info("Divisions exists in"+conference.getConferenceName()+", so looping over them");
 					for (Division division : divisions) {
-						List<Team> teams = division.getTeams();
+						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
-							logger.info("Teams exists in "+division.getDivisionName()+", so looping over them");
-							for (Team team : teams) {
-								List<Player> players = team.getPlayers();
+							logger.info("Teams exists in " + division.getDivisionName() + ", so looping over them");
+							for (ITeam team : teams) {
+								List<IPlayer> players = team.getPlayers();
 								if (players.size() > 0) {
-									logger.info("Players exists in "+team.getTeamName()+", so looping over them");
-									for (Player player : players) {
+									logger.info("Players exists in " + team.getTeamName() + ", so looping over them");
+									for (IPlayer player : players) {
 										Date playerBirthDate = getPlayerBirthDate(player, parse);
 										if (currentDate.compareTo(playerBirthDate) == 0) {
-											logger.info("Date is "+player.getPlayerName()+"'s birthday");
 											player.increaseAge(league, days, statDecayChance);
-										}
-										else {
-											logger.info("Date is not "+player.getPlayerName()+"'s birthday");
+										} else {
 											player.decreaseInjuredDaysForPlayer(days);
 										}
 
@@ -138,11 +129,10 @@ public class AgePlayer extends RetirePlayer {
 	}
 
 	private void checkForRetirement(ILeague league) {
-		logger.info("Entered checkForRetirement()");
 		boolean isRetired;
-		List<Player> retiredPlayers = new ArrayList<Player>();
+		List<IPlayer> retiredPlayers = new ArrayList<>();
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
-		List<Conference> conferences = league.getConferences();
+		List<IConference> conferences = league.getConferences();
 
 		Iterator<Player> freeAgentsItr = freeAgents.iterator();
 
@@ -150,30 +140,26 @@ public class AgePlayer extends RetirePlayer {
 			Player freeAgent = freeAgentsItr.next();
 			isRetired = freeAgent.isIsRetired();
 			if (isRetired) {
-				logger.info("Freeagent "+freeAgent.getPlayerName()+" is retired");
 				retiredPlayers.add(freeAgent);
 				freeAgentsItr.remove();
 			}
 		}
 
 		if (conferences.size() > 0) {
-			logger.info("Conferences exists in"+league.getLeagueName()+", so looping over them");
-			for (Conference conference : conferences) {
+			for (IConference conference : conferences) {
 				List<Division> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
-					logger.info("Divisions exists in"+conference.getConferenceName()+", so looping over them");
 					for (Division division : divisions) {
-						List<Team> teams = division.getTeams();
+						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
-							logger.info("Teams exists in "+division.getDivisionName()+", so looping over them");
-							for (Team team : teams) {
-								List<Player> players = team.getPlayers();
+							logger.info("Teams exists in " + division.getDivisionName() + ", so looping over them");
+							for (ITeam team : teams) {
+								List<IPlayer> players = team.getPlayers();
 								if (players.size() > 0) {
-									logger.info("Players exists in "+team.getTeamName()+", so looping over them");
-									for (Player player : players) {
+									logger.info("Players exists in " + team.getTeamName() + ", so looping over them");
+									for (IPlayer player : players) {
 										isRetired = player.isIsRetired();
 										if (isRetired) {
-											logger.info("Players "+player.getPlayerName()+" is retired");
 											retiredPlayers.add(player);
 										}
 									}
@@ -184,23 +170,23 @@ public class AgePlayer extends RetirePlayer {
 				}
 			}
 		}
-		List<Player> existingRetiredPlayers = league.getRetiredPlayers();
+		List<IPlayer> existingRetiredPlayers = league.getRetiredPlayers();
 		existingRetiredPlayers.addAll(retiredPlayers);
 		league.setRetiredPlayers(existingRetiredPlayers);
 		retireAndReplacePlayer(league);
 	}
 
-	private Date getPlayerBirthDate(Player player, IParse parse) {
+	private Date getPlayerBirthDate(IPlayer player, IParse parse) {
+
 		logger.info("Entered getPlayerBirthDate()");
 		int playerBirthYear = player.getBirthYear();
 		int playerBirthMonth = player.getBirthMonth();
 		int playerBirthDay = player.getBirthDay();
-		String birthDate = Integer.toString(playerBirthDay) + "/" + Integer.toString(playerBirthMonth) +  "/"
+		String birthDate = Integer.toString(playerBirthDay) + "/" + Integer.toString(playerBirthMonth) + "/"
 				+ Integer.toString(playerBirthYear);
 		Date playerBirthDate = parse.stringToDate(birthDate);
 		return playerBirthDate;
 
 	}
-
 
 }

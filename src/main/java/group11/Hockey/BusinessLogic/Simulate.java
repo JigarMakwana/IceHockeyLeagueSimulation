@@ -3,10 +3,7 @@
  */
 package group11.Hockey.BusinessLogic;
 
-import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.ICommandLineInput;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.InputOutput.IDisplay;
@@ -19,7 +16,6 @@ public class Simulate extends StateMachineState {
 	private IDisplay display;
 	private ICommandLineInput commandLineInput;
 	private IValidations validation;
-	private static Logger logger = LogManager.getLogger(Simulate.class);
 
 	public Simulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
 		super();
@@ -41,7 +37,6 @@ public class Simulate extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
-		logger.info("Entered startState()");
 		while (seasons > 0) {
 			StateMachineState currentState = DefaultHockeyFactory.makeInitializeSeason(league, leagueDb, display, commandLineInput, validation);
 			do {

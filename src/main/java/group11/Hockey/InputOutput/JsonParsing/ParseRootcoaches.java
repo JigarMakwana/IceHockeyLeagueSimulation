@@ -10,20 +10,21 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.models.ICoach;
+import group11.Hockey.BusinessLogic.models.ILeague;
 
 public class ParseRootcoaches implements IParseRootElement {
 
 	@Override
-	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
-		List<Coach> coachesList = parseCoaches(jsonObject);
+	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
+		List<ICoach> coachesList = parseCoaches(jsonObject);
 		leagueModelObj.setCoaches(coachesList);
 	}
 
-	private List<Coach> parseCoaches(JSONObject jsonObject) {
-		Coach coach;
-		List<Coach> coachesList = new ArrayList<Coach>();
+	private List<ICoach> parseCoaches(JSONObject jsonObject) {
+		ICoach coach;
+		List<ICoach> coachesList = new ArrayList<>();
 		JSONArray coachesJSONArray = (JSONArray) jsonObject.get(Attributes.COACHES.getAttribute());
 		Iterator<JSONObject> coachesListIterator = coachesJSONArray.iterator();
 		while (coachesListIterator.hasNext()) {
@@ -40,7 +41,7 @@ public class ParseRootcoaches implements IParseRootElement {
 			// get saving
 			float saving = ((Double) coachListJsonObject.get(Attributes.SAVING.getAttribute())).floatValue();
 
-			coach = new Coach(skating, shooting, checking, saving, name);
+			coach = DefaultHockeyFactory.makeCoach(skating, shooting, checking, saving, name);
 			coachesList.add(coach);
 		}
 		return coachesList;

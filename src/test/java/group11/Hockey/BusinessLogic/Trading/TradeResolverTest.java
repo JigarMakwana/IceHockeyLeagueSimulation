@@ -2,14 +2,10 @@ package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeResolver;
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TradeResolverTest {
     private TradingModelMock leagueModel;

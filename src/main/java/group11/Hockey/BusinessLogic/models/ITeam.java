@@ -1,25 +1,33 @@
 package group11.Hockey.BusinessLogic.models;
 
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.db.Team.ITeamDb;
 
 import java.util.List;
 
 public interface ITeam {
+
+	public void setTeamName(String teamName);
+
 	public String getTeamName();
 
-	public GeneralManager getGeneralManager();
+	public IGeneralManager getGeneralManager();
 
-	public void setGeneralManager(GeneralManager generalManager);
+	public void setGeneralManager(IGeneralManager generalManager);
 
-	public Coach getHeadCoach();
+	public ICoach getHeadCoach();
+
+	public void setHeadCoach(Coach headCoach);
 
 	public int getPoints();
+
+	public void setPlayers(List<IPlayer> players);
 
 	public int getAverageShoots();
 
 	public void setAverageShoots(int averageShoots);
 
-	public List<Player> getPlayers();
+	public List<IPlayer> getPlayers();
 
 	public boolean isOnPenalty();
 
@@ -61,5 +69,25 @@ public interface ITeam {
 
 	public List<Boolean> getTradedPicks();
 
-	public void setTradedPicks(int index);
+	public void updateTradedPicks(int index);
+
+	public float getTeamStrength();
+
+	public void setUserTeam(boolean isUserTeam);
+
+	public boolean teamExistsInDivision(String teamName, Division divisionName);
+
+	public ITeam getTeamFromDivision(String teamName, Division division);
+
+	public League loadLeagueWithTeamName(String teamName, ITeamDb teamDb);
+
+	public void addGeneralMangerToTeam(Team team, IGeneralManager gmObj, ILeague league);
+
+	public void addCoachToTeam(ITeam team, String coachName, ILeague league);
+
+	public List<Team> orderTeamsInLeagueStandings(ILeague league);
+
+	public List<Team> sortTeam(List<ITeam> teamsOrderedInReverse);
+
+	public String toString();
 }

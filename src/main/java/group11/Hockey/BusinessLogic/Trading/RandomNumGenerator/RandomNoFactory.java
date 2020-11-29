@@ -4,7 +4,10 @@ public class RandomNoFactory {
     public RandomNoFactory() {
         super();
     }
-    public static IRandomNoGenerator makeRandomFloatGenerator(){
-        return new RandomFloatGenerator();
+
+    public static IRandomFloatGenerator makeRandomFloatGenerator(){ return new RandomFloatGenerator(); }
+
+    public static IRandomIntGenerator makeRandomIntGenerator(){
+        return new RandomIntGenerator();
     }
 }

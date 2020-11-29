@@ -15,15 +15,14 @@ import java.util.List;
 public class TradingFactory {
 
     public static StateMachineState makeTradeRunner(ILeague leagueObj, ILeagueDb leagueDb, ICommandLineInput commandLineInput, IValidations validation, IDisplay display ){
-        return new TradeRunner(leagueObj, leagueDb, commandLineInput, validation, display) {
-        };
+        return new TradeRunner(leagueObj, leagueDb, commandLineInput, validation, display);
     }
 
     public static ITradeInitializer makeTradeInitializer(ILeague leagueObj){
         return new TradeInitializer(leagueObj);
     }
 
-    public static ITradeGenerator makeTradeGenerator(Team team, ITradeConfig tradingConfig, IDisplay display){
+    public static ITradeGenerator makeTradeGenerator(ITeam team, ITradeConfig tradingConfig, IDisplay display){
         return new TradeGenerator(team, tradingConfig, display);
     }
 
@@ -32,13 +31,13 @@ public class TradingFactory {
         return new TradeResolver(leagueObj, tradeCharter, tradingConfig, commandLineInput, validation, display);
     }
 
-    public static ITradeSettler makeTradeSettler(Team team, List<Player> freeAgentList, ICommandLineInput commandLineInput, IValidations validation,
+    public static ITradeSettler makeTradeSettler(ITeam team, List<IPlayer> freeAgentList, ICommandLineInput commandLineInput, IValidations validation,
                                                  IDisplay display){
         return new TradeSettler(team, freeAgentList, commandLineInput, validation, display);
     }
 
-    public static ITradeCharter makeTradeCharter(Team offeringTeam, List<Player> offeredPlayerList, Team requestedteam,
-                                                 List<Player> requestedPlayerList, int roundIdx){
+    public static ITradeCharter makeTradeCharter(ITeam offeringTeam, List<IPlayer> offeredPlayerList, ITeam requestedteam,
+                                                 List<IPlayer> requestedPlayerList, int roundIdx){
         return new TradeCharter(offeringTeam, offeredPlayerList, requestedteam, requestedPlayerList, roundIdx);
     }
 
@@ -47,7 +46,7 @@ public class TradingFactory {
         return new TradeConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
     }
 
-    public static ITradeGenerator makeTradeDraft(Team offeringTeam, ITradeConfig tradingConfig, IDisplay display){
+    public static ITradeGenerator makeTradeDraft(ITeam offeringTeam, ITradeConfig tradingConfig, IDisplay display){
         return new TradeDraft(offeringTeam, tradingConfig, display);
     }
 }

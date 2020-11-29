@@ -10,10 +10,10 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
 
-public class GameSimulation {
+public class GameSimulation implements IGameSimulation {
 	private ILeague league;
 	private ITeam team1;
 	private ITeam team2;
@@ -26,35 +26,46 @@ public class GameSimulation {
 		this.team2 = team2;
 	}
 
-	public ITeam startGamePlay() {
-		logger.info("Entered startGamePlay()");
-		List<Player> team_p1 = team1.getPlayers();
-		List<Player> team_p2 = team2.getPlayers();
+	public ITeam startGamePlay()  {
+
+		List<IPlayer> team_p1 = team1.getPlayers();
+		List<IPlayer> team_p2 = team2.getPlayers();
+		List<IPlayer>[] shiftsTeam1 = null;
+		List<IPlayer>[] shiftsTeam2 = null;
+
 
 		GenerateShiftsTemplate shifts1 = null;
 		GenerateShiftsTemplate shifts2 = null;
-		if (true) {
-			shifts1 = DefaultHockeyFactory.makeGenerateShifts(team_p1);
-			shifts2 = DefaultHockeyFactory.makeGenerateShifts(team_p2);
-		} else {
+		if (league.getQualifiedTeams().size() > 0) {
+			logger.info("Generate shifts for playoff schedule");
 			shifts1 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p1);
 			shifts2 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p2);
+		} else {
+			logger.info("Generate shifts for normal schedule");
+			shifts1 = DefaultHockeyFactory.makeGenerateShifts(team_p1);
+			shifts2 = DefaultHockeyFactory.makeGenerateShifts(team_p2);
 		}
-		List<Player>[] shiftsTeam1 = shifts1.getShifts();
-		int shootingStatsTeam1 = teamSkatingStats(team_p1);
 
-		List<Player>[] shiftsTeam2 = shifts2.getShifts();
+		try {
+			shiftsTeam1 = shifts1.getShifts();
+			shiftsTeam2 = shifts2.getShifts();
+		} catch (Exception e) {
+			logger.error("error while generating shifts " + e);
+		}
+
+		int shootingStatsTeam1 = teamSkatingStats(team_p1);		
+
 		int shootingStatsTeam2 = teamSkatingStats(team_p2);
 		setAverageShootsForTeams(shootingStatsTeam1, shootingStatsTeam2);
 
 		startGame(shiftsTeam1, shiftsTeam2);
 		ITeam winnerTeam = setWinnerTeam(team1, team2);
 		gameSummary(team1, team2);
+		resetTeamStats(team1, team2);
 		return winnerTeam;
 	}
 
 	private void setAverageShootsForTeams(int teamOneShoots, int teamTwoShoots) {
-		logger.info("Entered setAverageShootsForTeams()");
 		int averageShootsTeam1 = 0;
 		int averageShootsTeam2 = 0;
 		int shootingDifference = teamOneShoots - teamTwoShoots;
@@ -69,19 +80,20 @@ public class GameSimulation {
 		team2.setAverageShoots(averageShootsTeam2);
 	}
 
-	private void startGame(List<Player>[] shiftsTeam1, List<Player>[] shiftsTeam2) {
-		logger.info("Entered startGame()");
+	private void startGame(List<IPlayer>[] shiftsTeam1, List<IPlayer>[] shiftsTeam2) {
 		int averageShootsTeam1 = team1.getAverageShoots();
 		int averageShootsTeam2 = team2.getAverageShoots();
 		for (int shift = 0; shift < appConfiguration.shifts / 2; shift++) {
 
 			for (int i = 0; i < 2; i++) {
 				if (averageShootsTeam1 > 0) {
-					makeShoot(shiftsTeam1[shift], shiftsTeam2[shift], team1, team2, 3);
+					makeShoot(shiftsTeam1[shift], shiftsTeam2[shift], team1, team2,
+							appConfiguration.numberOfShoots_high);
 					averageShootsTeam1--;
 				} else {
 					if (averageShootsTeam2 > 0) {
-						makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1, 3);
+						makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1,
+								appConfiguration.numberOfShoots_high);
 						averageShootsTeam2--;
 					}
 				}
@@ -89,16 +101,15 @@ public class GameSimulation {
 		}
 		for (int shift = appConfiguration.shifts / 2; shift < appConfiguration.shifts; shift++) {
 			if (averageShootsTeam2 > 0) {
-				makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1, 2);
+				makeShoot(shiftsTeam2[shift], shiftsTeam1[shift], team2, team1, appConfiguration.numberOfShoots_low);
 				averageShootsTeam2--;
 			}
 		}
 	}
 
-	private void makeShoot(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers, ITeam defendingTeam,
+	private void makeShoot(List<IPlayer> shootingTeamPlayers, List<IPlayer> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
-		logger.info("Entered makeShoot()");
-		
+		logger.info("Team initiating the shoot");
 		IGameContext gameContext = null;
 
 		managePanelty(defendingTeam);
@@ -127,7 +138,6 @@ public class GameSimulation {
 	}
 
 	private void managePanelty(ITeam defendingTeam) {
-		logger.info("Entered managePanelty()");
 		int penaltyPeriod = defendingTeam.getPenaltyPeriod();
 		if (penaltyPeriod > 0) {
 			penaltyPeriod--;
@@ -139,8 +149,6 @@ public class GameSimulation {
 	}
 
 	private void gameSummary(ITeam team1, ITeam team2) {
-		logger.info("Entered gameSummary()");
-		
 		int goalsIngame = team1.getGoalsInSeason() + team2.getGoalsInSeason();
 		int penaltiesInGame = team1.getPenaltiesInSeason() + team2.getPenaltiesInSeason();
 		int savesInGame = team1.getSavesInSeason() + team2.getSavesInSeason();
@@ -150,13 +158,14 @@ public class GameSimulation {
 		league.setSavesInSeason(league.getSavesInSeason() + savesInGame);
 		league.setGamesInSeason(league.getGamesInSeason() + 2);
 
-		System.out.println("***********end summary**************");
-
+		System.out.println("***Game Summary***");
 		System.out.println("Goals per game: " + (float) league.getGoalsInSeason() / league.getGamesInSeason());
 		System.out.println("Penalties per game: " + (float) league.getPenaltiesInSeason() / league.getGamesInSeason());
 		System.out.println("Shots: " + 60 / 2);
 		System.out.println("Saves: " + (float) league.getSavesInSeason() / league.getGamesInSeason());
+	}
 
+	private void resetTeamStats(ITeam team1, ITeam team2) {
 		team1.setGoalsInSeason(0);
 		team2.setGoalsInSeason(0);
 		team1.setPenaltiesInSeason(0);
@@ -166,7 +175,6 @@ public class GameSimulation {
 	}
 
 	private ITeam setWinnerTeam(ITeam team1, ITeam team2) {
-		logger.info("Entered setWinnerTeam()");
 		int goalsTeam1 = team1.getGoalsInSeason();
 		int goalsTeam2 = team2.getGoalsInSeason();
 
@@ -177,10 +185,9 @@ public class GameSimulation {
 		}
 	}
 
-	private int teamSkatingStats(List<Player> team) {
-		logger.info("Entered teamSkatingStats()");
+	private int teamSkatingStats(List<IPlayer> team) {
 		int skatingStat = 0;
-		for (Player player : team) {
+		for (IPlayer player : team) {
 			skatingStat += player.getSkating();
 		}
 		return skatingStat;

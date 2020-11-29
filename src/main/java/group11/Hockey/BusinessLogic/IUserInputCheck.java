@@ -2,22 +2,22 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.ITeam;
 
 public interface IUserInputCheck {
-	public String conferenceNameFromUserCheck(List<Conference> conferencesList);
+	public String conferenceNameFromUserCheck(List<IConference> conferencesList);
 
-	public String divisonNameFromUserCheck(Conference conference);
+	public String divisonNameFromUserCheck(IConference conference);
 
-	public void teamNameFromUserCheck(Team newTeam, ILeague league);
+	public void teamNameFromUserCheck(ITeam newTeam, ILeague league);
 
-	public void generalManagerNameFromUserCheck(Team newTeam, ILeague league);
+	public void generalManagerNameFromUserCheck(ITeam newTeam, ILeague league);
 
-	public void headCoachNameFromUserCheck(Team newTeam, ILeague league);
+	public void headCoachNameFromUserCheck(ITeam newTeam, ILeague league);
 
-	public void playerChoiceFromUser(Team newTeam, ILeague league);
+	public void playerChoiceFromUser(ITeam newTeam, ILeague league);
 
 	public int validateUserTradeInput();
 

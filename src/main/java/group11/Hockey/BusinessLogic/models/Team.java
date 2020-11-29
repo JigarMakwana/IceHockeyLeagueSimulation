@@ -12,15 +12,14 @@ import group11.Hockey.db.Team.ITeamDb;
 /**
  * This class contain all the business logic related to team model
  *
- * @author jatinpartaprana
  *
  */
-public class Team implements ITeam, Comparable<Team>  {
+public class Team implements ITeam, Comparable<Team> {
 
 	private String teamName;
-	private GeneralManager generalManager;
-	private Coach headCoach;
-	private List<Player> players = null;
+	private IGeneralManager generalManager;
+	private ICoach headCoach;
+	private List<IPlayer> players = null;
 	private boolean isUserTeam = false;
 	private int losses;
 	private IRoster roster;
@@ -34,14 +33,14 @@ public class Team implements ITeam, Comparable<Team>  {
 	private int points;
 	private List<Boolean> tradedPicks;
 
-	public Team(String teamName, GeneralManager generalManager, Coach headCoach, List<? extends IPlayer> players) {
+	public Team(String teamName, IGeneralManager generalManager, ICoach headCoach, List<IPlayer> players) {
 		super();
 		this.teamName = teamName;
 		this.generalManager = generalManager;
 		this.headCoach = headCoach;
-		this.players = (List<Player>) players;
+		this.players = players;
 		this.tradedPicks = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
-		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, (List<Player>) players);
+		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, players);
 	}
 
 	public Team() {
@@ -104,15 +103,15 @@ public class Team implements ITeam, Comparable<Team>  {
 		this.teamName = teamName;
 	}
 
-	public GeneralManager getGeneralManager() {
+	public IGeneralManager getGeneralManager() {
 		return generalManager;
 	}
 
-	public void setGeneralManager(GeneralManager generalManager) {
+	public void setGeneralManager(IGeneralManager generalManager) {
 		this.generalManager = generalManager;
 	}
 
-	public Coach getHeadCoach() {
+	public ICoach getHeadCoach() {
 		return headCoach;
 	}
 
@@ -128,11 +127,11 @@ public class Team implements ITeam, Comparable<Team>  {
 		this.roster = roster;
 	}
 
-	public List<Player> getPlayers() {
+	public List<IPlayer> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(List<IPlayer> players) {
 		this.players = players;
 	}
 
@@ -161,12 +160,12 @@ public class Team implements ITeam, Comparable<Team>  {
 	}
 
 	public float getTeamStrength() {
-		List<Player> players = this.getPlayers();
+		List<IPlayer> players = this.getPlayers();
 		float teamStrength = 0;
 		if (players == null || players.size() == 0) {
 			return 0;
 		}
-		for (Player player : players) {
+		for (IPlayer player : players) {
 			teamStrength += player.getPlayerStrength();
 		}
 		return teamStrength;
@@ -182,12 +181,12 @@ public class Team implements ITeam, Comparable<Team>  {
 
 	public boolean isTeamNameValid(String teamName, ILeague league) {
 		boolean isTeamNameValid = true;
-		List<Conference> cconferenceList = league.getConferences();
-		for (Conference conference : cconferenceList) {
+		List<IConference> cconferenceList = league.getConferences();
+		for (IConference conference : cconferenceList) {
 			List<Division> divisionList = conference.getDivisions();
 			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
 					if (team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
 						isTeamNameValid = false;
 						return isTeamNameValid;
@@ -200,11 +199,11 @@ public class Team implements ITeam, Comparable<Team>  {
 
 	public boolean teamExistsInDivision(String teamName, Division divisionName) {
 		boolean teamExists = false;
-		List<Team> teamList = divisionName.getTeams();
+		List<ITeam> teamList = divisionName.getTeams();
 		if (teamList == null) {
 			return teamExists;
 		}
-		for (Team team : teamList) {
+		for (ITeam team : teamList) {
 			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamExists = true;
 				return teamExists;
@@ -213,10 +212,10 @@ public class Team implements ITeam, Comparable<Team>  {
 		return teamExists;
 	}
 
-	public Team getTeamFromDivision(String teamName, Division division) {
-		List<Team> teamList = division.getTeams();
-		Team teamInDivision = null;
-		for (Team team : teamList) {
+	public ITeam getTeamFromDivision(String teamName, Division division) {
+		List<ITeam> teamList = division.getTeams();
+		ITeam teamInDivision = null;
+		for (ITeam team : teamList) {
 			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamInDivision = team;
 				return team;
@@ -229,25 +228,24 @@ public class Team implements ITeam, Comparable<Team>  {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 
-	public void addGeneralMangerToTeam(Team team, GeneralManager gmObj, ILeague league) {
+	public void addGeneralMangerToTeam(Team team, IGeneralManager gmObj, ILeague league) {
 		team.setGeneralManager(gmObj);
-		List<GeneralManager> generalManagers = league.getGeneralManagers();
-		for (GeneralManager gm : generalManagers) {
-			if (gm.getName() != null && gm.getPersonality() != null &&
-					gm.getName().equalsIgnoreCase(gmObj.getName()) &&
-					gm.getPersonality().equalsIgnoreCase(gmObj.getPersonality())) {
+		List<IGeneralManager> generalManagers = league.getGeneralManagers();
+		for (IGeneralManager gm : generalManagers) {
+			if (gm.getName() != null && gm.getPersonality() != null && gm.getName().equalsIgnoreCase(gmObj.getName())
+					&& gm.getPersonality().equalsIgnoreCase(gmObj.getPersonality())) {
 				generalManagers.remove(gm);
 				break;
 			}
 		}
 	}
 
-	public void addCoachToTeam(Team team, String coachName, ILeague league) {
+	public void addCoachToTeam(ITeam team, String coachName, ILeague league) {
 		Coach coach = new Coach();
 		coach.setName(coachName);
 		team.setHeadCoach(coach);
-		List<Coach> coaches = league.getCoaches();
-		for (Coach ch : coaches) {
+		List<ICoach> coaches = league.getCoaches();
+		for (ICoach ch : coaches) {
 			if (ch.getName() != null && ch.getName().equalsIgnoreCase(coach.getName())) {
 				coaches.remove(ch);
 				break;
@@ -257,35 +255,42 @@ public class Team implements ITeam, Comparable<Team>  {
 
 	@Override
 	public int compareTo(Team team) {
-		if(this.getPoints() > team.getPoints()) {
+		if (this.getPoints() > team.getPoints()) {
 			return 1;
-		}
-		else {
+		} else {
 			return -1;
 		}
 	}
 
-	public List<Team> orderTeamsInLeagueStandings(ILeague league){
-		List<Team> teamsOrderedInReverse = new ArrayList<>();
-		for(IConference conference: league.getConferences()) {
-			for(IDivision divison : conference.getDivisions()) {
-				List<Team> team = divison.getTeams();
+	public List<Team> orderTeamsInLeagueStandings(ILeague league) {
+		List<ITeam> teamsOrderedInReverse = new ArrayList<>();
+		for (IConference conference : league.getConferences()) {
+			for (IDivision divison : conference.getDivisions()) {
+				List<ITeam> team = divison.getTeams();
 				teamsOrderedInReverse.addAll(team);
 			}
 		}
-		sortTeam(teamsOrderedInReverse);
-		return teamsOrderedInReverse;
+		return sortTeam(teamsOrderedInReverse);
 	}
 
-	public void sortTeam(List<Team> teamsOrderedInReverse){
-		 Collections.sort(teamsOrderedInReverse);
+	public List<Team> sortTeam(List<ITeam> teamsOrderedInReverse) {
+		List<Team> teams = new ArrayList<>();
+		for(ITeam team: teamsOrderedInReverse) {
+			teams.add((Team)team);
+		}
+		Collections.sort(teams);
+		return teams;
 	}
 
 	public List<Boolean> getTradedPicks() {
 		return tradedPicks;
 	}
 
-	public void setTradedPicks(int index) {
+	public void setTradedPicks(List<Boolean> tradedPicks) {
+		this.tradedPicks = tradedPicks;
+	}
+
+	public void updateTradedPicks(int index) {
 		tradedPicks.set(index, true);
 	}
 
@@ -294,4 +299,5 @@ public class Team implements ITeam, Comparable<Team>  {
 		return "Team [teamName=" + teamName + ", generalManager=" + generalManager + ", headCoach=" + headCoach
 				+ ", players=" + players + "]";
 	}
+
 }

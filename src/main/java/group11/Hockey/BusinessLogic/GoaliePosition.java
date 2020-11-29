@@ -6,24 +6,24 @@ package group11.Hockey.BusinessLogic;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
-public class GoaliePosition implements IPosition {
-	private Player player;
+public class GoaliePosition implements IPlayerStrengthStrategy {
+	private IPlayer player;
 	private static Logger logger = LogManager.getLogger(GoaliePosition.class);
 
-	public GoaliePosition(Player player) {
+	public GoaliePosition(IPlayer player) {
 		super();
 		this.player = player;
 	}
 
 	@Override
 	public float claculateStrength() {
-		logger.info("Entered calculateStrength()");
+		int reduceStrengthBy = BusinessConstants.Reduce_strength_by.getIntValue();
 		float playerStrength = player.getSkating() + player.getSaving();
 		if (player.isInjured()) {
-			logger.info("Player "+player.getPlayerName()+" is injured");
-			playerStrength = playerStrength / 2;
+			logger.warn("Player strength is reduced by " + reduceStrengthBy);
+			playerStrength = playerStrength / reduceStrengthBy;
 		}
 		return playerStrength;
 	}

@@ -7,13 +7,16 @@ import group11.Hockey.BusinessLogic.Enums.Positions;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
-
+/*
+ * Jatin Rana And Jigar
+ */
 public class UserInputCheck implements IUserInputCheck {
 	private ICommandLineInput commandLineInput;
 	IValidations validation;
@@ -28,7 +31,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public String conferenceNameFromUserCheck(List<Conference> conferencesList) {
+	public String conferenceNameFromUserCheck(List<IConference> conferencesList) {
 		logger.info("Entered conferenceNameFromUserCheck()");
 		boolean checkConferenceName = true;
 		String conferenceName = null;
@@ -41,7 +44,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public String divisonNameFromUserCheck(Conference conference) {
+	public String divisonNameFromUserCheck(IConference conference) {
 		logger.info("Entered divisonNameFromUserCheck()");
 		boolean checkDiviosneName = true;
 		String divisionName = null;
@@ -55,7 +58,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void teamNameFromUserCheck(Team newTeam, ILeague league) {
+	public void teamNameFromUserCheck(ITeam newTeam, ILeague league) {
 		logger.info("Entered teamNameFromUserCheck()");
 		boolean checkTeamName = true;
 		String teamName = null;
@@ -72,7 +75,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void generalManagerNameFromUserCheck(Team newTeam, ILeague league) {
+	public void generalManagerNameFromUserCheck(ITeam newTeam, ILeague league) {
 //		logger.info("Entered generalManagerNameFromUserCheck()");
 //		boolean checkManagerName = true;
 //		String generalManager = null;
@@ -88,7 +91,7 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void headCoachNameFromUserCheck(Team newTeam, ILeague league) {
+	public void headCoachNameFromUserCheck(ITeam newTeam, ILeague league) {
 		logger.info("Entered headCoachNameFromUserCheck()");
 		boolean checkHeadCoachName = true;
 		String headCoach = null;
@@ -104,13 +107,13 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	@Override
-	public void playerChoiceFromUser(Team newTeam, ILeague league) {
+	public void playerChoiceFromUser(ITeam newTeam, ILeague league) {
 		logger.info("Entered playerChoiceFromUser()");
 		boolean playerValueCheck = true;
 		List<Integer> selectedValuesFromUser = new ArrayList<Integer>();
-		List<Player> skatersList = new ArrayList<Player>();
-		List<Player> goalies = new ArrayList<Player>();
-		Player player = new Player();
+		List<IPlayer> skatersList = new ArrayList<>();
+		List<IPlayer> goalies = new ArrayList<>();
+		IPlayer player = DefaultHockeyFactory.makePlayer();
 		String playerValue;
 		display.showMessageOnConsole(BusinessConstants.Select_Player.getValue().toString());
 		for (int i = 0; i < Integer.parseInt(BusinessConstants.Number_Of_Total_Players.getValue().toString()); i++) {
@@ -123,16 +126,16 @@ public class UserInputCheck implements IUserInputCheck {
 					String postion = league.getFreeAgents().get(Integer.parseInt(playerValue) - 1).getPosition();
 					if (postion.equalsIgnoreCase(Positions.FORWARD.toString())
 							|| postion.equalsIgnoreCase(Positions.DEFENSE.toString())) {
-						skatersList.add((Player)league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
+						skatersList.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					} else if (postion.equalsIgnoreCase(Positions.GOALIE.toString())) {
-						goalies.add((Player)league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
+						goalies.add((Player) league.getFreeAgents().get(Integer.parseInt(playerValue) - 1));
 					}
 				}
 			}
 			playerValueCheck = true;
 		}
 
-		List<Player> finalListOfPlayers = new ArrayList<Player>();
+		List<IPlayer> finalListOfPlayers = new ArrayList<>();
 		finalListOfPlayers.addAll(skatersList);
 		finalListOfPlayers.addAll(goalies);
 		newTeam.setPlayers(finalListOfPlayers);
@@ -142,29 +145,28 @@ public class UserInputCheck implements IUserInputCheck {
 	/**
 	 * The below method takes and validates the trade related input provided by User
 	 * 1. User gives input to respond the trade offered by AI
-	 * @author  Jigar Makwana B00842568
+	 * 
+	 * @author Jigar Makwana B00842568
 	 */
 
 	@Override
-	public int validateUserTradeInput()
-	{
+	public int validateUserTradeInput() {
 		logger.info("Entered validateUserTradeInput()");
 		boolean isValidInput = false;
 		int userInput = -1;
 		do {
-			while(userInput == -1) {
+			while (userInput == -1) {
 				try {
 					userInput = commandLineInput.getInt();
 				} catch (Exception e) {
-					logger.error("Error occured : "+e);
+					logger.error("Error occured : " + e);
 					display.showMessageOnConsole("Please enter 0 or 1");
 				}
 			}
-			if(validation.isUserTradeInputValid(userInput)) {
+			if (validation.isUserTradeInputValid(userInput)) {
 				logger.info("Trade value is valid");
 				break;
-			}
-			else {
+			} else {
 				logger.error("Invalid value given");
 				display.showMessageOnConsole("Please enter 0 or 1");
 				userInput = -1;
@@ -174,9 +176,10 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	/**
-	 * The below method takes and validates the trade related User Inputs when
-	 * 1. User gives input to select players to add or drop to/from a team
-	 * @author  Jigar Makwana B00842568
+	 * The below method takes and validates the trade related User Inputs when 1.
+	 * User gives input to select players to add or drop to/from a team
+	 * 
+	 * @author Jigar Makwana B00842568
 	 */
 
 	@Override
@@ -185,19 +188,18 @@ public class UserInputCheck implements IUserInputCheck {
 		boolean isValidInput = false;
 		int userInput = 0;
 		do {
-			while(userInput <= 0) {
+			while (userInput <= 0) {
 				try {
 					userInput = commandLineInput.getInt();
 				} catch (Exception e) {
-					logger.error("Error occured : "+e);
+					logger.error("Error occured : " + e);
 					display.showMessageOnConsole("Please select valid value");
 				}
 			}
-			if(validation.isUserResolveRosterInputValid(userInput, listSize)) {
+			if (validation.isUserResolveRosterInputValid(userInput, listSize)) {
 				logger.info("Roster value is valid");
 				break;
-			}
-			else {
+			} else {
 				logger.error("Invalid value selected");
 				display.showMessageOnConsole("Please select valid value");
 				isValidInput = false;

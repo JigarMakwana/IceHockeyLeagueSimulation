@@ -1,13 +1,9 @@
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
-import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeResolver;
-import group11.Hockey.BusinessLogic.models.League;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class TradeCharterTest {
     private TradingModelMock leagueModel;

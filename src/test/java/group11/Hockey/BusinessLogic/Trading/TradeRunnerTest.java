@@ -1,6 +1,5 @@
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeRunner;
 import group11.Hockey.BusinessLogic.models.League;
 import org.junit.Assert;

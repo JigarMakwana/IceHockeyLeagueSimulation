@@ -1,10 +1,10 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic.models;
-
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Training;
 import org.junit.Assert;
 
 import org.junit.BeforeClass;

@@ -15,11 +15,11 @@ public class App {
 	private static Logger logger = LogManager.getLogger(App.class);
 	public static void main(String[] args) {
 		logger.info("Entered App.java");
-		System.out.println("Welcome to Hockey Simulation!");
 		ILeagueDb leagueDb = DefaultHockeyFactory.makeLeagueSerialisation();
 		ICommandLineInput commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
 		IDisplay display = DefaultHockeyFactory.makeDisplay();
 		IValidations validations = DefaultHockeyFactory.makeValidations(display);
+		display.showMessageOnConsole("Welcome to Hockey Simulation!");
 		StateMachineState currentState = null;
 		try {
 			if (args.length > 0) {

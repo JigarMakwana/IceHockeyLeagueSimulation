@@ -12,8 +12,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.FinalState;
 import group11.Hockey.BusinessLogic.StateMachineState;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
@@ -41,7 +41,7 @@ public class JsonImport extends ValidateJsonSchema {
 	public StateMachineState startState() {
 		StateMachineState stateMachineState = null;
 		try {
-			League league = parseFile(fileName);
+			ILeague league = parseFile(fileName);
 			stateMachineState = DefaultHockeyFactory.makeCreateTeam(league, commandLineInput, leagueDb, display);
 		} catch (Exception e) {
 			logger.error("Exception occurred :" + e.getMessage());

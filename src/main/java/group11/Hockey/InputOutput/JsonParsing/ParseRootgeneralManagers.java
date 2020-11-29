@@ -6,20 +6,19 @@ package group11.Hockey.InputOutput.JsonParsing;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import group11.Hockey.BusinessLogic.models.Coach;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import group11.Hockey.BusinessLogic.models.GeneralManager;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.models.IGeneralManager;
+import group11.Hockey.BusinessLogic.models.ILeague;
 
 public class ParseRootgeneralManagers implements IParseRootElement {
 
 	@Override
-	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
-		List<GeneralManager> generalManagersList = new ArrayList<GeneralManager>();
-		GeneralManager generalManager;
+	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
+		List<IGeneralManager> generalManagersList = new ArrayList<>();
+		IGeneralManager generalManager;
 		JSONArray gameplayConfigJson = (JSONArray) jsonObject.get(Attributes.GENERALMANAGERS.getAttribute());
 		Iterator<JSONObject> gmListIterator = gameplayConfigJson.iterator();
 		while (gmListIterator.hasNext()) {
@@ -30,7 +29,7 @@ public class ParseRootgeneralManagers implements IParseRootElement {
 			// get Personality
 			String personality = (String) gmListJsonObject.get(Attributes.PERSONALITY.getAttribute());
 
-			generalManager = new GeneralManager(name, personality);
+			generalManager = DefaultHockeyFactory.makeGeneralManager(name, personality);
 			generalManagersList.add(generalManager);
 		}
 		leagueModelObj.setGeneralManagers(generalManagersList);

@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -47,7 +47,6 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 		logger.info("Entered renderTeam()");
 		display.showMessageOnConsole("***Load League***\n");
 		String teamName;
-		boolean isTeamNameValid = false;
 		display.showMessageOnConsole("Enter Team Name: ");
 		teamName = userInputMode.getValueFromUser();
 		if (validations.isStrBlank(teamName)) {
@@ -61,15 +60,14 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 			display.showMessageOnConsole("Team name "+teamName+" does not exist in the system");
 		}
 		ITeam teamInLeague = DefaultHockeyFactory.makeTeam();
-		isTeamNameValid = teamInLeague.isTeamNameValid(teamName, league);
-		if(isTeamNameValid) {
+		teamInLeague.isTeamNameValid(teamName, league);
 			logger.info("Team name "+teamName+" is valid");
-			List<Conference> conferenceList = league.getConferences();
-			for (Conference conference : conferenceList) {
+			List<IConference> conferenceList = league.getConferences();
+			for (IConference conference : conferenceList) {
 				List<Division> divisionList = conference.getDivisions();
 				for (Division division : divisionList) {
-					List<Team> teamList = division.getTeams();
-					for (Team team : teamList) {
+					List<ITeam> teamList = division.getTeams();
+					for (ITeam team : teamList) {
 						if (team.getTeamName().equalsIgnoreCase(teamName)) {
 							display.printTeamDetails(league.getLeagueName(), conference.getConferenceName(),
 									division.getDivisionName(), team.getTeamName(), team.getGeneralManager().getName(),
@@ -78,12 +76,6 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 					}
 				}
 			}
-		}
-		else {
-			logger.error("Team name is not valid");
-			display.showMessageOnConsole("Not a valid Team name ");
-		}
-
 
 		return league;
 	}

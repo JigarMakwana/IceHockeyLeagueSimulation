@@ -1,7 +1,5 @@
 package group11.Hockey.InputOutput.JsonParsing;
 
-import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -13,9 +11,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.InputOutput.JsonParsing.ParseRootconferences;
+import group11.Hockey.InputOutput.DefaultInputOutputFactory;
 
 public class ParseRootConferenceTest {
 
@@ -27,14 +26,14 @@ public class ParseRootConferenceTest {
 		jsonObject = parseJsonObj.parseJson();
 	}
 
-//	@Test
-//	public void parseRootElementTest() throws Exception {
-//		League league = DefaultHockeyFactory.makeLeague();
-//		ParseRootconferences parseRoot = new ParseRootconferences();
-//		parseRoot.parseRootElement(league, jsonObject);
-//		List<Conference> lc = league.getConferences();
-//		Assert.assertEquals(lc.size(), 1);
-//
-//	}
+	@Test
+	public void parseRootElementTest() throws Exception {
+		ILeague league = DefaultHockeyFactory.makeLeague();
+		IParseRootElement parseRoot = DefaultInputOutputFactory.makeParseRootconferences();
+		parseRoot.parseRootElement(league, jsonObject);
+		List<IConference> lc = league.getConferences();
+		Assert.assertEquals(lc.size(), 2);
+
+	}
 
 }

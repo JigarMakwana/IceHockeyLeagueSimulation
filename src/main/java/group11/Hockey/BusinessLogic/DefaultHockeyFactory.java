@@ -2,14 +2,14 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
-import group11.Hockey.BusinessLogic.Enums.RosterSize;
 import org.json.simple.parser.JSONParser;
 
-import group11.Hockey.BusinessLogic.models.Roster.Roster;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
@@ -17,15 +17,47 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.InitializeSeason;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.PlayoffSchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ScheduleContext;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.DefencePlayerActive;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ForwardPlayerActive;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveDefencePlayer;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveForwardPlayer;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.ActiveGoaliePlayer;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameContext;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameStrategy;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GeneratePlayOffShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShifts;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShiftsTemplate;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GoaliePlayerActive;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
+import group11.Hockey.BusinessLogic.models.Advance;
+import group11.Hockey.BusinessLogic.models.Aging;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.GameResolver;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.IAdvance;
+import group11.Hockey.BusinessLogic.models.IAging;
+import group11.Hockey.BusinessLogic.models.ICoach;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
+import group11.Hockey.BusinessLogic.models.IGameResolver;
+import group11.Hockey.BusinessLogic.models.IGeneralManager;
+import group11.Hockey.BusinessLogic.models.IInjuries;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.ITrading;
+import group11.Hockey.BusinessLogic.models.ITraining;
+import group11.Hockey.BusinessLogic.models.IgmTable;
+import group11.Hockey.BusinessLogic.models.Injuries;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.Trading;
+import group11.Hockey.BusinessLogic.models.Training;
+import group11.Hockey.BusinessLogic.models.gmTable;
+import group11.Hockey.BusinessLogic.models.Roster.Roster;
 import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -35,6 +67,7 @@ import group11.Hockey.db.Deserialize;
 import group11.Hockey.db.IDeserialize;
 import group11.Hockey.db.ISerialize;
 import group11.Hockey.db.Serialize;
+import group11.Hockey.db.Coach.ICoachDb;
 import group11.Hockey.db.League.ILeagueDb;
 import group11.Hockey.db.League.LeagueSerialisation;
 
@@ -44,7 +77,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		super();
 	}
 
-	public static Team makeTeam() {
+	public static ITeam makeTeam() {
 		return new Team();
 	}
 
@@ -52,7 +85,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new League();
 	}
 
-	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb, IDisplay display) {
+	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb,
+			IDisplay display) {
 		return new JsonImport(fileName, commandLineInput, leagueDb, display);
 	}
 
@@ -78,25 +112,25 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static IUserInputCheck makeUserInputCheck(ICommandLineInput commandLineInput, IValidations validation,
-													 IDisplay display) {
+			IDisplay display) {
 		return new UserInputCheck(commandLineInput, validation, display);
 	}
 
-	public static StateMachineState makeCreateTeam(League league, ICommandLineInput commandLineInput,
+	public static StateMachineState makeCreateTeam(ILeague league, ICommandLineInput commandLineInput,
 			ILeagueDb leagueDb, IDisplay display) {
 		IValidations validation = makeValidations(display);
 		return new CreateTeam(league, commandLineInput, display, validation, leagueDb);
 
 	}
 
-	public static StateMachineState makePlayerChoice(League league, ICommandLineInput commandLineInput,
+	public static StateMachineState makePlayerChoice(ILeague league, ICommandLineInput commandLineInput,
 			ILeagueDb leagueDb, IDisplay display) {
 
 		IValidations validation = Validations.getInstance();
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
 	}
 
-	public static StateMachineState makeSimulate(League league, int seasons, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
 		return new Simulate(league, seasons, leagueDb, display, commandLineInput, validation);
 	}
 
@@ -165,27 +199,27 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Advance();
 	}
 
-	public static GameStrategy makeDefencePlayerActive() {
-		return new DefencePlayerActive();
+	public static IGameStrategy makeDefencePlayerActive() {
+		return new ActiveDefencePlayer();
 	}
 
-	public static GameStrategy makeForwardPlayerActive() {
-		return new ForwardPlayerActive();
+	public static IGameStrategy makeForwardPlayerActive() {
+		return new ActiveForwardPlayer();
 	}
 
-	public static GameStrategy makeGoaliePlayerActive() {
-		return new GoaliePlayerActive();
+	public static IGameStrategy makeGoaliePlayerActive() {
+		return new ActiveGoaliePlayer();
 	}
 
-	public static IGameContext makeGameContext(GameStrategy gameStrategy) {
+	public static IGameContext makeGameContext(IGameStrategy gameStrategy) {
 		return new GameContext(gameStrategy);
 	}
 
-	public static GenerateShiftsTemplate makeGenerateShifts(List<Player> team) {
+	public static GenerateShiftsTemplate makeGenerateShifts(List<IPlayer> team) {
 		return new GenerateShifts(team);
 	}
 
-	public static GenerateShiftsTemplate makeGeneratePlayOffShifts(List<Player> team) {
+	public static GenerateShiftsTemplate makeGeneratePlayOffShifts(List<IPlayer> team) {
 		return new GeneratePlayOffShifts(team);
 	}
 
@@ -193,26 +227,111 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new AdvanceToNextSeason(league, leagueDb, display);
 	}
 
-	public static IRoster makeRoster(String teamName, List<Player> playerList){
+	public static IRoster makeRoster(String teamName, List<IPlayer> playerList){
 		return new Roster(teamName, playerList);
 	}
 
-	public static IRosterSearch makeRosterSearch(){
+	public static IRosterSearch makeRosterSearch() {
 		return new RosterSearch();
 	}
 
-	public static GameplayConfig makeGameplayConfig(Aging aging, GameResolver gameResolver, Injuries injuries,
-													Training training, Trading trading){
-		return new GameplayConfig(aging, gameResolver, injuries, training, trading);
+	public static GameplayConfig makeGameplayConfig(IAging aging, IInjuries injuries, ITraining training,
+			ITrading trading) {
+		return new GameplayConfig(aging, injuries, training, trading);
 	}
 
-	public static IgmTable makeGMTable(float shrewd, float gambler, float normal){
+	public static IgmTable makeGMTable(float shrewd, float gambler, float normal) {
 		return new gmTable(shrewd, gambler, normal);
 	}
 
-	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance,
-											int maxPlayersPerTrade, float randomAcceptanceChance,
-											IgmTable gmTable){
+	public static Trading makeTradingConfig(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
+			float randomAcceptanceChance, IgmTable gmTable) {
 		return new Trading(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance, gmTable);
+	}
+
+	public static StateMachineState makeAgePlayer(ILeague league, int days, ILeagueDb leagueDb, IDisplay display) {
+		return new AgePlayer(league, days, leagueDb, display);
+	}
+
+	public static IPlayerStrengthStrategy makeDefensePosition(IPlayer player) {
+		return new DefensePosition(player);
+	}
+
+	public static IPlayerStrengthStrategy makeForwarsPosition(IPlayer player) {
+		return new ForwardPosition(player);
+	}
+
+	public static IPlayerStrengthStrategy makeGoaliePosition(IPlayer player) {
+		return new GoaliePosition(player);
+	}
+
+	public static IPlayer makePlayer(float skating, float shooting, float checking, float saving, String playerName,
+			String position, boolean captain, boolean isFreeAgent, float age) {
+		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age);
+	}
+
+	public static IInjurySystem makeInjurySystem(ILeague league) {
+		return new InjurySystem(league);
+	}
+
+	public static IPlayerStrengthContext makePlayerStrengthContext(IPlayerStrengthStrategy currentContext) {
+		return new PlayerStrengthContext(currentContext);
+	}
+
+	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
+		return new Simulate(league, seasons, leagueDb, display);
+	}
+
+	public static IGameSimulation makeGameSimulation(ILeague league, ITeam team1, ITeam team2) {
+		return new GameSimulation(league, team1, team2);
+	}
+
+	public static IAging makeAging(int averageRetirementAge, int maximumAge) {
+		return new Aging(averageRetirementAge, maximumAge);
+	}
+
+	public static ICoach makeCoach(float skating, float shooting, float checking, float saving, String name) {
+		return new Coach(skating, shooting, checking, saving, name);
+	}
+
+	public static ICoach makeCoach(String name, ICoachDb coachDb) {
+		return new Coach(name, coachDb);
+	}
+
+	public static IConference makeConference(String name, List<Division> divisions) {
+		return new Conference(name, divisions);
+	}
+
+	public static IGameResolver makeGameResolver(float randomWinChance) {
+		return new GameResolver(randomWinChance);
+	}
+
+	public static IInjuries makeInjuries(float randomInjuryChance, int injuryDaysLow, int injuryDaysHigh) {
+		return new Injuries(randomInjuryChance, injuryDaysLow, injuryDaysHigh);
+	}
+
+	public static ITraining makeTraining(int daysUntilStatIncreaseCheck) {
+		return new Training(daysUntilStatIncreaseCheck);
+	}
+
+	public static IGeneralManager makeGeneralManager(String name, String personality) {
+		return new GeneralManager(name, personality);
+	}
+
+	public static IPlayer makePlayer() {
+		return new Player();
+	}
+
+	public static StateMachineState makeDraftPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+		return new DraftPlayer(league, leagueDb, display);
+
+	}
+
+	public static IGeneratingPlayers makeGeneratePlayer() {
+		return new GeneratingPlayers();
+	}
+
+	public static Gson makeGson() {
+		return new GsonBuilder().setPrettyPrinting().create();
 	}
 }

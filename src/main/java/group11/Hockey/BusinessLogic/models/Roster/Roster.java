@@ -1,34 +1,34 @@
-/*
+/**
  * Author: Jigar Makwana B00842568
  */
 package group11.Hockey.BusinessLogic.models.Roster;
-
-import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.Enums.RosterSize;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.Enums.RosterSize;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+
 public class Roster implements IRoster {
     private String teamName;
-    private List<Player> allPlayerList;
-    private List<Player> forwardList;
-    private List<Player> defenseList;
-    private List<Player> goalieList;
-    private List<Player> activeRosterList = new ArrayList<>();
-    private List<Player> inActiveRosterList = new ArrayList<>();
+    private List<IPlayer> allPlayerList;
+    private List<IPlayer> forwardList;
+    private List<IPlayer> defenseList;
+    private List<IPlayer> goalieList;
+    private List<IPlayer> activeRosterList = new ArrayList<>();
+    private List<IPlayer> inActiveRosterList = new ArrayList<>();
 
-    public Roster(String teamName, List<Player> playerList){
+    public Roster(String teamName, List<IPlayer> playerList){
         this.teamName = teamName;
         this.allPlayerList = playerList;
         this.updateSubRoster(this.allPlayerList);
     }
 
-    public void updateSubRoster(List<Player> allPlayerList){
+    public void updateSubRoster(List<IPlayer> allPlayerList){
         IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
         if(allPlayerList == null){
             return;
@@ -71,34 +71,34 @@ public class Roster implements IRoster {
         }
     }
 
-    public void swapPlayers(Player one, Player two){
+    public void swapPlayers(IPlayer one, IPlayer two){
         activeRosterList.add(two);
         inActiveRosterList.add(one);
         activeRosterList.remove(one);
         inActiveRosterList.remove(two);
     }
 
-    public List<Player> getAllPlayerList() {
+    public List<IPlayer> getAllPlayerList() {
         return allPlayerList;
     }
 
-    public List<Player> getActiveRoster() {
+    public List<IPlayer> getActiveRoster() {
         return activeRosterList;
     }
 
-    public List<Player> getForwardList() {
+    public List<IPlayer> getForwardList() {
         return forwardList;
     }
 
-    public List<Player> getDefenseList() {
+    public List<IPlayer> getDefenseList() {
         return defenseList;
     }
 
-    public List<Player> getGoalieList() {
+    public List<IPlayer> getGoalieList() {
         return goalieList;
     }
 
-    public List<Player> getInActiveRoster() {
+    public List<IPlayer> getInActiveRoster() {
         return inActiveRosterList;
     }
 

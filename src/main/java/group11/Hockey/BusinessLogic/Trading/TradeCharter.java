@@ -1,24 +1,24 @@
-/*
+/**
  * Author: Jigar Makwana B00842568
  */
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
+
 public class TradeCharter implements ITradeCharter {
-    private Team offeringTeam;
-    private List<Player> offeredPlayerList;
-    private Team requestedTeam;
-    private List<Player> requestedPlayerList;
+    private ITeam offeringTeam;
+    private List<IPlayer> offeredPlayerList;
+    private ITeam requestedTeam;
+    private List<IPlayer> requestedPlayerList;
     private int draftRoundIdx;
 
 
-    public TradeCharter( Team offeringTeam, List<Player> offeredPlayerList,
-                         Team requestedTeam, List<Player> requestedPlayerList, int draftRoundIdx){
+    public TradeCharter( ITeam offeringTeam, List<IPlayer> offeredPlayerList,
+                         ITeam requestedTeam, List<IPlayer> requestedPlayerList, int draftRoundIdx){
         this.offeringTeam = offeringTeam;
         this.offeredPlayerList = offeredPlayerList;
         this.requestedTeam = requestedTeam;
@@ -27,22 +27,22 @@ public class TradeCharter implements ITradeCharter {
     }
 
     @Override
-    public List<Player> getOfferedPlayerList() {
+    public List<IPlayer> getOfferedPlayerList() {
         return offeredPlayerList;
     }
 
     @Override
-    public List<Player> getRequestedPlayerList() {
+    public List<IPlayer> getRequestedPlayerList() {
         return requestedPlayerList;
     }
 
     @Override
-    public Team getOfferingTeam() {
+    public ITeam getOfferingTeam() {
         return offeringTeam;
     }
 
     @Override
-    public Team getRequestedTeam() {
+    public ITeam getRequestedTeam() {
         return requestedTeam;
     }
 

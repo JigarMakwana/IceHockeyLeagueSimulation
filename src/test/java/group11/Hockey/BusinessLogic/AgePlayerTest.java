@@ -1,36 +1,49 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic;
-
-import static org.junit.Assert.*;
 
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.AgePlayer;
-import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public class AgePlayerTest {
+	private static ILeague league;
+
+	@BeforeClass
+	public static void init() {
+		LeagueModelMock leagueModel = new LeagueModelMock();
+		league = leagueModel.getLeagueInfo();
+	}
+
+	@Test
+	public void startStateTest() {
+
+		StateMachineState agePlayer = DefaultHockeyFactory.makeAgePlayer(league, 365, null, null);
+		StateMachineState currentState = agePlayer.startState();
+		Assert.assertNotNull(currentState);
+	}
 
 	@Test
 	public void increaseAgeTest() {
 
-//		LeagueModelMock leagueModel = new LeagueModelMock();
-//		League league = leagueModel.getLeagueInfo();
-//
-//		AgePlayer agePlayer = new AgePlayer(league, 365);
-//		agePlayer.startState();
-//		List<Conference> conferences = league.getConferences();
-//		List<Division> divisions = conferences.get(0).getDivisions();
-//		List<Team> teams = divisions.get(0).getTeams();
-//		List<Player> players = teams.get(0).getPlayers();
-//		Player player = players.get(0);
-//		Assert.assertEquals(21, player.getAge(), 21);
+		AgePlayer agePlayer = (AgePlayer) DefaultHockeyFactory.makeAgePlayer(league, 365, null, null);
+		agePlayer.agePlayers();
+		List<IConference> conferences = league.getConferences();
+		List<Division> divisions = conferences.get(0).getDivisions();
+		List<ITeam> teams = divisions.get(0).getTeams();
+		List<IPlayer> players = teams.get(0).getPlayers();
+		IPlayer player = players.get(0);
+		Assert.assertEquals(20, player.getAge(), 20);
 	}
 
 }

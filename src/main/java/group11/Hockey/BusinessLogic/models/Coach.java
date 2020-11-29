@@ -5,7 +5,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import java.util.List;
 
-import group11.Hockey.db.ICoachDb;
+import group11.Hockey.db.Coach.ICoachDb;
 
 public class Coach extends Stats implements ICoach{
 	private String name;

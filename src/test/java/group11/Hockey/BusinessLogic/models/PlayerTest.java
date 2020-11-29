@@ -2,10 +2,7 @@ package group11.Hockey.BusinessLogic.models;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.db.IPlayerDb;
+import group11.Hockey.db.Player.IPlayerDb;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -22,36 +19,30 @@ public class PlayerTest {
 
 	@BeforeClass
 	public static void init() {
-		playerWithParams = new Player((float) 10, (float) 10, (float) 10, (float) 10, "Player1", "forward", false,
-				false, age);
-	}
-
-	@Test
-	public void PlayerDefaultParameterisedConstructorTest() {
-//		Assert.assertEquals("Player1", playerWithParams.getPlayerName());
-//		Assert.assertEquals("forward", playerWithParams.getPosition());
+		playerWithParams = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
+				Constants.playerStats, Constants.playerName, Constants.forward, false, false, age);
 	}
 
 	@Test
 	public void setPlayerNameTest() {
-		playerWithParams.setPlayerName("Player 1");
-		Assert.assertEquals("Player 1", playerWithParams.getPlayerName());
+		playerWithParams.setPlayerName(Constants.playerName);
+		Assert.assertEquals(Constants.playerName, playerWithParams.getPlayerName());
 	}
 
 	@Test
 	public void getPlayerNameTest() {
-//		Assert.assertEquals("Player1", playerWithParams.getPlayerName());
+		Assert.assertEquals(Constants.playerName, playerWithParams.getPlayerName());
 	}
 
 	@Test
 	public void setPositionTest() {
-		playerWithParams.setPosition("forward");
-		Assert.assertEquals("forward", playerWithParams.getPosition());
+		playerWithParams.setPosition(Constants.forward);
+		Assert.assertEquals(Constants.forward, playerWithParams.getPosition());
 	}
 
 	@Test
 	public void getPositionTest() {
-		Assert.assertEquals("forward", playerWithParams.getPosition());
+		Assert.assertEquals(Constants.forward, playerWithParams.getPosition());
 	}
 
 	@Test
@@ -106,7 +97,7 @@ public class PlayerTest {
 	@Test
 	public void increaseAgeTest() {
 		LeagueModelMock leagueModel = new LeagueModelMock();
-		League league = leagueModel.getLeagueInfo();
+		ILeague league = leagueModel.getLeagueInfo();
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
 		playerWithParams.increaseAge(league, 365, statDecayChance);
 		Assert.assertEquals(age + 1, 31, 31);
@@ -114,13 +105,15 @@ public class PlayerTest {
 
 	@Test
 	public void replacePlayerWithFreeAgentTest() {
-		Player player1 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
-		Player player2 = new Player(10, 10, 10, 10, "Agent one", "forward", true, true, 20);
-		List<Player> playerList = new ArrayList<Player>();
+		Player player1 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
+				Constants.playerStats, Constants.playerName, Constants.forward, true, false, 50);
+		Player player2 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
+				Constants.playerStats, "Agent one", Constants.forward, true, true, 20);
+		List<IPlayer> playerList = new ArrayList<>();
 		playerList.add(player1);
 
 		LeagueModelMock leagueModel = new LeagueModelMock();
-		League league = leagueModel.getLeagueInfo();
+		ILeague league = leagueModel.getLeagueInfo();
 		List<Player> playerList2 = new ArrayList<Player>();
 		playerList2.add(player2);
 		league.setFreeAgents(playerList2);
@@ -132,11 +125,13 @@ public class PlayerTest {
 	@Test
 	public void removeFreeAgentsFromLeagueTest() {
 		LeagueModelMock leagueModelMock = new LeagueModelMock();
-		League league = leagueModelMock.getLeagueInfo();
+		ILeague league = leagueModelMock.getLeagueInfo();
 		Player player = new Player();
-		Player freeAgent1 = new Player(10, 10, 10, 10, "Player 1", "forward", true, false, 50);
-		Player freeAgent2 = new Player(10, 10, 10, 10, "Player 2", "forward", true, false, 50);
-		List<Player> freeAgents = new ArrayList<Player>();
+		Player freeAgent1 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
+				Constants.playerStats, Constants.playerName, Constants.forward, true, false, 50);
+		Player freeAgent2 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
+				Constants.playerStats, "Player 2", Constants.forward, true, false, 50);
+		List<IPlayer> freeAgents = new ArrayList<>();
 		freeAgents.add(freeAgent1);
 		freeAgents.add(freeAgent2);
 		player.removeFreeAgentsFromLeague(league, freeAgents);

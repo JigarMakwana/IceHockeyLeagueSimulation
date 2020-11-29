@@ -4,10 +4,14 @@
 package group11.Hockey.InputOutput.JsonParsing;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -17,18 +21,18 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 	private List<String> teamNameList = new ArrayList<String>();
 
 	@Override
-	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
-		List<Conference> conferencesList = parseConferences(jsonObject);
+	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
+		List<IConference> conferencesList = parseConferences(jsonObject);
 		leagueModelObj.setConferences(conferencesList);
 	}
 
-	private List<Conference> parseConferences(JSONObject jsonObject) throws Exception {
-		Conference conference;
-		List<Conference> conferencesList = new ArrayList<Conference>();
+	private List<IConference> parseConferences(JSONObject jsonObject) throws Exception {
+		IConference conference;
+		List<IConference> conferencesList = new ArrayList<>();
 		JSONArray ConferenceJSONArray = (JSONArray) jsonObject.get(Attributes.CONFERENCES.getAttribute());
 		Iterator<JSONObject> ConferencesListIterator = ConferenceJSONArray.iterator();
 		while (ConferencesListIterator.hasNext()) {
-			conference = new Conference();
+			conference = DefaultHockeyFactory.makeConference();
 			// get conferenceName
 			JSONObject ConferencesListJsonObject = ConferencesListIterator.next();
 			String conferenceName = (String) ConferencesListJsonObject.get(Attributes.CONFERENCENAME.getAttribute());
@@ -60,7 +64,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			} else {
 				divisionObj.setDivisionName(divisionName);
 				// parse Teams
-				List<Team> teamsList = parseTeams(divisionsListJsonObject);
+				List<ITeam> teamsList = parseTeams(divisionsListJsonObject);
 				divisionObj.setTeams(teamsList);
 				divisionsList.add(divisionObj);
 			}
@@ -68,9 +72,9 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 		return divisionsList;
 	}
 
-	private List<Team> parseTeams(JSONObject divisionsListJsonObject) throws Exception {
+	private List<ITeam> parseTeams(JSONObject divisionsListJsonObject) throws Exception {
 		Team teamObj;
-		List<Team> teamsList = new ArrayList<Team>();
+		List<ITeam> teamsList = new ArrayList<>();
 		JSONArray teamsJSONArray = (JSONArray) divisionsListJsonObject.get(Attributes.TEAMS.getAttribute());
 		Iterator<JSONObject> teamsListIterator = teamsJSONArray.iterator();
 		while (teamsListIterator.hasNext()) {
@@ -86,13 +90,17 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			setGeneralManager(teamObj, teamsListJsonObject);
 			setHeadCoach(teamObj, teamsListJsonObject);
 			// parse Teams
-			List<Player> playersList = parsePlayers(teamsListJsonObject);
+			List<IPlayer> playersList = parsePlayers(teamsListJsonObject);
 			if (playersList != null && playersList.size() > 0) {
 				teamObj.setPlayers(playersList);
 				if (hasInvalidCaptain(playersList)) {
 					throw new Exception("Team " + teamName + " has no/more captain(s)");
 				}
 			}
+			IRoster roster = DefaultHockeyFactory.makeRoster(teamName, playersList);
+			teamObj.setRoster(roster);
+			List<Boolean> tradedPicks = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
+			teamObj.setTradedPicks(tradedPicks);
 			teamsList.add(teamObj);
 		}
 		return teamsList;
@@ -106,9 +114,9 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 		gm.setName(name);
 		gm.setPersonality(personality);
 		team.setGeneralManager(gm);
-		
+
 	}
-	
+
 	private void setHeadCoach(Team team, JSONObject listJsonObject) {
 		JSONObject headCoach = (JSONObject) listJsonObject.get(Attributes.HEADCOACH.getAttribute());
 		String name = (String) headCoach.get(Attributes.NAME.getAttribute());
@@ -120,9 +128,9 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 		team.setHeadCoach(coach);
 	}
 
-	private List<Player> parsePlayers(JSONObject teamsListJsonObject) {
+	private List<IPlayer> parsePlayers(JSONObject teamsListJsonObject) {
 		Player playerObj;
-		List<Player> playersList = new ArrayList<Player>();
+		List<IPlayer> playersList = new ArrayList<>();
 		JSONArray playersJsonArray = (JSONArray) teamsListJsonObject.get(Attributes.PLAYERS.getAttribute());
 		if (playersJsonArray == null) {
 			return playersList;

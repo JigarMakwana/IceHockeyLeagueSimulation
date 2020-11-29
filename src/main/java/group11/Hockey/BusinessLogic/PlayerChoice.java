@@ -3,21 +3,26 @@ package group11.Hockey.BusinessLogic;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
+/**
+ *
+ * @author Jatin Partap Rana
+ *
+ */
 public class PlayerChoice  extends StateMachineState {
 
 	ICommandLineInput commandLineInput;
-	League league;
+	ILeague league;
 	IDisplay display;
 	IValidations validation;
 	ILeagueDb leagueDb;
 	private static Logger logger = LogManager.getLogger(PlayerChoice.class);
 
-	public PlayerChoice(League league, ICommandLineInput commandLineInput, IDisplay display, IValidations validation,
+	public PlayerChoice(ILeague league, ICommandLineInput commandLineInput, IDisplay display, IValidations validation,
 			ILeagueDb leagueDb){
 		this.commandLineInput = commandLineInput;
 		this.league = league;

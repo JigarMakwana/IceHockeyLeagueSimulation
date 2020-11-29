@@ -16,33 +16,33 @@ public interface ILeague {
 
 	public List<? extends IPlayer> getFreeAgents();
 
-	public List<Conference> getConferences();
+	public List<IConference> getConferences();
 
-	public List<Player> getRetiredPlayers();
+	public List<IPlayer> getRetiredPlayers();
 
-	public void setRetiredPlayers(List<Player> players);
+	public void setRetiredPlayers(List<IPlayer> players);
 
 	public IGameplayConfig getGamePlayConfig();
 
 	public void setStartDate(String date);
 
-	public List<Team> getQualifiedTeams();
+	public List<ITeam> getQualifiedTeams();
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb);
 
-	public List<Coach> getCoaches();
+	public List<ICoach> getCoaches();
 
-	public List<GeneralManager> getGeneralManagers();
+	public List<IGeneralManager> getGeneralManagers();
 
 	public ITimeLine getTimeLine();
 
 	public void setTimeLine(ITimeLine timeLine);
 
-	public HashMap<String, HashMap<Team, Team>> getSchedule();
+	public HashMap<String, HashMap<ITeam, ITeam>> getSchedule();
 
-	public void setSchedule(HashMap<String, HashMap<Team, Team>> schedule);
+	public void setSchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule);
 
-	public void setQualifiedTeams(List<Team> qualifiedTeams);
+	public void setQualifiedTeams(List<ITeam> qualifiedTeams);
 
 	public int getGoalsInSeason();
 
@@ -60,7 +60,17 @@ public interface ILeague {
 
 	public void setGamesInSeason(int gamesInSeason);
 
-	List<Map<Team, Map<Team, List<Boolean>>>> getDraftTradeTracker();
+	List<Map<ITeam, Map<ITeam, List<Boolean>>>> getDraftTradeTracker();
 
-	void setDraftTradeTracker(Team offeringTeam, Team requestedTeam, int draftRound);
+	void setDraftTradeTracker(ITeam offeringTeam, ITeam requestedTeam, int draftRound);
+
+	public void setFreeAgents(List<Player> player);
+
+	public void setCoaches(List<ICoach> coach);
+
+	public void setGeneralManagers(List<IGeneralManager> generalManagers);
+
+	public void setConferences(List<IConference> confList);
+
+	public void setGamePlayConfig(IGameplayConfig gameConfig);
 }

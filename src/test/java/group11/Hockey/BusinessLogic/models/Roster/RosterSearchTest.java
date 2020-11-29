@@ -27,7 +27,7 @@ public class RosterSearchTest {
 
     @Test
     public void findWeakestPlayersTest() {
-        List<Player> weakestPlayerList = rosterSearch.findWeakestPlayers(leagueModel.getTeam3().getPlayers(), 2);
+        List<IPlayer> weakestPlayerList = rosterSearch.findWeakestPlayers(leagueModel.getTeam3().getPlayers(), 2);
         Assert.assertEquals(weakestPlayerList.size(), 2);
         Assert.assertEquals(weakestPlayerList.get(0).getPlayerName(), "Raj");
     }
@@ -48,13 +48,13 @@ public class RosterSearchTest {
     @Test
     public void findStrongestPlayersTest() {
         List<Integer> playerPositionFlag = new ArrayList<Integer>(Arrays.asList(1,0,1));
-        List<Player> strongestPlayerList = rosterSearch.findStrongestPlayers(leagueModel.getTeam3().getPlayers(), playerPositionFlag, 2);
+        List<IPlayer> strongestPlayerList = rosterSearch.findStrongestPlayers(leagueModel.getTeam3().getPlayers(), playerPositionFlag, 2);
         Assert.assertEquals(strongestPlayerList.get(0).getPlayerName(), "Jigar");
     }
 
     @Test
     public void findStrongestTradeTeamTest() {
-        Triplet<Team, List<Player>, Float> strongestTeam = rosterSearch.findStrongestTradeTeam(leagueModel.getTradingTeamsBuffer());
+        Triplet<ITeam, List<IPlayer>, Float> strongestTeam = rosterSearch.findStrongestTradeTeam(leagueModel.getTradingTeamsBuffer());
         Assert.assertEquals(strongestTeam.getFirst().getTeamName(), "Viena");
     }
 
@@ -66,7 +66,7 @@ public class RosterSearchTest {
 
     @Test
     public void sortPlayersByStrengthTest() {
-        List<Player> sortedPlayerList = rosterSearch.sortPlayersByStrength(leagueModel.getTeam3().getPlayers());
+        List<IPlayer> sortedPlayerList = rosterSearch.sortPlayersByStrength(leagueModel.getTeam3().getPlayers());
         Assert.assertEquals(sortedPlayerList.get(0).getPlayerName(), "Raj");
         Assert.assertEquals(sortedPlayerList.get(1).getPlayerName(), "Alex");
         Assert.assertEquals(sortedPlayerList.get(2).getPlayerName(), "Jatin");
@@ -75,31 +75,31 @@ public class RosterSearchTest {
 
     @Test
     public void getDefenseListTest() {
-        List<Player> defenseList = rosterSearch.getDefenseList(leagueModel.getTeam3().getPlayers());
+        List<IPlayer> defenseList = rosterSearch.getDefenseList(leagueModel.getTeam3().getPlayers());
         Assert.assertEquals(defenseList.size(), 2);
     }
 
     @Test
     public void getForwardListTest() {
-        List<Player> forwardList = rosterSearch.getForwardList(leagueModel.getTeam3().getPlayers());
+        List<IPlayer> forwardList = rosterSearch.getForwardList(leagueModel.getTeam3().getPlayers());
         Assert.assertEquals(forwardList.size(), 1);
     }
 
     @Test
     public void getGoalieListTest() {
-        List<Player> goalieList = rosterSearch.getGoalieList(leagueModel.getTeam3().getPlayers());
+        List<IPlayer> goalieList = rosterSearch.getGoalieList(leagueModel.getTeam3().getPlayers());
         Assert.assertEquals(goalieList.size(), 1);
     }
 
     @Test
     public void findStrongestPlayerByPositionTest() {
-        Player p = rosterSearch.findStrongestPlayerByPosition(leagueModel.getTeam5().getPlayers(), Positions.FORWARD);
+        IPlayer p = rosterSearch.findStrongestPlayerByPosition(leagueModel.getTeam5().getPlayers(), Positions.FORWARD);
         Assert.assertEquals(p.getPlayerName(), "Ishan");
     }
 
     @Test
     public void findWeakestPlayerByPositionTest() {
-        Player p = rosterSearch.findWeakestPlayerByPosition(leagueModel.getTeam5().getPlayers(), Positions.DEFENSE);
+        IPlayer p = rosterSearch.findWeakestPlayerByPosition(leagueModel.getTeam5().getPlayers(), Positions.DEFENSE);
         Assert.assertEquals(p.getPlayerName(), "East");
     }
 
@@ -117,7 +117,7 @@ public class RosterSearchTest {
 
     @Test
     public void findStrongestTeamTest() {
-        Team team = rosterSearch.findStrongestTeam(leagueModel.getTeamList());
+        ITeam team = rosterSearch.findStrongestTeam(leagueModel.getTeamList());
         Assert.assertEquals(team.getTeamName(), "Florida");
     }
 }

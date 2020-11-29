@@ -6,25 +6,22 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import group11.Hockey.BusinessLogic.Enums.Positions;
-import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public abstract class GenerateShiftsTemplate {
-	private List<Player> team;
-	List<Player> playersOnIce = new ArrayList<>();
-	List<Player>[] shifts = new List[appConfiguration.shifts];
-	private static Logger logger = LogManager.getLogger(GenerateShiftsTemplate.class);
+	private List<IPlayer> team;
+	List<IPlayer> playersOnIce = new ArrayList<>();
+	List<IPlayer>[] shifts = new ArrayList[appConfiguration.shifts];
 
-	public GenerateShiftsTemplate(List<Player> team) {
+	public GenerateShiftsTemplate(List<IPlayer> team) {
 		super();
 		this.team = team;
 	}
 
-	public List<Player>[] getShifts() {
-		logger.info("Entered getShifts()");
+
+
+	public List<IPlayer>[] getShifts() throws Exception{
 		for (int i = 0; i < appConfiguration.shifts; i++) {
 			shifts[i] = new ArrayList<>();
 		}
@@ -35,10 +32,9 @@ public abstract class GenerateShiftsTemplate {
 	}
 
 	public void generateShifts(int limtOfPlayers, String position) {
-		logger.info("Entered generateShifts()");
 		int shift = 0;
 		do {
-			for (Player player : team) {
+			for (IPlayer player : team) {
 				if (player.getPosition().equalsIgnoreCase(position)) {
 					playersOnIce.add(player);
 				}
@@ -54,5 +50,5 @@ public abstract class GenerateShiftsTemplate {
 		} while (shift < appConfiguration.shifts);
 	}
 
-	public abstract void generateGoalieShift(String position);
+	public abstract void generateGoalieShift(String position) throws Exception;
 }

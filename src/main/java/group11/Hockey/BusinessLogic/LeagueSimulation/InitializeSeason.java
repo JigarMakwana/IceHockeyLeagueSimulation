@@ -10,8 +10,8 @@ import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.TimeLine;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
@@ -65,7 +65,7 @@ public class InitializeSeason extends StateMachineState {
 		league.setStartDate(startDate);
 
 		ISchedule regularSeasonSchedule = new Schedule(league);
-		HashMap<String, HashMap<Team, Team>> schedule = null;
+		HashMap<String, HashMap<ITeam, ITeam>> schedule = null;
 
 		IParse parse = new Parse();
 		IDeadlines deadline = new Deadlines();

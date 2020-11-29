@@ -1,24 +1,22 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.BusinessLogic.models;
-
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Injuries;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
 public class InjuriesTest {
 
-	private static Injuries injuries;
+	private static IInjuries injuries;
 
 	@BeforeClass
 	public static void init() {
-		injuries = new Injuries((float) 1.1, 1, 100);
+		injuries = DefaultHockeyFactory.makeInjuries((float) 1.1, 1, 100);
 	}
 
 	@Test

@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * This class contains the business logic for the Conference model
  * 
- * @author jatinpartaprana
  *
  */
 public class Conference implements IConference {
@@ -17,7 +16,7 @@ public class Conference implements IConference {
 		this.conferenceName = conferenceName;
 		this.divisions = divisions;
 	}
-	
+
 	public Conference() {
 	}
 
@@ -48,27 +47,27 @@ public class Conference implements IConference {
 	public void setDivisions(List<Division> divisions) {
 		this.divisions = divisions;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Conference [conferenceName=" + conferenceName + ", divisions=" + divisions + "]";
 	}
-	
-	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferences) {
+
+	public boolean isConferenceNameValid(String conferenceName, List<IConference> conferences) {
 		boolean isConferanceNameValid = false;
-		for(Conference conference: conferences) {
-			if(conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
+		for (IConference conference : conferences) {
+			if (conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
 				isConferanceNameValid = true;
 				break;
 			}
 		}
 		return isConferanceNameValid;
 	}
-	
-	public Conference getConferencefromConferenceName(String conferenceName, List<Conference> conferences) {
-		Conference conference = null;
-		for(Conference conf: conferences) {
-			if(conf.getConferenceName().equalsIgnoreCase(conferenceName)) {
+
+	public IConference getConferencefromConferenceName(String conferenceName, List<IConference> conferences) {
+		IConference conference = null;
+		for (IConference conf : conferences) {
+			if (conf.getConferenceName().equalsIgnoreCase(conferenceName)) {
 				conference = conf;
 				break;
 			}

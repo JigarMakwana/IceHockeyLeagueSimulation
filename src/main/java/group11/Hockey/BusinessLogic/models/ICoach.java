@@ -13,4 +13,6 @@ public interface ICoach {
 	public float getChecking();
 
 	public float getSaving();
+
+	public void setName(String name);
 }

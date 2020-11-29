@@ -3,16 +3,17 @@
  */
 package group11.Hockey.BusinessLogic.Trading.TradingInterfaces;
 
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.Team;
+
 public interface ITradeCharter {
-    List<Player> getOfferedPlayerList();
-    List<Player> getRequestedPlayerList();
-    Team getOfferingTeam();
-    Team getRequestedTeam();
+    List<IPlayer> getOfferedPlayerList();
+    List<IPlayer> getRequestedPlayerList();
+    ITeam getOfferingTeam();
+    ITeam getRequestedTeam();
     int getDraftRoundIdx();
     boolean isCharterValid();
     boolean isDraftTradeCharter();

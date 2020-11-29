@@ -10,13 +10,13 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class ParseRootfreeAgents implements IParseRootElement {
 
 	@Override
-	public void parseRootElement(League leagueModelObj, JSONObject jsonObject) throws Exception {
+	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
 		List<Player> playersList = parseFreeAgent(jsonObject);
 		leagueModelObj.setFreeAgents(playersList);
 	}

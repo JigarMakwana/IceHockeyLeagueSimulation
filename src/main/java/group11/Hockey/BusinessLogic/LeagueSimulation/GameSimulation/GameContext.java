@@ -5,29 +5,24 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
 
 public class GameContext implements IGameContext {
-	private GameStrategy gameStrategy;
-	private static Logger logger = LogManager.getLogger(GameContext.class);
+	private IGameStrategy gameStrategy;
 
-	public GameContext(GameStrategy gameStrategy) {
+	public GameContext(IGameStrategy gameStrategy) {
 		super();
 		this.gameStrategy = gameStrategy;
 	}
 
-	public void executeStrategy(List<Player> shootingTeamPlayers, List<Player> defendingTeamPlayers,
+	public void executeStrategy(List<IPlayer> shootingTeamPlayers, List<IPlayer> defendingTeamPlayers,
 			ITeam defendingTeam, ITeam ShootingTeam, int penaltyPeriod) {
-		logger.info("Entered executeStrategy()");
 		gameStrategy.playGame(shootingTeamPlayers, defendingTeamPlayers, defendingTeam, ShootingTeam, penaltyPeriod);
 	}
 
-	public int getAveragePlayersStrength(List<Player> playersList, ITeam defendingTeam) {
-		logger.info("Entered getAveragePlayersStrength()");
+	public int getAveragePlayersStrength(List<IPlayer> playersList, ITeam defendingTeam) {
+
 		int averageStrength = gameStrategy.calculateAveragePlayersStrength(playersList, defendingTeam);
 		return averageStrength;
 	}

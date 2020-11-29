@@ -19,5 +19,8 @@ public class appConfiguration {
 	public static float reduceDefenceStrength = (float) 0.75;
 	public static int twoPeriodsTime = (int) (2 * shifts / 3);
 	public static int finalPeriodsTime = (int) (shifts / 3);
+	public static int numberOfShoots_high = 3;
+	public static int numberOfShoots_low = 2;
+	
 
 }

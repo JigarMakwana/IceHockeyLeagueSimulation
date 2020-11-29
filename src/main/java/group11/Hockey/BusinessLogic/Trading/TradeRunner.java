@@ -1,20 +1,20 @@
-/*
+/**
  * Author: Jigar Makwana B00842568
  */
 package group11.Hockey.BusinessLogic.Trading;
+
+import java.util.List;
 
 import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.*;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
-
-import java.util.List;
 
 public class TradeRunner extends StateMachineState implements ITradeRunner {
     private ILeague leagueObj;
@@ -40,7 +40,7 @@ public class TradeRunner extends StateMachineState implements ITradeRunner {
     @Override
     public void runTrading() {
         ITradeInitializer tradeInitializer = TradingFactory.makeTradeInitializer(leagueObj);
-        List<Team> eligibleTeamList = tradeInitializer.getEligibleTeams();
+        List<ITeam> eligibleTeamList = tradeInitializer.getEligibleTeams();
         ITradeConfig tradingConfig = tradeInitializer.getTradingConfig();
 
         for (int i = 0; eligibleTeamList.size() > 1; i = 0){
@@ -51,10 +51,10 @@ public class TradeRunner extends StateMachineState implements ITradeRunner {
                 ITradeResolver tradeResolver = TradingFactory.makeTradeResolver(leagueObj, tradeCharter, tradingConfig, commandLineInput, validation, display);
                 tradeResolver.resolveTrade();
 
-                ITradeSettler offeringTeamSettler = TradingFactory.makeTradeSettler(tradeCharter.getOfferingTeam(), (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display);
+                ITradeSettler offeringTeamSettler = TradingFactory.makeTradeSettler(tradeCharter.getOfferingTeam(), (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display);
                 offeringTeamSettler.settleTeam();
 
-                ITradeSettler requestedTeamSettler = TradingFactory.makeTradeSettler(tradeCharter.getRequestedTeam(), (List<Player>) leagueObj.getFreeAgents(), commandLineInput, validation, display);
+                ITradeSettler requestedTeamSettler = TradingFactory.makeTradeSettler(tradeCharter.getRequestedTeam(), (List<IPlayer>) leagueObj.getFreeAgents(), commandLineInput, validation, display);
                 requestedTeamSettler.settleTeam();
             }
             eligibleTeamList.remove(0);

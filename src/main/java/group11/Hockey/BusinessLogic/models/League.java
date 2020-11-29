@@ -13,21 +13,21 @@ import group11.Hockey.db.League.ILeagueDb;
  */
 public class League implements ILeague {
 	private String leagueName;
-	private List<Conference> conferences = new ArrayList<Conference>();
-	private List<Player> freeAgents = new ArrayList<Player>();
+	private List<IConference> conferences = new ArrayList<>();
+	private List<Player> freeAgents = new ArrayList<>();
 	private IGameplayConfig gamePlayConfig = new GameplayConfig();
-	private List<Coach> coaches = new ArrayList<Coach>();
-	private List<GeneralManager> generalManagers;
-	private List<Player> retiredPlayers = new ArrayList<Player>();
-	private List<Team> qualifiedTeams = new ArrayList<Team>();
+	private List<ICoach> coaches = new ArrayList<>();
+	private List<IGeneralManager> generalManagers;
+	private List<IPlayer> retiredPlayers = new ArrayList<>();
+	private List<ITeam> qualifiedTeams = new ArrayList<>();
 	private String startDate;
 	private ITimeLine timeLine;
-	private HashMap<String, HashMap<Team, Team>> schedule;
+	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
 	private int goalsInSeason;
 	private int penaltiesInSeason;
 	private int savesInSeason;
 	private int gamesInSeason;
-	private List<Map<Team, Map<Team, List<Boolean>>>> draftTradeTracker;
+	private List<Map<ITeam, Map<ITeam, List<Boolean>>>> draftTradeTracker;
 
 	public int getGoalsInSeason() {
 		return goalsInSeason;
@@ -61,8 +61,8 @@ public class League implements ILeague {
 		this.gamesInSeason = gamesInSeason;
 	}
 
-	public League(String leagueName, List<Conference> conferences, List<? extends IPlayer> freeAgents,
-			GameplayConfig gamePlayConfig, List<Coach> coaches, List<GeneralManager> generalManagers) {
+	public League(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
+			IGameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers) {
 		super();
 		this.leagueName = leagueName;
 		this.conferences = conferences;
@@ -84,19 +84,19 @@ public class League implements ILeague {
 		this.timeLine = timeLine;
 	}
 
-	public HashMap<String, HashMap<Team, Team>> getSchedule() {
+	public HashMap<String, HashMap<ITeam, ITeam>> getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(HashMap<String, HashMap<Team, Team>> schedule) {
+	public void setSchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule) {
 		this.schedule = schedule;
 	}
 
-	public List<Team> getQualifiedTeams() {
+	public List<ITeam> getQualifiedTeams() {
 		return qualifiedTeams;
 	}
 
-	public void setQualifiedTeams(List<Team> qualifiedTeams) {
+	public void setQualifiedTeams(List<ITeam> qualifiedTeams) {
 		this.qualifiedTeams = qualifiedTeams;
 	}
 
@@ -117,14 +117,14 @@ public class League implements ILeague {
 	/**
 	 * @return the conferences
 	 */
-	public List<Conference> getConferences() {
+	public List<IConference> getConferences() {
 		return conferences;
 	}
 
 	/**
 	 * @param conferences the conferences to set
 	 */
-	public void setConferences(List<Conference> conferences) {
+	public void setConferences(List<IConference> conferences) {
 		this.conferences = conferences;
 	}
 
@@ -135,10 +135,8 @@ public class League implements ILeague {
 		if (isFreeAgentsNotNull()) {
 			Collections.sort(freeAgents);
 		}
-
 		return freeAgents;
 	}
-
 
 	/**
 	 * @param freeAgents the freeAgents to set
@@ -151,31 +149,31 @@ public class League implements ILeague {
 		return gamePlayConfig;
 	}
 
-	public void setGamePlayConfig(GameplayConfig gamePlayConfig) {
+	public void setGamePlayConfig(IGameplayConfig gamePlayConfig) {
 		this.gamePlayConfig = gamePlayConfig;
 	}
 
-	public List<Coach> getCoaches() {
+	public List<ICoach> getCoaches() {
 		return coaches;
 	}
 
-	public void setCoaches(List<Coach> coaches) {
+	public void setCoaches(List<ICoach> coaches) {
 		this.coaches = coaches;
 	}
 
-	public List<GeneralManager> getGeneralManagers() {
+	public List<IGeneralManager> getGeneralManagers() {
 		return generalManagers;
 	}
 
-	public void setGeneralManagers(List<GeneralManager> generalManagers) {
+	public void setGeneralManagers(List<IGeneralManager> generalManagers) {
 		this.generalManagers = generalManagers;
 	}
 
-	public List<Player> getRetiredPlayers() {
+	public List<IPlayer> getRetiredPlayers() {
 		return retiredPlayers;
 	}
 
-	public void setRetiredPlayers(List<Player> retiredPlayers) {
+	public void setRetiredPlayers(List<IPlayer> retiredPlayers) {
 		this.retiredPlayers = retiredPlayers;
 	}
 
@@ -199,11 +197,9 @@ public class League implements ILeague {
 
 	public boolean insertLeagueObject(ILeague league, ILeagueDb leagueDb) {
 		boolean leagueObjectInserted = false;
-		try {
-			leagueObjectInserted = leagueDb.insertLeagueInDb(league);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+
+		leagueObjectInserted = leagueDb.insertLeagueInDb(league);
+
 		return leagueObjectInserted;
 
 	}
@@ -215,21 +211,27 @@ public class League implements ILeague {
 
 	}
 
-	public List<Map<Team, Map<Team, List<Boolean>>>> getDraftTradeTracker() {
-		return draftTradeTracker;
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public List<Map<ITeam, Map<ITeam, List<Boolean>>>> getDraftTradeTracker() {
+		return this.draftTradeTracker;
 	}
 
-	public void setDraftTradeTracker(Team offeringTeam, Team requestedTeam, int draftRound) {
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	public void setDraftTradeTracker(ITeam offeringTeam, ITeam requestedTeam, int draftRound) {
 		if(null == draftTradeTracker){
 			addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
 		} else {
-			for (Map<Team, Map<Team, List<Boolean>>> map : draftTradeTracker) {
-				for(Team key: map.keySet()){
+			for (Map<ITeam, Map<ITeam, List<Boolean>>> map : draftTradeTracker) {
+				for(ITeam key: map.keySet()){
 					if (offeringTeam.equals(key)) {
-						for (Map<Team, List<Boolean>> innerMap : map.values()) {
-							for(Team key2: map.keySet()){
+						for (Map<ITeam, List<Boolean>> innerMap : map.values()) {
+							for(ITeam key2: map.keySet()){
 								if (requestedTeam.equals(key2)) {
-									Map.Entry<Team, List<Boolean>> entry = innerMap.entrySet().iterator().next();
+									Map.Entry<ITeam, List<Boolean>> entry = innerMap.entrySet().iterator().next();
 									List<Boolean> roundTracker = entry.getValue();
 									roundTracker.set(draftRound,true);
 									break;
@@ -244,15 +246,22 @@ public class League implements ILeague {
 		}
 	}
 
-	private Map<Team, List<Boolean>> addToInnerMap(Team requestedTeam, int draftRound){
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	private Map<ITeam, List<Boolean>> addToInnerMap(ITeam requestedTeam, int draftRound){
 		List<Boolean> roundTracker = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
 		roundTracker.set(draftRound,true);
-		Map<Team, List<Boolean>> tradeDetail = new HashMap<>();
+		Map<ITeam, List<Boolean>> tradeDetail = new HashMap<>();
 		tradeDetail.put(requestedTeam,roundTracker);
 		return tradeDetail;
 	}
-	private void addToOuterMap(Team offeringTeam, Map<Team, List<Boolean>> tradeDetail){
-		Map<Team, Map<Team, List<Boolean>>> entry = new HashMap<>();
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	private void addToOuterMap(ITeam offeringTeam, Map<ITeam, List<Boolean>> tradeDetail){
+		Map<ITeam, Map<ITeam, List<Boolean>>> entry = new HashMap<>();
 		entry.put(offeringTeam,tradeDetail);
 		draftTradeTracker.add(entry);
 	}

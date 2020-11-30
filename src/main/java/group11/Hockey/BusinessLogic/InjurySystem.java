@@ -119,7 +119,7 @@ public class InjurySystem implements IInjurySystem {
 		logger.debug("Entered isUnInjuredPlayerAvailable()");
 		int minUnInjuredPlayerRequired = 1;
 		List<IPlayer> filteredPosition = roster.getInActiveRoster().stream()
-				.filter(player -> player.getPosition().equals(position)).collect(Collectors.toList());
+				.filter(player -> player.getPosition().equalsIgnoreCase(position.toString())).collect(Collectors.toList());
 
 		List<IPlayer> filteredUnInjured = filteredPosition.stream().filter(player -> player.isInjured() == false)
 				.collect(Collectors.toList());

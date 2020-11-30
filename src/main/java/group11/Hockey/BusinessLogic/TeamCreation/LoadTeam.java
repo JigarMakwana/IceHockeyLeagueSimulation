@@ -12,7 +12,6 @@ import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
@@ -82,42 +81,5 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 
 		return league;
 	}
-
-
-//	@Override
-//	public League loadLeagueWithTeamName() throws Exception {
-//		display.showMessageOnConsole("***Load League***\n");
-//		String teamName;
-//
-//		display.showMessageOnConsole("Enter Team Name: ");
-//		teamName = userInputMode.getValueFromUser();
-//		if (validations.isStrBlank(teamName)) {
-//			throw new Exception("Not a valid Team name");
-//		}
-//
-//		Team teamObj = new Team();
-//
-//		League league = teamObj.loadLeagueWithTeamName(teamName, teamDb);
-//		if (league.getLeagueName() == null || league.getLeagueName() == "") {
-//			throw new Exception("Team name does not exist in the system");
-//		}
-//
-//		List<Conference> conferenceList = league.getConferences();
-//		for (Conference conference : conferenceList) {
-//			List<Division> divisionList = conference.getDivisions();
-//			for (Division division : divisionList) {
-//				List<Team> teamList = division.getTeams();
-//				for (Team team : teamList) {
-//					if (team.getTeamName().equalsIgnoreCase(teamName)) {
-//						display.printTeamDetails(league.getLeagueName(), conference.getConferenceName(),
-//								division.getDivisionName(), team.getTeamName(), team.getGeneralManager(),
-//								team.getHeadCoach());
-//					}
-//				}
-//			}
-//		}
-//
-//		return league;
-//	}
 
 }

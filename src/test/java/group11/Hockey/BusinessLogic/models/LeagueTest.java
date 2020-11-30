@@ -45,6 +45,10 @@ public class LeagueTest {
 				new Trading(0, 0, 0, 0, gmTbale));
 		ILeague league = new League("DHL", conferenceList, Arrays.asList(firstFreeAgent, secondFreeAgent), gameplayConf,
 				coachList, generalManagerList);
+		List<IGeneralManager> generalManagers = new ArrayList<>();
+		IGeneralManager gm = DefaultHockeyFactory.makeGeneralManager("Manager", "normal");
+		generalManagers.add(gm);
+		league.setGeneralManagers(generalManagers);
 		return league;
 
 	}

@@ -126,7 +126,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 
 	}
 
-	private void populateExtraPlayerList(List<IPlayer> extraPlayers, List<IPlayer> playerList, int extraPlayersCount) {
+	public void populateExtraPlayerList(List<IPlayer> extraPlayers, List<IPlayer> playerList, int extraPlayersCount) {
 		for (int i = 0; i < extraPlayersCount; i++) {
 			extraPlayers.add(playerList.get(i));
 		}

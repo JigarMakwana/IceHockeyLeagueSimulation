@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic.TeamCreation;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

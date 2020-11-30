@@ -45,7 +45,7 @@ public class TradeGenerator implements ITradeGenerator {
     @Override
     public ITradeCharter generateTradeOffer(List<ITeam> eligibleTeamList) {
         logger.debug("Entered generateTradeOffer()");
-        logger.info("\nGenerating Trade for AI Team " + offeringTeam.getTeamName());
+        logger.debug("\nGenerating Trade for AI Team " + offeringTeam.getTeamName());
         ITeam requestedTeam = rosterSearch.findStrongestTeam(eligibleTeamList);
         if(requestedTeam == offeringTeam) {
         } else {
@@ -56,15 +56,15 @@ public class TradeGenerator implements ITradeGenerator {
             if(rand.generateRandomNo() > PlayerNoModifier.DRAFTTRADE_MODIFIER.getNumVal() &&
                     entry.getKey() > offeringTeam.getTeamStrength()){
                 display.displayTradeStatistics(offeringTeam, offeredPlayerList, requestedTeam, entry.getValue());
-                logger.info("Found the "+ requestedTeam +" team to trade. Creating Trade Charter...");
+                logger.debug("Found the "+ requestedTeam +" team to trade. Creating Trade Charter...");
                 return TradingFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue(), -1);
             }
             else if(offeringTeam.getTeamStrength() < rosterSearch.averageTeamStrength(eligibleTeamList)){
-                logger.info("Could not generate Normal Trade. Generating Draft Pick Trades...");
+                logger.debug("Could not generate Normal Trade. Generating Draft Pick Trades...");
                 return tradeDraftPicks(eligibleTeamList);
             }
         }
-        logger.info("Could not generate any trade. Returning null Trade Charter.");
+        logger.debug("Could not generate any trade. Returning null Trade Charter.");
         return TradingFactory.makeTradeCharter(null,null,null, null, -1);
     }
 

@@ -7,9 +7,9 @@ import java.util.Random;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.IPlayer;
-import group11.Hockey.BusinessLogic.models.Player;
 
 /**
  *
@@ -24,7 +24,7 @@ public class GeneratingPlayers implements IGeneratingPlayers {
 	private static Logger logger = LogManager.getLogger(GeneratingPlayers.class);
 
 	public List<IPlayer> generatePlayers(int numbersOfPlayersToGenerate) {
-		logger.debug("Entered generatePlayers()");
+		logger.info("Entered generatePlayers()");
 		List<IPlayer> listOfPlayers = new ArrayList<>();
 		try {
 			String player = PlayerEnum.player.toString();
@@ -59,7 +59,7 @@ public class GeneratingPlayers implements IGeneratingPlayers {
 
 	public IPlayer populatePlayer(String playerName) {
 		logger.debug("Entered populatePlayer()");
-		IPlayer player = new Player();
+		IPlayer player = DefaultHockeyFactory.makePlayer();
 		player.setPlayerName(playerName);
 		player.setBirthDay(11);
 		player.setBirthMonth(10);

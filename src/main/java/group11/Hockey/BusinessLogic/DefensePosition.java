@@ -23,7 +23,7 @@ public class DefensePosition implements IPlayerStrengthStrategy {
 		int reduceStrengthBy = BusinessConstants.Reduce_strength_by.getIntValue();
 		float playerStrength = player.getSkating() + player.getChecking() + (player.getShooting() / reduceStrengthBy);
 		if (player.isInjured()) {
-			logger.info("Player strength is reduced by " + reduceStrengthBy);
+			logger.debug("Player strength is reduced by " + reduceStrengthBy);
 			playerStrength = playerStrength / reduceStrengthBy;
 		}
 		return playerStrength;

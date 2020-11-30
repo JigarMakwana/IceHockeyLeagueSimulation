@@ -26,6 +26,9 @@ public abstract class RetirePlayer extends StateMachineState {
 		int likelihoodOfRetirement = getLikelihoodOfRetirement(league, age);
 		boolean isRetired = RandomNoFactory.makeRandomIntGenerator()
 				.generateRandomNo(likelihoodOfRetirement) == likelihoodOfRetirement - 1;
+		if(isRetired) {
+			System.out.println();
+		}
 		return isRetired;
 	}
 
@@ -43,7 +46,7 @@ public abstract class RetirePlayer extends StateMachineState {
 					* BusinessConstants.Likelihood_Of_Retirement_Low.getIntValue();
 		} else if (averageRetirementAge < playerAge) {
 			likelihoodOfRetirement = (int) (maximumAge - playerAge)
-					* BusinessConstants.Likelihood_Of_Retirement_Low.getIntValue();
+					* BusinessConstants.Likelihood_Of_Retirement_High.getIntValue();
 		}
 		return likelihoodOfRetirement;
 	}

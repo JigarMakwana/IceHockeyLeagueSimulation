@@ -14,7 +14,11 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.InputOutput.IDisplay;
-
+/**
+ * 
+ * @author jatinpartaprana
+ *
+ */
 public class TrainingPlayerTest {
 	ILeague league;
 	TrainingPlayer traingPlayer;

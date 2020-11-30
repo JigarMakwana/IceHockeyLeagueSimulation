@@ -2,7 +2,11 @@ package group11.Hockey.BusinessLogic.Training;
 
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
-
+/**
+ * 
+ * @author jatinpartaprana
+ *
+ */
 public interface ITrainingPlayer {
 	public boolean comapreCoachStat(float coachStatValue) ;
 	public void changePlayerSkatingSkill(IPlayer player, float coachSkatingStatValue, ILeague league);

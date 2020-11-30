@@ -49,9 +49,6 @@ public class AdvanceTime extends StateMachineState implements IAdvanceTime {
 		Date firstRoundEnd = timeLine.getFirstRoundEnd();
 		Date secondRoundEnd = timeLine.getSecondRoundEnd();
 		Date semiFinalsEnd = timeLine.getSemiFinalsEnd();
-		if(display == null) {
-			display = DefaultHockeyFactory.makeDisplay();
-		}
 
 		currentDate = advance.getAdvanceDate(currentDate, 1);
 		timeLine.setCurrentDate(currentDate);

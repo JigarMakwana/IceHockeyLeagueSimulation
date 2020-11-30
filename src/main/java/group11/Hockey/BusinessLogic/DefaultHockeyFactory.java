@@ -2,6 +2,7 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
@@ -49,35 +50,6 @@ import group11.Hockey.BusinessLogic.TeamCreation.CreateTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.LoadTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.PlayerChoice;
 import group11.Hockey.BusinessLogic.Training.TrainingPlayer;
-import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.Aging;
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GameResolver;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
-import group11.Hockey.BusinessLogic.models.GeneralManager;
-import group11.Hockey.BusinessLogic.models.IAdvance;
-import group11.Hockey.BusinessLogic.models.IAging;
-import group11.Hockey.BusinessLogic.models.ICoach;
-import group11.Hockey.BusinessLogic.models.IConference;
-import group11.Hockey.BusinessLogic.models.IDivision;
-import group11.Hockey.BusinessLogic.models.IGameResolver;
-import group11.Hockey.BusinessLogic.models.IGeneralManager;
-import group11.Hockey.BusinessLogic.models.IInjuries;
-import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.IPlayer;
-import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.ITrading;
-import group11.Hockey.BusinessLogic.models.ITraining;
-import group11.Hockey.BusinessLogic.models.IgmTable;
-import group11.Hockey.BusinessLogic.models.Injuries;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
-import group11.Hockey.BusinessLogic.models.gmTable;
 import group11.Hockey.BusinessLogic.models.Roster.Roster;
 import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
@@ -104,8 +76,17 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Team();
 	}
 
+	public static ITeam makeTeam(String teamName, IGeneralManager generalManager, ICoach headCoach, List<IPlayer> players){
+		return new Team(teamName, generalManager, headCoach, players);
+	}
+
 	public static League makeLeague() {
 		return new League();
+	}
+
+	public static ILeague makeLeague(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
+									 IGameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers){
+		return new League(leagueName,  conferences,  freeAgents, gamePlayConfig,  coaches, generalManagers);
 	}
 
 	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb,
@@ -115,6 +96,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static IDivision makeDivision() {
 		return new Division();
+	}
+
+	public static IDivision makeDivision(String division, List<ITeam> teamList) {
+		return new Division(division, teamList);
 	}
 
 	public static IConference makeConference() {
@@ -296,6 +281,11 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age);
 	}
 
+	public static IPlayer makePlayer(float skating, float shooting, float checking, float saving, String playerName,
+									 String position, boolean captain, boolean isFreeAgent, float age, boolean isActive) {
+		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age, isActive);
+	}
+
 	public static IInjurySystem makeInjurySystem(ILeague league) {
 		return new InjurySystem(league);
 	}
@@ -320,7 +310,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Coach(name, coachDb);
 	}
 
-	public static IConference makeConference(String name, List<Division> divisions) {
+	public static IConference makeConference(String name, List<IDivision> divisions) {
 		return new Conference(name, divisions);
 	}
 

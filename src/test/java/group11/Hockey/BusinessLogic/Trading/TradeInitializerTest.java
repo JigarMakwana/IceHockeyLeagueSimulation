@@ -7,7 +7,7 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeInitializer;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import group11.Hockey.BusinessLogic.models.ITeam;
 
 public class TradeInitializerTest {
     private TradingModelMock leagueModel;
-    private League leagueObj;
+    private ILeague leagueObj;
     private ITradeInitializer aiTradingObj;
 
     @Before

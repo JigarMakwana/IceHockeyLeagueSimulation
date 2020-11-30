@@ -1,9 +1,12 @@
 package group11.Hockey;
 
+import java.lang.Thread.UncaughtExceptionHandler;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.IGlobalExceptionHandler;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
@@ -14,6 +17,10 @@ public class App {
 	private static Logger logger = LogManager.getLogger(App.class);
 	public static void main(String[] args) {
 		logger.debug("Entered App.java");
+		
+		IGlobalExceptionHandler globalExceptionHandler = DefaultHockeyFactory.makeGlobalExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler((UncaughtExceptionHandler) globalExceptionHandler);
+        
 		ILeagueDb leagueDb = DefaultHockeyFactory.makeLeagueSerialisation();
 		ICommandLineInput commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
 		IDisplay display = DefaultHockeyFactory.makeDisplay();

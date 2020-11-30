@@ -458,4 +458,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static ICheckAndSimulateTodaySchedule makeCheckAndSimulateTodaySchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule, ILeague league) {
 		return new CheckAndSimulateTodaySchedule(schedule, league);
 	}
+
+	public static IGlobalExceptionHandler makeGlobalExceptionHandler() {
+		return new GlobalExceptionHandler();
+	}
 }

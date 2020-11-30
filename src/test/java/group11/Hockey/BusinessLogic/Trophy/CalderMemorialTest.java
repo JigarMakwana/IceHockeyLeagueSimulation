@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.Trophy;
 
 import java.util.List;
@@ -5,8 +6,8 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.Assert;
 
-import group11.Hockey.SimulationLeagueModelMock;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.LeagueSimulation.SimulationLeagueModelMock;
 import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;

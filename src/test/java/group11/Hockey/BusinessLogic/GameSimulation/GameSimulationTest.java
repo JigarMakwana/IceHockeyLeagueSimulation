@@ -1,11 +1,12 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
+package group11.Hockey.BusinessLogic.GameSimulation;
 
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;

@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
@@ -78,11 +79,11 @@ public class Schedule implements ISchedule {
 				team1InConCount, team1OutConCount, totalGames = 0, team2DivCount, team2InConCount, team2OutConCount,
 				totalDivTeams, totalInConTeams, totalOutConTeams, team2TotalCount;
 		String date = startDate, time = "00:00:00";
-		IParse parse = new Parse();
+		IParse parse = DefaultHockeyFactory.makeParse();
 		Date dateTime = parse.stringToDate(date);
-		IDeadlines deadline = new Deadlines();
+		IDeadlines deadline = DefaultHockeyFactory.makeDeadlines();
 		Date endDateTime = deadline.getRegularSeasonDeadline(startDate);
-		IAdvance advance = new Advance();
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 		String regularSeasonStartDate = advance.getAdvanceDate(date, 1);
 		for (int i = 0; i < totalTeams; i++) {
 			t1 = teamName.get(i);

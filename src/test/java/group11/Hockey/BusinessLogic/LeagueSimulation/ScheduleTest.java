@@ -1,11 +1,14 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.HashMap;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Schedule;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Team;
 
@@ -13,13 +16,17 @@ public class ScheduleTest {
 
 	@Test
 	public void getSeasonScheduleTest() {
-//		SimulationLeagueModelMock leagueModel = new SimulationLeagueModelMock();
-//		League league = leagueModel.getLeagueInfo();
-//
-//		Schedule regularSeasonSchedule = new Schedule(league);
-//		HashMap<String, HashMap<Team, Team>> schedule = null;
-//		schedule = regularSeasonSchedule.getSeasonSchedule();
-//		Assert.assertEquals(1312, schedule.size());
+		SimulationLeagueModelMock leagueModel = new SimulationLeagueModelMock();
+		League league = leagueModel.getLeagueInfo();
+		
+		league.setStartDate("29/10/2020");
+		ITimeLine timeline=DefaultHockeyFactory.makeTimeLine();
+		timeline.setStartDate("29/10/2020");
+		league.setTimeLine(timeline);
+
+		ISchedule regularSeasonSchedule = DefaultHockeyFactory.makeSchedule(league);
+		HashMap<String, HashMap<ITeam, ITeam>> schedule = regularSeasonSchedule.getSeasonSchedule();
+		Assert.assertEquals(1312, schedule.size());
 	}
 
 }

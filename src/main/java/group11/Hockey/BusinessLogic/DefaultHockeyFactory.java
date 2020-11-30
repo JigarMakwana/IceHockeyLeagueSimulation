@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import group11.Hockey.BusinessLogic.Aging.AgePlayer;
+import group11.Hockey.BusinessLogic.Aging.IAgePlayer;
+import group11.Hockey.BusinessLogic.Aging.RetirePlayer;
 import group11.Hockey.BusinessLogic.Drafting.DraftPlayer;
 import group11.Hockey.BusinessLogic.Drafting.GeneratingPlayers;
 import group11.Hockey.BusinessLogic.Drafting.IGeneratingPlayers;
@@ -301,6 +303,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static StateMachineState makeAgePlayer(ILeague league, int days, ILeagueDb leagueDb, IDisplay display) {
 		return new AgePlayer(league, days, leagueDb, display);
+	}
+
+	public static RetirePlayer makeAgePlayer() {
+		return new AgePlayer();
 	}
 
 	public static IPlayerStrengthStrategy makeDefensePosition(IPlayer player) {

@@ -1,5 +1,6 @@
-/*
+/**
  * Author: Jigar Makwana B00842568
+ * Enum used in Draft Pick Trading
  */
 package group11.Hockey.BusinessLogic.Enums;
 

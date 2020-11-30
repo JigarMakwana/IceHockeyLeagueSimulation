@@ -1248,7 +1248,8 @@
   ],
   "generalManagers": [
     {
-      "name": "General Manager 1"
+      "name": "General Manager 1",
+      "personality": "normal"
     }
   ],
   "retiredPlayers": [
@@ -1561,5 +1562,6 @@
   "goalsInSeason": 0,
   "penaltiesInSeason": 0,
   "savesInSeason": 0,
-  "gamesInSeason": 0
+  "gamesInSeason": 0,
+  "draftTradeTracker": []
 }

@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.IRandomFloatGenerator;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomFloatGenerator;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.Enums.PlayerNoModifier;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeGenerator;
-import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;

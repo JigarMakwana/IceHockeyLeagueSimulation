@@ -5,7 +5,7 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

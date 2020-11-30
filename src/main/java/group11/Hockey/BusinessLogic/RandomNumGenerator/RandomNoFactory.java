@@ -1,4 +1,7 @@
-package group11.Hockey.BusinessLogic.Trading.RandomNumGenerator;
+/**
+ * Author: Jigar Makwana B00842568
+ */
+package group11.Hockey.BusinessLogic.RandomNumGenerator;
 
 public class RandomNoFactory {
     public RandomNoFactory() {

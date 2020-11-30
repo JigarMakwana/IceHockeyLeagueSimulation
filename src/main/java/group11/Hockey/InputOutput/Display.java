@@ -90,7 +90,7 @@ public class Display implements IDisplay {
 	 * @author  Jigar Makwana B00842568
 	 */
 	@Override
-	public  void displayTradeStatistics(ITeam offeringTeamName, List<IPlayer> offeredPlayerList,
+		public  void displayTradeStatistics(ITeam offeringTeamName, List<IPlayer> offeredPlayerList,
 										ITeam requestedTeamName, List<IPlayer> requestedPlayerList) {
 		System.out.println("\n****** Trade Statistics ******");
 		System.out.println("\nTeam " + offeringTeamName.getTeamName() + " is offering the trade to " + requestedTeamName.getTeamName());

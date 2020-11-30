@@ -145,8 +145,8 @@ public class UserInputCheck implements IUserInputCheck {
 
 	/**
 	 * The below method takes and validates the trade related input provided by User
-	 * 1. User gives input to respond the trade offered by AI
-	 * 
+	 * User gives input to respond the trade offered by AI
+	 *
 	 * @author Jigar Makwana B00842568
 	 */
 
@@ -177,9 +177,9 @@ public class UserInputCheck implements IUserInputCheck {
 	}
 
 	/**
-	 * The below method takes and validates the trade related User Inputs when 1.
+	 * The below method takes and validates the trade related User Inputs when
 	 * User gives input to select players to add or drop to/from a team
-	 * 
+	 *
 	 * @author Jigar Makwana B00842568
 	 */
 

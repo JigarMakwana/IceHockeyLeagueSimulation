@@ -16,7 +16,11 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.LeagueTest;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.InputOutput.IDisplay;
-
+/**
+ * 
+ * @author Jatinpartaprana and Jigar
+ *
+ */
 public class ValidationsTest {
 	ILeague league;
 	IDisplay display = DefaultHockeyFactory.makeDisplay();

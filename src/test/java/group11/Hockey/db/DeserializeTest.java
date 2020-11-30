@@ -6,7 +6,11 @@ import org.junit.Test;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
-
+/**
+ * 
+ * @author jatinpartaprana
+ *
+ */
 public class DeserializeTest {
 
 	

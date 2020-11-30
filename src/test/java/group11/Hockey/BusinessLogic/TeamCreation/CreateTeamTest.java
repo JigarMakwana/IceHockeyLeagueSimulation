@@ -20,7 +20,11 @@ import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
-
+/**
+ * 
+ * @author jatinpartaprana
+ *
+ */
 public class CreateTeamTest {
 
 	String leagueName = "DLU";

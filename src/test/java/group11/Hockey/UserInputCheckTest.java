@@ -14,7 +14,11 @@ import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
-
+/**
+ * 
+ * @author jatinpartaprana and Jigar
+ *
+ */
 public class UserInputCheckTest {
 
 	String conferenceName = "Eastern Conference";

@@ -3,17 +3,15 @@ package group11.Hockey.BusinessLogic.Training;
 import java.util.Date;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.Trading.TradingFactory;
-import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
-import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
+import group11.Hockey.BusinessLogic.Trading.TradingFactory;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
@@ -22,6 +20,7 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
+import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 /**
@@ -86,7 +85,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			}
 		}
 
-		ICheckAndSimulateTodaySchedule simulateToday = new CheckAndSimulateTodaySchedule(league.getSchedule(), league);
+		ICheckAndSimulateTodaySchedule simulateToday = DefaultHockeyFactory.makeCheckAndSimulateTodaySchedule(league.getSchedule(), league);
 		simulateToday.CheckAndSimulateToday(currentDate);
 
 

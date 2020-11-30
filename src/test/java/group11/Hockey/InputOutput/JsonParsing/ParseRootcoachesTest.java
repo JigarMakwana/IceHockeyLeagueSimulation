@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.InputOutput.JsonParsing;
 
 import java.io.FileNotFoundException;
@@ -21,7 +24,7 @@ public class ParseRootcoachesTest {
 
 	@BeforeClass
 	public static void init() throws FileNotFoundException, IOException, ParseException {
-		ParseJsonForTestMock parseJsonObj = new ParseJsonForTestMock();
+		IParseJsonForTestMock parseJsonObj = DefaultParseTestFactory.makeParseJsonForTestMock();
 		jsonObject = parseJsonObj.parseJson();
 	}
 

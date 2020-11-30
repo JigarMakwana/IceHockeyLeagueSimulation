@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Player;
 
 public class ActiveDefencePlayer implements IGameStrategy {
 	private static Logger logger = LogManager.getLogger(ActiveDefencePlayer.class);

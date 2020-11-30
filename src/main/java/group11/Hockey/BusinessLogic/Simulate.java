@@ -17,15 +17,8 @@ public class Simulate extends StateMachineState {
 	private ICommandLineInput commandLineInput;
 	private IValidations validation;
 
-	public Simulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
-		super();
-		this.league = league;
-		this.seasons = seasons;
-		this.leagueDb = leagueDb;
-		this.display = display;
-	}
-
-	public Simulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+	public Simulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display,
+			ICommandLineInput commandLineInput, IValidations validation) {
 		super();
 		this.display = display;
 		this.commandLineInput = commandLineInput;
@@ -38,7 +31,8 @@ public class Simulate extends StateMachineState {
 	@Override
 	public StateMachineState startState() {
 		while (seasons > 0) {
-			StateMachineState currentState = DefaultHockeyFactory.makeInitializeSeason(league, leagueDb, display, commandLineInput, validation);
+			StateMachineState currentState = DefaultHockeyFactory.makeInitializeSeason(league, leagueDb, display,
+					commandLineInput, validation);
 			do {
 				currentState = currentState.startState();
 			} while (currentState.ShouldContinue());

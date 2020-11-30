@@ -15,7 +15,6 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
-import group11.Hockey.BusinessLogic.models.Player;
 
 public class ForwardPlayerActiveTest {
 

@@ -5,9 +5,9 @@ package group11.Hockey.BusinessLogic.Trading;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.AgePlayer;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
+import group11.Hockey.BusinessLogic.Aging.AgePlayer;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.*;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;

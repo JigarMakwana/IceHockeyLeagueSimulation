@@ -23,6 +23,10 @@ import org.json.simple.parser.JSONParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import group11.Hockey.BusinessLogic.Aging.AgePlayer;
+import group11.Hockey.BusinessLogic.Drafting.DraftPlayer;
+import group11.Hockey.BusinessLogic.Drafting.GeneratingPlayers;
+import group11.Hockey.BusinessLogic.Drafting.IGeneratingPlayers;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
@@ -41,6 +45,10 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShif
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
+import group11.Hockey.BusinessLogic.TeamCreation.CreateTeam;
+import group11.Hockey.BusinessLogic.TeamCreation.LoadTeam;
+import group11.Hockey.BusinessLogic.TeamCreation.PlayerChoice;
+import group11.Hockey.BusinessLogic.Training.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.Coach;
@@ -294,10 +302,6 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static IPlayerStrengthContext makePlayerStrengthContext(IPlayerStrengthStrategy currentContext) {
 		return new PlayerStrengthContext(currentContext);
-	}
-
-	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
-		return new Simulate(league, seasons, leagueDb, display);
 	}
 
 	public static IGameSimulation makeGameSimulation(ILeague league, ITeam team1, ITeam team2) {

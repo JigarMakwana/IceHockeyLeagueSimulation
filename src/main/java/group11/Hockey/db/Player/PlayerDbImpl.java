@@ -5,14 +5,19 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.db.Constants;
 import group11.Hockey.db.DefaultDatabaseFactory;
 import group11.Hockey.db.IProcedureCallDb;
 import group11.Hockey.db.ProcedureCallDb;
+import group11.Hockey.db.Manager.ManagerDb;
 
 public class PlayerDbImpl implements IPlayerDb {
+	private static Logger logger = LogManager.getLogger(PlayerDbImpl.class);
 
 	@Override
 	public List<Player> loadFreeAgents(String leagueName) {
@@ -41,7 +46,7 @@ public class PlayerDbImpl implements IPlayerDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 
 			procedureCallDb.closeConnection();
@@ -75,7 +80,7 @@ public class PlayerDbImpl implements IPlayerDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 
 			procedureCallDb.closeConnection();
@@ -107,7 +112,7 @@ public class PlayerDbImpl implements IPlayerDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 
 			procedureCallDb.closeConnection();
@@ -132,7 +137,7 @@ public class PlayerDbImpl implements IPlayerDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 
 			procedureCallDb.closeConnection();

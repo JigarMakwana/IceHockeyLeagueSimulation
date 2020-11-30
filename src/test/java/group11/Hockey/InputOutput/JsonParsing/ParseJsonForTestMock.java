@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.InputOutput.JsonParsing;
 
 import java.io.FileNotFoundException;
@@ -10,7 +13,7 @@ import org.json.simple.parser.ParseException;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 
-public class ParseJsonForTestMock {
+public class ParseJsonForTestMock implements IParseJsonForTestMock {
 	public JSONObject parseJson() throws FileNotFoundException, IOException, ParseException {
 		String fileName = ParseRootcoachesTest.class.getClassLoader().getResource("LeagueNew.json").getPath();
 		JSONParser parser = DefaultHockeyFactory.makeJSONParser();

@@ -1,10 +1,12 @@
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.Drafting;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.Enums.RosterSize;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -24,7 +26,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 	IDisplay display;
 	private static Logger logger = LogManager.getLogger(DraftPlayer.class);
 
-	DraftPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
+	public DraftPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display) {
 		this.league = league;
 		this.leagueDb = leagueDb;
 		this.display = display;
@@ -38,7 +40,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 
 	@Override
 	public void draftPlayer() {
-		logger.info("Entered draftPlayer()");
+		display.showMessageOnConsole("Entered draftPlayer");
 		List<ITeam> draftingTeams = new ArrayList<>();
 		int numbersOfPlayersToGenerate;
 		int indexForGeneratedPlayers = 0;
@@ -49,23 +51,25 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 		draftingTeams.addAll(playOffTeamsInReverseOrder);
 		numbersOfPlayersToGenerate = draftingTeams.size() * 7;
 		IGeneratingPlayers generatingPlayers = DefaultHockeyFactory.makeGeneratePlayer();
+		display.showMessageOnConsole("Generating players for Draft");
 		List<Player> generatedPlayers = generatingPlayers.generatePlayers(numbersOfPlayersToGenerate);
 		Collections.sort(generatedPlayers);
 		for (int round = 1; round <= 7; round++) {
+			display.showMessageOnConsole("Drafting round "+round);
 			for (ITeam team : draftingTeams) {
 				logger.info("Players drafted for team " + team.getTeamName());
 				team.getPlayers().add(generatedPlayers.get(indexForGeneratedPlayers));
 				indexForGeneratedPlayers++;
 			}
 		}
-
+		display.showMessageOnConsole("Settling teams after drafting");
 		for (ITeam team : draftingTeams) {
 			List<IPlayer> extraPlayers = teamSettler(team);
 			@SuppressWarnings("unchecked")
 			List<IPlayer> freeAgents = (List<IPlayer>) DefaultHockeyFactory.makeLeague().getFreeAgents();
 			freeAgents.addAll(extraPlayers);
 		}
-
+		
 	}
 
 	public List<Team> selectTeamFromRegularSeasonStandinfo(List<Team> regularSeasonTeams) {

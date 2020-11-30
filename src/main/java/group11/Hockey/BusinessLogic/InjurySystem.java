@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import group11.Hockey.BusinessLogic.Enums.Positions;
-import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -54,7 +54,7 @@ public class InjurySystem implements IInjurySystem {
 		return numberOfInjuredDays;
 	}
 
-	/*
+	/**
 	 * Author: Jigar Makwana B00842568
 	 */
 	public void settleRecoveredPlayer(IRoster roster, IPlayer recoveredPlayer) {
@@ -71,7 +71,7 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
-	/*
+	/**
 	 * Author: Jigar Makwana B00842568
 	 */
 	public void settleInjuredPlayer(IRoster roster, IPlayer injuredPlayer) {
@@ -90,7 +90,7 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
-	/*
+	/**
 	 * Author: Jigar Makwana B00842568
 	 */
 	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer) {
@@ -99,7 +99,7 @@ public class InjurySystem implements IInjurySystem {
 		return isUnInjuredPlayerAvailable(roster, position);
 	}
 
-	/*
+	/**
 	 * Author: Jigar Makwana B00842568
 	 */
 	public Positions findInjuredPlayerPosition(IPlayer injuredPlayer) {
@@ -112,7 +112,7 @@ public class InjurySystem implements IInjurySystem {
 		}
 	}
 
-	/*
+	/**
 	 * Author: Jigar Makwana B00842568
 	 */
 	public boolean isUnInjuredPlayerAvailable(IRoster roster, Positions position) {

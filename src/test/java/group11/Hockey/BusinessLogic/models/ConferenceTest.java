@@ -46,7 +46,7 @@ public class ConferenceTest {
 
 	@Test
 	public void getDivisionsTest() {
-		List<Division> divisionsList = new ArrayList<Division>();
+		List<IDivision> divisionsList = new ArrayList<>();
 		Division atlanticDivision = new Division("Atlantic Division", null);
 		Division centralDivision = new Division("Central Division", null);
 		divisionsList.add(atlanticDivision);

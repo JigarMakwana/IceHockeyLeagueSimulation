@@ -53,4 +53,23 @@ public class InjurySystemTest {
 		Assert.assertTrue(flag);
 	}
 
+	@Test
+	public void settleRecoveredPlayer() {
+	}
+
+	@Test
+	public void settleInjuredPlayer() {
+	}
+
+	@Test
+	public void isInjuredSwappingPossible() {
+	}
+
+	@Test
+	public void findInjuredPlayerPosition() {
+	}
+
+	@Test
+	public void isUnInjuredPlayerAvailable() {
+	}
 }

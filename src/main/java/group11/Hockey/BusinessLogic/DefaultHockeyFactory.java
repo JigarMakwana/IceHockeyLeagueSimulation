@@ -2,6 +2,23 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.models.*;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
+import group11.Hockey.BusinessLogic.Trophy.CalderMemorial;
+import group11.Hockey.BusinessLogic.Trophy.EndOfRegularSeasonSubject;
+import group11.Hockey.BusinessLogic.Trophy.EndOfStanleySubject;
+import group11.Hockey.BusinessLogic.Trophy.JackAdams;
+import group11.Hockey.BusinessLogic.Trophy.MauriceRichard;
+import group11.Hockey.BusinessLogic.Trophy.Participation;
+import group11.Hockey.BusinessLogic.Trophy.President;
+import group11.Hockey.BusinessLogic.Trophy.RobHawkeyMemorial;
+import group11.Hockey.BusinessLogic.Trophy.Trophy;
+import group11.Hockey.BusinessLogic.Trophy.Veniza;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophySubject;
+
 import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
@@ -103,8 +120,17 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Team();
 	}
 
+	public static ITeam makeTeam(String teamName, IGeneralManager generalManager, ICoach headCoach, List<IPlayer> players){
+		return new Team(teamName, generalManager, headCoach, players);
+	}
+
 	public static League makeLeague() {
 		return new League();
+	}
+
+	public static ILeague makeLeague(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
+									 IGameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers){
+		return new League(leagueName,  conferences,  freeAgents, gamePlayConfig,  coaches, generalManagers);
 	}
 
 	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb,
@@ -114,6 +140,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static IDivision makeDivision() {
 		return new Division();
+	}
+
+	public static IDivision makeDivision(String division, List<ITeam> teamList) {
+		return new Division(division, teamList);
 	}
 
 	public static IConference makeConference() {
@@ -295,6 +325,11 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age);
 	}
 
+	public static IPlayer makePlayer(float skating, float shooting, float checking, float saving, String playerName,
+									 String position, boolean captain, boolean isFreeAgent, float age, boolean isActive) {
+		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age, isActive);
+	}
+
 	public static IInjurySystem makeInjurySystem(ILeague league) {
 		return new InjurySystem(league);
 	}
@@ -319,7 +354,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Coach(name, coachDb);
 	}
 
-	public static IConference makeConference(String name, List<Division> divisions) {
+	public static IConference makeConference(String name, List<IDivision> divisions) {
 		return new Conference(name, divisions);
 	}
 
@@ -395,7 +430,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 	public static Gson makeGson() {
 		return new GsonBuilder().setPrettyPrinting().create();
 	}
-	
+
 	public static JSONParser makeGsonJsonParser() {
 		return new JSONParser();
 	}

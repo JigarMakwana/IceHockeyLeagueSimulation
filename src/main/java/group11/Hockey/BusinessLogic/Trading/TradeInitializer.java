@@ -3,10 +3,10 @@
  */
 package group11.Hockey.BusinessLogic.Trading;
 
-import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.IRandomFloatGenerator;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomFloatGenerator;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeInitializer;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
-import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.models.*;
 
 import java.util.ArrayList;

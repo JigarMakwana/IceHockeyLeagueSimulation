@@ -4,20 +4,20 @@ import java.util.List;
 
 /**
  * This class contains the business logic for the Conference model
- * 
+ *
  *
  */
 public class Conference implements IConference {
 	private String conferenceName;
 	private List<Division> divisions = null;
 
-	public Conference(String conferenceName, List<Division> divisions) {
-		super();
-		this.conferenceName = conferenceName;
-		this.divisions = divisions;
+	public Conference() {
 	}
 
-	public Conference() {
+	public Conference(String conferenceName, List<? extends IDivision> divisions) {
+		super();
+		this.conferenceName = conferenceName;
+		this.divisions = (List<Division>) divisions;
 	}
 
 	/**

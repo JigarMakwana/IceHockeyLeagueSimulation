@@ -36,6 +36,9 @@ public class Trading implements ITrading{
 		return randomAcceptanceChance;
 	}
 
+	/**
+	 * Author: Jigar Makwana B00842568
+	 */
 	public IgmTable getGmTable() {
 		return gmTable;
 	}

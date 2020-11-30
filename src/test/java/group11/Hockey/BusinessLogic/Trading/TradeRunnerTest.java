@@ -1,14 +1,18 @@
+/**
+ * Author: Jigar Makwana B00842568
+ */
 package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeRunner;
-import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.ILeague;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TradeRunnerTest {
     private TradingModelMock leagueModel;
-    private League leagueObj;
+    private ILeague leagueObj;
     private ITradeRunner tradeRunner;
 
     @Before

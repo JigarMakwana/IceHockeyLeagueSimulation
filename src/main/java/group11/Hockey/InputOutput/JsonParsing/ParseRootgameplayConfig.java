@@ -79,6 +79,9 @@ public class ParseRootgameplayConfig implements IParseRootElement {
 		return trading;
 	}
 
+	/**
+	 * Author: Jigar Makwana B00842568
+	 */
 	private IgmTable parseGMTable(JSONObject gmTableJsonObj) {
 		float shrewdValue = ((Double) gmTableJsonObj.get(Attributes.SHREWD.getAttribute())).floatValue();
 		float gamblerValue = ((Double) gmTableJsonObj.get(Attributes.GAMBLER.getAttribute())).floatValue();

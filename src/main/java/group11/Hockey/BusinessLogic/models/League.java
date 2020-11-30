@@ -77,6 +77,7 @@ public class League implements ILeague {
 		this.gamePlayConfig = gamePlayConfig;
 		this.coaches = coaches;
 		this.generalManagers = generalManagers;
+		this.draftTradeTracker = new ArrayList<>();
 	}
 
 	public League() {

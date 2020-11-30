@@ -7,7 +7,7 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.BusinessConstants;
 import group11.Hockey.BusinessLogic.StateMachineState;
-import group11.Hockey.BusinessLogic.Trading.RandomNumGenerator.RandomNoFactory;
+import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

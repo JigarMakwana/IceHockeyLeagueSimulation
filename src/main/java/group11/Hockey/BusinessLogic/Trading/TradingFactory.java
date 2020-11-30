@@ -42,7 +42,7 @@ public class TradingFactory {
     }
 
     public static ITradeConfig makeTradeConfig(int lossPoint, float randomTradeOfferChance, int maxPlayersPerTrade,
-                                                   float randomAcceptanceChance, IgmTable gmTable){
+                                               float randomAcceptanceChance, IgmTable gmTable){
         return new TradeConfig(lossPoint, randomTradeOfferChance, maxPlayersPerTrade, randomAcceptanceChance,gmTable);
     }
 

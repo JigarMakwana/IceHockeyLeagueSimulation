@@ -130,7 +130,7 @@ public class TradeSettler implements ITradeSettler {
         if(null == playerList.get(0)){
             return;
         } else{
-        	IPlayer playerToBeDropped = playerList.get(0);
+            IPlayer playerToBeDropped = playerList.get(0);
             playerToBeDropped.setIsFreeAgent(true);
             playerToBeDropped.setCaptain(false);
             freeAgentList.add(playerToBeDropped);
@@ -231,7 +231,7 @@ public class TradeSettler implements ITradeSettler {
         if(sortedFreeAgents.size() == 0){
             throw new Exception("There are No enough Free Agents available to settle a Team.");
         } else{
-        	IPlayer playerToBeHired = sortedFreeAgents.get(0);
+            IPlayer playerToBeHired = sortedFreeAgents.get(0);
             playerToBeHired.setIsFreeAgent(false);
             team.getRoster().getAllPlayerList().add(playerToBeHired);
             freeAgentList.removeIf(player -> player.getPlayerName().equals(playerToBeHired.getPlayerName()));

@@ -27,22 +27,22 @@ public class TradeInitializer implements ITradeInitializer {
 		setEligibleTeams();
 	}
 
-    @Override
-    public ITradeConfig getTradingConfig(){
-        return TradingFactory.makeTradeConfig(tradingConfig.getLossPoint(), tradingConfig.getRandomTradeOfferChance(),
-                tradingConfig.getMaxPlayersPerTrade(), tradingConfig.getRandomAcceptanceChance(), tradingConfig.getGmTable());
-    }
+	@Override
+	public ITradeConfig getTradingConfig(){
+		return TradingFactory.makeTradeConfig(tradingConfig.getLossPoint(), tradingConfig.getRandomTradeOfferChance(),
+				tradingConfig.getMaxPlayersPerTrade(), tradingConfig.getRandomAcceptanceChance(), tradingConfig.getGmTable());
+	}
 
-    @Override
-    public boolean isTradePossible(ITeam team) {
-        if(team.isUserTeam()){
-            return false;
-        } else if (isRandomOfferChanceSuccess()){
-            return true;
-        } else {
-            return false;
-        }
-    }
+	@Override
+	public boolean isTradePossible(ITeam team) {
+		if(team.isUserTeam()){
+			return false;
+		} else if (isRandomOfferChanceSuccess()){
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	@Override
 	public List<ITeam> getEligibleTeams() {

@@ -8,9 +8,9 @@ public interface IConference {
 
 	public IConference getConferencefromConferenceName(String conferenceName, List<IConference> conferences);
 
-	public List<Division> getDivisions();
+	public List<IDivision> getDivisions();
 
-	public void setDivisions(List<Division> divisions);
+	public void setDivisions(List<IDivision> divisions);
 
 	public void setConferenceName(String name);
 

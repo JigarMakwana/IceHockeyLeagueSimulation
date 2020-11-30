@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.ArrayList;
@@ -8,15 +9,15 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.InputOutput.IPrintToConsole;
-import group11.Hockey.InputOutput.PrintToConsole;
 
 public class Schedule implements ISchedule {
 
@@ -48,9 +49,9 @@ public class Schedule implements ISchedule {
 		List<IConference> cconferenceList = league.getConferences();
 		for (IConference conference : cconferenceList) {
 			conTeamCount.put(conference, 0);
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
-				divTeamCount.put(division, 0);
+			List<IDivision> divisionList = conference.getDivisions();
+			for (IDivision division : divisionList) {
+				divTeamCount.put((Division) division, 0);
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
 					teamName.add(team);
@@ -58,29 +59,31 @@ public class Schedule implements ISchedule {
 					scheduledInConferenceMatchCount.put(team, 0);
 					scheduledOutConferenceMatchCount.put(team, 0);
 					teamConference.put(team, conference);
-					teamDivision.put(team, division);
+					teamDivision.put(team, (Division) division);
 					totalTeams++;
 					conTeamCount.put(conference, conTeamCount.get(conference) + 1);
-					divTeamCount.put(division, divTeamCount.get(division) + 1);
+					divTeamCount.put((Division) division, divTeamCount.get(division) + 1);
 					totalGameCount.put(team, 0);
 				}
 			}
 		}
-
-		IPrintToConsole console = new PrintToConsole();
+		
 		String message;
-		ITeam t1, t2;
-		Division div1, div2;
-		IConference con1, con2;
+		ITeam t1;
+		ITeam t2;
+		IDivision div1;
+		IDivision div2;
+		IConference con1;
+		IConference con2;
 		int divLimit, divLimitReached, inConLimit, inConLimitReached, outConLimit, outConLimitReached, team1DivCount,
 				team1InConCount, team1OutConCount, totalGames = 0, team2DivCount, team2InConCount, team2OutConCount,
 				totalDivTeams, totalInConTeams, totalOutConTeams, team2TotalCount;
 		String date = startDate, time = "00:00:00";
-		IParse parse = new Parse();
+		IParse parse = DefaultHockeyFactory.makeParse();
 		Date dateTime = parse.stringToDate(date);
-		IDeadlines deadline = new Deadlines();
+		IDeadlines deadline = DefaultHockeyFactory.makeDeadlines();
 		Date endDateTime = deadline.getRegularSeasonDeadline(startDate);
-		IAdvance advance = new Advance();
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 		String regularSeasonStartDate = advance.getAdvanceDate(date, 1);
 		for (int i = 0; i < totalTeams; i++) {
 			t1 = teamName.get(i);
@@ -113,7 +116,7 @@ public class Schedule implements ISchedule {
 				if (divLimitReached == divLimit) {
 					break;
 				}
-				if ((div1.getDivisionName() == div2.getDivisionName())) {
+				if (div1.getDivisionName() == div2.getDivisionName()) {
 
 					// ensures team played every other team once
 					if ((team2DivCount < divLimit)) {
@@ -131,7 +134,7 @@ public class Schedule implements ISchedule {
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
 						message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
-						console.print(message);
+						logger.info(message);
 						divLimitReached++;
 						totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 						totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -175,7 +178,7 @@ public class Schedule implements ISchedule {
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
 							message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
-							console.print(message);
+							logger.info(message);
 							divLimitReached++;
 							totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 							totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -218,7 +221,7 @@ public class Schedule implements ISchedule {
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
 						message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
-						console.print(message);
+						logger.info(message);
 						inConLimitReached++;
 						totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 						totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -262,7 +265,7 @@ public class Schedule implements ISchedule {
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
 							message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
-							console.print(message);
+							logger.info(message);
 							inConLimitReached++;
 							totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 							totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -303,7 +306,7 @@ public class Schedule implements ISchedule {
 						regularSchedule.put(date + "T" + time, schedule);
 						simulatedHashmap.put(date + time + t1 + t2, 0);
 						message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
-						console.print(message);
+						logger.info(message);
 						outConLimitReached++;
 						totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 						totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -347,7 +350,7 @@ public class Schedule implements ISchedule {
 							regularSchedule.put(date + "T" + time, schedule);
 							simulatedHashmap.put(date + time + t1 + t2, 0);
 							message = t1.getTeamName() + "," + t2.getTeamName() + "," + date + " " + time;
-							console.print(message);
+							logger.info(message);
 							outConLimitReached++;
 							totalGameCount.put(t1, totalGameCount.get(t1) + 1);
 							totalGameCount.put(t2, totalGameCount.get(t2) + 1);
@@ -361,9 +364,9 @@ public class Schedule implements ISchedule {
 		}
 		for (IConference conference : cconferenceList) {
 			conTeamCount.put(conference, 0);
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
-				divTeamCount.put(division, 0);
+			List<IDivision> divisionList = conference.getDivisions();
+			for (IDivision division : divisionList) {
+				divTeamCount.put((Division) division, 0);
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
 					totalGames += (scheduledDivisionMatchCount.get(team)) + (scheduledInConferenceMatchCount.get(team))
@@ -374,7 +377,7 @@ public class Schedule implements ISchedule {
 
 		message = "\n********** Total games scheduled : " + totalGames + "(" + (totalGames / totalTeams)
 				+ " games each team) **********";
-		console.print(message);
+		logger.info(message);
 		return regularSchedule;
 	}
 

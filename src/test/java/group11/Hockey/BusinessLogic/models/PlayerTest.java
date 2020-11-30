@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 
 public class PlayerTest {
 
-	private static Player playerWithParams;
+	private static IPlayer playerWithParams;
 	private static float age = 30;
 
 	@BeforeClass
@@ -60,7 +60,7 @@ public class PlayerTest {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
 		when(playerDb.insertLeagueFreeAgents("league", playerWithParams)).thenReturn(true);
 		List<Player> listOfFreeAgents = new ArrayList<Player>();
-		listOfFreeAgents.add(playerWithParams);
+		listOfFreeAgents.add((Player) playerWithParams);
 		Player player2 = new Player("league", playerDb);
 		boolean flag = player2.insertLeagueFreeAgents(listOfFreeAgents);
 		Assert.assertTrue(flag);
@@ -71,7 +71,7 @@ public class PlayerTest {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
 		when(playerDb.insertLeagueRetiredPlayers("league", playerWithParams)).thenReturn(true);
 		List<Player> listOfFreeAgents = new ArrayList<Player>();
-		listOfFreeAgents.add(playerWithParams);
+		listOfFreeAgents.add((Player) playerWithParams);
 		Player player2 = new Player("league", playerDb);
 		boolean flag = player2.insertLeagueRetiredPlayers(listOfFreeAgents);
 		Assert.assertTrue(flag);
@@ -82,7 +82,7 @@ public class PlayerTest {
 		IPlayerDb playerDb = mock(IPlayerDb.class);
 		when(playerDb.deleteLeaguePlayers("league")).thenReturn(true);
 		List<Player> listOfFreeAgents = new ArrayList<Player>();
-		listOfFreeAgents.add(playerWithParams);
+		listOfFreeAgents.add((Player) playerWithParams);
 		Player player2 = new Player("league", playerDb);
 		boolean flag = player2.deleteLeaguePlayers();
 		Assert.assertTrue(flag);

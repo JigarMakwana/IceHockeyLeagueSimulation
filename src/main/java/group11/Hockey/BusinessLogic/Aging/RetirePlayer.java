@@ -11,9 +11,9 @@ import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
@@ -54,9 +54,9 @@ public abstract class RetirePlayer extends StateMachineState {
 
 		if (conferences.size() > 0) {
 			for (IConference conference : conferences) {
-				List<Division> divisions = conference.getDivisions();
+				List<IDivision> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
-					for (Division division : divisions) {
+					for (IDivision division : divisions) {
 						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
 							for (ITeam team : teams) {

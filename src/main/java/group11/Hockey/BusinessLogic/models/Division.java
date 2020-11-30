@@ -12,6 +12,7 @@ public class Division implements IDivision {
 	private String divisionName;
 	private List<ITeam> teams = null;
 
+	@SuppressWarnings("unchecked")
 	public Division(String divisionName, List<? extends ITeam> teams) {
 		super();
 		this.divisionName = divisionName;
@@ -55,13 +56,13 @@ public class Division implements IDivision {
 		return "Division [divisionName=" + divisionName + ", teams=" + teams + "]";
 	}
 
-	public boolean isDivisionNameValid(String divisionName, List<Division> divisionList) {
+	public boolean isDivisionNameValid(String divisionName, List<IDivision> divisionList) {
 		boolean isDivisionNameValid = false;
 		if(divisionList == null) {
 			return isDivisionNameValid;
 		}
-		for(Division division: divisionList) {
-			if(division.getDivisionName().equalsIgnoreCase(divisionName)) {
+		for(IDivision division: divisionList) {
+			if(((Division) division).getDivisionName().equalsIgnoreCase(divisionName)) {
 				isDivisionNameValid = true;
 				break;
 			}
@@ -69,15 +70,15 @@ public class Division implements IDivision {
 		return isDivisionNameValid;
 	}
 
-	public Division getDivisionFromDivisionName(String divisionName, List<Division> divisionList) {
-		Division division = null;
-		for(Division div: divisionList) {
-			if(div.getDivisionName().equalsIgnoreCase(divisionName)) {
+	public Division getDivisionFromDivisionName(String divisionName, List<IDivision> divisionList) {
+		IDivision division = null;
+		for(IDivision div: divisionList) {
+			if(((Division) div).getDivisionName().equalsIgnoreCase(divisionName)) {
 				division = div;
 				break;
 			}
 		}
-		return division;
+		return (Division) division;
 	}
 
 

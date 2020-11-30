@@ -12,8 +12,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
@@ -37,7 +37,7 @@ public class InjurySystemTest {
 		LeagueModelMock leagueModel = new LeagueModelMock();
 		ILeague league = leagueModel.getLeagueInfo();
 		List<IConference> conferences = league.getConferences();
-		List<Division> divisions = conferences.get(0).getDivisions();
+		List<IDivision> divisions = conferences.get(0).getDivisions();
 		List<ITeam> teams = divisions.get(0).getTeams();
 		List<IPlayer> players = teams.get(0).getPlayers();
 

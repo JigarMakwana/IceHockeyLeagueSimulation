@@ -7,6 +7,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.StateMachineState;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleContext;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.db.League.ILeagueDb;
 

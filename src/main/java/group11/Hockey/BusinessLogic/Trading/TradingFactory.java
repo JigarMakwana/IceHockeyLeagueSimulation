@@ -31,9 +31,9 @@ public class TradingFactory {
         return new TradeResolver(leagueObj, tradeCharter, tradingConfig, commandLineInput, validation, display);
     }
 
-    public static ITradeSettler makeTradeSettler(ITeam team, List<IPlayer> freeAgentList, ICommandLineInput commandLineInput, IValidations validation,
+    public static ITradeSettler makeTradeSettler(ITeam team, List<IPlayer> list, ICommandLineInput commandLineInput, IValidations validation,
                                                  IDisplay display){
-        return new TradeSettler(team, freeAgentList, commandLineInput, validation, display);
+        return new TradeSettler(team, list, commandLineInput, validation, display);
     }
 
     public static ITradeCharter makeTradeCharter(ITeam offeringTeam, List<IPlayer> offeredPlayerList, ITeam requestedteam,

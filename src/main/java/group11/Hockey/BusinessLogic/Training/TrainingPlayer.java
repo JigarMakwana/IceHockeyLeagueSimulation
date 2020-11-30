@@ -12,8 +12,8 @@ import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
-import group11.Hockey.BusinessLogic.LeagueSimulation.ICheckAndSimulateTodaySchedule;
-import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ICheckAndSimulateTodaySchedule;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
@@ -71,10 +71,15 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 						ICoach headCoach = team.getHeadCoach();
 						List<IPlayer> playerList = team.getPlayers();
 						for (IPlayer player : playerList) {
+							try {
 							changePlayerSkatingSkill(player, headCoach.getSkating(), league);
 							changePlayerShootingSkill(player, headCoach.getShooting(), league);
 							changePlayerCheckingSkill(player, headCoach.getChecking(), league);
 							changePlayerSavingSkill(player, headCoach.getChecking(), league);
+							}
+							catch (Exception e) {
+								logger.error("Exception occurred in training player :"+e.getMessage());
+							}
 						}
 					}
 				}
@@ -86,18 +91,11 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 
 
 		if (dateTime.compareTo(tradeDeadLine) <= 0) {
-			logger.info("Performing trading");
 			return TradingFactory.makeTradeRunner(league, leaugueDb, commandLineInput, validation, display);
 		} else {
-			logger.info("Performing aging");
 			return DefaultHockeyFactory.makeAgePlayer(league, 1, leaugueDb, display);
 		}
 
-	}
-
-	@Override
-	public void trainPlayer(ILeague league) {
-		logger.debug("Entered trainPlayer()");
 	}
 
 	public boolean comapreCoachStat(float coachStatValue) {
@@ -113,10 +111,10 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerSkatingSkill(IPlayer player, float coachSkatingStatValue, ILeague league) {
 		logger.debug("Entered changePlayerSkatingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName() + " is not injured so changing skating skill");
 			boolean coachStat = comapreCoachStat(coachSkatingStatValue);
 			if (coachStat) {
 				float skatingSkill = player.getSkating() + 1;
+				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " skating skill improved");
 				player.setSkating(skatingSkill);
 			} else {
 				player.checkInjury(league);
@@ -128,10 +126,10 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerShootingSkill(IPlayer player, float coachShootingStatValue, ILeague league) {
 		logger.debug("Entered changePlayerShootingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName() + " is not injured so changing shooting skill");
 			boolean coachStat = comapreCoachStat(coachShootingStatValue);
 			if (coachStat) {
 				float shootingSkill = player.getShooting() + 1;
+				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " shooting skill improved");
 				player.setShooting(shootingSkill);
 			} else {
 				player.checkInjury(league);
@@ -143,10 +141,10 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerCheckingSkill(IPlayer player, float coachCheckingStatValue, ILeague league) {
 		logger.debug("Entered changePlayerCheckingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName() + " is not injured so changing checking skill");
 			boolean coachStat = comapreCoachStat(coachCheckingStatValue);
 			if (coachStat) {
 				float checkingSkill = player.getChecking() + 1;
+				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " checking skill improved");
 				player.setChecking(checkingSkill);
 			} else {
 				player.checkInjury(league);
@@ -157,10 +155,10 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 	public void changePlayerSavingSkill(IPlayer player, float coachSavingStatValue, ILeague league) {
 		logger.debug("Entered changePlayerSavingSkill()");
 		if (player.isInjured() == false) {
-			logger.info(player.getPlayerName() + " is not injured so changing saving skill");
 			boolean coachStat = comapreCoachStat(coachSavingStatValue);
 			if (coachStat) {
 				float savingSkill = player.getSaving() + 1;
+				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " saving skill improved");
 				player.setSaving(savingSkill);
 			} else {
 				player.checkInjury(league);

@@ -40,10 +40,11 @@ public class TradeRunner extends StateMachineState implements ITradeRunner {
         return new AgePlayer(leagueObj, leagueDb, display, commandLineInput, validation);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void runTrading() {
         logger.debug("Entered runTrading()");
-        logger.info("Running Trade Life Cycle: Initialize -> Generate -> Resolve -> Settle Team");
+        logger.debug("Running Trade Life Cycle: Initialize -> Generate -> Resolve -> Settle Team");
         ITradeInitializer tradeInitializer = TradingFactory.makeTradeInitializer(leagueObj);
         List<ITeam> eligibleTeamList = tradeInitializer.getEligibleTeams();
         ITradeConfig tradingConfig = tradeInitializer.getTradingConfig();

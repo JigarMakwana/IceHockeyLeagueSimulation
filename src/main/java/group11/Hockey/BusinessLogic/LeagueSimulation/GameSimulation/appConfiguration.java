@@ -14,7 +14,7 @@ public class appConfiguration {
 	public static int maxDifferenceLimit = 10;
 	public static int penaltyTime = 2;
 	public static int penaltyRandomChance = 30;
-	public static int penaltyOccuranceValue = 5;
+	public static int penaltyOccuranceValue = 2;
 	public static int saveChance = 5;
 	public static float reduceDefenceStrength = (float) 0.75;
 	public static int twoPeriodsTime = (int) (2 * shifts / 3);

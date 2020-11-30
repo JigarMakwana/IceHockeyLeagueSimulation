@@ -165,7 +165,7 @@ public class UserInputCheck implements IUserInputCheck {
 				}
 			}
 			if (validation.isUserTradeInputValid(userInput)) {
-				logger.info("Trade value is valid");
+				logger.debug("Trade value is valid");
 				break;
 			} else {
 				logger.error("Invalid value given");
@@ -198,7 +198,7 @@ public class UserInputCheck implements IUserInputCheck {
 				}
 			}
 			if (validation.isUserResolveRosterInputValid(userInput, listSize)) {
-				logger.info("Roster value is valid");
+				logger.debug("Roster value is valid");
 				break;
 			} else {
 				logger.error("Invalid value selected");

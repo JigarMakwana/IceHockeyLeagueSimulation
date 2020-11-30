@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
@@ -62,7 +63,9 @@ public class PlayoffSchedule implements IScheduleStrategy {
 		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 		message = "\n********** Playoff Schedule - First round **********";
 		logger.info(message);
-
+		if(display == null) {
+			display = DefaultHockeyFactory.makeDisplay();
+		}
 		List<IConference> cconferenceList = league.getConferences();
 		for (IConference conference : cconferenceList) {
 			List<ITeam> roundOne = new ArrayList<>();

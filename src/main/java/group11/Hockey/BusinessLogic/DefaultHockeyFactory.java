@@ -32,11 +32,6 @@ import group11.Hockey.BusinessLogic.Drafting.IGeneratingPlayers;
 import group11.Hockey.BusinessLogic.LeagueSimulation.AdvanceTime;
 import group11.Hockey.BusinessLogic.LeagueSimulation.AdvanceToNextSeason;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Deadlines;
-import group11.Hockey.BusinessLogic.LeagueSimulation.IDeadlines;
-import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.LeagueSimulation.ISchedule;
-import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleContext;
-import group11.Hockey.BusinessLogic.LeagueSimulation.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.LeagueSimulation.InitializeSeason;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.PlayoffSchedule;
@@ -54,6 +49,11 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShif
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IDeadlines;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ISchedule;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleContext;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.TeamCreation.CreateTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.LoadTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.PlayerChoice;
@@ -83,7 +83,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Team();
 	}
 
-	public static ITeam makeTeam(String teamName, IGeneralManager generalManager, ICoach headCoach, List<IPlayer> players){
+	public static ITeam makeTeam(String teamName, IGeneralManager generalManager, ICoach headCoach,
+			List<IPlayer> players) {
 		return new Team(teamName, generalManager, headCoach, players);
 	}
 
@@ -91,9 +92,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new League();
 	}
 
-	public static ILeague makeLeague(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
-									 IGameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers){
-		return new League(leagueName,  conferences,  freeAgents, gamePlayConfig,  coaches, generalManagers);
+	public static ILeague makeLeague(String leagueName, List<IConference> conferences,
+			List<? extends IPlayer> freeAgents, IGameplayConfig gamePlayConfig, List<ICoach> coaches,
+			List<IGeneralManager> generalManagers) {
+		return new League(leagueName, conferences, freeAgents, gamePlayConfig, coaches, generalManagers);
 	}
 
 	public static JsonImport getJsonImport(String fileName, ICommandLineInput commandLineInput, ILeagueDb leagueDb,
@@ -144,7 +146,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayerChoice(league, commandLineInput, display, validation, leagueDb);
 	}
 
-	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display,
+			ICommandLineInput commandLineInput, IValidations validation) {
 		return new Simulate(league, seasons, leagueDb, display, commandLineInput, validation);
 	}
 
@@ -175,7 +178,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	}
 
-	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+	public static StateMachineState makeInitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display,
+			ICommandLineInput commandLineInput, IValidations validation) {
 		return new InitializeSeason(league, leagueDb, display, commandLineInput, validation);
 	}
 
@@ -183,13 +187,13 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return FinalState.getInstance();
 	}
 
-	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
-	) {
+	public static StateMachineState makeAdvanceTime(ILeague league, ILeagueDb leagueDb, IDisplay display,
+			ICommandLineInput commandLineInput, IValidations validation) {
 		return new AdvanceTime(league, leagueDb, display, commandLineInput, validation);
 	}
 
-	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
-	) {
+	public static StateMachineState makeTrainingPlayer(ILeague league, ILeagueDb leagueDb, IDisplay display,
+			ICommandLineInput commandLineInput, IValidations validation) {
 		return new TrainingPlayer(league, leagueDb, display, commandLineInput, validation);
 	}
 
@@ -201,7 +205,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayoffSchedule();
 	}
 
-	public static IScheduleStrategy makePlayoffScheduleFinalRounds(IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+	public static IScheduleStrategy makePlayoffScheduleFinalRounds(IDisplay display, ICommandLineInput commandLineInput,
+			IValidations validation) {
 		return new PlayoffScheduleFinalRounds(display, commandLineInput, validation);
 	}
 
@@ -245,7 +250,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new AdvanceToNextSeason(league, leagueDb, display);
 	}
 
-	public static IRoster makeRoster(String teamName, List<IPlayer> playerList){
+	public static IRoster makeRoster(String teamName, List<IPlayer> playerList) {
 		return new Roster(teamName, playerList);
 	}
 
@@ -289,8 +294,9 @@ public class DefaultHockeyFactory extends TeamFactory {
 	}
 
 	public static IPlayer makePlayer(float skating, float shooting, float checking, float saving, String playerName,
-									 String position, boolean captain, boolean isFreeAgent, float age, boolean isActive) {
-		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age, isActive);
+			String position, boolean captain, boolean isFreeAgent, float age, boolean isActive) {
+		return new Player(skating, shooting, checking, saving, playerName, position, captain, isFreeAgent, age,
+				isActive);
 	}
 
 	public static IInjurySystem makeInjurySystem(ILeague league) {
@@ -317,6 +323,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Coach(name, coachDb);
 	}
 
+	public static ICoach makeCoach() {
+		return new Coach();
+	}
+
 	public static IConference makeConference(String name, List<IDivision> divisions) {
 		return new Conference(name, divisions);
 	}
@@ -335,6 +345,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static IGeneralManager makeGeneralManager(String name, String personality) {
 		return new GeneralManager(name, personality);
+	}
+
+	public static IGeneralManager makeGeneralManager() {
+		return new GeneralManager();
 	}
 
 	public static IPlayer makePlayer() {
@@ -402,7 +416,7 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new TimeLine();
 	}
 
-	public static ISchedule makeSchedule(ILeague league) {		
+	public static ISchedule makeSchedule(ILeague league) {
 		return new Schedule(league);
 	}
 

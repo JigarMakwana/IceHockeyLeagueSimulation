@@ -13,11 +13,14 @@ import java.util.Date;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ITradeDeadline;
 
-public class TradeDeadline {
+
+public class TradeDeadline implements ITradeDeadline {
 
 	private static Logger logger = LogManager.getLogger(TradeDeadline.class);
 
+	@Override
 	public Date getTradeDeadline(String startDate) {
 		logger.debug("Entered getTradeDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");

@@ -35,59 +35,60 @@ public class LeagueModelMock {
 		playerList.add((Player) player2);
 		playerList.add((Player) player3);
 
-		List<Team> teamsList = new ArrayList<Team>();
+		List<ITeam> teamsList = new ArrayList<>();
 		float skill = (float) 2.0;
-		Coach coach = new Coach();
+		ICoach coach = DefaultHockeyFactory.makeCoach();
 		coach.setChecking(skill);
 		coach.setName("Dave");
 		coach.setSaving(skill);
 		coach.setShooting(skill);
 		coach.setSkating(skill);
 
-		GeneralManager gm1 = new GeneralManager("Mister Fred", "normal");
-		Team team1 = new Team("Boston", gm1, coach, playerList);
+		IGeneralManager gm1 = DefaultHockeyFactory.makeGeneralManager("Mister Fred", "normal");
+		ITeam team1 = DefaultHockeyFactory.makeTeam("Boston", gm1, coach, playerList);
 
 		playerList = new ArrayList<>();
-		Player player4 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50);
-		Player player5 = new Player(10, 10, 10, 10, "Player Two", "defense", false, false, 20);
+		IPlayer player4 = DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player One", "forward", true, false, 50);
+		IPlayer player5 = DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player Two", "defense", false, false, 20);
 		playerList.add(player4);
 		playerList.add(player5);
 
-		GeneralManager gm2 = new GeneralManager("John Smith", "shrewd");
-		Team team2 = new Team("Vancouver Canucks", gm2, coach, playerList);
+		IGeneralManager gm2 = DefaultHockeyFactory.makeGeneralManager("John Smith", "shrewd");
+		ITeam team2 = DefaultHockeyFactory.makeTeam("Vancouver Canucks", gm2, coach, playerList);
 		teamsList.add(team1);
 		teamsList.add(team2);
 
 		List<IDivision> divisionsList = new ArrayList<>();
-		IDivision atlanticDivision = new Division("Atlantic", teamsList);
+		IDivision atlanticDivision = DefaultHockeyFactory.makeDivision("Atlantic", teamsList);
 		divisionsList.add(atlanticDivision);
 		List<IConference> conferenceList = new ArrayList<>();
 		List<Player> freeAgentsList = new ArrayList<>();
-		IConference conference = new Conference("Eastern Conference", divisionsList);
+		IConference conference = DefaultHockeyFactory.makeConference("Eastern Conference", divisionsList);
 		conferenceList.add(conference);
-		league = new League("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
+		league = DefaultHockeyFactory.makeLeague("Dalhousie Hockey League", conferenceList, freeAgentsList,
+				gameplayConfig, null, null);
 		playerList = new ArrayList<>();
 		List<ICoach> coachList = new ArrayList<>();
-		coachList.add(new Coach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
+		coachList.add(DefaultHockeyFactory.makeCoach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
 		league.setCoaches(coachList);
 		List<IGeneralManager> generalManagerList = new ArrayList<>();
-		IGeneralManager generalManager = new GeneralManager("General Manager 1", "normal");
+		IGeneralManager generalManager = DefaultHockeyFactory.makeGeneralManager("General Manager 1", "normal");
 		generalManagerList.add(generalManager);
 		league.setGeneralManagers(generalManagerList);
 		populateFreeAgents(league);
 		playerList.add((Player) player1);
 		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
-		qualifiedTeams.add(new Team("Rangers", gm2, coach, playerList));
-		qualifiedTeams.add(new Team("Lions", gm2, coach, playerList));
+		qualifiedTeams.add(DefaultHockeyFactory.makeTeam("Rangers", gm2, coach, playerList));
+		qualifiedTeams.add(DefaultHockeyFactory.makeTeam("Lions", gm2, coach, playerList));
 
 		league.setRetiredPlayers(playerList);
-		TimeLine timeLine = new TimeLine();
+		ITimeLine timeLine = DefaultHockeyFactory.makeTimeLine();
 		timeLine.setCurrentDate("27/11/2020");
 		league.setTimeLine(timeLine);
 	}
 
 	public void populateFreeAgents(ILeague league) {
-		List<Player> freeAgents = new ArrayList<Player>();
+		List<Player> freeAgents = new ArrayList<>();
 		freeAgents
 				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 1", "forward", true, false, 50));
 		freeAgents
@@ -154,23 +155,23 @@ public class LeagueModelMock {
 	public void insertDataForDrafing() {
 		List<ITeam> teamList = league.getConferences().get(0).getDivisions().get(0).getTeams();
 		List<IPlayer> playerList = teamList.get(0).getPlayers();
-		GeneralManager gm = new GeneralManager("John Smith", "shrewd");
-		teamList.add(new Team("Rangers1", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers2", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers3", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers4", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers5", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers6", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers7", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers8", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers9", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers10", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers11", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers12", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers13", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers14", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers15", gm, teamList.get(0).getHeadCoach(), playerList));
-		teamList.add(new Team("Rangers16", gm, teamList.get(0).getHeadCoach(), playerList));
+		IGeneralManager gm = DefaultHockeyFactory.makeGeneralManager("John Smith", "shrewd");
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers1", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers2", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers3", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers4", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers5", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers6", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers7", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers8", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers9", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers10", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers11", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers12", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers13", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers14", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers15", gm, teamList.get(0).getHeadCoach(), playerList));
+		teamList.add(DefaultHockeyFactory.makeTeam("Rangers16", gm, teamList.get(0).getHeadCoach(), playerList));
 	}
 
 	public ILeague getLeagueInfo() {

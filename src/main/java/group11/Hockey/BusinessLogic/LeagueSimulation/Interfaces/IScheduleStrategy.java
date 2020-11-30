@@ -1,7 +1,7 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic.LeagueSimulation;
+package group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces;
 
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.ILeague;

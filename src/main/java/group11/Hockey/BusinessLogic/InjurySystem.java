@@ -125,10 +125,10 @@ public class InjurySystem implements IInjurySystem {
 				.collect(Collectors.toList());
 
 		if (filteredUnInjured.size() >= minUnInjuredPlayerRequired) {
-			logger.info("Uninjured player available");
+			logger.debug("Uninjured player available");
 			return true;
 		} else {
-			logger.info("Uninjured player is not available");
+			logger.debug("Uninjured player is not available");
 			return false;
 		}
 	}

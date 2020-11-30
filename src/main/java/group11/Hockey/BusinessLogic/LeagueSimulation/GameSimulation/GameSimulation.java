@@ -35,11 +35,11 @@ public class GameSimulation implements IGameSimulation {
 		GenerateShiftsTemplate shifts2 = null;
 		
 		if (league.getQualifiedTeams().size() > 0) {
-			logger.info("Generate shifts for playoff schedule");
+			logger.debug("Generate shifts for playoff schedule");
 			shifts1 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p1);
 			shifts2 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p2);
 		} else {
-			logger.info("Generate shifts for normal schedule");
+			logger.debug("Generate shifts for normal schedule");
 			shifts1 = DefaultHockeyFactory.makeGenerateShifts(team_p1);
 			shifts2 = DefaultHockeyFactory.makeGenerateShifts(team_p2);
 		}
@@ -103,7 +103,6 @@ public class GameSimulation implements IGameSimulation {
 
 	private void makeShoot(List<IPlayer> shootingTeamPlayers, List<IPlayer> defendingTeamPlayers, ITeam defendingTeam,
 			ITeam ShootingTeam, int penaltyPeriod) {
-		logger.info("Team initiating the shoot");
 		IGameContext gameContext = null;
 
 		managePanelty(defendingTeam);
@@ -152,11 +151,11 @@ public class GameSimulation implements IGameSimulation {
 		league.setSavesInSeason(league.getSavesInSeason() + savesInGame);
 		league.setGamesInSeason(league.getGamesInSeason() + 2);
 
-		System.out.println("***Game Summary***");
-		System.out.println("Goals per game: " + (float) league.getGoalsInSeason() / league.getGamesInSeason());
-		System.out.println("Penalties per game: " + (float) league.getPenaltiesInSeason() / league.getGamesInSeason());
-		System.out.println("Shots: " + 60 / 2);
-		System.out.println("Saves: " + (float) league.getSavesInSeason() / league.getGamesInSeason());
+		logger.info("***Game Summary***");
+		logger.info("Goals per game: " + (float) league.getGoalsInSeason() / league.getGamesInSeason());
+		logger.info("Penalties per game: " + (float) league.getPenaltiesInSeason() / league.getGamesInSeason());
+		logger.info("Shots: " + 60 / 2);
+		logger.info("Saves: " + (float) league.getSavesInSeason() / league.getGamesInSeason());
 	}
 
 	private void resetTeamStats(ITeam team1, ITeam team2) {

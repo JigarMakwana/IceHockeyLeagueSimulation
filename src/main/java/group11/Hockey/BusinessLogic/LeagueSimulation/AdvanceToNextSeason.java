@@ -8,14 +8,16 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
-import group11.Hockey.BusinessLogic.Aging.AgePlayer;
+import group11.Hockey.BusinessLogic.Aging.IAgePlayer;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IAdvanceToNextSeason;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class AdvanceToNextSeason extends StateMachineState {
+public class AdvanceToNextSeason extends StateMachineState implements IAdvanceToNextSeason {
 	ILeague league;
 	ILeagueDb leagueDb;
 	IDisplay display;
@@ -45,8 +47,8 @@ public class AdvanceToNextSeason extends StateMachineState {
 		timeLine.setLastSimulatedDate(advanced);
 		league.setStartDate(advanced);
 
-		AgePlayer agePlayer = new AgePlayer(league, daysBetween, display);
-		agePlayer.agePlayers();
+		StateMachineState agePlayer = DefaultHockeyFactory.makeAgePlayer(league, daysBetween, leagueDb, display);
+		((IAgePlayer) agePlayer).agePlayers();
 
 		leagueDb.insertLeagueInDb(league);
 

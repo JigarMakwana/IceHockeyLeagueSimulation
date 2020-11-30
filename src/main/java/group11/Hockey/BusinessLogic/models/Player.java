@@ -4,13 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.IInjurySystem;
 import group11.Hockey.BusinessLogic.IPlayerStrengthContext;
-import group11.Hockey.BusinessLogic.InjurySystem;
-import group11.Hockey.BusinessLogic.PlayerStrengthContext;
-import group11.Hockey.BusinessLogic.Aging.AgePlayer;
+import group11.Hockey.BusinessLogic.Aging.RetirePlayer;
 import group11.Hockey.db.Player.IPlayerDb;
 import group11.Hockey.BusinessLogic.Enums.Positions;
-
 
 /**
  * This is model class for Player and it contains all the business logic related
@@ -187,7 +185,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		if (this.isInjured()) {
 			return this.isInjured();
 		}
-		InjurySystem injurySyetem = new InjurySystem(league);
+		IInjurySystem injurySyetem = DefaultHockeyFactory.makeInjurySystem(league);
 		boolean isPlayerInjured = injurySyetem.determainIsPlayerInjured();
 		this.setInjured(isPlayerInjured);
 		this.setNumberOfInjuredDays(injurySyetem.determainNumberOfDaysOfInjury());
@@ -213,9 +211,11 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 	public float getPlayerStrength() {
 		IPlayerStrengthContext playerStrength = null;
 		if (this.position.equalsIgnoreCase(Positions.FORWARD.toString())) {
-			playerStrength = new PlayerStrengthContext(DefaultHockeyFactory.makeForwarsPosition(this));
+			playerStrength = DefaultHockeyFactory
+					.makePlayerStrengthContext(DefaultHockeyFactory.makeForwarsPosition(this));
 		} else if (this.position.equalsIgnoreCase(Positions.DEFENSE.toString())) {
-			playerStrength = new PlayerStrengthContext(DefaultHockeyFactory.makeDefensePosition(this));
+			playerStrength = DefaultHockeyFactory
+					.makePlayerStrengthContext(DefaultHockeyFactory.makeDefensePosition(this));
 		} else {
 			playerStrength = DefaultHockeyFactory
 					.makePlayerStrengthContext(DefaultHockeyFactory.makeGoaliePosition(this));
@@ -280,7 +280,7 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 		float age;
 		age = this.getAge() + 1;
 		this.setAge(age);
-		AgePlayer agePlayer = new AgePlayer();
+		RetirePlayer agePlayer = DefaultHockeyFactory.makeAgePlayer();
 		this.setIsRetired(agePlayer.checkForRetirement(league, age));
 		checkAndDecrementPlayerShootingStat(statDecayChance);
 		checkAndDecrementPlayerCheckingStat(statDecayChance);
@@ -345,7 +345,5 @@ public class Player extends Stats implements Comparable<Player>, IPlayer {
 			this.setSaving(this.getSaving() - 1);
 		}
 	}
-
-
 
 }

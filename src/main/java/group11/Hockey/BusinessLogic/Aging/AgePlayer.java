@@ -152,7 +152,7 @@ public class AgePlayer extends RetirePlayer implements IAgePlayer {
 		checkForRetirement(league);
 	}
 
-	private void checkForRetirement(ILeague league) {
+	public void checkForRetirement(ILeague league) {
 		boolean isRetired;
 		List<IPlayer> retiredPlayers = new ArrayList<>();
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();

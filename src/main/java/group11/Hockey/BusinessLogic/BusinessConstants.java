@@ -14,8 +14,8 @@ public enum BusinessConstants {
 	Personality("normal"),
 	Number_Of_Total_Players("30"),
 	Reduce_strength_by(2),
-	Likelihood_Of_Retirement_Low(1000),
-	Likelihood_Of_Retirement_High(750);
+	Likelihood_Of_Retirement_Low(50),
+	Likelihood_Of_Retirement_High(15);
 
 
 

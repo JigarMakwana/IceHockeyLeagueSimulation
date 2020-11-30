@@ -75,7 +75,7 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 			userInputCheck.playerChoiceFromUser(newTeam, league);
 			divisionItem.addNewTeamInDivision(newTeam);
 		} catch (Exception e) {
-			logger.info("Exception occcured in create team :"+ e.getMessage());
+			logger.error("Exception occcured in create team :"+ e.getMessage());
 		}
 		return league;
 	}

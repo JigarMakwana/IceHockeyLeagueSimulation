@@ -21,7 +21,7 @@ public class ParseRootgeneralManagers implements IParseRootElement {
 
 	@Override
 	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
-		logger.info("Parsing Managers from Json");
+		logger.debug("Parsing Managers from Json");
 		List<IGeneralManager> generalManagersList = new ArrayList<>();
 		IGeneralManager generalManager;
 		JSONArray gameplayConfigJson = (JSONArray) jsonObject.get(Attributes.GENERALMANAGERS.getAttribute());

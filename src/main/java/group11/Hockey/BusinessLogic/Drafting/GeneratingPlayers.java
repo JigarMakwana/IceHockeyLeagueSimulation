@@ -24,7 +24,7 @@ public class GeneratingPlayers implements IGeneratingPlayers {
 	private static Logger logger = LogManager.getLogger(GeneratingPlayers.class);
 
 	public List<IPlayer> generatePlayers(int numbersOfPlayersToGenerate) {
-		logger.debug("Entered generatePlayers()");
+		logger.info("Entered generatePlayers()");
 		List<IPlayer> listOfPlayers = new ArrayList<>();
 		try {
 			String player = PlayerEnum.player.toString();

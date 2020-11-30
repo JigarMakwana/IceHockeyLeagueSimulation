@@ -28,7 +28,6 @@ public class ActiveDefencePlayer implements IGameStrategy {
 				checking += player.getChecking();
 				numberOfDefenseMen++;
 				if (defendingTeam.isOnPenalty()) {
-					logger.warn("Defence player is on penality");
 					checking = (int) (checking * appConfiguration.reduceDefenceStrength);
 					break;
 				}

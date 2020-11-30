@@ -259,7 +259,7 @@ public class TradeSettler implements ITradeSettler {
         if(null == team.getRoster().getAllPlayerList()){
             return;
         } else {
-            logger.info("Updating Team Roster with latest team changes");
+            logger.debug("Updating Team Roster with latest team changes");
             team.getRoster().updateSubRoster(team.getRoster().getAllPlayerList());
         }
     }

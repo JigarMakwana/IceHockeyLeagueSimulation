@@ -8,10 +8,11 @@ import group11.Hockey.BusinessLogic.Enums.RosterSize;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeSettler;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +28,7 @@ public class TradeSettler implements ITradeSettler {
     private IValidations validation;
     private IDisplay display;
     private IRosterSearch rosterSearch;
+    private static Logger logger = LogManager.getLogger(TradeSettler.class);
 
     public TradeSettler(ITeam team, List<IPlayer> freeAgentList, ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
         this.team = team;
@@ -38,7 +40,7 @@ public class TradeSettler implements ITradeSettler {
         initPlayers(team);
     }
 
-    public void initPlayers(ITeam team){
+    private void initPlayers(ITeam team){
         if (null == team){
             return;
         }
@@ -50,10 +52,11 @@ public class TradeSettler implements ITradeSettler {
 
     @Override
     public void settleTeam() {
+        logger.debug("Entered settleTeam()");
         if(null == team || team.getRoster().isValidRoster()){
             return;
         } else {
-            display.showMessageOnConsole("\nSettling Team " + team.getTeamName() + "'s size...");
+            logger.info("\nSettling Team " + team.getTeamName() + "'s size...");
             int constantTeamSize = RosterSize.ACTIVE_ROSTER_SIZE.getNumVal() + RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
             if(teamSize > constantTeamSize) {
                 dropPlayers();
@@ -61,10 +64,11 @@ public class TradeSettler implements ITradeSettler {
                 hirePlayers();
             }
         }
-        display.showMessageOnConsole("Team " + team.getTeamName() + "'s size successfully settled!\n");
+        logger.info("Team " + team.getTeamName() + "'s size successfully settled!\n");
     }
 
     public void dropPlayers(){
+        logger.debug("Entered dropPlayers()");
         if(teamGoalieSize > RosterSize.GOALIE_SIZE.getNumVal()) {
             int noOfGoaliesToBeDropped = teamGoalieSize - RosterSize.GOALIE_SIZE.getNumVal();
             dropGoalie(noOfGoaliesToBeDropped);
@@ -80,6 +84,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     private void dropGoalie(int noOfGoaliesToBeDropped){
+        logger.debug("Entered dropGoalie()");
         List<IPlayer> goalieList = team.getRoster().getGoalieList();
         for(int i=0; i<noOfGoaliesToBeDropped; i++) {
             if(team.isUserTeam() == true) {
@@ -93,6 +98,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     private void dropForward(int noOfForwardToBeDropped){
+        logger.debug("Entered dropForward()");
         List<IPlayer> forwardList = team.getRoster().getForwardList();
         for(int i=0; i<noOfForwardToBeDropped; i++) {
             if(team.isUserTeam() == true) {
@@ -106,6 +112,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void dropDefense(int noOfDefenseToBeDropped){
+        logger.debug("Entered dropDefense()");
         List<IPlayer> defenseList = team.getRoster().getDefenseList();
         for(int i=0; i<noOfDefenseToBeDropped; i++) {
             if(team.isUserTeam() == true) {
@@ -119,6 +126,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void dropPlayerFromAITeam(List<IPlayer> playerList) {
+        logger.debug("Entered dropPlayerFromAITeam()");
         if(null == playerList.get(0)){
             return;
         } else{
@@ -131,10 +139,11 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void dropPlayerFromUserTeam(List<IPlayer> playerList) {
+        logger.debug("Entered dropPlayerFromUserTeam()");
         display.pickPlayer(playerList);
         IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
         int userInput = userInputCheck.userResolveRosterInput(playerList.size());
-
+        logger.debug("User input is " + userInput);
         IPlayer p =  playerList.get(userInput-1);
         p.setIsFreeAgent(true);
         p.setCaptain(false);
@@ -143,6 +152,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void hirePlayers(){
+        logger.debug("Entered hirePlayers()");
         if(teamGoalieSize < RosterSize.GOALIE_SIZE.getNumVal()) {
             int noOfGoaliesToBeHired = RosterSize.GOALIE_SIZE.getNumVal() - teamGoalieSize;
             hireGoalie(noOfGoaliesToBeHired);
@@ -158,6 +168,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     private void hireGoalie(int noOfGoaliesToBeHired){
+        logger.debug("Entered hireGoalie()");
         for(int i=0; i<noOfGoaliesToBeHired; i++) {
             List<IPlayer> sortedFreeAgents = rosterSearch.getGoalieList(freeAgentList);
             try{
@@ -169,6 +180,7 @@ public class TradeSettler implements ITradeSettler {
                     hirePlayerInAITeam(sortedFreeAgents);
                 }
             }catch (Exception e) {
+                logger.error("Cannot hire Goalie. " + e);
                 e.printStackTrace();
             }
             updateRosterSubLists();
@@ -176,9 +188,10 @@ public class TradeSettler implements ITradeSettler {
     }
 
     private void hireForward(int noOfForwardToBeHired){
+        logger.debug("Entered hireForward()");
         for(int i=0; i<noOfForwardToBeHired; i++) {
             List<IPlayer> sortedFreeAgents = rosterSearch.getForwardList(freeAgentList);
-            try {
+            try{
                 if (team.isUserTeam() == true) {
                     hirePlayerInUserTeam(sortedFreeAgents);
                 } else {
@@ -186,6 +199,7 @@ public class TradeSettler implements ITradeSettler {
                     hirePlayerInAITeam(sortedFreeAgents);
                 }
             }catch (Exception e) {
+                logger.error("Cannot hire Forward. " + e);
                 e.printStackTrace();
             }
             updateRosterSubLists();
@@ -193,6 +207,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     private void hireDefense(int noOfDefenseToBeHired){
+        logger.debug("Entered hireDefense()");
         for(int i=0; i<noOfDefenseToBeHired; i++) {
             List<IPlayer> sortedFreeAgents = rosterSearch.getDefenseList(freeAgentList);
             try{
@@ -204,6 +219,7 @@ public class TradeSettler implements ITradeSettler {
                     hirePlayerInAITeam(sortedFreeAgents);
                 }
             }catch (Exception e) {
+                logger.error("Cannot hire Defense. " + e);
                 e.printStackTrace();
             }
             updateRosterSubLists();
@@ -211,6 +227,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     private void hirePlayerInAITeam(List<IPlayer> sortedFreeAgents) throws Exception {
+        logger.debug("Entered hirePlayerInAITeam()");
         if(sortedFreeAgents.size() == 0){
             throw new Exception("There are No enough Free Agents available to settle a Team.");
         } else{
@@ -222,6 +239,7 @@ public class TradeSettler implements ITradeSettler {
     }
 
     public void hirePlayerInUserTeam(List<IPlayer> sortedFreeAgents) throws Exception {
+        logger.debug("Entered hirePlayerInUserTeam()");
         if(null == sortedFreeAgents){
             throw new Exception("IPlayer is not available in Free Agents to form a Team.");
         } else {
@@ -237,9 +255,11 @@ public class TradeSettler implements ITradeSettler {
     }
 
     private void updateRosterSubLists(){
+        logger.debug("Entered updateRosterSubLists()");
         if(null == team.getRoster().getAllPlayerList()){
             return;
         } else {
+            logger.info("Updating Team Roster with latest team changes");
             team.getRoster().updateSubRoster(team.getRoster().getAllPlayerList());
         }
     }

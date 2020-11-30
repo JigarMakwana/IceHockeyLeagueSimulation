@@ -14,7 +14,7 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.InputOutput.IDisplay;
 /**
- * 
+ *
  * @author Jatin Partap Rana and Jigar
  *
  */
@@ -43,7 +43,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isConferenceNameValid(String conferenceName, List<IConference> conferencesList) {
-		logger.info("Entered isConferenceNameValid()");
+		logger.debug("Entered isConferenceNameValid()");
 		boolean conferenceNameCheck = false;
 		if (isStrBlank(conferenceName)) {
 			conferenceNameCheck = true;
@@ -58,7 +58,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isDivisionValid(String divisionName, IConference conferenceItem) {
-		logger.info("Entered isDivisionValid()");
+		logger.debug("Entered isDivisionValid()");
 		boolean divisionNameCheck = false;
 		if (isStrBlank(divisionName)) {
 			divisionNameCheck = true;
@@ -73,7 +73,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isTeamNameValid(String teamName, ILeague league) {
-		logger.info("Entered isTeamNameValid()");
+		logger.debug("Entered isTeamNameValid()");
 		ITeam team = DefaultHockeyFactory.makeTeam();
 		if (isStrBlank(teamName)) {
 			return true;
@@ -85,7 +85,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean generalManagerNameCheck(String name, ILeague league) {
-		logger.info("Entered generalManagerNameCheck()");
+		logger.debug("Entered generalManagerNameCheck()");
 		if (isStrBlank(name)) {
 			return true;
 		} else {
@@ -101,7 +101,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean headCoachNameCheck(String coachName, ILeague league) {
-		logger.info("Entered headCoachNameCheck()");
+		logger.debug("Entered headCoachNameCheck()");
 		boolean coachNameCheck = true;
 		if (isStrBlank(coachName)) {
 			coachNameCheck = true;
@@ -119,7 +119,7 @@ public class Validations implements IValidations {
 
 	public boolean playerCheck(String playerNumber, ILeague league, List<Integer> selectedValues, List<IPlayer> forwards,
 			List<IPlayer> defense, List<IPlayer> goalies) {
-		logger.info("Entered playerCheck()");
+		logger.debug("Entered playerCheck()");
 		boolean isPlayerValueNotValid = true;
 		int playerNumberInInt = 0;
 		try {
@@ -149,7 +149,7 @@ public class Validations implements IValidations {
 			} else {
 				display.showMessageOnConsole("Can not select more forward player");
 			}
-		} 
+		}
 		if (position.equalsIgnoreCase("defense")) {
 			if (defense.size() <= Integer.parseInt(BusinessConstants.Number_Of_Defense.getValue().toString())) {
 				isPlayerValueNotValid = false;
@@ -173,7 +173,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isStrBlank(String str) {
-		logger.info("Entered isStrBlank()");
+		logger.debug("Entered isStrBlank()");
 		if (str == null || str.isEmpty() || str.split(" +").length == 0) {
 			return true;
 		}
@@ -182,7 +182,7 @@ public class Validations implements IValidations {
 	}
 
 	public boolean isNoOfSeasonsValueValid(String numberOfSeasons) {
-		logger.info("Entered isNoOfSeasonsValueValid()");
+		logger.debug("Entered isNoOfSeasonsValueValid()");
 		boolean isNoOfSeasonsValueValid = false;
 		try {
 			int value = Integer.parseInt(numberOfSeasons);
@@ -206,7 +206,7 @@ public class Validations implements IValidations {
 	 * @author Jigar Makwana B00842568
 	 */
 	public boolean isUserTradeInputValid(int userInput) {
-		logger.info("Entered isUserTradeInputValid()");
+		logger.debug("Entered isUserTradeInputValid()");
 		if ((userInput == 1) || (userInput == 0)) {
 			logger.info("Trade input is valid");
 			return true;
@@ -220,7 +220,7 @@ public class Validations implements IValidations {
 	 * @author Jigar Makwana B00842568
 	 */
 	public boolean isUserResolveRosterInputValid(int userInput, int listSize) {
-		logger.info("Entered isUserResolveRosterInputValid()");
+		logger.debug("Entered isUserResolveRosterInputValid()");
 		if (((userInput >= 1) && (userInput <= listSize))) {
 			logger.info("Roster input is valid");
 			return true;

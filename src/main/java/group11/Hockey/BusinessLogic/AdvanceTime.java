@@ -34,7 +34,7 @@ public class AdvanceTime extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
-		logger.info("Entered startState()");
+		logger.debug("Entered startState()");
 		ITimeLine timeLine = league.getTimeLine();
 		IParse parse = DefaultHockeyFactory.makeParse();
 		IAdvance advance = DefaultHockeyFactory.makeAdvance();

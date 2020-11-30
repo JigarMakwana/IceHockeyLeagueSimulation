@@ -13,7 +13,7 @@ public class App {
 
 	private static Logger logger = LogManager.getLogger(App.class);
 	public static void main(String[] args) {
-		logger.info("Entered App.java");
+		logger.debug("Entered App.java");
 		ILeagueDb leagueDb = DefaultHockeyFactory.makeLeagueSerialisation();
 		ICommandLineInput commandLineInput = DefaultHockeyFactory.makeCommandLineInput();
 		IDisplay display = DefaultHockeyFactory.makeDisplay();

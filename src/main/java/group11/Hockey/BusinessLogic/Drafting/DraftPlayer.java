@@ -20,7 +20,7 @@ import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 /**
- * 
+ *
  * @author Jatin Partap Rana
  *
  */
@@ -49,7 +49,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 		List<Player> sortedPlayers = new ArrayList<>();
 		int numbersOfPlayersToGenerate;
 		int indexForGeneratedPlayers = 0;
-		
+
 		List<ITeam> playOffTeamsInReverseOrder = league.getQualifiedTeams();
 		List<Team> teamsInReverseOrder = DefaultHockeyFactory.makeTeam().orderTeamsInLeagueStandings(league);
 		DefaultHockeyFactory.makeTeam().sortTeam(playOffTeamsInReverseOrder);
@@ -59,7 +59,7 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 		IGeneratingPlayers generatingPlayers = DefaultHockeyFactory.makeGeneratePlayer();
 		display.showMessageOnConsole("Generating players for Draft");
 		List<IPlayer> generatedPlayers = generatingPlayers.generatePlayers(numbersOfPlayersToGenerate);
-		
+
 		for(IPlayer player: generatedPlayers) {
 			sortedPlayers.add((Player)player);
 		}
@@ -79,11 +79,11 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 			List<IPlayer> freeAgents = (List<IPlayer>) DefaultHockeyFactory.makeLeague().getFreeAgents();
 			freeAgents.addAll(extraPlayers);
 		}
-		
+
 	}
 
 	public List<Team> selectTeamFromRegularSeasonStandinfo(List<Team> regularSeasonTeams) {
-		logger.info("Entered selectTeamFromRegularSeasonStandinfo()");
+		logger.debug("Entered selectTeamFromRegularSeasonStandinfo()");
 		List<Team> teamsForRegularSeason = new ArrayList<>();
 		Iterator<Team> interator = regularSeasonTeams.iterator();
 		for (int i = 0; i < regularSeasonTeams.size() - 16; i++) {

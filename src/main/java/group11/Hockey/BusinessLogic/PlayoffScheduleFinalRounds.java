@@ -33,7 +33,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 
 	private static Logger logger = LogManager.getLogger(PlayoffScheduleFinalRounds.class);
 	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
-		logger.info("Entered getSchedule()");
+		logger.debug("Entered getSchedule()");
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getCurrentDate();
 		IAdvance advance = DefaultHockeyFactory.makeAdvance();

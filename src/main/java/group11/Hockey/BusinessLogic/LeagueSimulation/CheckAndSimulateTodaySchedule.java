@@ -33,7 +33,7 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 
 	@Override
 	public void CheckAndSimulateToday(String date) {
-		logger.info("Entered CheckAndSimulateToday()");
+		logger.debug("Entered CheckAndSimulateToday()");
 		String time = "00:00:00", id = date + "T" + time;
 		HashMap<ITeam, ITeam> todayTeams = new HashMap<>();
 		todayTeams = schedule.get(id);

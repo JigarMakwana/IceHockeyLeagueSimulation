@@ -58,7 +58,7 @@ public class InjurySystem implements IInjurySystem {
 	 * Author: Jigar Makwana B00842568
 	 */
 	public void settleRecoveredPlayer(IRoster roster, IPlayer recoveredPlayer) {
-		logger.info("Entered settleRecoveredPlayer()");
+		logger.debug("Entered settleRecoveredPlayer()");
 		Positions position = findInjuredPlayerPosition(recoveredPlayer);
 		IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
 		IPlayer replacement = rosterSearch.findWeakestPlayerByPosition(roster.getActiveRoster(), position);
@@ -75,7 +75,7 @@ public class InjurySystem implements IInjurySystem {
 	 * Author: Jigar Makwana B00842568
 	 */
 	public void settleInjuredPlayer(IRoster roster, IPlayer injuredPlayer) {
-		logger.info("Entered settleInjuredPlayer()");
+		logger.debug("Entered settleInjuredPlayer()");
 		if (isInjuredSwappingPossible(roster, injuredPlayer)) {
 			Positions position = findInjuredPlayerPosition(injuredPlayer);
 			IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
@@ -94,7 +94,7 @@ public class InjurySystem implements IInjurySystem {
 	 * Author: Jigar Makwana B00842568
 	 */
 	public boolean isInjuredSwappingPossible(IRoster roster, IPlayer injuredPlayer) {
-		logger.info("Entered isInjuredSwappingPossible()");
+		logger.debug("Entered isInjuredSwappingPossible()");
 		Positions position = findInjuredPlayerPosition(injuredPlayer);
 		return isUnInjuredPlayerAvailable(roster, position);
 	}
@@ -116,7 +116,7 @@ public class InjurySystem implements IInjurySystem {
 	 * Author: Jigar Makwana B00842568
 	 */
 	public boolean isUnInjuredPlayerAvailable(IRoster roster, Positions position) {
-		logger.info("Entered isUnInjuredPlayerAvailable()");
+		logger.debug("Entered isUnInjuredPlayerAvailable()");
 		int minUnInjuredPlayerRequired = 1;
 		List<IPlayer> filteredPosition = roster.getInActiveRoster().stream()
 				.filter(player -> player.getPosition().equals(position)).collect(Collectors.toList());

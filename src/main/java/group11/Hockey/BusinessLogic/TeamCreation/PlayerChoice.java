@@ -36,7 +36,7 @@ public class PlayerChoice  extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
-		logger.info("Entered startState()");
+		logger.debug("Entered startState()");
 		boolean seasonsCheck = true;
 		String numberOfSeasons = null;
 		while (seasonsCheck) {

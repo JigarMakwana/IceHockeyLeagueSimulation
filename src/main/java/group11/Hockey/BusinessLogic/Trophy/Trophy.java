@@ -31,7 +31,7 @@ public class Trophy extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
-		logger.info("Entered startState()");
+		logger.debug("Entered startState()");
 		IParse parse = DefaultHockeyFactory.makeParse();
 		IPrintToConsole console=DefaultHockeyFactory.makePrintToConsole();
 		ITimeLine timeLine = league.getTimeLine();
@@ -48,14 +48,14 @@ public class Trophy extends StateMachineState {
 		List<IPlayer> mauricePlayers = league.getMauriceRichardPlayers();
 		List<IPlayer> robHawkeyPlayers = league.getRobHawkeyPlayers();
 		List<ITeam> participationTeams = league.getParticipationTeams();
-		
+
 		ITeam winner = qualifiedTeams.get(0);
 		qualifiedTeams.remove(winner);
 		String message = "\n********** Winner team of the season(" + startYear + "/" + endYear + ") is "
 				+ winner.getTeamName() + " **********";
 		console.print(message);
 		DefaultHockeyFactory.makeEndOfStanleySubject(league);
-		
+
 		int seasons=presidentTeams.size();
 		for(int i=(seasons-1);i>=0;i--) {
 		console.print(message);

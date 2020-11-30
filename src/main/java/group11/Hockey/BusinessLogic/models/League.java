@@ -3,7 +3,10 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.*;
 
 import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
+import group11.Hockey.BusinessLogic.models.Roster.Roster;
 import group11.Hockey.db.League.ILeagueDb;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * This class contains the business logic for the League model
@@ -26,7 +29,6 @@ public class League implements ILeague {
 	private List<IPlayer> mauriceRichardPlayers = new ArrayList<>();
 	private List<IPlayer> robHawkeyPlayers = new ArrayList<>();
 	private List<ITeam> participationTeams = new ArrayList<>();
-
 	private String startDate;
 	private ITimeLine timeLine;
 	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
@@ -35,6 +37,7 @@ public class League implements ILeague {
 	private int savesInSeason;
 	private int gamesInSeason;
 	private List<Map<ITeam, Map<ITeam, List<Boolean>>>> draftTradeTracker;
+	private static Logger logger = LogManager.getLogger(League.class);
 
 	public int getGoalsInSeason() {
 		return goalsInSeason;
@@ -229,7 +232,30 @@ public class League implements ILeague {
 	/**
 	 * @author  Jigar Makwana B00842568
 	 */
+	private Map<ITeam, List<Boolean>> addToInnerMap(ITeam requestedTeam, int draftRound){
+		logger.debug("Entered addToInnerMap()");
+		List<Boolean> roundTracker = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
+		roundTracker.set(draftRound,true);
+		Map<ITeam, List<Boolean>> tradeDetail = new HashMap<>();
+		tradeDetail.put(requestedTeam,roundTracker);
+		return tradeDetail;
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
+	private void addToOuterMap(ITeam offeringTeam, Map<ITeam, List<Boolean>> tradeDetail){
+		logger.debug("Entered addToOuterMap()");
+		Map<ITeam, Map<ITeam, List<Boolean>>> entry = new HashMap<>();
+		entry.put(offeringTeam,tradeDetail);
+		draftTradeTracker.add(entry);
+	}
+
+	/**
+	 * @author  Jigar Makwana B00842568
+	 */
 	public void setDraftTradeTracker(ITeam offeringTeam, ITeam requestedTeam, int draftRound) {
+		logger.debug("Entered setDraftTradeTracker()");
 		if(null == draftTradeTracker){
 			addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
 		} else {
@@ -252,26 +278,6 @@ public class League implements ILeague {
 				addToOuterMap(offeringTeam, addToInnerMap(requestedTeam, draftRound));
 			}
 		}
-	}
-
-	/**
-	 * @author  Jigar Makwana B00842568
-	 */
-	private Map<ITeam, List<Boolean>> addToInnerMap(ITeam requestedTeam, int draftRound){
-		List<Boolean> roundTracker = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
-		roundTracker.set(draftRound,true);
-		Map<ITeam, List<Boolean>> tradeDetail = new HashMap<>();
-		tradeDetail.put(requestedTeam,roundTracker);
-		return tradeDetail;
-	}
-
-	/**
-	 * @author  Jigar Makwana B00842568
-	 */
-	private void addToOuterMap(ITeam offeringTeam, Map<ITeam, List<Boolean>> tradeDetail){
-		Map<ITeam, Map<ITeam, List<Boolean>>> entry = new HashMap<>();
-		entry.put(offeringTeam,tradeDetail);
-		draftTradeTracker.add(entry);
 	}
 
 	public List<ITeam> getPresidentTeams() {

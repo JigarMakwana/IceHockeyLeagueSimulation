@@ -22,6 +22,7 @@ public class RosterSearch implements IRosterSearch{
     private static Logger logger = LogManager.getLogger(RosterSearch.class);
 
     public List<IPlayer> findWeakestPlayers(List<IPlayer> unSortedPlayerList, int maxPlayersPerTrade) {
+        logger.debug("Entered findWeakestPlayers()");
         List<IPlayer> playerList = sortPlayersByStrength(unSortedPlayerList);
         List<IPlayer> weakestPlayerList = new ArrayList<>();
         for(int i=0; i < maxPlayersPerTrade; i++) {
@@ -31,6 +32,7 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public List<Integer> findPlayerPositions(List<IPlayer> playerList){
+        logger.debug("Entered findPlayerPositions()");
         List<Integer> playerPositionFlag = new ArrayList<>(Arrays.asList(0,0,0));
         for(int j=0; j<playerList.size(); j++) {
             String position = playerList.get(j).getPosition();
@@ -58,6 +60,7 @@ public class RosterSearch implements IRosterSearch{
 
     public List<IPlayer> findStrongestPlayers(List<IPlayer> unSortedPlayerList, List<Integer> playerPositionFlag,
                                               int maxPlayersPerTrade) {
+        logger.debug("Entered findStrongestPlayers()");
         List<IPlayer> playerList = sortPlayersByStrength(unSortedPlayerList);
         List<IPlayer> strongestPlayerList = new ArrayList<>();
 
@@ -98,6 +101,7 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public IPlayer findStrongestPlayerByPosition(List<IPlayer> unSortedPlayerList, Positions positions) {
+        logger.debug("Entered findStrongestPlayerByPosition()");
         List<IPlayer> playerList = sortPlayersByStrength(unSortedPlayerList);
         for(IPlayer p: playerList){
             if(p.getPosition().equalsIgnoreCase(positions.toString())){
@@ -109,6 +113,7 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public IPlayer findWeakestPlayerByPosition(List<IPlayer> unSortedPlayerList, Positions positions) {
+        logger.debug("Entered findWeakestPlayerByPosition()");
         List<IPlayer> playerList = sortPlayersByStrength(unSortedPlayerList);
         Collections.reverse(playerList);
         for(IPlayer p: playerList){
@@ -122,6 +127,7 @@ public class RosterSearch implements IRosterSearch{
 
     public Triplet<ITeam, List<IPlayer>, Float> findStrongestTradeTeam(
             List<Triplet<ITeam, List<IPlayer>, Float>> tradingTeamsBuffer) {
+        logger.debug("Entered findStrongestTradeTeam()");
         List<Triplet<ITeam, List<IPlayer>, Float>> sortedBuffer = tradingTeamsBuffer;
         int i, j;
         Triplet temp;
@@ -148,6 +154,7 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public List<IPlayer> sortPlayersByStrength(List<IPlayer> unSortedPlayerList) {
+        logger.debug("Entered sortPlayersByStrength()");
         List<IPlayer> sortedPlayerList = unSortedPlayerList;
         int i, j;
         IPlayer temp;
@@ -172,6 +179,7 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public float getRosterStrength(List<IPlayer> playerList){
+        logger.debug("Entered getRosterStrength()");
         float teamStrength = 0;
         if (playerList == null || playerList.size() == 0) {
             return 0;
@@ -183,24 +191,28 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public List<IPlayer> getDefenseList(List<IPlayer> playerList) {
+        logger.debug("Entered getDefenseList()");
         List<IPlayer> defenceIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.DEFENSE.toString())).collect(Collectors.toList());
         return sortPlayersByStrength(defenceIPlayerList);
     }
 
     public List<IPlayer> getForwardList(List<IPlayer> playerList) {
+        logger.debug("Entered getForwardList()");
         List<IPlayer> forwardIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.FORWARD.toString())).collect(Collectors.toList());
         return sortPlayersByStrength(forwardIPlayerList);
     }
 
     public List<IPlayer> getGoalieList(List<IPlayer> playerList) {
+        logger.debug("Entered getGoalieList()");
         List<IPlayer> goalieIPlayerList= playerList.stream().filter(player ->
                 player.getPosition().equalsIgnoreCase(Positions.GOALIE.toString())).collect(Collectors.toList());
         return sortPlayersByStrength(goalieIPlayerList);
     }
 
     public float averageTeamStrength(List<ITeam> eligibleTeamList){
+        logger.debug("Entered averageTeamStrength()");
         float sum = 0.0f;
         for(int i=0 ; i<eligibleTeamList.size(); i++){
             sum += eligibleTeamList.get(i).getTeamStrength();
@@ -209,6 +221,7 @@ public class RosterSearch implements IRosterSearch{
     }
 
     public ITeam findStrongestTeam(List<ITeam> eligibleTeamList){
+        logger.debug("Entered findStrongestTeam()");
         List<Team> teams = new ArrayList<>();
         for(ITeam team: eligibleTeamList) {
             teams.add((Team)team);

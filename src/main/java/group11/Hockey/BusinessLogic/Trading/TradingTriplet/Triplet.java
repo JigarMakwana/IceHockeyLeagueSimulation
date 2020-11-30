@@ -30,19 +30,19 @@ public class Triplet<T, U, V> implements Comparator<Triplet>
     @Override
     public String toString()
     {
-    	logger.info("Entered toString()");
+    	logger.debug("Entered toString()");
         return "(" + first + ", " + second + ", " + third + ")";
     }
 
     public static <T, U, V> Triplet <T, U, V> of(T a, U b, V c)
     {
-    	logger.info("Entered Triplet()");
+    	logger.debug("Entered Triplet()");
         return new Triplet <>(a, b, c);
     }
 
     @Override
     public int compare(Triplet o1, Triplet o2) {
-    	logger.info("Entered compare()");
+    	logger.debug("Entered compare()");
         return Float.compare((Float)o1.getThird(), (Float)o2.getThird());
     }
 }

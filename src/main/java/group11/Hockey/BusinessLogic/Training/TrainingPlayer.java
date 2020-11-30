@@ -113,7 +113,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			boolean coachStat = comapreCoachStat(coachSkatingStatValue);
 			if (coachStat) {
 				float skatingSkill = player.getSkating() + 1;
-				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " skating skill improved");
+				logger.info("Player with name "+ player.getPlayerName()+ " skating skill improved");
 				player.setSkating(skatingSkill);
 			} else {
 				player.checkInjury(league);
@@ -128,7 +128,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			boolean coachStat = comapreCoachStat(coachShootingStatValue);
 			if (coachStat) {
 				float shootingSkill = player.getShooting() + 1;
-				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " shooting skill improved");
+				logger.info("Player with name "+ player.getPlayerName()+ " shooting skill improved");
 				player.setShooting(shootingSkill);
 			} else {
 				player.checkInjury(league);
@@ -143,7 +143,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			boolean coachStat = comapreCoachStat(coachCheckingStatValue);
 			if (coachStat) {
 				float checkingSkill = player.getChecking() + 1;
-				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " checking skill improved");
+				logger.info("Player with name "+ player.getPlayerName()+ " checking skill improved");
 				player.setChecking(checkingSkill);
 			} else {
 				player.checkInjury(league);
@@ -157,7 +157,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			boolean coachStat = comapreCoachStat(coachSavingStatValue);
 			if (coachStat) {
 				float savingSkill = player.getSaving() + 1;
-				display.showMessageOnConsole("Player with name "+ player.getPlayerName()+ " saving skill improved");
+				logger.info("Player with name "+ player.getPlayerName()+ " saving skill improved");
 				player.setSaving(savingSkill);
 			} else {
 				player.checkInjury(league);

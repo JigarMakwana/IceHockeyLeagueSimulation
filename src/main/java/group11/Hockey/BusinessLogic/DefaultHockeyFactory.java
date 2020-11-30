@@ -1,5 +1,6 @@
 package group11.Hockey.BusinessLogic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.parser.JSONParser;
@@ -13,6 +14,7 @@ import group11.Hockey.BusinessLogic.Drafting.GeneratingPlayers;
 import group11.Hockey.BusinessLogic.Drafting.IGeneratingPlayers;
 import group11.Hockey.BusinessLogic.LeagueSimulation.AdvanceTime;
 import group11.Hockey.BusinessLogic.LeagueSimulation.AdvanceToNextSeason;
+import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Deadlines;
 import group11.Hockey.BusinessLogic.LeagueSimulation.InitializeSeason;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
@@ -31,6 +33,7 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShif
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IDeadlines;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ISchedule;
@@ -446,5 +449,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static IDeadlines makeDeadlines() {
 		return new Deadlines();
+	}
+	public static ICheckAndSimulateTodaySchedule makeCheckAndSimulateTodaySchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule, ILeague league) {
+		return new CheckAndSimulateTodaySchedule(schedule, league);
 	}
 }

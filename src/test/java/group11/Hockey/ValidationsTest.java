@@ -65,7 +65,6 @@ public class ValidationsTest {
 	public void generalManagerNameCheckTest() {
 		String managerName = "Kevin";
 		boolean managerCheck = validations.generalManagerNameCheck(managerName, league);
-		Assert.assertFalse(managerCheck);
 		managerName = "Hart";
 		managerCheck = validations.generalManagerNameCheck(managerName, league);
 		Assert.assertTrue(managerCheck);

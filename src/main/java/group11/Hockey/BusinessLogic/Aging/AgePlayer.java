@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -23,6 +22,7 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
@@ -73,6 +73,9 @@ public class AgePlayer extends RetirePlayer {
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
 			logger.info("Move to DraftPlayer State");
+			if(display == null) {
+				display = DefaultHockeyFactory.makeDisplay();
+			}
 			return DefaultHockeyFactory.makeDraftPlayer(league, leagueDb, display);
 		} else {
 			logger.info("Date is not end of stanley playoffs");

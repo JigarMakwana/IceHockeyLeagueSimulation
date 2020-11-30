@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,8 +6,6 @@ import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.*;
 import org.junit.Test;
-
-import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 
 public class CheckAndSimulateTodayScheduleTest {
 

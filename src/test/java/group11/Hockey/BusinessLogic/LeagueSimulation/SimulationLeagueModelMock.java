@@ -1,4 +1,5 @@
-package group11.Hockey;
+// Author: Harry B00856244
+package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,26 +1,26 @@
-// Author: Harry B00856244
-package group11.Hockey.BusinessLogic.Trophy;
+package group11.Hockey.BusinessLogic.LeagueSimulation;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.LeagueSimulation.SimulationLeagueModelMock;
-import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
 
-public class PresidentTest {
-
+public class PlayoffScheduleTest {
+	
 	@Test
-	public void AwardTrophyTest() {
+	public void getSchedule() {
 		SimulationLeagueModelMock leagueMock = new SimulationLeagueModelMock();
 		ILeague league = leagueMock.getLeagueInfo();
+		
 		List<IConference> cconferenceList = league.getConferences();
 		for (IConference conference : cconferenceList) {
 			List<IDivision> divisionList = conference.getDivisions();
@@ -35,9 +35,17 @@ public class PresidentTest {
 				}
 			}
 		}	
-		ITrophyObserver presidentTeam=DefaultHockeyFactory.makePresident(league);
-		presidentTeam.AwardTrophy();
-		List<ITeam> president=league.getPresidentTeams();
-		Assert.assertEquals(president.size(), 1);
+		league.setStartDate("01/10/2020");
+		ITimeLine timeline=DefaultHockeyFactory.makeTimeLine();
+		timeline.setStanleyDate("01/07/2021");
+		league.setTimeLine(timeline);
+		IScheduleStrategy playoff=DefaultHockeyFactory.makePlayoffSchedule();
+		playoff.getSchedule(league, null);
+		HashMap<String, HashMap<ITeam, ITeam>> playoffSchedule = league.getSchedule();
+		int size=playoffSchedule.size();
+		System.out.println("round1: "+size);
+		Assert.assertEquals(56, size);
+		
+		
 	}
 }

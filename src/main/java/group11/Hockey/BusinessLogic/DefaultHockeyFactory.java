@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import group11.Hockey.BusinessLogic.Aging.AgePlayer;
-import group11.Hockey.BusinessLogic.Aging.IAgePlayer;
 import group11.Hockey.BusinessLogic.Aging.RetirePlayer;
 import group11.Hockey.BusinessLogic.Drafting.DraftPlayer;
 import group11.Hockey.BusinessLogic.Drafting.GeneratingPlayers;

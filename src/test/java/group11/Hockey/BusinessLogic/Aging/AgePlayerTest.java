@@ -38,7 +38,7 @@ public class AgePlayerTest {
 	@Test
 	public void increaseAgeTest() {
 
-		AgePlayer agePlayer = (AgePlayer) DefaultHockeyFactory.makeAgePlayer(league, 365, null, null);
+		IAgePlayer agePlayer = (IAgePlayer) DefaultHockeyFactory.makeAgePlayer(league, 365, null, null);
 		agePlayer.agePlayers();
 		List<IConference> conferences = league.getConferences();
 		List<IDivision> divisions = conferences.get(0).getDivisions();

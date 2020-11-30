@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.HashMap;
@@ -6,18 +7,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.LeagueSimulation.Schedule;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ISchedule;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.ILeague;
 
 public class ScheduleTest {
 
 	@Test
 	public void getSeasonScheduleTest() {
 		SimulationLeagueModelMock leagueModel = new SimulationLeagueModelMock();
-		League league = leagueModel.getLeagueInfo();
+		ILeague league = leagueModel.getLeagueInfo();
 		
 		league.setStartDate("29/10/2020");
 		ITimeLine timeline=DefaultHockeyFactory.makeTimeLine();

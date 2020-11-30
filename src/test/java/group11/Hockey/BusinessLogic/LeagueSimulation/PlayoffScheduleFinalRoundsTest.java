@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.ArrayList;
@@ -8,47 +9,38 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleStrategy;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IGeneralManager;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Stats;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public class PlayoffScheduleFinalRoundsTest {
 	
 	@Test
 	public void getSchedule() {
 		 SimulationLeagueModelMock leagueMock = new SimulationLeagueModelMock();
-		  League league = leagueMock.getLeagueInfo(); 
+		  ILeague league = leagueMock.getLeagueInfo(); 
 		  ITeam team1,team2;
 		  
-		  float skill = (float) 2.0; 
-		  ICoach coach = new Coach();
-		  coach.setName("Dave"); 
-		  ((Stats) coach).setChecking(skill);
-		  ((Stats) coach).setSaving(skill);
-		  ((Stats) coach).setShooting(skill);
-		  ((Stats) coach).setSkating(skill);
+		  ICoach coach = DefaultHockeyFactory.makeCoach("Dave", null);
 		  
 		  IGeneralManager gm1=DefaultHockeyFactory.makeGeneralManager("gm1", "normal");
 		  IGeneralManager gm2=DefaultHockeyFactory.makeGeneralManager("gm2", "normal");
 		  
 		  List<IPlayer> playerList = new ArrayList<>(); 
-		  IPlayer player1 = new Player(10, 10, 10, 10, "Player One", "forward", true, false, 50); 
-		  IPlayer player2 = new Player(10, 10, 10, 10, "Player Two", "defense", false, false,
+		  IPlayer player1 = DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player One", "forward", true, false, 50); 
+		  IPlayer player2 = DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player Two", "defense", false, false,
 		  20); 
-		  IPlayer player3 = new Player(10, 10, 10, 10, "Player Three", "goalie",
+		  IPlayer player3 = DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player Three", "goalie",
 		  false, false, 20);
 		  
 		  playerList.add(player1); playerList.add(player2); playerList.add(player3);
 		  
-		  team1 = new Team("Boston Bruins", gm1, coach, playerList); 
-		  team2 = new Team("Arizona Coyotes", gm2, coach, playerList); 
+		  team1 = DefaultHockeyFactory.makeTeam("Boston Bruins", gm1, coach, playerList); 
+		  team2 = DefaultHockeyFactory.makeTeam("Arizona Coyotes", gm2, coach, playerList); 
 		  List<ITeam> teamList = new ArrayList<>();
 		  teamList.add(team1); teamList.add(team2);
 		  league.setQualifiedTeams(teamList);

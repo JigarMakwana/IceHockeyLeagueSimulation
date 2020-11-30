@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
-import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
@@ -26,7 +26,7 @@ import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class AgePlayer extends RetirePlayer {
+public class AgePlayer extends RetirePlayer implements IAgePlayer {
 
 	ILeague league;
 	int days;
@@ -83,11 +83,12 @@ public class AgePlayer extends RetirePlayer {
 		}
 	}
 
+	@Override
 	public void agePlayers() {
 		IParse parse = DefaultHockeyFactory.makeParse();
 		Date currentDate = parse.stringToDate(league.getTimeLine().getCurrentDate());
 
-		List<IPlayer> freeAgents = (List<IPlayer>) league.getFreeAgents();
+		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		List<IConference> conferences = league.getConferences();
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
 		if (freeAgents.size() > 0) {

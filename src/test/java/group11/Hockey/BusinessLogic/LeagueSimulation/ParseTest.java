@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.text.ParseException;
@@ -6,11 +7,14 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
+
 public class ParseTest {
 
 	@Test
 	public void stringToDateTest() {
-		Parse parse=new Parse();
+		IParse parse=DefaultHockeyFactory.makeParse();
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = null;
 		try {
@@ -24,14 +28,14 @@ public class ParseTest {
 
 	@Test
 	public void stringToYearTest() {
-		Parse parse=new Parse();
+		IParse parse=DefaultHockeyFactory.makeParse();
 		int dateYear= parse.stringToYear("01/10/2020");
 		Assert.assertEquals(2020,dateYear);
 	}
 
 	@Test
 	public void dateToStringTest() {
-		Parse parseObj=new Parse();
+		IParse parseObj=DefaultHockeyFactory.makeParse();
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateTime = null;
 		try {
@@ -45,7 +49,7 @@ public class ParseTest {
 
 	@Test
 	public void getFirstSaturdayOfAprilInYear() {
-		Parse parseObj=new Parse();
+		IParse parseObj=DefaultHockeyFactory.makeParse();
 		Date firstSaturday=parseObj.getFirstSaturdayOfAprilInYear(2021);
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateTime = null;

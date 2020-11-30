@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Coach;
-import group11.Hockey.BusinessLogic.models.Conference;
-import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GeneralManager;
 import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
@@ -18,18 +14,17 @@ import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.IGeneralManager;
 import group11.Hockey.BusinessLogic.models.IInjuries;
 import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.ITrading;
 import group11.Hockey.BusinessLogic.models.ITraining;
 import group11.Hockey.BusinessLogic.models.IgmTable;
-import group11.Hockey.BusinessLogic.models.League;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 
 public class SimulationLeagueModelMock {
 
-	private League league;
+	private ILeague league;
 	private List<ITeam> qualifiedTeams = new ArrayList<>();
 	private String startDate;
 	private ITimeLine timeLine;
@@ -57,14 +52,7 @@ public class SimulationLeagueModelMock {
 		ITrading trading = DefaultHockeyFactory.makeTradingConfig(0, 0, 0, 0, gmTbale);
 		IGameplayConfig gameplayConfig = DefaultHockeyFactory.makeGameplayConfig(aging, injuries, training, trading);
 
-
-		float skill = (float) 2.0;
-		Coach coach = new Coach();
-		coach.setChecking(skill);
-		coach.setName("Dave");
-		coach.setSaving(skill);
-		coach.setShooting(skill);
-		coach.setSkating(skill);
+		ICoach coach = DefaultHockeyFactory.makeCoach("Dave", null);
 
 		List<ITeam> teamsList = new ArrayList<>();
 		List<IPlayer> playerList = new ArrayList<>();
@@ -84,11 +72,11 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team1 = new Team("Boston Bruins", null, coach, playerList);
+		team1 = DefaultHockeyFactory.makeTeam("Boston Bruins", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		player1 = DefaultHockeyFactory.makePlayer(15, 18, 12, 1, "Tom2", "forward", true, false, 25);
-		team2 = new Team("Buffalo Sabres", null, coach, playerList);
+		team2 = DefaultHockeyFactory.makeTeam("Buffalo Sabres", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -101,7 +89,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team3 = new Team("Detroit Red Wings", null, coach, playerList);
+		team3 = DefaultHockeyFactory.makeTeam("Detroit Red Wings", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -114,7 +102,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team4 = new Team("Florida Panthers", null, coach, playerList);
+		team4 = DefaultHockeyFactory.makeTeam("Florida Panthers", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -127,7 +115,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team5 = new Team("Montreal Canadiens", null, coach, playerList);
+		team5 = DefaultHockeyFactory.makeTeam("Montreal Canadiens", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -140,7 +128,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team6 = new Team("Ottawa Senators", null, coach, playerList);
+		team6 = DefaultHockeyFactory.makeTeam("Ottawa Senators", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -153,7 +141,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team7 = new Team("Tampa Bay Lightning", null, coach, playerList);
+		team7 = DefaultHockeyFactory.makeTeam("Tampa Bay Lightning", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -166,7 +154,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team8 = new Team("Toronto Maple Leafs", null, coach, playerList);
+		team8 = DefaultHockeyFactory.makeTeam("Toronto Maple Leafs", null, coach, playerList);
 
 		teamsList.add(team1);
 		teamsList.add(team2);
@@ -177,7 +165,7 @@ public class SimulationLeagueModelMock {
 		teamsList.add(team7);
 		teamsList.add(team8);
 
-		Division division = new Division("Atlantic", teamsList);
+		IDivision division = DefaultHockeyFactory.makeDivision("Atlantic", teamsList);
 		divisionsList.add(division);
 
 		// Metropolitan Division, Eastern Conference
@@ -193,7 +181,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team1 = new Team("Carolina Hurricanes", null, coach, playerList);
+		team1 = DefaultHockeyFactory.makeTeam("Carolina Hurricanes", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -206,7 +194,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team2 = new Team("Columbus Blue Jackets", null, coach, playerList);
+		team2 = DefaultHockeyFactory.makeTeam("Columbus Blue Jackets", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -219,7 +207,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team3 = new Team("New Jersey Devils", null, coach, playerList);
+		team3 = DefaultHockeyFactory.makeTeam("New Jersey Devils", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -232,7 +220,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team4 = new Team("New York Islanders", null, coach, playerList);
+		team4 = DefaultHockeyFactory.makeTeam("New York Islanders", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -245,7 +233,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team5 = new Team("New York Rangers", null, coach, playerList);
+		team5 = DefaultHockeyFactory.makeTeam("New York Rangers", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -258,7 +246,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team6 = new Team("Philidelphia Flyers", null, coach, playerList);
+		team6 = DefaultHockeyFactory.makeTeam("Philidelphia Flyers", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -271,7 +259,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team7 = new Team("Pittsburgh Penguins", null, coach, playerList);
+		team7 = DefaultHockeyFactory.makeTeam("Pittsburgh Penguins", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -284,7 +272,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team8 = new Team("Washington Capitals", null, coach, playerList);
+		team8 = DefaultHockeyFactory.makeTeam("Washington Capitals", null, coach, playerList);
 
 		teamsList.add(team1);
 		teamsList.add(team2);
@@ -296,10 +284,10 @@ public class SimulationLeagueModelMock {
 		teamsList.add(team8);
 
 		qualifiedTeams.add(team1);
-		Division division1 = new Division("Metropolitan", teamsList);
+		IDivision division1 = DefaultHockeyFactory.makeDivision("Metropolitan", teamsList);
 		divisionsList.add(division1);
 
-		Conference conference = new Conference("Eastern Conference", divisionsList);
+		IConference conference = DefaultHockeyFactory.makeConference("Eastern Conference", divisionsList);
 		conferenceList.add(conference);
 
 		// Central Division, Western Conference
@@ -315,7 +303,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team1 = new Team("Chicago Blackhawks", null, coach, playerList);
+		team1 = DefaultHockeyFactory.makeTeam("Chicago Blackhawks", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -328,7 +316,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team2 = new Team("Colorado Avalanche", null, coach, playerList);
+		team2 = DefaultHockeyFactory.makeTeam("Colorado Avalanche", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -341,7 +329,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team3 = new Team("Dallas Stars", null, coach, playerList);
+		team3 = DefaultHockeyFactory.makeTeam("Dallas Stars", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -354,7 +342,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team4 = new Team("Minnesota Wild", null, coach, playerList);
+		team4 = DefaultHockeyFactory.makeTeam("Minnesota Wild", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -367,7 +355,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team5 = new Team("Nashville Predators", null, coach, playerList);
+		team5 = DefaultHockeyFactory.makeTeam("Nashville Predators", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -380,7 +368,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team6 = new Team("St. Louis Blues", null, coach, playerList);
+		team6 = DefaultHockeyFactory.makeTeam("St. Louis Blues", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -393,7 +381,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team7 = new Team("Winnipeg Jets", null, coach, playerList);
+		team7 = DefaultHockeyFactory.makeTeam("Winnipeg Jets", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -406,7 +394,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team8 = new Team("Minnesota Blues", null, coach, playerList);
+		team8 = DefaultHockeyFactory.makeTeam("Minnesota Blues", null, coach, playerList);
 
 		teamsList = new ArrayList<>();
 		teamsList.add(team1);
@@ -418,7 +406,7 @@ public class SimulationLeagueModelMock {
 		teamsList.add(team7);
 		teamsList.add(team8);
 
-		Division division2 = new Division("Central", teamsList);
+		IDivision division2 = DefaultHockeyFactory.makeDivision("Central", teamsList);
 		divisionsList.add(division2);
 
 		// Pacific Division, Western Conference
@@ -434,7 +422,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team1 = new Team("Anaheim Ducks", null, coach, playerList);
+		team1 = DefaultHockeyFactory.makeTeam("Anaheim Ducks", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -447,7 +435,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team2 = new Team("Arizona Coyotes", null, coach, playerList);
+		team2 = DefaultHockeyFactory.makeTeam("Arizona Coyotes", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -460,7 +448,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team3 = new Team("Calgary Flames", null, coach, playerList);
+		team3 = DefaultHockeyFactory.makeTeam("Calgary Flames", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -473,7 +461,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team4 = new Team("Edmonton Oilers", null, coach, playerList);
+		team4 = DefaultHockeyFactory.makeTeam("Edmonton Oilers", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -486,7 +474,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team5 = new Team("Los Angeles Kings", null, coach, playerList);
+		team5 = DefaultHockeyFactory.makeTeam("Los Angeles Kings", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -499,7 +487,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team6 = new Team("San Jose Sharks", null, coach, playerList);
+		team6 = DefaultHockeyFactory.makeTeam("San Jose Sharks", null, coach, playerList);
 
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
@@ -512,7 +500,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team7 = new Team("Vancouver Canucks", null, coach, playerList);
+		team7 = DefaultHockeyFactory.makeTeam("Vancouver Canucks", null, coach, playerList);
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
 			player1 = DefaultHockeyFactory.makePlayer(15, 18, 12, 1, "Tom32" + i, "forward", true, false, 25);
@@ -524,7 +512,7 @@ public class SimulationLeagueModelMock {
 			playerList.add(player3);
 			playerList.add(player4);
 		}
-		team8 = new Team("Vegas Golden Knights", null, coach, playerList);
+		team8 = DefaultHockeyFactory.makeTeam("Vegas Golden Knights", null, coach, playerList);
 
 		teamsList.add(team1);
 		teamsList.add(team2);
@@ -536,20 +524,20 @@ public class SimulationLeagueModelMock {
 		teamsList.add(team8);
 
 		qualifiedTeams.add(team1);
-		Division division3 = new Division("Pacific", teamsList);
+		IDivision division3 = DefaultHockeyFactory.makeDivision("Pacific", teamsList);
 		divisionsList.add(division3);
 
-		IConference conference2 = new Conference("Western Conference", divisionsList);
+		IConference conference2 = DefaultHockeyFactory.makeConference("Western Conference", divisionsList);
 		conferenceList.add(conference2);
 
-		List<Player> freeAgentsList = new ArrayList<>();
-		league = new League("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
+		List<IPlayer> freeAgentsList = new ArrayList<>();
+		league = DefaultHockeyFactory.makeLeague("Dalhousie Hockey League", conferenceList, freeAgentsList, gameplayConfig, null, null);
 		playerList = new ArrayList<>();
 		List<ICoach> coachList = new ArrayList<>();
-		coachList.add(new Coach((float) 2.0, (float) 2.0, (float) 2.0, (float) 2.0, "Coach 1"));
+		coachList.add(DefaultHockeyFactory.makeCoach("coach1", null));
 		league.setCoaches(coachList);
 		List<IGeneralManager> generalManagerList = new ArrayList<>();
-		IGeneralManager generalManager = new GeneralManager("General Manager 1");
+		IGeneralManager generalManager = DefaultHockeyFactory.makeGeneralManager("General Manager 1","normal");
 		generalManagerList.add(generalManager);
 		league.setGeneralManagers(generalManagerList);
 		populateFreeAgents(league);
@@ -557,7 +545,7 @@ public class SimulationLeagueModelMock {
 		league.setRetiredPlayers(playerList);
 	}
 
-	public void populateFreeAgents(League league) {
+	public void populateFreeAgents(ILeague league) {
 		List<Player> freeAgents = new ArrayList<>();
 		freeAgents.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 1", "forward", true, false, 50));
 		freeAgents.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 2", "forward", true, false, 50));
@@ -582,7 +570,7 @@ public class SimulationLeagueModelMock {
 		league.setFreeAgents(freeAgents);
 	}
 
-	public League getLeagueInfo() {
+	public ILeague getLeagueInfo() {
 		return league;
 	}
 

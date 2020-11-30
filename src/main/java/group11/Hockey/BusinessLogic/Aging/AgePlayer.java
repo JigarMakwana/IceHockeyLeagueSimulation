@@ -15,8 +15,8 @@ import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
@@ -103,9 +103,9 @@ public class AgePlayer extends RetirePlayer {
 
 		if (conferences.size() > 0) {
 			for (IConference conference : conferences) {
-				List<Division> divisions = conference.getDivisions();
+				List<IDivision> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
-					for (Division division : divisions) {
+					for (IDivision division : divisions) {
 						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
 							for (ITeam team : teams) {
@@ -149,9 +149,9 @@ public class AgePlayer extends RetirePlayer {
 
 		if (conferences.size() > 0) {
 			for (IConference conference : conferences) {
-				List<Division> divisions = conference.getDivisions();
+				List<IDivision> divisions = conference.getDivisions();
 				if (divisions.size() > 0) {
-					for (Division division : divisions) {
+					for (IDivision division : divisions) {
 						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
 							for (ITeam team : teams) {

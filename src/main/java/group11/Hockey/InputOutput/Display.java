@@ -57,6 +57,7 @@ public class Display implements IDisplay {
 	@Override
 	public void displayListOfPLayers(ILeague league) {
 		int count = 1;
+		@SuppressWarnings("unchecked")
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		System.out.println("******Select Players for Team******: ");
 		System.out.println("******List of free agents******: ");

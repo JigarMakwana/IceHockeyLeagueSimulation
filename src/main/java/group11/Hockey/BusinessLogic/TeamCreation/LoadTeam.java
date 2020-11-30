@@ -10,6 +10,7 @@ import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -66,13 +67,13 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 			logger.info("Team name "+teamName+" is valid");
 			List<IConference> conferenceList = league.getConferences();
 			for (IConference conference : conferenceList) {
-				List<Division> divisionList = conference.getDivisions();
-				for (Division division : divisionList) {
+				List<IDivision> divisionList = conference.getDivisions();
+				for (IDivision division : divisionList) {
 					List<ITeam> teamList = division.getTeams();
 					for (ITeam team : teamList) {
 						if (team.getTeamName().equalsIgnoreCase(teamName)) {
 							display.printTeamDetails(league.getLeagueName(), conference.getConferenceName(),
-									division.getDivisionName(), team.getTeamName(), team.getGeneralManager().getName(),
+									((Division) division).getDivisionName(), team.getTeamName(), team.getGeneralManager().getName(),
 									team.getHeadCoach());
 						}
 					}

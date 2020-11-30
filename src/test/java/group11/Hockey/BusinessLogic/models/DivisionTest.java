@@ -9,32 +9,32 @@ import org.junit.Test;
 import org.junit.Assert;
 
 public class DivisionTest {
-	Division division = new Division();
+	IDivision division = new Division();
 
 	@Test
 	public void DivisionConstructorTest() {
-		Division division = new Division();
+		IDivision division = new Division();
 		Assert.assertNull(division.getTeams());
 		Assert.assertNull(division.getDivisionName());
 	}
 
 	@Test
 	public void DivisionParameterizedConstructorTest() {
-		Division division = new Division("Atlantic Division", Arrays.asList(new Team()));
+		IDivision division = new Division("Atlantic Division", Arrays.asList(new Team()));
 		Assert.assertEquals("Atlantic Division", division.getDivisionName());
 		Assert.assertTrue(division.getTeams().size() == 1);
 	}
 
 	@Test
 	public void setDivisionNameTest() {
-		Division division = new Division();
-		division.setDivisionName("Atlantic Division");
+		IDivision division = new Division();
+		((Division) division).setDivisionName("Atlantic Division");
 		Assert.assertEquals("Atlantic Division", division.getDivisionName());
 	}
 
 	@Test
 	public void setTeamsTest() {
-		Division division = new Division();
+		IDivision division = new Division();
 		division.setTeams(Arrays.asList(new Team("Vancouver Canucks", null, null, null)));
 		Assert.assertTrue(division.getTeams().size() == 1);
 		Assert.assertEquals("Vancouver Canucks", division.getTeams().get(0).getTeamName());
@@ -42,19 +42,19 @@ public class DivisionTest {
 
 	@Test
 	public void getDivisionNameTest() {
-		Division division = new Division("Atlantic Division", null);
+		IDivision division = new Division("Atlantic Division", null);
 		Assert.assertEquals("Atlantic Division", division.getDivisionName());
 	}
 
 	@Test
 	public void getTeamsTest() {
-		List<Team> teamsList = new ArrayList<Team>();
-		Team team1 = new Team("Vancouver Canucks", null, null, null);
-		Team team2 = new Team("Maple Leafs", null, null, null);
+		List<ITeam> teamsList = new ArrayList<>();
+		ITeam team1 = new Team("Vancouver Canucks", null, null, null);
+		ITeam team2 = new Team("Maple Leafs", null, null, null);
 		teamsList.add(team1);
 		teamsList.add(team2);
 
-		Division division = new Division("Atlantic Division", teamsList);
+		IDivision division = new Division("Atlantic Division", teamsList);
 
 		Assert.assertEquals(
 				"Team [teamName=" + team1.getTeamName() + ", generalManager=" + team1.getGeneralManager()
@@ -86,7 +86,7 @@ public class DivisionTest {
 	public void getDivisionFromDivisionNameTest() {
 		LeagueTest leagueTest = new LeagueTest();
 		ILeague leagueObject = leagueTest.populateLeagueObject();
-		Division divisionFromName;
+		IDivision divisionFromName;
 		divisionFromName = division.getDivisionFromDivisionName("Eastern Zone",
 				leagueObject.getConferences().get(0).getDivisions());
 		Assert.assertNull(divisionFromName);
@@ -101,8 +101,8 @@ public class DivisionTest {
 	public void addNewTeamInDivisionTest() {
 		LeagueTest leagueTest = new LeagueTest();
 		ILeague leagueObject = leagueTest.populateLeagueObject();
-		Team team = new Team("Dalhousie Tigers", null, null, null);
-		Division divisionFromLeagueObject = leagueObject.getConferences().get(0).getDivisions().get(0);
+		ITeam team = new Team("Dalhousie Tigers", null, null, null);
+		IDivision divisionFromLeagueObject = leagueObject.getConferences().get(0).getDivisions().get(0);
 		divisionFromLeagueObject.addNewTeamInDivision(team);
 		Assert.assertTrue(leagueObject.getConferences().get(0).getDivisions().get(0).getTeams().get(1).getTeamName()
 				.equalsIgnoreCase("Dalhousie Tigers"));

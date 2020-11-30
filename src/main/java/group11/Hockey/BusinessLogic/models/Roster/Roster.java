@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.RosterSize;
-import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;

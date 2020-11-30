@@ -58,8 +58,8 @@ public class LeagueModelMock {
 		teamsList.add(team1);
 		teamsList.add(team2);
 
-		List<Division> divisionsList = new ArrayList<Division>();
-		Division atlanticDivision = new Division("Atlantic", teamsList);
+		List<IDivision> divisionsList = new ArrayList<>();
+		IDivision atlanticDivision = new Division("Atlantic", teamsList);
 		divisionsList.add(atlanticDivision);
 		List<IConference> conferenceList = new ArrayList<>();
 		List<Player> freeAgentsList = new ArrayList<>();

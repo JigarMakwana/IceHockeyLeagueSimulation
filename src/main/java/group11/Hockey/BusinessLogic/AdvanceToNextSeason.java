@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic;
 
 import java.util.Date;
@@ -7,8 +8,6 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.Aging.AgePlayer;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
-import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
@@ -30,8 +29,8 @@ public class AdvanceToNextSeason extends StateMachineState {
 	@Override
 	public StateMachineState startState() {
 		logger.debug("Entered startState()");
-		IParse parse = new Parse();
-		IAdvance advance = new Advance();
+		IParse parse = DefaultHockeyFactory.makeParse();
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 
 		ITimeLine timeLine = league.getTimeLine();
 		String currentDate = timeLine.getCurrentDate();

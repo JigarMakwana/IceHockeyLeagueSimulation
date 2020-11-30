@@ -3,7 +3,6 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.*;
 
 import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
-import group11.Hockey.BusinessLogic.models.Roster.Roster;
 import group11.Hockey.db.League.ILeagueDb;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -71,6 +70,7 @@ public class League implements ILeague {
 		this.gamesInSeason = gamesInSeason;
 	}
 
+	@SuppressWarnings("unchecked")
 	public League(String leagueName, List<IConference> conferences, List<? extends IPlayer> freeAgents,
 			IGameplayConfig gamePlayConfig, List<ICoach> coaches, List<IGeneralManager> generalManagers) {
 		super();

@@ -26,11 +26,11 @@ public class LeagueTest {
 		IGeneralManager generalManager = DefaultHockeyFactory.makeGeneralManager("Kevin", null);
 		generalManagerList.add((GeneralManager) generalManager);
 		IGeneralManager gm2 = DefaultHockeyFactory.makeGeneralManager("John Smith", "shrewd");
-		Team team = new Team("Vancouver Canucks", gm2, coach, null);
-		teamsList.add(team);
+		ITeam team = new Team("Vancouver Canucks", gm2, coach, null);
+		teamsList.add((Team) team);
 
-		List<Division> divisionsList = new ArrayList<Division>();
-		Division atlanticDivision = new Division("Atlantic Division", teamsList);
+		List<IDivision> divisionsList = new ArrayList<>();
+		IDivision atlanticDivision = new Division("Atlantic Division", teamsList);
 		divisionsList.add(atlanticDivision);
 		List<IConference> conferenceList = new ArrayList<>();
 		IConference conference = new Conference("Westeren Conference", divisionsList);

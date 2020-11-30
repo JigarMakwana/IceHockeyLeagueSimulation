@@ -14,7 +14,6 @@ import group11.Hockey.db.Constants;
 import group11.Hockey.db.DefaultDatabaseFactory;
 import group11.Hockey.db.IProcedureCallDb;
 import group11.Hockey.db.ProcedureCallDb;
-import group11.Hockey.db.Manager.ManagerDb;
 
 public class PlayerDbImpl implements IPlayerDb {
 	private static Logger logger = LogManager.getLogger(PlayerDbImpl.class);

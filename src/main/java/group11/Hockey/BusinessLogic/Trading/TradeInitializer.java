@@ -65,8 +65,8 @@ public class TradeInitializer implements ITradeInitializer {
 		int lossPointCutOff = tradingConfig.getLossPoint();
 		List<IConference> conferenceList = leagueObj.getConferences();
 		for (IConference conference : conferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
+			List<IDivision> divisionList = conference.getDivisions();
+			for (IDivision division : divisionList) {
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
 					if ((team.getLosses() >= lossPointCutOff)) {

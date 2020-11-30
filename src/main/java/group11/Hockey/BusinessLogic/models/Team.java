@@ -183,8 +183,8 @@ public class Team implements ITeam, Comparable<Team> {
 		boolean isTeamNameValid = true;
 		List<IConference> cconferenceList = league.getConferences();
 		for (IConference conference : cconferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
+			List<IDivision> divisionList = conference.getDivisions();
+			for (IDivision division : divisionList) {
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
 					if (team.getTeamName().equalsIgnoreCase(teamName)) {

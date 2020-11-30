@@ -46,7 +46,7 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 	@Override
 	public StateMachineState startState() {
 		logger.debug("Entered startState()");
-		renderTeam();
+		//renderTeam();
 		return DefaultHockeyFactory.makePlayerChoice(league, commandLineInput, leagueDb, display);
 	}
 

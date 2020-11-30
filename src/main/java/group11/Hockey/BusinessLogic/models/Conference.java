@@ -9,15 +9,16 @@ import java.util.List;
  */
 public class Conference implements IConference {
 	private String conferenceName;
-	private List<Division> divisions = null;
+	private List<IDivision> divisions = null;
 
 	public Conference() {
 	}
 
+	@SuppressWarnings("unchecked")
 	public Conference(String conferenceName, List<? extends IDivision> divisions) {
 		super();
 		this.conferenceName = conferenceName;
-		this.divisions = (List<Division>) divisions;
+		this.divisions = (List<IDivision>) divisions;
 	}
 
 	/**
@@ -37,14 +38,14 @@ public class Conference implements IConference {
 	/**
 	 * @return the divisions
 	 */
-	public List<Division> getDivisions() {
+	public List<IDivision> getDivisions() {
 		return divisions;
 	}
 
 	/**
 	 * @param divisions the divisions to set
 	 */
-	public void setDivisions(List<Division> divisions) {
+	public void setDivisions(List<IDivision> divisions) {
 		this.divisions = divisions;
 	}
 

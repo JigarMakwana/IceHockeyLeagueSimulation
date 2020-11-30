@@ -2,22 +2,6 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
-import group11.Hockey.BusinessLogic.Trophy.CalderMemorial;
-import group11.Hockey.BusinessLogic.Trophy.EndOfRegularSeasonSubject;
-import group11.Hockey.BusinessLogic.Trophy.EndOfStanleySubject;
-import group11.Hockey.BusinessLogic.Trophy.JackAdams;
-import group11.Hockey.BusinessLogic.Trophy.MauriceRichard;
-import group11.Hockey.BusinessLogic.Trophy.Participation;
-import group11.Hockey.BusinessLogic.Trophy.President;
-import group11.Hockey.BusinessLogic.Trophy.RobHawkeyMemorial;
-import group11.Hockey.BusinessLogic.Trophy.Trophy;
-import group11.Hockey.BusinessLogic.Trophy.Veniza;
-import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
-import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophySubject;
-
 import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
@@ -49,6 +33,18 @@ import group11.Hockey.BusinessLogic.TeamCreation.CreateTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.LoadTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.PlayerChoice;
 import group11.Hockey.BusinessLogic.Training.TrainingPlayer;
+import group11.Hockey.BusinessLogic.Trophy.CalderMemorial;
+import group11.Hockey.BusinessLogic.Trophy.EndOfRegularSeasonSubject;
+import group11.Hockey.BusinessLogic.Trophy.EndOfStanleySubject;
+import group11.Hockey.BusinessLogic.Trophy.JackAdams;
+import group11.Hockey.BusinessLogic.Trophy.MauriceRichard;
+import group11.Hockey.BusinessLogic.Trophy.Participation;
+import group11.Hockey.BusinessLogic.Trophy.President;
+import group11.Hockey.BusinessLogic.Trophy.RobHawkeyMemorial;
+import group11.Hockey.BusinessLogic.Trophy.Trophy;
+import group11.Hockey.BusinessLogic.Trophy.Veniza;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophySubject;
 import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.Coach;
@@ -79,6 +75,9 @@ import group11.Hockey.BusinessLogic.models.Trading;
 import group11.Hockey.BusinessLogic.models.Training;
 import group11.Hockey.BusinessLogic.models.gmTable;
 import group11.Hockey.BusinessLogic.models.Roster.Roster;
+import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
@@ -395,5 +394,9 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static Gson makeGson() {
 		return new GsonBuilder().setPrettyPrinting().create();
+	}
+	
+	public static JSONParser makeGsonJsonParser() {
+		return new JSONParser();
 	}
 }

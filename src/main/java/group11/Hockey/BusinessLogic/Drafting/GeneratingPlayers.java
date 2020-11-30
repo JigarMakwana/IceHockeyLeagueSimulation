@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import group11.Hockey.BusinessLogic.Enums.Positions;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Player;
-
+/**
+ * 
+ * @author Jatin Partap Rana
+ *
+ */
 public class GeneratingPlayers implements IGeneratingPlayers{
 	enum PlayerEnum {
 		player
@@ -17,28 +22,28 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 
 	private static Logger logger = LogManager.getLogger(GeneratingPlayers.class);
 
-	public List<Player> generatePlayers(int numbersOfPlayersToGenerate) {
+	public List<IPlayer> generatePlayers(int numbersOfPlayersToGenerate) {
 		logger.info("Entered generatePlayers()");
-		List<Player> listOfPlayers = new ArrayList<>();
+		List<IPlayer> listOfPlayers = new ArrayList<>();
 		String player = PlayerEnum.player.toString();
 		int forwardsToGenerate = numbersOfPlayersToGenerate / 2;
 		int defenseToGenerate = ((numbersOfPlayersToGenerate / 2) * 40) / 100;
 		int goaliesToGenerate = numbersOfPlayersToGenerate - (forwardsToGenerate + defenseToGenerate);
 		int startVal = 0;
 		for (startVal = 1; startVal <= numbersOfPlayersToGenerate / 2; startVal++) {
-			Player forwardPlayer = populatePlayer(player + Integer.toString(startVal));
+			IPlayer forwardPlayer = populatePlayer(player + Integer.toString(startVal));
 			forwardPlayer.setPosition(Positions.FORWARD.toString());
 			setStatForForwardPlayer(forwardPlayer);
 			listOfPlayers.add(forwardPlayer);
 		}
 		for (int i = 0; i < ((numbersOfPlayersToGenerate / 2) * 40) / 100; i++, startVal++) {
-			Player defensePlayer = populatePlayer(player + Integer.toString(startVal));
+			IPlayer defensePlayer = populatePlayer(player + Integer.toString(startVal));
 			defensePlayer.setPosition(Positions.DEFENSE.toString());
 			setStatDefensePlayer(defensePlayer);
 			listOfPlayers.add(defensePlayer);
 		}
 		for (int j = 0; j < goaliesToGenerate; j++, startVal++) {
-			Player goaliePlayer = populatePlayer(player + Integer.toString(startVal));
+			IPlayer goaliePlayer = populatePlayer(player + Integer.toString(startVal));
 			goaliePlayer.setPosition(Positions.GOALIE.toString());
 			setStatGoaliePlayer(goaliePlayer);
 			listOfPlayers.add(goaliePlayer);
@@ -47,9 +52,9 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 		return listOfPlayers;
 	}
 
-	private Player populatePlayer(String playerName) {
+	private IPlayer populatePlayer(String playerName) {
 		logger.info("Entered populatePlayer()");
-		Player player = new Player();
+		IPlayer player = new Player();
 		player.setPlayerName(playerName);
 		player.setBirthDay(11);
 		player.setBirthMonth(10);
@@ -61,7 +66,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 		return player;
 	}
 
-	public void setStatForForwardPlayer(Player player) {
+	public void setStatForForwardPlayer(IPlayer player) {
 		logger.info("Entered setStatForForwardPlayer()");
 		int skatingStat = getNumberInRange(12, 20);
 		int savingStat = getNumberInRange(1, 7);
@@ -73,7 +78,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 		player.setShooting(shootingStat);
 	}
 
-	public void setStatDefensePlayer(Player player) {
+	public void setStatDefensePlayer(IPlayer player) {
 		logger.info("Entered setStatDefensePlayer()");
 		int skatingStat = getNumberInRange(10, 19);
 		int savingStat = getNumberInRange(1, 12);
@@ -85,7 +90,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 		player.setShooting(shootingStat);
 	}
 
-	public void setStatGoaliePlayer(Player player) {
+	public void setStatGoaliePlayer(IPlayer player) {
 		logger.info("Entered setStatGoaliePlayer()");
 		int skatingStat = getNumberInRange(8, 15);
 		int savingStat = getNumberInRange(12, 20);

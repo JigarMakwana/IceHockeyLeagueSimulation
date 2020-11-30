@@ -1,6 +1,5 @@
-package group11.Hockey.BusinessLogic;
 //Author: Harry B00856244
-
+package group11.Hockey.BusinessLogic;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

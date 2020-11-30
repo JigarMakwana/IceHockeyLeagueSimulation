@@ -246,7 +246,7 @@ public class Team implements ITeam, Comparable<Team> {
 		team.setHeadCoach(coach);
 		List<ICoach> coaches = league.getCoaches();
 		for (ICoach ch : coaches) {
-			if (ch.getName() != null && ch.getName().equalsIgnoreCase(coach.getName())) {
+			if (ch.getName().equalsIgnoreCase(coach.getName())) {
 				coaches.remove(ch);
 				break;
 			}

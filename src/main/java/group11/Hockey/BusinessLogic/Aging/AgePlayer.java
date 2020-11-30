@@ -74,9 +74,6 @@ public class AgePlayer extends RetirePlayer implements IAgePlayer {
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
 			logger.debug("Move to DraftPlayer State");
-			if (display == null) {
-				display = DefaultHockeyFactory.makeDisplay();
-			}
 			return DefaultHockeyFactory.makeDraftPlayer(league, leagueDb, display);
 		} else {
 			logger.debug("Date is not end of stanley playoffs");

@@ -96,7 +96,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			setHeadCoach(teamObj, teamsListJsonObject);
 			// parse Teams
 			List<IPlayer> playersList = parsePlayers(teamsListJsonObject);
-			if (playersList != null && playersList.size() > 0) {
+			if (playersList.size() > 0) {
 				teamObj.setPlayers(playersList);
 				if (hasInvalidCaptain(playersList)) {
 					throw new Exception("Team " + teamName + " has no/more captain(s)");

@@ -1,22 +1,22 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
-import group11.Hockey.BusinessLogic.models.Advance;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
-import group11.Hockey.BusinessLogic.models.TimeLine;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
-import group11.Hockey.InputOutput.IPrintToConsole;
-import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class InitializeSeason extends StateMachineState {
@@ -26,6 +26,7 @@ public class InitializeSeason extends StateMachineState {
 	private IDisplay display;
 	private ICommandLineInput commandLineInput;
 	private IValidations validation;
+	private static Logger logger = LogManager.getLogger(InitializeSeason.class);
 
 	public InitializeSeason(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation
 	) {
@@ -38,39 +39,36 @@ public class InitializeSeason extends StateMachineState {
 
 	@Override
 	public StateMachineState startState() {
-		ITimeLine timeLine = new TimeLine();
+		logger.debug("Entered startState()");
+		ITimeLine timeLine =DefaultHockeyFactory.makeTimeLine();
+		IParse parse = DefaultHockeyFactory.makeParse();
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 
+		String message;		
 		String startDate = league.getStartDate();
 		String lastSimulatedDate = league.getStartDate();
-
 		int year;
+		
 		if ((lastSimulatedDate == null) || (lastSimulatedDate.isEmpty())) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
 			startDate = "29/09/" + Integer.toString(year);
 		} else {
-			IParse parse = new Parse();
 			year = parse.stringToYear(lastSimulatedDate);
 			startDate = lastSimulatedDate;
 		}
 		timeLine.setStartDate(startDate);
 		timeLine.setLastSimulatedDate(lastSimulatedDate);
 
-		String message;
-		IPrintToConsole console = new PrintToConsole();
-		IAdvance advance = new Advance();
-
 		league.setStartDate(startDate);
 		message = "Start date : " + startDate;
-		console.print(message);
-		league.setStartDate(startDate);
-
-		ISchedule regularSeasonSchedule = new Schedule(league);
+		logger.info(message);
+		league.setStartDate(startDate);
+		ISchedule regularSeasonSchedule = DefaultHockeyFactory.makeSchedule(league);
 		HashMap<String, HashMap<ITeam, ITeam>> schedule = null;
 
-		IParse parse = new Parse();
-		IDeadlines deadline = new Deadlines();
-
+		IDeadlines deadline = DefaultHockeyFactory.makeDeadlines();
 		String currentDate = startDate;
+
 
 		Date stanleyEndDateTime = deadline.getStanleyPlayoffDeadline(startDate);
 		Date regularSeasonEndDateTime = deadline.getRegularSeasonDeadline(startDate);

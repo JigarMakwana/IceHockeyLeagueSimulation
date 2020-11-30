@@ -47,16 +47,16 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 				conference.setConferenceName(conferenceName);
 			}
 			// parse Divisions
-			List<Division> divisionsList = parseDivisions(ConferencesListJsonObject);
+			List<IDivision> divisionsList = parseDivisions(ConferencesListJsonObject);
 			conference.setDivisions(divisionsList);
 			conferencesList.add(conference);
 		}
 		return conferencesList;
 	}
 
-	private List<Division> parseDivisions(JSONObject ConferencesListJsonObject) throws Exception {
+	private List<IDivision> parseDivisions(JSONObject ConferencesListJsonObject) throws Exception {
 		Division divisionObj;
-		List<Division> divisionsList = new ArrayList<Division>();
+		List<IDivision> divisionsList = new ArrayList<>();
 		JSONArray divisionsJSONArray = (JSONArray) ConferencesListJsonObject.get(Attributes.DIVISIONS.getAttribute());
 		Iterator<JSONObject> divisionsListIterator = divisionsJSONArray.iterator();
 		while (divisionsListIterator.hasNext()) {

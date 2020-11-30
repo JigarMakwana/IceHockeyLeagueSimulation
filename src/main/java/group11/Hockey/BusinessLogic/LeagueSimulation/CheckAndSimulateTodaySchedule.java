@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.Date;
@@ -7,17 +8,14 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import group11.Hockey.BusinessLogic.InjurySystem;
-import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GameSimulation;
-import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.IInjurySystem;
+import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
-import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.InputOutput.IPrintToConsole;
-import group11.Hockey.InputOutput.PrintToConsole;
 
 public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySchedule {
 
@@ -34,38 +32,45 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 	@Override
 	public void CheckAndSimulateToday(String date) {
 		logger.debug("Entered CheckAndSimulateToday()");
-		String time = "00:00:00", id = date + "T" + time;
+		int points;
+		int updatePoints;
+		int year;
+		int updateWin;
+		int loss;
+		Date possibleSeasonEnd;
+		Date possibleSeasonStart;
+		Date dateTime;
+		ITeam team1;
+		ITeam team2;
+		ITeam won;
+		ITeam lost;
+		String time = "00:00:00";
+		String id = date + "T" + time;
+		String message;
+
+		IParse parse = DefaultHockeyFactory.makeParse();	
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
+		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 		HashMap<ITeam, ITeam> todayTeams = new HashMap<>();
 		todayTeams = schedule.get(id);
-		int points, updatePoints, year, updateWin, loss;
-		Date possibleSeasonEnd, possibleSeasonStart, dateTime;
-		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
-
-		IParse parse = new Parse();
 		dateTime = parse.stringToDate(date);
 		year = parse.stringToYear(date);
 		possibleSeasonStart = parse.stringToDate("29/09/" + Integer.toString(year));
-		possibleSeasonEnd = parse.getFirstSaturdayOfAprilInYear(year);
-
-		ITeam team1, team2;
-		ITeam won, lost;
-		IAdvance advance = new Advance();
-		IPrintToConsole console = new PrintToConsole();
-		String message;
+		possibleSeasonEnd = parse.getFirstSaturdayOfAprilInYear(year);	
+		
 		while (schedule.containsKey(id)) {
 			List<IConference> cconferenceList = league.getConferences();
 			for (IConference conference : cconferenceList) {
-				List<Division> divisionList = conference.getDivisions();
-				for (Division division : divisionList) {
+				List<IDivision> divisionList = conference.getDivisions();
+				for (IDivision division : divisionList) {
 					List<ITeam> teamList = division.getTeams();
 					for (ITeam team : teamList) {
 						if (todayTeams.containsKey(team)) {
 							team1 = team;
 							team2 = todayTeams.get(team);
 							message = id + " teams are " + team1.getTeamName() + " and " + team2.getTeamName();
-							console.print(message);
-							// game play start
-							GameSimulation gamePlay = new GameSimulation(league, team1, team2);
+							logger.info(message);
+							IGameSimulation gamePlay = DefaultHockeyFactory.makeGameSimulation(league, team1, team2);
 							won = gamePlay.startGamePlay();
 							if (won.getTeamName().equalsIgnoreCase(team1.getTeamName())) {
 								lost = team2;
@@ -78,13 +83,13 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 								if ((team1.getWins() < 4) && (team2.getWins() < 4)) {
 
 									message = "Team Won : " + won.getTeamName();
-									console.print(message);
+									logger.info(message);
 									points = won.getPoints();
 									message = "Points are " + points;
-									console.print(message);
+									logger.info(message);
 									updatePoints = points + 2;
 									message = "Updated Points is " + updatePoints;
-									console.print(message);
+									logger.info(message);
 									won.setPoints(updatePoints);
 									won.setLosses(0);
 									loss = lost.getLosses();
@@ -101,20 +106,20 @@ public class CheckAndSimulateTodaySchedule implements ICheckAndSimulateTodaySche
 								}
 							} else {
 								message = "Team Won : " + won.getTeamName();
-								console.print(message);
+								logger.info(message);
 								points = won.getPoints();
 								message = "Points are " + points;
-								console.print(message);
+								logger.info(message);
 								updatePoints = points + 2;
 								message = "Updated Points is " + updatePoints;
-								console.print(message);
+								logger.info(message);
 								won.setPoints(updatePoints);
 								won.setLosses(0);
 								loss = lost.getLosses();
 								loss++;
 								lost.setLosses(loss);
 							}
-							InjurySystem injury = new InjurySystem(league);
+							IInjurySystem injury = DefaultHockeyFactory.makeInjurySystem(league);
 							injury.setInjuryToPlayers(team1);
 							injury.setInjuryToPlayers(team2);
 						}

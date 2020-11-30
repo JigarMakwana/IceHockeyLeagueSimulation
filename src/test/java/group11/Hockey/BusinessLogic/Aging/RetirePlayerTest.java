@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
@@ -35,7 +35,7 @@ public class RetirePlayerTest {
 		AgePlayer retirePlayer = new AgePlayer();
 		retirePlayer.retireAndReplacePlayer(league);
 		List<IConference> conferences = league.getConferences();
-		List<Division> divisions = conferences.get(0).getDivisions();
+		List<IDivision> divisions = conferences.get(0).getDivisions();
 		List<ITeam> teams = divisions.get(0).getTeams();
 		List<IPlayer> players = teams.get(0).getPlayers();
 		Assert.assertEquals(players.size(), 3);

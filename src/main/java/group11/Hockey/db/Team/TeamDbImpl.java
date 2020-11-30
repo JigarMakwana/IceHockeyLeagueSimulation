@@ -85,9 +85,9 @@ public class TeamDbImpl implements ITeamDb {
 					resultSet.getString(Constants.divisionName.toString()), conferenceInLeague.getDivisions());
 		} else {
 			divisionInConference = new Division(resultSet.getString(Constants.divisionName.toString()), null);
-			List<Division> divisionList = conferenceInLeague.getDivisions();
+			List<IDivision> divisionList = conferenceInLeague.getDivisions();
 			if (divisionList == null || divisionList.size() == 0) {
-				divisionList = new ArrayList<Division>();
+				divisionList = new ArrayList<>();
 				divisionList.add(divisionInConference);
 				conferenceInLeague.setDivisions(divisionList);
 			} else {

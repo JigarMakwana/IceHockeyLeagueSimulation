@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 	IDisplay display;
 	private ICommandLineInput commandLineInput;
 	private IValidations validation;
+	private static Logger logger = LogManager.getLogger(PlayoffScheduleFinalRounds.class);
 
 	public PlayoffScheduleFinalRounds(IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
 		this.display = display;
@@ -27,11 +29,6 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		this.validation = validation;
 	}
 
-	public PlayoffScheduleFinalRounds() {
-
-	}
-
-	private static Logger logger = LogManager.getLogger(PlayoffScheduleFinalRounds.class);
 	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
 		logger.debug("Entered getSchedule()");
 		ITimeLine timeLine = league.getTimeLine();
@@ -39,13 +36,16 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 		HashMap<String, HashMap<ITeam, ITeam>> playoffSchedule = new HashMap<>();
 		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
-		ITeam team1, team2;
+		ITeam team1;
+		ITeam team2;
 		String message;
-
 		String time = "00:00:00";
 		int teamNumber1 = 0;
 		int teamNumber2 = 1;
-		int teams = 0, series = 0, totalSetTeams, qualifiedTeamsSize;
+		int teams = 0;
+		int series = 0;
+		int totalSetTeams;
+		int qualifiedTeamsSize;
 		qualifiedTeamsSize = qualifiedTeams.size();
 		totalSetTeams = (qualifiedTeamsSize / 2);
 		if (totalSetTeams == 4) {
@@ -61,7 +61,6 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 			message = "\n********** Playoff Schedule - Final round **********";
 			logger.info(message);
 		}
-		// final sets of teams(team1,team2)
 		while (teams < totalSetTeams) {
 			teams++;
 			series = 0;

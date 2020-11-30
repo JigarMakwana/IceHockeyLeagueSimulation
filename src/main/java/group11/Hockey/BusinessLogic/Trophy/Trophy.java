@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.Trophy;
 
 import java.util.List;
@@ -14,7 +15,6 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.InputOutput.IDisplay;
-import group11.Hockey.InputOutput.IPrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class Trophy extends StateMachineState {
@@ -33,7 +33,6 @@ public class Trophy extends StateMachineState {
 	public StateMachineState startState() {
 		logger.debug("Entered startState()");
 		IParse parse = DefaultHockeyFactory.makeParse();
-		IPrintToConsole console=DefaultHockeyFactory.makePrintToConsole();
 		ITimeLine timeLine = league.getTimeLine();
 		String startDate = timeLine.getStartDate();
 		int startYear = parse.stringToYear(startDate);
@@ -53,20 +52,18 @@ public class Trophy extends StateMachineState {
 		qualifiedTeams.remove(winner);
 		String message = "\n********** Winner team of the season(" + startYear + "/" + endYear + ") is "
 				+ winner.getTeamName() + " **********";
-		console.print(message);
+		logger.info(message);
 		DefaultHockeyFactory.makeEndOfStanleySubject(league);
-
 		int seasons=presidentTeams.size();
 		for(int i=(seasons-1);i>=0;i--) {
-		console.print(message);
-			console.print("\nWinners of the season(" + startYear-- + "/" + endYear-- + ")");
-			console.print("President trophy winner is "+presidentTeams.get(i).getTeamName());
-			console.print("Calder Memorial trophy winner is "+calderPlayers.get(i).getPlayerName());
-			console.print("Veniza trophy winner is "+venizaPlayers.get(i).getPlayerName());
-			console.print("Jack Adam's trophy winner is "+jackAdamsCoaches.get(i).getName());
-			console.print("Maurice Richard trophy winner is "+mauricePlayers.get(i).getPlayerName());
-			console.print("Rob Hawkey Memorial trophy winner is "+robHawkeyPlayers.get(i).getPlayerName());
-			console.print("Participation trophy winner is "+participationTeams.get(i).getTeamName());
+			logger.info("\n**********Winners of the season(" + startYear-- + "/" + endYear-- + ")**********");
+			logger.info("President trophy winner is "+presidentTeams.get(i).getTeamName());
+			logger.info("Calder Memorial trophy winner is "+calderPlayers.get(i).getPlayerName());
+			logger.info("Veniza trophy winner is "+venizaPlayers.get(i).getPlayerName());
+			logger.info("Jack Adam's trophy winner is "+jackAdamsCoaches.get(i).getName());
+			logger.info("Maurice Richard trophy winner is "+mauricePlayers.get(i).getPlayerName());
+			logger.info("Rob Hawkey Memorial trophy winner is "+robHawkeyPlayers.get(i).getPlayerName());
+			logger.info("Participation trophy winner is "+participationTeams.get(i).getTeamName());
 		}
 		return DefaultHockeyFactory.makeAdvanceToNextSeason(league, leagueDb, display);
 	}

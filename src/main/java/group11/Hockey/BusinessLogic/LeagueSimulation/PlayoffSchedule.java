@@ -1,3 +1,4 @@
+// Author: Harry B00856244
 package group11.Hockey.BusinessLogic.LeagueSimulation;
 
 import java.util.ArrayList;
@@ -11,17 +12,14 @@ import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
-import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
-import group11.Hockey.InputOutput.IPrintToConsole;
-import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.db.League.ILeagueDb;
 
 public class PlayoffSchedule implements IScheduleStrategy {
@@ -29,17 +27,17 @@ public class PlayoffSchedule implements IScheduleStrategy {
 	IDisplay display;
 	private ICommandLineInput commandLineInput;
 	private IValidations validation;
-	public PlayoffSchedule() {
+	private static Logger logger = LogManager.getLogger(PlayoffSchedule.class);
 
-	}
 
 	public PlayoffSchedule(IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
 		this.display = display;
 		this.commandLineInput = commandLineInput;
 		this.validation = validation;
 	}
-
-	private static Logger logger = LogManager.getLogger(PlayoffSchedule.class);
+	
+	public PlayoffSchedule() {
+	}
 
 	@Override
 	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
@@ -47,20 +45,29 @@ public class PlayoffSchedule implements IScheduleStrategy {
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getStanleyDate();
 		HashMap<String, HashMap<ITeam, ITeam>> firstRoundSchedule = new HashMap<>();
-		ITeam team1, team2, firstHighestTeam = null, secondHighestTeam = null, thirdHighestTeam = null, tempTeam = null;
-		int firstHighestPoints = 0, secondHighestPoints = 0, thirdHighestPoints = 0, tempPoints, teamPoints;
-		String time = "00:00:00", message;
+		ITeam team1;
+		ITeam team2;
+		ITeam firstHighestTeam = null;
+		ITeam secondHighestTeam = null;
+		ITeam thirdHighestTeam = null;
+		ITeam tempTeam = null;
+		int firstHighestPoints = 0;
+		int secondHighestPoints = 0;
+		int thirdHighestPoints = 0;
+		int tempPoints;
+		int teamPoints;
+		String time = "00:00:00";
+		String message;
 		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
-		IAdvance advance = new Advance();
-		IPrintToConsole console = new PrintToConsole();
+		IAdvance advance = DefaultHockeyFactory.makeAdvance();
 		message = "\n********** Playoff Schedule - First round **********";
-		console.print(message);
+		logger.info(message);
 
 		List<IConference> cconferenceList = league.getConferences();
 		for (IConference conference : cconferenceList) {
 			List<ITeam> roundOne = new ArrayList<>();
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
+			List<IDivision> divisionList = conference.getDivisions();
+			for (IDivision division : divisionList) {
 				firstHighestPoints = 0;
 				secondHighestPoints = 0;
 				thirdHighestPoints = 0;
@@ -106,7 +113,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 			firstHighestTeam = null;
 			secondHighestTeam = null;
 			tempTeam = null;
-			for (Division division : divisionList) {
+			for (IDivision division : divisionList) {
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
 					if ((team == roundOne.get(0)) || (team == roundOne.get(1)) || (team == roundOne.get(2))
@@ -155,7 +162,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 					firstRoundSchedule.put(date + "T" + time, schedule);
 					message = "Scheduled b/w " + team1.getTeamName() + " & " + team2.getTeamName() + " on " + date
 							+ " at " + time;
-					console.print(message);
+					logger.info(message);
 					try {
 						time = advance.getAdvanceTime(time, 6);
 					} catch (Exception e) {

@@ -14,7 +14,6 @@ import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.IParse;
-import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
@@ -65,7 +64,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 		if (daysDifference > trainingDays) {
 			List<IConference> conferenceList = league.getConferences();
 			for (IConference conference : conferenceList) {
-				List<Division> divisionList = conference.getDivisions();
+				List<IDivision> divisionList = conference.getDivisions();
 				for (IDivision division : divisionList) {
 					List<ITeam> teamList = division.getTeams();
 					for (ITeam team : teamList) {

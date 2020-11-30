@@ -5,15 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Aging;
 import group11.Hockey.BusinessLogic.models.Coach;
 import group11.Hockey.BusinessLogic.models.Conference;
 import group11.Hockey.BusinessLogic.models.Division;
-import group11.Hockey.BusinessLogic.models.GameplayConfig;
 import group11.Hockey.BusinessLogic.models.GeneralManager;
 import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
 import group11.Hockey.BusinessLogic.models.IGameplayConfig;
 import group11.Hockey.BusinessLogic.models.IGeneralManager;
 import group11.Hockey.BusinessLogic.models.IInjuries;
@@ -23,19 +22,15 @@ import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.ITrading;
 import group11.Hockey.BusinessLogic.models.ITraining;
 import group11.Hockey.BusinessLogic.models.IgmTable;
-import group11.Hockey.BusinessLogic.models.Injuries;
 import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.BusinessLogic.models.Player;
 import group11.Hockey.BusinessLogic.models.Team;
-import group11.Hockey.BusinessLogic.models.Trading;
-import group11.Hockey.BusinessLogic.models.Training;
 
 public class SimulationLeagueModelMock {
 
 	private League league;
 	private List<ITeam> qualifiedTeams = new ArrayList<>();
 	private String startDate;
-	private List<Conference> conferences = new ArrayList<>();
 	private ITimeLine timeLine;
 	private HashMap<String, HashMap<ITeam, ITeam>> schedule;
 	private List<ITeam> presidentTeams = new ArrayList<>();
@@ -70,12 +65,12 @@ public class SimulationLeagueModelMock {
 		coach.setShooting(skill);
 		coach.setSkating(skill);
 
-		List<Team> teamsList = new ArrayList<Team>();
+		List<ITeam> teamsList = new ArrayList<>();
 		List<IPlayer> playerList = new ArrayList<>();
-		List<Division> divisionsList = new ArrayList<Division>();
+		List<IDivision> divisionsList = new ArrayList<>();
 		List<IConference> conferenceList = new ArrayList<>();
-		List<Team> qualifiedTeams = new ArrayList<Team>();
-		Team team1, team2, team3, team4, team5, team6, team7, team8;
+		List<ITeam> qualifiedTeams = new ArrayList<>();
+		ITeam team1, team2, team3, team4, team5, team6, team7, team8;
 		IPlayer player1, player2, player3, player4;
 
 		for (int i = 0; i <= 5; i++) {
@@ -307,7 +302,7 @@ public class SimulationLeagueModelMock {
 		conferenceList.add(conference);
 
 		// Central Division, Western Conference
-		divisionsList = new ArrayList<Division>();
+		divisionsList = new ArrayList<>();
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
 			player1 = DefaultHockeyFactory.makePlayer(15, 18, 12, 1, "Tom17" + i, "forward", true, false, 25);
@@ -412,7 +407,7 @@ public class SimulationLeagueModelMock {
 		}
 		team8 = new Team("Minnesota Blues", null, coach, playerList);
 
-		teamsList = new ArrayList<Team>();
+		teamsList = new ArrayList<>();
 		teamsList.add(team1);
 		teamsList.add(team2);
 		teamsList.add(team3);
@@ -426,7 +421,7 @@ public class SimulationLeagueModelMock {
 		divisionsList.add(division2);
 
 		// Pacific Division, Western Conference
-		teamsList = new ArrayList<Team>();
+		teamsList = new ArrayList<>();
 		playerList = new ArrayList<>();
 		for (int i = 0; i <= 5; i++) {
 			player1 = DefaultHockeyFactory.makePlayer(15, 18, 12, 1, "Tom25" + i, "forward", true, false, 25);

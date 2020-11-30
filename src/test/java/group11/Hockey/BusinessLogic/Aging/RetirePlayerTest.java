@@ -1,14 +1,13 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.Aging;
 
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.Aging.AgePlayer;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;

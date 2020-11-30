@@ -5,6 +5,7 @@ package group11.Hockey.BusinessLogic.Trading;
 
 import group11.Hockey.BusinessLogic.*;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.*;
+import group11.Hockey.BusinessLogic.Validations.IValidations;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;

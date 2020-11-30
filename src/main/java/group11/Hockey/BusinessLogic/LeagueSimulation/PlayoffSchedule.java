@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -13,6 +12,7 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleStrategy;
+import group11.Hockey.BusinessLogic.Validations.IValidations;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;

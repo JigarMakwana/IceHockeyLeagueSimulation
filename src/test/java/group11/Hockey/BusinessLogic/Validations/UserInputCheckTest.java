@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic.Validations;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -7,8 +7,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IUserInputCheck;
-import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.Validations.IUserInputCheck;
+import group11.Hockey.BusinessLogic.Validations.IValidations;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Team;

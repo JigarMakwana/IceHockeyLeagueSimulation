@@ -1,11 +1,13 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.InjurySystem;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.InjurySystem.IInjurySystem;
 import group11.Hockey.BusinessLogic.Trading.TradingMockFactory;
 import group11.Hockey.BusinessLogic.Trading.TradingModelMock;
 import org.junit.Assert;

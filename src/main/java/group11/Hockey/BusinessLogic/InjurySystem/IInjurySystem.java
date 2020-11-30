@@ -1,7 +1,7 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.InjurySystem;
 
 import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.IPlayer;

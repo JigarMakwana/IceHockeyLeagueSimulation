@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic.Validations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IValidations;
+import group11.Hockey.BusinessLogic.Validations.IValidations;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;

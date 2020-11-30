@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.PlayerChoice;
+import group11.Hockey.BusinessLogic.TeamCreation.PlayerChoice;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 

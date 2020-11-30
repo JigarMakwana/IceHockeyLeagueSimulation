@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import group11.Hockey.BusinessLogic.TrainingPlayer;
+import group11.Hockey.BusinessLogic.Training.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;

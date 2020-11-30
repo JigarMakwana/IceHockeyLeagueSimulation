@@ -17,11 +17,10 @@ import group11.Hockey.BusinessLogic.Enums.PlayerNoModifier;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeGenerator;
 import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
-import group11.Hockey.BusinessLogic.Trading.TradingTriplet.Triplet;
-import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.IDisplay;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class TradeGenerator implements ITradeGenerator {
     private ITeam offeringTeam;
@@ -31,7 +30,7 @@ public class TradeGenerator implements ITradeGenerator {
     private IRosterSearch rosterSearch;
     private List<List<IPlayer>> playerCombinations;
     private IRandomFloatGenerator rand;
-    private List<Triplet<Team, List<Player>, Float>> tradingTeamsBuffer = new ArrayList<>();
+    private static Logger logger = LogManager.getLogger(TradeGenerator.class);
 
     public TradeGenerator(ITeam offeringTeam, ITradeConfig tradingConfig, IDisplay display){
         this.display = display;
@@ -45,7 +44,8 @@ public class TradeGenerator implements ITradeGenerator {
 
     @Override
     public ITradeCharter generateTradeOffer(List<ITeam> eligibleTeamList) {
-        display.showMessageOnConsole("\nGenerating Trade for AI Team " + offeringTeam.getTeamName());
+        logger.debug("Entered generateTradeOffer()");
+        logger.info("\nGenerating Trade for AI Team " + offeringTeam.getTeamName());
         ITeam requestedTeam = rosterSearch.findStrongestTeam(eligibleTeamList);
         if(requestedTeam == offeringTeam) {
         } else {
@@ -56,21 +56,26 @@ public class TradeGenerator implements ITradeGenerator {
             if(rand.generateRandomNo() > PlayerNoModifier.DRAFTTRADE_MODIFIER.getNumVal() &&
                     entry.getKey() > offeringTeam.getTeamStrength()){
                 display.displayTradeStatistics(offeringTeam, offeredPlayerList, requestedTeam, entry.getValue());
+                logger.info("Found the "+ requestedTeam +" team to trade. Creating Trade Charter...");
                 return TradingFactory.makeTradeCharter(offeringTeam,offeredPlayerList,requestedTeam, entry.getValue(), -1);
             }
             else if(offeringTeam.getTeamStrength() < rosterSearch.averageTeamStrength(eligibleTeamList)){
+                logger.info("Could not generate Normal Trade. Generating Draft Pick Trades...");
                 return tradeDraftPicks(eligibleTeamList);
             }
         }
+        logger.info("Could not generate any trade. Returning null Trade Charter.");
         return TradingFactory.makeTradeCharter(null,null,null, null, -1);
     }
 
     public ITradeCharter tradeDraftPicks(List<ITeam> eligibleTeamList) {
+        logger.debug("Entered tradeDraftPicks(). Calling TradeDraft.");
         ITradeGenerator tradeDraft = TradingFactory.makeTradeDraft(offeringTeam,tradingConfig,display);
         return tradeDraft.generateTradeOffer(eligibleTeamList);
     }
 
     private void findCombinations(List<IPlayer> playerList,List<IPlayer> combinations, int start, int end, int index, int r) {
+        logger.debug("Entered recursive findCombinations(). Generating player combinations.");
         if (index == r) {
             List<IPlayer> temp = new ArrayList<>();
             for (int i=0; i<r; i++){
@@ -86,10 +91,10 @@ public class TradeGenerator implements ITradeGenerator {
     }
 
     public Map<Float, List<IPlayer>> findBestCombination(){
+        logger.debug("Entered findBestCombination(). Finding best multiple players to trade.");
         List<IPlayer> tradePlayerList = new ArrayList<>();
         float newTeamStrength = 0.0f;
         offeringTeam.getRoster().updateSubRoster(offeringTeam.getPlayers());
-//        List<IPlayer> activeRoster = offeringTeam.getRoster().getActiveRoster();
         List<IPlayer> activeRoster = offeringTeam.getPlayers();
 
         for(int i=0; i<activeRoster.size(); i++){
@@ -109,6 +114,7 @@ public class TradeGenerator implements ITradeGenerator {
         }
         Map<Float, List<IPlayer>> requestedPlayers = new HashMap<>();
         requestedPlayers.put(newTeamStrength,tradePlayerList);
+        logger.info("Found best player combination with strength " + newTeamStrength);
         return requestedPlayers;
     }
 }

@@ -17,7 +17,7 @@ import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 /**
- * 
+ *
  * @author Jatin Partap Rana
  *
  */
@@ -45,14 +45,14 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 
 	@Override
 	public StateMachineState startState() {
-		logger.info("Entered startState()");
+		logger.debug("Entered startState()");
 		renderTeam();
 		return DefaultHockeyFactory.makePlayerChoice(league, commandLineInput, leagueDb, display);
 	}
 
 	@Override
 	public ILeague renderTeam() {
-		logger.info("Entered renderTeam()");
+		logger.debug("Entered renderTeam()");
 		display.showMessageOnConsole("***Create Team***\\n");
 		IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
 		List<IConference> conferencesList = league.getConferences();

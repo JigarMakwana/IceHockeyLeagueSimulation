@@ -9,9 +9,12 @@ import java.util.stream.Collectors;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.RosterSize;
+import group11.Hockey.BusinessLogic.InjurySystem;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class Roster implements IRoster {
     private String teamName;
@@ -21,6 +24,7 @@ public class Roster implements IRoster {
     private List<IPlayer> goalieList;
     private List<IPlayer> activeRosterList = new ArrayList<>();
     private List<IPlayer> inActiveRosterList = new ArrayList<>();
+    private static Logger logger = LogManager.getLogger(Roster.class);
 
     public Roster(String teamName, List<IPlayer> playerList){
         this.teamName = teamName;
@@ -29,6 +33,7 @@ public class Roster implements IRoster {
     }
 
     public void updateSubRoster(List<IPlayer> allPlayerList){
+        logger.debug("Entered updateSubRoster()");
         IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
         if(allPlayerList == null){
             return;
@@ -42,6 +47,7 @@ public class Roster implements IRoster {
     }
 
     public boolean isValidRoster(){
+        logger.debug("Entered isValidRoster()");
         int tamSize =  RosterSize.ACTIVE_ROSTER_SIZE.getNumVal() + RosterSize.INACTIVE_ROSTER_SIZE.getNumVal();
         if(allPlayerList.size() == tamSize &&
                 isValidActiveRoster() &&
@@ -56,6 +62,7 @@ public class Roster implements IRoster {
     }
 
     public boolean isValidActiveRoster(){
+        logger.debug("Entered isValidActiveRoster()");
         if(RosterSize.ACTIVE_ROSTER_SIZE.getNumVal() == activeRosterList.size()){
             return true;
         }else{
@@ -64,6 +71,7 @@ public class Roster implements IRoster {
     }
 
     public boolean isValidInActiveRoster(){
+        logger.debug("Entered isValidInActiveRoster()");
         if(RosterSize.INACTIVE_ROSTER_SIZE.getNumVal() == inActiveRosterList.size()){
             return true;
         }else{
@@ -72,6 +80,7 @@ public class Roster implements IRoster {
     }
 
     public void swapPlayers(IPlayer one, IPlayer two){
+        logger.debug("Entered swapPlayers()");
         activeRosterList.add(two);
         inActiveRosterList.add(one);
         activeRosterList.remove(one);

@@ -14,16 +14,16 @@ import org.apache.log4j.Logger;
 
 
 public class TradeDeadline {
-	
+
 	private static Logger logger = LogManager.getLogger(TradeDeadline.class);
-	
+
 	public Date getTradeDeadline(String startDate) {
-		logger.info("Entered getTradeDeadline()");
+		logger.debug("Entered getTradeDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-		String[] dateParts = startDate.split("/");			
+		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
 		year++;
-		LocalDate eDate = LocalDate.of(year, Month.FEBRUARY, 1);	
+		LocalDate eDate = LocalDate.of(year, Month.FEBRUARY, 1);
 	    LocalDate lastMonday = eDate.with(TemporalAdjusters.lastInMonth(DayOfWeek.MONDAY));
 	    String TradeEndDate = lastMonday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	    Date tradeDeadLine = null;
@@ -32,7 +32,7 @@ public class TradeDeadline {
 		} catch (ParseException e) {
 			logger.error("Exception occured : "+e);
 			e.printStackTrace();
-		}	
+		}
 	    return tradeDeadLine;
 	}
 }

@@ -25,7 +25,7 @@ public class UserInputCheck implements IUserInputCheck {
 	private static Logger logger = LogManager.getLogger(UserInputCheck.class);
 
 	public UserInputCheck(ICommandLineInput commandLineInput, IValidations validation, IDisplay display) {
-		logger.info("Entered UserInputCheck()");
+		logger.debug("Entered UserInputCheck()");
 		this.commandLineInput = commandLineInput;
 		this.validation = validation;
 		this.display = display;
@@ -33,7 +33,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public String conferenceNameFromUserCheck(List<IConference> conferencesList) {
-		logger.info("Entered conferenceNameFromUserCheck()");
+		logger.debug("Entered conferenceNameFromUserCheck()");
 		boolean checkConferenceName = true;
 		String conferenceName = null;
 		while (checkConferenceName) {
@@ -46,7 +46,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public String divisonNameFromUserCheck(IConference conference) {
-		logger.info("Entered divisonNameFromUserCheck()");
+		logger.debug("Entered divisonNameFromUserCheck()");
 		boolean checkDiviosneName = true;
 		String divisionName = null;
 		while (checkDiviosneName) {
@@ -60,7 +60,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void teamNameFromUserCheck(ITeam newTeam, ILeague league) {
-		logger.info("Entered teamNameFromUserCheck()");
+		logger.debug("Entered teamNameFromUserCheck()");
 		boolean checkTeamName = true;
 		String teamName = null;
 		while (checkTeamName) {
@@ -74,7 +74,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void generalManagerNameFromUserCheck(ITeam newTeam, ILeague league) {
-		logger.info("Entered generalManagerNameFromUserCheck()");
+		logger.debug("Entered generalManagerNameFromUserCheck()");
 		boolean checkManagerName = true;
 		String generalManager = null;
 
@@ -92,7 +92,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void headCoachNameFromUserCheck(ITeam newTeam, ILeague league) {
-		logger.info("Entered headCoachNameFromUserCheck()");
+		logger.debug("Entered headCoachNameFromUserCheck()");
 		boolean checkHeadCoachName = true;
 		String headCoach = null;
 		while (checkHeadCoachName) {
@@ -106,7 +106,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public void playerChoiceFromUser(ITeam newTeam, ILeague league) {
-		logger.info("Entered playerChoiceFromUser()");
+		logger.debug("Entered playerChoiceFromUser()");
 		boolean playerValueCheck = true;
 		List<Integer> selectedValuesFromUser = new ArrayList<Integer>();
 		List<IPlayer> forwardList = new ArrayList<>();
@@ -152,7 +152,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public int validateUserTradeInput() {
-		logger.info("Entered validateUserTradeInput()");
+		logger.debug("Entered validateUserTradeInput()");
 		boolean isValidInput = false;
 		int userInput = -1;
 		do {
@@ -185,7 +185,7 @@ public class UserInputCheck implements IUserInputCheck {
 
 	@Override
 	public int userResolveRosterInput(int listSize) {
-		logger.info("Entered userResolveRosterInput()");
+		logger.debug("Entered userResolveRosterInput()");
 		boolean isValidInput = false;
 		int userInput = 0;
 		do {

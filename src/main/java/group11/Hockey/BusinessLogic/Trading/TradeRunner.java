@@ -15,6 +15,8 @@ import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class TradeRunner extends StateMachineState implements ITradeRunner {
     private ILeague leagueObj;
@@ -22,6 +24,7 @@ public class TradeRunner extends StateMachineState implements ITradeRunner {
     private ICommandLineInput commandLineInput;
     private IValidations validation;
     private IDisplay display;
+    private static Logger logger = LogManager.getLogger(TradeRunner.class);
 
     public TradeRunner(ILeague leagueObj, ILeagueDb leagueDb, ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
         this.leagueObj = leagueObj;
@@ -39,6 +42,8 @@ public class TradeRunner extends StateMachineState implements ITradeRunner {
 
     @Override
     public void runTrading() {
+        logger.debug("Entered runTrading()");
+        logger.info("Running Trade Life Cycle: Initialize -> Generate -> Resolve -> Settle Team");
         ITradeInitializer tradeInitializer = TradingFactory.makeTradeInitializer(leagueObj);
         List<ITeam> eligibleTeamList = tradeInitializer.getEligibleTeams();
         ITradeConfig tradingConfig = tradeInitializer.getTradingConfig();

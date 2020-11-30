@@ -20,7 +20,7 @@ public class ScheduleContext implements IScheduleContext{
 	}
 
 	public StateMachineState executeStrategy(ILeague league, ILeagueDb leagueDb) {
-		logger.info("Entered executeStrategy()");
+		logger.debug("Entered executeStrategy()");
 		return scheduleStrategy.getSchedule(league, leagueDb);
 	}
 

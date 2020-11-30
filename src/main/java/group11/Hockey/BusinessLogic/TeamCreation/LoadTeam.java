@@ -39,14 +39,14 @@ public class LoadTeam extends StateMachineState implements IRenderTeam {
 
 	@Override
 	public StateMachineState startState() {
-		logger.info("Entered startState()");
+		logger.debug("Entered startState()");
 		league = renderTeam();
 		return DefaultHockeyFactory.makePlayerChoice(league, userInputMode, leagueDb, display);
 	}
 
 	@Override
 	public League renderTeam() {
-		logger.info("Entered renderTeam()");
+		logger.debug("Entered renderTeam()");
 		display.showMessageOnConsole("***Load League***\n");
 		String teamName;
 		display.showMessageOnConsole("Enter Team Name: ");

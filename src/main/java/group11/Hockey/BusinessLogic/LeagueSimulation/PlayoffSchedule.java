@@ -43,7 +43,7 @@ public class PlayoffSchedule implements IScheduleStrategy {
 
 	@Override
 	public StateMachineState getSchedule(ILeague league, ILeagueDb leagueDb) {
-		logger.info("Entered getSchedule() and started scheduling");
+		logger.debug("Entered getSchedule() and started scheduling");
 		ITimeLine timeLine = league.getTimeLine();
 		String date = timeLine.getStanleyDate();
 		HashMap<String, HashMap<ITeam, ITeam>> firstRoundSchedule = new HashMap<>();

@@ -20,7 +20,8 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class TradeResolver implements ITradeResolver {
     private ILeague leagueObj;
@@ -34,6 +35,7 @@ public class TradeResolver implements ITradeResolver {
     private IUserInputCheck userInputCheck;
     private IRosterSearch rosterSearch;
     private IRandomFloatGenerator randomFloatGenerator;
+    private static Logger logger = LogManager.getLogger(TradeResolver.class);
 
     public TradeResolver(ILeague leagueObj, ITradeCharter tradeCharter, ITradeConfig tradingConfig,
                          ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
@@ -52,6 +54,7 @@ public class TradeResolver implements ITradeResolver {
 
     @Override
     public void resolveTrade() {
+        logger.debug("Entered resolveTrade()");
         if(tradeCharter.isCharterValid()){
             if (requestedTeam.isUserTeam()) {
                 resolveAIToUserTrade();
@@ -67,11 +70,13 @@ public class TradeResolver implements ITradeResolver {
 
     @Override
     public void resetLossPoints(ITeam team) {
+        logger.debug("Entered resetLossPoints()");
         team.setLosses(0);
     }
 
     @Override
     public float modifyAcceptanceChance(){
+        logger.debug("Entered modifyAcceptanceChance()");
         float modfiedChance = 0.0f;
         String gmPersonality = offeringTeam.getGeneralManager().getPersonality();
         if(gmPersonality.equalsIgnoreCase(GMPersonalities.SHREWD.toString())){
@@ -85,8 +90,8 @@ public class TradeResolver implements ITradeResolver {
     }
 
     public void resolveDraftTrade(){
-        display.showMessageOnConsole("Resolving draft picks trading between " + offeringTeam.getTeamName() +
-                " and " + requestedTeam.getTeamName());
+        logger.debug("Entered resolveDraftTrade()");
+        logger.info("Resolving draft picks trading between " + offeringTeam.getTeamName() + " and " + requestedTeam.getTeamName());
         float randomAcceptanceChance = randomFloatGenerator.generateRandomNo();
         if (randomAcceptanceChance < modifyAcceptanceChance()) {
             acceptTrade();
@@ -98,8 +103,8 @@ public class TradeResolver implements ITradeResolver {
     }
 
     private void resolveAIToAITrade(){
-        display.showMessageOnConsole("\nResolving Trade between team " + offeringTeam.getTeamName() +
-                " and " + requestedTeam.getTeamName());
+        logger.debug("Entered resolveAIToAITrade()");
+        logger.info("\nResolving Trade between team " + offeringTeam.getTeamName() + " and " + requestedTeam.getTeamName());
 
         Float playerStrength1 = rosterSearch.getRosterStrength(offeredPlayerList);
         Float playerStrength2 = rosterSearch.getRosterStrength(requestedPlayerList);
@@ -115,6 +120,7 @@ public class TradeResolver implements ITradeResolver {
     }
 
     private void resolveAIToUserTrade(){
+        logger.debug("Entered resolveAIToUserTrade()");
         display.displayTradeStatisticsToUser(offeringTeam.getTeamName(), offeredPlayerList, requestedTeam.getTeamName(), requestedPlayerList);
         display.displayAcceptRejectOptionToUser();
 
@@ -128,6 +134,7 @@ public class TradeResolver implements ITradeResolver {
 
     @Override
     public void acceptTrade() {
+        logger.debug("Entered acceptTrade()");
         List<IPlayer> localOfferedPlayerList = new ArrayList<>();
         if(null == offeredPlayerList){
         } else {
@@ -164,6 +171,7 @@ public class TradeResolver implements ITradeResolver {
 
     @Override
     public void rejectTrade() {
+        logger.debug("Entered rejectTrade()");
         display.showMessageOnConsole("Trade is declined.");
         resetLossPoints(offeringTeam);
     }

@@ -8,6 +8,8 @@ import java.util.List;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeCharter;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class TradeCharter implements ITradeCharter {
     private ITeam offeringTeam;
@@ -15,7 +17,7 @@ public class TradeCharter implements ITradeCharter {
     private ITeam requestedTeam;
     private List<IPlayer> requestedPlayerList;
     private int draftRoundIdx;
-
+    private static Logger logger = LogManager.getLogger(TradeCharter.class);
 
     public TradeCharter( ITeam offeringTeam, List<IPlayer> offeredPlayerList,
                          ITeam requestedTeam, List<IPlayer> requestedPlayerList, int draftRoundIdx){
@@ -53,21 +55,28 @@ public class TradeCharter implements ITradeCharter {
 
     @Override
     public boolean isCharterValid() {
+        logger.debug("Entered isCharterValid()");
         if(offeringTeam == null || requestedTeam == null ||
                 offeredPlayerList == null || requestedPlayerList == null ){
+            logger.debug("Charter is not valid");
             return false;
         }
+        logger.debug("Charter is valid");
         return true;
     }
 
     @Override
     public boolean isDraftTradeCharter() {
+        logger.debug("Entered isDraftTradeCharter()");
         if(offeringTeam == null || requestedTeam == null ||
                 offeredPlayerList == null || requestedPlayerList == null ){
+            logger.debug("Charter is not valid");
             return false;
         } else if(offeringTeam == null) {
+            logger.debug("DraftCharter is valid");
             return true;
         }
+        logger.debug("DraftCharter is not valid");
         return false;
     }
 }

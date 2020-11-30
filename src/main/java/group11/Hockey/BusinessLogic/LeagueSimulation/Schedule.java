@@ -29,7 +29,7 @@ public class Schedule implements ISchedule {
 
 	@Override
 	public HashMap<String, HashMap<ITeam,ITeam>> getSeasonSchedule() {
-		logger.info("Entered getSeasonSchedule()");
+		logger.debug("Entered getSeasonSchedule()");
 		ITimeLine timeLine = league.getTimeLine();
 		String startDate = timeLine.getStartDate();
 		ArrayList<ITeam> teamName = new ArrayList<>();

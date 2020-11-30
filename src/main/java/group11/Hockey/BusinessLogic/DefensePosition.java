@@ -19,7 +19,7 @@ public class DefensePosition implements IPlayerStrengthStrategy {
 
 	@Override
 	public float claculateStrength() {
-		logger.info("Entered claculateStrength()");
+		logger.debug("Entered claculateStrength()");
 		int reduceStrengthBy = BusinessConstants.Reduce_strength_by.getIntValue();
 		float playerStrength = player.getSkating() + player.getChecking() + (player.getShooting() / reduceStrengthBy);
 		if (player.isInjured()) {

@@ -11,7 +11,7 @@ import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Player;
 /**
- * 
+ *
  * @author Jatin Partap Rana
  *
  */
@@ -23,7 +23,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 	private static Logger logger = LogManager.getLogger(GeneratingPlayers.class);
 
 	public List<IPlayer> generatePlayers(int numbersOfPlayersToGenerate) {
-		logger.info("Entered generatePlayers()");
+		logger.debug("Entered generatePlayers()");
 		List<IPlayer> listOfPlayers = new ArrayList<>();
 		String player = PlayerEnum.player.toString();
 		int forwardsToGenerate = numbersOfPlayersToGenerate / 2;
@@ -53,7 +53,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 	}
 
 	public IPlayer populatePlayer(String playerName) {
-		logger.info("Entered populatePlayer()");
+		logger.debug("Entered populatePlayer()");
 		IPlayer player = new Player();
 		player.setPlayerName(playerName);
 		player.setBirthDay(11);
@@ -67,7 +67,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 	}
 
 	public void setStatForForwardPlayer(IPlayer player) {
-		logger.info("Entered setStatForForwardPlayer()");
+		logger.debug("Entered setStatForForwardPlayer()");
 		int skatingStat = getNumberInRange(12, 20);
 		int savingStat = getNumberInRange(1, 7);
 		int checkingStat = getNumberInRange(9, 18);
@@ -79,7 +79,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 	}
 
 	public void setStatDefensePlayer(IPlayer player) {
-		logger.info("Entered setStatDefensePlayer()");
+		logger.debug("Entered setStatDefensePlayer()");
 		int skatingStat = getNumberInRange(10, 19);
 		int savingStat = getNumberInRange(1, 12);
 		int checkingStat = getNumberInRange(12, 20);
@@ -91,7 +91,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 	}
 
 	public void setStatGoaliePlayer(IPlayer player) {
-		logger.info("Entered setStatGoaliePlayer()");
+		logger.debug("Entered setStatGoaliePlayer()");
 		int skatingStat = getNumberInRange(8, 15);
 		int savingStat = getNumberInRange(12, 20);
 		int checkingStat = getNumberInRange(1, 12);
@@ -103,7 +103,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 	}
 
 	public int getNumberInRange(int minRange, int maxRange) {
-		logger.info("Entered getNumberInRange()");
+		logger.debug("Entered getNumberInRange()");
 		Random random = new Random();
 		int randomValue = random.nextInt(maxRange - minRange + 1) + minRange;
 		return randomValue;

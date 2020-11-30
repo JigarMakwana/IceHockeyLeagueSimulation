@@ -12,12 +12,12 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 public class Deadlines implements IDeadlines {
-	
+
 	private static Logger logger = LogManager.getLogger(Deadlines.class);
 
 	@Override
 	public Date getTradeDeadline(String startDate) {
-		logger.info("Entered getTradeDeadline()");
+		logger.debug("Entered getTradeDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
@@ -34,10 +34,10 @@ public class Deadlines implements IDeadlines {
 		}
 		return tradeDeadLine;
 	}
-	
+
 	@Override
 	public Date getRegularSeasonDeadline(String startDate) {
-		logger.info("Entered getRegularSeasonDeadline()");
+		logger.debug("Entered getRegularSeasonDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
@@ -57,7 +57,7 @@ public class Deadlines implements IDeadlines {
 
 	@Override
 	public Date getStanleyPlayoffDeadline(String startDate) {
-		logger.info("Entered getStanleyPlayoffDeadline()");
+		logger.debug("Entered getStanleyPlayoffDeadline()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);
@@ -75,7 +75,7 @@ public class Deadlines implements IDeadlines {
 
 	@Override
 	public Date getStanleyPlayoffBeginDate(String startDate) {
-		logger.info("Entered getStanleyPlayoffBeginDate()");
+		logger.debug("Entered getStanleyPlayoffBeginDate()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String[] dateParts = startDate.split("/");
 		int year = Integer.valueOf(dateParts[2]);

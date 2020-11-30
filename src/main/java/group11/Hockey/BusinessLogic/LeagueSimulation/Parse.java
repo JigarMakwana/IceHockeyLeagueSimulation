@@ -14,12 +14,12 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 public class Parse implements IParse{
-	
+
 	private static Logger logger = LogManager.getLogger(Parse.class);
 
 	@Override
 	public Date stringToDate(String date) {
-		logger.info("Entered stringToDate()");
+		logger.debug("Entered stringToDate()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateTime = null;
 		try {
@@ -27,41 +27,41 @@ public class Parse implements IParse{
 		} catch (ParseException e) {
 			logger.error("Exception caught : "+e);
 			e.printStackTrace();
-		}		
+		}
 		return dateTime;
 	}
-	
+
 	@Override
 	public int stringToYear(String date) {
-		logger.info("Entered stringToYear()");
+		logger.debug("Entered stringToYear()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		int year = 0;
 		Date dateTime= null;
 		try {
 			dateTime = myFormat.parse(date);
-			Calendar c = Calendar.getInstance();  
+			Calendar c = Calendar.getInstance();
 			c.setTime(dateTime);
 			year=c.get(Calendar.YEAR);
 		} catch (ParseException e) {
 			logger.error("Exception caught : "+e);
 			e.printStackTrace();
-		}		
+		}
 		return year;
 	}
-	
+
 	@Override
 	public String dateToString(Date date) {
-		logger.info("Entered dateToString()");
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
-        String stringDate = dateFormat.format(date);  
+		logger.debug("Entered dateToString()");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String stringDate = dateFormat.format(date);
 	    return stringDate;
 	}
-	
+
 	@Override
 	public Date getFirstSaturdayOfAprilInYear(int year) {
-		logger.info("Entered getFirstSaturdayOfAprilInYear()");
+		logger.debug("Entered getFirstSaturdayOfAprilInYear()");
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-		LocalDate eDate = LocalDate.of(year, Month.APRIL, 1);	
+		LocalDate eDate = LocalDate.of(year, Month.APRIL, 1);
 	    LocalDate firstSaturday = eDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.SATURDAY));
 	    String startDate = firstSaturday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	    Date firstSat = null;
@@ -70,7 +70,7 @@ public class Parse implements IParse{
 		} catch (Exception e) {
 			logger.error("Exception caught : "+e);
 			e.printStackTrace();
-		}	
+		}
 		return firstSat;
 	}
 

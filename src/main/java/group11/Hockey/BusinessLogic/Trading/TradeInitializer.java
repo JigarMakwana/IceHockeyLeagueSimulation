@@ -8,6 +8,8 @@ import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeInitializer;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeConfig;
 import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.models.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public class TradeInitializer implements ITradeInitializer {
 	private ILeague leagueObj;
 	private ITrading tradingConfig;
 	private List<ITeam> eligibleTeams = new ArrayList<>();
+	private static Logger logger = LogManager.getLogger(TradeInitializer.class);
 
 	public TradeInitializer(ILeague leagueObj) {
 		this.leagueObj = leagueObj;
@@ -24,42 +27,10 @@ public class TradeInitializer implements ITradeInitializer {
 		setEligibleTeams();
 	}
 
-	private void setEligibleTeams() {
-		int lossPointCutOff = tradingConfig.getLossPoint();
-		List<IConference> conferenceList = leagueObj.getConferences();
-		for (IConference conference : conferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
-				List<ITeam> teamList = division.getTeams();
-				for (ITeam team : teamList) {
-					if ((team.getLosses() >= lossPointCutOff)) {
-						eligibleTeams.add(team);
-					}
-				}
-			}
-		}
-	}
-
-    private boolean isRandomOfferChanceSuccess() {
-		IRandomFloatGenerator randomFloatGenerator = RandomNoFactory.makeRandomFloatGenerator();
-        float randomTradeOfferChance = randomFloatGenerator.generateRandomNo();
-        if(randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public ITradeConfig getTradingConfig(){
-        ITradeConfig configTrading = TradingFactory.makeTradeConfig(
-                tradingConfig.getLossPoint(),
-                tradingConfig.getRandomTradeOfferChance(),
-                tradingConfig.getMaxPlayersPerTrade(),
-                tradingConfig.getRandomAcceptanceChance(),
-                tradingConfig.getGmTable()
-        );
-        return configTrading;
+        return TradingFactory.makeTradeConfig(tradingConfig.getLossPoint(), tradingConfig.getRandomTradeOfferChance(),
+                tradingConfig.getMaxPlayersPerTrade(), tradingConfig.getRandomAcceptanceChance(), tradingConfig.getGmTable());
     }
 
     @Override
@@ -76,5 +47,33 @@ public class TradeInitializer implements ITradeInitializer {
 	@Override
 	public List<ITeam> getEligibleTeams() {
 		return eligibleTeams;
+	}
+
+	private boolean isRandomOfferChanceSuccess() {
+		logger.debug("Entered isRandomOfferChanceSuccess()");
+		IRandomFloatGenerator randomFloatGenerator = RandomNoFactory.makeRandomFloatGenerator();
+		float randomTradeOfferChance = randomFloatGenerator.generateRandomNo();
+		if(randomTradeOfferChance < tradingConfig.getRandomTradeOfferChance()){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private void setEligibleTeams() {
+		logger.debug("Entered setEligibleTeams()");
+		int lossPointCutOff = tradingConfig.getLossPoint();
+		List<IConference> conferenceList = leagueObj.getConferences();
+		for (IConference conference : conferenceList) {
+			List<Division> divisionList = conference.getDivisions();
+			for (Division division : divisionList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
+					if ((team.getLosses() >= lossPointCutOff)) {
+						eligibleTeams.add(team);
+					}
+				}
+			}
+		}
 	}
 }

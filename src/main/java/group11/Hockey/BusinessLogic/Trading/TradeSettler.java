@@ -30,9 +30,9 @@ public class TradeSettler implements ITradeSettler {
     private IRosterSearch rosterSearch;
     private static Logger logger = LogManager.getLogger(TradeSettler.class);
 
-    public TradeSettler(ITeam team, List<IPlayer> freeAgentList, ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
+    public TradeSettler(ITeam team, List<IPlayer> list, ICommandLineInput commandLineInput, IValidations validation, IDisplay display){
         this.team = team;
-        this.freeAgentList = freeAgentList;
+        this.freeAgentList = list;
         this.commandLineInput = commandLineInput;
         this.validation = validation;
         this.display = display;

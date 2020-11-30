@@ -6,15 +6,20 @@ package group11.Hockey.db.Coach;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.db.DefaultDatabaseFactory;
 import group11.Hockey.db.IProcedureCallDb;
 
 public class CoachDb implements ICoachDb {
+	private static Logger logger = LogManager.getLogger(CoachDb.class);
 
 	@Override
 	public boolean insertCoaches(String leagueName, String coachName, float skating, float shooting, float checking,
 			float saving) {
-		IProcedureCallDb procedureCallDb = DefaultDatabaseFactory.makeProcedureCallDb("{call insertCoaches(?, ?, ?, ?, ?, ?, ?)}");
+		IProcedureCallDb procedureCallDb = DefaultDatabaseFactory
+				.makeProcedureCallDb("{call insertCoaches(?, ?, ?, ?, ?, ?, ?)}");
 		CallableStatement statement = procedureCallDb.getDBCallableStatement();
 		boolean outPutValue = false;
 		try {
@@ -34,7 +39,7 @@ public class CoachDb implements ICoachDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 
 			procedureCallDb.closeConnection();

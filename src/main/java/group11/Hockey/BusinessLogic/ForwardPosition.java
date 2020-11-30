@@ -23,7 +23,7 @@ public class ForwardPosition implements IPlayerStrengthStrategy {
 		int reduceStrengthBy = BusinessConstants.Reduce_strength_by.getIntValue();
 		float playerStrength = player.getSkating() + player.getShooting() + (player.getChecking() / reduceStrengthBy);
 		if (player.isInjured()) {
-			logger.warn("Player strength is reduced by " + reduceStrengthBy);
+			logger.info("Player strength is reduced by " + reduceStrengthBy);
 			playerStrength = playerStrength / reduceStrengthBy;
 		}
 		return playerStrength;

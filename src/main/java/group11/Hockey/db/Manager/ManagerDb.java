@@ -6,10 +6,14 @@ package group11.Hockey.db.Manager;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.db.DefaultDatabaseFactory;
 import group11.Hockey.db.IProcedureCallDb;
 
 public class ManagerDb implements IManagerDb {
+	private static Logger logger = LogManager.getLogger(ManagerDb.class);
 
 	@Override
 	public boolean insertManager(String leagueName, String managerName) {
@@ -29,7 +33,7 @@ public class ManagerDb implements IManagerDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 
 			procedureCallDb.closeConnection();

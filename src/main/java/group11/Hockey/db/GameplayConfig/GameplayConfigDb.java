@@ -6,6 +6,9 @@ package group11.Hockey.db.GameplayConfig;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.IAging;
 import group11.Hockey.BusinessLogic.models.IGameResolver;
@@ -18,6 +21,7 @@ import group11.Hockey.db.DefaultDatabaseFactory;
 import group11.Hockey.db.IProcedureCallDb;
 
 public class GameplayConfigDb implements IGameplayConfigDb {
+	private static Logger logger = LogManager.getLogger(GameplayConfigDb.class);
 
 	@Override
 	public boolean insertGameplayConfig(IAging aging, IGameResolver gameResolver, IInjuries injuries,
@@ -57,7 +61,7 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 
 			procedureCallDb.closeConnection();
@@ -96,7 +100,7 @@ public class GameplayConfigDb implements IGameplayConfigDb {
 			procedureCallDb.closeConnection();
 		} catch (Exception e) {
 			procedureCallDb.closeConnection();
-			System.out.println("Exception occured while getting the callable statment ");
+			logger.error("Exception occured while getting the callable statment " + e);
 		} finally {
 			procedureCallDb.closeConnection();
 		}

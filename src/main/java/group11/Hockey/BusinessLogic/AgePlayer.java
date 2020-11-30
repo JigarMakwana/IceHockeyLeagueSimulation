@@ -20,7 +20,6 @@ import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.BusinessLogic.models.Player;
-import group11.Hockey.BusinessLogic.models.Team;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
@@ -51,9 +50,9 @@ public class AgePlayer extends RetirePlayer {
 		this.display = display;
 	}
 
-	public AgePlayer(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput, IValidations validation) {
+	public AgePlayer(ILeague league, ILeagueDb leagueDb, IDisplay display, ICommandLineInput commandLineInput,
+			IValidations validation) {
 		this.league = league;
-		this.days = days;
 		this.leagueDb = leagueDb;
 		this.display = display;
 		this.commandLineInput = commandLineInput;
@@ -86,7 +85,6 @@ public class AgePlayer extends RetirePlayer {
 		List<IConference> conferences = league.getConferences();
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
 		if (freeAgents.size() > 0) {
-			logger.info("Freeagents exists so trying to loop over them");
 			for (IPlayer freeAgent : freeAgents) {
 				Date playerBirthDate = getPlayerBirthDate(freeAgent, parse);
 				if (currentDate.compareTo(playerBirthDate) == 0) {
@@ -104,11 +102,9 @@ public class AgePlayer extends RetirePlayer {
 					for (Division division : divisions) {
 						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
-							logger.info("Teams exists in " + division.getDivisionName() + ", so looping over them");
 							for (ITeam team : teams) {
 								List<IPlayer> players = team.getPlayers();
 								if (players.size() > 0) {
-									logger.info("Players exists in " + team.getTeamName() + ", so looping over them");
 									for (IPlayer player : players) {
 										Date playerBirthDate = getPlayerBirthDate(player, parse);
 										if (currentDate.compareTo(playerBirthDate) == 0) {
@@ -152,11 +148,9 @@ public class AgePlayer extends RetirePlayer {
 					for (Division division : divisions) {
 						List<ITeam> teams = division.getTeams();
 						if (teams.size() > 0) {
-							logger.info("Teams exists in " + division.getDivisionName() + ", so looping over them");
 							for (ITeam team : teams) {
 								List<IPlayer> players = team.getPlayers();
 								if (players.size() > 0) {
-									logger.info("Players exists in " + team.getTeamName() + ", so looping over them");
 									for (IPlayer player : players) {
 										isRetired = player.isIsRetired();
 										if (isRetired) {
@@ -178,7 +172,6 @@ public class AgePlayer extends RetirePlayer {
 
 	private Date getPlayerBirthDate(IPlayer player, IParse parse) {
 
-		logger.info("Entered getPlayerBirthDate()");
 		int playerBirthYear = player.getBirthYear();
 		int playerBirthMonth = player.getBirthMonth();
 		int playerBirthDay = player.getBirthDay();

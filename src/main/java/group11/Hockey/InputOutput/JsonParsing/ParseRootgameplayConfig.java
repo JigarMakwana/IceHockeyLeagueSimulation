@@ -5,10 +5,13 @@ package group11.Hockey.InputOutput.JsonParsing;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.*;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 
 public class ParseRootgameplayConfig implements IParseRootElement {
-
+	private static Logger logger = LogManager.getLogger(ParseRootgameplayConfig.class);
 	@Override
 	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
 		// parse gameplayConfig
@@ -18,6 +21,7 @@ public class ParseRootgameplayConfig implements IParseRootElement {
 	}
 
 	private GameplayConfig parseGameplayConfig(JSONObject listJsonObject) {
+		logger.info("Parsing Gameplay from Json");
 		JSONObject gameplayConfigJson = (JSONObject) listJsonObject.get(Attributes.GAMEPLAYCONFIG.getAttribute());
 
 		JSONObject agingJsonObj = (JSONObject) gameplayConfigJson.get(Attributes.AGING.getAttribute());

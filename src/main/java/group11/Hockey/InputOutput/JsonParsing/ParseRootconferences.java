@@ -12,6 +12,9 @@ import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.models.*;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -19,6 +22,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 	private List<String> conferenceNamesList = new ArrayList<String>();
 	private List<String> divisionNamesList = new ArrayList<String>();
 	private List<String> teamNameList = new ArrayList<String>();
+	private static Logger logger = LogManager.getLogger(ParseRootconferences.class);
 
 	@Override
 	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
@@ -27,6 +31,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 	}
 
 	private List<IConference> parseConferences(JSONObject jsonObject) throws Exception {
+		logger.info("Parsing Conference from Json");
 		IConference conference;
 		List<IConference> conferencesList = new ArrayList<>();
 		JSONArray ConferenceJSONArray = (JSONArray) jsonObject.get(Attributes.CONFERENCES.getAttribute());

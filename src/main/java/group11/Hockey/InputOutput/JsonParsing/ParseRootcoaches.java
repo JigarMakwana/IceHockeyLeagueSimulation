@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -15,6 +17,7 @@ import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.ILeague;
 
 public class ParseRootcoaches implements IParseRootElement {
+	private static Logger logger = LogManager.getLogger(ParseRootcoaches.class);
 
 	@Override
 	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
@@ -23,6 +26,7 @@ public class ParseRootcoaches implements IParseRootElement {
 	}
 
 	private List<ICoach> parseCoaches(JSONObject jsonObject) {
+		logger.info("Parsing Coaches from json");
 		ICoach coach;
 		List<ICoach> coachesList = new ArrayList<>();
 		JSONArray coachesJSONArray = (JSONArray) jsonObject.get(Attributes.COACHES.getAttribute());

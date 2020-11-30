@@ -15,7 +15,7 @@ public class SimulateTest {
 	public void startStateTest() {
 		ILeague league = new LeagueModelMock().getLeagueInfo();
 
-		StateMachineState currentState = DefaultHockeyFactory.makeSimulate(league, 0, null, null);
+		StateMachineState currentState = DefaultHockeyFactory.makeSimulate(league, 0, null, null, null, null);
 		Assert.assertNotNull(currentState);
 		Assert.assertTrue(currentState.ShouldContinue());
 

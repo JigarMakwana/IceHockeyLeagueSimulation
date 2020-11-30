@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import group11.Hockey.App;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.StateMachineState;
 
 public abstract class ValidateJsonSchema extends StateMachineState {
@@ -36,7 +37,7 @@ public abstract class ValidateJsonSchema extends StateMachineState {
 
 		} catch (FileNotFoundException e) {
 			logger.error(jsonFilePath + "File not found " + e.getMessage());
-			throw new Exception();
+			throw DefaultHockeyFactory.makeExceptionCall(jsonFilePath + "File not found " + e.getMessage());
 		}
 
 		JSONObject jsonSchema = new JSONObject(new JSONTokener(inputStreamJsonSchema));
@@ -47,10 +48,10 @@ public abstract class ValidateJsonSchema extends StateMachineState {
 		} catch (ValidationException e) {
 			logger.error("Exception: " + e.getMessage());
 			e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
-			throw new Exception();
+			throw DefaultHockeyFactory.makeExceptionCall("Exception: " + e.getMessage());
 		} catch (Exception e) {
 			logger.error("Exception: " + e.getMessage());
-			throw new Exception();
+			throw DefaultHockeyFactory.makeExceptionCall("Exception: " + e.getMessage());
 		}
 	}
 

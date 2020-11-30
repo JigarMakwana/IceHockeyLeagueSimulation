@@ -17,7 +17,7 @@ public interface ITeam {
 
 	public ICoach getHeadCoach();
 
-	public void setHeadCoach(Coach headCoach);
+	public void setHeadCoach(ICoach headCoach);
 
 	public int getPoints();
 
@@ -90,4 +90,6 @@ public interface ITeam {
 	public List<Team> sortTeam(List<ITeam> teamsOrderedInReverse);
 
 	public String toString();
+
+	public void setTradedPicks(List<Boolean> flag);
 }

@@ -12,11 +12,14 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.Player;
 
 public class ParseRootfreeAgents implements IParseRootElement {
 	private static Logger logger = LogManager.getLogger(ParseRootfreeAgents.class);
+
 	@Override
 	public void parseRootElement(ILeague leagueModelObj, JSONObject jsonObject) throws Exception {
 		List<Player> playersList = parseFreeAgent(jsonObject);
@@ -25,8 +28,8 @@ public class ParseRootfreeAgents implements IParseRootElement {
 
 	private List<Player> parseFreeAgent(JSONObject teamsListJsonObject) {
 		logger.info("Parsing FreeAgents from Json");
-		Player freeAgentsObj;
-		List<Player> freeAgentsList = new ArrayList<Player>();
+		IPlayer freeAgentsObj;
+		List<Player> freeAgentsList = new ArrayList<>();
 		JSONArray playersList = (JSONArray) teamsListJsonObject.get(Attributes.FREEAGENTS.getAttribute());
 		Iterator<JSONObject> playersListIterator = playersList.iterator();
 		while (playersListIterator.hasNext()) {
@@ -44,14 +47,15 @@ public class ParseRootfreeAgents implements IParseRootElement {
 			float checking = ((Long) playersListJsonObject.get(Attributes.CHECKING.getAttribute())).intValue();
 			// get saving
 			float saving = ((Long) playersListJsonObject.get(Attributes.SAVING.getAttribute())).intValue();
-			int birthDay =  ((Long) playersListJsonObject.get(Attributes.BIRTHDAY.getAttribute())).intValue();
-			int birthMonth =  ((Long) playersListJsonObject.get(Attributes.BIRTHMONTH.getAttribute())).intValue();
-			int birthYear =  ((Long) playersListJsonObject.get(Attributes.BIRTHYEAR.getAttribute())).intValue();
-			freeAgentsObj = new Player(skating, shooting, checking, saving, playerName, position, false, true, 0);
+			int birthDay = ((Long) playersListJsonObject.get(Attributes.BIRTHDAY.getAttribute())).intValue();
+			int birthMonth = ((Long) playersListJsonObject.get(Attributes.BIRTHMONTH.getAttribute())).intValue();
+			int birthYear = ((Long) playersListJsonObject.get(Attributes.BIRTHYEAR.getAttribute())).intValue();
+			freeAgentsObj = DefaultHockeyFactory.makePlayer(skating, shooting, checking, saving, playerName, position,
+					false, true, 0);
 			freeAgentsObj.setBirthDay(birthDay);
 			freeAgentsObj.setBirthMonth(birthMonth);
 			freeAgentsObj.setBirthYear(birthYear);
-			freeAgentsList.add(freeAgentsObj);
+			freeAgentsList.add((Player) freeAgentsObj);
 		}
 		return freeAgentsList;
 	}

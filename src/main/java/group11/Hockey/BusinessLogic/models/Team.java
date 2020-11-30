@@ -115,7 +115,7 @@ public class Team implements ITeam, Comparable<Team> {
 		return headCoach;
 	}
 
-	public void setHeadCoach(Coach headCoach) {
+	public void setHeadCoach(ICoach headCoach) {
 		this.headCoach = headCoach;
 	}
 
@@ -275,8 +275,8 @@ public class Team implements ITeam, Comparable<Team> {
 
 	public List<Team> sortTeam(List<ITeam> teamsOrderedInReverse) {
 		List<Team> teams = new ArrayList<>();
-		for(ITeam team: teamsOrderedInReverse) {
-			teams.add((Team)team);
+		for (ITeam team : teamsOrderedInReverse) {
+			teams.add((Team) team);
 		}
 		Collections.sort(teams);
 		return teams;

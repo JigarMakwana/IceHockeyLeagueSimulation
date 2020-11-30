@@ -13,7 +13,11 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.InputOutput.IDisplay;
-
+/**
+ * 
+ * @author Jatin Partap Rana and Jigar
+ *
+ */
 public class Validations implements IValidations {
 
 	IConference conferenceObj = DefaultHockeyFactory.makeConference();

@@ -3,7 +3,11 @@ package group11.Hockey.InputOutput;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.models.*;
-
+/**
+ * 
+ * @author Jigar and Jatin Partap Rana
+ *
+ */
 public class Display implements IDisplay {
 
 	private static Display displayInstance = null;

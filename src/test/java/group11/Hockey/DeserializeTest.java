@@ -7,7 +7,7 @@ import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.Division;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 
-public class DeserializeLeagueTest {
+public class DeserializeTest {
 
 	
 	@Test

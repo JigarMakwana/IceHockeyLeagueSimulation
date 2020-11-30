@@ -34,14 +34,12 @@ public class Deserialize implements IDeserialize {
 		League league = null;
 		try {
 			reader = new FileReader("./league.json");
-			JSONParser jsonParser = new JSONParser();
+			JSONParser jsonParser = DefaultHockeyFactory.makeGsonJsonParser();
 			String value = jsonParser.parse(reader).toString();
 			Gson gson = DefaultHockeyFactory.makeGson();
 			league = gson.fromJson(value, League.class);
-			System.out.println(league.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Eception occurred while deSerializing the object:" + e.getMessage());
 		}
 		return league;
 	}

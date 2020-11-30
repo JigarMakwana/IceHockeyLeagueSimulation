@@ -38,7 +38,7 @@ public class Serialize implements ISerialize {
 			gson.toJson(league, writer);
 			writer.close();
 		} catch (IOException e) {
-			System.out.println("Eception occurred while serializing the object:" + e.getMessage());
+			 e.getMessage();
 		}
 
 	}

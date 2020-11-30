@@ -48,7 +48,7 @@ public class TradeDraft implements ITradeGenerator {
     @Override
     public ITradeCharter generateTradeOffer(List<ITeam> eligibleTeamList) {
         logger.debug("Entered generateTradeOffer()");
-        logger.info("nGenerating draft trading offers for AI Team " + offeringTeam.getTeamName());
+        display.showMessageOnConsole("\nGenerating draft trading " + offeringTeam.getTeamName());
         for(int i=PlayerDraft.ROUND_7.getNumVal(); i>=0; i--){
             if(offeringTeam.getTradedPicks().get(i) == false){
                 return tradeRound(eligibleTeamList, i);

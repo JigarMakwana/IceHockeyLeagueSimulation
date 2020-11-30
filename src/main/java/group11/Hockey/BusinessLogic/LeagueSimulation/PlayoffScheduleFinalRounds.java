@@ -42,6 +42,9 @@ public class PlayoffScheduleFinalRounds implements IScheduleStrategy {
 		ITeam team1;
 		ITeam team2;
 		String message;
+		if(display == null) {
+			display = DefaultHockeyFactory.makeDisplay();
+		}
 		String time = "00:00:00";
 		int teamNumber1 = 0;
 		int teamNumber2 = 1;

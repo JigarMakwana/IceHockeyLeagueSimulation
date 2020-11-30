@@ -1,8 +1,10 @@
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.Validations;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.BusinessConstants;
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Enums.Positions;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

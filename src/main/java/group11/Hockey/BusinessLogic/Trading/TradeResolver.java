@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IUserInputCheck;
-import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.RandomNumGenerator.IRandomFloatGenerator;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.Enums.GMPersonalities;
 import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.*;
+import group11.Hockey.BusinessLogic.Validations.IUserInputCheck;
+import group11.Hockey.BusinessLogic.Validations.IValidations;
 import group11.Hockey.BusinessLogic.RandomNumGenerator.RandomNoFactory;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;

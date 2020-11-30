@@ -1,11 +1,13 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.positions;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.BusinessConstants;
+import group11.Hockey.BusinessLogic.PlayerStrength.IPlayerStrengthStrategy;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public class ForwardPosition implements IPlayerStrengthStrategy {

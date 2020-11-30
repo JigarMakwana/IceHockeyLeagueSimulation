@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.IInjurySystem;
-import group11.Hockey.BusinessLogic.IPlayerStrengthContext;
 import group11.Hockey.BusinessLogic.Aging.RetirePlayer;
 import group11.Hockey.db.Player.IPlayerDb;
 import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.InjurySystem.IInjurySystem;
+import group11.Hockey.BusinessLogic.PlayerStrength.IPlayerStrengthContext;
 
 /**
  * This is model class for Player and it contains all the business logic related

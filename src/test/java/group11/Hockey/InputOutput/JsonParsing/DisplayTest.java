@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.InputOutput.JsonParsing;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -29,7 +29,7 @@ public enum BusinessConstants {
 		this.intValue = intValue;
 	}
 
-	String getValue() {
+	public String getValue() {
 		return value;
 	}
 

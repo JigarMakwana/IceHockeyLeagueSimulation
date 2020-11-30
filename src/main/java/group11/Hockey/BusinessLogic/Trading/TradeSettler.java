@@ -6,6 +6,8 @@ package group11.Hockey.BusinessLogic.Trading;
 import group11.Hockey.BusinessLogic.*;
 import group11.Hockey.BusinessLogic.Enums.RosterSize;
 import group11.Hockey.BusinessLogic.Trading.TradingInterfaces.ITradeSettler;
+import group11.Hockey.BusinessLogic.Validations.IUserInputCheck;
+import group11.Hockey.BusinessLogic.Validations.IValidations;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;

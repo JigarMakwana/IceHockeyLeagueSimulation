@@ -1,7 +1,7 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.PlayerStrength;
 
 public class PlayerStrengthContext implements IPlayerStrengthContext {
 	private IPlayerStrengthStrategy currentContext;

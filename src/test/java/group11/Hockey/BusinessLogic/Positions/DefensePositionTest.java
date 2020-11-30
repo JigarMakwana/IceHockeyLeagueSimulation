@@ -1,11 +1,13 @@
 /*
  * Author: RajKumar B00849566
  */
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.Positions;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.PlayerStrength.IPlayerStrengthStrategy;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 
 public class DefensePositionTest {

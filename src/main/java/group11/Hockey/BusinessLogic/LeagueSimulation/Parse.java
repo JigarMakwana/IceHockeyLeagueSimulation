@@ -14,6 +14,8 @@ import java.util.Date;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
+
 public class Parse implements IParse{
 
 	private static Logger logger = LogManager.getLogger(Parse.class);

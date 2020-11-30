@@ -10,13 +10,16 @@ import org.apache.log4j.Logger;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
 import group11.Hockey.BusinessLogic.StateMachineState;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IAdvanceTime;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IScheduleContext;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.ITimeLine;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
 
-public class AdvanceTime extends StateMachineState {
+public class AdvanceTime extends StateMachineState implements IAdvanceTime {
 	private ILeague league;
 	private ILeagueDb leagueDb;
 	private static Logger logger = LogManager.getLogger(AdvanceTime.class);

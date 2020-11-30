@@ -105,17 +105,17 @@ public class PlayerTest {
 
 	@Test
 	public void replacePlayerWithFreeAgentTest() {
-		Player player1 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
+		IPlayer player1 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
 				Constants.playerStats, Constants.playerName, Constants.forward, true, false, 50);
-		Player player2 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
+		IPlayer player2 = new Player(Constants.playerStats, Constants.playerStats, Constants.playerStats,
 				Constants.playerStats, "Agent one", Constants.forward, true, true, 20);
 		List<IPlayer> playerList = new ArrayList<>();
 		playerList.add(player1);
 
 		LeagueModelMock leagueModel = new LeagueModelMock();
 		ILeague league = leagueModel.getLeagueInfo();
-		List<Player> playerList2 = new ArrayList<Player>();
-		playerList2.add(player2);
+		List<Player> playerList2 = new ArrayList<>();
+		playerList2.add((Player) player2);
 		league.setFreeAgents(playerList2);
 
 		playerWithParams.replacePlayerWithFreeAgent(league, playerList);

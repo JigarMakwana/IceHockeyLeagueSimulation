@@ -88,7 +88,7 @@ public class LeagueModelMock {
 	}
 
 	public void populateFreeAgents(ILeague league) {
-		List<Player> freeAgents = new ArrayList<Player>();
+		List<Player> freeAgents = new ArrayList<>();
 		freeAgents
 				.add((Player) DefaultHockeyFactory.makePlayer(10, 10, 10, 10, "Player 1", "forward", true, false, 50));
 		freeAgents

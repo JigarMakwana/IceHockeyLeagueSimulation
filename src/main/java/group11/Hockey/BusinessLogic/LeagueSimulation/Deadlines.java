@@ -11,6 +11,8 @@ import java.util.Date;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IDeadlines;
+
 public class Deadlines implements IDeadlines {
 
 	private static Logger logger = LogManager.getLogger(Deadlines.class);

@@ -10,8 +10,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.models.Advance;
-import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IDeadlines;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ISchedule;
 import group11.Hockey.BusinessLogic.models.IAdvance;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.IDivision;
@@ -39,9 +40,9 @@ public class Schedule implements ISchedule {
 		HashMap<ITeam, Integer> scheduledOutConferenceMatchCount = new HashMap<>();
 		HashMap<String, Integer> simulatedHashmap = new HashMap<>();
 		HashMap<ITeam, IConference> teamConference = new HashMap<>();
-		HashMap<ITeam, Division> teamDivision = new HashMap<>();
+		HashMap<ITeam, IDivision> teamDivision = new HashMap<>();
 		HashMap<IConference, Integer> conTeamCount = new HashMap<>();
-		HashMap<Division, Integer> divTeamCount = new HashMap<>();
+		HashMap<IDivision, Integer> divTeamCount = new HashMap<>();
 		HashMap<ITeam, Integer> totalGameCount = new HashMap<>();
 		HashMap<String, HashMap<ITeam, ITeam>> regularSchedule = new HashMap<>();
 
@@ -51,7 +52,7 @@ public class Schedule implements ISchedule {
 			conTeamCount.put(conference, 0);
 			List<IDivision> divisionList = conference.getDivisions();
 			for (IDivision division : divisionList) {
-				divTeamCount.put((Division) division, 0);
+				divTeamCount.put(division, 0);
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
 					teamName.add(team);
@@ -59,10 +60,10 @@ public class Schedule implements ISchedule {
 					scheduledInConferenceMatchCount.put(team, 0);
 					scheduledOutConferenceMatchCount.put(team, 0);
 					teamConference.put(team, conference);
-					teamDivision.put(team, (Division) division);
+					teamDivision.put(team, division);
 					totalTeams++;
 					conTeamCount.put(conference, conTeamCount.get(conference) + 1);
-					divTeamCount.put((Division) division, divTeamCount.get(division) + 1);
+					divTeamCount.put(division, divTeamCount.get(division) + 1);
 					totalGameCount.put(team, 0);
 				}
 			}
@@ -366,7 +367,7 @@ public class Schedule implements ISchedule {
 			conTeamCount.put(conference, 0);
 			List<IDivision> divisionList = conference.getDivisions();
 			for (IDivision division : divisionList) {
-				divTeamCount.put((Division) division, 0);
+				divTeamCount.put(division, 0);
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
 					totalGames += (scheduledDivisionMatchCount.get(team)) + (scheduledInConferenceMatchCount.get(team))

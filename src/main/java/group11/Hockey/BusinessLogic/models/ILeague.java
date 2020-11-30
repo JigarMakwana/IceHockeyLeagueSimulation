@@ -64,7 +64,7 @@ public interface ILeague {
 
 	void setDraftTradeTracker(ITeam offeringTeam, ITeam requestedTeam, int draftRound);
 
-	public void setFreeAgents(List<Player> player);
+	public void setFreeAgents(List<Player> freeAgents);
 
 	public void setCoaches(List<ICoach> coach);
 

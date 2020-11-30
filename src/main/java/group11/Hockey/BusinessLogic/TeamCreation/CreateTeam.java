@@ -16,6 +16,7 @@ import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
+
 /**
  *
  * @author Jatin Partap Rana
@@ -54,23 +55,28 @@ public class CreateTeam extends StateMachineState implements IRenderTeam {
 	public ILeague renderTeam() {
 		logger.debug("Entered renderTeam()");
 		display.showMessageOnConsole("***Create Team***\\n");
-		IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation, display);
-		List<IConference> conferencesList = league.getConferences();
-		IConference conference = DefaultHockeyFactory.makeConference();
-		IDivision division = DefaultHockeyFactory.makeDivision();
-		ITeam newTeam = DefaultHockeyFactory.makeTeam();
-		String conferenceName = userInputCheck.conferenceNameFromUserCheck(conferencesList);
-		IConference conferenceItem = conference.getConferencefromConferenceName(conferenceName, conferencesList);
-		String divisionName = userInputCheck.divisonNameFromUserCheck(conferenceItem);
-		IDivision divisionItem = division.getDivisionFromDivisionName(divisionName, conferenceItem.getDivisions());
-		userInputCheck.teamNameFromUserCheck(newTeam, league);
-		display.displayListOfGeneralMangers(league);
-		userInputCheck.generalManagerNameFromUserCheck(newTeam, league);
-		display.displayListOfCoaches(league);
-		userInputCheck.headCoachNameFromUserCheck(newTeam, league);
-		display.displayListOfPLayers(league);
-		userInputCheck.playerChoiceFromUser(newTeam, league);
-		divisionItem.addNewTeamInDivision(newTeam);
+		try {
+			IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(commandLineInput, validation,
+					display);
+			List<IConference> conferencesList = league.getConferences();
+			IConference conference = DefaultHockeyFactory.makeConference();
+			IDivision division = DefaultHockeyFactory.makeDivision();
+			ITeam newTeam = DefaultHockeyFactory.makeTeam();
+			String conferenceName = userInputCheck.conferenceNameFromUserCheck(conferencesList);
+			IConference conferenceItem = conference.getConferencefromConferenceName(conferenceName, conferencesList);
+			String divisionName = userInputCheck.divisonNameFromUserCheck(conferenceItem);
+			IDivision divisionItem = division.getDivisionFromDivisionName(divisionName, conferenceItem.getDivisions());
+			userInputCheck.teamNameFromUserCheck(newTeam, league);
+			display.displayListOfGeneralMangers(league);
+			userInputCheck.generalManagerNameFromUserCheck(newTeam, league);
+			display.displayListOfCoaches(league);
+			userInputCheck.headCoachNameFromUserCheck(newTeam, league);
+			display.displayListOfPLayers(league);
+			userInputCheck.playerChoiceFromUser(newTeam, league);
+			divisionItem.addNewTeamInDivision(newTeam);
+		} catch (Exception e) {
+			logger.info("Exception occcured in create team :"+ e.getMessage());
+		}
 		return league;
 	}
 

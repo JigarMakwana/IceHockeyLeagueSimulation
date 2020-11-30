@@ -52,7 +52,7 @@ public class GeneratingPlayers implements IGeneratingPlayers{
 		return listOfPlayers;
 	}
 
-	private IPlayer populatePlayer(String playerName) {
+	public IPlayer populatePlayer(String playerName) {
 		logger.info("Entered populatePlayer()");
 		IPlayer player = new Player();
 		player.setPlayerName(playerName);

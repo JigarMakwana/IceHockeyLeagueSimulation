@@ -3,11 +3,13 @@ package group11.Hockey.BusinessLogic.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-import group11.Hockey.db.Team.ITeamDb;
-import group11.Hockey.db.Team.TeamDbMock;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Test;
+
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.db.Team.ITeamDb;
+import group11.Hockey.db.Team.TeamDbMock;
 
 public class TeamTest {
 
@@ -38,17 +40,6 @@ public class TeamTest {
 	}
 
 	@Test
-	public void getGeneralManagerTest() {
-//		Assert.assertEquals("Kevin", team.getGeneralManager());
-	}
-
-	@Test
-	public void getHeadCoachTest() {
-//		Assert.assertEquals(null, team.getHeadCoach());
-	}
-
-	// getPlayers
-	@Test
 	public void getPlayersTest() {
 
 		Assert.assertEquals(player1.getPlayerName(), team.getPlayers().get(0).getPlayerName());
@@ -75,8 +66,8 @@ public class TeamTest {
 				fetcheData.getConferences().get(0).getConferenceName().equalsIgnoreCase("Westeren Conference"));
 		Assert.assertTrue(fetcheData.getConferences().get(0).getDivisions().get(0).getDivisionName()
 				.equalsIgnoreCase("Atlantic Division"));
-		Assert.assertTrue(fetcheData.getConferences().get(0).getDivisions().get(0).getTeams().get(0)
-				.getTeamName().equalsIgnoreCase("Toronto Maples"));
+		Assert.assertTrue(fetcheData.getConferences().get(0).getDivisions().get(0).getTeams().get(0).getTeamName()
+				.equalsIgnoreCase("Toronto Maples"));
 	}
 
 	@Test
@@ -87,9 +78,16 @@ public class TeamTest {
 
 	@Test
 	public void addGeneralMangerToTeamTest() {
-//		team.addGeneralMangerToTeam(team, "Kevin", league);
-//		Assert.assertEquals("Kevin", team.getGeneralManager());
-//		Assert.assertTrue(league.getGeneralManagers().size() == 0);
+		IGeneralManager generalManager = DefaultHockeyFactory.makeGeneralManager("Kevin", "normal");
+		team.addGeneralMangerToTeam(team, generalManager, league);
+		Assert.assertEquals("Kevin", generalManager.getName());
+		Assert.assertTrue(league.getGeneralManagers().size() == 1);
+	}
+
+	@Test
+	public void orderTeamsInLeagueStandingsTest() {
+		DefaultHockeyFactory.makeTeam();
+		Assert.assertTrue(team.getPlayers().size() == 2);
 	}
 
 	@Test
@@ -97,6 +95,13 @@ public class TeamTest {
 		team.addCoachToTeam(team, "C1", league);
 		Assert.assertEquals("C1", team.getHeadCoach().getName());
 		Assert.assertTrue(league.getCoaches().size() == 0);
+	}
+
+	@Test
+	public void sortTeamTest() {
+		ITeam teamm = DefaultHockeyFactory.makeTeam();
+		teamm.sortTeam(league.getConferences().get(0).getDivisions().get(0).getTeams());
+		Assert.assertTrue(team.getPlayers().size() == 2);
 	}
 
 }

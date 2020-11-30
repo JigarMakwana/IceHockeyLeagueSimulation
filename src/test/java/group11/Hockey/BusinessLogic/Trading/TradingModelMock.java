@@ -99,7 +99,7 @@ public class TradingModelMock {
         IPlayer player25 = DefaultHockeyFactory.makePlayer(2, 2, 2, 1, "Issfahan", "defense", false, false, 26, false);
         IPlayer player26 = DefaultHockeyFactory.makePlayer(10, 12, 10, 1, "Neiffrutya", "defense", false, false, 26, false);
         IPlayer player27 = DefaultHockeyFactory.makePlayer(2, 2, 2, 20, "Agfdfni", "forward", false, false, 26, false);
-        IPlayer player28= DefaultHockeyFactory.makePlayer(10, 15, 9, 15, "Vayavfdgya", "goalie", false, false, 25, false);
+        IPlayer player28= DefaultHockeyFactory.makePlayer(10, 15, 9, 15, "Vinayak", "goalie", false, false, 25, false);
         IPlayer player29 = DefaultHockeyFactory.makePlayer(2, 2, 2, 16, "Aggfrni", "goalie", false, false, 26, true);
         IPlayer player30= DefaultHockeyFactory.makePlayer(10, 15, 9, 14, "Vaysfdsavya", "goalie", false, false, 25, true);
 

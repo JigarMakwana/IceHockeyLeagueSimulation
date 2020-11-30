@@ -5,7 +5,11 @@ package group11.Hockey.BusinessLogic;
 
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.Enums.Positions;
+import group11.Hockey.BusinessLogic.Trading.TradingMockFactory;
+import group11.Hockey.BusinessLogic.Trading.TradingModelMock;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.models.Division;
@@ -17,6 +21,16 @@ import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 
 public class InjurySystemTest {
+	private TradingModelMock leagueModel;
+	private ILeague leagueObj;
+	private IInjurySystem injurySystem;
+
+	@Before
+	public void setUp() throws Exception {
+		leagueModel = TradingMockFactory.makeTradingMock(1.0f, 1.0f);
+		leagueObj = leagueModel.getLeagueInfo();
+		injurySystem = DefaultHockeyFactory.makeInjurySystem(leagueObj);
+	}
 
 	@Test
 	public void setInjuryToPlayersTest() {
@@ -54,22 +68,33 @@ public class InjurySystemTest {
 	}
 
 	@Test
-	public void settleRecoveredPlayer() {
+	public void settleRecoveredPlayerTest() {
+		injurySystem.settleRecoveredPlayer(leagueModel.getTeam2().getRoster(),leagueModel.getTeam2().getPlayers().get(27));
+		Assert.assertEquals(leagueModel.getTeam2().getRoster().getActiveRoster().size(), 20);
+		Assert.assertEquals(leagueModel.getTeam2().getRoster().getInActiveRoster().size(), 10);
 	}
 
 	@Test
-	public void settleInjuredPlayer() {
+	public void settleInjuredPlayerTest() {
+		injurySystem.settleInjuredPlayer(leagueModel.getTeam2().getRoster(),leagueModel.getTeam2().getPlayers().get(0));
+		Assert.assertEquals(leagueModel.getTeam2().getRoster().getActiveRoster().size(), 20);
+		Assert.assertEquals(leagueModel.getTeam2().getRoster().getInActiveRoster().size(), 10);
 	}
 
 	@Test
-	public void isInjuredSwappingPossible() {
+	public void isInjuredSwappingPossibleTest() {
+		Assert.assertTrue(injurySystem.isInjuredSwappingPossible(leagueModel.getTeam2().getRoster(),
+				leagueModel.getTeam2().getPlayers().get(0)));
 	}
 
 	@Test
-	public void findInjuredPlayerPosition() {
+	public void findInjuredPlayerPositionTest() {
+		Assert.assertEquals(injurySystem.findInjuredPlayerPosition(leagueModel.getTeam2().getPlayers().get(0)), Positions.FORWARD);
 	}
 
 	@Test
-	public void isUnInjuredPlayerAvailable() {
+	public void isUnInjuredPlayerAvailableTest() {
+		Assert.assertTrue(injurySystem.isUnInjuredPlayerAvailable(leagueModel.getTeam2().getRoster(), Positions.FORWARD));
+		Assert.assertFalse(injurySystem.isUnInjuredPlayerAvailable(leagueModel.getTeam1().getRoster(), Positions.FORWARD));
 	}
 }

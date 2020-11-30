@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.InputOutput.JsonParsing;
 
 import java.io.FileNotFoundException;
@@ -13,7 +16,6 @@ import org.junit.Test;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
-import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.DefaultInputOutputFactory;
 
 public class ParseRootConferenceTest {
@@ -22,7 +24,7 @@ public class ParseRootConferenceTest {
 
 	@BeforeClass
 	public static void init() throws FileNotFoundException, IOException, ParseException {
-		ParseJsonForTestMock parseJsonObj = new ParseJsonForTestMock();
+		IParseJsonForTestMock parseJsonObj = DefaultParseTestFactory.makeParseJsonForTestMock();
 		jsonObject = parseJsonObj.parseJson();
 	}
 

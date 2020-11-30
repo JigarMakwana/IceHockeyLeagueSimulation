@@ -27,15 +27,13 @@ public class GameSimulation implements IGameSimulation {
 	}
 
 	public ITeam startGamePlay()  {
-
 		List<IPlayer> team_p1 = team1.getPlayers();
 		List<IPlayer> team_p2 = team2.getPlayers();
 		List<IPlayer>[] shiftsTeam1 = null;
 		List<IPlayer>[] shiftsTeam2 = null;
-
-
 		GenerateShiftsTemplate shifts1 = null;
 		GenerateShiftsTemplate shifts2 = null;
+		
 		if (league.getQualifiedTeams().size() > 0) {
 			logger.info("Generate shifts for playoff schedule");
 			shifts1 = DefaultHockeyFactory.makeGeneratePlayOffShifts(team_p1);
@@ -45,19 +43,15 @@ public class GameSimulation implements IGameSimulation {
 			shifts1 = DefaultHockeyFactory.makeGenerateShifts(team_p1);
 			shifts2 = DefaultHockeyFactory.makeGenerateShifts(team_p2);
 		}
-
 		try {
 			shiftsTeam1 = shifts1.getShifts();
 			shiftsTeam2 = shifts2.getShifts();
 		} catch (Exception e) {
 			logger.error("error while generating shifts " + e);
 		}
-
 		int shootingStatsTeam1 = teamSkatingStats(team_p1);		
-
 		int shootingStatsTeam2 = teamSkatingStats(team_p2);
 		setAverageShootsForTeams(shootingStatsTeam1, shootingStatsTeam2);
-
 		startGame(shiftsTeam1, shiftsTeam2);
 		ITeam winnerTeam = setWinnerTeam(team1, team2);
 		gameSummary(team1, team2);

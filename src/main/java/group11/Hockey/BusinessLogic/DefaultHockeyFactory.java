@@ -304,10 +304,6 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new PlayerStrengthContext(currentContext);
 	}
 
-	public static StateMachineState makeSimulate(ILeague league, int seasons, ILeagueDb leagueDb, IDisplay display) {
-		return new Simulate(league, seasons, leagueDb, display);
-	}
-
 	public static IGameSimulation makeGameSimulation(ILeague league, ITeam team1, ITeam team2) {
 		return new GameSimulation(league, team1, team2);
 	}

@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
-import group11.Hockey.BusinessLogic.Drafting.IGeneratingPlayers;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 /**
  * 

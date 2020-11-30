@@ -6,15 +6,11 @@ package group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import group11.Hockey.BusinessLogic.Enums.Positions;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 
 public class ActiveDefencePlayer implements IGameStrategy {
-	private static Logger logger = LogManager.getLogger(ActiveDefencePlayer.class);
 
 	@Override
 	public int calculateAveragePlayersStrength(List<IPlayer> playersList, ITeam defendingTeam) {

@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IValidations;
-import group11.Hockey.BusinessLogic.Validations;
 import group11.Hockey.BusinessLogic.models.IConference;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
@@ -21,7 +20,7 @@ import group11.Hockey.InputOutput.IDisplay;
 public class ValidationsTest {
 	ILeague league;
 	IDisplay display = DefaultHockeyFactory.makeDisplay();
-	IValidations validations = new Validations(display);
+	IValidations validations = DefaultHockeyFactory.makeValidations(display);
 
 	@Before
 	public void loadLeagueObject() {

@@ -9,7 +9,6 @@ import org.junit.Test;
 import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.IUserInputCheck;
 import group11.Hockey.BusinessLogic.IValidations;
-import group11.Hockey.BusinessLogic.UserInputCheck;
 import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
 import group11.Hockey.BusinessLogic.models.Team;
@@ -29,7 +28,7 @@ public class UserInputCheckTest {
 	IDisplay display = DefaultHockeyFactory.makeDisplay();
 	IValidations validations = DefaultHockeyFactory.makeValidations(display);
 
-	IUserInputCheck userInputCheck = new UserInputCheck(userInputMode, validations, display);
+	IUserInputCheck userInputCheck = DefaultHockeyFactory.makeUserInputCheck(userInputMode, validations, display);
 
 	@Test
 	public void conferenceNameFromUserCheckTest() {
@@ -58,7 +57,7 @@ public class UserInputCheckTest {
 		when(userInputMode.getValueFromUser()).thenReturn(generalManger);
 		Team newTeam = new Team();
 		userInputCheck.generalManagerNameFromUserCheck(newTeam, leagueObj);
-//		Assert.assertEquals(newTeam.getGeneralManager(), generalManger);
+		Assert.assertEquals(newTeam.getGeneralManager().getName(), generalManger);
 	}
 
 	@Test
@@ -66,7 +65,7 @@ public class UserInputCheckTest {
 		when(userInputMode.getValueFromUser()).thenReturn(headCoach);
 		Team newTeam = new Team();
 		userInputCheck.headCoachNameFromUserCheck(newTeam, leagueObj);
-//		Assert.assertEquals(newTeam.getHeadCoach().getName(), headCoach);
+		Assert.assertEquals(newTeam.getHeadCoach().getName(), headCoach);
 	}
 
 	@Test

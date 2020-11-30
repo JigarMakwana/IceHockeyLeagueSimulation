@@ -1,4 +1,4 @@
-package group11.Hockey;
+package group11.Hockey.BusinessLogic.TrainingPlayer;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.BusinessLogic.Training.TrainingPlayer;
 import group11.Hockey.BusinessLogic.models.ICoach;
 import group11.Hockey.BusinessLogic.models.ILeague;
@@ -21,7 +22,7 @@ public class TrainingPlayerTest {
 	public void loadLeague() {
 		LeagueModelMock leagueMock = new LeagueModelMock();
 		league = leagueMock.getLeagueInfo();
-		traingPlayer = new TrainingPlayer(league, null, null,null,null);
+		traingPlayer = (TrainingPlayer) DefaultHockeyFactory.makeTrainingPlayer(league, null, null,null,null);
 	}
 
 	@Test

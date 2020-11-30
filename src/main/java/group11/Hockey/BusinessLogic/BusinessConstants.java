@@ -33,7 +33,7 @@ public enum BusinessConstants {
 		return value;
 	}
 
-	int getIntValue() {
+	public int getIntValue() {
 		return intValue;
 	}
 }

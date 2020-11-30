@@ -1,4 +1,4 @@
-package group11.Hockey.BusinessLogic;
+package group11.Hockey.BusinessLogic.TeamCreation;
 
 import group11.Hockey.BusinessLogic.models.ILeague;
 

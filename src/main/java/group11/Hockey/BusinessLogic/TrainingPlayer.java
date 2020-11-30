@@ -88,7 +88,7 @@ public class TrainingPlayer extends StateMachineState implements ITrainingPlayer
 			return TradingFactory.makeTradeRunner(league, leaugueDb, commandLineInput, validation, display);
 		} else {
 			logger.info("Performing aging");
-			return new AgePlayer(league, 1, leaugueDb, display);
+			return DefaultHockeyFactory.makeAgePlayer(league, 1, leaugueDb, display);
 		}
 
 	}

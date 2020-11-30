@@ -187,7 +187,7 @@ public class Team implements ITeam, Comparable<Team> {
 			for (Division division : divisionList) {
 				List<ITeam> teamList = division.getTeams();
 				for (ITeam team : teamList) {
-					if (team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
+					if (team.getTeamName().equalsIgnoreCase(teamName)) {
 						isTeamNameValid = false;
 						return isTeamNameValid;
 					}
@@ -232,7 +232,7 @@ public class Team implements ITeam, Comparable<Team> {
 		team.setGeneralManager(gmObj);
 		List<IGeneralManager> generalManagers = league.getGeneralManagers();
 		for (IGeneralManager gm : generalManagers) {
-			if (gm.getName() != null && gm.getPersonality() != null && gm.getName().equalsIgnoreCase(gmObj.getName())
+			if (gm.getName().equalsIgnoreCase(gmObj.getName())
 					&& gm.getPersonality().equalsIgnoreCase(gmObj.getPersonality())) {
 				generalManagers.remove(gm);
 				break;

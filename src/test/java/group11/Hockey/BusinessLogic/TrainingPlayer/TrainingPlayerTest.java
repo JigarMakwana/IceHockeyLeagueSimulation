@@ -13,27 +13,20 @@ import group11.Hockey.BusinessLogic.models.ILeague;
 import group11.Hockey.BusinessLogic.models.IPlayer;
 import group11.Hockey.BusinessLogic.models.ITeam;
 import group11.Hockey.BusinessLogic.models.LeagueModelMock;
+import group11.Hockey.InputOutput.IDisplay;
 
 public class TrainingPlayerTest {
 	ILeague league;
 	TrainingPlayer traingPlayer;
+	IDisplay display = DefaultHockeyFactory.makeDisplay();
 
 	@Before
 	public void loadLeague() {
 		LeagueModelMock leagueMock = new LeagueModelMock();
 		league = leagueMock.getLeagueInfo();
-		traingPlayer = (TrainingPlayer) DefaultHockeyFactory.makeTrainingPlayer(league, null, null,null,null);
+		traingPlayer = (TrainingPlayer) DefaultHockeyFactory.makeTrainingPlayer(league, null, display,null,null);
 	}
 
-	@Test
-	public void trainPlayerTest() {
-		ITeam team = league.getConferences().get(0).getDivisions().get(0).getTeams().get(0);
-		traingPlayer.trainPlayer(league);
-		Assert.assertTrue(team.getPlayers().get(0).getSkating() >= 0);
-		Assert.assertTrue(team.getPlayers().get(0).getShooting() >= 0);
-		Assert.assertTrue(team.getPlayers().get(0).getChecking() >= 0);
-		Assert.assertTrue(team.getPlayers().get(0).getSaving() >= 0);
-	}
 
 	@Test
 	public void comapreCoachStatTest() {
@@ -49,6 +42,7 @@ public class TrainingPlayerTest {
 		ICoach coach = team.getHeadCoach();
 		List<IPlayer> players = team.getPlayers();
 		traingPlayer.changePlayerSkatingSkill(players.get(0), coach.getSkating(), league);
+		Assert.assertTrue(players.size() > 0);
 	}
 
 	@Test

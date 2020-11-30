@@ -4,6 +4,7 @@
 package group11.Hockey.BusinessLogic.Aging;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -72,13 +73,13 @@ public class AgePlayer extends RetirePlayer implements IAgePlayer {
 		List<ITeam> qualifiedTeams = league.getQualifiedTeams();
 		Date dateTime = parse.stringToDate(currentDate);
 		if ((dateTime.equals(stanleyEndDateTime)) || (qualifiedTeams.size() == 1)) {
-			logger.info("Move to DraftPlayer State");
-			if(display == null) {
+			logger.debug("Move to DraftPlayer State");
+			if (display == null) {
 				display = DefaultHockeyFactory.makeDisplay();
 			}
 			return DefaultHockeyFactory.makeDraftPlayer(league, leagueDb, display);
 		} else {
-			logger.info("Date is not end of stanley playoffs");
+			logger.debug("Date is not end of stanley playoffs");
 			return DefaultHockeyFactory.makeAdvanceTime(league, leagueDb, display, commandLineInput, validation);
 		}
 	}
@@ -87,14 +88,25 @@ public class AgePlayer extends RetirePlayer implements IAgePlayer {
 	public void agePlayers() {
 		IParse parse = DefaultHockeyFactory.makeParse();
 		Date currentDate = parse.stringToDate(league.getTimeLine().getCurrentDate());
-
+		int ageDays;
 		List<Player> freeAgents = (List<Player>) league.getFreeAgents();
 		List<IConference> conferences = league.getConferences();
+		Calendar currentDayCalender = Calendar.getInstance();
+		Calendar birthDayCalender = Calendar.getInstance();
+		currentDayCalender.setTime(currentDate);
+		boolean dayCheck;
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
 		if (freeAgents.size() > 0) {
 			for (IPlayer freeAgent : freeAgents) {
 				Date playerBirthDate = getPlayerBirthDate(freeAgent, parse);
-				if (currentDate.compareTo(playerBirthDate) == 0) {
+				birthDayCalender.setTime(playerBirthDate);
+				dayCheck = (currentDayCalender.get(Calendar.MONTH) == birthDayCalender.get(Calendar.MONTH)
+						&& currentDayCalender.get(Calendar.DAY_OF_MONTH) == birthDayCalender
+								.get(Calendar.DAY_OF_MONTH));
+				if (dayCheck) {
+					ageDays = (int) ((currentDate.getTime() - playerBirthDate.getTime()) / (24 * 60 * 60 * 1000));
+					long ageYear = ageDays / (365);
+					freeAgent.setAge(ageYear);
 					freeAgent.increaseAge(league, days, statDecayChance);
 				} else {
 					freeAgent.decreaseInjuredDaysForPlayer(days);
@@ -114,7 +126,16 @@ public class AgePlayer extends RetirePlayer implements IAgePlayer {
 								if (players.size() > 0) {
 									for (IPlayer player : players) {
 										Date playerBirthDate = getPlayerBirthDate(player, parse);
-										if (currentDate.compareTo(playerBirthDate) == 0) {
+										birthDayCalender.setTime(playerBirthDate);
+										dayCheck = (currentDayCalender.get(Calendar.MONTH) == birthDayCalender
+												.get(Calendar.MONTH)
+												&& currentDayCalender.get(Calendar.DAY_OF_MONTH) == birthDayCalender
+														.get(Calendar.DAY_OF_MONTH));
+										if (dayCheck) {
+											ageDays = (int) ((currentDate.getTime() - playerBirthDate.getTime())
+													/ (24 * 60 * 60 * 1000));
+											long ageYear = ageDays / (365);
+											player.setAge(ageYear);
 											player.increaseAge(league, days, statDecayChance);
 										} else {
 											player.decreaseInjuredDaysForPlayer(days);

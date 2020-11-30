@@ -105,7 +105,7 @@ public class RosterSearch implements IRosterSearch{
         List<IPlayer> playerList = sortPlayersByStrength(unSortedPlayerList);
         for(IPlayer p: playerList){
             if(p.getPosition().equalsIgnoreCase(positions.toString())){
-                logger.info("Found strongest player " + p.getPlayerName());
+                logger.debug("Found strongest player " + p.getPlayerName());
                 return p;
             }
         }
@@ -118,7 +118,7 @@ public class RosterSearch implements IRosterSearch{
         Collections.reverse(playerList);
         for(IPlayer p: playerList){
             if(p.getPosition().equalsIgnoreCase(positions.toString())){
-                logger.info("Found weakest player " + p.getPlayerName());
+                logger.debug("Found weakest player " + p.getPlayerName());
                 return p;
             }
         }
@@ -149,7 +149,7 @@ public class RosterSearch implements IRosterSearch{
             }
         }
         Triplet<ITeam, List<IPlayer>, Float> tradeTeam = sortedBuffer.get(length-1);
-        logger.info("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
+        logger.debug("Successfully found strongest trade team " + tradeTeam.getFirst().getTeamName());
         return tradeTeam;
     }
 

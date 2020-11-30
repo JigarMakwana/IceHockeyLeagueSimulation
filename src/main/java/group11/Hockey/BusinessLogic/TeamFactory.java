@@ -7,7 +7,11 @@ import group11.Hockey.BusinessLogic.models.League;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
 import group11.Hockey.db.League.ILeagueDb;
-
+/**
+ * 
+ * @author Jatin Partap Rana
+ *
+ */
 public class TeamFactory {
 
 	enum RenderType {

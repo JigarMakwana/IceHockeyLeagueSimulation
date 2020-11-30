@@ -26,7 +26,7 @@ public class ParseRootcoaches implements IParseRootElement {
 	}
 
 	private List<ICoach> parseCoaches(JSONObject jsonObject) {
-		logger.info("Parsing Coaches from json");
+		logger.debug("Parsing Coaches from json");
 		ICoach coach;
 		List<ICoach> coachesList = new ArrayList<>();
 		JSONArray coachesJSONArray = (JSONArray) jsonObject.get(Attributes.COACHES.getAttribute());

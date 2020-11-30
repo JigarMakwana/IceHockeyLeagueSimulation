@@ -27,7 +27,7 @@ public class ParseRootfreeAgents implements IParseRootElement {
 	}
 
 	private List<Player> parseFreeAgent(JSONObject teamsListJsonObject) {
-		logger.info("Parsing FreeAgents from Json");
+		logger.debug("Parsing FreeAgents from Json");
 		IPlayer freeAgentsObj;
 		List<Player> freeAgentsList = new ArrayList<>();
 		JSONArray playersList = (JSONArray) teamsListJsonObject.get(Attributes.FREEAGENTS.getAttribute());

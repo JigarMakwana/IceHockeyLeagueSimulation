@@ -48,7 +48,7 @@ public class TradeDraft implements ITradeGenerator {
     @Override
     public ITradeCharter generateTradeOffer(List<ITeam> eligibleTeamList) {
         logger.debug("Entered generateTradeOffer()");
-        logger.info("nGenerating draft trading offers for AI Team " + offeringTeam.getTeamName());
+        display.showMessageOnConsole("\nGenerating draft trading " + offeringTeam.getTeamName());
         for(int i=PlayerDraft.ROUND_7.getNumVal(); i>=0; i--){
             if(offeringTeam.getTradedPicks().get(i) == false){
                 return tradeRound(eligibleTeamList, i);
@@ -68,7 +68,7 @@ public class TradeDraft implements ITradeGenerator {
         }
         if (tradingTeamsBuffer.size() > 0) {
             Triplet<ITeam, List<IPlayer>, Float> tradeTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
-            logger.info("Found team " + tradeTeam.getFirst() + " to trade draft picks. Creating Trade Charter...");
+            logger.debug("Found team " + tradeTeam.getFirst() + " to trade draft picks. Creating Trade Charter...");
             display.displayTradeStatistics(offeringTeam, null, tradeTeam.getFirst(), tradeTeam.getSecond());
             return TradingFactory.makeTradeCharter(offeringTeam, null, tradeTeam.getFirst(), tradeTeam.getSecond(), roundIdx);
         }

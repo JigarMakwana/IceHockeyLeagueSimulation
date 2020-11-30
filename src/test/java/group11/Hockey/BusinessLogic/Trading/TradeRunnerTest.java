@@ -26,9 +26,7 @@ public class TradeRunnerTest {
     @Test
     public void runTradingTest() {
         tradeRunner.runTrading();
-        Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().size(), 2);
-        Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().size(), 2);
-        Assert.assertEquals(leagueModel.getTeam1().getPlayers().get(2).getPlayerName(), "Harry");
-        Assert.assertEquals(leagueModel.getTeam6().getPlayers().get(2).getPlayerName(), "Gama");
+        Assert.assertEquals(leagueModel.getTeam1().getPlayers().size(), 4);
+        Assert.assertEquals(leagueModel.getTeam4().getPlayers().size(), 4);
     }
 }

@@ -32,7 +32,7 @@ public class Roster implements IRoster {
     }
 
     public void updateSubRoster(List<IPlayer> allPlayerList){
-        logger.debug("Entered updateSubRoster. Updating "+ teamName+ "roaster");
+        logger.debug("Entered updateSubRoster(). Updating "+ teamName+ "roaster");
         IRosterSearch rosterSearch = DefaultHockeyFactory.makeRosterSearch();
         if(allPlayerList == null){
             return;

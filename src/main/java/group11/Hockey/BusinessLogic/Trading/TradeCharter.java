@@ -68,11 +68,10 @@ public class TradeCharter implements ITradeCharter {
     @Override
     public boolean isDraftTradeCharter() {
         logger.debug("Entered isDraftTradeCharter()");
-        if(offeringTeam == null || requestedTeam == null ||
-                offeredPlayerList == null || requestedPlayerList == null ){
+        if(requestedTeam == null || requestedPlayerList == null ){
             logger.debug("Charter is not valid");
             return false;
-        } else if(offeringTeam == null) {
+        } else if(offeredPlayerList == null) {
             logger.debug("DraftCharter is valid");
             return true;
         }

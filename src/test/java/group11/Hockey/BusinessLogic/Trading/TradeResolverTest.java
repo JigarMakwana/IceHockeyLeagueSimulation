@@ -13,7 +13,7 @@ import org.junit.Test;
 public class TradeResolverTest {
     private TradingModelMock leagueModel;
     private ILeague leagueObj;
-    private ITradeResolver aiTradingObj;
+    private ITradeResolver aiTradingObj, draftTradeObj;
 
     @Before
     public void setUp() throws Exception {
@@ -21,13 +21,18 @@ public class TradeResolverTest {
         leagueObj = leagueModel.getLeagueInfo();
         aiTradingObj = TradingFactory.makeTradeResolver(leagueObj, leagueModel.getTradeCharter(), leagueModel.getTradingConfig(),
                 leagueModel.getCommandLineInput(), leagueModel.getValidations(), leagueModel.getDisplay());
+        draftTradeObj = TradingFactory.makeTradeResolver(leagueObj, leagueModel.getDraftCharter(), leagueModel.getTradingConfig(),
+                leagueModel.getCommandLineInput(), leagueModel.getValidations(), leagueModel.getDisplay());
     }
 
     @Test
     public void resolveTradeTest() {
         aiTradingObj.resolveTrade();
-        Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().size(), 2);
-        Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().size(), 2);
+        Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().size(), 4);
+        Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().size(), 4);
+
+        draftTradeObj.resolveTrade();
+        Assert.assertEquals(leagueModel.getTeam1().getPlayers().size(), 10);
     }
 
     @Test
@@ -52,9 +57,7 @@ public class TradeResolverTest {
     @Test
     public void acceptTradeTest() {
         aiTradingObj.acceptTrade();
-        Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().size(), 2);
-        Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().size(), 2);
-        Assert.assertEquals(leagueModel.getTeam1().getPlayers().get(2).getPlayerName(), "dsf");
-        Assert.assertEquals(leagueModel.getTeam6().getPlayers().get(2).getPlayerName(), "Gama");
+        Assert.assertEquals(leagueModel.getTradeCharter().getOfferedPlayerList().size(), 4);
+        Assert.assertEquals(leagueModel.getTradeCharter().getRequestedPlayerList().size(), 4);
     }
 }

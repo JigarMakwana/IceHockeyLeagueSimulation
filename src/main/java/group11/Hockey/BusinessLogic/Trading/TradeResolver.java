@@ -55,7 +55,7 @@ public class TradeResolver implements ITradeResolver {
     @Override
     public void resolveTrade() {
         logger.debug("Entered resolveTrade()");
-        if(tradeCharter.isCharterValid()){
+        if(tradeCharter.isCharterValid() && tradeCharter.getDraftRoundIdx() == -1){
             if (requestedTeam.isUserTeam()) {
                 resolveAIToUserTrade();
             } else {

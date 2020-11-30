@@ -26,7 +26,7 @@ public class TradingModelMock {
     private ITradeConfig tradingConfig;
     private List<IPlayer> freeAgentsList;
     private ICommandLineInput commandLineInput;
-    private ITradeCharter tradeCharter, inValidCharter;
+    private ITradeCharter tradeCharter, inValidCharter, draftCharter, tradeCharterRun;
     private ITeam team1, team2, team3, team4, team5,team6, team7;
     private List<Triplet<ITeam, List<IPlayer>, Float>> tradingTeamsBuffer;
 
@@ -348,10 +348,17 @@ public class TradingModelMock {
         List<IPlayer> requestedPlayerList = new ArrayList<>();
         requestedPlayerList.add(player14);
         requestedPlayerList.add(player16);
+        List<IPlayer> offeredPlayerList1 = new ArrayList<>();
+        offeredPlayerList.add(player01);
+        offeredPlayerList.add(player02);
+        List<IPlayer> requestedPlayerList2 = new ArrayList<>();
+        requestedPlayerList.add(newplayer01);
+        requestedPlayerList.add(newplayer02);
         tradeCharter = TradingFactory.makeTradeCharter(team1, offeredPlayerList, team4, requestedPlayerList, -1);
+        tradeCharterRun = TradingFactory.makeTradeCharter(team2, offeredPlayerList1, team7, requestedPlayerList2, -1);
         int draftRound = tradeCharter.getDraftRoundIdx();
         inValidCharter = TradingFactory.makeTradeCharter(null, null, team4, requestedPlayerList, draftRound);
-
+        draftCharter = TradingFactory.makeTradeCharter(team1, null, team4, requestedPlayerList, 1);
         tradingTeamsBuffer= new ArrayList<>();
         Triplet<ITeam, List<IPlayer>, Float> teamRequestEntry1 =
                 Triplet.of(team1, team1.getPlayers(),team1.getTeamStrength());
@@ -416,6 +423,10 @@ public class TradingModelMock {
         return team3;
     }
 
+    public ITeam getTeam4() {
+        return team4;
+    }
+
     public List<ITeam> getTeamList() {
         return teamsList;
     }
@@ -434,6 +445,14 @@ public class TradingModelMock {
 
     public ITradeCharter getInValidCharter() {
         return inValidCharter;
+    }
+
+    public ITradeCharter getTradeCharterRun() {
+        return tradeCharterRun;
+    }
+
+    public ITradeCharter getDraftCharter() {
+        return draftCharter;
     }
 
     public ILeague getLeagueInfo() {

@@ -70,12 +70,12 @@ public class DraftPlayer extends StateMachineState implements IDraftPlayer {
 			for (int round = 1; round <= 7; round++) {
 				logger.info("Drafting round " + round);
 				for (ITeam team : draftingTeams) {
-					display.showMessageOnConsole("Players drafted for team " + team.getTeamName());
+					logger.info("Players drafted for team " + team.getTeamName());
 					team.getPlayers().add(sortedPlayers.get(indexForGeneratedPlayers));
 					indexForGeneratedPlayers++;
 				}
 			}
-			display.showMessageOnConsole("Settling teams after drafting");
+			logger.info("Settling teams after drafting");
 			for (ITeam team : draftingTeams) {
 				List<IPlayer> extraPlayers = teamSettlement(team);
 				@SuppressWarnings("unchecked")

@@ -42,7 +42,8 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			JSONObject ConferencesListJsonObject = ConferencesListIterator.next();
 			String conferenceName = (String) ConferencesListJsonObject.get(Attributes.CONFERENCENAME.getAttribute());
 			if (isNameAlreadyExists(conferenceNamesList, conferenceName)) {
-				throw new Exception("Conference name " + conferenceName + " already exists");
+				logger.error("Conference name " + conferenceName + " already exists");
+				throw DefaultHockeyFactory.makeExceptionCall("Conference name " + conferenceName + " already exists");
 			} else {
 				conference.setConferenceName(conferenceName);
 			}
@@ -65,7 +66,8 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			JSONObject divisionsListJsonObject = divisionsListIterator.next();
 			String divisionName = (String) divisionsListJsonObject.get(Attributes.DIVISIONNAME.getAttribute());
 			if (isNameAlreadyExists(divisionNamesList, divisionName)) {
-				throw new Exception("Division name " + divisionName + " already exists");
+				logger.error("Division name " + divisionName + " already exists");
+				throw DefaultHockeyFactory.makeExceptionCall("Division name " + divisionName + " already exists");
 			} else {
 				divisionObj.setDivisionName(divisionName);
 				// parse Teams
@@ -88,7 +90,8 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			// get team name
 			String teamName = (String) teamsListJsonObject.get(Attributes.TEAMNAME.getAttribute());
 			if (isNameAlreadyExists(teamNameList, teamName)) {
-				throw new Exception("Team name " + teamName + " already exists");
+				logger.error("Team name " + teamName + " already exists");
+				throw DefaultHockeyFactory.makeExceptionCall("Team name " + teamName + " already exists");
 			} else {
 				teamObj.setTeamName(teamName);
 			}
@@ -96,10 +99,11 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 			setHeadCoach(teamObj, teamsListJsonObject);
 			// parse Teams
 			List<IPlayer> playersList = parsePlayers(teamsListJsonObject);
-			if (playersList != null && playersList.size() > 0) {
+			if (playersList.size() > 0) {
 				teamObj.setPlayers(playersList);
 				if (hasInvalidCaptain(playersList)) {
-					throw new Exception("Team " + teamName + " has no/more captain(s)");
+					logger.error("Team " + teamName + " has no/more captain(s)");
+					throw DefaultHockeyFactory.makeExceptionCall("Team " + teamName + " has no/more captain(s)");
 				}
 			}
 			IRoster roster = DefaultHockeyFactory.makeRoster(teamName, playersList);

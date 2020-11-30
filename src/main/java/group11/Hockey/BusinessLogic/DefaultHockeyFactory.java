@@ -1,24 +1,7 @@
 package group11.Hockey.BusinessLogic;
 
+import java.util.HashMap;
 import java.util.List;
-
-import group11.Hockey.BusinessLogic.models.*;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
-import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
-import group11.Hockey.BusinessLogic.models.Roster.Roster;
-import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
-import group11.Hockey.BusinessLogic.Trophy.CalderMemorial;
-import group11.Hockey.BusinessLogic.Trophy.EndOfRegularSeasonSubject;
-import group11.Hockey.BusinessLogic.Trophy.EndOfStanleySubject;
-import group11.Hockey.BusinessLogic.Trophy.JackAdams;
-import group11.Hockey.BusinessLogic.Trophy.MauriceRichard;
-import group11.Hockey.BusinessLogic.Trophy.Participation;
-import group11.Hockey.BusinessLogic.Trophy.President;
-import group11.Hockey.BusinessLogic.Trophy.RobHawkeyMemorial;
-import group11.Hockey.BusinessLogic.Trophy.Trophy;
-import group11.Hockey.BusinessLogic.Trophy.Veniza;
-import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
-import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophySubject;
 
 import org.json.simple.parser.JSONParser;
 
@@ -26,11 +9,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import group11.Hockey.BusinessLogic.Aging.AgePlayer;
+import group11.Hockey.BusinessLogic.Aging.IAgePlayer;
+import group11.Hockey.BusinessLogic.Aging.RetirePlayer;
 import group11.Hockey.BusinessLogic.Drafting.DraftPlayer;
 import group11.Hockey.BusinessLogic.Drafting.GeneratingPlayers;
 import group11.Hockey.BusinessLogic.Drafting.IGeneratingPlayers;
 import group11.Hockey.BusinessLogic.LeagueSimulation.AdvanceTime;
 import group11.Hockey.BusinessLogic.LeagueSimulation.AdvanceToNextSeason;
+import group11.Hockey.BusinessLogic.LeagueSimulation.CheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Deadlines;
 import group11.Hockey.BusinessLogic.LeagueSimulation.InitializeSeason;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Parse;
@@ -49,6 +35,7 @@ import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.GenerateShif
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameContext;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameSimulation;
 import group11.Hockey.BusinessLogic.LeagueSimulation.GameSimulation.IGameStrategy;
+import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ICheckAndSimulateTodaySchedule;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IDeadlines;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.IParse;
 import group11.Hockey.BusinessLogic.LeagueSimulation.Interfaces.ISchedule;
@@ -58,12 +45,58 @@ import group11.Hockey.BusinessLogic.TeamCreation.CreateTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.LoadTeam;
 import group11.Hockey.BusinessLogic.TeamCreation.PlayerChoice;
 import group11.Hockey.BusinessLogic.Training.TrainingPlayer;
+import group11.Hockey.BusinessLogic.Trophy.CalderMemorial;
+import group11.Hockey.BusinessLogic.Trophy.EndOfRegularSeasonSubject;
+import group11.Hockey.BusinessLogic.Trophy.EndOfStanleySubject;
+import group11.Hockey.BusinessLogic.Trophy.JackAdams;
+import group11.Hockey.BusinessLogic.Trophy.MauriceRichard;
+import group11.Hockey.BusinessLogic.Trophy.Participation;
+import group11.Hockey.BusinessLogic.Trophy.President;
+import group11.Hockey.BusinessLogic.Trophy.RobHawkeyMemorial;
+import group11.Hockey.BusinessLogic.Trophy.Trophy;
+import group11.Hockey.BusinessLogic.Trophy.Veniza;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophyObserver;
+import group11.Hockey.BusinessLogic.Trophy.Interfaces.ITrophySubject;
+import group11.Hockey.BusinessLogic.models.Advance;
+import group11.Hockey.BusinessLogic.models.Aging;
+import group11.Hockey.BusinessLogic.models.Coach;
+import group11.Hockey.BusinessLogic.models.Conference;
+import group11.Hockey.BusinessLogic.models.Division;
+import group11.Hockey.BusinessLogic.models.GameResolver;
+import group11.Hockey.BusinessLogic.models.GameplayConfig;
+import group11.Hockey.BusinessLogic.models.GeneralManager;
+import group11.Hockey.BusinessLogic.models.IAdvance;
+import group11.Hockey.BusinessLogic.models.IAging;
+import group11.Hockey.BusinessLogic.models.ICoach;
+import group11.Hockey.BusinessLogic.models.IConference;
+import group11.Hockey.BusinessLogic.models.IDivision;
+import group11.Hockey.BusinessLogic.models.IGameResolver;
+import group11.Hockey.BusinessLogic.models.IGameplayConfig;
+import group11.Hockey.BusinessLogic.models.IGeneralManager;
+import group11.Hockey.BusinessLogic.models.IInjuries;
+import group11.Hockey.BusinessLogic.models.ILeague;
+import group11.Hockey.BusinessLogic.models.IPlayer;
+import group11.Hockey.BusinessLogic.models.ITeam;
+import group11.Hockey.BusinessLogic.models.ITimeLine;
+import group11.Hockey.BusinessLogic.models.ITrading;
+import group11.Hockey.BusinessLogic.models.ITraining;
+import group11.Hockey.BusinessLogic.models.IgmTable;
+import group11.Hockey.BusinessLogic.models.Injuries;
+import group11.Hockey.BusinessLogic.models.League;
+import group11.Hockey.BusinessLogic.models.Player;
+import group11.Hockey.BusinessLogic.models.Team;
+import group11.Hockey.BusinessLogic.models.TimeLine;
+import group11.Hockey.BusinessLogic.models.Trading;
+import group11.Hockey.BusinessLogic.models.Training;
+import group11.Hockey.BusinessLogic.models.gmTable;
+import group11.Hockey.BusinessLogic.models.Roster.Roster;
+import group11.Hockey.BusinessLogic.models.Roster.RosterSearch;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRosterSearch;
 import group11.Hockey.InputOutput.CommandLineInput;
 import group11.Hockey.InputOutput.Display;
 import group11.Hockey.InputOutput.ICommandLineInput;
 import group11.Hockey.InputOutput.IDisplay;
-import group11.Hockey.InputOutput.IPrintToConsole;
-import group11.Hockey.InputOutput.PrintToConsole;
 import group11.Hockey.InputOutput.JsonParsing.JsonImport;
 import group11.Hockey.db.Deserialize;
 import group11.Hockey.db.IDeserialize;
@@ -218,10 +251,6 @@ public class DefaultHockeyFactory extends TeamFactory {
 		return new Advance();
 	}
 
-	public static IPrintToConsole makePrintToConsole() {
-		return new PrintToConsole();
-	}
-
 	public static IGameStrategy makeDefencePlayerActive() {
 		return new ActiveDefencePlayer();
 	}
@@ -274,6 +303,10 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static StateMachineState makeAgePlayer(ILeague league, int days, ILeagueDb leagueDb, IDisplay display) {
 		return new AgePlayer(league, days, leagueDb, display);
+	}
+
+	public static RetirePlayer makeAgePlayer() {
+		return new AgePlayer();
 	}
 
 	public static IPlayerStrengthStrategy makeDefensePosition(IPlayer player) {
@@ -422,5 +455,8 @@ public class DefaultHockeyFactory extends TeamFactory {
 
 	public static IDeadlines makeDeadlines() {
 		return new Deadlines();
+	}
+	public static ICheckAndSimulateTodaySchedule makeCheckAndSimulateTodaySchedule(HashMap<String, HashMap<ITeam, ITeam>> schedule, ILeague league) {
+		return new CheckAndSimulateTodaySchedule(schedule, league);
 	}
 }

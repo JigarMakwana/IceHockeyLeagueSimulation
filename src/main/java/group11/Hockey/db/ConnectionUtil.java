@@ -24,12 +24,9 @@ public class ConnectionUtil {
 		return conn;
 	}
 
-
 	public void closeConnection(Connection connection) {
 		try {
-			if (connection != null) {
-				connection.close();
-			}
+			connection.close();
 		} catch (Exception e) {
 			System.out.println("Exception occured while closing the connection");
 		}
@@ -37,7 +34,7 @@ public class ConnectionUtil {
 
 	public void readDataConnectionDetails() {
 		try {
-			String filePath = "./config.properties";
+			String filePath = "C:/Users/AVUser/Downloads/config.properties";
 			InputStream input = new FileInputStream(filePath);
 			Properties prop = new Properties();
 			prop.load(input);

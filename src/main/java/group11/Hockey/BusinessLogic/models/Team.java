@@ -1,92 +1,137 @@
 package group11.Hockey.BusinessLogic.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
+import group11.Hockey.BusinessLogic.Enums.PlayerDraft;
+import group11.Hockey.BusinessLogic.models.Roster.Interfaces.IRoster;
 import group11.Hockey.db.Team.ITeamDb;
 
 /**
  * This class contain all the business logic related to team model
  *
- * @author jatinpartaprana
  *
  */
-public class Team implements ITeam {
+public class Team implements ITeam, Comparable<Team> {
 
 	private String teamName;
-	private String generalManager;
-	private Coach headCoach;
-	private List<Player> players = null;
+	private IGeneralManager generalManager;
+	private ICoach headCoach;
+	private List<IPlayer> players = null;
 	private boolean isUserTeam = false;
 	private int losses;
-
+	private IRoster roster;
+	private int averageShoots;
+	private boolean isOnPenalty;
+	private int penaltyPeriod;
+	private int goalsInSeason;
+	private int penaltiesInSeason;
+	private int savesInSeason;
 	private int wins;
 	private int points;
+	private List<Boolean> tradedPicks;
 
-	public Team(String teamName, String generalManager, Coach headCoach, List<Player> players) {
+	public Team(String teamName, IGeneralManager generalManager, ICoach headCoach, List<IPlayer> players) {
 		super();
 		this.teamName = teamName;
 		this.generalManager = generalManager;
 		this.headCoach = headCoach;
 		this.players = players;
+		this.tradedPicks = new ArrayList<>(Collections.nCopies(PlayerDraft.PLAYER_DRAFT_ROUNDS.getNumVal(), false));
+		this.roster = DefaultHockeyFactory.makeRoster(this.teamName, players);
 	}
 
 	public Team() {
 
 	}
 
-	/**
-	 * @return the teamName
-	 */
+	public int getGoalsInSeason() {
+		return goalsInSeason;
+	}
+
+	public void setGoalsInSeason(int goalsInSeason) {
+		this.goalsInSeason = goalsInSeason;
+	}
+
+	public int getPenaltiesInSeason() {
+		return penaltiesInSeason;
+	}
+
+	public void setPenaltiesInSeason(int penaltiesInSeason) {
+		this.penaltiesInSeason = penaltiesInSeason;
+	}
+
+	public int getSavesInSeason() {
+		return savesInSeason;
+	}
+
+	public void setSavesInSeason(int savesInSeason) {
+		this.savesInSeason = savesInSeason;
+	}
+
+	public boolean isOnPenalty() {
+		return isOnPenalty;
+	}
+
+	public void setOnPenalty(boolean isOnPenality) {
+		this.isOnPenalty = isOnPenality;
+	}
+
+	public int getPenaltyPeriod() {
+		return penaltyPeriod;
+	}
+
+	public void setPenaltyPeriod(int penaltyPeriod) {
+		this.penaltyPeriod = penaltyPeriod;
+	}
+
+	public int getAverageShoots() {
+		return averageShoots;
+	}
+
+	public void setAverageShoots(int averageShoots) {
+		this.averageShoots = averageShoots;
+	}
+
 	public String getTeamName() {
 		return teamName;
 	}
 
-	/**
-	 * @param teamName the teamName to set
-	 */
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
 
-	/**
-	 * @return the generalManager
-	 */
-	public String getGeneralManager() {
+	public IGeneralManager getGeneralManager() {
 		return generalManager;
 	}
 
-	/**
-	 * @param generalManager the generalManager to set
-	 */
-	public void setGeneralManager(String generalManager) {
+	public void setGeneralManager(IGeneralManager generalManager) {
 		this.generalManager = generalManager;
 	}
 
-	/**
-	 * @return the headCoach
-	 */
-	public Coach getHeadCoach() {
+	public ICoach getHeadCoach() {
 		return headCoach;
 	}
 
-	/**
-	 * @param headCoach the headCoach to set
-	 */
-	public void setHeadCoach(Coach headCoach) {
+	public void setHeadCoach(ICoach headCoach) {
 		this.headCoach = headCoach;
 	}
 
-	/**
-	 * @return the players
-	 */
-	public List<Player> getPlayers() {
+	public IRoster getRoster() {
+		return roster;
+	}
+
+	public void setRoster(IRoster roster) {
+		this.roster = roster;
+	}
+
+	public List<IPlayer> getPlayers() {
 		return players;
 	}
 
-	/**
-	 * @param players the players to set
-	 */
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(List<IPlayer> players) {
 		this.players = players;
 	}
 
@@ -115,40 +160,34 @@ public class Team implements ITeam {
 	}
 
 	public float getTeamStrength() {
-		List<Player> players = this.getPlayers();
+		List<IPlayer> players = this.getPlayers();
 		float teamStrength = 0;
 		if (players == null || players.size() == 0) {
 			return 0;
 		}
-		for (Player player : players) {
+		for (IPlayer player : players) {
 			teamStrength += player.getPlayerStrength();
 		}
 		return teamStrength;
 	}
 
-	/**
-	 * @return the isUserTeam
-	 */
 	public boolean isUserTeam() {
 		return isUserTeam;
 	}
 
-	/**
-	 * @param isUserTeam the isUserTeam to set
-	 */
 	public void setUserTeam(boolean isUserTeam) {
 		this.isUserTeam = isUserTeam;
 	}
 
-	public boolean isTeamNameValid(String teamName, League league) {
+	public boolean isTeamNameValid(String teamName, ILeague league) {
 		boolean isTeamNameValid = true;
-		List<Conference> cconferenceList = league.getConferences();
-		for (Conference conference : cconferenceList) {
-			List<Division> divisionList = conference.getDivisions();
-			for (Division division : divisionList) {
-				List<Team> teamList = division.getTeams();
-				for (Team team : teamList) {
-					if (team.getTeamName() != null && team.getTeamName().equalsIgnoreCase(teamName)) {
+		List<IConference> cconferenceList = league.getConferences();
+		for (IConference conference : cconferenceList) {
+			List<IDivision> divisionList = conference.getDivisions();
+			for (IDivision division : divisionList) {
+				List<ITeam> teamList = division.getTeams();
+				for (ITeam team : teamList) {
+					if (team.getTeamName().equalsIgnoreCase(teamName)) {
 						isTeamNameValid = false;
 						return isTeamNameValid;
 					}
@@ -160,11 +199,11 @@ public class Team implements ITeam {
 
 	public boolean teamExistsInDivision(String teamName, Division divisionName) {
 		boolean teamExists = false;
-		List<Team> teamList = divisionName.getTeams();
+		List<ITeam> teamList = divisionName.getTeams();
 		if (teamList == null) {
 			return teamExists;
 		}
-		for (Team team : teamList) {
+		for (ITeam team : teamList) {
 			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamExists = true;
 				return teamExists;
@@ -173,10 +212,10 @@ public class Team implements ITeam {
 		return teamExists;
 	}
 
-	public Team getTeamFromDivision(String teamName, Division division) {
-		List<Team> teamList = division.getTeams();
-		Team teamInDivision = null;
-		for (Team team : teamList) {
+	public ITeam getTeamFromDivision(String teamName, Division division) {
+		List<ITeam> teamList = division.getTeams();
+		ITeam teamInDivision = null;
+		for (ITeam team : teamList) {
 			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				teamInDivision = team;
 				return team;
@@ -189,24 +228,25 @@ public class Team implements ITeam {
 		return teamDb.loadLeagueWithTeamName(teamName);
 	}
 
-	public void addGeneralMangerToTeam(Team team, String generalMangerName, League league) {
-		team.setGeneralManager(generalMangerName);
-		List<GeneralManager> generalManagers = league.getGeneralManagers();
-		for (GeneralManager gm : generalManagers) {
-			if (gm.getName() != null && gm.getName().equalsIgnoreCase(generalMangerName)) {
+	public void addGeneralMangerToTeam(ITeam team, IGeneralManager gmObj, ILeague league) {
+		team.setGeneralManager(gmObj);
+		List<IGeneralManager> generalManagers = league.getGeneralManagers();
+		for (IGeneralManager gm : generalManagers) {
+			if (gm.getName().equalsIgnoreCase(gmObj.getName())
+					&& gm.getPersonality().equalsIgnoreCase(gmObj.getPersonality())) {
 				generalManagers.remove(gm);
 				break;
 			}
 		}
 	}
 
-	public void addCoachToTeam(Team team, String coachName, League league) {
+	public void addCoachToTeam(ITeam team, String coachName, ILeague league) {
 		Coach coach = new Coach();
 		coach.setName(coachName);
 		team.setHeadCoach(coach);
-		List<Coach> coaches = league.getCoaches();
-		for (Coach ch : coaches) {
-			if (ch.getName() != null && ch.getName().equalsIgnoreCase(coach.getName())) {
+		List<ICoach> coaches = league.getCoaches();
+		for (ICoach ch : coaches) {
+			if (ch.getName().equalsIgnoreCase(coach.getName())) {
 				coaches.remove(ch);
 				break;
 			}
@@ -214,8 +254,50 @@ public class Team implements ITeam {
 	}
 
 	@Override
+	public int compareTo(Team team) {
+		if (this.getPoints() > team.getPoints()) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+
+	public List<Team> orderTeamsInLeagueStandings(ILeague league) {
+		List<ITeam> teamsOrderedInReverse = new ArrayList<>();
+		for (IConference conference : league.getConferences()) {
+			for (IDivision divison : conference.getDivisions()) {
+				List<ITeam> team = divison.getTeams();
+				teamsOrderedInReverse.addAll(team);
+			}
+		}
+		return sortTeam(teamsOrderedInReverse);
+	}
+
+	public List<Team> sortTeam(List<ITeam> teamsOrderedInReverse) {
+		List<Team> teams = new ArrayList<>();
+		for (ITeam team : teamsOrderedInReverse) {
+			teams.add((Team) team);
+		}
+		Collections.sort(teams);
+		return teams;
+	}
+
+	public List<Boolean> getTradedPicks() {
+		return tradedPicks;
+	}
+
+	public void setTradedPicks(List<Boolean> tradedPicks) {
+		this.tradedPicks = tradedPicks;
+	}
+
+	public void updateTradedPicks(int index) {
+		tradedPicks.set(index, true);
+	}
+
+	@Override
 	public String toString() {
 		return "Team [teamName=" + teamName + ", generalManager=" + generalManager + ", headCoach=" + headCoach
 				+ ", players=" + players + "]";
 	}
+
 }

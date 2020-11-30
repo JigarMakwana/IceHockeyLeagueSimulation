@@ -1,3 +1,6 @@
+/*
+ * Author: RajKumar B00849566
+ */
 package group11.Hockey.InputOutput.JsonParsing;
 
 public enum Attributes {
@@ -19,6 +22,10 @@ public enum Attributes {
 	RANDOMTRADEOFFERCHANCE("randomTradeOfferChance"),
 	MAXPLAYERSPERTRADE("maxPlayersPerTrade"),
 	RANDOMACCEPTANCECHANCE("randomAcceptanceChance"),
+	GMTABLE("gmTable"),
+	SHREWD("shrewd"),
+	GAMBLER("gambler"),
+	NORMAL("normal"),
 	CONFERENCES("conferences"),
 	CONFERENCENAME("conferenceName"),
 	DIVISIONS("divisions"),
@@ -26,6 +33,7 @@ public enum Attributes {
 	TEAMS("teams"),
 	TEAMNAME("teamName"),
 	GENERALMANAGER("generalManager"),
+	PERSONALITY("personality"),
 	HEADCOACH("headCoach"),
 	NAME("name"),
 	SKATING("skating"),
@@ -39,8 +47,11 @@ public enum Attributes {
 	AGE("age"),
 	FREEAGENTS("freeAgents"),
 	COACHES("coaches"),
-	GENERALMANAGERS("generalManagers");
-	
+	GENERALMANAGERS("generalManagers"),
+	BIRTHDAY("birthDay"),
+	BIRTHMONTH("birthMonth"),
+	BIRTHYEAR("birthYear");
+
 	private String attribute;
 
 	private Attributes(String attribute) {

@@ -4,19 +4,19 @@ import java.util.List;
 
 /**
  * This class contains the business logic for the division model.
- * 
- * @author jatinpartaprana
+ *
  *
  */
 public class Division implements IDivision {
 
 	private String divisionName;
-	private List<Team> teams = null;
+	private List<ITeam> teams = null;
 
-	public Division(String divisionName, List<Team> teams) {
+	@SuppressWarnings("unchecked")
+	public Division(String divisionName, List<? extends ITeam> teams) {
 		super();
 		this.divisionName = divisionName;
-		this.teams = teams;
+		this.teams = (List<ITeam>) teams;
 	}
 
 	public Division() {
@@ -39,50 +39,50 @@ public class Division implements IDivision {
 	/**
 	 * @return the teams
 	 */
-	public List<Team> getTeams() {
+	public List<ITeam> getTeams() {
 		return teams;
 	}
 
 	/**
 	 * @param teams the teams to set
 	 */
-	public void setTeams(List<Team> teams) {
+	public void setTeams(List<ITeam> teams) {
 		this.teams = teams;
 	}
-	
+
 
 	@Override
 	public String toString() {
 		return "Division [divisionName=" + divisionName + ", teams=" + teams + "]";
 	}
 
-	public boolean isDivisionNameValid(String divisionName, List<Division> divisionList) {
+	public boolean isDivisionNameValid(String divisionName, List<IDivision> divisionList) {
 		boolean isDivisionNameValid = false;
 		if(divisionList == null) {
 			return isDivisionNameValid;
 		}
-		for(Division division: divisionList) {
-			if(division.getDivisionName().equalsIgnoreCase(divisionName)) {
+		for(IDivision division: divisionList) {
+			if(((Division) division).getDivisionName().equalsIgnoreCase(divisionName)) {
 				isDivisionNameValid = true;
 				break;
 			}
 		}
 		return isDivisionNameValid;
 	}
-	
-	public Division getDivisionFromDivisionName(String divisionName, List<Division> divisionList) {
-		Division division = null;
-		for(Division div: divisionList) {
-			if(div.getDivisionName().equalsIgnoreCase(divisionName)) {
+
+	public Division getDivisionFromDivisionName(String divisionName, List<IDivision> divisionList) {
+		IDivision division = null;
+		for(IDivision div: divisionList) {
+			if(((Division) div).getDivisionName().equalsIgnoreCase(divisionName)) {
 				division = div;
 				break;
 			}
 		}
-		return division;
+		return (Division) division;
 	}
-	
-	
-	public void addNewTeamInDivision(Team newTeam) {
+
+
+	public void addNewTeamInDivision(ITeam newTeam) {
 		teams.add(newTeam);
 	}
 }

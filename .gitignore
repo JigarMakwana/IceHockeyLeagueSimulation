@@ -5,3 +5,7 @@ hs_err_pid4264.log
 .idea/sonarlint/issuestore/d/
 .classpath
 .project
+.settings/
+hs_err_pid220.log
+replay_pid220.log
+/bin/

@@ -4,21 +4,21 @@ import java.util.List;
 
 /**
  * This class contains the business logic for the Conference model
- * 
- * @author jatinpartaprana
+ *
  *
  */
 public class Conference implements IConference {
 	private String conferenceName;
-	private List<Division> divisions = null;
+	private List<IDivision> divisions = null;
 
-	public Conference(String conferenceName, List<Division> divisions) {
+	public Conference() {
+	}
+
+	@SuppressWarnings("unchecked")
+	public Conference(String conferenceName, List<? extends IDivision> divisions) {
 		super();
 		this.conferenceName = conferenceName;
-		this.divisions = divisions;
-	}
-	
-	public Conference() {
+		this.divisions = (List<IDivision>) divisions;
 	}
 
 	/**
@@ -38,37 +38,37 @@ public class Conference implements IConference {
 	/**
 	 * @return the divisions
 	 */
-	public List<Division> getDivisions() {
+	public List<IDivision> getDivisions() {
 		return divisions;
 	}
 
 	/**
 	 * @param divisions the divisions to set
 	 */
-	public void setDivisions(List<Division> divisions) {
+	public void setDivisions(List<IDivision> divisions) {
 		this.divisions = divisions;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Conference [conferenceName=" + conferenceName + ", divisions=" + divisions + "]";
 	}
-	
-	public boolean isConferenceNameValid(String conferenceName, List<Conference> conferences) {
+
+	public boolean isConferenceNameValid(String conferenceName, List<IConference> conferences) {
 		boolean isConferanceNameValid = false;
-		for(Conference conference: conferences) {
-			if(conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
+		for (IConference conference : conferences) {
+			if (conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
 				isConferanceNameValid = true;
 				break;
 			}
 		}
 		return isConferanceNameValid;
 	}
-	
-	public Conference getConferencefromConferenceName(String conferenceName, List<Conference> conferences) {
-		Conference conference = null;
-		for(Conference conf: conferences) {
-			if(conf.getConferenceName().equalsIgnoreCase(conferenceName)) {
+
+	public IConference getConferencefromConferenceName(String conferenceName, List<IConference> conferences) {
+		IConference conference = null;
+		for (IConference conf : conferences) {
+			if (conf.getConferenceName().equalsIgnoreCase(conferenceName)) {
 				conference = conf;
 				break;
 			}

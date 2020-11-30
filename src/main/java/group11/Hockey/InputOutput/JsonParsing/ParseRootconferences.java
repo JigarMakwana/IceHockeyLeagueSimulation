@@ -31,7 +31,7 @@ public class ParseRootconferences extends ValidateJsonAttributes implements IPar
 	}
 
 	private List<IConference> parseConferences(JSONObject jsonObject) throws Exception {
-		logger.info("Parsing Conference from Json");
+		logger.debug("Parsing Conference from Json");
 		IConference conference;
 		List<IConference> conferencesList = new ArrayList<>();
 		JSONArray ConferenceJSONArray = (JSONArray) jsonObject.get(Attributes.CONFERENCES.getAttribute());

@@ -208,7 +208,7 @@ public class Validations implements IValidations {
 	public boolean isUserTradeInputValid(int userInput) {
 		logger.debug("Entered isUserTradeInputValid()");
 		if ((userInput == 1) || (userInput == 0)) {
-			logger.info("Trade input is valid");
+			logger.debug("Trade input is valid");
 			return true;
 		} else {
 			logger.error("Trade input is invalid");
@@ -222,7 +222,7 @@ public class Validations implements IValidations {
 	public boolean isUserResolveRosterInputValid(int userInput, int listSize) {
 		logger.debug("Entered isUserResolveRosterInputValid()");
 		if (((userInput >= 1) && (userInput <= listSize))) {
-			logger.info("Roster input is valid");
+			logger.debug("Roster input is valid");
 			return true;
 		} else {
 			logger.error("Roster input is invalid");

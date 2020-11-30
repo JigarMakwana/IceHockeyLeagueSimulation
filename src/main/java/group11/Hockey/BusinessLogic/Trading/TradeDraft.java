@@ -68,7 +68,7 @@ public class TradeDraft implements ITradeGenerator {
         }
         if (tradingTeamsBuffer.size() > 0) {
             Triplet<ITeam, List<IPlayer>, Float> tradeTeam = rosterSearch.findStrongestTradeTeam(tradingTeamsBuffer);
-            logger.info("Found team " + tradeTeam.getFirst() + " to trade draft picks. Creating Trade Charter...");
+            logger.debug("Found team " + tradeTeam.getFirst() + " to trade draft picks. Creating Trade Charter...");
             display.displayTradeStatistics(offeringTeam, null, tradeTeam.getFirst(), tradeTeam.getSecond());
             return TradingFactory.makeTradeCharter(offeringTeam, null, tradeTeam.getFirst(), tradeTeam.getSecond(), roundIdx);
         }

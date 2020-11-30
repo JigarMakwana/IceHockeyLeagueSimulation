@@ -29,7 +29,7 @@ public class FinalState extends StateMachineState {
 	}
 
 	public boolean ShouldContinue() {
-		logger.info("Reached end of the Sate");
+		logger.warn("Reached end of the Sate");
 		return false;
 	}
 

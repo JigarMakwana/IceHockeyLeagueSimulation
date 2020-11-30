@@ -27,15 +27,6 @@ public class TrainingPlayerTest {
 		traingPlayer = (TrainingPlayer) DefaultHockeyFactory.makeTrainingPlayer(league, null, display,null,null);
 	}
 
-	@Test
-	public void trainPlayerTest() {
-		ITeam team = league.getConferences().get(0).getDivisions().get(0).getTeams().get(0);
-		traingPlayer.trainPlayer(league);
-		Assert.assertTrue(team.getPlayers().get(0).getSkating() >= 0);
-		Assert.assertTrue(team.getPlayers().get(0).getShooting() >= 0);
-		Assert.assertTrue(team.getPlayers().get(0).getChecking() >= 0);
-		Assert.assertTrue(team.getPlayers().get(0).getSaving() >= 0);
-	}
 
 	@Test
 	public void comapreCoachStatTest() {

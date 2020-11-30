@@ -21,7 +21,7 @@ public class ParseRootgameplayConfig implements IParseRootElement {
 	}
 
 	private GameplayConfig parseGameplayConfig(JSONObject listJsonObject) {
-		logger.info("Parsing Gameplay from Json");
+		logger.debug("Parsing Gameplay from Json");
 		JSONObject gameplayConfigJson = (JSONObject) listJsonObject.get(Attributes.GAMEPLAYCONFIG.getAttribute());
 
 		JSONObject agingJsonObj = (JSONObject) gameplayConfigJson.get(Attributes.AGING.getAttribute());

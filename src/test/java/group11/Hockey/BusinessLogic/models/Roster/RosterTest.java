@@ -52,7 +52,7 @@ public class RosterTest {
         Assert.assertEquals(leagueModel.getTeam1().getRoster().getActiveRoster().size(), 3);
         Assert.assertEquals(leagueModel.getTeam1().getRoster().getInActiveRoster().size(), 1);
 
-        Assert.assertEquals(leagueModel.getTeam1().getRoster().getActiveRoster().get(0).getPlayerName(), "Dick");
-        Assert.assertEquals(leagueModel.getTeam1().getRoster().getInActiveRoster().get(0).getPlayerName(), "Tom");
+        Assert.assertEquals(leagueModel.getTeam1().getRoster().getActiveRoster().get(0).getPlayerName(), "Tom");
+        Assert.assertEquals(leagueModel.getTeam1().getRoster().getInActiveRoster().get(0).getPlayerName(), "Jerry");
     }
 }

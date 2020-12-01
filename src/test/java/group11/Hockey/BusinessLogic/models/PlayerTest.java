@@ -2,6 +2,8 @@ package group11.Hockey.BusinessLogic.models;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import group11.Hockey.BusinessLogic.DefaultHockeyFactory;
 import group11.Hockey.db.Player.IPlayerDb;
 
 import static org.mockito.Mockito.mock;
@@ -101,6 +103,38 @@ public class PlayerTest {
 		float statDecayChance = league.getGamePlayConfig().getAging().getStatDecayChance();
 		playerWithParams.increaseAge(league, 365, statDecayChance);
 		Assert.assertEquals(age + 1, 31, 31);
+	}
+	
+	@Test
+	public void checkAndDecrementPlayerShootingStatTest() {
+		IPlayer player = DefaultHockeyFactory.makePlayer();
+		float strength = playerWithParams.getPlayerStrength();
+		player.checkAndDecrementPlayerShootingStat(new Float(1.0));
+		Assert.assertEquals(strength, 25.0, 25.0);
+	}
+	
+	@Test
+	public void checkAndDecrementPlayerCheckingStatTest() {
+		IPlayer player = DefaultHockeyFactory.makePlayer();
+		float strength = playerWithParams.getPlayerStrength();
+		player.checkAndDecrementPlayerCheckingStat(new Float(1.0));
+		Assert.assertEquals(strength, 25.0, 25.0);
+	}
+	
+	@Test
+	public void checkAndDecrementPlayerSkatingStatTest() {
+		IPlayer player = DefaultHockeyFactory.makePlayer();
+		float strength = playerWithParams.getPlayerStrength();
+		player.checkAndDecrementPlayerSkatingStat(new Float(1.0));
+		Assert.assertEquals(strength, 25.0, 25.0);
+	}
+	
+	@Test
+	public void checkAndDecrementPlayerSavingStatTest() {
+		IPlayer player = DefaultHockeyFactory.makePlayer();
+		float strength = playerWithParams.getPlayerStrength();
+		player.checkAndDecrementPlayerSavingStat(new Float(1.0));
+		Assert.assertEquals(strength, 25.0, 25.0);
 	}
 
 	@Test

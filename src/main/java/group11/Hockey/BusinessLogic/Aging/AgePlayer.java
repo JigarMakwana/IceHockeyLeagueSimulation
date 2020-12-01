@@ -195,7 +195,7 @@ public class AgePlayer extends RetirePlayer implements IAgePlayer {
 		retireAndReplacePlayer(league);
 	}
 
-	private Date getPlayerBirthDate(IPlayer player, IParse parse) {
+	public Date getPlayerBirthDate(IPlayer player, IParse parse) {
 
 		int playerBirthYear = player.getBirthYear();
 		int playerBirthMonth = player.getBirthMonth();

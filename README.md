@@ -3,8 +3,8 @@
 This command-line application simulates an Ice Hockey League. It is capable of reproducing the successes and failures 
 of a hockey team over decades of hockey seasons. 
 
-* Date Created: 2021-01-01
-* Last Modification Date: 2021-01-01
+* Date Created: 2021-01-05
+* Last Modification Date: 2021-01-05
 
 ## Authors
 

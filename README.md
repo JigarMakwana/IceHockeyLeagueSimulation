@@ -23,10 +23,10 @@ The following are the main fuctionalities that our application can perform:
 ## Internal Fetures
 
 The following are the features, but not limited to, are considered while League Simulation:
-1. Player aging
-2. Player injuries
-3. Player retirements
-4. Player trainings
+1. Player Aging
+2. Player Injuries
+3. Player Retirements
+4. Player Trainings
 5. Player Drfating
 6. Player Trading
 7. Player Strength Statistics
